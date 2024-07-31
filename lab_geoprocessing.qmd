@@ -1,0 +1,65 @@
+# Lab 9: Geoprocessing tools
+
+## Independent Exercise: assessing children access to schools
+
+You are a GIS analyst at the Stirlingshire council, and you have been asked to perform an analysis regarding children access to schools. Your manager has indicated which data sources you should use, and they want you to answer **how many children in the relevant age range live within less than 1km, between 1km and 2km, and further than 2km of *any* primary (4 to 10 years old) and secondary (11 to 17 years old) school. You have been instructed to use the census data at the most detailed level (Output Area), and to limit your analysis to the OAs and schools that are within Stirlingshire limits**. You should report the results as a table. 
+
+### Obtaining the data
+
+1. **Scottish School Roll and Locations**: this dataset is provided by the Scottish Government, and contains information on all Scottish schools for the year 2022. Dowload the '*Scottish School Roll and Locations ZIP*' (not the 'Table' one!) [from here](https://www.data.gov.uk/dataset/9a6f9d86-9698-4a5d-a2c8-89f3b212c52c/scottish-school-roll-and-locations).
+
+2. **Census data on population age**: the Digimap platform offers access to Census variables in spatial format. To obtain it, go to the *Society* tab, and then select the 'Download' option on the leftmost toolbar (a down arrow going into a 'box'). That will bring up the familiar Digimap download interface. To define the data coverage, change the '*Reference Grids*' option to '*Postcodes*' and make a generous selection around the FK postcode, similar to the fgure below. Then check the box for the '*Age*' variable, and download it as a geopackage. 
+
+3. **The bounds of Stirlingshire**: This should be extracted from the Ordnance Survey Boundary Line dataset for the UK. It can be downloaded from the [Ordnance Survey Open Data Hub](https://osdatahub.os.uk/). You should obtain the data in geopackage format, and the correct layer to use is called `scotland_wales_const`. 
+
+
+::: {.callout-note title="Stop and Think"}
+
+- What are the data models and data formats for each dataset?
+
+- What does the *metadata* say about each dataset on their respective download pages? When and where is the data from, what information does it contain?
+
+- What are the attributes contained in each dataset?
+
+- What is the CRS of each dataset? Are they all the same?
+
+:::
+
+### Data preparation
+
+The first step in your analysis is data preparation. Since the analysis is supposed to encompass Stirlinghsire only, the first logical step is to subset the other layers to your Area of Interest. You should use the Stirlinghshire boundary from the OS Boundary Line dataset to subset both the school dataset and the census dataset. **But** you will notice there is a (very common) problem with the census data - the census output areas (OAs) do not line up with the administrative boundaries of the council. So there is no clear cut way to subset it.
+
+::: {.callout-note title="Stop and Think"}
+
+- What are the two GIS operation options you have to subset the datasets? Which one would you choose for each dataset and why? 
+
+:::
+
+After consulting with your manager, you both decide that the best option in this case is to weigh the census data for all the OAs extending beyond the Stirlinghsire bounds by the proportion of total area contained within the bounds. So for example, if one OA has 78% of its total area within Stirlingshire, any population number you use should be multiplied by 0.78. 
+
+Now go ahead and prepare the datasets. At the end of this step, you should have:
+
+1. School locations for Stirlingshire only
+2. Census OAs for Stirlingshire only, with a new attribute on the table describing the proportion of the OA area contained within the bounds. 
+
+### Answering the question
+
+Again, the question is **how many children in the relevant age range live within less than 1km, between 1km and 2km, and further than 2km of *any* primary (4 to 10 years old) and secondary (11 to 17 years old) school.**. As with the data preparation step above, the numbers should be calculated based on areal proportions (*e.g.* if 54% of a OA is within the 1km range of a primary school, then the total number of children aged 4-10yrs in that OA should be multiplied by 0.54). 
+
+You will need to use some of the Geoprocessing tools you just learned to answer that. But before you jump into any analysis and calculations, *stop and think*  about your problem! Some things to keep in mind:
+
+- You will first need to add up the number of children at each 1yr age bracket to compute the totals for the primary and secondary school age ranges (4-10 yo and 11-17yo) and then apply your correction factor (the proportion of OA area wihin Stirlingshire). This should probably be done before any further steps.
+
+- Then you will need to determine the area of each OA within each distance bracket from the schools, and re-ajust your corrected totals from above by weighing them again, this time based on the proportion of OA area within the bracket. 
+
+- You are looking for sensible combinations of age ranges and school types, so no need to calculate all possible combinations (for example, no need to know how many children aged 11-17 are within any distance from a primary school).
+
+- The distance brackets are *not* nested, so you shouldn't be double counting any areas. 
+
+Try to think about the analysis steps and required tools on your own, but if you want a hint, all GIS tools I used to answer this problem can be seen below in sequence (drag you mouse over the dark area to reveal the text). 
+
+GIS operations used: Select by Location, Clip, Buffer, Difference, Intersection, Field Calculator, Statistical Summary Tool. 
+
+**IMPORTANT: Keep the data from this lab, as we will revisit it in a future exercise!** 
+
+Here are the answers to the problem (make sure you give it a good try before looking!)

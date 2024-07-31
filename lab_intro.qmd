@@ -1,0 +1,258 @@
+# Lab 1: QGIS overview and file management {#sec-exoverview}
+
+The purpose of this lab is to give you a first overview of what a proper GIS workflow looks like, from start to end. As you progress on your exercises the projects will become more complex but the general workflow will not change. 
+
+Developing proper project and file management habits from the start is the *best* thing you can do to succeed in GIS. Speaking as someone who has been teaching and working with Geomatics for more than a decade, poor file/project management is the underlying cause of at least 50% of the GIS problems you may encounter. 
+
+## Pre-Lab Activities
+
+1. Attend or watch the recording for this weeks seminar on Canvas.
+
+2. Watch the video on how to obtain spatial data from the [Digimap](https://digimap.edina.ac.uk/) platform, a spatial data portal service that the university subscribes to. 
+
+3. Read [this document](https://www.ordnancesurvey.co.uk/documents/resources/guide-to-nationalgrid.pdf) to understand how the British National Grid indexing system works. 
+
+## Guided Exercise 1 - Managing and loading files {#GE1}
+
+In this exercise, you download some data, then prepare a *folder structure* to organise the files in your GIS projects, then create a QGIS project file and add some GIS data to it.
+
+### Downloading the required data
+
+For this practical you will use the "OS open road" and "OS Terrain 50 Digital Terrain Model" spatial datasets, specifically for the NS89 tile of the Ordnance Survey British National Grid.
+
+1. Head to the [Digimap](https://digimap.edina.ac.uk/) website, and if you haven't already, make sure you accept the user licenses for all datasets, as show on the instructions video.
+
+2. Go the `Ordnance SUrvey` section of the site, and then pick the `View maps and download data` option on the right.
+
+3. Following the steps shown on the instructions video, download the following datasets *for the NS89 BNG tile only*:
+  - OS Open Roads (under *Vector Data*)
+  - "OS Terrain 50 Digital Terrain Model" (**NOT Terrain 5 and NOT Contours**, under Land and Height Data)
+
+As a hint, if you have searched for tile NS89 and checked the required datatsets correctly, you will see a screen like this:
+
+![](images/lab1_digimap.png)
+
+### Creating a project structure
+
+GIS projects generate a lot of different files, and quickly, so project organization is **essential**. The folder structure below is my personal suggestion for organizing GIS projects files and associated data. As you get comfortable managing your own projects, feel free to change the organization structure to something that best suits your own workflow and the specific project you are working on! 
+
+
+1. Create a folder on your computer with the module name (`GEOU9SP`), off of your main work folder. For **Windows** this will usually be `Documents`. For **Linux** and **Mac**, create it on you `home` folder. (If you prefer and are comfortable with saving at another location on your computer, go for it!)
+
+**Windows:**
+
+![](images/lab1_fig3_wincfolder.png)
+
+**mac OS:**
+
+![](https://nektony.com/wp-content/uploads/2018/02/home-folder-mac.jpg)
+
+::: {.callout-important}
+- Having complex file paths can sometimes create problems. That is why we try to keep our main projects on a base folder. If you would like to keep a copy of your data on your OneDrive folder you are encouraged to do so, but I don't recommend working directly from it. That is because the full path to a OneDrive folder will to be very long and likely contain spaces. Mine, for example is `C:\Users\Thiago\OneDrive - University of Stirling\Documents`. Those spaces in the name may create problems later. So I recommend *copying* your data tom your OneDrive folder at the end of each lab instead.  
+
+- For the same reason, **never** use spaces or special symbols on your folder and file names. Limit yourself to using letters A-Z and a-z, numbers 1-9 and just the *underline* (_) and *dash* (-) symbols. 
+
+- Windows **does not** differentiate letter case, so if you create a file named `filename1.txt` and then a second file named `Filename1.txt` in the same folder, the second will overwrite the first. Mac OS does differentiate upper and lower case letters, so 'Filename.txt' and 'filename.txt' are considered different names and can co-exist in the same folder.
+:::
+
+2. Inside the new `GEOU9SP` folder, create a subfolder called `lab_1` (notice I am avoiding spaces by using the underline)
+
+3. Inside `lab_1`, create the following folder structure. On the diagram below, the folder `raster` is a folder inside the folder `01_raw_data`, which is inside `lab_1` and so on.
+
+```
+.
+└── ENMPG11/
+    └── lab_1/
+        ├── 00_qgis
+        ├── 01_raw_data/
+        │   ├── raster
+        │   └── vector
+        ├── 02_processing
+        ├── 03_final_products
+        └── 04_notes
+```
+
+I like to start folder names start with double digits so they are kept in order. These folders will be used as follows:
+
+- `00_qgis`: we will use this folder to save our QGIS project files.
+
+- `01_raw_data`: this folder will keep all the original data files you download. This way you can always go back to the start if something goes wrong. You can optionally use the subfolders `vector` and `raster` to easily know which data type you are working with, but this may not be necessary for small projects. As you obtain data you will create additional subfolders for each individual dataset to keep data organized.
+
+- `02_processing`: here we will keep all the intermediate files you generate as part of your work. Make ample use of subfolders to identify each step of the workflow.
+
+- `03_final_products`: here we will keep the final products of our intended analysis. This makes it easy for us to find the latest version of our final results, without risking confusing it with intermediate files. This can also include maps, reports and any other 'deliverable'resulting from your analysis. 
+
+- `04_notes`: here we will keep all our *non-GIS* files. For example, it may be a good idea to keep a text file documenting the project steps as you work on it. You could also save here screen grabs of specific steps. Again, use subfolders as needed to keep your data tidy.
+
+4. Now move the data you've downloaded into your organized project folders and extract (unzip) them if necessary. The terrain data files should go into the `raster` folder) and the roads data files into the `vector` folder. You can keep the data into the original folders they came in, for easy identification. Your folder structure should look like this:
+
+```
+.
+└── ENMPG11/
+    └── lab_1/
+        ├── 00_qgis
+        ├── 01_raw_data/
+        │   ├── raster/
+        │   │   └── OS_terrain_50/
+        │   │       └── ...
+        │   └── vector/
+        │       └── OS_roads/
+        │           └── ...
+        ├── 02_processing
+        ├── 03_final_products
+        └── 04_notes
+```
+
+5. Start a new text file (a Word .doc file or a Notepad .txt file) in your `notes` folder, and write a few lines documenting the steps you took until now. If you prefer hand written notes on a paper notebook, feel free to use it instead! The important thing is to keep track of the steps you are taking. As projects get more complicated, it is easy to forget which steps we took, and in what order!
+
+### Creating a QGIS project and adding data to it
+
+A QGIS project is just an *index* file that will remember all the data layers you have loaded, their stacking order, the styling of each layer, and some other information such as the coordinate reference system. It will also keep any map layouts that you create. **But it will NOT store the data files themselves!!**. That is why we need good project folder organisation.
+
+6. Create a new project in QGIS by clicking on `Project > New...` or pressing *Ctrl-N*:
+
+```{R qgisproj1,  out.width = "75%", fig.align = 'center', echo=F}
+knitr::include_graphics(rep("images/lab1_fig1_newproject.png"))
+```
+
+7. Add the layers `NS_RoadLink.shp` from the OS Roads layer and the `NS89.asc` terrain data from your organized  project folders to your project.
+
+8. Save your project. Click on the Save button, give your project a name, and save it inside the `00_qgis` folder.
+
+9. Open the project settings by clicking on the menu `Project > Properties...`. You will then see this window:
+
+```{R qgisproj2,  out.width = "75%", fig.align = 'center', echo=F}
+knitr::include_graphics(rep("images/lab1_fig2_projprops.png"))
+```
+
+10. The main things to set on your new project are the project home folder, the coordinate reference system (CRS) and the measurement units. 
+
+    - As the *project home* on the `General` tab, select the `lab_1` folder you created. This helps quick navigation when opening and saving data.
+  
+    - For *measurement units*, make sure distance units are set in meters, and area units in squared meters, also on the `General` tab. 
+  
+    - For the CRS, go to the `CRS` tab and search for **27700** in the `Filter` box. That is the *EPSG code* that identifies the *OSGB 1936 British National Grid* coordinate reference system. Select it by clicking on it.
+    
+:::[.callout-note]
+EPSG stands for "European Petroleum Survey Group", and designates a database with standard codes for hundreds of coordinate reference systems. Over time, you will probably memorize the EPSG codes for the CRSs you use more often. 
+:::
+  
+11. Save your project by clicking on the *Save* button, or going to `Project > Save`, or by holding `Ctrl+S` simultaneously.
+
+## Guided Exercise 2 - Styling your layers and producing a simple map
+
+1. Select the `NS89` layer on the *Layers* side panel, and drag it to the bottom of the layers list if not there already. 
+
+2. Turn the roads layer off for now.
+
+3. Right-click on the layer name and choose `Rename Layer`. Rename it to `Digital Elevation Model (50m)`. Open the file explorer in your system, and look for the `NS89.asc` file you have saved before.
+
+::: {.callout-note title="Stop and Think"}
+Will changing a layer name in the layer panel also change the name of the source data file for that layer?
+:::
+
+4. Right click on the terrain layer and choose `Zoom to Layer`. This is always a handy tool to "find yourself" if you end up zooming or panning the map too far. Pick a layer that covers most of your intended work area and zoom to it. 
+
+5. Right click on the terrain layer name and select `Properties...`, then go to the `Symbology` tab. Select `Rendering type` to be `Single Band Pseudocolor`, and `Color Ramp` as `spectral`. Click again on the down arrow button to the right of the `Color Ramp` box, and select `Invert Color Ramp`, so that the minimum heights are colored blue. Then click `OK`. Save your project.
+
+::: {.callout-note title="Stop and Think"}
+**Stop and think:** Why bother inverting the color ramp for this dataset?
+:::
+
+6. Rename the `NS_RoadLink` layer to `Road Network`. Go to its Symbology properties and click on `Simple Line`. Change the line color to a mid-grey, and the line width to 0.3. Click `OK`. Reactivate the layer to visualise it.
+
+7. Go to the `Vector` menu and select `Research Tools > Extract Layer Extent...`. Select the terrain layer as your `Input layer`, and click `Run` to generate a *temporary layer*. This layer will not be kept once you close QGIS, unless you save it manually later. **The window will not close automatically** once you run, so remember to click on `Close` when you are done.
+
+8. Go to `Vector > Geoprocessing Tools > Clip...`. Select the roads layer as the `Input Layer` and the new temporary layer as the `Overlay Layer`. This time, we will save the output. Click on the `...` button to the right of the `Clipped` text box, and then choose `Save to file`. Save your new layer on `ENMPG11/lab_1/processing`, naming it `clipped_roads.shp`. Make sure the `SHP file` format is selected below the file name.
+
+9. Turn the original roads layer on and off to see the result of your operation. Then right-click on the original roads layer, and select `Styles > Copy Style > All Style Categories`. Then right click on the new (clipped) roads layer and select `Styles > Paste Style > All Style Categories`. Remove the original roads layer from your project and save the project. Close QGIS.
+
+::: {.callout-note title="Stop and Think"}
+**Stop and think:** what does the warning given by QGIS when you try to close it means?
+:::
+
+10. Reopen QGIS, and load back your project. Notice it remembers exaclty where you last saved it, including zoom level, layer names and layer styles. If the "Extent" layer still shows on the side panel, remove it (as the source data file was not saved, this entry now links to nothing). 
+
+11. Click on `Project > New Map Layout` and name it `Lab 1 Layout`. A new window will open with the QGIS Layout Editor.
+
+12. Add a new map to the layout by clicking on the ![](https://docs.qgis.org/testing/en/_images/mActionAddMap.png) icon. Drag it through the page so it covers about 2/3 of it horizontally, and the full page (minus borders) vertically.
+
+13. Use the `Interactive Extent` tool ![](https://docs.qgis.org/testing/en/_images/mActionMoveItemContent.png) to pan and zoom until your data uses most of the map area. Make sure you are not hiding the edges of your map with too much zoom!
+
+![](images/lab1_fig6_mapzoom.png)
+
+14. Now fine tune the map scale by changing the `Scale` value on the right panel. Remember that this value means "1:value", meaning 1 unit on the page is equal to that many units (value) in the real world. This means larger numbers will "zoom out", and smaller numbers will "zoom in". Try to make the map fill as much as possible of the map box, without clipping the edges.
+
+15. Go to the menu `Add Item > Add Legend...` (notice the icon for this option, and find it on the side toolbar). Click the area beside the map box and drag to add a legend. 
+
+16. Go back to the main QGIS window, right click on the terrain layer name, and on the `Symblogy` tab, change the `Mode` under the class color box to `Equal Interval`, and select the number of `Classes` to 10 (to the right of the `Equal Interval` box). Go back top the Map Layout eritor.
+
+17. Go to the menu `Add Item > Add Scalebar` (notice the icon for this option, and find it on the side toolbar). Click and drag below the legend to add it to the map layout.
+
+18. Add a title to your map using the `Add Label...` tool (either on the `Add Item` menu or selecting the tool directly from the lef sidebar). You can change the text by replacing the "Lorem ipsum" placeholder with your own text on the left pane. Try to make it Bold with a font size of 16.
+
+19. Rearrange the items on the page until you are pleased with the results. Then go to `Layout > Export as PDF...`, and export your map, naming it properly and saving it on `ENMPG11/lab_1/products`. Save your map layout by clicking on the save button in the Map Layout Window and close it. Then save your Project on the main QGIS window and close QGIS as well.
+
+20. Reopen QGIS, and go to `Project > Layout Manager`. The layout you created previosuly show appear on the list. Select it and click on `Show`. 
+
+
+Congratulations! You have sucessfully finished your first GIS project, using proper file management practices. As a final suggestion, create a "workflow_notes" file on `ENPMG11/lab1/notes` and write up a quick overview of what you did, along with any specific notes you would like to remember later.
+
+::: {.callout-tip collapse="true" title="AnswerS to Stop and Think Questions"}
+*Q: Will changing a layer name in the layer panel also change the name of the source data file for that layer?*
+
+A: No, the layer name in your project is independent from the file name. You should use nice, readable and properly spelled names, and you don't need to worry about using spaces.
+
+*Q: Why bother inverting the color ramp for this dataset?*
+
+A: We should always try to use colours that reinforce map interpretation. The color blue is usually associated with water, and water accumulates on the lowest elevations, so setting the lowest elevations to blue helps map users interpret the map. 
+
+*Q: What does the warning given by QGIS when you try to close it means?*
+
+A: Because you have created a *temporary* layer
+
+
+:::
+
+
+## Independent Exercise 1
+
+1. Create a new project folder structure for this new project, under your main ENMPG11 or GEOU9SP work folder. 
+Then obtain layers for: 
+
+2. Download the following data and move it to the appropriate locations in your project folders:
+
+  - "Sites of Special Scientific Interest" from The Scottish Natural Heritage Natural Spaces collection: https://gateway.snh.gov.uk/natural-spaces/. Use the ESRI Shapefile data format. 
+
+  - Roads and rivers from the Ordnance Survey Open Data page: https://www.ordnancesurvey.co.uk/opendatadownload/products.html. Again, use the ESRI Shapefile format. 
+
+3. Load the data into QGIS. Some datasets may be be given as several files split by BNG grid tile. Focus your analysis on data from BNG grid tile NN. If you need a quick refresher, these are the main grid tile codes:
+
+![](images\British_National_Grid.png){fig-align="center"}
+
+4. Produce a map of a SSSI area of your choice within the NN zone. The map should show the SSSI itself and nearby/crossing roads and rivers, at a map scale of 1:150000. Make sure you order and style your layers properly for maximum map legibility.
+
+5. Save your analysis as a project, and export your map as a PDF. 
+
+## Independent Exercise 2
+
+1. Download the zipfile containing the Air Photo Mosaic and the Stirling Council Geospatial Data from [here]().
+
+2. Set up a project folder structure to contain this project.
+
+3. Extract the data from the zipfiles and place them in the proper project folders.
+
+4. Open the airphoto raster and the Railway Track, Electricity Transmission Line, and Functional Site vector files into QGIS.
+
+5. Organize and style your layers so that railways and transmission lines are on top of every other layer, and shown in red but with different line styles. The air photo mosaic should be under all the vector layers, and the functional sites should be shown with outlines only, without a fill color. 
+
+6. (Bonus) The airphoto image seems to be a bit faded, can you improve its contrast?
+
+7. Answer the questions below:
+
+ - How far is the Bridge of Allan train station to the Cottrell Main entrance? Calculate it both "as the crow flies" (linear distance) and as if you were driving.
+
+- What is the total surface area of the water bodies in the University of Stirling Campus?
+
+- What is the UoS campus polygon classified as within the "Functional Site" layer?
+

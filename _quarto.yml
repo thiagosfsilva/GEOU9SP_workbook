@@ -7,10 +7,11 @@ book:
   author: "Thiago Silva"
   date: "24/07/2024"
   chapters:
-    - index.qmd
-    - intro.qmd
-    - summary.qmd
-    - references.qmd
+  - index.qmd
+  - part: sec_intro_toGIS.qmd
+    chapters:
+      - lab_intro.qmd
+      - lab_crs.qmd
 
 bibliography: references.bib
 
