@@ -179,7 +179,7 @@ We should always try to use colours that reinforce map interpretation. The color
 
 6. Rename the `NS_RoadLink` layer to `Road Network`. Go to its Symbology properties and click on `Simple Line`. Change the line color to a mid-grey, and the line width to 0.3. Click `OK`. Reactivate the layer to visualise it.
 
-### Guided Exercise 3: Processing data using GIS functions
+## Guided Exercise 3: Processing data using GIS functions
 
 The core of GIS work is to use the many built-in functions of GIS software to *process* the data in some way, and thus extract information. For this exercise, we will use a function that generates a new layer representing the boundaries of the terrain data layer, and then use a second function to cut the roads layer to the same shape and extent as this new layer. 
 
@@ -211,7 +211,7 @@ b) Because the `Clip` function requires two *vector* files as input, and the ter
 c) When we created the extent layer, we produced a *temporay layer*, which is discarded by QGIS when the program is closed. However, the link to the layer will remain, and will give you a 'data not found' error when you next reopen the project. Temporary layers are also lost when QGIS crashed (yes, when, not if - it will happen), so never use them for important stuff - only for quick tests if you are not sure what the output of a function will be.    
 :::
 
-### Creating a map layout
+## Guided Exercise 4: Creating a map layout
 
 The main QGIS interface (or any other GIS software) is developed and optimised for interactive work. But very often as part of our GIS analysis we will want to generate nice maps and figures, which require some level of proper design (i.e. just grabbing a screen capture of the QGIS window and dumping it on a page is not enough). For that, we use the QGIS *Map Layout Editor*. 
 

@@ -152,13 +152,11 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#creating-a-project-structure" id="toc-creating-a-project-structure" class="nav-link" data-scroll-target="#creating-a-project-structure"><span class="header-section-number">1.2.2</span> Creating a project structure</a></li>
   <li><a href="#creating-a-qgis-project-and-adding-data-to-it" id="toc-creating-a-qgis-project-and-adding-data-to-it" class="nav-link" data-scroll-target="#creating-a-qgis-project-and-adding-data-to-it"><span class="header-section-number">1.2.3</span> Creating a QGIS project and adding data to it</a></li>
   </ul></li>
-  <li><a href="#guided-exercise-2---organizing-and-styling-your-layers" id="toc-guided-exercise-2---organizing-and-styling-your-layers" class="nav-link" data-scroll-target="#guided-exercise-2---organizing-and-styling-your-layers"><span class="header-section-number">1.3</span> Guided Exercise 2 - Organizing and styling your layers</a>
-  <ul class="collapse">
-  <li><a href="#guided-exercise-3-processing-data-using-gis-functions" id="toc-guided-exercise-3-processing-data-using-gis-functions" class="nav-link" data-scroll-target="#guided-exercise-3-processing-data-using-gis-functions"><span class="header-section-number">1.3.1</span> Guided Exercise 3: Processing data using GIS functions</a></li>
-  <li><a href="#creating-a-map-layout" id="toc-creating-a-map-layout" class="nav-link" data-scroll-target="#creating-a-map-layout"><span class="header-section-number">1.3.2</span> Creating a map layout</a></li>
-  </ul></li>
-  <li><a href="#independent-exercise-1" id="toc-independent-exercise-1" class="nav-link" data-scroll-target="#independent-exercise-1"><span class="header-section-number">1.4</span> Independent Exercise 1</a></li>
-  <li><a href="#independent-exercise-2" id="toc-independent-exercise-2" class="nav-link" data-scroll-target="#independent-exercise-2"><span class="header-section-number">1.5</span> Independent Exercise 2</a></li>
+  <li><a href="#guided-exercise-2---organizing-and-styling-your-layers" id="toc-guided-exercise-2---organizing-and-styling-your-layers" class="nav-link" data-scroll-target="#guided-exercise-2---organizing-and-styling-your-layers"><span class="header-section-number">1.3</span> Guided Exercise 2 - Organizing and styling your layers</a></li>
+  <li><a href="#guided-exercise-3-processing-data-using-gis-functions" id="toc-guided-exercise-3-processing-data-using-gis-functions" class="nav-link" data-scroll-target="#guided-exercise-3-processing-data-using-gis-functions"><span class="header-section-number">1.4</span> Guided Exercise 3: Processing data using GIS functions</a></li>
+  <li><a href="#guided-exercise-4-creating-a-map-layout" id="toc-guided-exercise-4-creating-a-map-layout" class="nav-link" data-scroll-target="#guided-exercise-4-creating-a-map-layout"><span class="header-section-number">1.5</span> Guided Exercise 4: Creating a map layout</a></li>
+  <li><a href="#independent-exercise-1" id="toc-independent-exercise-1" class="nav-link" data-scroll-target="#independent-exercise-1"><span class="header-section-number">1.6</span> Independent Exercise 1</a></li>
+  <li><a href="#independent-exercise-2" id="toc-independent-exercise-2" class="nav-link" data-scroll-target="#independent-exercise-2"><span class="header-section-number">1.7</span> Independent Exercise 2</a></li>
   </ul>
 </nav>
     </div>
@@ -411,8 +409,9 @@ Answer
 <ol start="6" type="1">
 <li>Rename the <code>NS_RoadLink</code> layer to <code>Road Network</code>. Go to its Symbology properties and click on <code>Simple Line</code>. Change the line color to a mid-grey, and the line width to 0.3. Click <code>OK</code>. Reactivate the layer to visualise it.</li>
 </ol>
-<section id="guided-exercise-3-processing-data-using-gis-functions" class="level3" data-number="1.3.1">
-<h3 data-number="1.3.1" class="anchored" data-anchor-id="guided-exercise-3-processing-data-using-gis-functions"><span class="header-section-number">1.3.1</span> Guided Exercise 3: Processing data using GIS functions</h3>
+</section>
+<section id="guided-exercise-3-processing-data-using-gis-functions" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="guided-exercise-3-processing-data-using-gis-functions"><span class="header-section-number">1.4</span> Guided Exercise 3: Processing data using GIS functions</h2>
 <p>The core of GIS work is to use the many built-in functions of GIS software to <em>process</em> the data in some way, and thus extract information. For this exercise, we will use a function that generates a new layer representing the boundaries of the terrain data layer, and then use a second function to cut the roads layer to the same shape and extent as this new layer.</p>
 <ol type="1">
 <li><p>Go to the <code>Vector</code> menu and select <code>Research Tools &gt; Extract Layer Extent...</code>. Select the terrain layer as your <code>Input layer</code>, and click <code>Run</code> to generate a <em>temporary layer</em>. This layer will not be kept once you close QGIS, unless you save it manually later. <strong>The window will not close automatically</strong> once you run, so remember to click on <code>Close</code> when you are done.</p></li>
@@ -461,8 +460,8 @@ Answer
 </div>
 </div>
 </section>
-<section id="creating-a-map-layout" class="level3" data-number="1.3.2">
-<h3 data-number="1.3.2" class="anchored" data-anchor-id="creating-a-map-layout"><span class="header-section-number">1.3.2</span> Creating a map layout</h3>
+<section id="guided-exercise-4-creating-a-map-layout" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="guided-exercise-4-creating-a-map-layout"><span class="header-section-number">1.5</span> Guided Exercise 4: Creating a map layout</h2>
 <p>The main QGIS interface (or any other GIS software) is developed and optimised for interactive work. But very often as part of our GIS analysis we will want to generate nice maps and figures, which require some level of proper design (i.e.&nbsp;just grabbing a screen capture of the QGIS window and dumping it on a page is not enough). For that, we use the QGIS <em>Map Layout Editor</em>.</p>
 <ol type="1">
 <li><p>Click on <code>Project &gt; New Map Layout</code> and name it <code>Lab 1 Layout</code>. A new window will open showing the QGIS Layout Editor. Notice that the main QGIS window remains open as well. These windows are ‘linked’, so that the map layout reflects any styling changes you make on the main window.</p></li>
@@ -481,9 +480,8 @@ Answer
 </ol>
 <p><strong>Congratulations!</strong> You have successfully finished your first GIS project, using proper file management practices! As a final suggestion, create a “workflow_notes” file on <code>GEOU9SP/lab1/notes</code> and write up a quick overview of what you did, along with any specific notes you would like to remember later.</p>
 </section>
-</section>
-<section id="independent-exercise-1" class="level2" data-number="1.4">
-<h2 data-number="1.4" class="anchored" data-anchor-id="independent-exercise-1"><span class="header-section-number">1.4</span> Independent Exercise 1</h2>
+<section id="independent-exercise-1" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="independent-exercise-1"><span class="header-section-number">1.6</span> Independent Exercise 1</h2>
 <p>At the end of each lab, you will have the opportunity to reinforce what you learned during the guided exercises by going through ‘independent’ exercises. These will use the same procedures and functions you used during the guided exercises, but will not have step by step instructions on <em>how</em> to do things. As the module progresses, the independent exercises will guive you less and less directions, to reflect real-world GIs usage. It is <strong>really important</strong> that you do the independent exercises as well - it is easy to fall into a false sense of ‘<em>I got this</em>’ when following step-by-step directions.</p>
 <ol type="1">
 <li><p>Create a new project folder structure for this project, under your main GEOU9SP work folder. The create a new QGIS project file for it, naming it properly.</p></li>
@@ -506,8 +504,8 @@ Answer
 <li><p>Save your analysis as a project, and export your map as a PDF.</p></li>
 </ol>
 </section>
-<section id="independent-exercise-2" class="level2" data-number="1.5">
-<h2 data-number="1.5" class="anchored" data-anchor-id="independent-exercise-2"><span class="header-section-number">1.5</span> Independent Exercise 2</h2>
+<section id="independent-exercise-2" class="level2" data-number="1.7">
+<h2 data-number="1.7" class="anchored" data-anchor-id="independent-exercise-2"><span class="header-section-number">1.7</span> Independent Exercise 2</h2>
 <ol type="1">
 <li><p>Download the zipfile containing the Air Photo Mosaic and the Stirling Council Geospatial Data from <a href="">here</a>.</p></li>
 <li><p>Set up a project folder structure to contain this project.</p></li>
