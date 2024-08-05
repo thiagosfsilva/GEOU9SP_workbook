@@ -277,7 +277,7 @@ As the module progresses, the independent exercises will give you less and less 
 
 1. Create a new project folder structure for this project, under your main GEOU9SP work folder. 
 
-2. Download the zipfile containing the Air Photo Mosaic and the Stirling Council Geospatial Data from [here]().
+2. Download the zipfile containing the Air Photo Mosaic and the Stirling Council Geospatial Data from [here](https://stir-my.sharepoint.com/:u:/g/personal/ala2_stir_ac_uk/EWxq18uE5uRAjh_fGHf1qC4BRKxp-M4QTs0e1qttSa_m_Q?e=oPnFWQ).
 
 3. Extract the data from the zipfiles and move them to the proper project folders.
 
