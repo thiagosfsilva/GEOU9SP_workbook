@@ -4,31 +4,31 @@ The purpose of this lab is to give you a first overview of what a proper GIS wor
 
 Developing proper project and file management habits from the start is the *best* thing you can do to succeed in GIS. Speaking as someone who has been teaching and working with Geomatics for more than a decade, poor file/project management is the underlying cause of at least 50% of the GIS problems you may encounter. 
 
-## Pre-Lab Activities
+## Before you start!
 
-1. Attend or watch the recording for this weeks seminar on Canvas.
+1. Go through the Week 1 preparatory session on Canvas, and watch the seminar recording if you have missed it. 
 
-2. Watch the video on how to obtain spatial data from the [Digimap](https://digimap.edina.ac.uk/) platform, a spatial data portal service that the university subscribes to. 
+2. Read [this document](https://www.ordnancesurvey.co.uk/documents/resources/guide-to-nationalgrid.pdf) to understand how the British National Grid indexing system works. 
 
-3. Read [this document](https://www.ordnancesurvey.co.uk/documents/resources/guide-to-nationalgrid.pdf) to understand how the British National Grid indexing system works. 
+<!-- end of list -->
 
 ## Guided Exercise 1 - Managing and loading files {#GE1}
 
-In this exercise, you download some data, then prepare a *folder structure* to organise the files in your GIS projects, then create a QGIS project file and add some GIS data to it.
+In this exercise, you will download some data, prepare a *folder structure* to organise the files in your GIS projects, then create a QGIS project file and add some GIS data to it. 
 
 ### Downloading the required data
 
-For this practical you will use the "OS open road" and "OS Terrain 50 Digital Terrain Model" spatial datasets, specifically for the NS89 tile of the Ordnance Survey British National Grid.
+For this practical you will use the "OS open road" and "OS Terrain 50 Digital Terrain Model" spatial datasets, specifically for the **NS89** tile of the Ordnance Survey British National Grid. (Read about what these datasets are here: [OS Open Roads](https://www.ordnancesurvey.co.uk/products/os-open-roads) , [OS Terrain 50](https://www.ordnancesurvey.co.uk/products/os-terrain-50)). 
 
-1. Head to the [Digimap](https://digimap.edina.ac.uk/) website, and if you haven't already, make sure you accept the user licenses for all datasets, as show on the instructions video.
+(@) Head to the [Digimap](https://digimap.edina.ac.uk/) website, and if you haven't already, make sure you accept the user licenses for all datasets, as show on the instructions video avaiable on Canvas.
 
-2. Go the `Ordnance SUrvey` section of the site, and then pick the `View maps and download data` option on the right.
+(@) Go the `Ordnance Survey` section of the site, and then pick the `View maps and download data` option on the right.
 
-3. Following the steps shown on the instructions video, download the following datasets *for the NS89 BNG tile only*:
+(@) Following the steps shown on the instructions video, download the following datasets *for the NS89 BNG tile only*:
   - OS Open Roads (under *Vector Data*)
-  - "OS Terrain 50 Digital Terrain Model" (**NOT Terrain 5 and NOT Contours**, under Land and Height Data)
+  - "OS Terrain 50 Digital Terrain Model" (*NOT Terrain 5 and NOT Contours!*, under Land and Height Data)
 
-As a hint, if you have searched for tile NS89 and checked the required datatsets correctly, you will see a screen like this:
+If you have correctly searched for tile NS89 and checked the required datatsets, you will see a screen like this:
 
 ![](images/lab1_digimap.png)
 
@@ -37,7 +37,7 @@ As a hint, if you have searched for tile NS89 and checked the required datatsets
 GIS projects generate a lot of different files, and quickly, so project organization is **essential**. The folder structure below is my personal suggestion for organizing GIS projects files and associated data. As you get comfortable managing your own projects, feel free to change the organization structure to something that best suits your own workflow and the specific project you are working on! 
 
 
-1. Create a folder on your computer with the module name (`GEOU9SP`), off of your main work folder. For **Windows** this will usually be `Documents`. For **Linux** and **Mac**, create it on you `home` folder. (If you prefer and are comfortable with saving at another location on your computer, go for it!)
+(@) Create a folder on your computer with the module name (`GEOU9SP`), off of your main work folder. For **Windows** this will usually be `Documents`. For **Linux** and **Mac**, create it on you `home` folder. (If you prefer and are comfortable with saving at another location on your computer, go for it!)
 
 **Windows:**
 
@@ -48,20 +48,20 @@ GIS projects generate a lot of different files, and quickly, so project organiza
 ![](https://nektony.com/wp-content/uploads/2018/02/home-folder-mac.jpg)
 
 ::: {.callout-warning}
-- Having complex file paths can sometimes create problems. That is why we try to keep our main projects on a base folder. If you would like to keep a copy of your data on your OneDrive folder you are encouraged to do so, but I don't recommend working directly from it. That is because the full path to a OneDrive folder will to be very long and likely contain spaces. Mine, for example is `C:\Users\Thiago\OneDrive - University of Stirling\Documents`. Those spaces in the name may create problems later. So I recommend *copying* your data tom your OneDrive folder at the end of each lab instead.  
+- Having complex file paths can sometimes create problems. That is why we try to keep our main projects on a base folder. If you would like to keep a copy of your data on your OneDrive folder you are encouraged to do so, but I don't recommend working directly from it. That is because the full path to a OneDrive folder will to be very long and likely contain spaces. Mine, for example is `C:\Users\Thiago\OneDrive - University of Stirling\Documents`. Those spaces in the name may create problems later. So I recommend instead to *copy* the completed lab data to your OneDrive folder at the end of each lab.  
 
 - For the same reason, **never** use spaces or special symbols on your folder and file names. Limit yourself to using letters A-Z and a-z, numbers 1-9 and just the *underline* (_) and *dash* (-) symbols. 
 
-- Windows **does not** differentiate letter case, so if you create a file named `filename1.txt` and then a second file named `Filename1.txt` in the same folder, the second will overwrite the first. Mac OS does differentiate upper and lower case letters, so 'Filename.txt' and 'filename.txt' are considered different names and can co-exist in the same folder.
+- Windows **does not** differentiate letter case, so if you create a file named `filename1.txt` and then a second file named `Filename1.txt` in the same folder, the second will overwrite the first. Mac OS does differentiate upper and lower case letters, so `Filename1.txt` and `filename1.txt` are considered different names and can co-exist in the same folder.
 :::
 
-2. Inside the new `GEOU9SP` folder, create a subfolder called `lab_1` (notice I am avoiding spaces by using the underline)
+(@) Inside the new `GEOU9SP` folder, create a subfolder called `lab_1` (notice I am avoiding spaces by using the underline)
 
-3. Inside `lab_1`, create the following folder structure. On the diagram below, the folder `raster` is a folder inside the folder `01_raw_data`, which is inside `lab_1` and so on.
+(@) Inside `lab_1`, create the following folder structure. On the diagram below, the folder `raster` is a folder inside the folder `01_raw_data`, which is inside `lab_1` and so on.
 
 ```
 .
-└── ENMPG11/
+└── GEOU9SP/
     └── lab_1/
         ├── 00_qgis
         ├── 01_raw_data/
@@ -76,7 +76,7 @@ I like to start folder names start with double digits so they are kept in order.
 
 - `00_qgis`: we will use this folder to save our QGIS project files.
 
-- `01_raw_data`: this folder will keep all the original data files you download. This way you can always go back to the start if something goes wrong. You can optionally use the subfolders `vector` and `raster` to easily know which data type you are working with, but this may not be necessary for small projects. As you obtain data you will create additional subfolders for each individual dataset to keep data organized.
+- `01_raw_data`: this folder will keep all the original data files you download. This way you can always go back to the start if something goes wrong. You can optionally use the subfolders `vector` and `raster` to easily know which kind of data you are working with, but this may not be necessary for small projects. As you obtain data you will create additional subfolders for each individual dataset to keep data organized.
 
 - `02_processing`: here we will keep all the intermediate files you generate as part of your work. Make ample use of subfolders to identify each step of the workflow.
 
@@ -84,11 +84,11 @@ I like to start folder names start with double digits so they are kept in order.
 
 - `04_notes`: here we will keep all our *non-GIS* files. For example, it may be a good idea to keep a text file documenting the project steps as you work on it. You could also save here screen grabs of specific steps. Again, use subfolders as needed to keep your data tidy.
 
-4. Now move the data you've downloaded into your organized project folders and extract (unzip) them if necessary. The terrain data files should go into the `raster` folder) and the roads data files into the `vector` folder. You can keep the data into the original folders they came in, for easy identification. Your folder structure should look like this:
+(@) Now move the data you've downloaded into your organized project folders and extract (unzip) them if necessary. The terrain data folder (`terrain-50-dtm_xxxxxxx`) should go into the `raster` folder within `01_raw_data` and the roads folder (`open-roads_xxxxxxx`) into the `vector` folder. The `citations_orders.xxxx.txt` and `contents_order_xxx` text files should go into your `04_notes` folder. Your folder structure should look like this:
 
 ```
 .
-└── ENMPG11/
+└── GEOU9SP/
     └── lab_1/
         ├── 00_qgis
         ├── 01_raw_data/
@@ -103,14 +103,22 @@ I like to start folder names start with double digits so they are kept in order.
         └── 04_notes
 ```
 
-5. Start a new text file (a Word *.doc* file or a Notepad *.txt* file) in your `notes` folder, and write a few lines documenting the steps you took until now. If you prefer hand written notes on a paper notebook, feel free to use it instead! The important thing is to keep track of the steps you are taking. As projects get more complicated, it is easy to forget which steps we took, and in what order!
+::: {.callout-important title="Stop and Think"}
+What are the `citations_orders.xxxx.txt` and `contents_order_xxx` files? What information do they contain?
+:::
+
+::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
+They are both plain text files. `citations_orders.xxxx.txt` is very handy as it gives us the proper way to cite the data sources on reports. `contents_order_xxx` is just a summary of your Digimap order. 
+:::
+
+(@) Start a new text file (a Word *.doc* file or a Notepad *.txt* file) in your `04_notes` folder, and write a few lines documenting the steps you took until now. If you prefer handwritten notes on a paper notebook, feel free to use it instead! The important thing is to keep track of the steps you are taking. As projects get more complicated, it is easy to forget which steps we took, and in what order!
 
 
 
 
 ### Creating a QGIS project and adding data to it
 
-A QGIS project is just an *index* file, which will remember all the data layers you have loaded, their stacking order, the styling of each layer, and some other information such as the coordinate reference system. It will also keep any map layouts that you create. **But it will NOT store the data files themselves!!**. That is why we need good project folder organisation. If a data file is moved or renamed, the QGIS project file will lose track of it. 
+A QGIS project is a file, which will remember all the data layers you have loaded, their stacking order, the styling of each layer, and some other information such as the coordinate reference system. It will also keep any map layouts that you create. **But he project file will NOT store the data files themselves!!**. It will only link to the data. That is why we need good project folder organisation. If a data file is moved or renamed, the QGIS project file will lose track of it. 
 
 6. Create a new project in QGIS by clicking on `Project > New...` or pressing *Ctrl-N*:
 
@@ -118,29 +126,29 @@ A QGIS project is just an *index* file, which will remember all the data layers 
 knitr::include_graphics(rep("images/lab1_fig1_newproject.png"))
 ```
 
-7. Add to your project the layers `NS_RoadLink.shp` from the OS Roads layer and the `NS89.asc` terrain data from your organized  project folders.
+(@) Add to your project the layers `NS_RoadLink.shp` from the OS Roads dataset and the `NS89.asc` terrain data from your organized project folders.
 
-8. Save your project. Click on the Save button, give your project a name, and save it inside the `00_qgis` folder.
+(@) Save your project inside the `00_qgis` folder. You can save your project by clicking on the *Save* button, going to `Project > Save` menu, or by holding the keys `Ctrl+S (Command+S on Mac)`.
 
-9. Open the project settings by clicking on the menu `Project > Properties...`. You will then see this window:
+(@) Open the project settings by clicking on the menu `Project > Properties...`. You will then see this window:
 
 ```{R qgisproj2,  out.width = "75%", fig.align = 'center', echo=F}
 knitr::include_graphics(rep("images/lab1_fig2_projprops.png"))
 ```
 
-10. The main things to set on your new project are the project home folder, the coordinate reference system (CRS) and the measurement units. 
+(@) The main things to set on your new project are the project home folder, the coordinate reference system (CRS) and the measurement units. 
 
     - As the *project home* on the `General` tab, select the `lab_1` folder you created. This helps quick navigation when opening and saving data.
   
-    - For *measurement units*, make sure distance units are set in meters, and area units in squared meters, also on the `General` tab. 
+    - For *measurement units*, make sure distance units are set in meters, and area units in squared meters, also on the `General` tab. Any QGIS operations that calculate distances or areas will use the units set by the project.
   
-    - For the CRS, go to the `CRS` tab and search for **27700** in the `Filter` box. That is the *EPSG code* that identifies the *OSGB 1936 British National Grid* coordinate reference system. Select it by clicking on it.
+    - For the CRS, go to the `CRS` tab and search for **27700** in the `Filter` box. That is the *EPSG code* that identifies the *OSGB 1936 British National Grid* coordinate reference system (CRS). Select it by clicking on it.
     
 ::: {.callout-note}
 EPSG stands for "European Petroleum Survey Group", and designates a database with standard codes for hundreds of coordinate reference systems. Over time, you will probably memorize the EPSG codes for the CRSs you use more often. 
 :::
   
-11. Save your project by clicking on the *Save* button, or going to `Project > Save`, or by holding the keys `Ctrl+S (Command+S on Mac)` simultaneously.
+(@) Save your project again.
 
 
 
@@ -149,103 +157,127 @@ EPSG stands for "European Petroleum Survey Group", and designates a database wit
 
 One of the most powerful aspects of GIS software is the ability to *style* spatial data in very specific ways, by specifying colors, line widths, line types, simbols, etc. As we progress in the module you will learn more and more ways to style your data.  
 
-1. Select the `NS89` layer on the *Layers* side panel, and drag it to the bottom of the layers list if not there already. 
+(@) On the `Layers panel` to the left of the screen, select the `NS89` layer, and drag it to the bottom of the layers list if not there already. 
 
-2. Turn the roads layer off for now.
+(@) Turn the roads layer off for now, by unchecking the box besides its name. 
 
-3. Right-click on the layer name and choose `Rename Layer`. Rename it to `Digital Elevation Model (50m)`. 
+(@) Right-click on the `NS89` layer name and choose `Rename Layer`. Rename it to `Digital Elevation Model (50m)`. 
 
-4. Open the file explorer in your system, and find the `NS89.asc` file that holds the actual elevation data, which you downloaded from Digimap.
+(@) Open the file explorer in your system, and find the `NS89.asc` file that holds the actual elevation data, which you downloaded from Digimap.
 
 ::: {.callout-important title="Stop and Think"}
 Will changing a layer name in the layer panel also change the name of the source data file for that layer?
 :::
 
-::: {.callout-important title="Answer" collapse="true" appearance="minimal"}
+::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
 No, layer names within the project are independent of file names -  but as default QGIS will use the file name as layer name when you add new data. But you should always change them into nice, readable and properly spelled names within your project, where you are free to use spaces. The actual file name linked by the project will stay the same and can always be seen by right-clicking on the layer name and selecting `Properties...> Information`.
 :::
 
-4. Right click on the terrain layer and choose `Zoom to Layer`. This is a very handy tool to "find yourself" if you end up zooming or panning the map too far. 
+(@) Right click on the newly renamed terrain layer and choose `Zoom to Layer`. This is a very handy tool to "find yourself" if you end up zooming or panning the map too far. 
 
-5. Right click on the terrain layer name again and select `Properties...`, then go to the `Symbology` tab. Select `Rendering type` to be `Single Band Pseudocolor`, and `Color Ramp` as `spectral`. Click again on the down arrow button to the right of the `Color Ramp` box, and select `Invert Color Ramp`, so that the minimum heights are colored blue. Then click `OK`. Save your project.
+(@) Right click on the terrain layer name again and select `Properties...`, then go to the `Symbology` tab. 
+
+
+(@) On the `Min` and `Max` boxes, type `0` and `500` respectively. This determines the range of layer values to be visualised. 
+
+
+(@) Select `Rendering type` to be `Single Band Pseudocolor`, and change the `Color ramp` option by clicling on the down-arrow button to the right and picking the  `spectral` colour ramp. If you click on the colour ramp itself it will open a new window to custmize it. This is now what we need for now, so just close it and use the down-arrow. 
+
+
+(@) Click on `Classify` (under the dropdown menu that says * Mode: continuous*). The colours will be matched to the range of elevation values in the layer.
+
+(@) Click again on the down-arrow button and select `Invert Color Ramp` at the top of the options, so that the lowest heights are coloured blue. Then click on `OK`. 
+
+(@) Note how the legend for you terrain layer has changed on the Layers panel. it now shows the minimum and maximum elevations and the colour ramp. Save your project.
 
 ::: {.callout-important title="Stop and Think"}
-Why do we bother inverting the color ramp for this dataset?
+Why do we bother inverting the colour ramp for this dataset?
 :::
 
-::: {.callout-important title="Answer" collapse="true" appearance="minimal"}
+::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
 We should always try to use colours that reinforce map interpretation. The color blue is usually associated with water, and water accumulates on the lowest elevations, so setting the lowest elevations to blue helps map users read and interpret the map. 
 :::
 
-6. Rename the `NS_RoadLink` layer to `Road Network`. Go to its Symbology properties and click on `Simple Line`. Change the line color to a mid-grey, and the line width to 0.3. Click `OK`. Reactivate the layer to visualise it.
+(@) Rename the `NS_RoadLink` layer to `Road Network`. 
 
-## Guided Exercise 3: Processing data using GIS functions
+(@) Go to its `Symbology` properties, like you did for the terrain layer, Notice that the symbology options are data-specific (vector vs. raster). Seclet `Simple Line` in the symbology window (under the main `Line` option). Then under the window, go to the `Color` option an click on the down-arrow menu to change the line color to a dark grey. If you click on the actual colour, a more complex colour-picking window will appear. You can use either the quicker colour dropdown or the main colour window, whatever you prefer.  
 
-The core of GIS work is to use the many built-in functions of GIS software to *process* the data in some way, and thus extract information. For this exercise, we will use a function that generates a new layer representing the boundaries of the terrain data layer, and then use a second function to cut the roads layer to the same shape and extent as this new layer. 
+(@) Change the `Stroke width` (line width) to 0.3. Click `OK`. Reactivate the layer if needed to visualise it.
 
-1. Go to the `Vector` menu and select `Research Tools > Extract Layer Extent...`. Select the terrain layer as your `Input layer`, and click `Run` to generate a *temporary layer*. This layer will not be kept once you close QGIS, unless you save it manually later. **The window will not close automatically** once you run, so remember to click on `Close` when you are done.
+## Guided Exercise 3: Processing data using GIS operations
 
-2. Go to `Vector > Geoprocessing Tools > Clip...`. Select the roads layer as the `Input Layer` and the new temporary layer as the `Overlay Layer`. This time, we will save the output. Click on the `...` button to the right of the `Clipped` text box, and then choose `Save to file`. Save your new layer on `ENMPG11/lab_1/processing`, naming it `clipped_roads.shp`. Make sure the `SHP file` format is selected below the file name.
+The core of GIS work is to use the many built-in operations (also known as functions or tools) of GIS software to *process* the data in some way, and thus create additional information. For this exercise, we will use an operation that creates a new layer representing the boundaries of the terrain data layer, and then use a second operation to cut the roads layer to the same shape and extent as this new layer. 
 
-3. Turn the original roads layer on and off to see the result of your operation. Then right-click on the original roads layer, and select `Styles > Copy Style > All Style Categories`. Then right click on the new (clipped) roads layer and select `Styles > Paste Style > All Style Categories`. This is a great way top style several layers ion the same way wirthout effort. 
+(@) Go to the `Vector` menu and select `Research Tools > Extract Layer Extent...`. Select the terrain layer as your `Input layer`, and click `Run` to generate a *temporary layer*. Temporary layers  are not kept once you close QGIS, unless you save it manually later. The `Extract Layer Extent` window will not close automatically after you run the operation, so click on `Close` when you are done.
 
-4. Remove the original roads layer from your project by right clicking on it and selecting `Remove Layer...`, and then save your project. 
+(@) Go to `Vector > Geoprocessing Tools > Clip...`. Select the roads layer as the `Input Layer` and the new temporary layer as the `Overlay Layer`. 
 
-5. Close QGIS. **It will give you a warning** - read it carefully and then confirm it. 
+(@) This time, we will save the output. Click on the `...` button to the right of the `Clipped` text box, and then choose `Save to file`. Save your new layer on the folder `GEOU9SP/lab_1/02_processing/`, naming it `clipped_roads.shp`. Make sure the `SHP file` format is selected below the file name. Then click on `Run` to execute the operation. Close the window.
 
-6. Reopen QGIS, and load back your project. Notice it remembers exactly where you last saved it, including zoom level, layer names and layer styles. The "Extent" layer will show an exclamation mark on the side panel, meaning the actual data cannot be found. Remove it for now. 
+(@) Turn the original roads layer on and off to see the result of your operation. Then right-click on the original roads layer, and select `Styles > Copy Style > All Style Categories`. Then right click on the new (clipped) roads layer and select `Styles > Paste Style > All Style Categories`. This is a great way top style several layers ion the same way wirthout effort. 
+
+(@) Remove the original roads layer from your project by right clicking on it and selecting `Remove Layer...`, and then rename you clipped layer to "Roads". Save your project. 
+
+(@) Close QGIS. **It will give you a warning** - read it carefully and then confirm it. 
+
+(@) Reopen QGIS, and load back your project. Notice it remembers exactly where you last saved it, including zoom level, layer names and layer styles. The "Extent" layer will still be on your list, but will appear empty - it has been deleted once you closed QGIS. Remove it from the project and save again. 
 
 ::: {.callout-important title="Stop and Think"}
 a) What are the names of the two GIS functions you just used in this exercise?
 
 b) Why did you have to create a new layer representing the extent of the terrain data before *clipping* the roads layer?
 
-c) What does the warning given by QGIS when you tried to close it means?
+c) What does the warning given by QGIS when you closed your project means?
 :::
 
-::: {.callout-important title="Answer" collapse="true" appearance="minimal"}
+::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
 a) The functions are called `Clip` and `Extract Layer Extent`. 
 
-b) Because the `Clip` function requires two *vector* files as input, and the terrain data is a *raster* file (i.e. an image). Each specific tool will require different data models to work properly. We will learn more about vectors and rasters on weeks 2 and 3. 
+b) The `Clip` function requires two *vector* files as input, but the terrain data is a *raster* file (i.e. an image). The `Extract Layer Extent`  creates a vector file representing the extent of any given layer. Each specific tool will require different kinds of data to work properly. We will learn more about vectors and rasters on weeks 2 and 3. 
 
-c) When we created the extent layer, we produced a *temporay layer*, which is discarded by QGIS when the program is closed. However, the link to the layer will remain, and will give you a 'data not found' error when you next reopen the project. Temporary layers are also lost when QGIS crashed (yes, when, not if - it will happen), so never use them for important stuff - only for quick tests if you are not sure what the output of a function will be.    
+c) When we created the extent layer, we produced a *temporary layer*, which is discarded by QGIS when the program is closed. QGIS was letting you know that will happen, to give you the chance to go back and save it. Temporary layers are also lost when QGIS crashes (yes when, not if - it will happen). So never use them for important stuff - only for quick tests if you are not sure what the output of a function will be.     
 :::
 
 ## Guided Exercise 4: Creating a map layout
 
-The main QGIS interface (or any other GIS software) is developed and optimised for interactive work. But very often as part of our GIS analysis we will want to generate nice maps and figures, which require some level of proper design (i.e. just grabbing a screen capture of the QGIS window and dumping it on a page is not enough). For that, we use the QGIS *Map Layout Editor*. 
+The main QGIS interface (or any other GIS software) is developed and optimised for interactive work. But very often as part of our GIS analysis we will want to generate nice maps and figures following proper design rules (and not just grabbing a screen capture of the QGIS window and dumping it on a page - hint for your assignment reports). For that, we use the QGIS **Map Layout Editor**. 
 
-1. Click on `Project > New Map Layout` and name it `Lab 1 Layout`. A new window will open showing the QGIS Layout Editor. Notice that the main QGIS window remains open as well. These windows are 'linked', so that the map layout reflects any styling changes you make on the main window. 
+(@) Click on `Project > New Print Layout` and name it `Lab 1 Layout`. A new window will open showing the QGIS Layout Editor. Notice that the main QGIS window remains open as well. These windows are 'linked', so that the map layout reflects any styling changes you make on the main window. 
 
-2. Add a new map to the layout by clicking on the ![](https://docs.qgis.org/testing/en/_images/mActionAddMap.png) icon. Drag it through the page so it covers about 2/3 of it horizontally, and the full height of the page (minus some borders).
+(@) Add a new map to the layout by clicking on the ![](https://docs.qgis.org/testing/en/_images/mActionAddMap.png) icon. Drag it through the page so it covers about 2/3 of it horizontally, and the full height of the page (minus some borders).
 
-3. Use the `Interactive Extent` tool ![](https://docs.qgis.org/testing/en/_images/mActionMoveItemContent.png) to pan (click and grag) and zoom (mouse wheel) until your data covers the entire map box. But make sure you don't hide the edges of the data by zooming in too much!
+(@) Use the `Interactive Extent` tool ![](https://docs.qgis.org/testing/en/_images/mActionMoveItemContent.png) to pan (click and grag) and zoom (mouse wheel) until your data covers the entire map box. But make sure you don't hide the edges of the data by zooming in too much!
+
+(@) Now fine tune the map scale by changing the `Scale` value on the bottom right panel. Remember that this value means "1:value", i.e. one unit on the page is equal to that many units (value) in the real world. This means larger numbers will "zoom out", and smaller numbers will "zoom in". Try to make the map fill as much as possible of the map box, without clipping the edges.
+
+(@) Go to the menu `Add Item > Add Legend...` in the Map Layout Window (or guess the icon for this option on the side toolbar). Click the area beside the map box and drag to add a legend. 
+
+(@) Go back to the main QGIS window, right click on the terrain layer name, then select `Properties...`, and on the `Symbology` tab, change the `Mode` under the class color box to `Equal Interval`. Then select the number of `Classes` to 10 (to the right of the `Equal Interval` box). Go back top the Map Layout editor.
+
+(@) Go to the menu `Add Item > Add Scalebar` in the Map Layout Window (or guess the icon for this option on the side toolbar). Click and drag in the area below the legend to add it to the map layout.
+
+(@) Add a title to your map using the `Add Label...` tool (either on the `Add Item` menu or selecting the tool directly from the left sidebar). You can change the text by replacing the "Lorem ipsum" placeholder text with your own text on the left pane. Try to make it **bold** with a font size of 16 (hint: always use the down-arrow buttons for 'quick settings').
+
+(@) Rearrange the items on the page until you are pleased with the results. Then go to `Layout > Export as PDF...`, and export your map, naming it properly and saving it on `GEOU9SP/lab_1/final_products`. It is a good idea to export as PDF if you want your map to be a standalone document. If you are exporting to insert the map into a report, then use `Layout > Export as Image...` instead.
+
+For reference, my map looked like this at this stage:
 
 ![](images/lab1_fig6_mapzoom.png)
 
-4. Now fine tune the map scale by changing the `Scale` value on the bottom right panel. Remember that this value means "1:value", i.e. one unit on the page is equal to that many units (value) in the real world. This means larger numbers will "zoom out", and smaller numbers will "zoom in". Try to make the map fill as much as possible of the map box, without clipping the edges.
-
-5. Go to the menu `Add Item > Add Legend...` in the Map Layout Window (or guess the icon for this option on the side toolbar). Click the area beside the map box and drag to add a legend. 
-
-6. Go back to the main QGIS window, right click on the terrain layer name, then select `Properties...`, and on the `Symblogy` tab, change the `Mode` under the class color box to `Equal Interval`. Then select the number of `Classes` to 10 (to the right of the `Equal Interval` box). Go back top the Map Layout editor.
-
-7. Go to the menu `Add Item > Add Scalebar` in the Map Layout Window (or guess the icon for this option on the side toolbar). Click and drag in the area below the legend to add it to the map layout.
-
-8. Add a title to your map using the `Add Label...` tool (either on the `Add Item` menu or selecting the tool directly from the left sidebar). You can change the text by replacing the "Lorem ipsum" placeholder text with your own text on the left pane. Try to make it **bold** with a font size of 16.
-
-9. Rearrange the items on the page until you are pleased with the results. Then go to `Layout > Export as PDF...`, and export your map, naming it properly and saving it on `GEOU9SP/lab_1/final_products`. Then close the Map Layout window, save your project on the main QGIS window, and close QGIS .
-
-10. Reopen QGIS, and go to `Project > Layout Manager`. The layout you created previously should appear on the list. Select it and click on `Show` to reopen the Map Layout window. 
+(@) Then close the Map Layout window, save your project on the main QGIS window, and close QGIS. Reopen QGIS, and go to `Project > Layout Manager`. The layout you created previously should appear on the list. Select it and click on `Show` to reopen the Map Layout window. 
 
 
 **Congratulations!** You have successfully finished your first GIS project, using proper file management practices! As a final suggestion, create a "workflow_notes" file on `GEOU9SP/lab1/notes` and write up a quick overview of what you did, along with any specific notes you would like to remember later.
 
 
 
-## Independent Exercise 1
+## Independent Exercises
 
-At the end of each lab, you will have the opportunity to reinforce what you learned during the guided exercises by going through 'independent' exercises. These will use the same procedures and functions you used during the guided exercises, but will not have step by step instructions on *how* to do things. As the module progresses, the independent exercises will guive you less and less directions, to reflect real-world GIs usage. It is **really important** that you do the independent exercises as well -  it is easy to fall into a false sense of '*I got this*' when following step-by-step directions. 
+At the end of each lab, you will have the opportunity to reinforce what you learned by going through 'independent' exercises. These will use the same operations you learned with the guided exercises, but will not have step by step instructions.
 
+As the module progresses, the independent exercises will give you less and less directions, to reflect real-world GIs usage. **Make sure you do the independent exercises**  - it is easy to fall into a false sense of '*I got this*' when only following step-by-step directions. 
+
+### Independent Exercise 1
 
 1. Create a new project folder structure for this project, under your main GEOU9SP work folder. The create a new QGIS project file for it, naming it properly.
 
@@ -263,7 +295,7 @@ At the end of each lab, you will have the opportunity to reinforce what you lear
 
 5. Save your analysis as a project, and export your map as a PDF. 
 
-## Independent Exercise 2
+### Independent Exercise 2
 
 1. Download the zipfile containing the Air Photo Mosaic and the Stirling Council Geospatial Data from [here]().
 

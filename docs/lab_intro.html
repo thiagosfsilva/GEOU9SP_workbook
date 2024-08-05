@@ -145,7 +145,7 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#pre-lab-activities" id="toc-pre-lab-activities" class="nav-link active" data-scroll-target="#pre-lab-activities"><span class="header-section-number">1.1</span> Pre-Lab Activities</a></li>
+  <li><a href="#before-you-start" id="toc-before-you-start" class="nav-link active" data-scroll-target="#before-you-start"><span class="header-section-number">1.1</span> Before you start!</a></li>
   <li><a href="#GE1" id="toc-GE1" class="nav-link" data-scroll-target="#GE1"><span class="header-section-number">1.2</span> Guided Exercise 1 - Managing and loading files</a>
   <ul class="collapse">
   <li><a href="#downloading-the-required-data" id="toc-downloading-the-required-data" class="nav-link" data-scroll-target="#downloading-the-required-data"><span class="header-section-number">1.2.1</span> Downloading the required data</a></li>
@@ -153,10 +153,13 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#creating-a-qgis-project-and-adding-data-to-it" id="toc-creating-a-qgis-project-and-adding-data-to-it" class="nav-link" data-scroll-target="#creating-a-qgis-project-and-adding-data-to-it"><span class="header-section-number">1.2.3</span> Creating a QGIS project and adding data to it</a></li>
   </ul></li>
   <li><a href="#guided-exercise-2---organizing-and-styling-your-layers" id="toc-guided-exercise-2---organizing-and-styling-your-layers" class="nav-link" data-scroll-target="#guided-exercise-2---organizing-and-styling-your-layers"><span class="header-section-number">1.3</span> Guided Exercise 2 - Organizing and styling your layers</a></li>
-  <li><a href="#guided-exercise-3-processing-data-using-gis-functions" id="toc-guided-exercise-3-processing-data-using-gis-functions" class="nav-link" data-scroll-target="#guided-exercise-3-processing-data-using-gis-functions"><span class="header-section-number">1.4</span> Guided Exercise 3: Processing data using GIS functions</a></li>
+  <li><a href="#guided-exercise-3-processing-data-using-gis-operations" id="toc-guided-exercise-3-processing-data-using-gis-operations" class="nav-link" data-scroll-target="#guided-exercise-3-processing-data-using-gis-operations"><span class="header-section-number">1.4</span> Guided Exercise 3: Processing data using GIS operations</a></li>
   <li><a href="#guided-exercise-4-creating-a-map-layout" id="toc-guided-exercise-4-creating-a-map-layout" class="nav-link" data-scroll-target="#guided-exercise-4-creating-a-map-layout"><span class="header-section-number">1.5</span> Guided Exercise 4: Creating a map layout</a></li>
-  <li><a href="#independent-exercise-1" id="toc-independent-exercise-1" class="nav-link" data-scroll-target="#independent-exercise-1"><span class="header-section-number">1.6</span> Independent Exercise 1</a></li>
-  <li><a href="#independent-exercise-2" id="toc-independent-exercise-2" class="nav-link" data-scroll-target="#independent-exercise-2"><span class="header-section-number">1.7</span> Independent Exercise 2</a></li>
+  <li><a href="#independent-exercises" id="toc-independent-exercises" class="nav-link" data-scroll-target="#independent-exercises"><span class="header-section-number">1.6</span> Independent Exercises</a>
+  <ul class="collapse">
+  <li><a href="#independent-exercise-1" id="toc-independent-exercise-1" class="nav-link" data-scroll-target="#independent-exercise-1"><span class="header-section-number">1.6.1</span> Independent Exercise 1</a></li>
+  <li><a href="#independent-exercise-2" id="toc-independent-exercise-2" class="nav-link" data-scroll-target="#independent-exercise-2"><span class="header-section-number">1.6.2</span> Independent Exercise 2</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -184,36 +187,36 @@ ul.task-list li input[type="checkbox"] {
 
 <p>The purpose of this lab is to give you a first overview of what a proper GIS workflow looks like, from start to end. As you progress on your exercises the projects will become more complex but the general workflow will not change.</p>
 <p>Developing proper project and file management habits from the start is the <em>best</em> thing you can do to succeed in GIS. Speaking as someone who has been teaching and working with Geomatics for more than a decade, poor file/project management is the underlying cause of at least 50% of the GIS problems you may encounter.</p>
-<section id="pre-lab-activities" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="pre-lab-activities"><span class="header-section-number">1.1</span> Pre-Lab Activities</h2>
+<section id="before-you-start" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="before-you-start"><span class="header-section-number">1.1</span> Before you start!</h2>
 <ol type="1">
-<li><p>Attend or watch the recording for this weeks seminar on Canvas.</p></li>
-<li><p>Watch the video on how to obtain spatial data from the <a href="https://digimap.edina.ac.uk/">Digimap</a> platform, a spatial data portal service that the university subscribes to.</p></li>
+<li><p>Go through the Week 1 preparatory session on Canvas, and watch the seminar recording if you have missed it.</p></li>
 <li><p>Read <a href="https://www.ordnancesurvey.co.uk/documents/resources/guide-to-nationalgrid.pdf">this document</a> to understand how the British National Grid indexing system works.</p></li>
 </ol>
+<!-- end of list -->
 </section>
 <section id="GE1" class="level2" data-number="1.2">
 <h2 data-number="1.2" class="anchored" data-anchor-id="GE1"><span class="header-section-number">1.2</span> Guided Exercise 1 - Managing and loading files</h2>
-<p>In this exercise, you download some data, then prepare a <em>folder structure</em> to organise the files in your GIS projects, then create a QGIS project file and add some GIS data to it.</p>
+<p>In this exercise, you will download some data, prepare a <em>folder structure</em> to organise the files in your GIS projects, then create a QGIS project file and add some GIS data to it.</p>
 <section id="downloading-the-required-data" class="level3" data-number="1.2.1">
 <h3 data-number="1.2.1" class="anchored" data-anchor-id="downloading-the-required-data"><span class="header-section-number">1.2.1</span> Downloading the required data</h3>
-<p>For this practical you will use the “OS open road” and “OS Terrain 50 Digital Terrain Model” spatial datasets, specifically for the NS89 tile of the Ordnance Survey British National Grid.</p>
-<ol type="1">
-<li><p>Head to the <a href="https://digimap.edina.ac.uk/">Digimap</a> website, and if you haven’t already, make sure you accept the user licenses for all datasets, as show on the instructions video.</p></li>
-<li><p>Go the <code>Ordnance SUrvey</code> section of the site, and then pick the <code>View maps and download data</code> option on the right.</p></li>
+<p>For this practical you will use the “OS open road” and “OS Terrain 50 Digital Terrain Model” spatial datasets, specifically for the <strong>NS89</strong> tile of the Ordnance Survey British National Grid. (Read about what these datasets are here: <a href="https://www.ordnancesurvey.co.uk/products/os-open-roads">OS Open Roads</a> , <a href="https://www.ordnancesurvey.co.uk/products/os-terrain-50">OS Terrain 50</a>).</p>
+<ol class="example" type="1">
+<li><p>Head to the <a href="https://digimap.edina.ac.uk/">Digimap</a> website, and if you haven’t already, make sure you accept the user licenses for all datasets, as show on the instructions video avaiable on Canvas.</p></li>
+<li><p>Go the <code>Ordnance Survey</code> section of the site, and then pick the <code>View maps and download data</code> option on the right.</p></li>
 <li><p>Following the steps shown on the instructions video, download the following datasets <em>for the NS89 BNG tile only</em>:</p></li>
 </ol>
 <ul>
 <li>OS Open Roads (under <em>Vector Data</em>)</li>
-<li>“OS Terrain 50 Digital Terrain Model” (<strong>NOT Terrain 5 and NOT Contours</strong>, under Land and Height Data)</li>
+<li>“OS Terrain 50 Digital Terrain Model” (<em>NOT Terrain 5 and NOT Contours!</em>, under Land and Height Data)</li>
 </ul>
-<p>As a hint, if you have searched for tile NS89 and checked the required datatsets correctly, you will see a screen like this:</p>
+<p>If you have correctly searched for tile NS89 and checked the required datatsets, you will see a screen like this:</p>
 <p><img src="images/lab1_digimap.png" class="img-fluid"></p>
 </section>
 <section id="creating-a-project-structure" class="level3" data-number="1.2.2">
 <h3 data-number="1.2.2" class="anchored" data-anchor-id="creating-a-project-structure"><span class="header-section-number">1.2.2</span> Creating a project structure</h3>
 <p>GIS projects generate a lot of different files, and quickly, so project organization is <strong>essential</strong>. The folder structure below is my personal suggestion for organizing GIS projects files and associated data. As you get comfortable managing your own projects, feel free to change the organization structure to something that best suits your own workflow and the specific project you are working on!</p>
-<ol type="1">
+<ol start="4" class="example" type="1">
 <li>Create a folder on your computer with the module name (<code>GEOU9SP</code>), off of your main work folder. For <strong>Windows</strong> this will usually be <code>Documents</code>. For <strong>Linux</strong> and <strong>Mac</strong>, create it on you <code>home</code> folder. (If you prefer and are comfortable with saving at another location on your computer, go for it!)</li>
 </ol>
 <p><strong>Windows:</strong></p>
@@ -231,18 +234,18 @@ Warning
 </div>
 <div class="callout-body-container callout-body">
 <ul>
-<li><p>Having complex file paths can sometimes create problems. That is why we try to keep our main projects on a base folder. If you would like to keep a copy of your data on your OneDrive folder you are encouraged to do so, but I don’t recommend working directly from it. That is because the full path to a OneDrive folder will to be very long and likely contain spaces. Mine, for example is <code>C:\Users\Thiago\OneDrive - University of Stirling\Documents</code>. Those spaces in the name may create problems later. So I recommend <em>copying</em> your data tom your OneDrive folder at the end of each lab instead.</p></li>
+<li><p>Having complex file paths can sometimes create problems. That is why we try to keep our main projects on a base folder. If you would like to keep a copy of your data on your OneDrive folder you are encouraged to do so, but I don’t recommend working directly from it. That is because the full path to a OneDrive folder will to be very long and likely contain spaces. Mine, for example is <code>C:\Users\Thiago\OneDrive - University of Stirling\Documents</code>. Those spaces in the name may create problems later. So I recommend instead to <em>copy</em> the completed lab data to your OneDrive folder at the end of each lab.</p></li>
 <li><p>For the same reason, <strong>never</strong> use spaces or special symbols on your folder and file names. Limit yourself to using letters A-Z and a-z, numbers 1-9 and just the <em>underline</em> (_) and <em>dash</em> (-) symbols.</p></li>
-<li><p>Windows <strong>does not</strong> differentiate letter case, so if you create a file named <code>filename1.txt</code> and then a second file named <code>Filename1.txt</code> in the same folder, the second will overwrite the first. Mac OS does differentiate upper and lower case letters, so ‘Filename.txt’ and ‘filename.txt’ are considered different names and can co-exist in the same folder.</p></li>
+<li><p>Windows <strong>does not</strong> differentiate letter case, so if you create a file named <code>filename1.txt</code> and then a second file named <code>Filename1.txt</code> in the same folder, the second will overwrite the first. Mac OS does differentiate upper and lower case letters, so <code>Filename1.txt</code> and <code>filename1.txt</code> are considered different names and can co-exist in the same folder.</p></li>
 </ul>
 </div>
 </div>
-<ol start="2" type="1">
+<ol start="5" class="example" type="1">
 <li><p>Inside the new <code>GEOU9SP</code> folder, create a subfolder called <code>lab_1</code> (notice I am avoiding spaces by using the underline)</p></li>
 <li><p>Inside <code>lab_1</code>, create the following folder structure. On the diagram below, the folder <code>raster</code> is a folder inside the folder <code>01_raw_data</code>, which is inside <code>lab_1</code> and so on.</p></li>
 </ol>
 <pre><code>.
-└── ENMPG11/
+└── GEOU9SP/
     └── lab_1/
         ├── 00_qgis
         ├── 01_raw_data/
@@ -254,16 +257,16 @@ Warning
 <p>I like to start folder names start with double digits so they are kept in order. These folders will be used as follows:</p>
 <ul>
 <li><p><code>00_qgis</code>: we will use this folder to save our QGIS project files.</p></li>
-<li><p><code>01_raw_data</code>: this folder will keep all the original data files you download. This way you can always go back to the start if something goes wrong. You can optionally use the subfolders <code>vector</code> and <code>raster</code> to easily know which data type you are working with, but this may not be necessary for small projects. As you obtain data you will create additional subfolders for each individual dataset to keep data organized.</p></li>
+<li><p><code>01_raw_data</code>: this folder will keep all the original data files you download. This way you can always go back to the start if something goes wrong. You can optionally use the subfolders <code>vector</code> and <code>raster</code> to easily know which kind of data you are working with, but this may not be necessary for small projects. As you obtain data you will create additional subfolders for each individual dataset to keep data organized.</p></li>
 <li><p><code>02_processing</code>: here we will keep all the intermediate files you generate as part of your work. Make ample use of subfolders to identify each step of the workflow.</p></li>
 <li><p><code>03_final_products</code>: here we will keep the final products of our intended analysis. This makes it easy for us to find the latest version of our final results, without risking confusing it with intermediate files. This can also include maps, reports and any other ’deliverable’resulting from your analysis.</p></li>
 <li><p><code>04_notes</code>: here we will keep all our <em>non-GIS</em> files. For example, it may be a good idea to keep a text file documenting the project steps as you work on it. You could also save here screen grabs of specific steps. Again, use subfolders as needed to keep your data tidy.</p></li>
 </ul>
-<ol start="4" type="1">
-<li>Now move the data you’ve downloaded into your organized project folders and extract (unzip) them if necessary. The terrain data files should go into the <code>raster</code> folder) and the roads data files into the <code>vector</code> folder. You can keep the data into the original folders they came in, for easy identification. Your folder structure should look like this:</li>
+<ol start="7" class="example" type="1">
+<li>Now move the data you’ve downloaded into your organized project folders and extract (unzip) them if necessary. The terrain data folder (<code>terrain-50-dtm_xxxxxxx</code>) should go into the <code>raster</code> folder within <code>01_raw_data</code> and the roads folder (<code>open-roads_xxxxxxx</code>) into the <code>vector</code> folder. The <code>citations_orders.xxxx.txt</code> and <code>contents_order_xxx</code> text files should go into your <code>04_notes</code> folder. Your folder structure should look like this:</li>
 </ol>
 <pre><code>.
-└── ENMPG11/
+└── GEOU9SP/
     └── lab_1/
         ├── 00_qgis
         ├── 01_raw_data/
@@ -276,13 +279,42 @@ Warning
         ├── 02_processing
         ├── 03_final_products
         └── 04_notes</code></pre>
-<ol start="5" type="1">
-<li>Start a new text file (a Word <em>.doc</em> file or a Notepad <em>.txt</em> file) in your <code>notes</code> folder, and write a few lines documenting the steps you took until now. If you prefer hand written notes on a paper notebook, feel free to use it instead! The important thing is to keep track of the steps you are taking. As projects get more complicated, it is easy to forget which steps we took, and in what order!</li>
+<div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Stop and Think
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>What are the <code>citations_orders.xxxx.txt</code> and <code>contents_order_xxx</code> files? What information do they contain?</p>
+</div>
+</div>
+<div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>They are both plain text files. <code>citations_orders.xxxx.txt</code> is very handy as it gives us the proper way to cite the data sources on reports. <code>contents_order_xxx</code> is just a summary of your Digimap order.</p>
+</div>
+</div>
+</div>
+<ol start="8" class="example" type="1">
+<li>Start a new text file (a Word <em>.doc</em> file or a Notepad <em>.txt</em> file) in your <code>04_notes</code> folder, and write a few lines documenting the steps you took until now. If you prefer handwritten notes on a paper notebook, feel free to use it instead! The important thing is to keep track of the steps you are taking. As projects get more complicated, it is easy to forget which steps we took, and in what order!</li>
 </ol>
 </section>
 <section id="creating-a-qgis-project-and-adding-data-to-it" class="level3" data-number="1.2.3">
 <h3 data-number="1.2.3" class="anchored" data-anchor-id="creating-a-qgis-project-and-adding-data-to-it"><span class="header-section-number">1.2.3</span> Creating a QGIS project and adding data to it</h3>
-<p>A QGIS project is just an <em>index</em> file, which will remember all the data layers you have loaded, their stacking order, the styling of each layer, and some other information such as the coordinate reference system. It will also keep any map layouts that you create. <strong>But it will NOT store the data files themselves!!</strong>. That is why we need good project folder organisation. If a data file is moved or renamed, the QGIS project file will lose track of it.</p>
+<p>A QGIS project is a file, which will remember all the data layers you have loaded, their stacking order, the styling of each layer, and some other information such as the coordinate reference system. It will also keep any map layouts that you create. <strong>But he project file will NOT store the data files themselves!!</strong>. It will only link to the data. That is why we need good project folder organisation. If a data file is moved or renamed, the QGIS project file will lose track of it.</p>
 <ol start="6" type="1">
 <li>Create a new project in QGIS by clicking on <code>Project &gt; New...</code> or pressing <em>Ctrl-N</em>:</li>
 </ol>
@@ -295,9 +327,9 @@ Warning
 </div>
 </div>
 </div>
-<ol start="7" type="1">
-<li><p>Add to your project the layers <code>NS_RoadLink.shp</code> from the OS Roads layer and the <code>NS89.asc</code> terrain data from your organized project folders.</p></li>
-<li><p>Save your project. Click on the Save button, give your project a name, and save it inside the <code>00_qgis</code> folder.</p></li>
+<ol start="9" class="example" type="1">
+<li><p>Add to your project the layers <code>NS_RoadLink.shp</code> from the OS Roads dataset and the <code>NS89.asc</code> terrain data from your organized project folders.</p></li>
+<li><p>Save your project inside the <code>00_qgis</code> folder. You can save your project by clicking on the <em>Save</em> button, going to <code>Project &gt; Save</code> menu, or by holding the keys <code>Ctrl+S (Command+S on Mac)</code>.</p></li>
 <li><p>Open the project settings by clicking on the menu <code>Project &gt; Properties...</code>. You will then see this window:</p></li>
 </ol>
 <div class="cell" data-layout-align="center">
@@ -309,12 +341,12 @@ Warning
 </div>
 </div>
 </div>
-<ol start="10" type="1">
+<ol start="12" class="example" type="1">
 <li><p>The main things to set on your new project are the project home folder, the coordinate reference system (CRS) and the measurement units.</p>
 <ul>
 <li><p>As the <em>project home</em> on the <code>General</code> tab, select the <code>lab_1</code> folder you created. This helps quick navigation when opening and saving data.</p></li>
-<li><p>For <em>measurement units</em>, make sure distance units are set in meters, and area units in squared meters, also on the <code>General</code> tab.</p></li>
-<li><p>For the CRS, go to the <code>CRS</code> tab and search for <strong>27700</strong> in the <code>Filter</code> box. That is the <em>EPSG code</em> that identifies the <em>OSGB 1936 British National Grid</em> coordinate reference system. Select it by clicking on it.</p></li>
+<li><p>For <em>measurement units</em>, make sure distance units are set in meters, and area units in squared meters, also on the <code>General</code> tab. Any QGIS operations that calculate distances or areas will use the units set by the project.</p></li>
+<li><p>For the CRS, go to the <code>CRS</code> tab and search for <strong>27700</strong> in the <code>Filter</code> box. That is the <em>EPSG code</em> that identifies the <em>OSGB 1936 British National Grid</em> coordinate reference system (CRS). Select it by clicking on it.</p></li>
 </ul></li>
 </ol>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -330,18 +362,18 @@ Note
 <p>EPSG stands for “European Petroleum Survey Group”, and designates a database with standard codes for hundreds of coordinate reference systems. Over time, you will probably memorize the EPSG codes for the CRSs you use more often.</p>
 </div>
 </div>
-<ol start="11" type="1">
-<li>Save your project by clicking on the <em>Save</em> button, or going to <code>Project &gt; Save</code>, or by holding the keys <code>Ctrl+S (Command+S on Mac)</code> simultaneously.</li>
+<ol start="13" class="example" type="1">
+<li>Save your project again.</li>
 </ol>
 </section>
 </section>
 <section id="guided-exercise-2---organizing-and-styling-your-layers" class="level2" data-number="1.3">
 <h2 data-number="1.3" class="anchored" data-anchor-id="guided-exercise-2---organizing-and-styling-your-layers"><span class="header-section-number">1.3</span> Guided Exercise 2 - Organizing and styling your layers</h2>
 <p>One of the most powerful aspects of GIS software is the ability to <em>style</em> spatial data in very specific ways, by specifying colors, line widths, line types, simbols, etc. As we progress in the module you will learn more and more ways to style your data.</p>
-<ol type="1">
-<li><p>Select the <code>NS89</code> layer on the <em>Layers</em> side panel, and drag it to the bottom of the layers list if not there already.</p></li>
-<li><p>Turn the roads layer off for now.</p></li>
-<li><p>Right-click on the layer name and choose <code>Rename Layer</code>. Rename it to <code>Digital Elevation Model (50m)</code>.</p></li>
+<ol start="14" class="example" type="1">
+<li><p>On the <code>Layers panel</code> to the left of the screen, select the <code>NS89</code> layer, and drag it to the bottom of the layers list if not there already.</p></li>
+<li><p>Turn the roads layer off for now, by unchecking the box besides its name.</p></li>
+<li><p>Right-click on the <code>NS89</code> layer name and choose <code>Rename Layer</code>. Rename it to <code>Digital Elevation Model (50m)</code>.</p></li>
 <li><p>Open the file explorer in your system, and find the <code>NS89.asc</code> file that holds the actual elevation data, which you downloaded from Digimap.</p></li>
 </ol>
 <div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
@@ -357,25 +389,30 @@ Stop and Think
 <p>Will changing a layer name in the layer panel also change the name of the source data file for that layer?</p>
 </div>
 </div>
-<div class="callout callout-style-simple callout-important no-icon callout-titled" title="Answer">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Answer
+Click for answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>No, layer names within the project are independent of file names - but as default QGIS will use the file name as layer name when you add new data. But you should always change them into nice, readable and properly spelled names within your project, where you are free to use spaces. The actual file name linked by the project will stay the same and can always be seen by right-clicking on the layer name and selecting <code>Properties...&gt; Information</code>.</p>
 </div>
 </div>
 </div>
-<ol start="4" type="1">
-<li><p>Right click on the terrain layer and choose <code>Zoom to Layer</code>. This is a very handy tool to “find yourself” if you end up zooming or panning the map too far.</p></li>
-<li><p>Right click on the terrain layer name again and select <code>Properties...</code>, then go to the <code>Symbology</code> tab. Select <code>Rendering type</code> to be <code>Single Band Pseudocolor</code>, and <code>Color Ramp</code> as <code>spectral</code>. Click again on the down arrow button to the right of the <code>Color Ramp</code> box, and select <code>Invert Color Ramp</code>, so that the minimum heights are colored blue. Then click <code>OK</code>. Save your project.</p></li>
+<ol start="18" class="example" type="1">
+<li><p>Right click on the newly renamed terrain layer and choose <code>Zoom to Layer</code>. This is a very handy tool to “find yourself” if you end up zooming or panning the map too far.</p></li>
+<li><p>Right click on the terrain layer name again and select <code>Properties...</code>, then go to the <code>Symbology</code> tab.</p></li>
+<li><p>On the <code>Min</code> and <code>Max</code> boxes, type <code>0</code> and <code>500</code> respectively. This determines the range of layer values to be visualised.</p></li>
+<li><p>Select <code>Rendering type</code> to be <code>Single Band Pseudocolor</code>, and change the <code>Color ramp</code> option by clicling on the down-arrow button to the right and picking the <code>spectral</code> colour ramp. If you click on the colour ramp itself it will open a new window to custmize it. This is now what we need for now, so just close it and use the down-arrow.</p></li>
+<li><p>Click on <code>Classify</code> (under the dropdown menu that says * Mode: continuous*). The colours will be matched to the range of elevation values in the layer.</p></li>
+<li><p>Click again on the down-arrow button and select <code>Invert Color Ramp</code> at the top of the options, so that the lowest heights are coloured blue. Then click on <code>OK</code>.</p></li>
+<li><p>Note how the legend for you terrain layer has changed on the Layers panel. it now shows the minimum and maximum elevations and the colour ramp. Save your project.</p></li>
 </ol>
 <div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
 <div class="callout-header d-flex align-content-center">
@@ -387,39 +424,42 @@ Stop and Think
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Why do we bother inverting the color ramp for this dataset?</p>
+<p>Why do we bother inverting the colour ramp for this dataset?</p>
 </div>
 </div>
-<div class="callout callout-style-simple callout-important no-icon callout-titled" title="Answer">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Answer
+Click for answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>We should always try to use colours that reinforce map interpretation. The color blue is usually associated with water, and water accumulates on the lowest elevations, so setting the lowest elevations to blue helps map users read and interpret the map.</p>
 </div>
 </div>
 </div>
-<ol start="6" type="1">
-<li>Rename the <code>NS_RoadLink</code> layer to <code>Road Network</code>. Go to its Symbology properties and click on <code>Simple Line</code>. Change the line color to a mid-grey, and the line width to 0.3. Click <code>OK</code>. Reactivate the layer to visualise it.</li>
+<ol start="25" class="example" type="1">
+<li><p>Rename the <code>NS_RoadLink</code> layer to <code>Road Network</code>.</p></li>
+<li><p>Go to its <code>Symbology</code> properties, like you did for the terrain layer, Notice that the symbology options are data-specific (vector vs.&nbsp;raster). Seclet <code>Simple Line</code> in the symbology window (under the main <code>Line</code> option). Then under the window, go to the <code>Color</code> option an click on the down-arrow menu to change the line color to a dark grey. If you click on the actual colour, a more complex colour-picking window will appear. You can use either the quicker colour dropdown or the main colour window, whatever you prefer.</p></li>
+<li><p>Change the <code>Stroke width</code> (line width) to 0.3. Click <code>OK</code>. Reactivate the layer if needed to visualise it.</p></li>
 </ol>
 </section>
-<section id="guided-exercise-3-processing-data-using-gis-functions" class="level2" data-number="1.4">
-<h2 data-number="1.4" class="anchored" data-anchor-id="guided-exercise-3-processing-data-using-gis-functions"><span class="header-section-number">1.4</span> Guided Exercise 3: Processing data using GIS functions</h2>
-<p>The core of GIS work is to use the many built-in functions of GIS software to <em>process</em> the data in some way, and thus extract information. For this exercise, we will use a function that generates a new layer representing the boundaries of the terrain data layer, and then use a second function to cut the roads layer to the same shape and extent as this new layer.</p>
-<ol type="1">
-<li><p>Go to the <code>Vector</code> menu and select <code>Research Tools &gt; Extract Layer Extent...</code>. Select the terrain layer as your <code>Input layer</code>, and click <code>Run</code> to generate a <em>temporary layer</em>. This layer will not be kept once you close QGIS, unless you save it manually later. <strong>The window will not close automatically</strong> once you run, so remember to click on <code>Close</code> when you are done.</p></li>
-<li><p>Go to <code>Vector &gt; Geoprocessing Tools &gt; Clip...</code>. Select the roads layer as the <code>Input Layer</code> and the new temporary layer as the <code>Overlay Layer</code>. This time, we will save the output. Click on the <code>...</code> button to the right of the <code>Clipped</code> text box, and then choose <code>Save to file</code>. Save your new layer on <code>ENMPG11/lab_1/processing</code>, naming it <code>clipped_roads.shp</code>. Make sure the <code>SHP file</code> format is selected below the file name.</p></li>
+<section id="guided-exercise-3-processing-data-using-gis-operations" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="guided-exercise-3-processing-data-using-gis-operations"><span class="header-section-number">1.4</span> Guided Exercise 3: Processing data using GIS operations</h2>
+<p>The core of GIS work is to use the many built-in operations (also known as functions or tools) of GIS software to <em>process</em> the data in some way, and thus create additional information. For this exercise, we will use an operation that creates a new layer representing the boundaries of the terrain data layer, and then use a second operation to cut the roads layer to the same shape and extent as this new layer.</p>
+<ol start="28" class="example" type="1">
+<li><p>Go to the <code>Vector</code> menu and select <code>Research Tools &gt; Extract Layer Extent...</code>. Select the terrain layer as your <code>Input layer</code>, and click <code>Run</code> to generate a <em>temporary layer</em>. Temporary layers are not kept once you close QGIS, unless you save it manually later. The <code>Extract Layer Extent</code> window will not close automatically after you run the operation, so click on <code>Close</code> when you are done.</p></li>
+<li><p>Go to <code>Vector &gt; Geoprocessing Tools &gt; Clip...</code>. Select the roads layer as the <code>Input Layer</code> and the new temporary layer as the <code>Overlay Layer</code>.</p></li>
+<li><p>This time, we will save the output. Click on the <code>...</code> button to the right of the <code>Clipped</code> text box, and then choose <code>Save to file</code>. Save your new layer on the folder <code>GEOU9SP/lab_1/02_processing/</code>, naming it <code>clipped_roads.shp</code>. Make sure the <code>SHP file</code> format is selected below the file name. Then click on <code>Run</code> to execute the operation. Close the window.</p></li>
 <li><p>Turn the original roads layer on and off to see the result of your operation. Then right-click on the original roads layer, and select <code>Styles &gt; Copy Style &gt; All Style Categories</code>. Then right click on the new (clipped) roads layer and select <code>Styles &gt; Paste Style &gt; All Style Categories</code>. This is a great way top style several layers ion the same way wirthout effort.</p></li>
-<li><p>Remove the original roads layer from your project by right clicking on it and selecting <code>Remove Layer...</code>, and then save your project.</p></li>
+<li><p>Remove the original roads layer from your project by right clicking on it and selecting <code>Remove Layer...</code>, and then rename you clipped layer to “Roads”. Save your project.</p></li>
 <li><p>Close QGIS. <strong>It will give you a warning</strong> - read it carefully and then confirm it.</p></li>
-<li><p>Reopen QGIS, and load back your project. Notice it remembers exactly where you last saved it, including zoom level, layer names and layer styles. The “Extent” layer will show an exclamation mark on the side panel, meaning the actual data cannot be found. Remove it for now.</p></li>
+<li><p>Reopen QGIS, and load back your project. Notice it remembers exactly where you last saved it, including zoom level, layer names and layer styles. The “Extent” layer will still be on your list, but will appear empty - it has been deleted once you closed QGIS. Remove it from the project and save again.</p></li>
 </ol>
 <div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
 <div class="callout-header d-flex align-content-center">
@@ -434,26 +474,26 @@ Stop and Think
 <ol type="a">
 <li><p>What are the names of the two GIS functions you just used in this exercise?</p></li>
 <li><p>Why did you have to create a new layer representing the extent of the terrain data before <em>clipping</em> the roads layer?</p></li>
-<li><p>What does the warning given by QGIS when you tried to close it means?</p></li>
+<li><p>What does the warning given by QGIS when you closed your project means?</p></li>
 </ol>
 </div>
 </div>
-<div class="callout callout-style-simple callout-important no-icon callout-titled" title="Answer">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Answer
+Click for answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ol type="a">
 <li><p>The functions are called <code>Clip</code> and <code>Extract Layer Extent</code>.</p></li>
-<li><p>Because the <code>Clip</code> function requires two <em>vector</em> files as input, and the terrain data is a <em>raster</em> file (i.e.&nbsp;an image). Each specific tool will require different data models to work properly. We will learn more about vectors and rasters on weeks 2 and 3.</p></li>
-<li><p>When we created the extent layer, we produced a <em>temporay layer</em>, which is discarded by QGIS when the program is closed. However, the link to the layer will remain, and will give you a ‘data not found’ error when you next reopen the project. Temporary layers are also lost when QGIS crashed (yes, when, not if - it will happen), so never use them for important stuff - only for quick tests if you are not sure what the output of a function will be.<br>
+<li><p>The <code>Clip</code> function requires two <em>vector</em> files as input, but the terrain data is a <em>raster</em> file (i.e.&nbsp;an image). The <code>Extract Layer Extent</code> creates a vector file representing the extent of any given layer. Each specific tool will require different kinds of data to work properly. We will learn more about vectors and rasters on weeks 2 and 3.</p></li>
+<li><p>When we created the extent layer, we produced a <em>temporary layer</em>, which is discarded by QGIS when the program is closed. QGIS was letting you know that will happen, to give you the chance to go back and save it. Temporary layers are also lost when QGIS crashes (yes when, not if - it will happen). So never use them for important stuff - only for quick tests if you are not sure what the output of a function will be.<br>
 </p></li>
 </ol>
 </div>
@@ -462,27 +502,31 @@ Answer
 </section>
 <section id="guided-exercise-4-creating-a-map-layout" class="level2" data-number="1.5">
 <h2 data-number="1.5" class="anchored" data-anchor-id="guided-exercise-4-creating-a-map-layout"><span class="header-section-number">1.5</span> Guided Exercise 4: Creating a map layout</h2>
-<p>The main QGIS interface (or any other GIS software) is developed and optimised for interactive work. But very often as part of our GIS analysis we will want to generate nice maps and figures, which require some level of proper design (i.e.&nbsp;just grabbing a screen capture of the QGIS window and dumping it on a page is not enough). For that, we use the QGIS <em>Map Layout Editor</em>.</p>
-<ol type="1">
-<li><p>Click on <code>Project &gt; New Map Layout</code> and name it <code>Lab 1 Layout</code>. A new window will open showing the QGIS Layout Editor. Notice that the main QGIS window remains open as well. These windows are ‘linked’, so that the map layout reflects any styling changes you make on the main window.</p></li>
+<p>The main QGIS interface (or any other GIS software) is developed and optimised for interactive work. But very often as part of our GIS analysis we will want to generate nice maps and figures following proper design rules (and not just grabbing a screen capture of the QGIS window and dumping it on a page - hint for your assignment reports). For that, we use the QGIS <strong>Map Layout Editor</strong>.</p>
+<ol start="35" class="example" type="1">
+<li><p>Click on <code>Project &gt; New Print Layout</code> and name it <code>Lab 1 Layout</code>. A new window will open showing the QGIS Layout Editor. Notice that the main QGIS window remains open as well. These windows are ‘linked’, so that the map layout reflects any styling changes you make on the main window.</p></li>
 <li><p>Add a new map to the layout by clicking on the <img src="https://docs.qgis.org/testing/en/_images/mActionAddMap.png" class="img-fluid"> icon. Drag it through the page so it covers about 2/3 of it horizontally, and the full height of the page (minus some borders).</p></li>
 <li><p>Use the <code>Interactive Extent</code> tool <img src="https://docs.qgis.org/testing/en/_images/mActionMoveItemContent.png" class="img-fluid"> to pan (click and grag) and zoom (mouse wheel) until your data covers the entire map box. But make sure you don’t hide the edges of the data by zooming in too much!</p></li>
-</ol>
-<p><img src="images/lab1_fig6_mapzoom.png" class="img-fluid"></p>
-<ol start="4" type="1">
 <li><p>Now fine tune the map scale by changing the <code>Scale</code> value on the bottom right panel. Remember that this value means “1:value”, i.e.&nbsp;one unit on the page is equal to that many units (value) in the real world. This means larger numbers will “zoom out”, and smaller numbers will “zoom in”. Try to make the map fill as much as possible of the map box, without clipping the edges.</p></li>
 <li><p>Go to the menu <code>Add Item &gt; Add Legend...</code> in the Map Layout Window (or guess the icon for this option on the side toolbar). Click the area beside the map box and drag to add a legend.</p></li>
-<li><p>Go back to the main QGIS window, right click on the terrain layer name, then select <code>Properties...</code>, and on the <code>Symblogy</code> tab, change the <code>Mode</code> under the class color box to <code>Equal Interval</code>. Then select the number of <code>Classes</code> to 10 (to the right of the <code>Equal Interval</code> box). Go back top the Map Layout editor.</p></li>
+<li><p>Go back to the main QGIS window, right click on the terrain layer name, then select <code>Properties...</code>, and on the <code>Symbology</code> tab, change the <code>Mode</code> under the class color box to <code>Equal Interval</code>. Then select the number of <code>Classes</code> to 10 (to the right of the <code>Equal Interval</code> box). Go back top the Map Layout editor.</p></li>
 <li><p>Go to the menu <code>Add Item &gt; Add Scalebar</code> in the Map Layout Window (or guess the icon for this option on the side toolbar). Click and drag in the area below the legend to add it to the map layout.</p></li>
-<li><p>Add a title to your map using the <code>Add Label...</code> tool (either on the <code>Add Item</code> menu or selecting the tool directly from the left sidebar). You can change the text by replacing the “Lorem ipsum” placeholder text with your own text on the left pane. Try to make it <strong>bold</strong> with a font size of 16.</p></li>
-<li><p>Rearrange the items on the page until you are pleased with the results. Then go to <code>Layout &gt; Export as PDF...</code>, and export your map, naming it properly and saving it on <code>GEOU9SP/lab_1/final_products</code>. Then close the Map Layout window, save your project on the main QGIS window, and close QGIS .</p></li>
-<li><p>Reopen QGIS, and go to <code>Project &gt; Layout Manager</code>. The layout you created previously should appear on the list. Select it and click on <code>Show</code> to reopen the Map Layout window.</p></li>
+<li><p>Add a title to your map using the <code>Add Label...</code> tool (either on the <code>Add Item</code> menu or selecting the tool directly from the left sidebar). You can change the text by replacing the “Lorem ipsum” placeholder text with your own text on the left pane. Try to make it <strong>bold</strong> with a font size of 16 (hint: always use the down-arrow buttons for ‘quick settings’).</p></li>
+<li><p>Rearrange the items on the page until you are pleased with the results. Then go to <code>Layout &gt; Export as PDF...</code>, and export your map, naming it properly and saving it on <code>GEOU9SP/lab_1/final_products</code>. It is a good idea to export as PDF if you want your map to be a standalone document. If you are exporting to insert the map into a report, then use <code>Layout &gt; Export as Image...</code> instead.</p></li>
+</ol>
+<p>For reference, my map looked like this at this stage:</p>
+<p><img src="images/lab1_fig6_mapzoom.png" class="img-fluid"></p>
+<ol start="44" class="example" type="1">
+<li>Then close the Map Layout window, save your project on the main QGIS window, and close QGIS. Reopen QGIS, and go to <code>Project &gt; Layout Manager</code>. The layout you created previously should appear on the list. Select it and click on <code>Show</code> to reopen the Map Layout window.</li>
 </ol>
 <p><strong>Congratulations!</strong> You have successfully finished your first GIS project, using proper file management practices! As a final suggestion, create a “workflow_notes” file on <code>GEOU9SP/lab1/notes</code> and write up a quick overview of what you did, along with any specific notes you would like to remember later.</p>
 </section>
-<section id="independent-exercise-1" class="level2" data-number="1.6">
-<h2 data-number="1.6" class="anchored" data-anchor-id="independent-exercise-1"><span class="header-section-number">1.6</span> Independent Exercise 1</h2>
-<p>At the end of each lab, you will have the opportunity to reinforce what you learned during the guided exercises by going through ‘independent’ exercises. These will use the same procedures and functions you used during the guided exercises, but will not have step by step instructions on <em>how</em> to do things. As the module progresses, the independent exercises will guive you less and less directions, to reflect real-world GIs usage. It is <strong>really important</strong> that you do the independent exercises as well - it is easy to fall into a false sense of ‘<em>I got this</em>’ when following step-by-step directions.</p>
+<section id="independent-exercises" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="independent-exercises"><span class="header-section-number">1.6</span> Independent Exercises</h2>
+<p>At the end of each lab, you will have the opportunity to reinforce what you learned by going through ‘independent’ exercises. These will use the same operations you learned with the guided exercises, but will not have step by step instructions.</p>
+<p>As the module progresses, the independent exercises will give you less and less directions, to reflect real-world GIs usage. <strong>Make sure you do the independent exercises</strong> - it is easy to fall into a false sense of ‘<em>I got this</em>’ when only following step-by-step directions.</p>
+<section id="independent-exercise-1" class="level3" data-number="1.6.1">
+<h3 data-number="1.6.1" class="anchored" data-anchor-id="independent-exercise-1"><span class="header-section-number">1.6.1</span> Independent Exercise 1</h3>
 <ol type="1">
 <li><p>Create a new project folder structure for this project, under your main GEOU9SP work folder. The create a new QGIS project file for it, naming it properly.</p></li>
 <li><p>Download the following data and move it to the appropriate locations in your project folders:</p></li>
@@ -504,8 +548,8 @@ Answer
 <li><p>Save your analysis as a project, and export your map as a PDF.</p></li>
 </ol>
 </section>
-<section id="independent-exercise-2" class="level2" data-number="1.7">
-<h2 data-number="1.7" class="anchored" data-anchor-id="independent-exercise-2"><span class="header-section-number">1.7</span> Independent Exercise 2</h2>
+<section id="independent-exercise-2" class="level3" data-number="1.6.2">
+<h3 data-number="1.6.2" class="anchored" data-anchor-id="independent-exercise-2"><span class="header-section-number">1.6.2</span> Independent Exercise 2</h3>
 <ol type="1">
 <li><p>Download the zipfile containing the Air Photo Mosaic and the Stirling Council Geospatial Data from <a href="">here</a>.</p></li>
 <li><p>Set up a project folder structure to contain this project.</p></li>
@@ -522,6 +566,7 @@ Answer
 </ul>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

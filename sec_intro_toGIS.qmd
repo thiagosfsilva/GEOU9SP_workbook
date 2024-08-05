@@ -24,7 +24,7 @@ For every week, we will list the main theoretical and practical learning goals. 
 
 ### Practical knowledge:
 
-[Lab @sec-exoverview]
+[@sec-exoverview]
 
 -   How to launch QGIS
 -   How to load a spatial data file
@@ -35,7 +35,7 @@ For every week, we will list the main theoretical and practical learning goals. 
 -   How to enter the layout editor
 -   How to make and export a simple map layout
 
-[Lab @sec-excrs]
+[@sec-excrs]
 
 -   How to check the Coordinate Reference System of a spatial file
 -   How to set the CRS of a QGIS project
