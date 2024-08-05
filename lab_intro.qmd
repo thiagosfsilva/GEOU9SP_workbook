@@ -30,7 +30,7 @@ For this practical you will use the "OS open road" and "OS Terrain 50 Digital Te
 
 If you have correctly searched for tile NS89 and checked the required datatsets, you will see a screen like this:
 
-![](images/lab1_digimap.png)
+![](images/lab_1/lab1_digimap.png)
 
 ### Creating a project structure
 
@@ -41,11 +41,11 @@ GIS projects generate a lot of different files, and quickly, so project organiza
 
 **Windows:**
 
-![](images/lab1_fig3_wincfolder.png)
+![](images/lab_1/lab1_fig3_wincfolder.png)
 
 **mac OS:**
 
-![](https://nektony.com/wp-content/uploads/2018/02/home-folder-mac.jpg)
+![](images/lab_1/lab1_fig3_macfolder.png)
 
 ::: {.callout-warning}
 - Having complex file paths can sometimes create problems. That is why we try to keep our main projects on a base folder. If you would like to keep a copy of your data on your OneDrive folder you are encouraged to do so, but I don't recommend working directly from it. That is because the full path to a OneDrive folder will to be very long and likely contain spaces. Mine, for example is `C:\Users\Thiago\OneDrive - University of Stirling\Documents`. Those spaces in the name may create problems later. So I recommend instead to *copy* the completed lab data to your OneDrive folder at the end of each lab.  
@@ -122,9 +122,9 @@ A QGIS project is a file, which will remember all the data layers you have loade
 
 6. Create a new project in QGIS by clicking on `Project > New...` or pressing *Ctrl-N*:
 
-```{R qgisproj1,  out.width = "75%", fig.align = 'center', echo=F}
-knitr::include_graphics(rep("images/lab1_fig1_newproject.png"))
-```
+![](images/lab_1/lab1_fig1_newproject.png)
+
+
 
 (@) Add to your project the layers `NS_RoadLink.shp` from the OS Roads dataset and the `NS89.asc` terrain data from your organized project folders.
 
@@ -132,9 +132,9 @@ knitr::include_graphics(rep("images/lab1_fig1_newproject.png"))
 
 (@) Open the project settings by clicking on the menu `Project > Properties...`. You will then see this window:
 
-```{R qgisproj2,  out.width = "75%", fig.align = 'center', echo=F}
-knitr::include_graphics(rep("images/lab1_fig2_projprops.png"))
-```
+![](images/lab_1/lab1_fig2_projprops.png)
+
+
 
 (@) The main things to set on your new project are the project home folder, the coordinate reference system (CRS) and the measurement units. 
 
@@ -182,8 +182,6 @@ No, layer names within the project are independent of file names -  but as defau
 
 
 (@) Select `Rendering type` to be `Single Band Pseudocolor`, and change the `Color ramp` option by clicling on the down-arrow button to the right and picking the  `spectral` colour ramp. If you click on the colour ramp itself it will open a new window to custmize it. This is now what we need for now, so just close it and use the down-arrow. 
-
-
 (@) Click on `Classify` (under the dropdown menu that says * Mode: continuous*). The colours will be matched to the range of elevation values in the layer.
 
 (@) Click again on the down-arrow button and select `Invert Color Ramp` at the top of the options, so that the lowest heights are coloured blue. Then click on `OK`. 
@@ -262,7 +260,7 @@ The main QGIS interface (or any other GIS software) is developed and optimised f
 
 For reference, my map looked like this at this stage:
 
-![](images/lab1_fig6_mapzoom.png)
+![](images/lab_1/lab1_fig6_mapzoom.png)
 
 (@) Then close the Map Layout window, save your project on the main QGIS window, and close QGIS. Reopen QGIS, and go to `Project > Layout Manager`. The layout you created previously should appear on the list. Select it and click on `Show` to reopen the Map Layout window. 
 
@@ -271,49 +269,39 @@ For reference, my map looked like this at this stage:
 
 
 
-## Independent Exercises
+## Independent Exercise 1
 
-At the end of each lab, you will have the opportunity to reinforce what you learned by going through 'independent' exercises. These will use the same operations you learned with the guided exercises, but will not have step by step instructions.
+At the end of each lab, you will have the opportunity to reinforce what you learned by going through 'independent' exercises. These will use the same operations you learned with the guided exercises, but it may require you to figure out small bits of new functionality, and will not have step by step instructions.
 
 As the module progresses, the independent exercises will give you less and less directions, to reflect real-world GIs usage. **Make sure you do the independent exercises**  - it is easy to fall into a false sense of '*I got this*' when only following step-by-step directions. 
 
-### Independent Exercise 1
+1. Create a new project folder structure for this project, under your main GEOU9SP work folder. 
 
-1. Create a new project folder structure for this project, under your main GEOU9SP work folder. The create a new QGIS project file for it, naming it properly.
+2. Download the zipfile containing the Air Photo Mosaic and the Stirling Council Geospatial Data from [here]().
 
-2. Download the following data and move it to the appropriate locations in your project folders:
+3. Extract the data from the zipfiles and move them to the proper project folders.
 
-  - "Sites of Special Scientific Interest" from The Scottish Natural Heritage Natural Spaces collection: https://gateway.snh.gov.uk/natural-spaces/. Use the *ESRI Shapefile* data format. 
+4. Open QGIS and create a new project that uses the OSGB British Grid (EPSG 27700) coordinate reference system.
 
-  - OS Open Roads and OS Open Rivers rivers for the NN BNG tile from the Ordnance Survey Open Data page: https://www.ordnancesurvey.co.uk/opendatadownload/products.html. Again, use the ESRI Shapefile format. 
+5. Import the airphoto raster image and the vector files for Buildings, Roads, Railway Track, Electricity Transmission Lines, and Functional Sites into your QGIS project.
 
-3. Load the data into QGIS. Some datasets may be be given as several files split by BNG grid tile. Focus your analysis on data from BNG grid tile NN. If you need a quick refresher, these are the main grid tile codes:
+6. Organize your layers so that, from top to bottom, you have transmission lines, railways, roads, buildings, functional sites, and then the airphoto image.  
 
-![](images\British_National_Grid.png){fig-align="center"}
+7. Style your layers so that transmission lines are styled as thin dashed red lines, railways as thick white lines, roads as thick grey lines, buildings as filled yellow polygons and functional sites with a thick dark blue outline and no fill colour (hint: check the `Fill style` options).
 
-4. Produce a map of a SSSI area of your choice within the NN zone. The map should show the SSSI itself and nearby/crossing roads and rivers, at a map scale of 1:150000. Make sure you order and style your layers properly for maximum map legibility.
+8. `Clip` all your vector layers to the extent of the airphoto image.
 
-5. Save your analysis as a project, and export your map as a PDF. 
+9. Create a map layout covering the entire extent of the airphoto. Add a title, legend and scale bar to your layout and export it as a PNG image. Then insert your exported file as a figure into a MS Word document.
 
-### Independent Exercise 2
+::: {.callout-important title="Click here to see what the final layout should look like." collapse="true" appearance="minimal"}
+![](images/lab_1/lab1_fig7_indmap.png)
+:::
 
-1. Download the zipfile containing the Air Photo Mosaic and the Stirling Council Geospatial Data from [here]().
+10. Now answer the questions below:
 
-2. Set up a project folder structure to contain this project.
+ - How far is the Pathfoot Building from the Cottrell Bulding? Calculate it both "as the crow flies" (linear distance) and as if you were walking. (Hint: use the [Measuring](https://docs.qgis.org/3.34/en/docs/user_manual/map_views/map_view.html#sec-measure) tool).
 
-3. Extract the data from the zipfiles and place them in the proper project folders.
+- What is the total surface area of the water bodies in the University of Stirling Campus? (Hint: also the Measuring tool).
 
-4. Open the airphoto raster and the Railway Track, Electricity Transmission Line, and Functional Site vector files into QGIS.
-
-5. Organize and style your layers so that railways and transmission lines are on top of every other layer, and shown in red but with different line styles. The air photo mosaic should be under all the vector layers, and the functional sites should be shown with outlines only, without a fill color. 
-
-6. (Bonus) The airphoto image seems to be a bit faded, can you improve its contrast?
-
-7. Answer the questions below:
-
- - How far is the Bridge of Allan train station to the Cottrell Main entrance? Calculate it both "as the crow flies" (linear distance) and as if you were driving.
-
-- What is the total surface area of the water bodies in the University of Stirling Campus?
-
-- What is the UoS campus polygon classified as within the "Functional Site" layer?
+- What is the classification of the UoS campus polygon within the "Functional Site" layer? (Hint: use the [Indentify Features](https://docs.qgis.org/3.34/en/docs/user_manual/introduction/general_tools.html#identify) tool).
 

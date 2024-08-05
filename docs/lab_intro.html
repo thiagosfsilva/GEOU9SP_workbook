@@ -155,11 +155,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#guided-exercise-2---organizing-and-styling-your-layers" id="toc-guided-exercise-2---organizing-and-styling-your-layers" class="nav-link" data-scroll-target="#guided-exercise-2---organizing-and-styling-your-layers"><span class="header-section-number">1.3</span> Guided Exercise 2 - Organizing and styling your layers</a></li>
   <li><a href="#guided-exercise-3-processing-data-using-gis-operations" id="toc-guided-exercise-3-processing-data-using-gis-operations" class="nav-link" data-scroll-target="#guided-exercise-3-processing-data-using-gis-operations"><span class="header-section-number">1.4</span> Guided Exercise 3: Processing data using GIS operations</a></li>
   <li><a href="#guided-exercise-4-creating-a-map-layout" id="toc-guided-exercise-4-creating-a-map-layout" class="nav-link" data-scroll-target="#guided-exercise-4-creating-a-map-layout"><span class="header-section-number">1.5</span> Guided Exercise 4: Creating a map layout</a></li>
-  <li><a href="#independent-exercises" id="toc-independent-exercises" class="nav-link" data-scroll-target="#independent-exercises"><span class="header-section-number">1.6</span> Independent Exercises</a>
-  <ul class="collapse">
-  <li><a href="#independent-exercise-1" id="toc-independent-exercise-1" class="nav-link" data-scroll-target="#independent-exercise-1"><span class="header-section-number">1.6.1</span> Independent Exercise 1</a></li>
-  <li><a href="#independent-exercise-2" id="toc-independent-exercise-2" class="nav-link" data-scroll-target="#independent-exercise-2"><span class="header-section-number">1.6.2</span> Independent Exercise 2</a></li>
-  </ul></li>
+  <li><a href="#independent-exercise-1" id="toc-independent-exercise-1" class="nav-link" data-scroll-target="#independent-exercise-1"><span class="header-section-number">1.6</span> Independent Exercise 1</a></li>
   </ul>
 </nav>
     </div>
@@ -211,7 +207,7 @@ ul.task-list li input[type="checkbox"] {
 <li>“OS Terrain 50 Digital Terrain Model” (<em>NOT Terrain 5 and NOT Contours!</em>, under Land and Height Data)</li>
 </ul>
 <p>If you have correctly searched for tile NS89 and checked the required datatsets, you will see a screen like this:</p>
-<p><img src="images/lab1_digimap.png" class="img-fluid"></p>
+<p><img src="images/lab_1/lab1_digimap.png" class="img-fluid"></p>
 </section>
 <section id="creating-a-project-structure" class="level3" data-number="1.2.2">
 <h3 data-number="1.2.2" class="anchored" data-anchor-id="creating-a-project-structure"><span class="header-section-number">1.2.2</span> Creating a project structure</h3>
@@ -220,9 +216,9 @@ ul.task-list li input[type="checkbox"] {
 <li>Create a folder on your computer with the module name (<code>GEOU9SP</code>), off of your main work folder. For <strong>Windows</strong> this will usually be <code>Documents</code>. For <strong>Linux</strong> and <strong>Mac</strong>, create it on you <code>home</code> folder. (If you prefer and are comfortable with saving at another location on your computer, go for it!)</li>
 </ol>
 <p><strong>Windows:</strong></p>
-<p><img src="images/lab1_fig3_wincfolder.png" class="img-fluid"></p>
+<p><img src="images/lab_1/lab1_fig3_wincfolder.png" class="img-fluid"></p>
 <p><strong>mac OS:</strong></p>
-<p><img src="https://nektony.com/wp-content/uploads/2018/02/home-folder-mac.jpg" class="img-fluid"></p>
+<p><img src="images/lab_1/lab1_fig3_macfolder.png" class="img-fluid"></p>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -318,29 +314,13 @@ Click for answer
 <ol start="6" type="1">
 <li>Create a new project in QGIS by clicking on <code>Project &gt; New...</code> or pressing <em>Ctrl-N</em>:</li>
 </ol>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/lab1_fig1_newproject.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:75.0%"></p>
-</figure>
-</div>
-</div>
-</div>
+<p><img src="images/lab_1/lab1_fig1_newproject.png" class="img-fluid"></p>
 <ol start="9" class="example" type="1">
 <li><p>Add to your project the layers <code>NS_RoadLink.shp</code> from the OS Roads dataset and the <code>NS89.asc</code> terrain data from your organized project folders.</p></li>
 <li><p>Save your project inside the <code>00_qgis</code> folder. You can save your project by clicking on the <em>Save</em> button, going to <code>Project &gt; Save</code> menu, or by holding the keys <code>Ctrl+S (Command+S on Mac)</code>.</p></li>
 <li><p>Open the project settings by clicking on the menu <code>Project &gt; Properties...</code>. You will then see this window:</p></li>
 </ol>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/lab1_fig2_projprops.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:75.0%"></p>
-</figure>
-</div>
-</div>
-</div>
+<p><img src="images/lab_1/lab1_fig2_projprops.png" class="img-fluid"></p>
 <ol start="12" class="example" type="1">
 <li><p>The main things to set on your new project are the project home folder, the coordinate reference system (CRS) and the measurement units.</p>
 <ul>
@@ -515,58 +495,53 @@ Click for answer
 <li><p>Rearrange the items on the page until you are pleased with the results. Then go to <code>Layout &gt; Export as PDF...</code>, and export your map, naming it properly and saving it on <code>GEOU9SP/lab_1/final_products</code>. It is a good idea to export as PDF if you want your map to be a standalone document. If you are exporting to insert the map into a report, then use <code>Layout &gt; Export as Image...</code> instead.</p></li>
 </ol>
 <p>For reference, my map looked like this at this stage:</p>
-<p><img src="images/lab1_fig6_mapzoom.png" class="img-fluid"></p>
+<p><img src="images/lab_1/lab1_fig6_mapzoom.png" class="img-fluid"></p>
 <ol start="44" class="example" type="1">
 <li>Then close the Map Layout window, save your project on the main QGIS window, and close QGIS. Reopen QGIS, and go to <code>Project &gt; Layout Manager</code>. The layout you created previously should appear on the list. Select it and click on <code>Show</code> to reopen the Map Layout window.</li>
 </ol>
 <p><strong>Congratulations!</strong> You have successfully finished your first GIS project, using proper file management practices! As a final suggestion, create a “workflow_notes” file on <code>GEOU9SP/lab1/notes</code> and write up a quick overview of what you did, along with any specific notes you would like to remember later.</p>
 </section>
-<section id="independent-exercises" class="level2" data-number="1.6">
-<h2 data-number="1.6" class="anchored" data-anchor-id="independent-exercises"><span class="header-section-number">1.6</span> Independent Exercises</h2>
-<p>At the end of each lab, you will have the opportunity to reinforce what you learned by going through ‘independent’ exercises. These will use the same operations you learned with the guided exercises, but will not have step by step instructions.</p>
+<section id="independent-exercise-1" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="independent-exercise-1"><span class="header-section-number">1.6</span> Independent Exercise 1</h2>
+<p>At the end of each lab, you will have the opportunity to reinforce what you learned by going through ‘independent’ exercises. These will use the same operations you learned with the guided exercises, but it may require you to figure out small bits of new functionality, and will not have step by step instructions.</p>
 <p>As the module progresses, the independent exercises will give you less and less directions, to reflect real-world GIs usage. <strong>Make sure you do the independent exercises</strong> - it is easy to fall into a false sense of ‘<em>I got this</em>’ when only following step-by-step directions.</p>
-<section id="independent-exercise-1" class="level3" data-number="1.6.1">
-<h3 data-number="1.6.1" class="anchored" data-anchor-id="independent-exercise-1"><span class="header-section-number">1.6.1</span> Independent Exercise 1</h3>
 <ol type="1">
-<li><p>Create a new project folder structure for this project, under your main GEOU9SP work folder. The create a new QGIS project file for it, naming it properly.</p></li>
-<li><p>Download the following data and move it to the appropriate locations in your project folders:</p></li>
-</ol>
-<ul>
-<li><p>“Sites of Special Scientific Interest” from The Scottish Natural Heritage Natural Spaces collection: https://gateway.snh.gov.uk/natural-spaces/. Use the <em>ESRI Shapefile</em> data format.</p></li>
-<li><p>OS Open Roads and OS Open Rivers rivers for the NN BNG tile from the Ordnance Survey Open Data page: https://www.ordnancesurvey.co.uk/opendatadownload/products.html. Again, use the ESRI Shapefile format.</p></li>
-</ul>
-<ol start="3" type="1">
-<li>Load the data into QGIS. Some datasets may be be given as several files split by BNG grid tile. Focus your analysis on data from BNG grid tile NN. If you need a quick refresher, these are the main grid tile codes:</li>
-</ol>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images\British_National_Grid.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
-</figure>
-</div>
-<ol start="4" type="1">
-<li><p>Produce a map of a SSSI area of your choice within the NN zone. The map should show the SSSI itself and nearby/crossing roads and rivers, at a map scale of 1:150000. Make sure you order and style your layers properly for maximum map legibility.</p></li>
-<li><p>Save your analysis as a project, and export your map as a PDF.</p></li>
-</ol>
-</section>
-<section id="independent-exercise-2" class="level3" data-number="1.6.2">
-<h3 data-number="1.6.2" class="anchored" data-anchor-id="independent-exercise-2"><span class="header-section-number">1.6.2</span> Independent Exercise 2</h3>
-<ol type="1">
+<li><p>Create a new project folder structure for this project, under your main GEOU9SP work folder.</p></li>
 <li><p>Download the zipfile containing the Air Photo Mosaic and the Stirling Council Geospatial Data from <a href="">here</a>.</p></li>
-<li><p>Set up a project folder structure to contain this project.</p></li>
-<li><p>Extract the data from the zipfiles and place them in the proper project folders.</p></li>
-<li><p>Open the airphoto raster and the Railway Track, Electricity Transmission Line, and Functional Site vector files into QGIS.</p></li>
-<li><p>Organize and style your layers so that railways and transmission lines are on top of every other layer, and shown in red but with different line styles. The air photo mosaic should be under all the vector layers, and the functional sites should be shown with outlines only, without a fill color.</p></li>
-<li><p>(Bonus) The airphoto image seems to be a bit faded, can you improve its contrast?</p></li>
-<li><p>Answer the questions below:</p></li>
+<li><p>Extract the data from the zipfiles and move them to the proper project folders.</p></li>
+<li><p>Open QGIS and create a new project that uses the OSGB British Grid (EPSG 27700) coordinate reference system.</p></li>
+<li><p>Import the airphoto raster image and the vector files for Buildings, Roads, Railway Track, Electricity Transmission Lines, and Functional Sites into your QGIS project.</p></li>
+<li><p>Organize your layers so that, from top to bottom, you have transmission lines, railways, roads, buildings, functional sites, and then the airphoto image.</p></li>
+<li><p>Style your layers so that transmission lines are styled as thin dashed red lines, railways as thick white lines, roads as thick grey lines, buildings as filled yellow polygons and functional sites with a thick dark blue outline and no fill colour (hint: check the <code>Fill style</code> options).</p></li>
+<li><p><code>Clip</code> all your vector layers to the extent of the airphoto image.</p></li>
+<li><p>Create a map layout covering the entire extent of the airphoto. Add a title, legend and scale bar to your layout and export it as a PNG image. Then insert your exported file as a figure into a MS Word document.</p></li>
+</ol>
+<div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click here to see what the final layout should look like.">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click here to see what the final layout should look like.
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><img src="images/lab_1/lab1_fig7_indmap.png" class="img-fluid"></p>
+</div>
+</div>
+</div>
+<ol start="10" type="1">
+<li>Now answer the questions below:</li>
 </ol>
 <ul>
-<li><p>How far is the Bridge of Allan train station to the Cottrell Main entrance? Calculate it both “as the crow flies” (linear distance) and as if you were driving.</p></li>
-<li><p>What is the total surface area of the water bodies in the University of Stirling Campus?</p></li>
-<li><p>What is the UoS campus polygon classified as within the “Functional Site” layer?</p></li>
+<li><p>How far is the Pathfoot Building from the Cottrell Bulding? Calculate it both “as the crow flies” (linear distance) and as if you were walking. (Hint: use the <a href="https://docs.qgis.org/3.34/en/docs/user_manual/map_views/map_view.html#sec-measure">Measuring</a> tool).</p></li>
+<li><p>What is the total surface area of the water bodies in the University of Stirling Campus? (Hint: also the Measuring tool).</p></li>
+<li><p>What is the classification of the UoS campus polygon within the “Functional Site” layer? (Hint: use the <a href="https://docs.qgis.org/3.34/en/docs/user_manual/introduction/general_tools.html#identify">Indentify Features</a> tool).</p></li>
 </ul>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
