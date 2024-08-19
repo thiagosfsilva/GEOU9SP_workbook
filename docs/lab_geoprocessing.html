@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.554">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>GEOU9SP GIS Workbook - 3&nbsp; Lab 9: Geoprocessing tools</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./sec_w5_spatial_analysis_I.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./sec_w5_spatial_analysis_I.html">Week 1 - Introduction to GIS</a></li><li class="breadcrumb-item"><a href="./lab_geoprocessing.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Lab 9: Geoprocessing tools</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">GEOU9SP GIS Workbook</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome!</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./sec_w1_intro_toGIS.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1 - Introduction to GIS</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lab_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Lab 1: QGIS overview and file management</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lab_crs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Lab 2: Coordinate Reference Systems</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Week 1 - Introduction to GIS</span></span>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Week 1 - Introduction to GIS</span></span>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Week 1 - Introduction to GIS</span></span>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./sec_w5_spatial_analysis_I.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1 - Introduction to GIS</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lab_geoprocessing.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Lab 9: Geoprocessing tools</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#guided-exercise-assessing-children-access-to-schools" id="toc-guided-exercise-assessing-children-access-to-schools" class="nav-link active" data-scroll-target="#guided-exercise-assessing-children-access-to-schools"><span class="header-section-number">3.1</span> Guided Exercise: assessing children access to schools</a>
+  <ul class="collapse">
+  <li><a href="#obtaining-the-data" id="toc-obtaining-the-data" class="nav-link" data-scroll-target="#obtaining-the-data"><span class="header-section-number">3.1.1</span> Obtaining the data</a></li>
+  <li><a href="#preparing-the-data" id="toc-preparing-the-data" class="nav-link" data-scroll-target="#preparing-the-data"><span class="header-section-number">3.1.2</span> Preparing the data</a></li>
+  <li><a href="#answering-the-question" id="toc-answering-the-question" class="nav-link" data-scroll-target="#answering-the-question"><span class="header-section-number">3.1.3</span> Answering the question</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./sec_w5_spatial_analysis_I.html">Week 1 - Introduction to GIS</a></li><li class="breadcrumb-item"><a href="./lab_geoprocessing.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Lab 9: Geoprocessing tools</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Lab 9: Geoprocessing tools</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="guided-exercise-assessing-children-access-to-schools" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="guided-exercise-assessing-children-access-to-schools"><span class="header-section-number">3.1</span> Guided Exercise: assessing children access to schools</h2>
+<p>You are a GIS analyst at the Stirling council, and you have been asked to perform an analysis regarding children access to schools. Your manager has indicated which data sources you should use, and they want you to answer <strong>how many children within the relevant age range live within less than 1km, between 1km and 2km, and further than 2km of <em>any</em> primary (4 to 10 years old) and secondary (11 to 17 years old) school. You have been instructed to use the census data at the most detailed level (Output Area, OA), and to limit your analysis to the OAs and schools that are within Stirling Council Area limits</strong>. You should report the results as a table.</p>
+<section id="obtaining-the-data" class="level3" data-number="3.1.1">
+<h3 data-number="3.1.1" class="anchored" data-anchor-id="obtaining-the-data"><span class="header-section-number">3.1.1</span> Obtaining the data</h3>
+<ol class="example" type="1">
+<li>The first piece of data needed for this exercise is of course the limits of the Stirling Council Area. The official administrative boundary data for the UK is contained within the Ordnance Survey Boundary Line dataset. It can be downloaded from the <a href="https://osdatahub.os.uk/">Ordnance Survey Open Data Hub</a> or from Digimap, but the files cover all of the UK, and thus are a very large download. To save precious lab time, we have already isolated the Stirling Council boundary as a separate file that you can download here. You are welcome!</li>
+</ol>
+<p>You can then download the two other datasets needed:</p>
+<ol start="2" class="example" type="1">
+<li><p><strong>Scottish School Roll and Locations</strong>: this dataset is provided by the Scottish Government, and contains information on all Scottish schools. Download the ‘<em>Scottish School Roll and Locations ZIP</em>’ (NOT the one with ‘Table’ on the name) <a href="https://www.data.gov.uk/dataset/9a6f9d86-9698-4a5d-a2c8-89f3b212c52c/scottish-school-roll-and-locations">from here</a>.</p></li>
+<li><p><strong>Census data on population age</strong>: the Digimap platform offers access to the 2011 Census variables in spatial format. To obtain it, go to the <em>Society</em> tab, and then select the ‘Download’ option on the leftmost toolbar (a down arrow going into a ‘box’). That will bring up the familiar Digimap download interface. This time we will use our Stirling Council shapefile to set the search area. For that, click on the <code>Import Polygons</code> button, and then on <code>Choose File</code>. Then choose the <em>zipped</em> Stirling dataset you have downloaded and click on import. Finally, under the <code>2011 Census data layers</code> tab, select the <code>Age</code> dataset. Your window should look like this:</p></li>
+</ol>
+<p><img src="images/lab_geoprocessing/Fig1_digimap_stirlinghsire.png" class="img-fluid"></p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The data for the 2022 census have been officially published by National Records of Scotland, but are not available on Digimap yet. Since we are only practising our GIS knowledge, it is OK to use mismatched data (schools from 2024 vs.&nbsp;age data from 2011). In a real application scenario, it would be very important to make sure the temporal coverage of the datasets matches as well as possible.</p>
+</div>
+</div>
+<ol start="4" class="example" type="1">
+<li>Add your data to the basket and finish the order, then download the data as you have done in previous labs.</li>
+<li>Now create a folder structure for your project and extract and organise the contents of the three datasets. Then create a new QGIS project and import the three datasets. The census geopackage will contain layers for different levels of aggregation, remember you want the Output Area polygons. If everything worked correctly, you should have something like this:</li>
+</ol>
+<p><img src="images/lab_geoprocessing/Fig2_qgis_import.png" class="img-fluid"></p>
+<div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Stop and Think
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p>What are the data models and file formats of each dataset?</p></li>
+<li><p>What are the attributes contained in each dataset?</p></li>
+<li><p>What is the CRS of each dataset? Are they all the same?</p></li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p>They all use the vector data model. The schools are vector points, the other are vector polygons.</p></li>
+<li><p>The attributes of each dataset can be seen by either inspecting the <em>attribute table</em> of each dataset or by looking at the layer <code>Properties &gt; Fields</code> tab.</p></li>
+<li><p>All three datasets are in OS British Standard Grid (EPSG 27700). You can find this out by either going to the <code>Properties &gt; Information</code> tab or by right-clicking on the layer name then on <code>Layer CRS</code>.<br>
+</p></li>
+</ol>
+</div>
+</div>
+</div>
+</section>
+<section id="preparing-the-data" class="level3" data-number="3.1.2">
+<h3 data-number="3.1.2" class="anchored" data-anchor-id="preparing-the-data"><span class="header-section-number">3.1.2</span> Preparing the data</h3>
+<p>You may have noticed that your Digimap census data download includes many OA polygons that are outside of Stirling Council. This is because of a (sadly) very common problem with spatial data from different sources - the census output areas (OAs) do not perfectly line up with the administrative boundaries of the council. So when the Digimap interface tries to determine which OAs overlap with Stirling, we get more data than we need.</p>
+<ol start="6" class="example" type="1">
+<li>Set the symbology of the Stirling boundaries to a red outline without fill. Then make sure this layer is on top of the census layer. Then zoom in very close to the Stirling boundary. You will see they are offset by about 1.5m:</li>
+</ol>
+<p><img src="images/lab_geoprocessing/Fig3_boundary_offset.png" class="img-fluid"></p>
+<p>We thus need to further subset our data to match the actual extent of the Stirling coucil.</p>
+<div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Stop and Think
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>What are the options of GIS operations that you have to subset the datasets?</p>
+</div>
+</div>
+<div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>You could use <code>Clip</code> or <code>Intersection</code> if you wanted to change (‘cut’) the geometries of the target layer, or use <code>Select by Location</code> if you wanted to fidn the overlapping polygins without changing geometries.</p>
+</div>
+</div>
+</div>
+<p>After consulting with your manager, you both decide that clipping or intersecting the data would not be a good option as it would change the geometry of the OAs, and there are official limits. So you decide to use <code>Select by Location</code>:</p>
+<ol start="7" class="example" type="1">
+<li><p>Go to <code>Vector &gt; Research Tools &gt; Select by Location...</code> or click on the <img src="https://docs.qgis.org/3.34/en/_images/mAlgorithmSelectLocation.png" class="img-fluid"> button.</p></li>
+<li><p>Select all polygons from the census layer that <code>are within</code> the Stirling bounds layer. Check the selection results.</p></li>
+<li><p>Change your criteria to include both <code>intersect</code> and <code>are within</code> the Stirling bounds layer. Check the selection results.</p></li>
+</ol>
+<div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Stop and Think
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Why both selection attempts give you wrong results? How would you fix it?</p>
+</div>
+</div>
+<div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Because of the mismatch between the boundaries of the OAs and the Stirlingshire boundaries. So inner OAs that are the edges of the council area are not considered fully <code>within</code> (they extend a sliver outwards from the actual bounds), and outer OAs also at the edges will be considered to <code>intersect</code> Stirling since they extend a sliver within the bounds.</p>
+<p>Think a bit on how to fix it, then continue below for a solution.</p>
+</div>
+</div>
+</div>
+<p>You could manually deselect the polygons that are not part of Stirling council, but then you have an idea: what if you buffer the Stirlingshire boundaries to expand them a tiny bit, and then try selecting the polygons <code>within</code> the buffer. That way OAs inside the council area that slightly extend outwards will fall within the buffer, while OAs outside the council area that slightly extend inward will still not be fully within it.</p>
+<ol start="10" class="example" type="1">
+<li><p>Go to <code>Vector &gt; Geoprocessing &gt; Buffer</code> and create a 20m buffer around the Stirling layer. You can just leave it as a temporary layer, as we will only use it for our spatial selection.</p></li>
+<li><p>Now repeat the <code>Select by location</code> operation for OA polygons <code>within</code> the buffered area. Bingo!</p></li>
+<li><p>Save the selection as a new layer by right clicking on the census layer name and selecting <code>Export &gt; Save Selected Features As..</code>. Once this new census layer is added to your project, remove the original one to avoid confusion.</p></li>
+</ol>
+</section>
+<section id="answering-the-question" class="level3" data-number="3.1.3">
+<h3 data-number="3.1.3" class="anchored" data-anchor-id="answering-the-question"><span class="header-section-number">3.1.3</span> Answering the question</h3>
+<p>Now we can answer the actual study question. As a reminder, it is <strong>how many children in the relevant age range live within less than 1km, between 1km and 2km, and further than 2km of <em>any</em> primary (4 to 10 years old) and secondary (11 to 17 years old) school?</strong>. You will need to use some of the Geoprocessing tools you just learned to answer that, as well as tools from previous weeks.</p>
+<div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Stop and Think
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Before you continue, try to think about the solution yourself. Look at the attributes of each layer, and then try to sketch a step by step plan to achieve the results you need. Then continue.</p>
+</div>
+</div>
+<ol start="13" class="example" type="1">
+<li><p>You will first need to add up the number of children at each 1yr age bracket to compute the totals for the primary and secondary school age ranges (4-10 yo and 11-17 yo). For that, you can use the <code>Field Calculator</code>, as in previous labs. Just add up the numbers for columns <code>age_4</code> to <code>age_10</code> into a new <code>age_4-10</code> column, and then add columns <code>age_11</code> to <code>age_17</code> into a new <code>age_11-17</code> column.</p></li>
+<li><p>Then you will need to select only the schools within the Stirling council area. You can use <code>Select by location</code> as above, using the Stirling bounds, or by using the <code>LAname</code> field in the attribute table of the School Roll layer. Both methods should give you a selection of 48 schools. Create a new layer containing just these schools, then remove the original school layer from the project.</p></li>
+<li><p>The next step is to calculate the area covered by each distance bracket (1km, 2km) from the schools. For that, you should create a <code>Buffer</code> for the 1km distance, then a second <code>Buffer</code> for the 2km distance. Make sure you select the <code>Dissolve result</code> option when creating the buffers, since many locations will be within less than the specified distance from multiple schools, and we don’t want to repeat them.</p></li>
+<li><p>Then compute the <code>Difference</code> between the 2km and 1km buffers to create “rings” covering the range of 1km to 2km. This is important so we don’t “double count” the 1km bracket - see below.</p></li>
+</ol>
+<p>Now you have to deal with the biggest limitation of your analysis - the OAs are still very big, and many will span areas both within and outside the 1k and 2km distances. You discuss the problem with your manager again, and you decide that the best approach is to <em>weight</em> the children count of each OA by the respective <em>area</em> of the OA that is <em>within</em> each distance bracket. So if an OA has 15 children aged 11-17, and 40% of the OA area is within 1km of a school, then you should multiply 15 by 0.4 to obtain the estimated number of children within 1km.</p>
+<ol start="17" class="example" type="1">
+<li>The first step is to calculate the total area of each OA. You can do that by using the <code>Field Calculator</code> tool and creating a new field called <code>oa_area</code> that takes the <code>$area</code> parameter under the <code>Geometry</code> calculator operations. Remember to make this new field a <strong>Decimal number</strong> with two decimal places.</li>
+</ol>
+<div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Stop and Think
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>What units were used for the area calculation? Does it matter?</p>
+</div>
+</div>
+<div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Unless you have set it differently in your <em>Project properties</em>, areas are calculated in squared metres by default. This is not an ideal unit for such large areas (km<span class="math inline">\(^2\)</span> would have been better), but since we will only need to calculate the percentage of this total area within each distance bracket, it shouldn’t matter much.</p>
+</div>
+</div>
+</div>
+<p>Now that you have the total areas for each OA, it is time to find out the portions within each distance bracket. For that, we can either <code>Clip</code> or get the <code>Intersection</code> of the buffer layers with the census layer.</p>
+<div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Stop and Think
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>What will change in your results if you use <code>Intersection</code> instead of <code>Clip</code>?</p>
+</div>
+</div>
+<div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><code>Intersection</code> will combine the attributes of both layers, while <code>CLip</code> will only preserve the attributes of the target layer.</p>
+</div>
+</div>
+</div>
+<ol start="18" class="example" type="1">
+<li>Since the buffers have been <em>dissolved</em>, they can’t be linked to individual schools anymore - whenever the buffers of two schools overlap their attribute tables will just keep the name of one of the schools when they are dissolved. So no need to preserve the buffer attributes, and we can use <code>Clip</code>. Create two new layers, the first being the clipping of the census layer by the 1km buffer layer, and the second being the clipping of the census layer by the 1km-2km ‘donuts’ layer. We use it instead of the 2km buffer otherwise when we calculate the percentage of area within 2km we will be double counting the area within 1km - which is already covered by the 1km buffer.</li>
+</ol>
+<p>You should end up with something like the figure below. To make sure the layers don’t overlap, style them using hatching in different directions. If you see a cross-hatch, theyn they are overlapping, and it means you used the full 2km buffer instead of the 1km-2km ‘donut’:</p>
+<p><img src="images/lab_geoprocessing/fig4_clipped_buffers.png" class="img-fluid"></p>
+<ol start="19" class="example" type="1">
+<li><p>Now we can calculate the area percentages. First, re-calculate the polygon areas for the clipped layers, using the <code>Field Calculator</code>. Create a new attribute called <code>clip_area</code>, and assign the <code>$area</code> operator to it again. Remember to set it as a decimal number.</p></li>
+<li><p>Still using the <code>Field Calculator</code>, you can now calculate the percent area by creating a new attribute called <code>perc_area</code>, which will be <code>clip_area / oa_area</code>. It should also be a decimal number.</p></li>
+<li><p>Finally, calculate the weighted number of children by creating new fields. First calculate <code>perc_4-10</code> as <code>age_4-10 * perc_area</code>, and then <code>perc_11-17</code> as <code>age_11-17 * perc_area</code>. These fields should be integers, unless you are sending partial children to school.</p></li>
+</ol>
+<p>Great, you are almost there! The last step is to aggregate all the data at the council level, and then also determine the number of children beyond 2km:</p>
+<ol start="22" class="example" type="1">
+<li><p>Use the <code>Statistical Summary</code> tool to calculate the respective sums of <code>perc_4-10</code> and <code>perc_11-17</code>. These are the final answers for <strong>how many children in the relevant age range live within less than 1km, between 1km and 2km?</strong>.</p></li>
+<li><p>To get the number of children beyond 2km, use the <code>Statistical Summary</code> tool to calculate the total number of children within each age bracket (<code>age_4-10</code> and <code>age_11-17</code>) in the council, and then subtract the number of children within 1km and between 1km and 2km from this total.</p></li>
+</ol>
+<p>Your final results should be:</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th></th>
+<th>1km</th>
+<th>2km</th>
+<th>&gt;2km</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Primary</td>
+<td>6451</td>
+<td>6656</td>
+<td>89</td>
+</tr>
+<tr class="even">
+<td>Secondary</td>
+<td>7572</td>
+<td>7880</td>
+<td>91</td>
+</tr>
+</tbody>
+</table>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./sec_w5_spatial_analysis_I.html" class="pagination-link" aria-label="Week 1 - Introduction to GIS">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Week 1 - Introduction to GIS</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

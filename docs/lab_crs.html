@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>GEOU9SP GIS Workbook - 2&nbsp; Lab: Coordinate Reference Systems</title>
+<title>GEOU9SP GIS Workbook - 2&nbsp; Lab 2: Coordinate Reference Systems</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,6 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./sec_w2_vectors.html" rel="next">
 <link href="./lab_intro.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -80,7 +81,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./sec_intro_toGIS.html">Week 1 - Introduction to GIS</a></li><li class="breadcrumb-item"><a href="./lab_crs.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Lab: Coordinate Reference Systems</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./sec_w1_intro_toGIS.html">Week 1 - Introduction to GIS</a></li><li class="breadcrumb-item"><a href="./lab_crs.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Lab 2: Coordinate Reference Systems</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -113,7 +114,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./sec_intro_toGIS.html" class="sidebar-item-text sidebar-link">
+            <a href="./sec_w1_intro_toGIS.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 1 - Introduction to GIS</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -129,7 +130,36 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./lab_crs.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Lab: Coordinate Reference Systems</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Lab 2: Coordinate Reference Systems</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Week 1 - Introduction to GIS</span></span>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Week 1 - Introduction to GIS</span></span>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Week 1 - Introduction to GIS</span></span>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./sec_w5_spatial_analysis_I.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1 - Introduction to GIS</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lab_geoprocessing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Lab 9: Geoprocessing tools</span></span></a>
   </div>
 </li>
       </ul>
@@ -140,14 +170,25 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#guided-exercise-1-understanding-coordinate-reference-systems" id="toc-guided-exercise-1-understanding-coordinate-reference-systems" class="nav-link active" data-scroll-target="#guided-exercise-1-understanding-coordinate-reference-systems"><span class="header-section-number">2.1</span> Guided Exercise 1: Understanding Coordinate Reference Systems</a>
+  <ul class="collapse">
+  <li><a href="#obtaining-the-required-data" id="toc-obtaining-the-required-data" class="nav-link" data-scroll-target="#obtaining-the-required-data"><span class="header-section-number">2.1.1</span> Obtaining the required data</a></li>
+  <li><a href="#visualising-data-with-different-crs" id="toc-visualising-data-with-different-crs" class="nav-link" data-scroll-target="#visualising-data-with-different-crs"><span class="header-section-number">2.1.2</span> Visualising data with different CRS</a></li>
+  <li><a href="#potential-issues-with-using-mismatched-data" id="toc-potential-issues-with-using-mismatched-data" class="nav-link" data-scroll-target="#potential-issues-with-using-mismatched-data"><span class="header-section-number">2.1.3</span> Potential issues with using mismatched data</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./sec_intro_toGIS.html">Week 1 - Introduction to GIS</a></li><li class="breadcrumb-item"><a href="./lab_crs.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Lab: Coordinate Reference Systems</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./sec_w1_intro_toGIS.html">Week 1 - Introduction to GIS</a></li><li class="breadcrumb-item"><a href="./lab_crs.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Lab 2: Coordinate Reference Systems</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-excrs" class="quarto-section-identifier"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Lab: Coordinate Reference Systems</span></span></h1>
+<h1 class="title"><span id="sec-excrs" class="quarto-section-identifier"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Lab 2: Coordinate Reference Systems</span></span></h1>
 </div>
 
 
@@ -164,8 +205,480 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p>The purpose of this lab is to help you understand why we need to pay attention to Coordinate Reference Systems (CRS) when working with spatial data. CRS’s are what make data <em>spatial</em> - they associate the actual data to locations on the surface of the Earth (or other planets!). But there are dozens of CRS’s in existence, each adapted for a specific world region and purpose. So quite often you will obtain spatial data in different coordinate systems, which can cause problems if not normalised before analysis.</p>
+<section id="guided-exercise-1-understanding-coordinate-reference-systems" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="guided-exercise-1-understanding-coordinate-reference-systems"><span class="header-section-number">2.1</span> Guided Exercise 1: Understanding Coordinate Reference Systems</h2>
+<p>In this exercise, you will learn how to use QGIS to identify the coordinate reference system (CRS, sometimes wrongly called as just “projection”) of spatial data you acquire, and also how to manage data and project coordinate reference systems.</p>
+<div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Stop and Think
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Why are coordinate reference systems and ‘projections’ not the same thing?</p>
+</div>
+</div>
+<div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Coordinate reference systems combine a <strong>datum</strong>, which defines a geometric representation of the Earth’s shape and how it ‘intersects’ with the real surface of the Earth, a <strong>coordinate system</strong> (for example latitude and longitude or northings and eastings) and a <strong>map projection</strong> which is a set of mathematical rules to project the 3D surface of the datum’s <em>ellpisoid</em> into a flat plane (such as a screen or a map).</p>
+</div>
+</div>
+</div>
+<section id="obtaining-the-required-data" class="level3" data-number="2.1.1">
+<h3 data-number="2.1.1" class="anchored" data-anchor-id="obtaining-the-required-data"><span class="header-section-number">2.1.1</span> Obtaining the required data</h3>
+<ol class="example" type="1">
+<li>Download the <strong>2020</strong> country boundary data in <strong>GeoJSON</strong> format, at the <strong>1:20</strong> million scale, from the link below. The GeoJSON format is a more recent GIS file format, commonly used for web-based mapping. It is derived from the JavaScript Object Notation (JSON) data file format, widely used to exchange data among websites and web servers. More info <a href="https://en.wikipedia.org/wiki/GeoJSON">here</a>.</li>
+</ol>
+<p><a href="https://ec.europa.eu/eurostat/web/gisco/geodata/administrative-units/countries">https://ec.europa.eu/eurostat/web/gisco/geodata/administrative-units/countries</a></p>
+<p><img src="images/lab_2/lab2_fig1_eurostat.jpg" class="img-fluid"></p>
+<div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Stop and Think
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="a">
+<li><p>What is the source of the data you are downloading? Does it seem reliable?</p></li>
+<li><p>What are the conditions (provisions) of use for the data?</p></li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="a">
+<li><p>The page providing the data is managed by Eurostat, the statistical office of the European Union. Therefore you would be inclined to trust in the quality and correctness of the data provided.</p></li>
+<li><p>The webpage presents a link to “<a href="https://ec.europa.eu/eurostat/web/gisco/geodata/administrative-units">dowload rules</a>’ which describe the authorised uses of the data. This informartion can also be found in the data’s <em>metadata</em> file.</p></li>
+</ol>
+</div>
+</div>
+</div>
+<ol start="2" class="example" type="1">
+<li><p>Create a lab_2 folder in your GEOU9SP main folder. Then create a simple folder structure to organise the data, and extract the zipped downloaded data in its proper location. If you are not sure how to do this, please revisit <a href="lab_intro.html" class="quarto-xref"><span>Chapter 1</span></a>.</p></li>
+<li><p>Open QGIS and start a new project. Save it as <code>lab_2</code> in its proper folder. Then look at the contents of the folder holding the country data, using the <a href="https://docs.qgis.org/3.34/en/docs/user_manual/managing_data_source/opening_data.html#the-browser-panel">QGIS browser panel</a>. If the panel is not available, you can enable it by going to the <code>View &gt; Panels</code> menu and checking the box for <code>browser</code>. You should see several layers on tghe folder:</p></li>
+</ol>
+<p><img src="images/lab_2/lab_2_img2_layers.png" class="img-fluid"></p>
+<ol start="4" class="example" type="1">
+<li>Load the <code>CNTR_BN_20M_2020_4326</code> file into your project. Pay attention to the file name as there are many files with similar names.</li>
+</ol>
+<div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Stop and Think
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Good file names are always informative of their content. Can you gess the contents of the different GeoJSON files you have downloaded based on their names?</p>
+</div>
+</div>
+<div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>All file names start with <code>CNTR</code> for ‘countries’, followed by a two letter code. <code>BN</code> seems to stand for ‘boundary’(vector lines), <code>RG</code> for ‘region’(vector polygons), and <code>LB</code> for ‘labels’ (vector points). Then <code>2020</code> specified the reference year, and <code>20M</code> indicates the 1:20 million mapping scale. the final four-letter number indicates the EPSG code for the data CRS: 4326 (‘unprojected’ WGS84), 3857 (WGS 84 with Pseudo-Mercator projection) or 3035 (ETRS89-extended / Lambert Azimuthal Equal Area for Europe).</p>
+</div>
+</div>
+</div>
+</section>
+<section id="visualising-data-with-different-crs" class="level3" data-number="2.1.2">
+<h3 data-number="2.1.2" class="anchored" data-anchor-id="visualising-data-with-different-crs"><span class="header-section-number">2.1.2</span> Visualising data with different CRS</h3>
+<ol start="5" class="example" type="1">
+<li>Set the symbology for the outline and fill as you prefer. Try to manipulate more visual variables than just colour.</li>
+</ol>
+<div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Stop and Think
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Why can’t you set a fill color for the countries?</p>
+</div>
+</div>
+<div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Because the <code>BN</code> files are vector lines, not polygons. Lines only have one dimension, and thus the inner parts of the countries in this dataset are actually empty. If you load the <code>RG</code> dataset instead, you can set the fill, as vector polygons represent 2D areas.</p>
+</div>
+</div>
+</div>
+<ol start="6" class="example" type="1">
+<li>Right-click on this layer’s name and go to <code>Properties &gt; Information</code>.</li>
+</ol>
+<div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Stop and Think
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>What is the Coordinate Reference System (CRS) for this dataset?</p>
+</div>
+</div>
+<div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The information tab will have a section called Coordinate Reference System, as below:</p>
+<p>Name: EPSG:4326 - WGS 84 Units: Geographic (uses latitude and longitude for coordinates) Type: Geographic (2D) Method: Lat/long (Geodetic alias) Celestial Body: Earth Accuracy: Based on World Geodetic System 1984 ensemble (EPSG:6326), which has a limited accuracy of at best 2 meters. Reference: Dynamic (relies on a datum which is not plate-fixed)</p>
+</div>
+</div>
+</div>
+<ol start="7" class="example" type="1">
+<li>Note, on the bottom QGIS status bar, that as you move your mouse pointer around, the coordinates for the mouse position are updated in real time. Also note what the map scale is, how it changes as zoom in and out. You can also type the second part of a scale nuber to zoom at the desired map scale (for example 50000 if you want to see the map at a 1:50000 scale)</li>
+</ol>
+<p><img src="images/lab_2/lab_2_img4_status_bar.png" class="img-fluid"></p>
+<div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Stop and Think
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="a">
+<li><p>Why doesn’t the scale shown on the bar match the “advertised” scale for the dataset (1:10 million)?</p></li>
+<li><p>The box on the very bottom right of the QGIS status bar tells you what is the current project CRS. How is it different from a layer CRS?</p></li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="a">
+<li><p>The 20M scale refers to the scale used when digitising the coastline, i.e., what is the ‘closest’ you can view the dataset without loss of detail.</p></li>
+<li><p>The project CRS defines the ‘viewing’ CRS for the map canvas. Any data that uses a different CRS than the project will be re-projected ‘on the fly’ to match the CRS of the project - but continue with the exercise to learn why that can be a problem.</p></li>
+</ol>
+</div>
+</div>
+</div>
+<ol start="8" class="example" type="1">
+<li>Zoom to the UK in the shown layer. Note how the scale at the bottom status bar changes with your zoom.</li>
+</ol>
+<div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Stop and Think
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Does the shape of the UK look “right” to you? If not, what is the issue and what is the cause?</p>
+</div>
+</div>
+<div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The UK looks ‘squished` vertically. That is because the data is being viewed in the EPSG 4326 (’unprjected’ WGS84) CRS. EPSG 4236 uses what is effectively the <em>Plate Carrée</em> or <a href="https://proj.org/en/9.4/operations/projections/eqc.html"><em>Equidistant cylindrical</em></a> projection, the simplest possible map projection - lat and long degrees are just linearly converted to <em>x,y</em> coordinates. This projection does not preserve area nor shape (conformal) and increasingly distorts features as you approach the poles.</p>
+</div>
+</div>
+</div>
+<ol start="9" class="example" type="1">
+<li>Click on the project projection box at the bottom right of the status bar (or go to <code>Project &gt; Properties... &gt; CRS tab</code>). On the <code>Filter</code> text box, search for EPSG:3035. Select this projection for the project and click <code>OK</code>. A warning box will appear, make sure you read it through before selecting <code>OK</code> again.</li>
+</ol>
+<div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Stop and Think
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="a">
+<li><p>what is the name of the Coordinate Reference System specified by EPSG 3035?</p></li>
+<li><p>What did the warning window warned you about?</p></li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-16" class="callout-16-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="a">
+<li><p><a href="https://epsg.io/3035">EPSG 3035</a> is called ETRS89-extended / LAEA Europe and is the official projection for cartographic data from the European Union. It uses the European Terrestrial Reference System 1989 datum and the Lambert Azimuthal Equal Area projection, which preserves areas and can be considered conformal for Europe.</p></li>
+<li><p>It warned you that there is more than one option for the ‘on the fly’ reprojection of your layer from ESPG 4326 to EPSG 3035. It showed you the options with the most accurate (1m) selected by default. But this option is only valid for Europe.</p></li>
+</ol>
+</div>
+</div>
+</div>
+<p>It is important to not “freak out” when an unexpected warning or error appear. Take a breath, and read through the window or error message, most often the explanation is right there. You just have to dare to look.</p>
+<p>If you did click through it without looking, here is a screen capture of it:</p>
+<p><img src="images/lab_2/lab_2_img_5_crs_warning.png" class="img-fluid"></p>
+<ol start="10" class="example" type="1">
+<li>Look at the shape of the UK again after changing the project CRS. Then right click on the layer name and select “Zoom to Layer(s).”</li>
+</ol>
+<div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Stop and Think
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="a">
+<li><p>How does the rest of the world look now? Why?</p></li>
+<li><p>When you move your mouse, what unit are the coordinates in?</p></li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-18" class="callout-18-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="a">
+<li><p>As you move further away from the centre of the projection, shape gets progressively more distorted. This is because the LAEA projection is only conformal at its centre. But areas are all correct.</p></li>
+<li><p>In metres. You can check that on the layer’s <code>Properties &gt; Information</code> tab.</p></li>
+</ol>
+</div>
+</div>
+</div>
+<ol start="11" class="example" type="1">
+<li>Now add to the project the file called CNTR_BN_10M_2020_3035.geojson. Notice the different last four numbers on the file name.</li>
+</ol>
+<div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Stop and Think
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>What is the CRS for this new layer, and how well dos it visually align with the p[revious layer.</p>
+</div>
+</div>
+<div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-20-contents" aria-controls="callout-20" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-20" class="callout-20-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>This second layers uses the EPSG 3035 CRS, while the previous layer used EPSG 4326. Notice how ech layer maintains its original CRS when added to the project, but if necessary they are reprojected ‘on the fly’ to match up visually.</p>
+</div>
+</div>
+</div>
+<ol start="12" class="example" type="1">
+<li><p>Change the project CRS back to EPSG:4326.</p></li>
+<li><p>Now go back to the project CRS properties and check the box that says <code>No CRS</code> at the top of the window. This disables the on-the-fly projection. Then click OK and go back to your map.</p></li>
+<li><p>Right click on the 4326 layer and select <code>Zoom to Layer</code>. Then select the zoom out tool (the loupe with a minus sign) at the top button row, and start clicking at the centre of the map. Keep clicking as it gets really smalll - you should click about 17 times until the second dataset is fully visible. Check the properties of each layer to make sure they still have the same CRS of when you loaded them.</p></li>
+</ol>
+<div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Stop and Think
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>What has happened? Why are the two datasets suddenly very different in size?</p>
+</div>
+</div>
+<div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-22-contents" aria-controls="callout-22" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-22" class="callout-22-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Since you turned off on-the-fly reprojection, each dataset is now drawn at their original coordinates - but one is in meters and the other in degrees, so their x,y positions and scale become very different.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="potential-issues-with-using-mismatched-data" class="level3" data-number="2.1.3">
+<h3 data-number="2.1.3" class="anchored" data-anchor-id="potential-issues-with-using-mismatched-data"><span class="header-section-number">2.1.3</span> Potential issues with using mismatched data</h3>
+<ol start="15" class="example" type="1">
+<li><p>Download <a href="https://stir-my.sharepoint.com/:u:/g/personal/ala2_stir_ac_uk/EWwn64TEDgFCvLE-JUwjUZEBMRXc6NKtQ0KWHk769hI4Jw?e=iR9RdT">this vector shapefile (link)</a>, unzip it and add it to your QGIS project. Check what is the CRS of this layer.</p></li>
+<li><p>Set the Project CRS back to EPSG:3035. Then go to the top menu bar and select <code>Vector &gt; Geoprocessing &gt; Clip</code>. Select the layer that has the EPSG 3035 projection as your <code>Input</code> Layer, and the new “clip_bounds” layer as your <code>Overlay</code> Layer. You can just leave the output as a temporary file. Click Run.</p></li>
+<li><p>Turn off the visibility of all layers except the new “Clipped” layer to see the result of the Clip operation.</p></li>
+<li><p>Rename the “Clipped” layer to “Clipped_3035” by right clicking on it and selecting <code>Rename layer</code>. Then repeat the <code>Clip</code> operation, this time selecting the 4326 world layer as <code>Input</code>, and “clip_bounds” as <code>Overlay</code> again. Rename the result to “Clipped_4326.”</p></li>
+</ol>
+<p>Using what you learned on the previous lab activities, pick two contrasting colours for each “Clipped_…” layer, and make the lines thicker. Zoom in at the lines of each clipped layer and check if they overlap perfectly.</p>
+<div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Stop and Think
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Why are the clipping results different even though the initial 3035 and 4236 layers looked perfectly aligned?</p>
+</div>
+</div>
+<div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-24-contents" aria-controls="callout-24" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-24" class="callout-24-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Because although they have been reprojected visually to match on screen, the files still have different CRSs, and this affects the lining up of the <code>Input</code> and overlay layers. To get proper results, you need permanently translate (reproject) both datasets to the same CRS.</p>
+</div>
+</div>
+</div>
+<ol start="19" class="example" type="1">
+<li><p>Now go to <code>Vector &gt; Data Management Tools &gt; Reproject Data</code>. Select the 4326 world layer as your <code>Input Layer</code>, and EPSG:3035 as your <code>Target CRS</code>. Let the result be a temporary file and click <code>OK</code>. The new layer will be automatically named as “Reprojected”. What is the CRS of this new layer (check on the layer properties window)?</p></li>
+<li><p>Now repeat the use of the <code>Clip</code> tool using “Reprojected” as the <code>Input Layer</code> and “clip_bounds” as the <code>Overlay Layer</code>. Rename the resulting layer to ‘Clipped_Reprojected’. Which of the two originally clipped layers (“Clipped_3035” or “Clipped_4236?) better matches the”Clipped_Reprojected” layer?</p></li>
+</ol>
+<div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Stop and Think
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>What does the <code>Reproject</code> operation do?</p>
+</div>
+</div>
+<div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-26-contents" aria-controls="callout-26" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-26" class="callout-26-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>It actually applies a permament mathematical transformation to the coordinates of the input data, translating the data from one CRS to another. For any GIS project that involves multiple data layers with different CRSs, you should pick the CRS that makes more sense for your project as the ‘project CRS’, and then reproject all layers to the same CRS before anything else.</p>
+</div>
+</div>
+</div>
+<p>This is the end of Lab 2! You shoudl now understand why different datasets may have different Coordinate Reference Systems, what are the problems with working with data that has mismatched CRSs, and how to reproject data to match a given CRS. As this is your first week, there are no additional independent exercises - lets take it easy!</p>
+<p>If you still want to practice more, check the exercises from the <a href="https://docs.qgis.org/3.34/en/docs/training_manual/basic_map/index.html">QGIS Training Manual</a>!</p>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -584,6 +1097,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./sec_w2_vectors.html" class="pagination-link" aria-label="Week 1 - Introduction to GIS">
+        <span class="nav-page-text">Week 1 - Introduction to GIS</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

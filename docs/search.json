@@ -10,8 +10,8 @@
     ]
   },
   {
-    "objectID": "sec_intro_toGIS.html",
-    "href": "sec_intro_toGIS.html",
+    "objectID": "sec_w1_intro_toGIS.html",
+    "href": "sec_w1_intro_toGIS.html",
     "title": "Week 1 - Introduction to GIS",
     "section": "",
     "text": "ILOs covered",
@@ -20,8 +20,8 @@
     ]
   },
   {
-    "objectID": "sec_intro_toGIS.html#ilos-covered",
-    "href": "sec_intro_toGIS.html#ilos-covered",
+    "objectID": "sec_w1_intro_toGIS.html#ilos-covered",
+    "href": "sec_w1_intro_toGIS.html#ilos-covered",
     "title": "Week 1 - Introduction to GIS",
     "section": "",
     "text": "Understand the structure of spatial data and choose appropriate data types and models for storing and representing it;\nObtain and assess the quality of spatial data from online and offline sources and produce new spatial data using computer and field methods;\nCreate map visualisations that adhere to cartographic principles and can be easily and unambiguously interpreted by the non-specialist public;",
@@ -30,11 +30,11 @@
     ]
   },
   {
-    "objectID": "sec_intro_toGIS.html#what-will-you-learn",
-    "href": "sec_intro_toGIS.html#what-will-you-learn",
+    "objectID": "sec_w1_intro_toGIS.html#what-will-you-learn",
+    "href": "sec_w1_intro_toGIS.html#what-will-you-learn",
     "title": "Week 1 - Introduction to GIS",
     "section": "What will you learn",
-    "text": "What will you learn\nFor every week, we will list the main theoretical and practical learning goals. Use these as a ‘checklist’ to gauge your learning for each week. If you don’t feel confident you have learned any specific topic, then revisit the week’s material!\n\nTheoretical knowledge for Week 1:\n\nWhat are Geomatics, GIS, Remote Sensing and associated terms and fields?\nWhat is spatial data?\nWhat is a datum?\nWhat is a map projection?\nWhat is a Coordinate Reference System?\n\n\n\nPractical knowledge:\n1  Lab 1: QGIS overview and file management\n\nHow to launch QGIS\nHow to load a spatial data file\nHow to navigate the main QGIS interface\nHow to identify features\nHow to do basic measurements\nHow to do basic styling of spatial data\nHow to enter the layout editor\nHow to make and export a simple map layout\n\n2  Lab: Coordinate Reference Systems\n\nHow to check the Coordinate Reference System of a spatial file\nHow to set the CRS of a QGIS project\nHow to set the CRS of a spatial file when it is already known.\nHow to reproject(convert) a spatial file from one CRS to another\nWhat are the main CRSs you should be familiar with.",
+    "text": "What will you learn\nFor every week, we will list the main theoretical and practical learning goals. Use these as a ‘checklist’ to gauge your learning for each week. If you don’t feel confident you have learned any specific topic, then revisit the week’s material!\n\nTheoretical knowledge for Week 1:\n\nWhat are Geomatics, GIS, Remote Sensing and associated terms and fields?\nWhat is spatial data?\nWhat is a datum?\nWhat is a map projection?\nWhat is a Coordinate Reference System?\n\n\n\nPractical knowledge:\n1  Lab 1: QGIS overview and file management\n\nHow to launch QGIS\nHow to load a spatial data file\nHow to navigate the main QGIS interface\nHow to identify features\nHow to do basic measurements\nHow to do basic styling of spatial data\nHow to enter the layout editor\nHow to make and export a simple map layout\n\n2  Lab 2: Coordinate Reference Systems\n\nHow to check the Coordinate Reference System of a spatial file\nHow to set the CRS of a QGIS project\nHow to set the CRS of a spatial file when it is already known.\nHow to reproject(convert) a spatial file from one CRS to another\nWhat are the main CRSs you should be familiar with.",
     "crumbs": [
       "Week 1 - Introduction to GIS"
     ]
@@ -114,6 +114,170 @@
     "crumbs": [
       "Week 1 - Introduction to GIS",
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Lab 1: QGIS overview and file management</span>"
+    ]
+  },
+  {
+    "objectID": "lab_crs.html",
+    "href": "lab_crs.html",
+    "title": "2  Lab 2: Coordinate Reference Systems",
+    "section": "",
+    "text": "2.1 Guided Exercise 1: Understanding Coordinate Reference Systems\nIn this exercise, you will learn how to use QGIS to identify the coordinate reference system (CRS, sometimes wrongly called as just “projection”) of spatial data you acquire, and also how to manage data and project coordinate reference systems.",
+    "crumbs": [
+      "Week 1 - Introduction to GIS",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Lab 2: Coordinate Reference Systems</span>"
+    ]
+  },
+  {
+    "objectID": "lab_crs.html#guided-exercise-1-understanding-coordinate-reference-systems",
+    "href": "lab_crs.html#guided-exercise-1-understanding-coordinate-reference-systems",
+    "title": "2  Lab 2: Coordinate Reference Systems",
+    "section": "",
+    "text": "Stop and Think\n\n\n\nWhy are coordinate reference systems and ‘projections’ not the same thing?\n\n\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\nCoordinate reference systems combine a datum, which defines a geometric representation of the Earth’s shape and how it ‘intersects’ with the real surface of the Earth, a coordinate system (for example latitude and longitude or northings and eastings) and a map projection which is a set of mathematical rules to project the 3D surface of the datum’s ellpisoid into a flat plane (such as a screen or a map).\n\n\n\n\n2.1.1 Obtaining the required data\n\nDownload the 2020 country boundary data in GeoJSON format, at the 1:20 million scale, from the link below. The GeoJSON format is a more recent GIS file format, commonly used for web-based mapping. It is derived from the JavaScript Object Notation (JSON) data file format, widely used to exchange data among websites and web servers. More info here.\n\nhttps://ec.europa.eu/eurostat/web/gisco/geodata/administrative-units/countries\n\n\n\n\n\n\n\nStop and Think\n\n\n\n\nWhat is the source of the data you are downloading? Does it seem reliable?\nWhat are the conditions (provisions) of use for the data?\n\n\n\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\n\nThe page providing the data is managed by Eurostat, the statistical office of the European Union. Therefore you would be inclined to trust in the quality and correctness of the data provided.\nThe webpage presents a link to “dowload rules’ which describe the authorised uses of the data. This informartion can also be found in the data’s metadata file.\n\n\n\n\n\nCreate a lab_2 folder in your GEOU9SP main folder. Then create a simple folder structure to organise the data, and extract the zipped downloaded data in its proper location. If you are not sure how to do this, please revisit Chapter 1.\nOpen QGIS and start a new project. Save it as lab_2 in its proper folder. Then look at the contents of the folder holding the country data, using the QGIS browser panel. If the panel is not available, you can enable it by going to the View &gt; Panels menu and checking the box for browser. You should see several layers on tghe folder:\n\n\n\nLoad the CNTR_BN_20M_2020_4326 file into your project. Pay attention to the file name as there are many files with similar names.\n\n\n\n\n\n\n\nStop and Think\n\n\n\nGood file names are always informative of their content. Can you gess the contents of the different GeoJSON files you have downloaded based on their names?\n\n\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\nAll file names start with CNTR for ‘countries’, followed by a two letter code. BN seems to stand for ‘boundary’(vector lines), RG for ‘region’(vector polygons), and LB for ‘labels’ (vector points). Then 2020 specified the reference year, and 20M indicates the 1:20 million mapping scale. the final four-letter number indicates the EPSG code for the data CRS: 4326 (‘unprojected’ WGS84), 3857 (WGS 84 with Pseudo-Mercator projection) or 3035 (ETRS89-extended / Lambert Azimuthal Equal Area for Europe).\n\n\n\n\n\n2.1.2 Visualising data with different CRS\n\nSet the symbology for the outline and fill as you prefer. Try to manipulate more visual variables than just colour.\n\n\n\n\n\n\n\nStop and Think\n\n\n\nWhy can’t you set a fill color for the countries?\n\n\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\nBecause the BN files are vector lines, not polygons. Lines only have one dimension, and thus the inner parts of the countries in this dataset are actually empty. If you load the RG dataset instead, you can set the fill, as vector polygons represent 2D areas.\n\n\n\n\nRight-click on this layer’s name and go to Properties &gt; Information.\n\n\n\n\n\n\n\nStop and Think\n\n\n\nWhat is the Coordinate Reference System (CRS) for this dataset?\n\n\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\nThe information tab will have a section called Coordinate Reference System, as below:\nName: EPSG:4326 - WGS 84 Units: Geographic (uses latitude and longitude for coordinates) Type: Geographic (2D) Method: Lat/long (Geodetic alias) Celestial Body: Earth Accuracy: Based on World Geodetic System 1984 ensemble (EPSG:6326), which has a limited accuracy of at best 2 meters. Reference: Dynamic (relies on a datum which is not plate-fixed)\n\n\n\n\nNote, on the bottom QGIS status bar, that as you move your mouse pointer around, the coordinates for the mouse position are updated in real time. Also note what the map scale is, how it changes as zoom in and out. You can also type the second part of a scale nuber to zoom at the desired map scale (for example 50000 if you want to see the map at a 1:50000 scale)\n\n\n\n\n\n\n\n\nStop and Think\n\n\n\n\nWhy doesn’t the scale shown on the bar match the “advertised” scale for the dataset (1:10 million)?\nThe box on the very bottom right of the QGIS status bar tells you what is the current project CRS. How is it different from a layer CRS?\n\n\n\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\n\nThe 20M scale refers to the scale used when digitising the coastline, i.e., what is the ‘closest’ you can view the dataset without loss of detail.\nThe project CRS defines the ‘viewing’ CRS for the map canvas. Any data that uses a different CRS than the project will be re-projected ‘on the fly’ to match the CRS of the project - but continue with the exercise to learn why that can be a problem.\n\n\n\n\n\nZoom to the UK in the shown layer. Note how the scale at the bottom status bar changes with your zoom.\n\n\n\n\n\n\n\nStop and Think\n\n\n\nDoes the shape of the UK look “right” to you? If not, what is the issue and what is the cause?\n\n\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\nThe UK looks ‘squished` vertically. That is because the data is being viewed in the EPSG 4326 (’unprjected’ WGS84) CRS. EPSG 4236 uses what is effectively the Plate Carrée or Equidistant cylindrical projection, the simplest possible map projection - lat and long degrees are just linearly converted to x,y coordinates. This projection does not preserve area nor shape (conformal) and increasingly distorts features as you approach the poles.\n\n\n\n\nClick on the project projection box at the bottom right of the status bar (or go to Project &gt; Properties... &gt; CRS tab). On the Filter text box, search for EPSG:3035. Select this projection for the project and click OK. A warning box will appear, make sure you read it through before selecting OK again.\n\n\n\n\n\n\n\nStop and Think\n\n\n\n\nwhat is the name of the Coordinate Reference System specified by EPSG 3035?\nWhat did the warning window warned you about?\n\n\n\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\n\nEPSG 3035 is called ETRS89-extended / LAEA Europe and is the official projection for cartographic data from the European Union. It uses the European Terrestrial Reference System 1989 datum and the Lambert Azimuthal Equal Area projection, which preserves areas and can be considered conformal for Europe.\nIt warned you that there is more than one option for the ‘on the fly’ reprojection of your layer from ESPG 4326 to EPSG 3035. It showed you the options with the most accurate (1m) selected by default. But this option is only valid for Europe.\n\n\n\n\nIt is important to not “freak out” when an unexpected warning or error appear. Take a breath, and read through the window or error message, most often the explanation is right there. You just have to dare to look.\nIf you did click through it without looking, here is a screen capture of it:\n\n\nLook at the shape of the UK again after changing the project CRS. Then right click on the layer name and select “Zoom to Layer(s).”\n\n\n\n\n\n\n\nStop and Think\n\n\n\n\nHow does the rest of the world look now? Why?\nWhen you move your mouse, what unit are the coordinates in?\n\n\n\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\n\nAs you move further away from the centre of the projection, shape gets progressively more distorted. This is because the LAEA projection is only conformal at its centre. But areas are all correct.\nIn metres. You can check that on the layer’s Properties &gt; Information tab.\n\n\n\n\n\nNow add to the project the file called CNTR_BN_10M_2020_3035.geojson. Notice the different last four numbers on the file name.\n\n\n\n\n\n\n\nStop and Think\n\n\n\nWhat is the CRS for this new layer, and how well dos it visually align with the p[revious layer.\n\n\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\nThis second layers uses the EPSG 3035 CRS, while the previous layer used EPSG 4326. Notice how ech layer maintains its original CRS when added to the project, but if necessary they are reprojected ‘on the fly’ to match up visually.\n\n\n\n\nChange the project CRS back to EPSG:4326.\nNow go back to the project CRS properties and check the box that says No CRS at the top of the window. This disables the on-the-fly projection. Then click OK and go back to your map.\nRight click on the 4326 layer and select Zoom to Layer. Then select the zoom out tool (the loupe with a minus sign) at the top button row, and start clicking at the centre of the map. Keep clicking as it gets really smalll - you should click about 17 times until the second dataset is fully visible. Check the properties of each layer to make sure they still have the same CRS of when you loaded them.\n\n\n\n\n\n\n\nStop and Think\n\n\n\nWhat has happened? Why are the two datasets suddenly very different in size?\n\n\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\nSince you turned off on-the-fly reprojection, each dataset is now drawn at their original coordinates - but one is in meters and the other in degrees, so their x,y positions and scale become very different.\n\n\n\n\n\n2.1.3 Potential issues with using mismatched data\n\nDownload this vector shapefile (link), unzip it and add it to your QGIS project. Check what is the CRS of this layer.\nSet the Project CRS back to EPSG:3035. Then go to the top menu bar and select Vector &gt; Geoprocessing &gt; Clip. Select the layer that has the EPSG 3035 projection as your Input Layer, and the new “clip_bounds” layer as your Overlay Layer. You can just leave the output as a temporary file. Click Run.\nTurn off the visibility of all layers except the new “Clipped” layer to see the result of the Clip operation.\nRename the “Clipped” layer to “Clipped_3035” by right clicking on it and selecting Rename layer. Then repeat the Clip operation, this time selecting the 4326 world layer as Input, and “clip_bounds” as Overlay again. Rename the result to “Clipped_4326.”\n\nUsing what you learned on the previous lab activities, pick two contrasting colours for each “Clipped_…” layer, and make the lines thicker. Zoom in at the lines of each clipped layer and check if they overlap perfectly.\n\n\n\n\n\n\nStop and Think\n\n\n\nWhy are the clipping results different even though the initial 3035 and 4236 layers looked perfectly aligned?\n\n\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\nBecause although they have been reprojected visually to match on screen, the files still have different CRSs, and this affects the lining up of the Input and overlay layers. To get proper results, you need permanently translate (reproject) both datasets to the same CRS.\n\n\n\n\nNow go to Vector &gt; Data Management Tools &gt; Reproject Data. Select the 4326 world layer as your Input Layer, and EPSG:3035 as your Target CRS. Let the result be a temporary file and click OK. The new layer will be automatically named as “Reprojected”. What is the CRS of this new layer (check on the layer properties window)?\nNow repeat the use of the Clip tool using “Reprojected” as the Input Layer and “clip_bounds” as the Overlay Layer. Rename the resulting layer to ‘Clipped_Reprojected’. Which of the two originally clipped layers (“Clipped_3035” or “Clipped_4236?) better matches the”Clipped_Reprojected” layer?\n\n\n\n\n\n\n\nStop and Think\n\n\n\nWhat does the Reproject operation do?\n\n\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\nIt actually applies a permament mathematical transformation to the coordinates of the input data, translating the data from one CRS to another. For any GIS project that involves multiple data layers with different CRSs, you should pick the CRS that makes more sense for your project as the ‘project CRS’, and then reproject all layers to the same CRS before anything else.\n\n\n\nThis is the end of Lab 2! You shoudl now understand why different datasets may have different Coordinate Reference Systems, what are the problems with working with data that has mismatched CRSs, and how to reproject data to match a given CRS. As this is your first week, there are no additional independent exercises - lets take it easy!\nIf you still want to practice more, check the exercises from the QGIS Training Manual!",
+    "crumbs": [
+      "Week 1 - Introduction to GIS",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Lab 2: Coordinate Reference Systems</span>"
+    ]
+  },
+  {
+    "objectID": "sec_w2_vectors.html",
+    "href": "sec_w2_vectors.html",
+    "title": "Week 1 - Introduction to GIS",
+    "section": "",
+    "text": "ILOs covered",
+    "crumbs": [
+      "Week 1 - Introduction to GIS"
+    ]
+  },
+  {
+    "objectID": "sec_w2_vectors.html#ilos-covered",
+    "href": "sec_w2_vectors.html#ilos-covered",
+    "title": "Week 1 - Introduction to GIS",
+    "section": "",
+    "text": "Understand the structure of spatial data and choose appropriate data types and models for storing and representing it;\nObtain and assess the quality of spatial data from online and offline sources and produce new spatial data using computer and field methods;\nCreate map visualisations that adhere to cartographic principles and can be easily and unambiguously interpreted by the non-specialist public;",
+    "crumbs": [
+      "Week 1 - Introduction to GIS"
+    ]
+  },
+  {
+    "objectID": "sec_w2_vectors.html#what-will-you-learn",
+    "href": "sec_w2_vectors.html#what-will-you-learn",
+    "title": "Week 1 - Introduction to GIS",
+    "section": "What will you learn",
+    "text": "What will you learn\nFor every week, we will list the main theoretical and practical learning goals. Use these as a ‘checklist’ to gauge your learning for each week. If you don’t feel confident you have learned any specific topic, then revisit the week’s material!\n\nTheoretical knowledge for Week 1:\n\nWhat are Geomatics, GIS, Remote Sensing and associated terms and fields?\nWhat is spatial data?\nWhat is a datum?\nWhat is a map projection?\nWhat is a Coordinate Reference System?\n\n\n\nPractical knowledge:\n1  Lab 1: QGIS overview and file management\n\nHow to launch QGIS\nHow to load a spatial data file\nHow to navigate the main QGIS interface\nHow to identify features\nHow to do basic measurements\nHow to do basic styling of spatial data\nHow to enter the layout editor\nHow to make and export a simple map layout\n\n2  Lab 2: Coordinate Reference Systems\n\nHow to check the Coordinate Reference System of a spatial file\nHow to set the CRS of a QGIS project\nHow to set the CRS of a spatial file when it is already known.\nHow to reproject(convert) a spatial file from one CRS to another\nWhat are the main CRSs you should be familiar with.",
+    "crumbs": [
+      "Week 1 - Introduction to GIS"
+    ]
+  },
+  {
+    "objectID": "sec_w3_rasters.html",
+    "href": "sec_w3_rasters.html",
+    "title": "Week 1 - Introduction to GIS",
+    "section": "",
+    "text": "ILOs covered",
+    "crumbs": [
+      "Week 1 - Introduction to GIS"
+    ]
+  },
+  {
+    "objectID": "sec_w3_rasters.html#ilos-covered",
+    "href": "sec_w3_rasters.html#ilos-covered",
+    "title": "Week 1 - Introduction to GIS",
+    "section": "",
+    "text": "Understand the structure of spatial data and choose appropriate data types and models for storing and representing it;\nObtain and assess the quality of spatial data from online and offline sources and produce new spatial data using computer and field methods;\nCreate map visualisations that adhere to cartographic principles and can be easily and unambiguously interpreted by the non-specialist public;",
+    "crumbs": [
+      "Week 1 - Introduction to GIS"
+    ]
+  },
+  {
+    "objectID": "sec_w3_rasters.html#what-will-you-learn",
+    "href": "sec_w3_rasters.html#what-will-you-learn",
+    "title": "Week 1 - Introduction to GIS",
+    "section": "What will you learn",
+    "text": "What will you learn\nFor every week, we will list the main theoretical and practical learning goals. Use these as a ‘checklist’ to gauge your learning for each week. If you don’t feel confident you have learned any specific topic, then revisit the week’s material!\n\nTheoretical knowledge for Week 1:\n\nWhat are Geomatics, GIS, Remote Sensing and associated terms and fields?\nWhat is spatial data?\nWhat is a datum?\nWhat is a map projection?\nWhat is a Coordinate Reference System?\n\n\n\nPractical knowledge:\n1  Lab 1: QGIS overview and file management\n\nHow to launch QGIS\nHow to load a spatial data file\nHow to navigate the main QGIS interface\nHow to identify features\nHow to do basic measurements\nHow to do basic styling of spatial data\nHow to enter the layout editor\nHow to make and export a simple map layout\n\n2  Lab 2: Coordinate Reference Systems\n\nHow to check the Coordinate Reference System of a spatial file\nHow to set the CRS of a QGIS project\nHow to set the CRS of a spatial file when it is already known.\nHow to reproject(convert) a spatial file from one CRS to another\nWhat are the main CRSs you should be familiar with.",
+    "crumbs": [
+      "Week 1 - Introduction to GIS"
+    ]
+  },
+  {
+    "objectID": "sec_w4_cartography.html",
+    "href": "sec_w4_cartography.html",
+    "title": "Week 1 - Introduction to GIS",
+    "section": "",
+    "text": "ILOs covered",
+    "crumbs": [
+      "Week 1 - Introduction to GIS"
+    ]
+  },
+  {
+    "objectID": "sec_w4_cartography.html#ilos-covered",
+    "href": "sec_w4_cartography.html#ilos-covered",
+    "title": "Week 1 - Introduction to GIS",
+    "section": "",
+    "text": "Understand the structure of spatial data and choose appropriate data types and models for storing and representing it;\nObtain and assess the quality of spatial data from online and offline sources and produce new spatial data using computer and field methods;\nCreate map visualisations that adhere to cartographic principles and can be easily and unambiguously interpreted by the non-specialist public;",
+    "crumbs": [
+      "Week 1 - Introduction to GIS"
+    ]
+  },
+  {
+    "objectID": "sec_w4_cartography.html#what-will-you-learn",
+    "href": "sec_w4_cartography.html#what-will-you-learn",
+    "title": "Week 1 - Introduction to GIS",
+    "section": "What will you learn",
+    "text": "What will you learn\nFor every week, we will list the main theoretical and practical learning goals. Use these as a ‘checklist’ to gauge your learning for each week. If you don’t feel confident you have learned any specific topic, then revisit the week’s material!\n\nTheoretical knowledge for Week 1:\n\nWhat are Geomatics, GIS, Remote Sensing and associated terms and fields?\nWhat is spatial data?\nWhat is a datum?\nWhat is a map projection?\nWhat is a Coordinate Reference System?\n\n\n\nPractical knowledge:\n1  Lab 1: QGIS overview and file management\n\nHow to launch QGIS\nHow to load a spatial data file\nHow to navigate the main QGIS interface\nHow to identify features\nHow to do basic measurements\nHow to do basic styling of spatial data\nHow to enter the layout editor\nHow to make and export a simple map layout\n\n2  Lab 2: Coordinate Reference Systems\n\nHow to check the Coordinate Reference System of a spatial file\nHow to set the CRS of a QGIS project\nHow to set the CRS of a spatial file when it is already known.\nHow to reproject(convert) a spatial file from one CRS to another\nWhat are the main CRSs you should be familiar with.",
+    "crumbs": [
+      "Week 1 - Introduction to GIS"
+    ]
+  },
+  {
+    "objectID": "sec_w5_spatial_analysis_I.html",
+    "href": "sec_w5_spatial_analysis_I.html",
+    "title": "Week 1 - Introduction to GIS",
+    "section": "",
+    "text": "ILOs covered",
+    "crumbs": [
+      "Week 1 - Introduction to GIS"
+    ]
+  },
+  {
+    "objectID": "sec_w5_spatial_analysis_I.html#ilos-covered",
+    "href": "sec_w5_spatial_analysis_I.html#ilos-covered",
+    "title": "Week 1 - Introduction to GIS",
+    "section": "",
+    "text": "Understand the structure of spatial data and choose appropriate data types and models for storing and representing it;\nObtain and assess the quality of spatial data from online and offline sources and produce new spatial data using computer and field methods;\nCreate map visualisations that adhere to cartographic principles and can be easily and unambiguously interpreted by the non-specialist public;",
+    "crumbs": [
+      "Week 1 - Introduction to GIS"
+    ]
+  },
+  {
+    "objectID": "sec_w5_spatial_analysis_I.html#what-will-you-learn",
+    "href": "sec_w5_spatial_analysis_I.html#what-will-you-learn",
+    "title": "Week 1 - Introduction to GIS",
+    "section": "What will you learn",
+    "text": "What will you learn\nFor every week, we will list the main theoretical and practical learning goals. Use these as a ‘checklist’ to gauge your learning for each week. If you don’t feel confident you have learned any specific topic, then revisit the week’s material!\n\nTheoretical knowledge for Week 1:\n\nWhat are Geomatics, GIS, Remote Sensing and associated terms and fields?\nWhat is spatial data?\nWhat is a datum?\nWhat is a map projection?\nWhat is a Coordinate Reference System?\n\n\n\nPractical knowledge:\n1  Lab 1: QGIS overview and file management\n\nHow to launch QGIS\nHow to load a spatial data file\nHow to navigate the main QGIS interface\nHow to identify features\nHow to do basic measurements\nHow to do basic styling of spatial data\nHow to enter the layout editor\nHow to make and export a simple map layout\n\n2  Lab 2: Coordinate Reference Systems\n\nHow to check the Coordinate Reference System of a spatial file\nHow to set the CRS of a QGIS project\nHow to set the CRS of a spatial file when it is already known.\nHow to reproject(convert) a spatial file from one CRS to another\nWhat are the main CRSs you should be familiar with.",
+    "crumbs": [
+      "Week 1 - Introduction to GIS"
+    ]
+  },
+  {
+    "objectID": "lab_geoprocessing.html",
+    "href": "lab_geoprocessing.html",
+    "title": "3  Lab 9: Geoprocessing tools",
+    "section": "",
+    "text": "3.1 Guided Exercise: assessing children access to schools\nYou are a GIS analyst at the Stirling council, and you have been asked to perform an analysis regarding children access to schools. Your manager has indicated which data sources you should use, and they want you to answer how many children within the relevant age range live within less than 1km, between 1km and 2km, and further than 2km of any primary (4 to 10 years old) and secondary (11 to 17 years old) school. You have been instructed to use the census data at the most detailed level (Output Area, OA), and to limit your analysis to the OAs and schools that are within Stirling Council Area limits. You should report the results as a table.",
+    "crumbs": [
+      "Week 1 - Introduction to GIS",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Lab 9: Geoprocessing tools</span>"
+    ]
+  },
+  {
+    "objectID": "lab_geoprocessing.html#guided-exercise-assessing-children-access-to-schools",
+    "href": "lab_geoprocessing.html#guided-exercise-assessing-children-access-to-schools",
+    "title": "3  Lab 9: Geoprocessing tools",
+    "section": "",
+    "text": "3.1.1 Obtaining the data\n\nThe first piece of data needed for this exercise is of course the limits of the Stirling Council Area. The official administrative boundary data for the UK is contained within the Ordnance Survey Boundary Line dataset. It can be downloaded from the Ordnance Survey Open Data Hub or from Digimap, but the files cover all of the UK, and thus are a very large download. To save precious lab time, we have already isolated the Stirling Council boundary as a separate file that you can download here. You are welcome!\n\nYou can then download the two other datasets needed:\n\nScottish School Roll and Locations: this dataset is provided by the Scottish Government, and contains information on all Scottish schools. Download the ‘Scottish School Roll and Locations ZIP’ (NOT the one with ‘Table’ on the name) from here.\nCensus data on population age: the Digimap platform offers access to the 2011 Census variables in spatial format. To obtain it, go to the Society tab, and then select the ‘Download’ option on the leftmost toolbar (a down arrow going into a ‘box’). That will bring up the familiar Digimap download interface. This time we will use our Stirling Council shapefile to set the search area. For that, click on the Import Polygons button, and then on Choose File. Then choose the zipped Stirling dataset you have downloaded and click on import. Finally, under the 2011 Census data layers tab, select the Age dataset. Your window should look like this:\n\n\n\n\n\n\n\n\nWarning\n\n\n\nThe data for the 2022 census have been officially published by National Records of Scotland, but are not available on Digimap yet. Since we are only practising our GIS knowledge, it is OK to use mismatched data (schools from 2024 vs. age data from 2011). In a real application scenario, it would be very important to make sure the temporal coverage of the datasets matches as well as possible.\n\n\n\nAdd your data to the basket and finish the order, then download the data as you have done in previous labs.\nNow create a folder structure for your project and extract and organise the contents of the three datasets. Then create a new QGIS project and import the three datasets. The census geopackage will contain layers for different levels of aggregation, remember you want the Output Area polygons. If everything worked correctly, you should have something like this:\n\n\n\n\n\n\n\n\nStop and Think\n\n\n\n\nWhat are the data models and file formats of each dataset?\nWhat are the attributes contained in each dataset?\nWhat is the CRS of each dataset? Are they all the same?\n\n\n\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\n\nThey all use the vector data model. The schools are vector points, the other are vector polygons.\nThe attributes of each dataset can be seen by either inspecting the attribute table of each dataset or by looking at the layer Properties &gt; Fields tab.\nAll three datasets are in OS British Standard Grid (EPSG 27700). You can find this out by either going to the Properties &gt; Information tab or by right-clicking on the layer name then on Layer CRS.\n\n\n\n\n\n\n\n3.1.2 Preparing the data\nYou may have noticed that your Digimap census data download includes many OA polygons that are outside of Stirling Council. This is because of a (sadly) very common problem with spatial data from different sources - the census output areas (OAs) do not perfectly line up with the administrative boundaries of the council. So when the Digimap interface tries to determine which OAs overlap with Stirling, we get more data than we need.\n\nSet the symbology of the Stirling boundaries to a red outline without fill. Then make sure this layer is on top of the census layer. Then zoom in very close to the Stirling boundary. You will see they are offset by about 1.5m:\n\n\nWe thus need to further subset our data to match the actual extent of the Stirling coucil.\n\n\n\n\n\n\nStop and Think\n\n\n\nWhat are the options of GIS operations that you have to subset the datasets?\n\n\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\nYou could use Clip or Intersection if you wanted to change (‘cut’) the geometries of the target layer, or use Select by Location if you wanted to fidn the overlapping polygins without changing geometries.\n\n\n\nAfter consulting with your manager, you both decide that clipping or intersecting the data would not be a good option as it would change the geometry of the OAs, and there are official limits. So you decide to use Select by Location:\n\nGo to Vector &gt; Research Tools &gt; Select by Location... or click on the  button.\nSelect all polygons from the census layer that are within the Stirling bounds layer. Check the selection results.\nChange your criteria to include both intersect and are within the Stirling bounds layer. Check the selection results.\n\n\n\n\n\n\n\nStop and Think\n\n\n\nWhy both selection attempts give you wrong results? How would you fix it?\n\n\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\nBecause of the mismatch between the boundaries of the OAs and the Stirlingshire boundaries. So inner OAs that are the edges of the council area are not considered fully within (they extend a sliver outwards from the actual bounds), and outer OAs also at the edges will be considered to intersect Stirling since they extend a sliver within the bounds.\nThink a bit on how to fix it, then continue below for a solution.\n\n\n\nYou could manually deselect the polygons that are not part of Stirling council, but then you have an idea: what if you buffer the Stirlingshire boundaries to expand them a tiny bit, and then try selecting the polygons within the buffer. That way OAs inside the council area that slightly extend outwards will fall within the buffer, while OAs outside the council area that slightly extend inward will still not be fully within it.\n\nGo to Vector &gt; Geoprocessing &gt; Buffer and create a 20m buffer around the Stirling layer. You can just leave it as a temporary layer, as we will only use it for our spatial selection.\nNow repeat the Select by location operation for OA polygons within the buffered area. Bingo!\nSave the selection as a new layer by right clicking on the census layer name and selecting Export &gt; Save Selected Features As... Once this new census layer is added to your project, remove the original one to avoid confusion.\n\n\n\n3.1.3 Answering the question\nNow we can answer the actual study question. As a reminder, it is how many children in the relevant age range live within less than 1km, between 1km and 2km, and further than 2km of any primary (4 to 10 years old) and secondary (11 to 17 years old) school?. You will need to use some of the Geoprocessing tools you just learned to answer that, as well as tools from previous weeks.\n\n\n\n\n\n\nStop and Think\n\n\n\nBefore you continue, try to think about the solution yourself. Look at the attributes of each layer, and then try to sketch a step by step plan to achieve the results you need. Then continue.\n\n\n\nYou will first need to add up the number of children at each 1yr age bracket to compute the totals for the primary and secondary school age ranges (4-10 yo and 11-17 yo). For that, you can use the Field Calculator, as in previous labs. Just add up the numbers for columns age_4 to age_10 into a new age_4-10 column, and then add columns age_11 to age_17 into a new age_11-17 column.\nThen you will need to select only the schools within the Stirling council area. You can use Select by location as above, using the Stirling bounds, or by using the LAname field in the attribute table of the School Roll layer. Both methods should give you a selection of 48 schools. Create a new layer containing just these schools, then remove the original school layer from the project.\nThe next step is to calculate the area covered by each distance bracket (1km, 2km) from the schools. For that, you should create a Buffer for the 1km distance, then a second Buffer for the 2km distance. Make sure you select the Dissolve result option when creating the buffers, since many locations will be within less than the specified distance from multiple schools, and we don’t want to repeat them.\nThen compute the Difference between the 2km and 1km buffers to create “rings” covering the range of 1km to 2km. This is important so we don’t “double count” the 1km bracket - see below.\n\nNow you have to deal with the biggest limitation of your analysis - the OAs are still very big, and many will span areas both within and outside the 1k and 2km distances. You discuss the problem with your manager again, and you decide that the best approach is to weight the children count of each OA by the respective area of the OA that is within each distance bracket. So if an OA has 15 children aged 11-17, and 40% of the OA area is within 1km of a school, then you should multiply 15 by 0.4 to obtain the estimated number of children within 1km.\n\nThe first step is to calculate the total area of each OA. You can do that by using the Field Calculator tool and creating a new field called oa_area that takes the $area parameter under the Geometry calculator operations. Remember to make this new field a Decimal number with two decimal places.\n\n\n\n\n\n\n\nStop and Think\n\n\n\nWhat units were used for the area calculation? Does it matter?\n\n\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\nUnless you have set it differently in your Project properties, areas are calculated in squared metres by default. This is not an ideal unit for such large areas (km\\(^2\\) would have been better), but since we will only need to calculate the percentage of this total area within each distance bracket, it shouldn’t matter much.\n\n\n\nNow that you have the total areas for each OA, it is time to find out the portions within each distance bracket. For that, we can either Clip or get the Intersection of the buffer layers with the census layer.\n\n\n\n\n\n\nStop and Think\n\n\n\nWhat will change in your results if you use Intersection instead of Clip?\n\n\n\n\n\n\n\n\nClick for answer\n\n\n\n\n\nIntersection will combine the attributes of both layers, while CLip will only preserve the attributes of the target layer.\n\n\n\n\nSince the buffers have been dissolved, they can’t be linked to individual schools anymore - whenever the buffers of two schools overlap their attribute tables will just keep the name of one of the schools when they are dissolved. So no need to preserve the buffer attributes, and we can use Clip. Create two new layers, the first being the clipping of the census layer by the 1km buffer layer, and the second being the clipping of the census layer by the 1km-2km ‘donuts’ layer. We use it instead of the 2km buffer otherwise when we calculate the percentage of area within 2km we will be double counting the area within 1km - which is already covered by the 1km buffer.\n\nYou should end up with something like the figure below. To make sure the layers don’t overlap, style them using hatching in different directions. If you see a cross-hatch, theyn they are overlapping, and it means you used the full 2km buffer instead of the 1km-2km ‘donut’:\n\n\nNow we can calculate the area percentages. First, re-calculate the polygon areas for the clipped layers, using the Field Calculator. Create a new attribute called clip_area, and assign the $area operator to it again. Remember to set it as a decimal number.\nStill using the Field Calculator, you can now calculate the percent area by creating a new attribute called perc_area, which will be clip_area / oa_area. It should also be a decimal number.\nFinally, calculate the weighted number of children by creating new fields. First calculate perc_4-10 as age_4-10 * perc_area, and then perc_11-17 as age_11-17 * perc_area. These fields should be integers, unless you are sending partial children to school.\n\nGreat, you are almost there! The last step is to aggregate all the data at the council level, and then also determine the number of children beyond 2km:\n\nUse the Statistical Summary tool to calculate the respective sums of perc_4-10 and perc_11-17. These are the final answers for how many children in the relevant age range live within less than 1km, between 1km and 2km?.\nTo get the number of children beyond 2km, use the Statistical Summary tool to calculate the total number of children within each age bracket (age_4-10 and age_11-17) in the council, and then subtract the number of children within 1km and between 1km and 2km from this total.\n\nYour final results should be:\n\n\n\n\n1km\n2km\n&gt;2km\n\n\n\n\nPrimary\n6451\n6656\n89\n\n\nSecondary\n7572\n7880\n91",
+    "crumbs": [
+      "Week 1 - Introduction to GIS",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Lab 9: Geoprocessing tools</span>"
     ]
   }
 ]

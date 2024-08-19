@@ -1,65 +1,151 @@
 # Lab 9: Geoprocessing tools
 
-## Independent Exercise: assessing children access to schools
+## Guided Exercise: assessing children access to schools
 
-You are a GIS analyst at the Stirlingshire council, and you have been asked to perform an analysis regarding children access to schools. Your manager has indicated which data sources you should use, and they want you to answer **how many children in the relevant age range live within less than 1km, between 1km and 2km, and further than 2km of *any* primary (4 to 10 years old) and secondary (11 to 17 years old) school. You have been instructed to use the census data at the most detailed level (Output Area), and to limit your analysis to the OAs and schools that are within Stirlingshire limits**. You should report the results as a table. 
+You are a GIS analyst at the Stirling council, and you have been asked to perform an analysis regarding children access to schools. Your manager has indicated which data sources you should use, and they want you to answer **how many children within the relevant age range live within less than 1km, between 1km and 2km, and further than 2km of *any* primary (4 to 10 years old) and secondary (11 to 17 years old) school. You have been instructed to use the census data at the most detailed level (Output Area, OA), and to limit your analysis to the OAs and schools that are within Stirling Council Area limits**. You should report the results as a table. 
 
 ### Obtaining the data
 
-1. **Scottish School Roll and Locations**: this dataset is provided by the Scottish Government, and contains information on all Scottish schools for the year 2022. Dowload the '*Scottish School Roll and Locations ZIP*' (not the 'Table' one!) [from here](https://www.data.gov.uk/dataset/9a6f9d86-9698-4a5d-a2c8-89f3b212c52c/scottish-school-roll-and-locations).
+(@) The first piece of data needed for this exercise is of course the limits of the Stirling Council Area. The official administrative boundary data for the UK is contained within the Ordnance Survey Boundary Line dataset. It can be downloaded from the [Ordnance Survey Open Data Hub](https://osdatahub.os.uk/) or from Digimap, but the files cover all of the UK, and thus are a very large download. To save precious lab time, we have already isolated the Stirling Council boundary as a separate file that you can download here. You are welcome! 
 
-2. **Census data on population age**: the Digimap platform offers access to Census variables in spatial format. To obtain it, go to the *Society* tab, and then select the 'Download' option on the leftmost toolbar (a down arrow going into a 'box'). That will bring up the familiar Digimap download interface. To define the data coverage, change the '*Reference Grids*' option to '*Postcodes*' and make a generous selection around the FK postcode, similar to the fgure below. Then check the box for the '*Age*' variable, and download it as a geopackage. 
+You can then download the two other datasets needed:
 
-3. **The bounds of Stirlingshire**: This should be extracted from the Ordnance Survey Boundary Line dataset for the UK. It can be downloaded from the [Ordnance Survey Open Data Hub](https://osdatahub.os.uk/). You should obtain the data in geopackage format, and the correct layer to use is called `scotland_wales_const`. 
+(@) **Scottish School Roll and Locations**: this dataset is provided by the Scottish Government, and contains information on all Scottish schools. Download the '*Scottish School Roll and Locations ZIP*' (NOT the one with 'Table' on the name) [from here](https://www.data.gov.uk/dataset/9a6f9d86-9698-4a5d-a2c8-89f3b212c52c/scottish-school-roll-and-locations).
 
+(@) **Census data on population age**: the Digimap platform offers access to the 2011 Census variables in spatial format. To obtain it, go to the *Society* tab, and then select the 'Download' option on the leftmost toolbar (a down arrow going into a 'box'). That will bring up the familiar Digimap download interface. This time we will use our Stirling Council shapefile to set the search area. For that, click on the `Import Polygons` button, and then on `Choose File`. Then choose the *zipped* Stirling dataset you have downloaded and click on import. Finally, under the `2011 Census data layers` tab, select the `Age` dataset. Your window should look like this:
 
-::: {.callout-note title="Stop and Think"}
+![](images/lab_geoprocessing/Fig1_digimap_stirlinghsire.png)
 
-- What are the data models and data formats for each dataset?
-
-- What does the *metadata* say about each dataset on their respective download pages? When and where is the data from, what information does it contain?
-
-- What are the attributes contained in each dataset?
-
-- What is the CRS of each dataset? Are they all the same?
-
+::: {.callout-warning}
+The data for the 2022 census have been officially published by National Records of Scotland, but are not available on Digimap yet. Since we are only practising our GIS knowledge, it is OK to use mismatched data (schools from 2024 vs. age data from 2011). In a real application scenario, it would be very important to make sure the temporal coverage of the datasets matches as well as possible. 
 :::
 
-### Data preparation
+(@) Add your data to the basket and finish the order, then download the data as you have done in previous labs. 
+(@) Now create a folder structure for your project and extract and organise the contents of the three datasets. Then create a new QGIS project and import the three datasets. The census geopackage will contain layers for different levels of aggregation, remember you want the Output Area polygons. If everything worked correctly, you should have something like this:
 
-The first step in your analysis is data preparation. Since the analysis is supposed to encompass Stirlinghsire only, the first logical step is to subset the other layers to your Area of Interest. You should use the Stirlinghshire boundary from the OS Boundary Line dataset to subset both the school dataset and the census dataset. **But** you will notice there is a (very common) problem with the census data - the census output areas (OAs) do not line up with the administrative boundaries of the council. So there is no clear cut way to subset it.
+![](images/lab_geoprocessing/Fig2_qgis_import.png)
 
-::: {.callout-note title="Stop and Think"}
 
-- What are the two GIS operation options you have to subset the datasets? Which one would you choose for each dataset and why? 
+::: {.callout-important title="Stop and Think"}
+1. What are the data models and file formats of each dataset?
 
+2. What are the attributes contained in each dataset?
+
+3. What is the CRS of each dataset? Are they all the same?
 :::
 
-After consulting with your manager, you both decide that the best option in this case is to weigh the census data for all the OAs extending beyond the Stirlinghsire bounds by the proportion of total area contained within the bounds. So for example, if one OA has 78% of its total area within Stirlingshire, any population number you use should be multiplied by 0.78. 
+::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
+1. They all use the vector data model. The schools are vector points, the other are vector polygons. 
 
-Now go ahead and prepare the datasets. At the end of this step, you should have:
+2. The attributes of each dataset can be seen by either inspecting the *attribute table* of each dataset or by looking at the layer `Properties > Fields` tab.
 
-1. School locations for Stirlingshire only
-2. Census OAs for Stirlingshire only, with a new attribute on the table describing the proportion of the OA area contained within the bounds. 
+3. All three datasets are in OS British Standard Grid (EPSG 27700). You can find this out by either going to the  `Properties > Information` tab or by right-clicking on the layer name then on `Layer CRS`.  
+:::
+
+### Preparing the data
+
+You may have noticed that your Digimap census data download includes many OA polygons that are outside of Stirling Council. This is because of a (sadly) very common problem with spatial data from different sources - the census output areas (OAs) do not perfectly line up with the administrative boundaries of the council. So when the Digimap interface tries to determine which OAs overlap with Stirling, we get more data than we need.
+
+(@) Set the symbology of the Stirling boundaries to a red outline without fill. Then make sure this layer is on top of the census layer. Then zoom in very close to the Stirling boundary. You will see they are offset by about 1.5m:
+
+![](images/lab_geoprocessing/Fig3_boundary_offset)
+
+We thus need to further subset our data to match the actual extent of the Stirling coucil. 
+
+::: {.callout-important title="Stop and Think"}
+What are the options of GIS operations that you have to subset the datasets?
+:::
+
+::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
+You could use `Clip` or `Intersection` if you wanted to change ('cut') the geometries of the target layer, or use `Select by Location` if you wanted to fidn the overlapping polygins without changing geometries. 
+:::
+
+After consulting with your manager, you both decide that clipping or intersecting the data would not be a good option as it would change the geometry of the OAs, and there are official limits. So you decide to use `Select by Location`:   
+
+(@) Go to `Vector > Research Tools > Select by Location...` or click on the ![](https://docs.qgis.org/3.34/en/_images/mAlgorithmSelectLocation.png) button. 
+
+(@) Select all polygons from the census layer that `are within` the Stirling bounds layer. Check the selection results. 
+
+(@) Change your criteria to include both `intersect` and `are within` the Stirling bounds layer. Check the selection results. 
+
+::: {.callout-important title="Stop and Think"}
+Why both selection attempts give you wrong results? How would you fix it?
+:::
+
+::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
+Because of the mismatch between the boundaries of the OAs and the Stirlingshire boundaries. So inner OAs that are the edges of the council area are not considered fully `within` (they extend a sliver outwards from the actual bounds), and outer OAs also at the edges will be considered to `intersect` Stirling since they extend a sliver within the bounds.  
+
+Think a bit on how to fix it, then continue below for a solution.
+:::
+
+You could manually deselect the polygons that are not part of Stirling council, but then you have an idea: what if you buffer the Stirlingshire boundaries to expand them a tiny bit, and then try selecting the polygons `within` the buffer. That way OAs inside the council area that slightly extend outwards will fall within the buffer, while OAs outside the council area that slightly extend inward will still not be fully within it.
+
+(@) Go to `Vector > Geoprocessing > Buffer` and create a 20m buffer around the Stirling layer. You can just leave it as a temporary layer, as we will only use it for our spatial selection. 
+
+(@) Now repeat the `Select by location` operation for OA polygons `within` the buffered area. Bingo!
+
+(@) Save the selection as a new layer by right clicking on the census layer name and selecting `Export > Save Selected Features As..`. Once this new census layer is added to your project, remove the original one to avoid confusion. 
 
 ### Answering the question
 
-Again, the question is **how many children in the relevant age range live within less than 1km, between 1km and 2km, and further than 2km of *any* primary (4 to 10 years old) and secondary (11 to 17 years old) school.**. As with the data preparation step above, the numbers should be calculated based on areal proportions (*e.g.* if 54% of a OA is within the 1km range of a primary school, then the total number of children aged 4-10yrs in that OA should be multiplied by 0.54). 
+Now we can answer the actual study question. As a reminder, it is **how many children in the relevant age range live within less than 1km, between 1km and 2km, and further than 2km of *any* primary (4 to 10 years old) and secondary (11 to 17 years old) school?**. You will need to use some of the Geoprocessing tools you just learned to answer that, as well as tools from previous weeks. 
 
-You will need to use some of the Geoprocessing tools you just learned to answer that. But before you jump into any analysis and calculations, *stop and think*  about your problem! Some things to keep in mind:
+::: {.callout-important title="Stop and Think"}
+Before you continue, try to think about the solution yourself. Look at the attributes of each layer, and then try to sketch a step by step plan to achieve the results you need. Then continue. 
+:::
 
-- You will first need to add up the number of children at each 1yr age bracket to compute the totals for the primary and secondary school age ranges (4-10 yo and 11-17yo) and then apply your correction factor (the proportion of OA area wihin Stirlingshire). This should probably be done before any further steps.
+(@) You will first need to add up the number of children at each 1yr age bracket to compute the totals for the primary and secondary school age ranges (4-10 yo and 11-17 yo). For that, you can use the `Field Calculator`, as in previous labs. Just add up the numbers for columns `age_4` to `age_10` into a new `age_4-10` column, and then add columns `age_11` to `age_17` into a new `age_11-17` column. 
 
-- Then you will need to determine the area of each OA within each distance bracket from the schools, and re-ajust your corrected totals from above by weighing them again, this time based on the proportion of OA area within the bracket. 
+(@) Then you will need to select only the schools within the Stirling council area. You can use `Select by location` as above, using the Stirling bounds, or by using the `LAname` field in the attribute table of the School Roll layer. Both methods should give you a selection of 48 schools. Create a new layer containing just these schools, then remove the original school layer from the project. 
 
-- You are looking for sensible combinations of age ranges and school types, so no need to calculate all possible combinations (for example, no need to know how many children aged 11-17 are within any distance from a primary school).
+(@) The next step is to calculate the area covered by each distance bracket (1km, 2km) from the schools. For that, you should create a `Buffer` for the 1km distance, then a second `Buffer` for the 2km distance. Make sure you select the `Dissolve result` option when creating the buffers, since many locations will be within less than the specified distance from multiple schools, and we don't want to repeat them. 
 
-- The distance brackets are *not* nested, so you shouldn't be double counting any areas. 
+(@) Then compute the `Difference` between the 2km and 1km buffers to create "rings" covering the range of 1km to 2km. This is important so we don't "double count" the 1km bracket - see below.  
 
-Try to think about the analysis steps and required tools on your own, but if you want a hint, all GIS tools I used to answer this problem can be seen below in sequence (drag you mouse over the dark area to reveal the text). 
+Now you have to deal with the biggest limitation of your analysis - the OAs are still very big, and many will span areas both within and outside the 1k and 2km distances. You discuss the problem with your manager again, and you decide that the best approach is to *weight* the children count of each OA by the respective *area* of the OA that is *within* each distance bracket. So if an OA has 15 children aged 11-17, and 40% of the OA area is within 1km of a school, then you should multiply 15 by 0.4 to obtain the estimated number of children within 1km. 
 
-GIS operations used: Select by Location, Clip, Buffer, Difference, Intersection, Field Calculator, Statistical Summary Tool. 
+(@) The first step is to calculate the total area of each OA. You can do that by using the `Field Calculator` tool and creating a new field called `oa_area` that takes the `$area` parameter under the `Geometry` calculator operations. Remember to make this new field a **Decimal number** with two decimal places. 
 
-**IMPORTANT: Keep the data from this lab, as we will revisit it in a future exercise!** 
+::: {.callout-important title="Stop and Think"}
+What units were used for the area calculation? Does it matter?
+:::
 
-Here are the answers to the problem (make sure you give it a good try before looking!)
+::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
+Unless you have set it differently in your *Project properties*, areas are calculated in squared metres by default. This is not an ideal unit for such large areas (km$^2$ would have been better), but since we will only need to calculate the percentage of this total area within each distance bracket, it shouldn't matter much.
+:::
+
+Now that you have the total areas for each OA, it is time to find out the portions within each distance bracket. For that, we can either `Clip` or get the `Intersection` of the buffer layers with the census layer. 
+
+::: {.callout-important title="Stop and Think"}
+What will change in your results if you use `Intersection` instead of `Clip`?
+:::
+
+::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
+`Intersection` will combine the attributes of both layers, while `CLip` will only preserve the attributes of the target layer. 
+:::
+
+(@) Since the buffers have been *dissolved*, they can't be linked to individual schools anymore - whenever the buffers of two schools overlap their attribute tables will just keep the name of one of the schools when they are dissolved. So no need to preserve the buffer attributes, and we can use `Clip`. Create two new layers, the first being the clipping of the census layer by the 1km buffer layer, and the second being the clipping of the census layer by the 1km-2km 'donuts' layer. We use it instead of the 2km buffer otherwise when we calculate the percentage of area within 2km we will be double counting the area within 1km - which is already covered by the 1km buffer. 
+
+You should end up with something like the figure below. To make sure the layers don't overlap, style them using hatching in different directions. If you see a cross-hatch, theyn they are overlapping, and it means you used the full 2km buffer instead of the 1km-2km 'donut':
+
+![](images/lab_geoprocessing/fig4_clipped_buffers)
+
+(@) Now we can calculate the area percentages. First, re-calculate the polygon areas for the clipped layers, using the `Field Calculator`. Create a new attribute called `clip_area`, and assign the `$area` operator to it again. Remember to set it as a decimal number.
+
+(@) Still using the `Field Calculator`, you can now calculate the percent area by creating a new attribute called `perc_area`, which will be `clip_area / oa_area`. It should also be a decimal number.
+
+(@) Finally, calculate the weighted number of children by creating new fields. First calculate `perc_4-10` as `age_4-10 * perc_area`, and then `perc_11-17` as `age_11-17 * perc_area`. These fields should be integers, unless you are sending partial children to school.
+
+Great, you are almost there! The last step is to aggregate all the data at the council level, and then also determine the number of children beyond 2km:
+
+(@) Use the `Statistical Summary` tool to calculate the respective sums of `perc_4-10` and `perc_11-17`. These are the final answers for **how many children in the relevant age range live within less than 1km, between 1km and 2km?**. 
+
+(@) To get the number of children beyond 2km, use the `Statistical Summary` tool to calculate the total number of children within each age bracket (`age_4-10` and `age_11-17`) in the council, and then subtract the number of children within 1km and between 1km and 2km from this total. 
+
+Your final results should be:
+
+|           | 1km	| 2km  | >2km |
+|-----------|-------|------|------|
+| Primary	| 6451	| 6656 | 89   |
+| Secondary	| 7572	| 7880 | 91   |
+

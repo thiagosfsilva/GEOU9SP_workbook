@@ -8,10 +8,16 @@ book:
   date: "24/07/2024"
   chapters:
   - index.qmd
-  - part: sec_intro_toGIS.qmd
+  - part: sec_w1_intro_toGIS.qmd
     chapters:
       - lab_intro.qmd
       - lab_crs.qmd
+  - part: sec_w2_vectors.qmd
+  - part: sec_w3_rasters.qmd
+  - part: sec_w4_cartography.qmd
+  - part: sec_w5_spatial_analysis_I.qmd
+    chapters:
+      - lab_geoprocessing.qmd
 
 bibliography: references.bib
 

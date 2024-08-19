@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Thiago Silva">
-<meta name="dcterms.date" content="2025-12-07">
 
-<title>GEOU9SP GIS Workbook</title>
+<title>GEOU9SP GIS Workbook - Week 1 - Introduction to GIS</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -32,7 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./sec_w1_intro_toGIS.html" rel="next">
+<link href="./sec_w3_rasters.html" rel="next">
+<link href="./lab_crs.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -82,7 +81,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Welcome!</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./sec_w2_vectors.html">Week 1 - Introduction to GIS</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -109,7 +108,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Welcome!</span></a>
   </div>
 </li>
@@ -175,7 +174,12 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#welcome" id="toc-welcome" class="nav-link active" data-scroll-target="#welcome">Welcome!</a></li>
+  <li><a href="#ilos-covered" id="toc-ilos-covered" class="nav-link active" data-scroll-target="#ilos-covered">ILOs covered</a></li>
+  <li><a href="#what-will-you-learn" id="toc-what-will-you-learn" class="nav-link" data-scroll-target="#what-will-you-learn">What will you learn</a>
+  <ul class="collapse">
+  <li><a href="#theoretical-knowledge-for-week-1" id="toc-theoretical-knowledge-for-week-1" class="nav-link" data-scroll-target="#theoretical-knowledge-for-week-1">Theoretical knowledge for Week 1:</a></li>
+  <li><a href="#practical-knowledge" id="toc-practical-knowledge" class="nav-link" data-scroll-target="#practical-knowledge">Practical knowledge:</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -184,26 +188,14 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">GEOU9SP GIS Workbook</h1>
+<h1 class="title">Week 1 - Introduction to GIS</h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Thiago Silva </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">December 7, 2025</p>
-    </div>
-  </div>
   
     
   </div>
@@ -213,15 +205,52 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="welcome" class="level1 unnumbered">
-<h1 class="unnumbered">Welcome!</h1>
-<p>This e-book was created as a lab companion for the <em>GEOU9SP - Geographic Information Systems</em> module at University of Stirling. It contains all the practical exercises that will be covered throughout the module.</p>
-<p>This book is <strong>not a replacement to Canvas</strong>, so make sure you are engaging with the material on Canvas on a weekly basis!</p>
-<p>The content of this book is organised into sections, which will correspond to the teaching weeks and practical lab sessions. You will always see the main content in the center window, with a detailed menu covering all entries in the book on the left, and a chapter-specific table of contents on the right. The Canvas pages for each lab session will always link to the corresponding chapter in this book.</p>
-<p>A PDF version of this book can be downloaded <a href="">here</a>.</p>
-<p>If you have any questions follow the instructions on Canvas on how to <a href="">contact the module coordinator</a>.</p>
+<p>In our first week, we will get acquainted to with basic GIS data manipulation using the QGIS software.</p>
+<section id="ilos-covered" class="level2">
+<h2 class="anchored" data-anchor-id="ilos-covered">ILOs covered</h2>
+<ol type="1">
+<li><p>Understand the structure of spatial data and choose appropriate data types and models for storing and representing it;</p></li>
+<li><p>Obtain and assess the quality of spatial data from online and offline sources and produce new spatial data using computer and field methods;</p></li>
+<li><p>Create map visualisations that adhere to cartographic principles and can be easily and unambiguously interpreted by the non-specialist public;</p></li>
+</ol>
+</section>
+<section id="what-will-you-learn" class="level2">
+<h2 class="anchored" data-anchor-id="what-will-you-learn">What will you learn</h2>
+<p>For every week, we will list the main theoretical and practical learning goals. Use these as a ‘checklist’ to gauge your learning for each week. If you don’t feel confident you have learned any specific topic, then revisit the week’s material!</p>
+<section id="theoretical-knowledge-for-week-1" class="level3">
+<h3 class="anchored" data-anchor-id="theoretical-knowledge-for-week-1">Theoretical knowledge for Week 1:</h3>
+<ul>
+<li>What are Geomatics, GIS, Remote Sensing and associated terms and fields?</li>
+<li>What is spatial data?</li>
+<li>What is a datum?</li>
+<li>What is a map projection?</li>
+<li>What is a Coordinate Reference System?</li>
+</ul>
+</section>
+<section id="practical-knowledge" class="level3">
+<h3 class="anchored" data-anchor-id="practical-knowledge">Practical knowledge:</h3>
+<p><a href="lab_intro.html" class="quarto-xref"><span>1&nbsp; Lab 1: QGIS overview and file management</span></a></p>
+<ul>
+<li>How to launch QGIS</li>
+<li>How to load a spatial data file</li>
+<li>How to navigate the main QGIS interface</li>
+<li>How to identify features</li>
+<li>How to do basic measurements</li>
+<li>How to do basic styling of spatial data</li>
+<li>How to enter the layout editor</li>
+<li>How to make and export a simple map layout</li>
+</ul>
+<p><a href="lab_crs.html" class="quarto-xref"><span>2&nbsp; Lab 2: Coordinate Reference Systems</span></a></p>
+<ul>
+<li>How to check the Coordinate Reference System of a spatial file</li>
+<li>How to set the CRS of a QGIS project</li>
+<li>How to set the CRS of a spatial file when it is already known.</li>
+<li>How to reproject(convert) a spatial file from one CRS to another</li>
+<li>What are the main CRSs you should be familiar with.</li>
+</ul>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -636,9 +665,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./lab_crs.html" class="pagination-link" aria-label="Lab 2: Coordinate Reference Systems">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Lab 2: Coordinate Reference Systems</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./sec_w1_intro_toGIS.html" class="pagination-link" aria-label="Week 1 - Introduction to GIS">
+      <a href="./sec_w3_rasters.html" class="pagination-link" aria-label="Week 1 - Introduction to GIS">
         <span class="nav-page-text">Week 1 - Introduction to GIS</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
