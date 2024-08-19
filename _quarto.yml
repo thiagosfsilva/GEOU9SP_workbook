@@ -13,6 +13,9 @@ book:
       - lab_intro.qmd
       - lab_crs.qmd
   - part: sec_w2_vectors.qmd
+    chapters:
+      - lab_vectors_1.qmd
+      - lab_vectors_2.qmd
   - part: sec_w3_rasters.qmd
   - part: sec_w4_cartography.qmd
   - part: sec_w5_spatial_analysis_I.qmd

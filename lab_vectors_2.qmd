@@ -1,0 +1,16 @@
+# Lab 3: Working with Vectors {#sec-labvec2}
+
+The purpose of this lab is to 
+
+## Before you start!
+
+1. Go through the Week 2 preparatory session on Canvas, and watch the seminar recording if you have missed it. 
+
+<!-- end of list -->
+
+## Guided Exercise 1 - 
+
+### 
+
+
+(@) 

@@ -1,6 +1,6 @@
-# Week 1 - Introduction to GIS
+# Week 2 - Working with vector files
 
-In our first week, we will get acquainted to with basic GIS data manipulation using the QGIS software.
+In our second week, we will take a deeper dive into understanding GIS spatial vector data. This is the most common data model you will encounter while working with GIS, so make sure you take your time to understand it fully. 
 
 ## ILOs covered
 
@@ -8,37 +8,58 @@ In our first week, we will get acquainted to with basic GIS data manipulation us
 
 2.  Obtain and assess the quality of spatial data from online and offline sources and produce new spatial data using computer and field methods;
 
-3.  Create map visualisations that adhere to cartographic principles and can be easily and unambiguously interpreted by the non-specialist public;
+4.  Plan and execute GIS analytical steps to solve spatial problems successfully;
 
 ## What will you learn
 
-For every week, we will list the main theoretical and practical learning goals. Use these as a 'checklist' to gauge your learning for each week. If you don't feel confident you have learned any specific topic, then revisit the week's material!
+Use this list as a 'check-list' to gauge your learning for each week. If you don't feel confident you have learned any specific topic, then revisit the week's material!
 
-### Theoretical knowledge for Week 1:
+### Theoretical knowledge for Week 2:
 
-- What are Geomatics, GIS, Remote Sensing and associated terms and fields?
-- What is spatial data?
-- What is a datum?
-- What is a map projection?
-- What is a Coordinate Reference System?
+- What are data models vs data formats (file formats) vs data types (attribute types)?
+- What is the vector data model?
+    - How are vectors represented?
+    - What are the components of a vector file (geometry + attribute)?
+- What are the main vector file formats?
+- What are the main data types we use to represent attributes?
+- What kinds of data can we represent using vector data?
+- What kinds of questions can we answer using attributes?
+- What kinds of questions can we answer using geometries?
+- What kinds of questions can we answer using both (i.e. geometry-based attribute calculations). 
+
 
 ### Practical knowledge:
 
-[@sec-exoverview]
+[@sec-lab_vec1]
 
--   How to launch QGIS
--   How to load a spatial data file
--   How to navigate the main QGIS interface
--   How to identify features
--   How to do basic measurements
--   How to do basic styling of spatial data
--   How to enter the layout editor
--   How to make and export a simple map layout
+- How to identify a vector file format
+- How to load a vector file
+- How to use the identify tool to get information on the fly
+- The concept of ‘selecting’ a feature.
+- How to select features using the click tools in QGIS
+- How to access the attribute table
+- How to use the statistical summary tool 
+    - Global summaries vs summaries on selected data
+- How to select using simple queries (filter) on attributes 
+    - Boolean operators
+    - String based operators
+- How to use attributes to set symbology
+    - Single symbol
+    - Categorised
+    - Graduated
 
-[@sec-excrs]
+[@sec-lab_vec2]
 
--   How to check the Coordinate Reference System of a spatial file
--   How to set the CRS of a QGIS project
--   How to set the CRS of a spatial file when it is already known.
--   How to reproject(convert) a spatial file from one CRS to another
--   What are the main CRSs you should be familiar with.
+- How to do combined attribute queries (AND / OR) 
+- How to calculate new attributes
+    - Numeric attributes
+    - String attributes
+    - Geometry attributes	
+- How to convert data types if needed
+- Attribute selection vs attribute filtering
+- How to select based on location
+    - The different selection options
+    - Importance of CRS matching
+    - Select by location vs clipping
+-How to combine spatial and attribute selection
+    - Selecting within selections or saving intermediate results
