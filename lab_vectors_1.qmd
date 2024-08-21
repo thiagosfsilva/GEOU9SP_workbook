@@ -238,7 +238,9 @@ Yes, 1 Mile = 1.609 kilometres.
 
 Tip: if you want to rename an attribute, create a new one with the new name and just use the name of the old one as the expression on the `Field Calculator`. It will copy all values to the new attribute. Then remove the old one.
 
-Good job, we have now finished our first guided tour of vector attributes. We will revsit it in the next lab, when we also learn about geometry-based selections. 
+(@) We will continue working with this data in the next lab. If you want to keeo your project, this is the best way to do it: on your computer's file explorer, find the root folder for the project (`lab_3`, or whatever you have named it as). Then right click on it and select (on Windows) `Compress to Zip file`. That will create a new zipfile of the folder contents, with the same name as the folder. Then you can copy this zip file to your OneDrive folder or to an external drive. 
+
+Good job, we have now finished our first guided tour of vector attributes. We will revisit it in the next lab, when we also learn about geometry-based selections. 
 
 Make sure you  have a go at the independent exercise below, to make sure you feel comfortable with attribute selections, calculations and summaries. You will keep using these skills for the rest of the module (and your GIS life).
 
