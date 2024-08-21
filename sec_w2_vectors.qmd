@@ -1,4 +1,4 @@
-# Week 2 - Working with vector files
+# Week 2 - Vector data
 
 In our second week, we will take a deeper dive into understanding GIS spatial vector data. This is the most common data model you will encounter while working with GIS, so make sure you take your time to understand it fully. 
 

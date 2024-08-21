@@ -1,4 +1,4 @@
-# Week 1 - Introduction to GIS
+# Week 1 - Introduction
 
 In our first week, we will get acquainted to with basic GIS data manipulation using the QGIS software.
 

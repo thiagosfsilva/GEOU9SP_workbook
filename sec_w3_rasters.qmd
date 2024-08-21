@@ -1,4 +1,4 @@
-# Week 3 - Working with raster files
+# Week 3 - Raster data
 
 This week, we will...
 

@@ -1,4 +1,4 @@
-# Week 5 - Obtaining spatial data in the field
+# Week 10 - Obtaining spatial data in the field
 
 This week, we will 
 
