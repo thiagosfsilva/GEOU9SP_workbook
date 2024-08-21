@@ -1,10 +1,8 @@
-# Week 1 - Introduction to GIS
+# Week 4 - Making maps
 
-In our first week, we will get acquainted to with basic GIS data manipulation using the QGIS software.
+This week, we will 
 
 ## ILOs covered
-
-1.  Understand the structure of spatial data and choose appropriate data types and models for storing and representing it;
 
 2.  Obtain and assess the quality of spatial data from online and offline sources and produce new spatial data using computer and field methods;
 
@@ -14,31 +12,11 @@ In our first week, we will get acquainted to with basic GIS data manipulation us
 
 For every week, we will list the main theoretical and practical learning goals. Use these as a 'checklist' to gauge your learning for each week. If you don't feel confident you have learned any specific topic, then revisit the week's material!
 
-### Theoretical knowledge for Week 1:
-
-- What are Geomatics, GIS, Remote Sensing and associated terms and fields?
-- What is spatial data?
-- What is a datum?
-- What is a map projection?
-- What is a Coordinate Reference System?
+### Theoretical knowledge for Week 4:
 
 ### Practical knowledge:
 
-[@sec-exoverview]
+[@sec-exmaps1]
 
--   How to launch QGIS
--   How to load a spatial data file
--   How to navigate the main QGIS interface
--   How to identify features
--   How to do basic measurements
--   How to do basic styling of spatial data
--   How to enter the layout editor
--   How to make and export a simple map layout
+[@sec-exmaps2]
 
-[@sec-excrs]
-
--   How to check the Coordinate Reference System of a spatial file
--   How to set the CRS of a QGIS project
--   How to set the CRS of a spatial file when it is already known.
--   How to reproject(convert) a spatial file from one CRS to another
--   What are the main CRSs you should be familiar with.

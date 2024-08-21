@@ -8,6 +8,8 @@ In our second week, we will take a deeper dive into understanding GIS spatial ve
 
 2.  Obtain and assess the quality of spatial data from online and offline sources and produce new spatial data using computer and field methods;
 
+3.  Create map visualisations that adhere to cartographic principles and can be easily and unambiguously interpreted by the non-specialist public;
+
 4.  Plan and execute GIS analytical steps to solve spatial problems successfully;
 
 ## What will you learn

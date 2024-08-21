@@ -1,6 +1,6 @@
-# Week 1 - Introduction to GIS
+# Week 3 - Working with raster files
 
-In our first week, we will get acquainted to with basic GIS data manipulation using the QGIS software.
+This week, we will...
 
 ## ILOs covered
 
@@ -10,35 +10,18 @@ In our first week, we will get acquainted to with basic GIS data manipulation us
 
 3.  Create map visualisations that adhere to cartographic principles and can be easily and unambiguously interpreted by the non-specialist public;
 
+4.  Plan and execute GIS analytical steps to solve spatial problems successfully;
+
 ## What will you learn
 
 For every week, we will list the main theoretical and practical learning goals. Use these as a 'checklist' to gauge your learning for each week. If you don't feel confident you have learned any specific topic, then revisit the week's material!
 
-### Theoretical knowledge for Week 1:
-
-- What are Geomatics, GIS, Remote Sensing and associated terms and fields?
-- What is spatial data?
-- What is a datum?
-- What is a map projection?
-- What is a Coordinate Reference System?
+### Theoretical knowledge for Week 3:
 
 ### Practical knowledge:
 
-[@sec-exoverview]
+[@sec-exraster1]
 
--   How to launch QGIS
--   How to load a spatial data file
--   How to navigate the main QGIS interface
--   How to identify features
--   How to do basic measurements
--   How to do basic styling of spatial data
--   How to enter the layout editor
--   How to make and export a simple map layout
+[@sec-exraster2]
 
-[@sec-excrs]
 
--   How to check the Coordinate Reference System of a spatial file
--   How to set the CRS of a QGIS project
--   How to set the CRS of a spatial file when it is already known.
--   How to reproject(convert) a spatial file from one CRS to another
--   What are the main CRSs you should be familiar with.

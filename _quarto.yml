@@ -21,8 +21,9 @@ book:
   - part: sec_w5_spatial_analysis_I.qmd
     chapters:
       - lab_geoprocessing.qmd
-
-bibliography: references.bib
+  - part: sec_w6_spatial_analysis_II.qmd
+  - part: sec_w8_spatial_analysis_III.qmd
+  - part: sec_w10_gnss.qmd
 
 format:
   html:
