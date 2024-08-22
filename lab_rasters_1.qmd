@@ -1,0 +1,303 @@
+# Lab 5: Working with raster data {#sec-labvec1}
+
+So far, we have been working within the realm of vector data: beautiful topological combinations of vertices and lines to represent the complexity of the Earth’s surface. But there are plenty of situations where vectors are not the best choice; any information that varies gradually and continuously over the surface can be better represented by a raster.
+
+You know rasters well - any digital image is a raster. While vectors connect dots with lines, rasters are grid (i.e. a matrix) of numbers, called *pixels*. The numeric value of each pixel can be used the indicate a colour (like on digital photos), or can actually represent a physical quantity, such as temperature or elevation. 
+
+Raster files can contain multiple 'images' within them, which call *channels* or *bands*. Digital photos for example, actually contain three bands: one specifying the amount of red colour per pixel, one for the green colour, and one for the blue colour. When you look at a photo you are seeing a *color composition* mixing the amounts of the three primary colours according to the information help by each pixel. 
+
+
+![Source: https://doi.org/10.5772/63028](https://d3i71xaburhd42.cloudfront.net/205876806bc8715da74adc23a0ad78090c73734f/4-Figure3-1.png)
+
+
+For GIS data, multiple raster bands can be thought as vector attributes -  each band will hold the values of a specific variable (i.e. one band for temperature, and one for humidity). In fact, it may help to frame rasters in terms of their vector equivalents:
+
+| |Vector	|Raster|
+|-|-|-|
+| Data variables               | Vector Attributes |	Raster Bands |
+| Data values	               | Attribute values |	Pixel values |
+| Select ranges of data values | `Select by expression` |	`Raster calculator` and/or `Mask`|
+| Calculate new variables      | `Field Calculator` |	`Raster Calculator` |
+| Calculate feature areas      | `Field Calculator` (`$area`) |	`Raster layer unique values` |
+| Select by spatial location   | `Select By Location` (Vec > Vec) |	Extract Raster Values (Points > Raster) |
+|                              |                                  |Zonal Statistics (Polygons > Raster) |
+|                              |                                  |Zonal Statistics (Raster > Raster) |
+
+
+We will cover most of the above this week, and then cover how to extract values from raster based on other layers on Week 6. For today, we will learn how to inspect and style raster data, and also how to do some mathematical operations among raster layers using the raster equivalent of the `Field Calculator` - the `Raster calculator`.
+
+## Before you start!
+
+1. Go through the Week 3 preparatory session on Canvas, and watch the seminar recording if you have missed it. 
+
+## Guided Exercise 1 - Opening and inspecting raster data
+
+(@) For this exercise we will look at three different raster layers. The data has been pre-packaged and can be [downloaded here](https://stir-my.sharepoint.com/:u:/g/personal/ala2_stir_ac_uk/ESim8eCFo_ZCkZ4DQJ6eKpcBSJQSWHQErdPpkgcktwrXtg?e=5eG27g). It includes the following datasets:
+
+- UK SRTM: This is a single-band raster containing data from the [Shuttle Radar Topography Mission (SRTM)] (https://en.wikipedia.org/wiki/Shuttle_Radar_Topography_Mission), a global dataset of surface elevation. The data can be obtained from a variety of sources online. 
+
+- UK Bioclim: The BIOCLIM suite of climate data has been developed to support biodiversity studies and species distribution modelling. It is a single multiband raster file. [Read this page](https://www.worldclim.org/data/bioclim.html) for a description of which variable each band represents.
+
+- CORINE land cover: CORINE is a [EU-wide land cover map](https://land.copernicus.eu/en/products/corine-land-cover) that is produced by the Copernicus Space Program. The pixel values are numerical codes that specify the different land cover classes. A description of each land cover number is given [here](https://land.copernicus.eu/content/corine-land-cover-nomenclature-guidelines/html/). 
+
+- UK administrative boundaries from the [GADM website](https://gadm.org/), in geopackage vector file format. 
+
+(@) Download the required data and organise it as you have learned. Create a new QGIS project and add the `UK_SRTM.tif`, `UK_Bioclim.tif` and `CLC2018_CLC2018_V2018_20_UKclip.tif` raster files to your project. All files are in [*GeoTIFF*'](https://en.wikipedia.org/wiki/GeoTIFF) format, which is the most common and standard spatial raster file format. 
+
+(@) For each of the raster layers, right-click on the layer name and go to `Properties > Information`, then:
+
+::: {.callout-important title="Stop and Think"}
+a) What is the *data model* of these files? 
+
+b) What is the *file format* of these files?
+
+c) What are the *data types* of each raster file? Why is that important?
+ 
+d) What are the CRSs of each dataset you have?
+
+e) What are the dimensions (rows, columns) of each raster dataset?
+
+f) How many *bands* does each raster dataset have?
+
+g) What are the *pixel sizes* (spatial resolution) of each raster dataset?
+:::
+
+::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
+a) raster (vector for the boundaries)
+
+b) GeoTIFF for the rasters, geopackage for the vector
+
+c) The data types can be found when looking at `Properties > Information` for a raster layer. The SRTM and CORINE datasets are sixteen bit signed integer (INT16), the BIOCLIM dataset is a 32-but floating point raster. Raster data types are important as they determine the range and precision of the data that can be stored in the raster, and also impact the size of the raster file. For the same number of rows, columns and bandas, a 32-bit raster is twice as large as a 16-bit raster. 
+
+d) GADM, SRTM, BIOCLIM: EPSG 4236 (WGS-84); CORINE: EPSG3035 (ETRS89 / Europe LAEA)
+
+e) These are also found in `Properties > Information`, as `Width` (columns) and `Height`(rows) or in `Dimensions`. SRTM: 16355 cols x 12036 rows; CORINE: 10473 cols x 12261 rows; BIOCLIM: 1471 cols x 1084 rows.
+
+f)  These are also found in `Properties > Information`, as a list of bands, or in `Dimensions`. SRTM: 1 band, CORINE 1 band; BIOCLIM: 19 bands.
+
+g)  These are also found in `Properties > Information` in `Pixel Size`. SRTM: 0.0008084837557075693617 degrees; CORINE: 100m; BIOCLIM: 0.008983152841195215371 degrees. 
+:::
+
+## Guided Exercise 2 - Reprojecting raster data
+
+As we learned in week 1, the UK looks “squished” because the data is projected using only the WGS-84 datum and geographic coordinates (EPSG:4236). Although data in geographic coordinates is often referred to as “unprojected,” this is not actually true (you are looking at it on a flat screen, right?). For these “unprojected” datasets, what most GIS software do is to simply use a linear function to convert latitudes and longitudes in degrees to x and y values on your screen. This projection can be referred to as Plate Carrée or Equirectangular projection, which has a heavy amount of distortion towards the poles:
+
+![](images/lab_5/lab5_fig1_Equirectangular_projection_SW.jpg)
+
+(@) To reproject raster data, go to `Raster > Projections > Warp (Reproject...)`. Select your SRTM layer as the Input Layer, and the EPSG: `27700 - OSGB 1936 / British National Grid` as the `Target CRS`. (If you don't see it as an option, click on the small button to the right to bring up the CRS selection window). Set the `Output file resolution...` to `90` (this will be in meters, as meters are the units of the BNG projection). Leave everything else as default. Then click on the `...` button to pick an appropriate folder location. Name uour file `UK_SRTM_BG.tif`.  `Run` the algorithm and then `Close` when finished. 
+
+(@) Repeat the process for the Bioclim layer (use a cell size of 1000m) and the CORINE land cover map (cell size of 100m). These cell sizes are the meter equivalent of the degree pixel sizes the data currently has. Make sure you add the `_BG` suffix to the new file names to keep track of what has changed from one file to the other.  
+
+(@) If it seems nothing has really changed, remember that QGIS does reprojections “on the fly” to make sure data on the screen are all aligned to the project CRS. So as you learned in Week 1, change the project CRS to EPSG:27700 as well. Now everything should look good. 
+
+(@) Remove the original layers from the project and keep only the reprojected ones, then save your project. 
+
+## Guided Exercise 3 - Masking rasters using vectors
+
+We often want to remove portions (specific cells) of a raster, a process called *masking*. For example, some of our datasets include the Republic of Ireland and bits of mainland Europe, and some datasets include the Shetland Islands, while others don't. Let use the UK boundaries from the GADM dataset to mask our data to the Island of Great Britain (Scotland, England and Wales) only. 
+
+(@) First add the GADm data (`gadm36_GBR.gpkg`) to your project. This geopackage holds multiple layers for the different levels of admin boundaries. You can just add the level 0 layer, which gets the UK as a whole. 
+
+::: {.callout-important title="Stop and Think"}
+Why did you get a warning window when you added the layer to the project?
+:::
+
+::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
+Because this layer has a different CRS than the project, and QGIS it is asking you how to deal with it. 
+:::
+
+As we learned on Week 1, trying to do clipping (and masking) operations between layers with mismatched CRSs gives us wrong results. So before you do anything, reproject the UK boundaries layer to EPSG 27700. You also need to extract the main British Island from the rest of the dataset. Turns out there is a quick way to do both at once, but first we need to deal with a little issue with the vector layer:
+
+(@) Open the Attribute Table of the UK boundaries layer. How many features does it have? 
+
+This is what is called a `multipart` polygon - a set of disjoint polygons all treated as a single feature. Before we can use the layer, we need to split the individual polygons apart to be able to select the main island only:
+
+(@) Go to `Vector > Geometry Tools > Multipart to Singleparts`, and select the GADM layer. You can leave it as a temporary layer since we will only export one polygon for it in the next step. A new temp layer called `Single parts` will be created. Inspect its Attribute Table. 
+
+(@) Now use the feature selection tool (![](https://docs.qgis.org/3.34/en/_images/mActionSelectRectangle.png)) to select Great Britain only, and then right-click on the Single Part layer name  and choose  `Export > Save selected features as...`. Pick a folder location and name the file `GB_Island.shp`. Before you click on OK, however, change the `CRS` drop-down menu to EPSG:27000. That is it, QGIS will now reproject the layer before saving it! Click `OK`to save, and then remove the original GADM and the temp layer from your project to keep things tidy. Save your project.
+
+(@) Double check what is the CRS of the new `GB_island` layer you have created.
+
+(@) You are now ready to mask the raster data. Go to `Raster > Extraction > Clip Raster by Mask Layer...`. As `Input layer`, select the SRTM layer, and as `Mask layer`, select the GB island layer. Then on the option `Assign a specific nodata value to output bands`, enter the number `-32768`. *Make sure you include the minus sign*! Leave the other options as default, but do check both the `Match the extent of the clipped raster to the extent of the mask layer` and `Keep resolution of input raster` options. Pick a folder and name your file `UK_SRTM_BG_GBmask.tif`. Now we can know at a glance that this is the SRTM data, reprojected to British Grid and masked to Great Britain. 
+
+::: {.callout-important title="Stop and Think"}
+a) Why did we pick a value of -999 for 'nodata'? 
+
+b) Why should we check the `Match the extent...` and `Keep Resolution..` boxes?
+:::
+
+::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
+a) Since raster layers are grids (matrices) they must always be rectangular in shape. So when masking a raster using an irregular shape, the pixels outside the polygon will receive a value indicating *nodata*, but they will still exist. The default nodata value for QGIS is zero, but since we are dealing with elevations, zero is still a valid elevation value, and we could even have areas inland that are at sea level or lower, and thus have an elevation of zero or below. We also know our data is a signed 16 bit integer, that can take values from -32,768 to +32,767. So we pick the most negative elevation number within this range, which also would never occur on land (-32768 meters) to use as nodata. 
+
+b) By selecting the `Match the extent of the clipped raster to the extent of the mask layer` option when masking, the extent of the raster rectangle will be just enough to cover the GB polygon. If we left that unchecked, QGIS would set the non GB pixels to 'nodata', but leave the raster with the original dimensions. That would be a waste of disk space. We also check `Keep resolution...` to make sure QGIS doesn;t change the pixel sizes to better 'fit' the rectangle to the extent. The spatial resolution of a raster file often has a reason to be, and we don't want to arbitrarily change that. 
+:::
+
+(@) Use the `Identify Features` tool (![](https://docs.qgis.org/3.34/en/_images/mActionIdentify.png)) to click on blank area of the masked SRTM layer (near the shore). Make sure you have the SRTM layer selected on the Layers panel before you click the tool. What pixel values do you get? -32768 or 'nodata'?
+
+(@) Now go to the `Properties > Transparency` tab of the SRTM raster layer, and uncheck the  `No data value -999` box. Look at your raster again, and probe the same areas with the `Identify Features` tool. Can you see now how the actual raster is still a rectangle, with the pixels outside the mask set to -32768? Before you proceed, go back and check the `No data -999` box again. 
+
+(@) Now repeat the masking for the CORINE and BIOCLIM layers. You can use the same nodata number for the  CORINE and BIOCLIM layers. the CORINE layer actually already has nodata defined as `-32768` so we just keep it. And for Bioclim, it is an unlikely value for any of the climatic variables, and because the climate data is a floating point number (decimal), it is almost impossible that a perfect value of -32768.000000 would exist in the data naturally. 
+
+(@) Remove the non-masked raster datasets from your project and save it. 
+
+(@) Now zoom in into any place on the coastline, and answer:
+
+::: {.callout-important title="Stop and Think"}
+Why don't the edges of each raster dataset line up perfectly?
+:::
+
+::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
+a) Again, this is a side effect from raster layers being grids. As each one has a different pixel size, the `decision` of which pixel is inside our outside the GB vector polygon will be different for each layer. Also, the coastline will always appear 'ragged' because we can't represent any detail smaller than a single pixel on a raster file - and the pixel grids of the three layers do not align because of the pixel sizes. 
+:::
+
+## Guided Exercise 4 - Styling raster data
+
+Just as with vector data, QGIS offers many options for the symbology of raster data. You will see some similarities between the symbology options for vectors and rasters, but also some differences because of the nature of each data model. 
+
+(@) Turn off all layers except the CORINE land cover, and then go to its `Properties > Symbology`. Note that the default `Render Type` for single-band rasters is `Singleband gray`. That means pixels are coloured by a shade of grey that is proportional to its numeric value, with higher values being closer to white. Change it to `Paletted / Unique Values`. Maintain the `Band 1` selection (there is only one band anyway) and `Random Colors` options, and then click on `Classify`. Apply the result to your raster and visualise it.
+
+::: {.callout-important title="Stop and Think"}
+a) How many categories are there on this raster?
+
+b) What are the pixel values representing?
+
+c) What would be the vector symbology equivalent of `Paletted / Unique Values`?
+:::
+
+::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
+a) 36 categories (unique pixel values)
+
+b) Each pixel value is a numerical code that indicates a land cover type.
+
+c) the `Categorized` option.
+:::
+
+WHoa, there are a lot of classes, and the random colours selection picked colours that are very similar to one another for some of the classes. Fortunately for us, the data producers of CORINE include a colour map file as part of the metadata. Let us use it!
+
+(@) Back on the `Properties > Symbology` window, click on the `...` button to the right of `Delete All` and choose `Load Color Map from File...`. Within the CORINE files you unzipped, find and select the metadata file named `CLC2018_CLC2018_V2018_20_QGIS.txt`. `Apply`and then click `OK`. Not only we get the colours selected by the CORIEN mapping team, but also all the proper class names! That was nice!
+
+(@) Now let us have a look at the BIOCLIM dataset. First, read the metadata included with the data files (`Bioclim_metadata.txt`) to understand what each band of this dataset represents. Then turn on the BIOLCIM layer and turn the remaining layers off. 
+
+::: {.callout-important title="Stop and Think"}
+Why does the BIOCLIM layer appears to be coloured?
+:::
+
+::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
+When QGIS opens a multiband, single file raster, it always thinks that the file is an image, and thus it automatically assigns the first three bands of the file to the Red, Green, and Blue colour channels. We will look at raster images in the next session, but this color composition clearly doesn't make sense for our climate data, so let us change it.  
+:::
+
+
+(@) Go to the `Properties >  Symbology` window for the BIOCLIM dataset. Notice the default symbology choice of `Multiband color`. Since each band of our data represents a different climatic variable, with  continuous numeric values (not categories or classes), we need to pick the `Single band - pseudocolor` option. Choose the `bio1` band, and for the colour ramp, click on the down-arrow button to the right of the colour palette button, and select the `magma` colour ramp. Classify the existing values and then `Apply` and click `OK`. How does the layer look like now? 
+
+::: {.callout-important title="Stop and Think"}
+a) What would be the vector symbology equivalent of `Single band  - pseudocolor`?
+
+b) What climatic variable is "bio01" representing?
+
+c) What units are the minimum and maximum values shown on the colour scale?
+
+d) Why such a strange choice for the units?
+:::
+
+::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
+a) The `Graduated` option.
+
+b) The metadata file tells us it is Annual Mean Temperature.
+
+c) The metadata file also tells us it is °C * 10 (deegrees celsius times ten)
+
+d) This is an old `trick` to reduce file sizes while keeping some precision. Let's say the data creators wanted to record temperatures with one decimal place of precision. If they stored the data as a floating point, we would need 32-bit files. But if we consider that mean annual temperatures on Earth will easily be contained in the range of -100 to +100 degrees Celsius, we could instead multiply all numbers by ten, and store them as 16-bit integers instead, cutting file sizes in half. For example, a temperature of 32.7°C becomes a pixel value of 327. 
+:::
+
+(@) Explore some of the other climatic variables contained in the BIOCLIM dataset, using different colour ramps.
+
+Finally, let’s work on the symbology for the SRTM data. For that, we will take advantage of some nice scientific colour palettes that are built-in on QGIS. We will talk aboout what makes these palettes special on Week 4, but let us just use them now.  
+
+(@) On the `Properties > Symbology` window of the SRTM layer, choose the `Singleband Pseudocolor` option, and then on th downarrow button besides the `Color Ramp` option, select Create New Color Ramp. On the small options window that comes up, select Catalog:cpt-city.
+
+(@) Once the catalogue window opens, go to the `Topography` list and select the `cd-a` palette. Then manually enter `Min` and  `Max` values, using `0` and `900` respectively. `Apply` and see how it changes. But before clicking on `OK`, go to the `Transparency` tab and drag the slider at the top to around `60%`. That will let other layers under it to show through and blend with the colours.
+
+(@) Right-click on the SRTM layer name and select `Duplicate layer`. This option creates a 'virtual' copy of the layer - it will still point to the same file on disk, but you are able to select a different symbology for it. 
+
+(@)Now, on the `Properties > Symbology` of the copied layer, change the render type to `Hillshade`. Leave everything as default, then `Apply` and close the window. Make sure both the coloured and the hillshade SRTM layers are turned on on the Layer Panel, and that the hillshade layer is immediately under the coloured SRTM layer. Zoom in and turn each layer on and off in turn to understand how this neat '3-D' visual effect works. 
+
+
+::: {.callout-important title="Stop and Think"}
+What does the `hillshade` render style does? 
+:::
+
+::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
+It uses the elevation information to simulate how different areas of the terrain would be illuminated or shaded by sunlight coming from a certain sun elevation and azimuth (direction). 
+:::
+
+## Guided Exercise 5 - Terrain Calculations
+
+One of the most common raster datasets used in GIS are Digital Elevation Models or DEMS. The structure of raster data is particularly well suited to represent terrain, in its continuous and highly variable nature. Moreover, terrain and elevation data is often a key variable in GIS analysis, as it directly influences most biological, geological and anthropic processes. 
+
+For this reason, a few specific terrain analysis tools that are always included in GIS software, and used often. These are the methods to calculate [slopes](https://en.wikipedia.org/wiki/Grade_(slope))(a.k.a grades, gradients), [aspects](https://en.wikipedia.org/wiki/Aspect_(geography)) and [viewsheds](https://en.wikipedia.org/wiki/Viewshed), using DEMs as the base data. 
+
+
+### Plugins
+
+In this exercise, you will also learn about one of the most powerful aspects of QGIS: *plugins*. As you may know, QGIS is a free and open-source software, meaning anyone can contribute with the code. QGIS also makes it easy for it's functionality to be extended via plugins, separate little 'apps' that add new tools and capabilities to the main QGIS app. For this exercise, we will install and use two official QGIS plugins, the `QuickMapServices` and `Visibility Analysis`.
+
+(@) Head to the menu `Plugins > Manage and Install Plugins`. You will se a window like the one below. Then select the `Not Installed` tab, and then on the search bar search for `QuickMapServices`. Select it on the left panel, and then click on `Install Plugin`. Then repeat this process to find and install the `Visibility Analysis` plugin. 
+
+![](images/lab_5/lab5_fig2_quickmap.jpg)
+
+(@) The `QuickMapServices` plugin will add a new menu entry: `Web > QuickMapServices`. Once yo8u click on it, you will see a list of web map services - but there is more. Go to `Web > QuickMapServices > Settings`, and then click on the `More services` tab. Then read the warning and click on `Get contributed pack`, and once you get a confirmation message, click on `Save` and exit the window.
+
+![](images/lab_5/lab5_fig3_moremaps.jpg)
+
+(@) Now go back to `Web > QuickMapServices > Settings`, and you will see a list of providers. For example, go to the `Web > QuickMapServices > Google` option and add the `Google Hybrid` dataset directly as layer in your project! These layers will require you to be connected to Internet to work, and they won;t give you many symbology options, but they are very handy to help in navigation when working on a project. 
+
+(@) Take some time to explore the layers available in this plugin.
+
+### Masking by area
+
+Earlier today you have learned how to use a vector polygon to mask a raster layer. But sometimes we just want to 'freeform' cut a piece of a raster, without the need to be too precise. In that case, we can use the `Clip Raster by Extent` function.
+
+(@) Make sure you `Google Hybrid` web layer is visible, and navigate until you frame the 'Stirling-Glasgow-Edinburgh triangle' in your canvas, like the image below:
+
+![](images/lab_5/lab5_fig4_stirglaedi.jpg)
+(@) Then go to `Raster > Extract > Clip Raster by Extent...`. Pick the SRTM layer as `Input layer`, and then for `Clipping Extent`, click on the small button to the right with a small arrow figure. That will set the `cut area` to be exactly what you are viewing on the canvas. But there are other options. If you click on the small down-arrow button to the right, you can use the extent (bounding box) of another layer, as well some more advanced options. You can also click on `Draw on map canvas` to be allowed to drag a rectangle over your map canvas that sets the extent of the cut. 
+
+(@) Mask the SRTM layer to the region including Stirling, Glasgow and Edinburgh, either by setting you map canvas zoom and using it as extent, or by clicking and dragging to set the extent. Then pick a proper folder and save it as `UK_SRTM_BG_centralscotland.tif`. You should end up with something like this (but your extent will likely vary):
+
+![](images/lab_5/lab5_fig5_centralscot.jpg)
+
+### Calculating slope and aspect
+
+We can now use our Central Scotland subset to demonstrate how to calculate slope and aspect. 
+
+(@) Go to `Raster > Analysis > Slope...`, and pick the Central Scotland DEM you created as `Input Layer`. Leave everything else as default and then pick a proper folder to save the new file as `UK_SRTM_BG_centralscot_slope.tif`. Then `Run` and `Close`. You will get a new raster layer, where the pixel values indicate the steepness of each pixel, in degrees. Steep slopes will appear as light grey/white, and flat areas will appear dark: 
+
+![](images/lab_5/lab5_fig6_slope.jpg)
+
+(@) Now go to `Raster > Analysis > Aspect...`, and again pick the Central Scotland DEM you created as `Input Layer`. Leave everything else as default and pick a folder to save the new file as `UK_SRTM_BG_centralscot_aspect.tif`. `Run` and `Close`. This layer will now tell you the cardinal direction, in degrees (North = 0/360),, that each slope is facing. 
+
+(@) Use the `Indentify Features...` tool to explore some of the aspect and slope values you have calculated. 
+
+### Viewshed analysis
+
+Finally, let us calculate a 'viewshed' - raster indicating which points in the Earth surface are visible from a given point, considering the topography. Viewshed analysis is often used for landscape planning - for example, determining from where a wind power turbine may be visible or not.
+
+The `Visibility Analysis` plugin adds some option to the `Processing panel` of QGIS. To see it, click on the `Processing Toolbox` button on the main QGIS toolbar (![](https://docs.qgis.org/3.34/en/_images/processingAlgorithm.png)), and the panel will open to the right. This panel houses many, many more GIS functions beyond those available on the `Vector` and `Raster` menus, and we will use it often during the last weeks of the module.
+
+![](images/lab_5/lab5_fig7_proc.jpg)
+
+(@) Load the `observation_point,shp` file you have downloaded as part of the lab data.  
+
+
+(@) Open the `Visibility Analysis` heading on the `Processing Toolbox`, and then double click on `Create Viewpoints`. A new window will open. On this window, you need to pick the `Observer Location`, which will be the Observation point layer, and then the DEM, which will be the Central Scotland SRTM (make sure you *don't* pick the slope or aspect layers by mistake!). 
+
+(@) There are many options that you don't need to worry about for now, but three warrant some explanation: `Radius of Analysis` specifies how far you want to calculate the viewshed - it is an expensive computation so it may make sense to limit it. Let's use 20,000 meters for our analysis. Then pat attention to `Observer Height` and `Target Height`. They determine what is the height of the observation being made (above the elevation of the observation point), and also what would be the height of the target. So again, if you are wondering if a wind power turbine would be visible from that location, you should add the height of the turbine to the `Target Height` field. You can leave these options at 1.6m and zero, respectively. Then pick a folder and save the viewpoint as `viewpoint.shp`, and `Run` the tool.
+
+(@) Now go back to the `Processing Toolbox` and double click on `Viewshed`. Pick the `Viewpoint` layer as `Observer Location`, and the Central Scotland DEM as `Digital Elevation Model`. Leave everything else as default, and pick a folder to save your viewshed analysis as `viewshed.tif` (it wil be a raster file).
+
+You should get an output similar to the figure below, where white pixels (value `1`) indicate 'visible' and black pixels (value `0`) indicate "not visible'. 
+
+![](images/lab_5/lab5_fig8_viewshed.jpg)
+Congratulations, you reached the end of Lab 5. You should now understand the raster data model and how to mask it and style it. You have also learned some common terrain analysis tools. In the next lab, we will learn about the `Raster Calculator`, which fulfils the role of both the `Field Calculator` and `Select by Attribute` for rasters. 
+
+

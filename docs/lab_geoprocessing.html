@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>GEOU9SP GIS Workbook - 5&nbsp; Lab 9: Geoprocessing tools</title>
+<title>GEOU9SP GIS Workbook - 7&nbsp; Lab 9: Geoprocessing tools</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -110,7 +110,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./sec_w5_spatial_analysis_I.html">Week 5 - Spatial analysis I</a></li><li class="breadcrumb-item"><a href="./lab_geoprocessing.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Lab 9: Geoprocessing tools</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./sec_w5_spatial_analysis_I.html">Week 5 - Spatial analysis I</a></li><li class="breadcrumb-item"><a href="./lab_geoprocessing.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Lab 9: Geoprocessing tools</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -188,8 +188,27 @@ window.Quarto = {
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text">Week 3 - Raster data</span></span>
+      <div class="sidebar-item-container"> 
+            <a href="./sec_w3_rasters.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 3 - Raster data</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lab_rasters_1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Lab 5: Working with raster data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lab_rasters_2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Lab 6: The Raster Calculator and other rastery bits</span></span></a>
+  </div>
+</li>
+      </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <span class="sidebar-item-text sidebar-link text-start">
@@ -207,7 +226,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./lab_geoprocessing.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Lab 9: Geoprocessing tools</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Lab 9: Geoprocessing tools</span></span></a>
   </div>
 </li>
       </ul>
@@ -234,11 +253,11 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#guided-exercise-assessing-children-access-to-schools" id="toc-guided-exercise-assessing-children-access-to-schools" class="nav-link active" data-scroll-target="#guided-exercise-assessing-children-access-to-schools"><span class="header-section-number">5.1</span> Guided Exercise: assessing children access to schools</a>
+  <li><a href="#guided-exercise-assessing-children-access-to-schools" id="toc-guided-exercise-assessing-children-access-to-schools" class="nav-link active" data-scroll-target="#guided-exercise-assessing-children-access-to-schools"><span class="header-section-number">7.1</span> Guided Exercise: assessing children access to schools</a>
   <ul class="collapse">
-  <li><a href="#obtaining-the-data" id="toc-obtaining-the-data" class="nav-link" data-scroll-target="#obtaining-the-data"><span class="header-section-number">5.1.1</span> Obtaining the data</a></li>
-  <li><a href="#preparing-the-data" id="toc-preparing-the-data" class="nav-link" data-scroll-target="#preparing-the-data"><span class="header-section-number">5.1.2</span> Preparing the data</a></li>
-  <li><a href="#answering-the-question" id="toc-answering-the-question" class="nav-link" data-scroll-target="#answering-the-question"><span class="header-section-number">5.1.3</span> Answering the question</a></li>
+  <li><a href="#obtaining-the-data" id="toc-obtaining-the-data" class="nav-link" data-scroll-target="#obtaining-the-data"><span class="header-section-number">7.1.1</span> Obtaining the data</a></li>
+  <li><a href="#preparing-the-data" id="toc-preparing-the-data" class="nav-link" data-scroll-target="#preparing-the-data"><span class="header-section-number">7.1.2</span> Preparing the data</a></li>
+  <li><a href="#answering-the-question" id="toc-answering-the-question" class="nav-link" data-scroll-target="#answering-the-question"><span class="header-section-number">7.1.3</span> Answering the question</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -246,9 +265,9 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./sec_w5_spatial_analysis_I.html">Week 5 - Spatial analysis I</a></li><li class="breadcrumb-item"><a href="./lab_geoprocessing.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Lab 9: Geoprocessing tools</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./sec_w5_spatial_analysis_I.html">Week 5 - Spatial analysis I</a></li><li class="breadcrumb-item"><a href="./lab_geoprocessing.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Lab 9: Geoprocessing tools</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Lab 9: Geoprocessing tools</span></h1>
+<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Lab 9: Geoprocessing tools</span></h1>
 </div>
 
 
@@ -265,11 +284,11 @@ window.Quarto = {
 </header>
 
 
-<section id="guided-exercise-assessing-children-access-to-schools" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="guided-exercise-assessing-children-access-to-schools"><span class="header-section-number">5.1</span> Guided Exercise: assessing children access to schools</h2>
+<section id="guided-exercise-assessing-children-access-to-schools" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="guided-exercise-assessing-children-access-to-schools"><span class="header-section-number">7.1</span> Guided Exercise: assessing children access to schools</h2>
 <p>You are a GIS analyst at the Stirling council, and you have been asked to perform an analysis regarding children access to schools. Your manager has indicated which data sources you should use, and they want you to answer <strong>how many children within the relevant age range live within less than 1km, between 1km and 2km, and further than 2km of <em>any</em> primary (4 to 10 years old) and secondary (11 to 17 years old) school. You have been instructed to use the census data at the most detailed level (Output Area, OA), and to limit your analysis to the OAs and schools that are within Stirling Council Area limits</strong>. You should report the results as a table.</p>
-<section id="obtaining-the-data" class="level3" data-number="5.1.1">
-<h3 data-number="5.1.1" class="anchored" data-anchor-id="obtaining-the-data"><span class="header-section-number">5.1.1</span> Obtaining the data</h3>
+<section id="obtaining-the-data" class="level3" data-number="7.1.1">
+<h3 data-number="7.1.1" class="anchored" data-anchor-id="obtaining-the-data"><span class="header-section-number">7.1.1</span> Obtaining the data</h3>
 <ol class="example" type="1">
 <li>The first piece of data needed for this exercise is of course the limits of the Stirling Council Area. The official administrative boundary data for the UK is contained within the Ordnance Survey Boundary Line dataset. It can be downloaded from the <a href="https://osdatahub.os.uk/">Ordnance Survey Open Data Hub</a> or from Digimap, but the files cover all of the UK, and thus are a very large download. To save precious lab time, we have already isolated the Stirling Council boundary as a separate file that you can download here. You are welcome!</li>
 </ol>
@@ -336,8 +355,8 @@ Click for answer
 </div>
 </div>
 </section>
-<section id="preparing-the-data" class="level3" data-number="5.1.2">
-<h3 data-number="5.1.2" class="anchored" data-anchor-id="preparing-the-data"><span class="header-section-number">5.1.2</span> Preparing the data</h3>
+<section id="preparing-the-data" class="level3" data-number="7.1.2">
+<h3 data-number="7.1.2" class="anchored" data-anchor-id="preparing-the-data"><span class="header-section-number">7.1.2</span> Preparing the data</h3>
 <p>You may have noticed that your Digimap census data download includes many OA polygons that are outside of Stirling Council. This is because of a (sadly) very common problem with spatial data from different sources - the census output areas (OAs) do not perfectly line up with the administrative boundaries of the council. So when the Digimap interface tries to determine which OAs overlap with Stirling, we get more data than we need.</p>
 <ol start="6" class="example" type="1">
 <li>Set the symbology of the Stirling boundaries to a red outline without fill. Then make sure this layer is on top of the census layer. Then zoom in very close to the Stirling boundary. You will see they are offset by about 1.5m:</li>
@@ -416,8 +435,8 @@ Click for answer
 <li><p>Save the selection as a new layer by right clicking on the census layer name and selecting <code>Export &gt; Save Selected Features As..</code>. Once this new census layer is added to your project, remove the original one to avoid confusion.</p></li>
 </ol>
 </section>
-<section id="answering-the-question" class="level3" data-number="5.1.3">
-<h3 data-number="5.1.3" class="anchored" data-anchor-id="answering-the-question"><span class="header-section-number">5.1.3</span> Answering the question</h3>
+<section id="answering-the-question" class="level3" data-number="7.1.3">
+<h3 data-number="7.1.3" class="anchored" data-anchor-id="answering-the-question"><span class="header-section-number">7.1.3</span> Answering the question</h3>
 <p>Now we can answer the actual study question. As a reminder, it is <strong>how many children in the relevant age range live within less than 1km, between 1km and 2km, and further than 2km of <em>any</em> primary (4 to 10 years old) and secondary (11 to 17 years old) school?</strong>. You will need to use some of the Geoprocessing tools you just learned to answer that, as well as tools from previous weeks.</p>
 <div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
 <div class="callout-header d-flex align-content-center">

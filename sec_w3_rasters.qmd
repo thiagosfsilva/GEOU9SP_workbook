@@ -1,6 +1,6 @@
 # Week 3 - Raster data
 
-This week, we will...
+For our third week, we will learn about the second most common data model for spatial data: raster files. While vectors are good at representing separated and/or well-defined individual regions, rasters excel at representing gradual, continuous data such as surface temperatures or elevations. 
 
 ## ILOs covered
 

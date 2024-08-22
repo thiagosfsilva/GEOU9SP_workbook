@@ -1,0 +1,1177 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.554">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>GEOU9SP GIS Workbook - 5&nbsp; Lab 5: Working with raster data</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./lab_rasters_2.html" rel="next">
+<link href="./sec_w3_rasters.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./sec_w3_rasters.html">Week 3 - Raster data</a></li><li class="breadcrumb-item"><a href="./lab_rasters_1.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Lab 5: Working with raster data</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">GEOU9SP GIS Workbook</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome!</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./sec_w1_intro_toGIS.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1 - Introduction</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lab_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Lab 1: QGIS overview and file management</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lab_crs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Lab 2: Coordinate Reference Systems</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./sec_w2_vectors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2 - Vector data</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lab_vectors_1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Lab 3: Working with vector attributes</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lab_vectors_2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Lab 4: Working with vector geometries</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./sec_w3_rasters.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 3 - Raster data</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lab_rasters_1.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Lab 5: Working with raster data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lab_rasters_2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Lab 6: The Raster Calculator and other rastery bits</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Week 4 - Making maps</span></span>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./sec_w5_spatial_analysis_I.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 5 - Spatial analysis I</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lab_geoprocessing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Lab 9: Geoprocessing tools</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Week 6 - Spatial analysis II</span></span>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Week 8 - Spatial analysis III</span></span>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Week 10 - Obtaining spatial data in the field</span></span>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#before-you-start" id="toc-before-you-start" class="nav-link active" data-scroll-target="#before-you-start"><span class="header-section-number">5.1</span> Before you start!</a></li>
+  <li><a href="#guided-exercise-1---opening-and-inspecting-raster-data" id="toc-guided-exercise-1---opening-and-inspecting-raster-data" class="nav-link" data-scroll-target="#guided-exercise-1---opening-and-inspecting-raster-data"><span class="header-section-number">5.2</span> Guided Exercise 1 - Opening and inspecting raster data</a></li>
+  <li><a href="#guided-exercise-2---reprojecting-raster-data" id="toc-guided-exercise-2---reprojecting-raster-data" class="nav-link" data-scroll-target="#guided-exercise-2---reprojecting-raster-data"><span class="header-section-number">5.3</span> Guided Exercise 2 - Reprojecting raster data</a></li>
+  <li><a href="#guided-exercise-3---masking-rasters-using-vectors" id="toc-guided-exercise-3---masking-rasters-using-vectors" class="nav-link" data-scroll-target="#guided-exercise-3---masking-rasters-using-vectors"><span class="header-section-number">5.4</span> Guided Exercise 3 - Masking rasters using vectors</a></li>
+  <li><a href="#guided-exercise-4---styling-raster-data" id="toc-guided-exercise-4---styling-raster-data" class="nav-link" data-scroll-target="#guided-exercise-4---styling-raster-data"><span class="header-section-number">5.5</span> Guided Exercise 4 - Styling raster data</a></li>
+  <li><a href="#guided-exercise-5---terrain-calculations" id="toc-guided-exercise-5---terrain-calculations" class="nav-link" data-scroll-target="#guided-exercise-5---terrain-calculations"><span class="header-section-number">5.6</span> Guided Exercise 5 - Terrain Calculations</a>
+  <ul class="collapse">
+  <li><a href="#plugins" id="toc-plugins" class="nav-link" data-scroll-target="#plugins"><span class="header-section-number">5.6.1</span> Plugins</a></li>
+  <li><a href="#masking-by-area" id="toc-masking-by-area" class="nav-link" data-scroll-target="#masking-by-area"><span class="header-section-number">5.6.2</span> Masking by area</a></li>
+  <li><a href="#calculating-slope-and-aspect" id="toc-calculating-slope-and-aspect" class="nav-link" data-scroll-target="#calculating-slope-and-aspect"><span class="header-section-number">5.6.3</span> Calculating slope and aspect</a></li>
+  <li><a href="#viewshed-analysis" id="toc-viewshed-analysis" class="nav-link" data-scroll-target="#viewshed-analysis"><span class="header-section-number">5.6.4</span> Viewshed analysis</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./sec_w3_rasters.html">Week 3 - Raster data</a></li><li class="breadcrumb-item"><a href="./lab_rasters_1.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Lab 5: Working with raster data</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-labvec1" class="quarto-section-identifier"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Lab 5: Working with raster data</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>So far, we have been working within the realm of vector data: beautiful topological combinations of vertices and lines to represent the complexity of the Earth’s surface. But there are plenty of situations where vectors are not the best choice; any information that varies gradually and continuously over the surface can be better represented by a raster.</p>
+<p>You know rasters well - any digital image is a raster. While vectors connect dots with lines, rasters are grid (i.e.&nbsp;a matrix) of numbers, called <em>pixels</em>. The numeric value of each pixel can be used the indicate a colour (like on digital photos), or can actually represent a physical quantity, such as temperature or elevation.</p>
+<p>Raster files can contain multiple ‘images’ within them, which call <em>channels</em> or <em>bands</em>. Digital photos for example, actually contain three bands: one specifying the amount of red colour per pixel, one for the green colour, and one for the blue colour. When you look at a photo you are seeing a <em>color composition</em> mixing the amounts of the three primary colours according to the information help by each pixel.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://d3i71xaburhd42.cloudfront.net/205876806bc8715da74adc23a0ad78090c73734f/4-Figure3-1.png" class="img-fluid figure-img"></p>
+<figcaption>Source: https://doi.org/10.5772/63028</figcaption>
+</figure>
+</div>
+<p>For GIS data, multiple raster bands can be thought as vector attributes - each band will hold the values of a specific variable (i.e.&nbsp;one band for temperature, and one for humidity). In fact, it may help to frame rasters in terms of their vector equivalents:</p>
+<table class="table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Vector</th>
+<th>Raster</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Data variables</td>
+<td>Vector Attributes</td>
+<td>Raster Bands</td>
+</tr>
+<tr class="even">
+<td>Data values</td>
+<td>Attribute values</td>
+<td>Pixel values</td>
+</tr>
+<tr class="odd">
+<td>Select ranges of data values</td>
+<td><code>Select by expression</code></td>
+<td><code>Raster calculator</code> and/or <code>Mask</code></td>
+</tr>
+<tr class="even">
+<td>Calculate new variables</td>
+<td><code>Field Calculator</code></td>
+<td><code>Raster Calculator</code></td>
+</tr>
+<tr class="odd">
+<td>Calculate feature areas</td>
+<td><code>Field Calculator</code> (<code>$area</code>)</td>
+<td><code>Raster layer unique values</code></td>
+</tr>
+<tr class="even">
+<td>Select by spatial location</td>
+<td><code>Select By Location</code> (Vec &gt; Vec)</td>
+<td>Extract Raster Values (Points &gt; Raster)</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td>Zonal Statistics (Polygons &gt; Raster)</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td>Zonal Statistics (Raster &gt; Raster)</td>
+</tr>
+</tbody>
+</table>
+<p>We will cover most of the above this week, and then cover how to extract values from raster based on other layers on Week 6. For today, we will learn how to inspect and style raster data, and also how to do some mathematical operations among raster layers using the raster equivalent of the <code>Field Calculator</code> - the <code>Raster calculator</code>.</p>
+<section id="before-you-start" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="before-you-start"><span class="header-section-number">5.1</span> Before you start!</h2>
+<ol type="1">
+<li>Go through the Week 3 preparatory session on Canvas, and watch the seminar recording if you have missed it.</li>
+</ol>
+</section>
+<section id="guided-exercise-1---opening-and-inspecting-raster-data" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="guided-exercise-1---opening-and-inspecting-raster-data"><span class="header-section-number">5.2</span> Guided Exercise 1 - Opening and inspecting raster data</h2>
+<ol class="example" type="1">
+<li>For this exercise we will look at three different raster layers. The data has been pre-packaged and can be <a href="https://stir-my.sharepoint.com/:u:/g/personal/ala2_stir_ac_uk/ESim8eCFo_ZCkZ4DQJ6eKpcBSJQSWHQErdPpkgcktwrXtg?e=5eG27g">downloaded here</a>. It includes the following datasets:</li>
+</ol>
+<ul>
+<li><p>UK SRTM: This is a single-band raster containing data from the [Shuttle Radar Topography Mission (SRTM)] (https://en.wikipedia.org/wiki/Shuttle_Radar_Topography_Mission), a global dataset of surface elevation. The data can be obtained from a variety of sources online.</p></li>
+<li><p>UK Bioclim: The BIOCLIM suite of climate data has been developed to support biodiversity studies and species distribution modelling. It is a single multiband raster file. <a href="https://www.worldclim.org/data/bioclim.html">Read this page</a> for a description of which variable each band represents.</p></li>
+<li><p>CORINE land cover: CORINE is a <a href="https://land.copernicus.eu/en/products/corine-land-cover">EU-wide land cover map</a> that is produced by the Copernicus Space Program. The pixel values are numerical codes that specify the different land cover classes. A description of each land cover number is given <a href="https://land.copernicus.eu/content/corine-land-cover-nomenclature-guidelines/html/">here</a>.</p></li>
+<li><p>UK administrative boundaries from the <a href="https://gadm.org/">GADM website</a>, in geopackage vector file format.</p></li>
+</ul>
+<ol start="2" class="example" type="1">
+<li><p>Download the required data and organise it as you have learned. Create a new QGIS project and add the <code>UK_SRTM.tif</code>, <code>UK_Bioclim.tif</code> and <code>CLC2018_CLC2018_V2018_20_UKclip.tif</code> raster files to your project. All files are in <a href="https://en.wikipedia.org/wiki/GeoTIFF"><em>GeoTIFF</em>’</a> format, which is the most common and standard spatial raster file format.</p></li>
+<li><p>For each of the raster layers, right-click on the layer name and go to <code>Properties &gt; Information</code>, then:</p></li>
+</ol>
+<div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Stop and Think
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="a">
+<li><p>What is the <em>data model</em> of these files?</p></li>
+<li><p>What is the <em>file format</em> of these files?</p></li>
+<li><p>What are the <em>data types</em> of each raster file? Why is that important?</p></li>
+<li><p>What are the CRSs of each dataset you have?</p></li>
+<li><p>What are the dimensions (rows, columns) of each raster dataset?</p></li>
+<li><p>How many <em>bands</em> does each raster dataset have?</p></li>
+<li><p>What are the <em>pixel sizes</em> (spatial resolution) of each raster dataset?</p></li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="a">
+<li><p>raster (vector for the boundaries)</p></li>
+<li><p>GeoTIFF for the rasters, geopackage for the vector</p></li>
+<li><p>The data types can be found when looking at <code>Properties &gt; Information</code> for a raster layer. The SRTM and CORINE datasets are sixteen bit signed integer (INT16), the BIOCLIM dataset is a 32-but floating point raster. Raster data types are important as they determine the range and precision of the data that can be stored in the raster, and also impact the size of the raster file. For the same number of rows, columns and bandas, a 32-bit raster is twice as large as a 16-bit raster.</p></li>
+<li><p>GADM, SRTM, BIOCLIM: EPSG 4236 (WGS-84); CORINE: EPSG3035 (ETRS89 / Europe LAEA)</p></li>
+<li><p>These are also found in <code>Properties &gt; Information</code>, as <code>Width</code> (columns) and <code>Height</code>(rows) or in <code>Dimensions</code>. SRTM: 16355 cols x 12036 rows; CORINE: 10473 cols x 12261 rows; BIOCLIM: 1471 cols x 1084 rows.</p></li>
+<li><p>These are also found in <code>Properties &gt; Information</code>, as a list of bands, or in <code>Dimensions</code>. SRTM: 1 band, CORINE 1 band; BIOCLIM: 19 bands.</p></li>
+<li><p>These are also found in <code>Properties &gt; Information</code> in <code>Pixel Size</code>. SRTM: 0.0008084837557075693617 degrees; CORINE: 100m; BIOCLIM: 0.008983152841195215371 degrees.</p></li>
+</ol>
+</div>
+</div>
+</div>
+</section>
+<section id="guided-exercise-2---reprojecting-raster-data" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="guided-exercise-2---reprojecting-raster-data"><span class="header-section-number">5.3</span> Guided Exercise 2 - Reprojecting raster data</h2>
+<p>As we learned in week 1, the UK looks “squished” because the data is projected using only the WGS-84 datum and geographic coordinates (EPSG:4236). Although data in geographic coordinates is often referred to as “unprojected,” this is not actually true (you are looking at it on a flat screen, right?). For these “unprojected” datasets, what most GIS software do is to simply use a linear function to convert latitudes and longitudes in degrees to x and y values on your screen. This projection can be referred to as Plate Carrée or Equirectangular projection, which has a heavy amount of distortion towards the poles:</p>
+<p><img src="images/lab_5/lab5_fig1_Equirectangular_projection_SW.jpg" class="img-fluid"></p>
+<ol start="4" class="example" type="1">
+<li><p>To reproject raster data, go to <code>Raster &gt; Projections &gt; Warp (Reproject...)</code>. Select your SRTM layer as the Input Layer, and the EPSG: <code>27700 - OSGB 1936 / British National Grid</code> as the <code>Target CRS</code>. (If you don’t see it as an option, click on the small button to the right to bring up the CRS selection window). Set the <code>Output file resolution...</code> to <code>90</code> (this will be in meters, as meters are the units of the BNG projection). Leave everything else as default. Then click on the <code>...</code> button to pick an appropriate folder location. Name uour file <code>UK_SRTM_BG.tif</code>. <code>Run</code> the algorithm and then <code>Close</code> when finished.</p></li>
+<li><p>Repeat the process for the Bioclim layer (use a cell size of 1000m) and the CORINE land cover map (cell size of 100m). These cell sizes are the meter equivalent of the degree pixel sizes the data currently has. Make sure you add the <code>_BG</code> suffix to the new file names to keep track of what has changed from one file to the other.</p></li>
+<li><p>If it seems nothing has really changed, remember that QGIS does reprojections “on the fly” to make sure data on the screen are all aligned to the project CRS. So as you learned in Week 1, change the project CRS to EPSG:27700 as well. Now everything should look good.</p></li>
+<li><p>Remove the original layers from the project and keep only the reprojected ones, then save your project.</p></li>
+</ol>
+</section>
+<section id="guided-exercise-3---masking-rasters-using-vectors" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="guided-exercise-3---masking-rasters-using-vectors"><span class="header-section-number">5.4</span> Guided Exercise 3 - Masking rasters using vectors</h2>
+<p>We often want to remove portions (specific cells) of a raster, a process called <em>masking</em>. For example, some of our datasets include the Republic of Ireland and bits of mainland Europe, and some datasets include the Shetland Islands, while others don’t. Let use the UK boundaries from the GADM dataset to mask our data to the Island of Great Britain (Scotland, England and Wales) only.</p>
+<ol start="8" class="example" type="1">
+<li>First add the GADm data (<code>gadm36_GBR.gpkg</code>) to your project. This geopackage holds multiple layers for the different levels of admin boundaries. You can just add the level 0 layer, which gets the UK as a whole.</li>
+</ol>
+<div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Stop and Think
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Why did you get a warning window when you added the layer to the project?</p>
+</div>
+</div>
+<div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Because this layer has a different CRS than the project, and QGIS it is asking you how to deal with it.</p>
+</div>
+</div>
+</div>
+<p>As we learned on Week 1, trying to do clipping (and masking) operations between layers with mismatched CRSs gives us wrong results. So before you do anything, reproject the UK boundaries layer to EPSG 27700. You also need to extract the main British Island from the rest of the dataset. Turns out there is a quick way to do both at once, but first we need to deal with a little issue with the vector layer:</p>
+<ol start="9" class="example" type="1">
+<li>Open the Attribute Table of the UK boundaries layer. How many features does it have?</li>
+</ol>
+<p>This is what is called a <code>multipart</code> polygon - a set of disjoint polygons all treated as a single feature. Before we can use the layer, we need to split the individual polygons apart to be able to select the main island only:</p>
+<ol start="10" class="example" type="1">
+<li><p>Go to <code>Vector &gt; Geometry Tools &gt; Multipart to Singleparts</code>, and select the GADM layer. You can leave it as a temporary layer since we will only export one polygon for it in the next step. A new temp layer called <code>Single parts</code> will be created. Inspect its Attribute Table.</p></li>
+<li><p>Now use the feature selection tool (<img src="https://docs.qgis.org/3.34/en/_images/mActionSelectRectangle.png" class="img-fluid">) to select Great Britain only, and then right-click on the Single Part layer name and choose <code>Export &gt; Save selected features as...</code>. Pick a folder location and name the file <code>GB_Island.shp</code>. Before you click on OK, however, change the <code>CRS</code> drop-down menu to EPSG:27000. That is it, QGIS will now reproject the layer before saving it! Click <code>OK</code>to save, and then remove the original GADM and the temp layer from your project to keep things tidy. Save your project.</p></li>
+<li><p>Double check what is the CRS of the new <code>GB_island</code> layer you have created.</p></li>
+<li><p>You are now ready to mask the raster data. Go to <code>Raster &gt; Extraction &gt; Clip Raster by Mask Layer...</code>. As <code>Input layer</code>, select the SRTM layer, and as <code>Mask layer</code>, select the GB island layer. Then on the option <code>Assign a specific nodata value to output bands</code>, enter the number <code>-32768</code>. <em>Make sure you include the minus sign</em>! Leave the other options as default, but do check both the <code>Match the extent of the clipped raster to the extent of the mask layer</code> and <code>Keep resolution of input raster</code> options. Pick a folder and name your file <code>UK_SRTM_BG_GBmask.tif</code>. Now we can know at a glance that this is the SRTM data, reprojected to British Grid and masked to Great Britain.</p></li>
+</ol>
+<div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Stop and Think
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="a">
+<li><p>Why did we pick a value of -999 for ‘nodata’?</p></li>
+<li><p>Why should we check the <code>Match the extent...</code> and <code>Keep Resolution..</code> boxes?</p></li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="a">
+<li><p>Since raster layers are grids (matrices) they must always be rectangular in shape. So when masking a raster using an irregular shape, the pixels outside the polygon will receive a value indicating <em>nodata</em>, but they will still exist. The default nodata value for QGIS is zero, but since we are dealing with elevations, zero is still a valid elevation value, and we could even have areas inland that are at sea level or lower, and thus have an elevation of zero or below. We also know our data is a signed 16 bit integer, that can take values from -32,768 to +32,767. So we pick the most negative elevation number within this range, which also would never occur on land (-32768 meters) to use as nodata.</p></li>
+<li><p>By selecting the <code>Match the extent of the clipped raster to the extent of the mask layer</code> option when masking, the extent of the raster rectangle will be just enough to cover the GB polygon. If we left that unchecked, QGIS would set the non GB pixels to ‘nodata’, but leave the raster with the original dimensions. That would be a waste of disk space. We also check <code>Keep resolution...</code> to make sure QGIS doesn;t change the pixel sizes to better ‘fit’ the rectangle to the extent. The spatial resolution of a raster file often has a reason to be, and we don’t want to arbitrarily change that.</p></li>
+</ol>
+</div>
+</div>
+</div>
+<ol start="14" class="example" type="1">
+<li><p>Use the <code>Identify Features</code> tool (<img src="https://docs.qgis.org/3.34/en/_images/mActionIdentify.png" class="img-fluid">) to click on blank area of the masked SRTM layer (near the shore). Make sure you have the SRTM layer selected on the Layers panel before you click the tool. What pixel values do you get? -32768 or ‘nodata’?</p></li>
+<li><p>Now go to the <code>Properties &gt; Transparency</code> tab of the SRTM raster layer, and uncheck the <code>No data value -999</code> box. Look at your raster again, and probe the same areas with the <code>Identify Features</code> tool. Can you see now how the actual raster is still a rectangle, with the pixels outside the mask set to -32768? Before you proceed, go back and check the <code>No data -999</code> box again.</p></li>
+<li><p>Now repeat the masking for the CORINE and BIOCLIM layers. You can use the same nodata number for the CORINE and BIOCLIM layers. the CORINE layer actually already has nodata defined as <code>-32768</code> so we just keep it. And for Bioclim, it is an unlikely value for any of the climatic variables, and because the climate data is a floating point number (decimal), it is almost impossible that a perfect value of -32768.000000 would exist in the data naturally.</p></li>
+<li><p>Remove the non-masked raster datasets from your project and save it.</p></li>
+<li><p>Now zoom in into any place on the coastline, and answer:</p></li>
+</ol>
+<div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Stop and Think
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Why don’t the edges of each raster dataset line up perfectly?</p>
+</div>
+</div>
+<div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="a">
+<li>Again, this is a side effect from raster layers being grids. As each one has a different pixel size, the <code>decision</code> of which pixel is inside our outside the GB vector polygon will be different for each layer. Also, the coastline will always appear ‘ragged’ because we can’t represent any detail smaller than a single pixel on a raster file - and the pixel grids of the three layers do not align because of the pixel sizes.</li>
+</ol>
+</div>
+</div>
+</div>
+</section>
+<section id="guided-exercise-4---styling-raster-data" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="guided-exercise-4---styling-raster-data"><span class="header-section-number">5.5</span> Guided Exercise 4 - Styling raster data</h2>
+<p>Just as with vector data, QGIS offers many options for the symbology of raster data. You will see some similarities between the symbology options for vectors and rasters, but also some differences because of the nature of each data model.</p>
+<ol start="19" class="example" type="1">
+<li>Turn off all layers except the CORINE land cover, and then go to its <code>Properties &gt; Symbology</code>. Note that the default <code>Render Type</code> for single-band rasters is <code>Singleband gray</code>. That means pixels are coloured by a shade of grey that is proportional to its numeric value, with higher values being closer to white. Change it to <code>Paletted / Unique Values</code>. Maintain the <code>Band 1</code> selection (there is only one band anyway) and <code>Random Colors</code> options, and then click on <code>Classify</code>. Apply the result to your raster and visualise it.</li>
+</ol>
+<div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Stop and Think
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="a">
+<li><p>How many categories are there on this raster?</p></li>
+<li><p>What are the pixel values representing?</p></li>
+<li><p>What would be the vector symbology equivalent of <code>Paletted / Unique Values</code>?</p></li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="a">
+<li><p>36 categories (unique pixel values)</p></li>
+<li><p>Each pixel value is a numerical code that indicates a land cover type.</p></li>
+<li><p>the <code>Categorized</code> option.</p></li>
+</ol>
+</div>
+</div>
+</div>
+<p>WHoa, there are a lot of classes, and the random colours selection picked colours that are very similar to one another for some of the classes. Fortunately for us, the data producers of CORINE include a colour map file as part of the metadata. Let us use it!</p>
+<ol start="20" class="example" type="1">
+<li><p>Back on the <code>Properties &gt; Symbology</code> window, click on the <code>...</code> button to the right of <code>Delete All</code> and choose <code>Load Color Map from File...</code>. Within the CORINE files you unzipped, find and select the metadata file named <code>CLC2018_CLC2018_V2018_20_QGIS.txt</code>. <code>Apply</code>and then click <code>OK</code>. Not only we get the colours selected by the CORIEN mapping team, but also all the proper class names! That was nice!</p></li>
+<li><p>Now let us have a look at the BIOCLIM dataset. First, read the metadata included with the data files (<code>Bioclim_metadata.txt</code>) to understand what each band of this dataset represents. Then turn on the BIOLCIM layer and turn the remaining layers off.</p></li>
+</ol>
+<div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Stop and Think
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Why does the BIOCLIM layer appears to be coloured?</p>
+</div>
+</div>
+<div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>When QGIS opens a multiband, single file raster, it always thinks that the file is an image, and thus it automatically assigns the first three bands of the file to the Red, Green, and Blue colour channels. We will look at raster images in the next session, but this color composition clearly doesn’t make sense for our climate data, so let us change it.</p>
+</div>
+</div>
+</div>
+<ol start="22" class="example" type="1">
+<li>Go to the <code>Properties &gt;  Symbology</code> window for the BIOCLIM dataset. Notice the default symbology choice of <code>Multiband color</code>. Since each band of our data represents a different climatic variable, with continuous numeric values (not categories or classes), we need to pick the <code>Single band - pseudocolor</code> option. Choose the <code>bio1</code> band, and for the colour ramp, click on the down-arrow button to the right of the colour palette button, and select the <code>magma</code> colour ramp. Classify the existing values and then <code>Apply</code> and click <code>OK</code>. How does the layer look like now?</li>
+</ol>
+<div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Stop and Think
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="a">
+<li><p>What would be the vector symbology equivalent of <code>Single band  - pseudocolor</code>?</p></li>
+<li><p>What climatic variable is “bio01” representing?</p></li>
+<li><p>What units are the minimum and maximum values shown on the colour scale?</p></li>
+<li><p>Why such a strange choice for the units?</p></li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="a">
+<li><p>The <code>Graduated</code> option.</p></li>
+<li><p>The metadata file tells us it is Annual Mean Temperature.</p></li>
+<li><p>The metadata file also tells us it is °C * 10 (deegrees celsius times ten)</p></li>
+<li><p>This is an old <code>trick</code> to reduce file sizes while keeping some precision. Let’s say the data creators wanted to record temperatures with one decimal place of precision. If they stored the data as a floating point, we would need 32-bit files. But if we consider that mean annual temperatures on Earth will easily be contained in the range of -100 to +100 degrees Celsius, we could instead multiply all numbers by ten, and store them as 16-bit integers instead, cutting file sizes in half. For example, a temperature of 32.7°C becomes a pixel value of 327.</p></li>
+</ol>
+</div>
+</div>
+</div>
+<ol start="23" class="example" type="1">
+<li>Explore some of the other climatic variables contained in the BIOCLIM dataset, using different colour ramps.</li>
+</ol>
+<p>Finally, let’s work on the symbology for the SRTM data. For that, we will take advantage of some nice scientific colour palettes that are built-in on QGIS. We will talk aboout what makes these palettes special on Week 4, but let us just use them now.</p>
+<ol start="24" class="example" type="1">
+<li><p>On the <code>Properties &gt; Symbology</code> window of the SRTM layer, choose the <code>Singleband Pseudocolor</code> option, and then on th downarrow button besides the <code>Color Ramp</code> option, select Create New Color Ramp. On the small options window that comes up, select Catalog:cpt-city.</p></li>
+<li><p>Once the catalogue window opens, go to the <code>Topography</code> list and select the <code>cd-a</code> palette. Then manually enter <code>Min</code> and <code>Max</code> values, using <code>0</code> and <code>900</code> respectively. <code>Apply</code> and see how it changes. But before clicking on <code>OK</code>, go to the <code>Transparency</code> tab and drag the slider at the top to around <code>60%</code>. That will let other layers under it to show through and blend with the colours.</p></li>
+<li><p>Right-click on the SRTM layer name and select <code>Duplicate layer</code>. This option creates a ‘virtual’ copy of the layer - it will still point to the same file on disk, but you are able to select a different symbology for it.</p></li>
+</ol>
+<p>(@)Now, on the <code>Properties &gt; Symbology</code> of the copied layer, change the render type to <code>Hillshade</code>. Leave everything as default, then <code>Apply</code> and close the window. Make sure both the coloured and the hillshade SRTM layers are turned on on the Layer Panel, and that the hillshade layer is immediately under the coloured SRTM layer. Zoom in and turn each layer on and off in turn to understand how this neat ‘3-D’ visual effect works.</p>
+<div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Stop and Think
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>What does the <code>hillshade</code> render style does?</p>
+</div>
+</div>
+<div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-16" class="callout-16-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>It uses the elevation information to simulate how different areas of the terrain would be illuminated or shaded by sunlight coming from a certain sun elevation and azimuth (direction).</p>
+</div>
+</div>
+</div>
+</section>
+<section id="guided-exercise-5---terrain-calculations" class="level2" data-number="5.6">
+<h2 data-number="5.6" class="anchored" data-anchor-id="guided-exercise-5---terrain-calculations"><span class="header-section-number">5.6</span> Guided Exercise 5 - Terrain Calculations</h2>
+<p>One of the most common raster datasets used in GIS are Digital Elevation Models or DEMS. The structure of raster data is particularly well suited to represent terrain, in its continuous and highly variable nature. Moreover, terrain and elevation data is often a key variable in GIS analysis, as it directly influences most biological, geological and anthropic processes.</p>
+<p>For this reason, a few specific terrain analysis tools that are always included in GIS software, and used often. These are the methods to calculate <a href="https://en.wikipedia.org/wiki/Grade_(slope)">slopes</a>(a.k.a grades, gradients), <a href="https://en.wikipedia.org/wiki/Aspect_(geography)">aspects</a> and <a href="https://en.wikipedia.org/wiki/Viewshed">viewsheds</a>, using DEMs as the base data.</p>
+<section id="plugins" class="level3" data-number="5.6.1">
+<h3 data-number="5.6.1" class="anchored" data-anchor-id="plugins"><span class="header-section-number">5.6.1</span> Plugins</h3>
+<p>In this exercise, you will also learn about one of the most powerful aspects of QGIS: <em>plugins</em>. As you may know, QGIS is a free and open-source software, meaning anyone can contribute with the code. QGIS also makes it easy for it’s functionality to be extended via plugins, separate little ‘apps’ that add new tools and capabilities to the main QGIS app. For this exercise, we will install and use two official QGIS plugins, the <code>QuickMapServices</code> and <code>Visibility Analysis</code>.</p>
+<ol start="27" class="example" type="1">
+<li>Head to the menu <code>Plugins &gt; Manage and Install Plugins</code>. You will se a window like the one below. Then select the <code>Not Installed</code> tab, and then on the search bar search for <code>QuickMapServices</code>. Select it on the left panel, and then click on <code>Install Plugin</code>. Then repeat this process to find and install the <code>Visibility Analysis</code> plugin.</li>
+</ol>
+<p><img src="images/lab_5/lab5_fig2_quickmap.jpg" class="img-fluid"></p>
+<ol start="28" class="example" type="1">
+<li>The <code>QuickMapServices</code> plugin will add a new menu entry: <code>Web &gt; QuickMapServices</code>. Once yo8u click on it, you will see a list of web map services - but there is more. Go to <code>Web &gt; QuickMapServices &gt; Settings</code>, and then click on the <code>More services</code> tab. Then read the warning and click on <code>Get contributed pack</code>, and once you get a confirmation message, click on <code>Save</code> and exit the window.</li>
+</ol>
+<p><img src="images/lab_5/lab5_fig3_moremaps.jpg" class="img-fluid"></p>
+<ol start="29" class="example" type="1">
+<li><p>Now go back to <code>Web &gt; QuickMapServices &gt; Settings</code>, and you will see a list of providers. For example, go to the <code>Web &gt; QuickMapServices &gt; Google</code> option and add the <code>Google Hybrid</code> dataset directly as layer in your project! These layers will require you to be connected to Internet to work, and they won;t give you many symbology options, but they are very handy to help in navigation when working on a project.</p></li>
+<li><p>Take some time to explore the layers available in this plugin.</p></li>
+</ol>
+</section>
+<section id="masking-by-area" class="level3" data-number="5.6.2">
+<h3 data-number="5.6.2" class="anchored" data-anchor-id="masking-by-area"><span class="header-section-number">5.6.2</span> Masking by area</h3>
+<p>Earlier today you have learned how to use a vector polygon to mask a raster layer. But sometimes we just want to ‘freeform’ cut a piece of a raster, without the need to be too precise. In that case, we can use the <code>Clip Raster by Extent</code> function.</p>
+<ol start="31" class="example" type="1">
+<li>Make sure you <code>Google Hybrid</code> web layer is visible, and navigate until you frame the ‘Stirling-Glasgow-Edinburgh triangle’ in your canvas, like the image below:</li>
+</ol>
+<p><img src="images/lab_5/lab5_fig4_stirglaedi.jpg" class="img-fluid"> (@) Then go to <code>Raster &gt; Extract &gt; Clip Raster by Extent...</code>. Pick the SRTM layer as <code>Input layer</code>, and then for <code>Clipping Extent</code>, click on the small button to the right with a small arrow figure. That will set the <code>cut area</code> to be exactly what you are viewing on the canvas. But there are other options. If you click on the small down-arrow button to the right, you can use the extent (bounding box) of another layer, as well some more advanced options. You can also click on <code>Draw on map canvas</code> to be allowed to drag a rectangle over your map canvas that sets the extent of the cut.</p>
+<ol start="32" class="example" type="1">
+<li>Mask the SRTM layer to the region including Stirling, Glasgow and Edinburgh, either by setting you map canvas zoom and using it as extent, or by clicking and dragging to set the extent. Then pick a proper folder and save it as <code>UK_SRTM_BG_centralscotland.tif</code>. You should end up with something like this (but your extent will likely vary):</li>
+</ol>
+<p><img src="images/lab_5/lab5_fig5_centralscot.jpg" class="img-fluid"></p>
+</section>
+<section id="calculating-slope-and-aspect" class="level3" data-number="5.6.3">
+<h3 data-number="5.6.3" class="anchored" data-anchor-id="calculating-slope-and-aspect"><span class="header-section-number">5.6.3</span> Calculating slope and aspect</h3>
+<p>We can now use our Central Scotland subset to demonstrate how to calculate slope and aspect.</p>
+<ol start="33" class="example" type="1">
+<li>Go to <code>Raster &gt; Analysis &gt; Slope...</code>, and pick the Central Scotland DEM you created as <code>Input Layer</code>. Leave everything else as default and then pick a proper folder to save the new file as <code>UK_SRTM_BG_centralscot_slope.tif</code>. Then <code>Run</code> and <code>Close</code>. You will get a new raster layer, where the pixel values indicate the steepness of each pixel, in degrees. Steep slopes will appear as light grey/white, and flat areas will appear dark:</li>
+</ol>
+<p><img src="images/lab_5/lab5_fig6_slope.jpg" class="img-fluid"></p>
+<ol start="34" class="example" type="1">
+<li><p>Now go to <code>Raster &gt; Analysis &gt; Aspect...</code>, and again pick the Central Scotland DEM you created as <code>Input Layer</code>. Leave everything else as default and pick a folder to save the new file as <code>UK_SRTM_BG_centralscot_aspect.tif</code>. <code>Run</code> and <code>Close</code>. This layer will now tell you the cardinal direction, in degrees (North = 0/360),, that each slope is facing.</p></li>
+<li><p>Use the <code>Indentify Features...</code> tool to explore some of the aspect and slope values you have calculated.</p></li>
+</ol>
+</section>
+<section id="viewshed-analysis" class="level3" data-number="5.6.4">
+<h3 data-number="5.6.4" class="anchored" data-anchor-id="viewshed-analysis"><span class="header-section-number">5.6.4</span> Viewshed analysis</h3>
+<p>Finally, let us calculate a ‘viewshed’ - raster indicating which points in the Earth surface are visible from a given point, considering the topography. Viewshed analysis is often used for landscape planning - for example, determining from where a wind power turbine may be visible or not.</p>
+<p>The <code>Visibility Analysis</code> plugin adds some option to the <code>Processing panel</code> of QGIS. To see it, click on the <code>Processing Toolbox</code> button on the main QGIS toolbar (<img src="https://docs.qgis.org/3.34/en/_images/processingAlgorithm.png" class="img-fluid">), and the panel will open to the right. This panel houses many, many more GIS functions beyond those available on the <code>Vector</code> and <code>Raster</code> menus, and we will use it often during the last weeks of the module.</p>
+<p><img src="images/lab_5/lab5_fig7_proc.jpg" class="img-fluid"></p>
+<ol start="36" class="example" type="1">
+<li><p>Load the <code>observation_point,shp</code> file you have downloaded as part of the lab data.</p></li>
+<li><p>Open the <code>Visibility Analysis</code> heading on the <code>Processing Toolbox</code>, and then double click on <code>Create Viewpoints</code>. A new window will open. On this window, you need to pick the <code>Observer Location</code>, which will be the Observation point layer, and then the DEM, which will be the Central Scotland SRTM (make sure you <em>don’t</em> pick the slope or aspect layers by mistake!).</p></li>
+<li><p>There are many options that you don’t need to worry about for now, but three warrant some explanation: <code>Radius of Analysis</code> specifies how far you want to calculate the viewshed - it is an expensive computation so it may make sense to limit it. Let’s use 20,000 meters for our analysis. Then pat attention to <code>Observer Height</code> and <code>Target Height</code>. They determine what is the height of the observation being made (above the elevation of the observation point), and also what would be the height of the target. So again, if you are wondering if a wind power turbine would be visible from that location, you should add the height of the turbine to the <code>Target Height</code> field. You can leave these options at 1.6m and zero, respectively. Then pick a folder and save the viewpoint as <code>viewpoint.shp</code>, and <code>Run</code> the tool.</p></li>
+<li><p>Now go back to the <code>Processing Toolbox</code> and double click on <code>Viewshed</code>. Pick the <code>Viewpoint</code> layer as <code>Observer Location</code>, and the Central Scotland DEM as <code>Digital Elevation Model</code>. Leave everything else as default, and pick a folder to save your viewshed analysis as <code>viewshed.tif</code> (it wil be a raster file).</p></li>
+</ol>
+<p>You should get an output similar to the figure below, where white pixels (value <code>1</code>) indicate ‘visible’ and black pixels (value <code>0</code>) indicate “not visible’.</p>
+<p><img src="images/lab_5/lab5_fig8_viewshed.jpg" class="img-fluid"> Congratulations, you reached the end of Lab 5. You should now understand the raster data model and how to mask it and style it. You have also learned some common terrain analysis tools. In the next lab, we will learn about the <code>Raster Calculator</code>, which fulfils the role of both the <code>Field Calculator</code> and <code>Select by Attribute</code> for rasters.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./sec_w3_rasters.html" class="pagination-link" aria-label="Week 3 - Raster data">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Week 3 - Raster data</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./lab_rasters_2.html" class="pagination-link" aria-label="Lab 6: The Raster Calculator and other rastery bits">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Lab 6: The Raster Calculator and other rastery bits</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
