@@ -298,6 +298,19 @@ The `Visibility Analysis` plugin adds some option to the `Processing panel` of Q
 You should get an output similar to the figure below, where white pixels (value `1`) indicate 'visible' and black pixels (value `0`) indicate "not visible'. 
 
 ![](images/lab_5/lab5_fig8_viewshed.jpg)
+## Guided Exercise 6 - Cleaning up and saving your project for the next lab
+
+We will use the data you produced on this lab to get started on the next, so let us 'package'it properly.
+
+(@) Remove all layers from the project except for the SRTM, CORINE, BIOCLIM and GADM layers that you have reprojected and masked for the GB island. Save your project
+
+(@) Delete from the folder all files except for the files for the four data layers above. If you saved the GB island vector as a shapefile, remember you need to keep all files with the same name but different extensions (`.shp`, `.shx`, `.dbf`, `.prj`)
+
+(@) On your systems file explorer, find the base folder for today's lab according to your organization, and right click on it. On Windows, choose `Compress to...` to create a zipfile containing your entire project. Name it as `lab_5_final_results.zip` or something similar.
+
+(@) Now store this zipfile on your university's OneDrive or on some external drive, so that you can re-download it when you need it for the next session.
+
+
 Congratulations, you reached the end of Lab 5. You should now understand the raster data model and how to mask it and style it. You have also learned some common terrain analysis tools. In the next lab, we will learn about the `Raster Calculator`, which fulfils the role of both the `Field Calculator` and `Select by Attribute` for rasters. 
 
 

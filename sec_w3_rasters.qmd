@@ -45,6 +45,8 @@ For every week, we will list the main theoretical and practical learning goals. 
     - Continuous variables
     - Categorical variables 
 - How to use the identify tool to get raster information on the fly
+- Working with Digital Elevation Models
+    - Calculating slope, aspect and viewshed
 
 [@sec-labras2]
 
@@ -55,8 +57,7 @@ For every week, we will list the main theoretical and practical learning goals. 
     - Band arithmetic
     - Making flowcharts
 - Mosaicking rasters
-- Working with Digital Elevation Models
-    - Calculating slope, aspect and viewshed
+- How to adjust the stretch of a raster
 - Styling raster Images 
 - Resampling methods
 

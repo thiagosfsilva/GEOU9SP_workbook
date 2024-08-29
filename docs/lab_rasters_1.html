@@ -741,7 +741,15 @@ Click for answer
 <li><p>Now go back to the <code>Processing Toolbox</code> and double click on <code>Viewshed</code>. Pick the <code>Viewpoint</code> layer as <code>Observer Location</code>, and the Central Scotland DEM as <code>Digital Elevation Model</code>. Leave everything else as default, and pick a folder to save your viewshed analysis as <code>viewshed.tif</code> (it wil be a raster file).</p></li>
 </ol>
 <p>You should get an output similar to the figure below, where white pixels (value <code>1</code>) indicate ‘visible’ and black pixels (value <code>0</code>) indicate “not visible’.</p>
-<p><img src="images/lab_5/lab5_fig8_viewshed.jpg" class="img-fluid"> Congratulations, you reached the end of Lab 5. You should now understand the raster data model and how to mask it and style it. You have also learned some common terrain analysis tools. In the next lab, we will learn about the <code>Raster Calculator</code>, which fulfils the role of both the <code>Field Calculator</code> and <code>Select by Attribute</code> for rasters.</p>
+<p><img src="images/lab_5/lab5_fig8_viewshed.jpg" class="img-fluid"> ## Guided Exercise 6 - Cleaning up and saving your project for the next lab</p>
+<p>We will use the data you produced on this lab to get started on the next, so let us ’package’it properly.</p>
+<ol start="40" class="example" type="1">
+<li><p>Remove all layers from the project except for the SRTM, CORINE, BIOCLIM and GADM layers that you have reprojected and masked for the GB island. Save your project</p></li>
+<li><p>Delete from the folder all files except for the files for the four data layers above. If you saved the GB island vector as a shapefile, remember you need to keep all files with the same name but different extensions (<code>.shp</code>, <code>.shx</code>, <code>.dbf</code>, <code>.prj</code>)</p></li>
+<li><p>On your systems file explorer, find the base folder for today’s lab according to your organization, and right click on it. On Windows, choose <code>Compress to...</code> to create a zipfile containing your entire project. Name it as <code>lab_5_final_results.zip</code> or something similar.</p></li>
+<li><p>Now store this zipfile on your university’s OneDrive or on some external drive, so that you can re-download it when you need it for the next session.</p></li>
+</ol>
+<p>Congratulations, you reached the end of Lab 5. You should now understand the raster data model and how to mask it and style it. You have also learned some common terrain analysis tools. In the next lab, we will learn about the <code>Raster Calculator</code>, which fulfils the role of both the <code>Field Calculator</code> and <code>Select by Attribute</code> for rasters.</p>
 
 
 </section>

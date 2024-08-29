@@ -225,7 +225,11 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#before-you-start" id="toc-before-you-start" class="nav-link active" data-scroll-target="#before-you-start"><span class="header-section-number">6.1</span> Before you start!</a></li>
-  <li><a href="#guided-exercise-1" id="toc-guided-exercise-1" class="nav-link" data-scroll-target="#guided-exercise-1"><span class="header-section-number">6.2</span> Guided Exercise 1</a></li>
+  <li><a href="#guided-exercise-1---using-the-raster-calculator" id="toc-guided-exercise-1---using-the-raster-calculator" class="nav-link" data-scroll-target="#guided-exercise-1---using-the-raster-calculator"><span class="header-section-number">6.2</span> Guided Exercise 1 - Using the Raster Calculator</a>
+  <ul class="collapse">
+  <li><a href="#recovering-your-data" id="toc-recovering-your-data" class="nav-link" data-scroll-target="#recovering-your-data"><span class="header-section-number">6.2.1</span> Recovering your data</a></li>
+  <li><a href="#gobal-raster-statistics" id="toc-gobal-raster-statistics" class="nav-link" data-scroll-target="#gobal-raster-statistics"><span class="header-section-number">6.2.2</span> Gobal raster statistics</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -258,8 +262,61 @@ ul.task-list li input[type="checkbox"] {
 <li>Go through the Week 3 preparatory session on Canvas, and watch the seminar recording if you have missed it. Also make sure you have completed all labs prior to this one.</li>
 </ol>
 </section>
-<section id="guided-exercise-1" class="level2" data-number="6.2">
-<h2 data-number="6.2" class="anchored" data-anchor-id="guided-exercise-1"><span class="header-section-number">6.2</span> Guided Exercise 1</h2>
+<section id="guided-exercise-1---using-the-raster-calculator" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="guided-exercise-1---using-the-raster-calculator"><span class="header-section-number">6.2</span> Guided Exercise 1 - Using the Raster Calculator</h2>
+<p>In this exercise, we will use the layers from the previous lab to learn about raster statics and the raster calculator. Then we will learn about mosaicking, stacking and adjusting the contrast of raster layers, and see the effects of using different <em>resampling</em> methods when working with rasters.</p>
+<section id="recovering-your-data" class="level3" data-number="6.2.1">
+<h3 data-number="6.2.1" class="anchored" data-anchor-id="recovering-your-data"><span class="header-section-number">6.2.1</span> Recovering your data</h3>
+<p>At the end of last week’s lab you saved the final results of your project as a zipfile. Retrieve this file, extract the contents, and re-open your project. It should have the four layers in it:</p>
+<ul>
+<li>Vector polygon of the Island of Great Britain</li>
+<li>Raster file of the SRTM digital elevation model (reprojected to EPSG27700 and masked to the GB island)</li>
+<li>Raster file of the CORINE digital elevation modelland cover dataset (reprojected to EPSG27700 and masked to the GB island)</li>
+<li>Raster file of the BIOCLIM climatic dataset (reprojected to EPSG27700 and masked to the GB island)</li>
+</ul>
+</section>
+<section id="gobal-raster-statistics" class="level3" data-number="6.2.2">
+<h3 data-number="6.2.2" class="anchored" data-anchor-id="gobal-raster-statistics"><span class="header-section-number">6.2.2</span> Gobal raster statistics</h3>
+<p>Winter is coming, and you want to escape the worst of the cold and rain. You therefore decide to use your GIS skills to find the ideal place to spend your winter - an urban or periurban place with the lowest precipitation and highest minimum temperatures in the UK.</p>
+<p>To get started, you want to know the range of precipitation and temperature values for the entire island, using the BIOCLIM data. If this was a vector dataset, you would use <code>Statistical Summary Tool</code> - but it is a raster. What would be the equivalent operation?</p>
+<ol class="example" type="1">
+<li><p>The tool we need is called <code>Raster Layer Statistics</code>, but it is <em>not</em> located in the <code>Raster</code> menu. Instead, we need to launch the <code>Processing</code> panel ( ADD ICON). This panel contains a lot of additional GIS functions, and we will use if often now.</p></li>
+<li><p>Once you have <code>Processing</code> panel open, you can either search for <code>Raster Layer Statistics</code> or find it under rhe <code>Raster analysis</code> heading. Double click on it to launch the tool window. It should look like this:</p></li>
+</ol>
+<p><img src="images/lab_6/lab_6_fig1_rasterstats.jpg" class="img-fluid"></p>
+<p>Looking at the BIOCLIM data description, you need to get statistics for BIO6 - Minimum Temperature of the Coldest Month, and BIO12 - Annual Precipitation. The BIO variables are ordered in the file, so <em>band 6</em> is BIO6, and <em>Band 12</em> is BIO12.</p>
+<ol start="3" class="example" type="1">
+<li>In the <code>Raster Layer Statistics</code> window, select the BIOCLIM layer as <code>Input Layer</code> and <code>band 06</code> as band number. You can keep the results as a temporaty file. <code>Run</code> it and <code>Close</code> the window. A new panel will have appeared under the <code>Processing</code> panel, called <code>Results Viewer</code>. It will have an entry called <code>Statistics</code>. Double click on it and take note of the minimum and maximum BIO6 values (-75 and 33).</li>
+</ol>
+<div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Stop and Think
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Do these values seem too extreme for the UK? What is going on here?</p>
+</div>
+</div>
+<div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The metadata for the BIO layers states that temperature values are scaled by a factor of 10, so you need to divide these numbers by 10 to get proper Celsius units.</p>
+</div>
+</div>
+</div>
 <p>Return to the Symbology window, and expand the option Min / Max Value Settings. What is the default option selected? Experiment with the other options (with different percent clips and standard deviations) and see how the Symbology changes. Remember to Apply the changes every time you change any options. Still, on the Symbology window, change the Classification options (drop-down menu to the left, under the classes) from Continuous to Equal Interval. To the right of it, select the number of classes as 3. Then Apply and evaluate. Without changing your number of classes, change the Interpolation option above the classes from Linear to Discrete. Apply and evaluate. Take some time to play with these visualisation options to analyse the distribution of different Bioclimatic variables in the UK, and think about what they mean for plants, (non-human) animals and in terms of social and economic factors. Finally, let’s work on the Symbology for the SRTM data. On the Symbology window, choose the Singleband Pseudocolor option, and then on the Color Ramp option, select Create New Color Ramp. On the small options window that comes up, select Catalog:cpt-city. Once the catalogue window opens, go to the Topography list and select the cd-a palette. Then classify your elevation values using the User Defined Min /Max option, and type 0 as Min and 900 as Maximum. Apply and visualise. Then, before closing the Properties window, go to the Transparency table and drag the slider at the top to around 60%.</p>
 <p>Right-click on the SRTM layer name and select Duplicate layer (this step is useful to create a copy of a layer and retain symbology. Remember, this is a temporary layer). Now, on the Symbology of the copied layer, change the render type to Hillshade. Apply and close the window. Make sure the copied layer is immediately under the original layer, and alternate each layer between on and off.</p>
 <p>Stop and think:</p>
@@ -283,6 +340,7 @@ ul.task-list li input[type="checkbox"] {
 <p>Open the properties of the DEM and select the Hillshade symbology, with a Z factor of 10. Add the earthquake and country data from Week 2. Now see if there are any clear relationships between high elevations, plate boundaries and earthquake locations.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

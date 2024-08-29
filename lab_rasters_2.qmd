@@ -6,7 +6,42 @@
 
 1. Go through the Week 3 preparatory session on Canvas, and watch the seminar recording if you have missed it. Also make sure you have completed all labs prior to this one.
 
-## Guided Exercise 1 
+## Guided Exercise 1 - Using the Raster Calculator
+
+In this exercise, we will use the layers from the previous lab to learn about raster statics and the raster calculator. Then we will learn about mosaicking, stacking and adjusting the contrast of raster layers, and see the effects of using different *resampling* methods when working with rasters. 
+
+### Recovering your data
+
+At the end of last week's lab you saved the final results of your project as a zipfile. Retrieve this file, extract the contents, and re-open your project. It should have the four layers in it:
+
+- Vector polygon of the Island of Great Britain
+- Raster file of the SRTM digital elevation model (reprojected to EPSG27700 and masked to the GB island)
+- Raster file of the CORINE digital elevation modelland cover dataset (reprojected to EPSG27700 and masked to the GB island)
+- Raster file of the BIOCLIM climatic dataset (reprojected to EPSG27700 and masked to the GB island)
+
+### Gobal raster statistics
+
+Winter is coming, and you want to escape the worst of the cold and rain. You therefore decide to use your GIS skills to find the ideal place to spend your winter - an urban or periurban place with the lowest precipitation and highest minimum temperatures in the UK. 
+
+To get started, you want to know the range of precipitation and temperature values for the entire island, using the BIOCLIM data. If this was a vector dataset, you would use `Statistical Summary Tool` - but it is a raster. What would be the equivalent operation?
+
+(@) The tool we need is called `Raster Layer Statistics`, but it is *not* located in the `Raster` menu. Instead, we need to launch the `Processing` panel ( ADD ICON). This panel contains a lot of additional GIS functions, and we will use if often now. 
+
+(@) Once you have `Processing` panel open, you can either search for `Raster Layer Statistics` or find it under rhe `Raster analysis` heading. Double click on it to launch the tool window. It should look like this:
+
+![](images/lab_6/lab_6_fig1_rasterstats.jpg)
+
+Looking at the BIOCLIM data description, you need to get statistics for BIO6 - Minimum Temperature of the Coldest Month, and BIO12 - Annual Precipitation. The BIO variables are ordered in the file, so *band 6* is BIO6, and *Band 12* is BIO12. 
+
+(@) In the `Raster Layer Statistics` window, select the BIOCLIM layer as `Input Layer` and `band 06` as band number. You can keep the results as a temporaty file. `Run` it and `Close` the window. A new panel will have appeared under the `Processing` panel, called `Results Viewer`. It will have an entry called `Statistics`. Double click on it and take note of the minimum and maximum BIO6 values (-75 and 33).
+
+::: {.callout-important title="Stop and Think"}
+Do these values seem too extreme for the UK? What is going on here?
+:::
+
+::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
+The metadata for the BIO layers states that temperature values are scaled by a factor of 10, so you need to divide these numbers by 10 to get proper Celsius units.
+:::
 
 
 
