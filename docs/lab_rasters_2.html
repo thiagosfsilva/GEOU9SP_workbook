@@ -69,6 +69,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -229,6 +258,12 @@ ul.task-list li input[type="checkbox"] {
   <ul class="collapse">
   <li><a href="#recovering-your-data" id="toc-recovering-your-data" class="nav-link" data-scroll-target="#recovering-your-data"><span class="header-section-number">6.2.1</span> Recovering your data</a></li>
   <li><a href="#gobal-raster-statistics" id="toc-gobal-raster-statistics" class="nav-link" data-scroll-target="#gobal-raster-statistics"><span class="header-section-number">6.2.2</span> Gobal raster statistics</a></li>
+  <li><a href="#per-pixel-calculations-with-the-raster-calculator" id="toc-per-pixel-calculations-with-the-raster-calculator" class="nav-link" data-scroll-target="#per-pixel-calculations-with-the-raster-calculator"><span class="header-section-number">6.2.3</span> Per-pixel calculations with the raster calculator</a></li>
+  <li><a href="#boolean-logical-operations-with-the-raster-calculator" id="toc-boolean-logical-operations-with-the-raster-calculator" class="nav-link" data-scroll-target="#boolean-logical-operations-with-the-raster-calculator"><span class="header-section-number">6.2.4</span> Boolean (logical) operations with the raster calculator</a></li>
+  <li><a href="#raster-reclassification" id="toc-raster-reclassification" class="nav-link" data-scroll-target="#raster-reclassification"><span class="header-section-number">6.2.5</span> Raster reclassification</a></li>
+  <li><a href="#band-vs.-band-raster-calculations" id="toc-band-vs.-band-raster-calculations" class="nav-link" data-scroll-target="#band-vs.-band-raster-calculations"><span class="header-section-number">6.2.6</span> Band vs.&nbsp;band raster calculations</a></li>
+  <li><a href="#guided-exercise-x---mosaicking-and-stacking-rasters" id="toc-guided-exercise-x---mosaicking-and-stacking-rasters" class="nav-link" data-scroll-target="#guided-exercise-x---mosaicking-and-stacking-rasters"><span class="header-section-number">6.2.7</span> Guided Exercise X - Mosaicking and Stacking rasters</a></li>
+  <li><a href="#raster-image-stretching" id="toc-raster-image-stretching" class="nav-link" data-scroll-target="#raster-image-stretching"><span class="header-section-number">6.2.8</span> Raster image stretching</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -317,6 +352,260 @@ Click for answer
 </div>
 </div>
 </div>
+<ol start="4" class="example" type="1">
+<li>Now repeat the process to get the Min and Max values for BIO12 (532 and 2311)</li>
+</ol>
+<div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Stop and Think
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>What are the units for precipitation?</p>
+</div>
+</div>
+<div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The metadata for the BIO layers states that annual precipitation is given in mm. One milimitre of rain is equal to one liter per squared metre.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="per-pixel-calculations-with-the-raster-calculator" class="level3" data-number="6.2.3">
+<h3 data-number="6.2.3" class="anchored" data-anchor-id="per-pixel-calculations-with-the-raster-calculator"><span class="header-section-number">6.2.3</span> Per-pixel calculations with the raster calculator</h3>
+<p>Although it is easy enough to covert the temperature pixel values to Celsius in our heads, it would be useful to have the data in the proper units, especially if we want to map it later. Let us use the <code>Raster Calculator</code> to apply the conversion factor to all pixels.</p>
+<ol start="5" class="example" type="1">
+<li>Go to <code>Raster &gt; Raster Calculator</code> or click on the () button to launch the calculator. It will look like this:</li>
+</ol>
+<p><img src="images/lab_6/lab_6_fig2_rastercalc.jpg" class="img-fluid"></p>
+<p>The general idea is similar to the <code>Field Calculator</code>, with a slightly different layout. The top right panel lists all raster <em>bands</em> in the project (so <code>UK_bioclim_BG_GBmasked@19</code> means band 19 of the BIOCLIM raster). The top right panel lets us pick some options for our raster creation, and the bottom panel let’s us type expressions.</p>
+<ol start="6" class="example" type="1">
+<li><p>We need to divide all BIO6 temperature values by 10. Double click on the BIOCLIM band 6 in the bands list to add it to the expression panel, and then add the division by <code>10</code>. On my project, the expression panel looks like <code>"UK_bioclim_BG_GBmasked@6" / 10</code>, but your BIOCLIM layer may not be named the same as mine. Note that the bottom of the expression panel should say <code>Expression Valid</code>. If it says <code>Expression Invalid</code>, check your typing (did you use the double quotes?)</p></li>
+<li><p>For <code>Output Layer</code>, click on the <code>...</code> button and pick a folder so save the new file. Name it <code>UK_bioclim_BG_GBmasked_BIO6.tif</code>. Leave the rest as default and click in <code>OK</code>.</p></li>
+</ol>
+<div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Stop and Think
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>How many bands has your newly created file?</p>
+</div>
+</div>
+<div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Only one band, holding the results of the calculation.</p>
+</div>
+</div>
+</div>
+<p>Every time you enter an expression involving a raster band and a single number in the <code>Raster Calculator</code> you are telling QGIS to apply the same expression to each pixel of that band. In our case, we dividided all pixel values by 10.</p>
+</section>
+<section id="boolean-logical-operations-with-the-raster-calculator" class="level3" data-number="6.2.4">
+<h3 data-number="6.2.4" class="anchored" data-anchor-id="boolean-logical-operations-with-the-raster-calculator"><span class="header-section-number">6.2.4</span> Boolean (logical) operations with the raster calculator</h3>
+<p>The <code>Raster Calculator</code> also fulfills the role of the vector <code>Select by expression</code> tool for rasters. The result of any raster logical operation is either <code>1</code> (True) or <code>0</code> (False), i.e.&nbsp;a <em>binary raster</em>, sometimes called a <em>raster mask</em>.</p>
+<p>Let us find the warmer places in Great Britain. Our highest minimum temperature of the coldest month (BIO6) value was 3.3 degrees. Let us limit our search to any place that doesn’t go below 0 Celsius.</p>
+<ol start="8" class="example" type="1">
+<li>Open the <code>Raster Calculator</code> again, and this time use the expression <code>" UK_bioclim_BG_GBmask_BIO6@1" &gt; 0</code>. Save it in a proper folder with the name <code>GB_mintemp_gt_0.tif</code> (gt for ‘greater than’) and run the calculation. You should get something like this:</li>
+</ol>
+<p><img src="images/lab_6/lab_6_fig3_mintemp_gt_0.jpg" class="img-fluid"> By default, QGIS will paint pixels with a value of <code>1</code> white, and <code>2</code> black. So the white areas now show us all regions of Great Britain that <em>on average</em> don’t go below zero in the worst of winter (these are long term climatic averages). Use the <code>Identify Features</code> tool to check if the pixel values are really <code>0</code> and <code>1</code>.</p>
+<ol start="9" class="example" type="1">
+<li>Now repeat the process for the precipitation layer. Our minimum annual precipitiation value was just above 500, so let us limit us to areas under 700mm of precipitation. Save the result as <code>GB_precip_lt_700.tif</code>.</li>
+</ol>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You may get a result that shows all of GB as white. This is because the calculator picks the lowest possible floating point number (<span class="math inline">\(-3.40282 \times 10^{+38}\)</span>) as nodata value, and then QGIS sets this value as black instead.</p>
+</div>
+</div>
+</section>
+<section id="raster-reclassification" class="level3" data-number="6.2.5">
+<h3 data-number="6.2.5" class="anchored" data-anchor-id="raster-reclassification"><span class="header-section-number">6.2.5</span> Raster reclassification</h3>
+<p>If we use the above raster with this extreme low number, we will get calculation errors. So before we proceed with our analysis, lets fix it.</p>
+<ol start="10" class="example" type="1">
+<li>We will use a tool from the <code>Processing</code> panel called <code>Reclassify by table</code>, also under the <code>Raster Analysis</code> heading. Find the tool and open it, and you will see this:</li>
+</ol>
+<p><img src="images/lab_6/lab_6_fig4_rec_by_table.jpg" class="img-fluid"></p>
+<ol start="11" class="example" type="1">
+<li>Pick <code>GB_precip_lt_700</code> as your <code>Raster layer</code>, and <code>band 1</code> as your <code>Band Number</code>. Then click on the <code>...</code> button besides the box for <code>Reclassification  table</code>, and fill the table like this:</li>
+</ol>
+<p><img src="images/lab_6/lab_6_fig5_rec_table.jpg" class="img-fluid"></p>
+<ol start="12" class="example" type="1">
+<li>Click on te blue arroew to go back to main tool window, then set the <code>nodata value</code> to <code>0</code>, the <code>Range Boundaries</code> to <code>min &lt;= value &lt;= max</code> and the <code>Output Data Type</code> to <code>Byte</code>. Save it as <code>GB_precip_lt_700_reclass.tif</code>. .</li>
+</ol>
+</section>
+<section id="band-vs.-band-raster-calculations" class="level3" data-number="6.2.6">
+<h3 data-number="6.2.6" class="anchored" data-anchor-id="band-vs.-band-raster-calculations"><span class="header-section-number">6.2.6</span> Band vs.&nbsp;band raster calculations</h3>
+<p>We now have two <em>raster masks</em> showing us all the GB areas that don’t go below zero Celsius and have less than 700mm of rain. How can we combine them into a single layer?</p>
+<p>The answer to the above question is still the <code>Raster Calculator</code>. We know the pixels we ‘want’ are numbered <code>1</code> on each layer, otherwise they are <code>0</code>. So if we could multiply one layer by the other, i.e.&nbsp;multiply the value of each pair of corresponding pixels, we would get a new raster whith values of <span class="math inline">\(1 \times 1 = 1\)</span> when both conditions are met, and a result of <span class="math inline">\(0 \times 1 = 1 \times 0 = 0 \times 0 = 0\)</span> if only one or none of the conditions are met. To do this in the <code>Raster Calculator</code> is as simple as it sounds:</p>
+<ol start="13" class="example" type="1">
+<li>Open the <code>Raster Calculator</code> and enter the expression `</li>
+</ol>
+</section>
+<section id="guided-exercise-x---mosaicking-and-stacking-rasters" class="level3" data-number="6.2.7">
+<h3 data-number="6.2.7" class="anchored" data-anchor-id="guided-exercise-x---mosaicking-and-stacking-rasters"><span class="header-section-number">6.2.7</span> Guided Exercise X - Mosaicking and Stacking rasters</h3>
+<p>As raster files are often very large and ‘heavy’, it is common to distribute them as <em>tiles</em> or <em>scenes</em>, i.e.&nbsp;smaller adjacent pieces that can be merged back together to cover a certain area of interest. And for satellite images, it is also common for each image band to be stored as a separate file. In this exercise, we will learn how to a) <em>mosaic</em> rasters - merge them together side by side to cover a largear and b) <em>stack</em> rasters - merge the different band files into a single file.</p>
+<ol start="14" class="example" type="1">
+<li>Download the data from this link. It contains four aerial images covering the Universoty of Stirling Campus and the Wallace Monument area. Extract the data and organise it.</li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>These images were originally downloaded from the ‘Aerial’ section of Digimap - if you ever need very detailed imagery of the UK surface, check it out!|</p>
+</div>
+</div>
+<ol start="15" class="example" type="1">
+<li>Each image is within its own folder, named <code>nsXXXX</code>, where <code>XXXX</code> is a four digit number. Load into QGIS all the <code>.tif</code> files in all four folders. There should be six files in total.</li>
+</ol>
+<div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Stop and Think
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>What do you think is the meaning of the <code>nsXXXX</code> folder names?</p>
+</div>
+</div>
+<div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>They indicate tiles in the OS British Grid system.</p>
+</div>
+</div>
+</div>
+<p>Notice that the airphoto for tile ns8196 has been provided with its three colour bands (RGB) as separate files. To be able to see them in colour, we must first <em>stack</em> these bands into a single file. The operation is called stack because you could visualise it as physically stacking them one on top of the other.</p>
+<ol start="16" class="example" type="1">
+<li>Go to <code>Raster &gt; Miscellaneous &gt; Merge...</code>. You will get a window like this:</li>
+</ol>
+<p><img src="images/lab_6/lab_6_fig6_merge.jpg" class="img-fluid"> (@) For <code>Input Layers</code>, click on the <code>...</code> button, and a list of all available raster layers will appear. You can drag the layer names to reorder them, and your final selection should the <code>ns8196_R</code>, <code>ns8196_G</code>, and <code>ns8196_B</code> layers, in this order from top to bottom:</p>
+<p><img src="images/lab_6/lab_6_fig7_merge_layers.jpg" class="img-fluid"> (@) Once you have selected the layers, click on the blue arrow to go back to the main window, then set the following parameters: check the box for <code>Place each input file into a separate band</code> (that tells QGIS you want a <em>stack</em>), and the <code>Output Data Type</code> to <code>Byte</code>. Then save the resulting file as <code>ns8196_RGB.tif</code> in the same folder where you had the three separate band files.</p>
+<div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Stop and Think
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Why do we change <code>Output Data Type</code> to <code>Byte</code>?</p>
+</div>
+</div>
+<div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The RGB colour system uses one byte (8-bits, 0-255 integer numbers) per colour channel to designate any colour. For example, the University of Stirling official green colour is R G B . the <code>Byte</code> option ensure we only use 8-bits per band, and keep the file size smaller. If we left it as <code>Float32</code>, the same 0-225 integer numbers would be stored as 32bit decimal numbers, quadrupling the size of the file for no reason.</p>
+</div>
+</div>
+</div>
+<ol start="17" class="example" type="1">
+<li>You should now have a properly colored image. Remove the three original single band layers from the project and then save it.</li>
+</ol>
+<p>Everything looks good colour-wise now, bur our airphoto is still actually four separate adjacent photos. That means anything processing we may want to do involving the entire area would have to be repeated four times. But we can combine these four tiles in a single airphoto <em>mosaic</em>.</p>
+<ol start="18" class="example" type="1">
+<li><p>Go back to <code>Raster &gt; Miscellaneous &gt; Merge...</code>. It is a bit confusing, but QGIS uses the same tool for both stacking and mosaicking.</p></li>
+<li><p>This time, check the four tiled RGB images as your <code>Input Layers</code>. Then make sure to <strong>not check</strong> the <code>Place each input file into a separate band</code> option this time. That will tell QGIS you want a mosaic and not a stack. Set the <code>Output Data Type</code> to <code>Byte</code> again, and save it as <code>UoS_RGB_mosaic.tif</code>. You should now have a single airphoto layer covering the entire area. Remove the previous individual layers from the project and save it again.</p></li>
+</ol>
+</section>
+<section id="raster-image-stretching" class="level3" data-number="6.2.8">
+<h3 data-number="6.2.8" class="anchored" data-anchor-id="raster-image-stretching"><span class="header-section-number">6.2.8</span> Raster image stretching</h3>
+<p>When working with multiband color images in a GIS environment, we can often manipulate the contrast of an image by applying different <em>contrast stretches</em> to each band. Especially when working with satellite images, which tend to look a bit ‘faded’ because of the atmospheric effect, sretching can make our images more vivid and easier to intepret.</p>
+<ol start="20" class="example" type="1">
+<li>Right-click on the airphoto mosaic layers and go to <code>Propertiers &gt; Symbology</code>. You will se that the symbology type is <code>Multiband color</code>, which is the correct choice for representing images. Note that each band is associated to a colour channel (R, G, B), but this association can be changed at will. Change the <code>Red band</code> to band 2, and the <code>Green band</code> to band 1, and <code>Apply</code>. Now the vegetation appears red! Change it back to the proper colour order and <code>Apply</code> again.</li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This is a useful feature when working with satellite images, which often have bands representing spectral regions that we cannot see, such as Near Infrared or Microwave. We can then freely associate these bands to color channels and create <code>false colour compositions</code> that highlight different surface features. The example below shows the UoS campus as seen from the Sentinel-2 satellite. The Red band is actually represented in the blue channel, while the green colour is used to show the Near-Infrared band (NIR), and the red channel is used to represent the Short-Wave Infrared Band (SWIR). Since water reflects visible light and absorbs IR, the loch appears blue. Plants reflect mostly in the NIR region so appear green, and bare ground reflects mostly in the SWIR, thus appearing red.</p>
+<p>(INSERT UOS SENTINEL IMAGE)</p>
+</div>
+</div>
+<ol start="21" class="example" type="1">
+<li><p>Notice how the <code>Min</code> and <code>Max</code> values for each band are <code>0</code> and <code>255</code>, meansing we are mapping our screen colours to the entire range of possible values (0-255). But quite often the colours in an image do not cover the entire range, so we are ‘wasting’ colour discrimination.</p></li>
+<li><p>Change the <code>No Enhancement</code> option to <code>Stretch to Min/Max</code>, and then expand the <code>Min/Max Value Settings</code> heading. Pick the <code>Min/Max</code> option, and select <code>Whole Raster</code> for <code>Statistics Extent</code> and <code>Actual(slower)</code> for <code>Accuracy</code>, then click on <code>Apply</code>. You will see that while band 1 and band 3 do use the entire 0-255 range, band 2 uses the 2-255 range only.</p></li>
+</ol>
+<p>To further enhance the contrast of images, we can tell QGIS to ‘cut off’ the extreme values of the range, using different methods.</p>
+<ol start="23" class="example" type="1">
+<li><p>Change the <code>Min/Max Value Settings</code> option to <code>Cumulative Count Cut</code>, and then<code>Apply</code>. Now the <code>Min</code> and <code>Max</code> color values for each band are (13-189, 29-187,and 31-164 respectively), and the image should look more vivid. What QGIS did was remove the lowest 2% (2% percentile) and the highest 2% (98% percentile) values from the calculation of Min/Max values, thus <em>stretching</em> this smaller number range to the full colour range of the screen.</p></li>
+<li><p>Progressively increase the lower percentile (i.e.&nbsp;from 2% to 3%) and decrease the upper percentile (i.e.&nbsp;from 98% to 97%) and notice how the contrast gets progressively stronger. If you go too far (i.e.&nbsp;too narrow a range, you start to see <em>pixel saturation</em> - many of the pixels will be outside the range and thus mapped to fully black or fully white).</p></li>
+</ol>
+<p>A second way to calculate the stretch is to use standard deviations. You may remember from statistics that when you assume a Normal distribution, a distance of <span class="math inline">\(\pm 1 \sigma\)</span> from the mean will capture about 68% of the data, <span class="math inline">\(\pm 2 \sigma\)</span> will capture 98%, <span class="math inline">\(\pm 3 \sigma\)</span> will capture X % and so on:</p>
+<p>INSERT FIG SD</p>
+<ol start="25" class="example" type="1">
+<li><p>Change the <code>Min/Max Value Settings</code> option to <code>Mean +/- Standard Deviation x</code>, and leave the multiplier at <code>2</code>. Aplly and check the contrast. Then change the multiplier to <code>1</code> and <code>Apply</code>, and compare the contrast of using <span class="math inline">\(\pm 1 \sigma\)</span> vs.&nbsp;<span class="math inline">\(\pm 2 \sigma\)</span>.</p></li>
+<li><p>Set the final image contrast to your linking, and exit the <code>Properties</code> window. Save your project.</p></li>
+</ol>
 <p>Return to the Symbology window, and expand the option Min / Max Value Settings. What is the default option selected? Experiment with the other options (with different percent clips and standard deviations) and see how the Symbology changes. Remember to Apply the changes every time you change any options. Still, on the Symbology window, change the Classification options (drop-down menu to the left, under the classes) from Continuous to Equal Interval. To the right of it, select the number of classes as 3. Then Apply and evaluate. Without changing your number of classes, change the Interpolation option above the classes from Linear to Discrete. Apply and evaluate. Take some time to play with these visualisation options to analyse the distribution of different Bioclimatic variables in the UK, and think about what they mean for plants, (non-human) animals and in terms of social and economic factors. Finally, let’s work on the Symbology for the SRTM data. On the Symbology window, choose the Singleband Pseudocolor option, and then on the Color Ramp option, select Create New Color Ramp. On the small options window that comes up, select Catalog:cpt-city. Once the catalogue window opens, go to the Topography list and select the cd-a palette. Then classify your elevation values using the User Defined Min /Max option, and type 0 as Min and 900 as Maximum. Apply and visualise. Then, before closing the Properties window, go to the Transparency table and drag the slider at the top to around 60%.</p>
 <p>Right-click on the SRTM layer name and select Duplicate layer (this step is useful to create a copy of a layer and retain symbology. Remember, this is a temporary layer). Now, on the Symbology of the copied layer, change the render type to Hillshade. Apply and close the window. Make sure the copied layer is immediately under the original layer, and alternate each layer between on and off.</p>
 <p>Stop and think:</p>

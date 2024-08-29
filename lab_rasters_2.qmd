@@ -43,6 +43,156 @@ Do these values seem too extreme for the UK? What is going on here?
 The metadata for the BIO layers states that temperature values are scaled by a factor of 10, so you need to divide these numbers by 10 to get proper Celsius units.
 :::
 
+(@) Now repeat the process to get the Min and Max values for BIO12 (532 and 2311)
+
+::: {.callout-important title="Stop and Think"}
+What are the units for precipitation?
+:::
+
+::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
+The metadata for the BIO layers states that annual precipitation is given in mm. One milimitre of rain is equal to one liter per squared metre.
+:::
+
+### Per-pixel calculations with the raster calculator
+
+Although it is easy enough to covert the temperature pixel values to Celsius in our heads, it would be useful to have the data in the proper units, especially if we want to map it later. Let us use the `Raster Calculator` to apply the conversion factor to all pixels. 
+
+(@) Go to `Raster > Raster Calculator` or click on the () button to launch the calculator. It will look like this:
+
+![](images/lab_6/lab_6_fig2_rastercalc.jpg)
+
+The general idea is similar to the `Field Calculator`, with a slightly different layout. The top right panel lists all raster *bands* in the project (so `UK_bioclim_BG_GBmasked@19` means band 19 of the BIOCLIM raster). The top right panel lets us pick some options for our raster creation, and the bottom panel let's us type expressions.
+
+(@) We need to divide all BIO6 temperature values by 10. Double click on the BIOCLIM band 6 in the bands list to add it to the expression panel, and then add the division by `10`. On my project, the expression panel looks like `"UK_bioclim_BG_GBmasked@6" / 10`, but your BIOCLIM layer may not be named the same as mine. Note that the bottom of the expression panel should say `Expression Valid`. If it says `Expression Invalid`, check your typing (did you use the double quotes?)
+
+(@) For `Output Layer`, click on the `...` button and pick a folder so save the new file. Name it `UK_bioclim_BG_GBmasked_BIO6.tif`. Leave the rest as default and click in `OK`.
+
+::: {.callout-important title="Stop and Think"}
+How many bands has your newly created file?
+:::
+
+::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
+Only one band, holding the results of the calculation.
+:::
+
+Every time you enter an expression involving a raster band and a single number in the `Raster Calculator` you are telling QGIS to apply the same expression to each pixel of that band. In our case, we dividided all pixel values by 10.
+
+### Boolean (logical) operations with the raster calculator
+
+The `Raster Calculator` also fulfills the role of the vector `Select by expression` tool for rasters. The result of any raster logical operation is either `1` (True) or `0` (False), i.e. a *binary raster*, sometimes called a *raster mask*.
+
+Let us find the warmer places in Great Britain. Our highest minimum temperature of the coldest month (BIO6) value was 3.3 degrees. Let us limit our search to any place that doesn't go below 0 Celsius. 
+
+(@) Open the `Raster Calculator` again, and this time use the expression `" UK_bioclim_BG_GBmask_BIO6@1" > 0`. Save it in a proper folder with the name `GB_mintemp_gt_0.tif` (gt for 'greater than') and run the calculation. You should get something like this:
+
+![](images/lab_6/lab_6_fig3_mintemp_gt_0.jpg)
+By default, QGIS will paint pixels with a value of `1` white, and `2` black. So the white areas now show us all regions of Great Britain that *on average* don't go below zero in the worst of winter (these are long term climatic averages). Use the `Identify Features` tool to check if the pixel values are really `0` and `1`.
+
+(@) Now repeat the process for the precipitation layer. Our minimum annual precipitiation value was just above 500, so let us limit us to areas under 700mm of precipitation. Save the result as `GB_precip_lt_700.tif`.
+
+::: {.callout-warning}
+You may get a result that shows all of GB as white. This is because the calculator picks the lowest possible floating point number ($-3.40282 \times 10^{+38}$) as nodata value, and then QGIS sets this value as black instead. 
+:::
+
+### Raster reclassification
+
+If we use the above raster with this extreme low number, we will get calculation errors. So before we proceed with our analysis, lets fix it. 
+
+(@) We will use a tool from the `Processing` panel called `Reclassify by table`, also under the `Raster Analysis` heading. Find the tool and open it, and you will see this:
+
+![](images/lab_6/lab_6_fig4_rec_by_table.jpg)
+
+(@) Pick `GB_precip_lt_700` as your `Raster layer`, and `band 1` as your `Band Number`. Then click on the `...` button besides the box for `Reclassification  table`, and fill the table like this:
+
+![](images/lab_6/lab_6_fig5_rec_table.jpg)
+
+(@) Click on te blue arroew to go back to main tool window, then set the `nodata value` to `0`, the `Range Boundaries` to `min <= value <= max` and the `Output Data Type` to `Byte`. Save it as `GB_precip_lt_700_reclass.tif`. .
+
+### Band vs. band raster calculations
+
+We now have two *raster masks* showing us all the GB areas that don't go below zero Celsius and have less than 700mm of rain. How can we combine them into a single layer?
+
+The answer to the above question is still the `Raster Calculator`. We know the pixels we 'want' are numbered `1` on each layer, otherwise they are `0`. So if we could multiply one layer by the other, i.e. multiply the value of each pair of  corresponding pixels, we would get a new raster whith values of $1 \times 1 = 1$ when both conditions are met, and a result of $0 \times 1 = 1 \times 0 = 0 \times 0 = 0$ if only one or none of the conditions are met. To do this in the `Raster Calculator` is as simple as it sounds:
+
+(@) Open the `Raster Calculator` and enter the expression `
+
+
+
+### Guided Exercise X - Mosaicking and Stacking rasters
+
+As raster files are often very large and 'heavy', it is common to distribute them as *tiles* or *scenes*, i.e. smaller adjacent pieces that can be merged back together to cover a certain area of interest. And for satellite images, it is also common for each image band to be stored as a separate file. In this exercise, we will learn how to a) *mosaic* rasters - merge them together side by side to cover a largear and b) *stack* rasters - merge the different band files into a single file. 
+
+(@) Download the data from this link. It contains four aerial images covering the Universoty of Stirling Campus and the Wallace Monument area. Extract the data and organise it. 
+
+::: {.callout-tip}
+These images were originally downloaded from the 'Aerial' section of Digimap - if you ever need very detailed imagery of the UK surface, check it out!|
+:::
+
+(@) Each image is within its own folder, named `nsXXXX`, where `XXXX` is a four digit number. Load into QGIS all the `.tif` files in all four folders. There should be six files in total.
+
+::: {.callout-important title="Stop and Think"}
+What do you think is the meaning of the `nsXXXX` folder names?
+:::
+
+::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
+They indicate tiles in the OS British Grid system. 
+:::
+
+Notice that the airphoto for tile ns8196 has been provided with its three colour bands (RGB) as separate files. To be able to see them in colour, we must first *stack* these bands into a single file. The operation is called stack because you could visualise it as physically stacking them one on top of the other. 
+
+(@) Go to `Raster > Miscellaneous > Merge...`. You will get a window like this:
+
+![](images/lab_6/lab_6_fig6_merge.jpg)
+(@) For `Input Layers`, click on the `...` button, and a list of all available raster layers will appear. You can drag the layer names to reorder them, and your final selection should the `ns8196_R`, `ns8196_G`, and `ns8196_B` layers, in this order from top to bottom:
+
+![](images/lab_6/lab_6_fig7_merge_layers.jpg)
+(@) Once you have selected the layers, click on the blue arrow to go back to the main window, then set the following parameters: check the box for `Place each input file into a separate band` (that tells QGIS you want a *stack*), and the `Output Data Type` to `Byte`. Then save the resulting file as `ns8196_RGB.tif` in the same folder where you had the three separate band files. 
+
+::: {.callout-important title="Stop and Think"}
+Why do we change `Output Data Type` to `Byte`?
+:::
+
+::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
+The RGB colour system uses one byte (8-bits, 0-255 integer numbers) per colour channel to designate any colour. For example, the University of Stirling official green colour is R G B . the `Byte` option ensure we only use 8-bits per band, and keep the file size smaller. If we left it as `Float32`, the same 0-225 integer numbers would be stored as 32bit decimal numbers, quadrupling the size of the file for no reason. 
+:::
+
+(@) You should now have a properly colored image. Remove the three original single band layers from the project and then save it. 
+
+Everything looks good colour-wise now, bur our airphoto is still actually four separate adjacent photos. That means anything processing we may want to do involving the entire area would have to be repeated four times. But we can combine these four tiles in a single airphoto *mosaic*.
+
+(@) Go back to `Raster > Miscellaneous > Merge...`. It is a bit confusing, but QGIS uses the same tool for both stacking and mosaicking.
+
+(@) This time, check the four tiled RGB images as your `Input Layers`. Then make sure to **not check** the `Place each input file into a separate band` option this time. That will tell QGIS you want a mosaic and not a stack. Set the `Output Data Type` to `Byte` again, and save it as `UoS_RGB_mosaic.tif`. You should now have a single airphoto layer covering the entire area. Remove the previous individual layers from the project and save it again.
+
+### Raster image stretching
+
+When working with multiband color images in a GIS environment, we can often manipulate the contrast of an image by applying different *contrast stretches*  to each band. Especially when working with satellite images, which tend to look a bit 'faded' because of the atmospheric effect, sretching can make our images more vivid and easier to intepret. 
+
+(@) Right-click on the airphoto mosaic layers and go to `Propertiers > Symbology`. You will se that the symbology type is `Multiband color`, which is the correct choice for representing images. Note that each band is associated to a colour channel (R, G, B), but this association can be changed at will. Change the `Red band` to band 2, and the `Green band` to band 1, and `Apply`. Now the vegetation appears red! Change it back to the proper colour order and `Apply` again.
+
+::: {.callout-tip}
+This is a useful feature when working with satellite images, which often have bands representing spectral regions that we cannot see, such as Near Infrared or Microwave. We can then freely associate these bands to color channels and create `false colour compositions` that highlight different surface features. The example below shows the UoS campus as seen from the Sentinel-2 satellite. The Red band is actually represented in the blue channel, while the green colour is used to show the Near-Infrared band (NIR), and the red channel is used to represent the Short-Wave Infrared Band (SWIR). Since water reflects visible light and absorbs IR, the loch appears blue. Plants reflect mostly in the NIR region so appear green, and bare ground reflects mostly in the SWIR, thus appearing red.
+
+(INSERT UOS SENTINEL IMAGE)
+:::
+
+(@) Notice how the `Min` and `Max` values for each band are `0` and `255`, meansing we are mapping our screen colours to the entire range of possible values (0-255). But quite often the colours in an image do not cover the entire range, so we are 'wasting' colour discrimination. 
+
+(@) Change the `No Enhancement` option to `Stretch to Min/Max`, and then expand the `Min/Max Value Settings` heading. Pick the `Min/Max` option, and select `Whole Raster` for `Statistics Extent` and `Actual(slower)` for `Accuracy`, then click on `Apply`. You will see that while band 1 and band 3 do use the entire 0-255 range, band 2 uses the 2-255 range only.
+
+To further enhance the contrast of images, we can tell QGIS to 'cut off' the extreme values of the range, using different methods. 
+
+(@) Change the `Min/Max Value Settings` option to `Cumulative Count Cut`, and then`Apply`. Now the `Min` and `Max` color values for each band are (13-189, 29-187,and 31-164 respectively), and the image should look more vivid. What QGIS did was remove the lowest 2% (2% percentile) and the highest 2% (98% percentile) values from the calculation of Min/Max values, thus *stretching* this smaller number range to the full colour range of the screen. 
+
+(@) Progressively increase the lower percentile (i.e. from 2% to 3%) and decrease the upper percentile (i.e. from 98% to 97%) and notice how the contrast gets progressively stronger. If you go too far (i.e. too narrow a range, you start to see *pixel saturation* - many of the pixels will be outside the range and thus mapped to fully black or fully white).
+
+A second way to calculate the stretch is to use standard deviations. You may remember from statistics that when you assume a Normal distribution, a distance of $\pm 1 \sigma$ from the mean will capture about 68% of the data, $\pm 2 \sigma$ will capture 98%, $\pm 3 \sigma$ will capture X % and so on:
+
+INSERT FIG SD
+
+(@) Change the `Min/Max Value Settings` option to `Mean +/- Standard Deviation x`, and leave the multiplier at `2`. Aplly and check the contrast. Then change the multiplier to `1` and `Apply`, and compare the contrast of using $\pm 1 \sigma$ vs. $\pm 2 \sigma$. 
+
+(@) Set the final image contrast to your linking, and exit the `Properties` window. Save your project. 
 
 
 
