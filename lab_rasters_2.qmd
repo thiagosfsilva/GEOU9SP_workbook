@@ -1,4 +1,4 @@
-# Lab 6: The raster calculator and other rastery bits {sec-labras2}
+# Lab 6: The raster calculator and other rastery bits {#sec-labras2}
 
 ....
 

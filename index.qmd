@@ -6,6 +6,4 @@ This book is **not a replacement to Canvas**, so make sure you are engaging with
 
 The content of this book is organised into sections, which will correspond to the teaching weeks and practical lab sessions. You will always see the main content in the center window, with a detailed menu covering all entries in the book on the left, and a chapter-specific table of contents on the right. The Canvas pages for each lab session will always link to the corresponding chapter in this book.  
 
-A PDF version of this book can be downloaded [here]().
-
 If you have any questions follow the instructions on Canvas on how to [contact the module coordinator](). 

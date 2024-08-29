@@ -18,10 +18,45 @@ For every week, we will list the main theoretical and practical learning goals. 
 
 ### Theoretical knowledge for Week 3:
 
+- What is the raster data model?
+    - How are rasters represented?
+- What are the components of a raster file (rows, columns, bands/channels, resolution)?
+- What are the main raster file formats?
+- What data types can rasters represent?
+- What kinds of data can we represent using raster data?
+- Raster / vector component equivalence
+- Raster / vector tool equivalence
+    - No concept of ‘ selection’ 
+- What kinds of questions can we answer using rasters?
+- How can we transform rasters to vectors and vice-versa
+    - The concept of raster resampling
+    - The concept of raster contrast manipulation
+
 ### Practical knowledge:
 
-[@sec-exraster1]
+[@sec-labras1]
 
-[@sec-exraster2]
+- How to identify raster files
+- How to load raster files 
+- How to get raster properties
+- How to reproject raster data
+- How to mask rasters
+- How to set raster symbology
+    - Continuous variables
+    - Categorical variables 
+- How to use the identify tool to get raster information on the fly
 
+[@sec-labras2]
+
+- How to calculate raster statistics 
+- How to ‘select’ using the raster calculator 
+    - Boolean operators on the same band
+    - Boolean operators between bands
+    - Band arithmetic
+    - Making flowcharts
+- Mosaicking rasters
+- Working with Digital Elevation Models
+    - Calculating slope, aspect and viewshed
+- Styling raster Images 
+- Resampling methods
 

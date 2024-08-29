@@ -1,4 +1,4 @@
-# Lab 5: Working with raster data {#sec-labvec1}
+# Lab 5: Working with raster data {#sec-labras1}
 
 So far, we have been working within the realm of vector data: beautiful topological combinations of vertices and lines to represent the complexity of the Earth’s surface. But there are plenty of situations where vectors are not the best choice; any information that varies gradually and continuously over the surface can be better represented by a raster.
 

@@ -32,7 +32,7 @@ Use this list as a 'check-list' to gauge your learning for each week. If you don
 
 ### Practical knowledge:
 
-[@sec-lab_vec1]
+[@sec-labvec1]
 
 - How to identify a vector file format
 - How to load a vector file
@@ -50,7 +50,7 @@ Use this list as a 'check-list' to gauge your learning for each week. If you don
     - Categorised
     - Graduated
 
-[@sec-lab_vec2]
+[@sec-labvec2]
 
 - How to do combined attribute queries (AND / OR) 
 - How to calculate new attributes
