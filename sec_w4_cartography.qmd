@@ -1,6 +1,6 @@
 # Week 4 - Making maps
 
-This week, we will 
+This week is about visualising spatial data. For as long as Geography existed, maps have been a key way of communicating spatial information to other people. Most rules of visual design also apply to map making, but there are some additional constraints: maps need to have a proper scale, a coordinate grid (or graticule), and often a north arrow. Maps, like statistical plots, must also have a comprehensive legend, associating all visual variables present on the map to an interpretation key. Maps also often make use of textual labels to help give spatial context to the displayed information.
 
 ## ILOs covered
 
@@ -16,7 +16,7 @@ For every week, we will list the main theoretical and practical learning goals. 
 
 ### Practical knowledge:
 
-[@sec-exmaps1]
+[@sec-carto1]
 
-[@sec-exmaps2]
+[@sec-carto2]
 

@@ -48,7 +48,7 @@ You may have noticed that your Digimap census data download includes many OA pol
 
 (@) Set the symbology of the Stirling boundaries to a red outline without fill. Then make sure this layer is on top of the census layer. Then zoom in very close to the Stirling boundary. You will see they are offset by about 1.5m:
 
-![](images/lab_geoprocessing/Fig3_boundary_offset)
+![](images/lab_geoprocessing/Fig3_boundary_offset.png)
 
 We thus need to further subset our data to match the actual extent of the Stirling coucil. 
 
@@ -126,9 +126,9 @@ What will change in your results if you use `Intersection` instead of `Clip`?
 
 (@) Since the buffers have been *dissolved*, they can't be linked to individual schools anymore - whenever the buffers of two schools overlap their attribute tables will just keep the name of one of the schools when they are dissolved. So no need to preserve the buffer attributes, and we can use `Clip`. Create two new layers, the first being the clipping of the census layer by the 1km buffer layer, and the second being the clipping of the census layer by the 1km-2km 'donuts' layer. We use it instead of the 2km buffer otherwise when we calculate the percentage of area within 2km we will be double counting the area within 1km - which is already covered by the 1km buffer. 
 
-You should end up with something like the figure below. To make sure the layers don't overlap, style them using hatching in different directions. If you see a cross-hatch, theyn they are overlapping, and it means you used the full 2km buffer instead of the 1km-2km 'donut':
+You should end up with something like the figure below. To make sure the layers don't overlap, style them using hatching in different directions. If you see a cross-hatch, then they are overlapping, and it means you used the full 2km buffer instead of the 1km-2km 'donut':
 
-![](images/lab_geoprocessing/fig4_clipped_buffers)
+![](images/lab_geoprocessing/fig4_clipped_buffers.png)
 
 (@) Now we can calculate the area percentages. First, re-calculate the polygon areas for the clipped layers, using the `Field Calculator`. Create a new attribute called `clip_area`, and assign the `$area` operator to it again. Remember to set it as a decimal number.
 

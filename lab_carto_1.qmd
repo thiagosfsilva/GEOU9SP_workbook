@@ -1,0 +1,2137 @@
+# Lab 6: Making Maps - Part I {#sec-carto1}
+
+
+
+## Context
+
+One of my favorite TV shows of all time is the series ['The Last Kingdom](https://en.wikipedia.org/wiki/The_Last_Kingdom_(TV_series)). I was already a fan of the books, and I think they translated it to TV very well. 
+
+One of the key plots in the show is that the main character Uthred, wants to reclaim his birthright, the castle of Bebbanburg. Turns out this is a real castle, and it still exists today, known as [Bamburgh Castle](https://en.wikipedia.org/wiki/Bamburgh_Castle), in Northumberland. It is a great place to visit, very scenic!
+
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Bamburgh_Castle%2C_beautiful_day.jpg/1023px-Bamburgh_Castle%2C_beautiful_day.jpg)
+
+So for this mapping exercise, we will create a map that could ne used to guide someone wanting to visit the location, inlcuding road and train access, some conext information, and a close-up aerial view of the castle. It wil be fun!
+
+## Guided Exercise 1 - Getting the data
+
+We will use sereval datasets for this exercise. First, we will need the OS 50m Digital Elevation Model, the Open Roads, Open Rivers, 
+
+
+OS Open data: https://osdatahub.os.uk/downloads/openLinks to an external site.
+
+Heritage Data: https://historicengland.org.uk/listing/the-list/data-downloads/Links to an external site.
+
+Aerial Images: https://digimap.edina.ac.uk/aerial
+
+Strategi: https://digimap.edina.ac.uk/os
+
+
+
+1
+Notes
+Bookmarks
+Hide
+Hi, everyone. So we're starting know the series of videos about mapping in Huges, but it's not the first video, actually.
+0:02
+I will show you some good base maps to download from the open data from the ordinance survey of Great Britain.
+0:09
+It can help us map a region. So you can always go.
+0:15
+Go. Oh, yes. Open data and we'll take you straight to the downloads page.
+0:19
+Can you search and you see that there's different options, for example,
+0:26
+there's rester data with the very complex maps that they have in terms of reference.
+0:29
+But the nice thing here is that we can get some made maps, but also individual data, so can make our own maps.
+0:36
+OK, we're gonna download this one, the Great Britain overview maps.
+0:44
+So those are just some premade preety sort of like overview.
+0:49
+Maps of the whole of the UK that we can use to do sort of location maps so we can just download this and if you click here overview maps,
+0:56
+then he's going to download I'm gonna cancel because I actually downloaded all this data already.
+1:05
+Just showing you here overview maps. Once you're done, go back.
+1:10
+We also cannot download. The open names data set, and you can download that as a geo package.
+1:16
+Actually, no, we're not going to use open names, so skip that.
+1:33
+We're going to Dallow, this strategic web map to tease you,
+1:42
+has some specific data on major roads in some locations and some stuff at the regional level and download it as a shapefile.
+1:46
+We're gonna download the OS touring. Fifty. OK, this is very heavy.
+2:07
+You need to download link for all of Great Britain, which is a bit tough.
+2:13
+So we're going to skip this one. We're going to download this one from d.g map because did you map let us cut this data.
+2:18
+Let's go back to the open data and then the final one, we one is the vector map district.
+2:24
+OK. And this one to make sure we don't have. Boatload of data that we don't need.
+2:29
+We're going to set a custom area and we're just going to use for now data from the end, you 10 kilometre square off the OSP Stiles style map case.
+2:36
+You can click on Enu to select Save Selection and then you can also download as a shapefile.
+2:45
+Okay, you can download as a div. But if you download as a Jew, if it comes premade and we don't want that because we do not want to.
+2:53
+I'm not interested in evaluating if the OS cartographer's know how to make maps.
+3:03
+I'm interested in evaluating how you make maps. So let's get the shape files with individual features.
+3:08
+Okay. So just going back again, we want overview maps.
+3:13
+We want. Strategic.
+3:19
+We want vector map from here. OK, and I'll show you here what I have downloaded already.
+3:25
+So these are the overview maps. These are the strategic layer.
+3:37
+And this is the vector map district vector data.
+3:44
+Then we're going to go to d.g map. Is your map.
+3:52
+And we want ordnance survey data. If you haven't logged, get logged in in a while, it does ask you it's going to ask you to log again.
+4:00
+So then you select University of Sterling, you enter your data, your irregular log.
+4:06
+And so one way you're going to come to data download. We can turn on a reference grid here.
+4:11
+So we can again zoom in to the and you. Region.
+4:19
+And then we can take. The square and we want to draw.
+4:25
+Enu region. And now we're going to come here to land and height data bolstering 50 DTM.
+4:32
+And we can add that to Baskett. And then it was going to send us email with a link to download again.
+4:44
+I already downloaded that. I'm not going to do it. And that would be welcome.
+4:50
+What does name download?
+4:58
+And the number of download which is going to change because this is sort of like the cumulative number of all the downloads in d.g map.
+4:59
+And then there's one less data set that we want. Which are some historical sites for the key so we can just Google historical sites, U.K. shapefile.
+5:08
+That's usually how we start any search to find spatial data. I put shapefile instead of vector because most people use the term is like saying you
+5:18
+Gillette instead of a razor or because this or I guess maybe that's a Brazilian thing.
+5:27
+Never mind. Anyway, it's just that everybody's going to call vector shape files.
+5:34
+And then the first head that it get is just download listing data, J.S. ship files.
+5:39
+I can click here. Well, this is all the data that we have.
+5:45
+Oh, Pich. Listed buildings. I have to give a reason for using the data.
+5:50
+I'll do other end of put and location.
+5:56
+And then it would let us download and give us this open licence agreements, the same open licence for other ordinance or data.
+6:04
+Once you accept that is going to download. But again, I already downloaded and has this listed buildings that zip.
+6:12
+And so we have now a good combination of files to work with.
+6:19
+Finally, what we want to get from digital maps, which might be nice.
+6:24
+And I'll get that because this has to do with the area that I decided to map.
+6:30
+We're going to go back to the main the new map.
+6:35
+Area merciless. Aerial. You can go to aerial data download.
+6:40
+We can just select the latest aerial image that we have. Let's zoom in and a reference grids here.
+6:47
+Q Okay, so it's we're in the end you region.
+6:55
+Let's zoom in a bit closer, closer, closer, and we will actually want to get data for this area around here.
+7:01
+The Bamberg area, we can grab square.
+7:12
+No, maybe grab that sea from here.
+7:18
+There is a big area. Let's see, 30 tree tiles. Uh, yeah.
+7:29
+Let's make it a bit smaller. Just do a fix.
+7:34
+Go ahead and go back in a little bit. Can let's get from.
+7:40
+From. To hear love and tales, that's a bit better at best, get one high resolution for my gym bag.
+7:47
+I don't have any options. Do this Bamberg and actually crest and yellow.
+8:04
+It's gonna take a few minutes and then a date is gonna come in and I'm gonna download that as well.
+8:15
+And with that, we have all the data we need to start doing our mapping.
+8:19
+Okay. I'll see you then in the next video.
+8:23
+2
+All right, so now that we have downloaded all of our data, we moved that to our organised folder.
+0:01
+So, my dear, you and I asked folder week for and I have at least two buildings, my overview maps, my strategy data set, my vector map district data,
+0:07
+set the download for my OS map 50 metres digital turning model on a download for the aerial images of the Bambrick area.
+0:19
+If I want, I can select all of these. Or you can do the extract all one using the windows.
+0:29
+So I think everybody let's see what's going to happen strict.
+0:41
+I usually don't do the windows. Mean one. Yeah.
+0:48
+So if you just have to play one on windows, it's going to extract just one at a time.
+0:52
+So need to repeat that for old files again. I like to use seven zip because I think it's very handy.
+0:58
+So for example, I can do extract here and you would extract all the files that I selected.
+1:06
+Some of them come organised in folders.
+1:13
+Insight does it, while some others, they just don't have any for their organisation, so they got extracted appear.
+1:17
+But let's do some organisation here. This is my download Bamberg, which is actually my aerial data.
+1:25
+So let's just do F2 to rename aerial photos.
+1:33
+Emberg. This is my OS vector map.
+1:41
+But again, we don't like spaces on the file, so I just do os vector map district.
+1:45
+We don't need to know this as we should file. Let's keep the enu so we know the region.
+1:53
+This is the strategic data set now we've downloaded.
+2:01
+So you have two strategic OS data set.
+2:06
+This is out terrain, 50 metres, I guess. Looks good enough in terms of name or just do enough to rename.
+2:14
+I can always press F2 on my screen, on my keyboard to rename.
+2:24
+Alternatively, I can right. Click and see rename. And.
+2:30
+We've got I have this. OK.
+2:37
+It should make things better. I can come here f to do rename touring 50.
+2:42
+It is renamed now. This one citation or does doesn't, et cetera.
+2:56
+As for the terrain data. So just copy that and throw it in here.
+3:00
+This is the first zip file that we don't need anymore. Now, this is our Great Britain overview.
+3:07
+Oh, just copy. Select all of those. Here and in shift to select everybody and will.
+3:14
+But we first create a folder will come up here folder and do GOP overview maps.
+3:27
+And then I can grab those two. And bring them over here.
+3:40
+Okay. Now, those are the historical sites which come under us listed zip.
+3:46
+I'll clear that. And then again, create a new folder listed historical buildings.
+3:52
+And I can grab all of this. And this, which is the licence and drop over here.
+4:05
+OK. And then I can get rid of those zip files as well.
+4:15
+And I should have all my data nicely organised. Well, it might work for foder if I want to make it even more organised.
+4:19
+I can do a new folder and call in Vector and it should be storico buildings, vector map and strategic and I can do a new one and call it.
+4:27
+Restor and ERU photos arrestor.
+4:43
+The terrain is Restor and the overview maps are also arrestor and it them in here.
+4:48
+So we're all organised. Then I can go into Kubis and start playing with the data.
+4:54
+I'll start a new project. Outcome to a project.
+5:01
+Project properties and set my properties to what I want before I I'm working.
+5:05
+I'm going to be mapping a region of the UK. So I'm going to use the British National Grid as my coordinate reference system.
+5:10
+I want my OK, measuring. Measuring metres unit for error measurement.
+5:19
+I usually like square kilometres or hectors, everything else should be.
+5:24
+OK. Apply. Okay.
+5:31
+My project is set. Now, again, I have my unanimous folder saved here as a favourite so I can come and look at my data.
+5:35
+Let's start with arrestor data. Let's see what it looks like so we can first bring the overview maps.
+5:45
+We have two maps, overview and overview plus.
+5:52
+I'm right here, and that's what it looks like, it's just a pre styled raster fight, you see, it's arrested because if you zoom in, it lose definition.
+5:56
+So they're not very good to do anything zooming in, but they're handy to make sort of like reference overview maps of locations.
+6:04
+And in this case, I don't mind if you use a premade map because that's just an overview map.
+6:12
+It's okay. We're going to you're going to see how, again, how this map is going to feature in our map composition later.
+6:18
+But it's fine. So the overview is the simpler one. The overview plus have a bit more location names and some major roads and things like that.
+6:23
+And it's the simple and assister plus. Cool.
+6:33
+Then we have our terrain data. Fifty here.
+6:39
+Region and you have all the method data and data metadata.
+6:44
+And what we want are those A-s C files. That's to ask.
+6:48
+Grade format from our. We want to select all of them.
+6:54
+And we can direct them here. Let's zoom to this layer just to get us in the ballpark.
+7:04
+There were few zoom out. We have always put the. That Chibi overview.
+7:16
+To the bottom. Now we can turn it on is to have a little reference where we are.
+7:24
+And here we have our touring, but it's tiles. So what will be the first thing we do if we want to use this data properly and make our life easier?
+7:33
+Think about it. I'll give you five seconds. We want to mosaic this data, right, to make it a single image.
+7:41
+So we have to style it only once. And we don't need to know which square we're working with.
+7:53
+So remember, we come to Restor. Miscellaneous Mirch.
+7:59
+We're going to select all of our input, all the input layers, one to merge.
+8:08
+So I just do type one hopes shift volume one.
+8:13
+And then I can do toggle selection and I select only the ones I had selected.
+8:19
+Now I can go back. I can leave everything else default, but I want to save my five because I know I'm going to use this file.
+8:25
+I'm going to save it directly to a file here and my wrester folder in my enduring folder.
+8:33
+I'm just gonna call it bogus 50 metre.
+8:41
+And you, Mosaic. So you OK, rumoured that we want to have this uncloaked,
+8:46
+does we click this when we want to stack Rasta's meaning, put several bands into a single file?
+8:55
+But the bands go on top of each other.
+9:02
+When we went to Mosaic, which means street stitching tiles together side by side, we did not want to collect this data and run it work, work, clothes.
+9:05
+And so we now have a very nice mosaic of the area and we can come here and select our news.
+9:17
+And right, click and remove. S.
+9:27
+Now we have a single Mozi that we can work. That was easy.
+9:32
+And then finally, we have the aerial photos that we downloaded here within this mapping also.
+9:38
+And you and those are coming in JPEG format. It is unusual, but yes, Jay bags can also be your reference.
+9:44
+They have internal metadata, just like Q tips.
+9:54
+Don't make them do your reference. We select selected all or jay bags.
+10:02
+And then we can bring them in. And we have.
+10:08
+Elected one wrong, which went too far, too late. Mr. Square here is probably one file that I probably collected wrong.
+10:15
+C.J. Thank you. Thank you. Interesting.
+10:23
+Well, let's see here we have our photo of the region.
+10:33
+So let me get my information data. If I'm clicking here, this is and you fifteen thirty five.
+10:39
+And this one is 1735. So I would assume this.
+10:50
+Sixteen thirty five. That's Graham, 16 35.
+10:54
+Peg. And he has a problem with it.
+11:03
+That's too bad. Why does he have a problem? I guess it didn't extract correctly.
+11:10
+It's been. Sixteen to five.
+11:17
+Taping it opens fine.
+11:23
+You're. I wonder why.
+11:28
+Said sixteen thirty five. Here.
+11:36
+If he's feeling pain, though. Luck messages.
+12:05
+OK. That provider can not open bogus Huffman table definition.
+12:13
+Now, that's a credible error, bogus Huffman table definition.
+12:22
+I have no idea what that is, but I'm going to try one final thing, which is to remove this SML file and see if that somehow interfering.
+12:28
+I don't know. Delete this.
+12:40
+Back to bogus Hofman table definition.
+12:53
+There's probably some issue and told them image was generated or how it's stored on or it could be an issue with compression.
+12:57
+All right. Download it later and see if I can fix it.
+13:07
+But let me know if you get the same error when you download from the GMAT.
+13:11
+So if you download from D, you have I'm not putting this data in the weak folder.
+13:17
+I wanted to download it directly from D you map so you get comfortable with it.
+13:21
+So if you do it and you'll get the exact same error, then it's a problem on the original data from the map.
+13:25
+If you don't, then it was a problem we might download. Oh, investigate.
+13:31
+Anyway, you let me know if you get the error. OK. We can close this window.
+13:35
+We're going to have this gap in here. Kids, okay, for now. This is our area image and we should do the same thing.
+13:42
+We should do the mosaic. Let's do.
+13:49
+Actually, let me pause and see if I can exceed two bucks.
+13:55
+Let me see if I can fix that data. And another way of posing, we didn't come right back.
+13:59
+3
+And we're back. And what I did was to open his image and and other software that has a programming language called R.
+0:02
+And then it was able to open it fine. And then I exported it as a duty of bringing a.
+0:11
+We fixed our whole. Can have a hotel in my area image.
+0:19
+Come on. OK. Now, process is the same.
+0:24
+We won two Mosaic. We do Rester Miscellaneous merge.
+0:28
+We'll take. All our folks here.
+0:34
+Torgau. Well, back output data tape.
+0:40
+We do not. What floor? 32. Because those are simple LGB images. So byte is fine.
+0:44
+We don't need a gigantic file. We have your data specifically merge and I'll do emerge as a temporary file.
+0:49
+I'll tell you why in a sec. Run it.
+1:02
+Run as a temporary file, sir. To complaining about it.
+1:06
+JPM data. Most images. And that's why kids, you always use geo diff because geo tiff is nice.
+1:10
+Nobody complains about geo if. You hear that?
+1:21
+Did you map? Now we have our merged mosaic.
+1:26
+That's. Remove all of those layers.
+1:35
+We had some issues here, which I gather from that problem with the GPA.
+1:43
+We did tile that was missing. Now I guess we can see it was the result of the bogus half above whatever actually table.
+1:50
+OK. Let's leave it like that. You make a map that doesn't show this area think should be OK right now.
+1:59
+I'll save this. So what do you see? Is that on the properties of the original data?
+2:07
+The series was not defined. Again, you know, teabag.
+2:12
+Not great. It knows where to place it, but it doesn't really bring the data.
+2:16
+So now what I can do is export. And Miss.
+2:21
+And I'll do a proper deal if my file name, we can come here and Esther and I'll do a photo.
+2:27
+Mosi Bambury. If I can actually set my mixing arrest, U.S. GDP, which I know it is, because all of that you can do is or has to be and do OK.
+2:36
+And now is going to actually save it. That's a file. And I can remove.
+2:52
+Oh, I know, I killed my kid. Oh, no, Spike, I can't remove the slayer, which is the temporary layer.
+3:16
+So I just we keep our original music. Okay.
+3:23
+We are good. So this is our rester data, and that's what sort of preparation that we wanted to do.
+3:29
+We don't raster data to make sure we could use it right vector data.
+3:35
+We don't need to prepare because it is all, you know, already prepare.
+3:40
+We don't have to mosaic raster data or anything.
+3:45
+So now I'll see you again on the next video where we're going to start to prepare our map composition.
+3:48
+I'll see you there.
+4
+And back to you just now, we can start to do a proper map composition the region.
+0:03
+The reason I actually chose this region is because, you know, I really like that TV series called The Last Kingdom, even before the TV series.
+0:10
+I have read the books back then, especially what was it, or at least back then.
+0:19
+And I really like the story. And I suppose if you haven't seen the series or read the books as set in mediaeval
+0:24
+England around the time of King Alfred when was trying to unify England.
+0:32
+And the main character is called Thread and Thread. It was the air of a castle.
+0:37
+And Beban Berg, which is nowadays known as Bambury Benbrika Castle.
+0:43
+And then he's taken by invading Danes.
+0:49
+He's raised by Danes and then he comes back and has all the story.
+0:53
+But his main goal in life is to go back and claim his ownership of Beban Berg off the land of his family.
+0:56
+And this is a place that actually went to visit just because I like the story so much.
+1:04
+And I know it's not far from here. So as soon as I can just go and visit.
+1:08
+But I thought. So we change a little bit from, you know, mapping sterling, sterling campus, sterling, sterling.
+1:13
+Let's look at Bamberg or as that's realty Bitburg.
+1:19
+I need to go back to bit the book, Delinda, of my family. If you don't understand the accent, watch the series.
+1:23
+Okay. So let's make our map of. Pembrook.
+1:32
+We have our overview map. We're not going to need that. No, no, actually, it's just group them here.
+1:41
+Groups selected and do overview.
+1:51
+We're not going to need it too much later. So I'll turn it off.
+1:55
+And here we have our terrain data. And we have our Air Force.
+2:01
+So let's start with terrain data to make a little bit of a background.
+2:06
+So I'm gonna go to my properties. I'm going to go to my symbology.
+2:11
+Cancel that and. Zoom to here so you can see it better.
+2:19
+Bring it a bit to the side now into properties.
+2:26
+And we want to go from single Ben Grey to single Ben pseudo colour because it's continuous elevation data.
+2:32
+We have a range from minus one point five to about three point eleven.
+2:40
+And as usual, we could come here, pick a colour ramp like spectral.
+2:45
+We could inverted to make it blue and red and apply.
+2:50
+We have a decent enough map. But I mean, we could do better, right?
+2:54
+We know that not all of those scales are perceptually uniform.
+3:01
+And we might want to avoid, you know, the use of red and green because of colour blindness issues.
+3:07
+So now I'm going to show you something. It's very powerful in cages in terms of creating colour scales.
+3:12
+That's definitely new and expands all we can do with those colour scales.
+3:20
+So when you click here to select the colour ramp, it gives you some options in here, some may options.
+3:24
+You can also look at all colour ramps and then you'll give you all the standard colour ramps and those that are like red,
+3:31
+purple, red, yellow, blue, red, yellow, green, yellow, orange.
+3:39
+Bur. I don't know what Birx is and so on.
+3:45
+They are actually called Brewer Pellets from Cutler Brewer Web site, which is good.
+3:51
+We also have some of the varieties. So varieties. We have plasma.
+3:56
+We have magma. We have inferno. And those are there for us to use.
+4:00
+But there's more we can create new column ramps.
+4:05
+If I click here, new call ramp. I have the option are creating a gradient, and I'll just show you for the sake of knowing it's there,
+4:09
+that this gives us an option of create a colour gradient. You can select the starting caller and maybe I want to make it pink instead.
+4:19
+And you can select the final colour. And maybe I'm going to make it yellow.
+4:29
+If I want to add a colour and mix, I can double click here.
+4:35
+And then add colour to the mix and start messing with my colours.
+4:40
+Okay. But we know that this is dangerous. Right. Creating colour gradients without knowing what you do in it.
+4:46
+We know knowing colour Siri, you may create a scale that is not perceptually uniform and is going to skew the interpretation of your map.
+4:52
+Let's just cancel that and instead let's go back here to create new called ramp.
+5:01
+And let's look at two options we have here. First is called Brewer Catalogue.
+5:08
+So if you click here, OK, we have this small window that gives us, again, all of the colour brewer pellets.
+5:13
+But the difference here is this.
+5:22
+Once you pick one, maybe right blue, you can't change the number of classes, some colour palettes with a lot more classes on.
+5:23
+This would allow less lessons where you can just change the number of classes and get your colour palette.
+5:31
+The caller Brewer Palace. Let's see, wondered I could kind of look like at lavish.
+5:41
+It's the city's. Green, blue, traders, green, blue.
+5:49
+Well, see how it works. See this one, Maximus Nightcrawlers, The King and apply.
+5:57
+I know, I have. You know, I probably want to invert that.
+6:04
+Play it again. Water is blue. It looks OK.
+6:09
+Not very similar to what we tend to look about in terms of elevation.
+6:12
+But it works. And at least we know that is a good colour palette.
+6:17
+But we still have another option if we create new called a ramp and we pick the option CBT city.
+6:21
+Now, this is the pot of gold. Docility City is a collection of colour palettes that are curated and are made
+6:28
+using all the designated rules or official palettes for different things.
+6:37
+And you can see that we have here for bathymetry meaning Schnaps.
+6:45
+We have some blue pallets. We have some this chording pallets, diverging pallets.
+6:50
+Again, those are the colour brewer. Once we have a very happy bird in the background.
+6:56
+You have greens, greys. The Kuji is pallets.
+7:03
+We have pellets for precipitation, pearlers, pellets for temperature.
+7:07
+And here we have high topography.
+7:12
+And those are some pellets that are made so that it looks like the topographic maps, the tering maps that we use to their STF.
+7:15
+And once this is, some of them will go through grey and white. So those are more appropriate for areas where the mountain peaks actually have snow.
+7:23
+I don't think that's the case over here. So let's see if we can find one.
+7:31
+It is smooth enough without having a white, but we can try to see tree to one.
+7:34
+Seems to be. Moose, it's also not not very strong.
+7:43
+We just want us to be at our background so we don't want to overwhelm the person of colour palette.
+7:48
+OK. It has already classified. Things and we can do apply.
+7:55
+Our sea is green, which is not great. So what we can do is maybe try to change this.
+8:03
+So instead of minus one point five, we can maybe do. Let's see if we do minus one.
+8:08
+And let's just round us up to 300 and apply.
+8:14
+OK. It's still well, it's going to do everything that's below minus one green.
+8:21
+But now we can come here to our transparency and we can try to add no data value.
+8:26
+So let's say instead of a value, we can do a range so we can pick a pixel range and we can say that everything from maybe minus one hundred.
+8:34
+I don't think it exists. But whatever to actually minus one, we want it to be 100 percent transparent.
+8:43
+Apply now. It has. Remove some of the data. There's a green chunk here that's left out.
+8:52
+This might be because it's above minus one. We have this handy, too.
+9:00
+Over here, click. And then we can just click on the colour we want.
+9:03
+And it picks the value. So that's actually a zero. So we could maybe add our range here from minus one hundred,
+9:08
+minus one hundred zero removed designer learn by now we have removed the zero elevation the ocean from our areas.
+9:15
+This is fine for now. We may have lost some low lying areas.
+9:25
+At the short too. But we can try and fix that later. OK.
+9:29
+So now we have a background elevation that we can work with.
+9:34
+We need to start adding some elements to our map. Then we want to use as reference instead.
+9:38
+That's where the vector data is going to be very handy. OK.
+9:43
+So we have here the vector map district and we have the strategic the strategy is more regional data that's less precise.
+9:48
+But it has some additional stuff that the West Vector Map district doesn't have.
+9:57
+So let's start with strategically open our data folder and see what we have.
+10:04
+We have a roads so we can drag them here and make them a roads.
+10:08
+We have admin lines. Let's see what they look like.
+10:18
+Ozone layer. Not a lot in our particular region for those ones.
+10:31
+I guess it can remove them. To be roads.
+10:42
+Now we have some B roads. That's cool. We have a coastline that's useful.
+10:50
+We can drag that in and we have strong coastline. Very bogs, very line.
+10:54
+Think so for a short region. So that would be No.
+11:02
+That sort of mudflat area. So we could use that kind of like hide that harsh transition from land to for sure.
+11:06
+Texas with only Great Plains lakes. You can add some of the lakes around.
+11:14
+Minor road. I think we can take that from the other data sets can be better.
+11:20
+Motorways can add snow motorists in our area. But it's OK.
+11:26
+National Park. And if there's any, there's a big one here. So that's cool.
+11:31
+Primary road. You can add rail line.
+11:36
+There a route line here. There you go. Rail line. Rivers and rivers.
+11:40
+It doesn't mean we're going to use all of that, but just take a look at things we have then maybe important that we have here.
+11:49
+Urban region and we have here. Woodland region. No, let me.
+11:57
+Might be interesting as well. OK, now let's zoom back to our track mosaics and layer.
+12:02
+This is kind of the area that we're working with. We actually know that we want to be around the Bamberg area.
+12:10
+And if you need to find herself. Let's bring open street map on top.
+12:15
+You can get literally coast closer. Bamberg, so maybe we can work.
+12:23
+And your first map at this scale.
+12:31
+Put this over here. And this is kind of the scale of one to seven.
+12:36
+Let's see. We do maybe see a hundred thousand.
+12:40
+See how it looks. I went to one hundred thousand U k.
+12:45
+Or maybe. 20.
+12:53
+Fifty thousand. Side guest workers.
+12:59
+One, two, two. No. And then we can start styling our layers and thinking about how we want things to look like.
+13:05
+And so one. So first, let's see if we can think of a natural order.
+13:12
+So I would think that urban region. National Park.
+13:16
+Lakes. Foreshore and woodlands, those are all bays, regions,
+13:27
+so they should be under everything else and actually grouped them to make easier and call them base regions, in this case regions.
+13:34
+And I might want to get some nicer callers for them.
+13:50
+So Woodland's we would like them to be. Greenish.
+13:53
+Let's look at her symbol, Phil. You can pick. Green tones.
+14:00
+You're thinking this is nice. Again, though, as a matter of taste, this Truecaller.
+14:13
+I want to make green as well, so what I'll do is I will wrap this.
+14:21
+We can pick colour, pick the same colour that I have.
+14:27
+And I can come back here, just drag it to make it a bit darker.
+14:32
+Have some contrast. Now we have our woodland data in there.
+14:38
+OK. Fresh our region.
+14:43
+It's sort of coastal, so we might want to make it a bit blue.
+14:49
+I actually like this blue. Keep it.
+14:54
+But again, we want the stroke to be just like that colour.
+14:58
+But maybe a bit darker. So select the same colour and then bring the value down.
+15:02
+If you don't understand this idea of hue saturation and value it, let me know.
+15:08
+I could make a video specifically about it. But I mean, for design, this is so much better than thinking about red, green and blue.
+15:12
+We all learn. I think that's something that you should change.
+15:20
+We all learn as kids, you know, about red, green and blue because you're mixing paint and stuff.
+15:23
+But on the computer, it makes a lot more sense to use hue saturation and value because you isolate the different aspects of the colours.
+15:28
+So instead of trying to guess a mixture of colour that would give you the hue, the saturation and the value that you want.
+15:35
+You can work on them separately.
+15:42
+So if we just change value, I'm just changing the brightness without changing the hue or the saturation on my colour at all.
+15:43
+And then if I just want to keep that value, when I went to desaturate like the intensity of the colour, I can just play with saturation.
+15:51
+And if I actually want to change the colour, then a contract hue and change the colour.
+15:58
+And I think this is a much better way to think of colour.
+16:02
+When you're designing and the computer will play, it's not we have kind of.
+16:07
+It could be 10 Turker. Pulley here.
+16:16
+OK, now I have my sort of like for short region, doesn't line up perfectly,
+16:27
+but maybe we can then change a bit over the threshold to fill in those areas later lakes.
+16:32
+Could also be blue properties. Phil, I'll get maybe a lighter blue for this one.
+16:41
+So I think this is the one it was. This is the one we were using before.
+16:49
+And I can just come and increase the value to make it a lighter blue.
+16:53
+Hey. Let's pick up line.
+16:59
+And then maybe create the valley a little bit. Well, plie.
+17:05
+OK. If you actually have any leaks in that area, maybe you should go to Hoopes.
+17:12
+Not ten thousand. Hundred thousand. So at least we have one little lake in there.
+17:20
+I think what you get. We have our national park.
+17:30
+It's not really showing in this cut, so I'm not going to bother about it.
+17:34
+Give it off. And then we have our urban regions. Now, what colour is urban?
+17:38
+It's harder, isn't it? What colour would you make? Urban. Because urban doesn't have a natural colour barrier.
+17:44
+Yes. But it's grey. Which is might not be as nice. You might want to think of it instead of thinking of interpretive colours, maybe colours.
+17:50
+There will just. Bring the gift, the amount of highlight that you want to the urban areas without overpowering the composition.
+18:00
+I want something that's different from the sort of like orange tones for my to rain.
+18:10
+Maybe I'll go towards this pinkish red purplish.
+18:15
+I like this transition between pink and red. No idea what name the colour is, but I can.
+18:20
+Do that. Let me now go here so I can.
+18:30
+To my. Values differently. I think that's key.
+18:35
+Marcet mission. And for the stroke, make this Bolar.
+18:43
+Can bring to value town a bit. PLI.
+18:53
+And though we have urban areas starting to look a bit better.
+19:01
+Then the next thing we have is in this area.
+19:07
+We have our lines. And you said that we should also organise our lines, that we would like them to leave.
+19:13
+So first thing we have here is that we have transport lines and we have natural lines like rivers and coastline.
+19:20
+So I think that natural lines to go over transport lines and not the opposite,
+19:27
+you can think differently depending on if you think of the transport line or a bridge or if you don't want it interrupted here, I think.
+19:33
+Oh, keep the rivers. And the coastline. On top, and then we'd have to say that a motorway was going to go over Abbey Road.
+19:39
+Primary roads should be clean and the rail line can be on top.
+19:51
+So we know where the rail line is crossing the motorway. And again, we can start playing with our lines so it makes more sense.
+19:56
+So it can start with the B roads. I think the B roads, they are not.
+20:03
+Super important at that scale. So I'll just probably pick pick a black come here and just the value to get grey.
+20:12
+To play. I might even make them lighter back.
+20:27
+Or I'll leave them like that for No. Kate, then we have primary roads.
+20:37
+And we can use the same tone maybe as the urban rose, so we do hear.
+20:44
+Broad. Or sorry, Abbey Road Styles, Baqi style.
+20:52
+I can copy off styles and in primary road styles, beast style.
+20:58
+Well, they all look the same, but not what I'm going to do to differentiate them.
+21:04
+It's going to beat the with. I don't do a primary road. A bit thicker than the secondary roads.
+21:09
+Remember, we have different visual variables, not just colour. We also have size.
+21:17
+Let's use that. And then. Motorway.
+21:22
+I don't know if there's any motoring here, but let's go to the properties just to gaze.
+21:27
+Oh, like my motorways to be red. Because I really want them to stand out.
+21:32
+There's nothing here. I can even take them off one.
+21:36
+And I have a railway line. It's go to properties.
+21:41
+I confess that I am a fan of the railway looking like this, but definitely not this strong, let's reduce.
+21:46
+With. Plie case or symbol's or smaller.
+21:55
+And now we need to take her simple line and actually. It is true that Peter King.
+22:04
+So now we have or we will track. Now it can go to our coastline.
+22:18
+And then it. Really depends on what you want to emphasise here.
+22:24
+If you wanted to just be very strong and put a very hard limit on where the coastline is, you could do that.
+22:28
+Or you could just use lighter colour again of blue fly and it might just disappear.
+22:37
+And we think actually I might not even use. The coastline.
+22:46
+Because we already have. For short region, which I think is giving us what we want.
+22:50
+Rivers. Well. It must be blue.
+23:05
+And I would like to get maybe the same colour as the lake because you're the same type of fresh water.
+23:10
+So come here, style, coffee style.
+23:15
+And let's get let's see if it works for the. An apology and then come here.
+23:20
+Now, this biology. I can copy between polygons and lines.
+23:27
+No bother. We can come here to properties. Caller.
+23:35
+Caller. Colour code.
+23:40
+And we go back to approvers. Properties put pine cone of colour and paste the colour code may apply.
+23:47
+Now I have a reverse. Well, again, an interpretive corner.
+23:59
+So this map, it's looking kind of nice already, right?
+24:05
+Of course, that's a. You say this is a subjective opinion.
+24:10
+I'm liking of course I'm making it so I'm picking the colours and I'm liking the colours that I chose.
+24:19
+So I'll stop this video from here.
+24:24
+And then the next one, we start to think about other tricks that we can do to make this map even more visually appealing.
+5
+OK. No. We're going to use some other tricks in terms of styling that are a little bit more advanced, that can maybe make her map look better.
+0:03
+First thing that I want to mess up with is my ring. So you see here we have the OS 50, a new mosaic.
+0:15
+That's our rain. And right, click on it and click on Duplicate later.
+0:23
+So that creates a copy of that layer that is exactly the same, but is not duplicating the data.
+0:31
+Right. Is not creating a second file that is called Mosaic Cop is just reading the same file, but drawing it twice on my screen.
+0:38
+An advantage of doing that is that it can change the style of the layer.
+0:47
+So I can have this one and one style, this one with another style and still have and still they're coming from the same data.
+0:53
+So this one, I'm going to click properties and I'm going to use a symbology that is called Cool Shade.
+1:01
+And what shape does is simulate the appearance of the terrain when light is inciting on it.
+1:12
+So it uses default. See, now we get this great terrain with this sort of like appearance because we're saying that, well,
+1:19
+the sun is an altitude of forty five degrees above the horizon coming from an azimuth or off direction of two hundred and fifteen coming from here.
+1:27
+And we have the actual elevation or an RDM the Z factor means that we want to exaggerate or elevation or not.
+1:37
+We don't need to. Multidirectional just makes it look friends here because we would compute like reflections and things like that.
+1:45
+And I can play. OK, nothing changed because it's behind my call earlier.
+1:54
+See, this is. Where my Terry is.
+2:02
+But now what I can do is right, click on my Mosaic properties, come here to transparency and bring that transparency down a bit.
+2:11
+Plie. And now I'm seeing. That's sort of like 3-D information behind.
+2:23
+My map, and it's pretty cool. This is the basic way of doing it.
+2:32
+It doesn't give me a lot of control because. If it got too transparent, I see a lot of the terrain,
+2:38
+but I'd lose the colour and if it don't have enough transparency, I get my colour, but not enough of the terrain.
+2:49
+So we can also play with blend modes. And I just I have to remember which order delayers have to go.
+2:55
+But let's give it a try. Go back to symbology. This is the blending mode, and let's say that the blending modes multiply by.
+3:03
+That kind of works, but maybe we could do different ordering.
+3:15
+I think you can have overlay. Works off, it doesn't work.
+3:20
+I think, actually, let's make this normal play and let's bring this one on top.
+3:27
+And now it can go properties and we can do the blending mode.
+3:35
+So blending mode means like how will this layer blend, which the stuff that's under it normal?
+3:39
+It means it doesn't blend. It just covers what's on top. But all the other options, what they do is take different.
+3:46
+Modes of blending. We watch with what's under it.
+3:58
+For example, Multiply is going to take the colours under there and multiply by the value of this shade, it gives us this sort of tonality.
+4:06
+OK. And this comes from the desktop publishing.
+4:16
+If you work with Photoshop, you're going to recognise our order image.
+4:20
+Is like Photoshop. You're going to recognise all of those modes.
+4:25
+But we can use multiply. Which is good for a purpose.
+4:30
+And then we can start playing. With that appearance here, until we get something that we'd like.
+4:34
+So the first thing is we have. Factors.
+4:40
+We can exaggerate the elevation. If we want, see, so it gets much.
+4:46
+It makes the hills look a lot bigger because we're exaggerating the height.
+4:51
+You can pick the Z factor that want.
+4:56
+I think I like the one. I don't want to make it too overpowering.
+5:00
+I can also play with contrast and saturation. But again, let me play Kay and.
+5:06
+Been a while since I did this, sorry, guys. But let me bring in Edith.
+5:17
+And then again. And in a few hours, my.
+5:23
+My copy being dragged into my overview. OK.
+5:31
+Come back here. So I think, again, this should be properties.
+5:35
+Normal. Play Kay. This one should be multiply.
+5:43
+Why? Properties. And.
+5:48
+Now, let's go back to those properties. And outwards to changing the hue shading.
+5:59
+So we're changing what's under way. We can, for example, change the elevation of the sun.
+6:05
+So I could put the sun a bit higher in the horizon. And give me.
+6:11
+Towser, I think. May actually be elevation angle, so let's see if we put the nine T.
+6:18
+And I apply, I get older. OK. So this is actually in relation to Nader.
+6:27
+So in relation to the vertical position, not the. Not the horizon.
+6:32
+So 30 degrees should actually be higher elevation angle.
+6:38
+Sorry about that.
+6:43
+Enter, but that means, you know, if I put zero degrees and apply it sort of like the sun at midday or like right at the peak of the sky.
+6:44
+So not a lot of shadows. And then if I go down to 30 degrees, then I'm lowering my son.
+6:54
+And the lower I go, the more shadowing I'm going to get because I'm getting closer to the horizon.
+7:00
+So I think I'd like to play.
+7:07
+It looks good as it moves in the direction of the so right on this wheel.
+7:12
+So do you want the sun shining from this site? Is it going to get the shadows on the side?
+7:17
+If you move the sun over here and apply. And he should get the shadows coming from the other side.
+7:22
+Hey, turn off the multidirectional might be better. See, so no lights coming from this direction now.
+7:29
+Lights coming from this direction. Now it's coming from this direction.
+7:36
+You can see that you can change the appearance of the terrain because of the position that you put sun.
+7:41
+I like the sun from over here, I think. It gives a nice shade.
+7:48
+E.A. coming from the east. Kind of like raising. Cool.
+7:53
+And then we can start playing with this, so, for example, if I increase the contrast of my train.
+8:00
+I can change how it's going to paint over there. It's a zero ply.
+8:08
+Change the brightness a little bit, make it darker or make it lighter.
+8:15
+You can adjust all those things we chair like, how does this layer appear?
+8:24
+OK, take this off so. Oh, this this layer here.
+8:29
+More contrast. Less brightness.
+8:36
+I was getting more from. And then as it as a change that is going to change how it blends with my theory.
+8:43
+OK. And you can always link.
+8:52
+Also. Just to. Transparency and try to change how intense it is.
+8:56
+But. Kind of like it was.
+9:04
+Maybe a little bit. Let's bring this. And a bit dressed to make it pop a little bit.
+9:11
+So usually less brightness, more contrast, gonna make it pop.
+9:19
+Or if you make it brighter with less contrast, it's going to make it duller.
+9:23
+So you can choose the. How much you want to emphasise?
+9:28
+The background of your maths. OK.
+9:36
+That's when we do it. So now we have our Terang with a little bit of extra umph.
+9:40
+We have the sort of like 3D effect. This really cool. Now, we can also think about the vector data that is on top of the terrain,
+9:44
+but it doesn't really combine very well because it's an abrupt transition from a gradient to a colour.
+9:52
+And what we can explore in that sense is to use transparency.
+10:01
+Let's go, for example, to my properties and I can change my pastie and apply and they start to get a bit more transparent that
+10:06
+let through what's under them and then sort of blend with the surface that they're on zero opacity.
+10:15
+It means completely transparent and 100 percent opacity is zero transparency.
+10:22
+You can play a little bit. If you go too much transparency, then you start to lose the information.
+10:29
+But again, it depends on how much you want that information to come true or not.
+10:34
+They're playing with that. And maybe make it just not so in your face.
+10:41
+I think that's why I didn't bother making it lighter before, because I was thinking about.
+10:50
+Using some transparency and as well as I could do the same with the Woodland's.
+10:58
+Let me see. It more or less equal. We're about 70 percent.
+11:04
+Round them up. Make it about 70 percent capacity.
+11:10
+Let's do the woodland's. Properties.
+11:17
+And make that same let's make them. Seventy percent.
+11:24
+Pessary. You can take her lakes.
+11:31
+Seventy percent. You don't have to do that to all of them.
+11:43
+It depends on the visual effect that anyone with the with this foreshore region, let's see how it's going to look.
+11:47
+It may not look very good because it's weird on that transition zone.
+11:55
+Yeah. See? It looks horrible in there because we're mixing up the rest there.
+11:59
+So it probably went to keep. Opacity. Hi.
+12:03
+One. And find another way to get his mother transaction.
+12:08
+Now we have roads which we could make transparent to if they were stronger.
+12:21
+I might do a little bit of transparency. See the reverse. That's too depressing.
+12:25
+Play, blend, a little bit more background. I have.
+12:34
+Roads, regions, and now, you know, starting to look better as a map.
+12:39
+The one thing that might not be looking very good is.
+12:45
+The ocean, so we could try to get rid of this for sure. Region for now, tried to play a little bit better terrain.
+12:51
+So let's do here properties. And maybe we could try to add a custom class.
+12:58
+Let's add a class in here, which is a zero.
+13:07
+And we can make that maybe. Glue.
+13:12
+We need to remember to. Turn off, remove this custom transparency to bring our data back.
+13:23
+Biology and I can take the minus one and then make it blue as well.
+13:33
+Maybe it's darker. Why are you kind of.
+13:39
+Messing with the values to make colour known.
+13:44
+Like how they have this big block in here that's higher than over here, so I might just have them all be.
+13:48
+I just have to beat the same callers. What does?
+14:01
+And this. And now we have more looking homogeneously seashore.
+14:08
+And in that case, maybe we want to bring. Some sort of coastline back.
+14:20
+We had that from here. Let's see, sea coastline.
+14:27
+Put it, oh, we have it in here ready, let's turn it on.
+14:33
+Now we have a coastline. Let's see proper teeth.
+14:38
+I mean, people want to make that. Victor.
+14:43
+But then. Also, give it more.
+14:53
+Opacity. Look, so in have a little bit of a coastline area.
+14:57
+It's been hard to tell friends to.
+15:08
+Or we could try to bring back the force short now.
+15:11
+And now. Maybe give it some. Opacity.
+15:16
+To Mike. To them. You're not a fan, though.
+15:23
+No. That's up to you if you prefer it with coastline or no coastline.
+15:30
+And then we have sort of a campaign layout that we've done came so stopped as we for now and for next video,
+15:39
+we're there and talk about labelling and how to put names on our maps.
+6
+OK. Now, as I said on the zero videos, one thing that really makes maths look more like maps is having labels for places.
+0:03
+Right. It's having locations. So we could see here if they have.
+0:10
+Some location names. They seem to have transport text.
+0:18
+They have road point line. Park Road.
+0:23
+So well, let's see the work, the stuff that we have here first. I mean, look, for example, at the urban region and see if it has any attributes.
+0:28
+Urban region has a code, hasn't legen and hasn't amended, so it doesn't really have a name and we can use.
+0:39
+That's too bad. Let's see if Woodlawn has a name attribute.
+0:46
+Now just tell us. Yeah. So it doesn't have names for us. Which is the greatest.
+0:51
+Let's see if we can use from the oh SMAP district.
+0:56
+They might have some better place names. Let's see. Function, name place.
+1:03
+So they have this layer called name place. Oh bring it over here.
+1:10
+Bring it on top. And you equal name and place.
+1:15
+And now we have all those points with names. We can.
+1:22
+Right, click. Got two properties and we can use this new tab, which is called Labels.
+1:30
+And instead of No Labels, we can use single labels and we can actually choose an attribute.
+1:38
+I think would be. This name is and apply. Now we have names for these regions.
+1:44
+Doesn't look great, does it? Because it's a lot of locations.
+1:52
+But let's see if we can improve that. No. First thing that we might want to do is make those dots less.
+1:57
+In your face, I can go for properties, biology, and maybe just one black dot.
+2:06
+And we want to be small. Michael.
+2:15
+Better simple Merkur. It's a not a fan of Ned White's stroke.
+2:23
+I guess I'll take my stroke. No. Plie.
+2:30
+Is it? I think it gets to get smaller. Maybe one point.
+2:35
+It's one. When one looks about right and maybe doesn't have to be fully black.
+2:41
+Let's bring this value up a bit. Plie.
+2:47
+Okay, but we still have a lot of stuff here. I wonder if it could get rid of this by looking at the attribute table.
+2:51
+That's the attribute table. Has this name. Yes.
+2:59
+H.T. email name and has a classification. Well, maybe we could try to filter that classification so we don't have every single thing in there.
+3:02
+And normally we would come here to do the selection and filter and stuff.
+3:14
+I use a different tool now. So if you right click and select filter would come to this window, which is kind of the same,
+3:19
+is is gonna give you the same way where we can write an expression.
+3:29
+The difference is that it's going to filter what we see instead of making a selection that then we can turn into a new layer of stuff.
+3:33
+This is just going to change what we see. So let's say we can get four separate classification equal.
+3:40
+Let me say like this and get my unique values and let's do classification equal populated place.
+3:46
+Then I can do test. OK, so now we've removed everything, it's not a populated place, it's better, but still a lot of different places.
+3:56
+Let's see if we have anything else. So have font height, because remember, this is a map, so maybe if we just do and.
+4:09
+Phone height, equal or equal, large.
+4:18
+Maybe we're going to just pick up the main places, let's do test. Actually, there's nothing in here is worthy of a large fund.
+4:23
+Let's. Get that and put medium instead and test.
+4:33
+Now we have less places to show, just like the main places we can look at.
+4:40
+Well, it could be different. Maybe we had population, maybe we had a classification in terms of some I think some other sites,
+4:47
+some other data we'll have like towns, hamlets, villages, cities.
+4:54
+It could be that here, because this is supposed to be for mapping, we can just use that font height,
+5:01
+which already gives the importance of the place to filter the main to only some of the main areas.
+5:05
+OK. So that's cool. We can click OK. And our dataset is filtered, meaning is only showing what we filter.
+5:13
+That's different from the selection because the selection will show us everything.
+5:20
+And paint the selected areas yellow. But we aren't to actually hide those other things from view.
+5:24
+And it gives us this handy icon here that tells us that this reminds us that this layer is filtered, that we can right click,
+5:30
+go back to properties and back to labels and we can actually change lots of things for those labels.
+5:38
+For example, we can change the font. Take a nice font.
+5:45
+Let's do something like. Open sense condense light.
+5:54
+It would depend on which fonts you have on your computer. And can do apply and gives us a lighter, like less in your face.
+5:59
+Funt. And we have the formatting, the lighter work.
+6:07
+We don't need to go into the. We can change the styles of front to make it bolder italic.
+6:13
+We can change the size of that. I think the size is good enough.
+6:19
+We can change opacity of the font as well. If we want to blend.
+6:23
+I don't think we need that. We can add a buffer around the patient's skin.
+6:29
+I think simple, so dry, it draws the sort of like white buffer to make it a little bit more readable.
+6:37
+And again, you can change the size. That's too strong.
+6:44
+You can make it a little less strong. You can change the colour.
+6:48
+You could use any colour you want. Not great, but just showing you how it's done.
+6:52
+Let's go back to Mike. I'm not sure if I want it or not at this point, but it does help if you went to.
+7:00
+Give it some separation from the bottom line in the background.
+7:11
+This kind of same, but it draws a box instead of a background.
+7:17
+We can use Shadow and just do it, drop shadow. By now, we have no mask, but we have looked at the labels, drop this shadow.
+7:22
+It gives them a little bit of a 3-D appearance.
+7:32
+And again, it can change the colour of the shadow. We want to have like a white shadow instead of a black shadow.
+7:37
+You can change. You go back to black banner. Again, this direction is where the light is going to come to make the schedule clear.
+7:44
+Does this the width of the shadow so you can make the shadows larger one,
+7:57
+and then you have this blur radius, which is like how blurred are the shadow shadows?
+8:04
+So if I make this smaller one than a blur, blur is less if I make it bigger.
+8:09
+Then it's going to blur and now it made it so big that the action does appear.
+8:17
+But it just makes the shadow like more crisp or more diffuse.
+8:21
+So you can play with that as well. You have the blending mode for the shadow.
+8:26
+Like I said, now it's multiply. It could be normal. It can lead to default, not to play.
+8:29
+We can change the opacity. Ready, transparent.
+8:43
+Not until one, so we reduce this radius, maybe one.
+8:48
+Why? Glenmont normal.
+8:53
+Pass me. Wallinger.
+9:06
+OK, so we have maybe this shows even.
+9:17
+Closer to really under. An.
+9:22
+U.S. Navy. If my. Watch them.
+9:34
+So now I have this wide channel that kind of helps, you know, stand out a little bit.
+9:39
+Can bring more capacity out. Very hard to see, but I wanted to be subtle.
+9:44
+I said it's no shadow and there's this shadow and just help me separate a little bit more the names from the points.
+9:52
+Interesting, make it bigger if it won't play. Maybe a hundred and fifty.
+10:06
+No, no, they stand to get off to see you, Slick.
+10:15
+Little bit of shadel. You see them phone banks.
+10:21
+Nice pessary. Five. Buffer my.
+10:37
+No need to kill us then placement is. You can play around like where you're going to place your.
+10:44
+So there's this around point where you can tell how far from the point one which we apply now to millimetres so that words move away from the points.
+10:53
+We do one. By now, I could do cartographic,
+11:06
+which gives us a condensers like where does Dist. is going to be if it's from the point the actual coordinate are from the symbol.
+11:13
+So if I was using bigger symbols, there would be more useful. Now I'm just using a point.
+11:21
+It doesn't matter much. Or I can do offset from point and then I can control exactly like how they go.
+11:26
+In terms of being offset. OK. So for example, if I put this on this quadrant, I apply all move to this position in relation to the point.
+11:32
+If I put the centre and apply, it goes smack on top.
+11:41
+Point well around point. What it does is that it tries to find the best location.
+11:46
+But he will change. See, for example, Bahir, like West flip them would overlay on Swinscoe.
+11:52
+If we use the exact same positioning. So it's smart enough to move this word around so it doesn't overlap.
+11:59
+Things. Again, this is a you think this literally encourages is very, very powerful.
+12:06
+And there's millions of options and I don't know, like even 10 percent of it.
+12:12
+So you can, for example, discords labels from cover and features. You can decide on the priority of the label versus order labels.
+12:17
+If you had multiple label layers on your map and you have all these settings about.
+12:25
+Avoid pictures thing. Yes.
+12:31
+So it's yeah, it's a lot. But this is the basic that we can do for labelling.
+12:34
+Final option that you could try again and we could maybe try the buffering and see if.
+12:42
+Looks better. And then to quote the shadow.
+12:48
+Much. A stuff is a key.
+12:58
+It is the. Point or.
+13:07
+Three ply. You know, it's hard to see.
+13:14
+They can leave like that. See how it looks later. I was trying to change a little bit the opacity.
+13:24
+There was nothing that looks good. Sorry, I heard a noise outside, sounded like my ship was just looking.
+13:32
+And I'm not a big fan of the points because the points, sometimes the overlay with the urban areas.
+13:47
+So what I might go here now is, come on, get back on properties, symbology.
+13:53
+And what I'll do is stand on my marker. Out to Phil.
+14:00
+To be. Transparent apply and all the dots are gone.
+14:07
+I mean, they're still there because the layer needs to be there for it to be labelled, but they're transparent.
+14:13
+And I just have the names, which are better because they just show, you know,
+14:17
+I have the sort of regional map and I'm ready to make it into an actual map layout.
+14:23
+And that's gonna be the topic of the next few.
+7
+OK, so now we're back. And we're ready to make this into a map layout.
+0:02
+And this is a new part of Kuji is that you haven't seen yet. So once we're happy with how the map looks, what we can do is that we can come here.
+0:09
+What good idea would be to save it project? Let's do that now. I'll do a week for and I will do mapping practical.
+0:18
+Gets us to happy we make peace. Dave.
+0:31
+OK. No, I'm going to come here. Project new print layout.
+0:36
+Know, maybe I'll call this a regional.
+0:43
+From just do bambury map, OK?
+0:49
+And it opened up a new window. And this is what we call the layout window.
+0:55
+OK, or the map layout editor. And the idea now is that we can actually layout or map into proper page.
+1:00
+Right. Now we don't have much. We just have the general settings for layout.
+1:07
+But not much is set. We have margins, units and things like that.
+1:13
+We have resolution which is important. And we can come here layout, for example, into a page set up.
+1:20
+So make sure maybe we want our map to be a four K.
+1:28
+Maybe you can think about some margin, so maybe one millimetre margins going to trump the margins.
+1:36
+OK. And then we're ready to start lay laying out our map.
+1:43
+First tool they always gonna use when you're laying out a map is to actually add what we call.
+1:52
+A map, so at a map certainly can map window. So I'm going to click on this.
+2:00
+And sealed drag. And they drag that where.
+2:06
+That's gonna be the area off my main map. So it's gonna be drawn inside the square.
+2:12
+So if I move back here to this select item, I can move that square.
+2:17
+And that's where my map is going to show. And I see that it shows exactly how it looks on me.
+2:25
+Main Kuji, Kansas. Right. So all the colour and visual variables and everything you do on your regular Kirgiz canvas,
+2:31
+what you do on the map layout is like setting up as we set the layout, meaning the looks of it.
+2:39
+Okay, so I drew Mike Mac's map box. I'll make it a bit smaller.
+2:47
+And this is going to be one of the most frustrating things at first is that if you try to resize, it would change the zoom level as well.
+2:57
+Or the scale, which might not be what you want.
+3:06
+And so the way they would do it is that we set our map window the size of one of the sites, because I'm going to want to add stuff around here later.
+3:10
+And once I have set my map window, first thing I can do is change this tool, which is called move item content.
+3:23
+So if I'm on this to here the select and if I drag this, I'm dragging my map box.
+3:30
+And if I zoom in and out, I'm zooming in and out on my beach.
+3:39
+Have similar zoom tools here, zoom for one to one.
+3:47
+Etc., but these are all regarding to the page and not.
+3:51
+The map. Let's get her a map. Well, here.
+3:58
+But if I come to this tool, which is the move item content, then that.
+4:05
+Works with whatever is in sight. This map, so if it drag now, I'm actually directing the map content.
+4:12
+And if I zoom in or zoom out, I'm dragging out on the map content.
+4:18
+So this is the first thing that's going to get people very frustrated.
+4:23
+Is that draw your size in your area in terms of what you want it to be on the page.
+4:26
+Don't worry about how the maps looking. Once you have the square, the way you want it on the page,
+4:32
+Danya can use the move around tool to make it move around and you can set it in the position and scale that one.
+4:37
+OK. And then everything we're going to use is gonna be on this site now.
+4:46
+Right. So the way that the map layout works in Huges is that you have items steady place on our page.
+4:52
+So each item on your page is going to show up here. For example, we have this map box, which is map one, and it's an item.
+4:57
+You can make it visible or invisible. You can lock it. So no one can change it or drag it or anything.
+5:06
+Or you can release it and then port whatever item is selected here.
+5:13
+Then we're going to have properties or that item and we're going to work on this.
+5:17
+But changing those properties. Right. This is about the general layout. These aren't the actual properties off the map items that we want to set.
+5:23
+First thing we want to set is our scale. So we were working at the time.
+5:31
+We tested different scales. So maybe one hundred thousand.
+5:36
+That was our scale. Here to 150, sorry, 150 TAUZIN and see how it looks.
+5:41
+Or we could do fifty thousand books.
+5:53
+I think I'm happy with one hundred thousand.
+5:57
+So at leave that that. So my map is at a scale of one to one hundred thousand.
+6:01
+You can still, Tregear, remember that Bambrick is our area of interest, so we want to place it into more.
+6:09
+Visible area. So I want to make sure I'm not cutting any labels in here.
+6:18
+So this looks okay. Maybe come a bit up.
+6:25
+So it shows me where Bambury is giving Saarland this general view of the populated areas, the rain, the roads and so one.
+6:29
+And then there's a trick that I have learnt to make sure that this never goes out.
+6:41
+Even if you want to drag, because you can lock this and then you can't change anything.
+6:46
+Well, let's say used to want to rearrange the map and things like that and maybe.
+6:50
+Make small adjustments on your map window. But if I do small adjustments here and go back to my select, it's going to start to mess up my scale.
+6:55
+This is a justice to scale based on what I do with my window. And I don't want that.
+7:06
+Well, the trick that I have is that you can compare on your scale instead of just typing one hundred thousand.
+7:17
+And here you come on this menu. And you're going to say that it is.
+7:25
+You can do edit and you're going to set it to a fixed value.
+7:34
+I'm going to say one hundred thousand. OK.
+7:38
+So that you have like every time you have that menu, you can make it equal to other variables in your map.
+7:43
+But right now, what I did is that I just said it is one hundred thousand and now it is fixed because it is a fixed value that I typed.
+7:49
+So if I changed the window now, it is going to do is sort of like rescale, but it's not changing.
+7:57
+It's never going to change that one hundred thousand scale regardless of what you do.
+8:02
+So is a good idea, answered the sidewards kill you want to do, just enter it.
+8:08
+So just come here and edit and I just type the heart value.
+8:12
+One thousand. You see that is set here. Yes. Hundred thousand.
+8:16
+Sorry. About 1000 hundred thousand. Now it's never gonna change the scale again.
+8:20
+I still can come here and do my move and move it round and position it the way it was.
+8:23
+But. He will not change the scale.
+8:30
+And it's very useful. If you ever tried to do that, it actually yes.
+8:42
+He's also very annoying. Rescaling. So now we have things set.
+8:47
+What other properties we have? We have the extent here. So see that if I'm on the drag content to drag down the extensive changing.
+8:56
+This is the X and Y coordinates for the minimal X or sorry, minimum ie, maximum Y, minimal X, maximum X.
+9:05
+So I could also, if I want a specific region, just type the numbers in here.
+9:14
+What I'm just trying to frame it in a way that I find.
+9:19
+Nice. And so I can live like that.
+9:24
+And as long as I don't touch this again, I'm going to move. And then we have.
+9:30
+So remember that one of the things that we'd like is the graphical, the map grid.
+9:41
+To Derek unclipped, meaning a deselected these area. So not no item is selected, so there's no properties need to make sure.
+9:47
+Pretty selected. And if they go on grids now, it doesn't have any grids.
+9:55
+So it can create a grid, do it plus not be called a great one.
+10:00
+And let's say I want to modify it. So I'm clicking in here, modify, and then it goes into the properties off the grid.
+10:06
+This is where we go back to the map properties. So grid is enable, it is solid, the interval is a map unit.
+10:15
+And right now it's zero. So we're not seeing anything. But let's say we want something like maybe.
+10:24
+One kilometre. One kilometre.
+10:33
+Remember, those are map units. Now I have a grade of one by one.
+10:38
+CaBi Firefly five. We'll be a bit better.
+10:45
+Wehrli. Change, but rarely do grids that are not the same where X and Y.
+10:52
+If I want, I can play a bit with the offset, meaning I can thus locate my grades will say if I want to make this more balanced.
+11:01
+So there's a little bit in here and a little bit in here, and I don't want to cut it.
+11:08
+I can maybe come on my ex offset and maybe put an offset of 500 metres.
+11:12
+Or maybe. Minus five hundred metres.
+11:22
+Seven hundred. Minus 800.
+11:28
+Minuses as I have to go all the way into the other side, so let's see.
+11:42
+Fifty eight. Andrew. EDI.
+11:46
+An. For him. Four thousand five hundred.
+11:57
+Yeah, seems to be a bit more balanced in terms of the edges.
+12:06
+And I can do the same here with the word baby now.
+12:11
+Said two different things. And I can again change the line style.
+12:15
+So do I wanted to make it a fresh line or a regular line.
+12:20
+Why we don't want the shooting is symbolic because actually I'm not.
+12:31
+I may not even keep those lines, but I'll make them thinner.
+12:35
+That's for sure. Just for reference. So maybe to your point one.
+12:41
+Now, I have some great lines. Next item is my frame.
+12:52
+So right now I have no frame, but I would like to have a frame so I can do a line border.
+12:57
+That's going to add a line to my map or I can be more fancy and do exterior ticks so different.
+13:04
+I have like extra ticks on my Courteney's. If I want to be super fancy, I could do a zebra.
+13:12
+Like a lot of maps do zebras like that. And it's a bit too much.
+13:19
+I'll keep my exterior ticks. I can change again the size.
+13:23
+So how far will my tics go? I think it's fine.
+13:30
+It is emerging. It could change. I can choose to hide some divisions, so if I don't want you, shouldn't divisions in here or in here?
+13:35
+I don't have to. Mm hmm. No.
+13:47
+OK. You know, I have a frame. Next one. We went to add coordinates or drop coordinates.
+13:53
+Boom. We have our coordinates in there. Sixty three.
+14:00
+Sixty four. Time. It's looking OK.
+14:04
+But it could be better. First thing we can do. From all our options down here is what's the precision?
+14:08
+And it is all point zero zero zero point zero zero zero. So I don't need decimal points in my coordinates.
+14:15
+I'm going to take them out.
+14:22
+And those are kind of going out from the page in here, too, so maybe it could rotate them so I could come to my left coordinates.
+14:25
+I went to see them. I want them outside the frame, but I want them vertical ascending.
+14:35
+And now they're going up and I can go to my right coordinates and do them vertical descending.
+14:41
+And I'll get going that way. And that looks a lot more neat.
+14:48
+Now I have coordinates again. I can change the font.
+14:51
+I can change that colour. I can change the distance from the frame.
+14:55
+So let do. I wanted to be further away as a one millimetre from from tick mark.
+15:01
+We wanted to be closer or not. And that is that if you join the coordinates, you can go back.
+15:05
+Know that the progress of my grid coordinates preme periods.
+15:17
+Back now I have a map grid. That's great. One, I can have multiple grids, for example, if I wanted to have different types of coordinates.
+15:23
+And it's up to me and here I'm using map units, so I'm doing coordinates in metres.
+15:33
+So those are coordinates for the British National Grid. They're useful, if I want to guess, distances, for example, from here to here.
+15:38
+They might not be very useful for people that.
+15:46
+I may be coming from the region, so maybe we want latitude and longitude in here, how can we do latitude and longitude?
+15:51
+We don't have to change the projection. We can come back to our grid, modify it.
+15:57
+And change the Seer s. Well, let's say now I want.
+16:03
+My map grid should just be. Ford is.
+16:11
+Two, there's the regular simple w just eighty for it with no projection.
+16:20
+Okay, now I'm gonna have to change this because five thousand degrees, it's not going to show me a lot of coordinates.
+16:25
+Let's put zero point zero one degree here.
+16:32
+Zero point zero one degree here, a little bit too much, so Naveh point, what point when the green.
+16:39
+To one degree. I'll clear my offset.
+16:53
+Point one. Ben. Two miles to a point zero five.
+17:08
+Zero of by too many points. Point for point to see now, because latitudes and longitudes don't have the same length.
+17:17
+They might not have the same size, so we might want to play it a little bit.
+17:37
+I don't see as many on my ex as they need. Why?
+17:41
+Because at this latitude, the lines of longitude are converging already.
+17:45
+We do something like this better, and I gets to play a little bit when my offset and see ClearPoint point zero zero one.
+17:52
+Due to. One zero three.
+18:08
+Five. A little bit more. Maybe one.
+18:17
+Fine. Yeah. So these are kind of centred way, way offset to two point zero by.
+18:25
+One point to. Kee.
+18:36
+Why are you not like me? ClearPoint? OK, I'm not going to bother with this.
+18:53
+No. Style.
+19:02
+Glad mode. Maybe we just want to. Multiply.
+19:08
+Softly, softly, this good kind of fades away.
+19:16
+Go. It could be hardly better sort of see that the different blending mode, so it feeds more when it's on a lighter area.
+19:21
+And then it's darker when it's over the blue, like softly.
+19:30
+Mm hmm. Difference. Tracked.
+19:36
+Durcan. Ghoncheh.
+19:43
+Multiply, kill it, multiply. Don't want it to fade too much.
+19:52
+No, what I want to do is make sure that.
+19:57
+I know there's more things here than just 56 into right, so I went to make sure that my coordinate.
+20:04
+Units are okay, so formal.
+20:14
+I can either do a decimal and into decimal degrees and then the only thing I need to do is to make sure that I increase my precision.
+20:17
+Or if people are not familiar with. That's what degree is really don't like.
+20:29
+I can change that to degree. Mean it. And second.
+20:33
+And in this case, it's not a lot of change in the seconds, I could just do a degree and minute if I wanted and now I have.
+20:38
+Greece, I mean, it's N w north W.
+20:47
+And so one was a matter of preference.
+20:52
+Oh, you want to show Green mean it the fix or just agree and mean it without the suffix end and it just puts a minus or the western hemisphere suffix.
+20:55
+So yeah, it's up to you. I prefer decimal but I like having the suffix so I would do it like this.
+21:08
+And now we have more like global coordinates for our site.
+21:13
+And that's how you do map grid and more properties.
+21:20
+Let's see what else we could have overviews. Not now if we can add a simple frame if you want.
+21:27
+That's just an outline. But let me select this or actually take up off the frame.
+21:32
+And D elect, and you said that there's the lines. But there is no actual frame around the map.
+21:43
+It's just a tick marks. So what I can do is come here on my properties and just cheque frame.
+21:51
+So now that's a black line around it, which I think makes it look nice.
+21:57
+I don't need a background in this case, but if it was some empty areas here, you could set a background.
+22:03
+I think I'm happy with this part of my map. OK, then I can come here and save and I'm saving my layout.
+22:09
+I'm not saving my project here, actually saving my layout. And now we have our main map made.
+22:16
+Now let's learn how we can add the cryptographic elements to our map in the next video.
+8
+Back to our. So remember that we went to have a sights to grab Acuil, we went to have a N arrow.
+0:06
+We want to have a scale bar so we can add those elements here by coming into an item and there's all the different names.
+0:12
+Or we actually have tools in here which are kind of self-explanatory.
+0:20
+Legend Scale Bar North Aero.
+0:25
+We can also just draw shapes if one draw markers, drop arrows.
+0:29
+Just simple free form drawing. It can add free form text over here if we want.
+0:35
+We can add images as backgrounds if we want as well. Well, let's drag a north arrow.
+0:41
+What kind of out here? This is my n arrow and first thing that I can do.
+0:49
+Now the N Arrow is another item on the map that I can edit is that I can choose a different symbol for it.
+0:56
+I want to know there's a list of symbols in here.
+1:06
+But if you look at arrows, I have all these different arrows that I use or if I look at wind rows.
+1:11
+So give me a nice wind, Rose. Want. I tend to like the simpler arrows better, so pick the symbol.
+1:18
+That one was. That's good.
+1:43
+It has an end. I like having the end in it. And I can again change feel colours.
+1:47
+True colours, et cetera, et cetera, et cetera. Well, let's do.
+1:52
+Still colour. Maybe you can leave it. Choose caller.
+1:59
+You can make. One way. These rogue like.
+2:11
+We can enter this in is part of the symbol, so it tells a white.
+2:24
+There's all the shading and stuff. This is your maps rotation. Again, I could add a frame of background.
+2:32
+All right. I don't think you need to have placemen resized.
+2:38
+Move. So really, there's not much you need to do it at North Arrows or just leave that one in there.
+2:41
+Next one we add is the scale. And this is the big advantage of having your reference data is that you just drag.
+2:47
+And Kirgiz calculates what the size of the scale bar should be to match the scale that
+2:55
+you set here to now have zero or one kilometres scale bar becomes a new item on our map.
+3:01
+We can also change the style so we can change, for example, style of delayer, single box, double box line takes up or down.
+3:09
+All of boxes, just the numeric scale. I usually like the single box.
+3:21
+Or sometimes I like line ticks up. I think I think they're also like very clear.
+3:31
+You can chant units from kilometres to Ft. Miles, whatever you want.
+3:36
+Maybe if you're making that map for a British audience, you want to use miles scale.
+3:43
+The only thing is once you start using units, be consistent.
+3:49
+For example, if you had that British grid here in metres, it wouldn't make a lot of sense to have miles.
+3:53
+Or maybe you want to be inclusive and you could always do and add a second scale bar here.
+3:58
+And so have one in kilometres and one in miles. That would be fine.
+4:06
+One of your maps to be. Unit inclusive.
+4:12
+Well, back to Miles, you can change the number of segments.
+4:20
+So right now has two segments where you can make three for many segments as you want.
+4:24
+You can add segments to the left like negative sort of segments as well.
+4:31
+So zero one to the other side to like.
+4:36
+You have a fix with with your units. You can decide on the height offers, you know, which water, which you think.
+4:42
+Shauna. And then how many subdivisions you have so you could have, like, half point subdivisions in there.
+4:54
+And I think that looks nice. I'll do the same. At this point.
+5:02
+Now we have división. You have Marjie and boxes and where the segments go and you can change the font in.
+5:11
+Off your left here, you can maybe reduce the font that look a little bit big.
+5:25
+Put a font size 10. I'll do the same here.
+5:31
+Well. Font size 10.
+5:36
+Now. Skilled or skilled were more.
+5:41
+And. Position and size.
+5:50
+Only once in America, he placed them on the page again.
+5:56
+If you want, you can add the frame to your legend box, which might be useful sometimes if you place in the scale over.
+5:59
+We try to avoid obscuring map features with map elements.
+6:09
+So I wouldn't put my scale in here.
+6:13
+Not in here. Usually it's better if it's outside. If you want to put it inside, make sure you put it in a place where it doesn't matter.
+6:17
+For example, I could have my leg in here matter. And for that.
+6:24
+Purpose. We can also have a background if we want.
+6:29
+But I prefer to try and leave them outside the main map area.
+6:33
+If I can just have here my two scale virus kilometres and miles, and I might want to align it with the bottom of the frame in here or less that one.
+6:37
+Now I have scale virus. I have NRO. And I need to put the main thing.
+6:53
+No, no. Save my Leo, which is the legend. So I have here this two which I can drag and sort of place my legend in here.
+6:57
+What goes into the legend? Well, everything that is.
+7:08
+Remember that I said the legend has to take care of everything. So everything you have in here will go on your legend by default.
+7:13
+Okay. And if there's some stuff that you don't want to show, then you have to manually.
+7:20
+Manage your legend. So let's select the religion here. We can have a title for legend legend.
+7:27
+All right. See if I can we can decide where the symbols go, they go on the left or right.
+7:35
+And for the legend items, if we don't want to auto update.
+7:45
+What we can do is. Turn this on.
+7:50
+And then we can manage and manually. We can also do things only show items in the map, so you see that that changes a bit already.
+7:55
+Cuts off some of the stuff. But let's do try to do an auto update.
+8:04
+Take this off and then let's remove it we don't want. So we don't want open street map.
+8:13
+We don't want any photo mosaic. We actually don't want named place because the named place is just labels that we have so we can remove it.
+8:17
+We want rivers. We want coastline. One railway waterway, Perama Road, the road.
+8:27
+We want to rid these regions. We want our elevation mosaic.
+8:33
+We don't want our Mozi copy and we don't want our overview. It's not we have a map, Légion, that really covers everything that we want, have fonts.
+8:39
+We have fonts for the different groupings. And so groups and items.
+8:50
+Let's maybe. Recife's. A little bit.
+8:56
+That's 10, I guess, for this group's. We don't have any subgroups for the group font.
+9:05
+He could have. Twelve.
+9:12
+Mm hmm. Maybe one this Mueller. Because this is kind of like a legend.
+9:30
+I mean, a living title font.
+9:36
+Exciting. Yeah, maybe it's not as big.
+9:40
+Columns. So if I want to spread this into different columns to maybe make better use of space, I can add a column.
+9:49
+And now it split in two or three columns, four columns.
+9:56
+See what extent you can ask it to split layers and then you would split, but it doesn't look very good.
+10:01
+Oh, I wouldn't. You can decide to make them equal or not.
+10:08
+Or let just the column sizes out or just. Up to you.
+10:12
+But I think it's a good idea to use two columns in here makes religion a bit better.
+10:17
+It fits the space that we have a bit better to have here, a map legend.
+10:29
+Its colours. Again, you want you can add a frame to your legen if you want.
+10:36
+It already has a background. We don't see it because it's over, but see, it has a white background.
+10:47
+Right now. There's many other options, but those are the main ones.
+10:52
+US has all the space scenes you can changed column space, box space, et cetera, et cetera.
+11:02
+So, for example, maybe you want to separate those columns a little bit, but you can do the space sense for the titles and everything.
+11:09
+You can go crazy with that in here, especially if you're kind of like obsessed with details for design like I am.
+11:15
+Especially when I'm grading. And so we have our legen, but it's still not perfect.
+11:25
+Right. First we have what we have National Park and we actually not using.
+11:31
+So let me move that as well. We have urban region, woodland lakes.
+11:36
+We don't have foreshore. Let's remove that. OK. That's better.
+11:43
+We don't have motorway. So we can remove that as well. We do have rivers, we do have coastline.
+11:47
+We do have reweigh. We do have primary and B roads. We have our mosaic.
+11:56
+Leaks. We do do. I don't think we have any legal section.
+12:07
+But you can remove that. We can. We have definitely have rivers have our bone.
+12:14
+We have Wiedlin. We have three call.
+12:20
+This my No. Fifth Column. No, I think I still prefer.
+12:26
+Columns. Probably got maybe look at position and size.
+12:37
+And see how things are positioned. Or maybe in space scenes.
+12:52
+So, for example, if I wanted to line up that, I promise I'm not going to try to do it.
+12:56
+No, hold on. And not trying to do it. But we still have two problems here.
+12:59
+One is the names are not nice. Right. Those are the layer names which underscores and things.
+13:05
+And that's Kair. We like those numbers also doesn't look nice.
+13:10
+So how do we fix that? Well, we fixed that. But going back to our map canvas.
+13:13
+So the layer name, the names in the legend are layer names.
+13:19
+So we can just give them nice names. And they will automatically update there, so let's do here.
+13:23
+Rivers. We can do here. Coastline.
+13:31
+You can do here right away. You can do primary road and we're not renaming the files.
+13:39
+OK, we're just renaming the layers. So this is not changing the name of the file in any way.
+13:50
+And so we don't have to worry about using spaces and etc. because it's it's just the name of the leader in here.
+13:55
+So you can't call it secondary road. And for base regions, you can have.
+14:02
+Well, we don't have foreign shores, we don't need to worry about that, we don't have lakes, we don't have a national park, but we do have one.
+14:10
+So we can do it like I'm sorry. EF two, EF two urban areas, EF two woodlands.
+14:17
+And for this west, you do have to and we call it elevation in metres.
+14:31
+So now we have nice names. Or for agent.
+14:41
+The one thing is that. Because we didn't have to update here.
+14:47
+It's going. It doesn't update, so we need to click update all and and it brings everybody back.
+14:54
+We need to just go over again and remove the stuff.
+15:00
+We don't want. By street map.
+15:05
+By phone or finding a place. By motorway, like, for sure.
+15:11
+Leaks. By National Park, by mostly Opie, by overview.
+15:21
+Now, the names are looking good. I guess it didn't save.
+15:29
+Wiedlin. Mm hmm. Two would look.
+15:35
+Lands. OK, so now I have a name, so I update this later.
+15:47
+And religion and the other thing is those numbers, right? Those numbers are fractional, they're ugly.
+15:57
+So we can come back here on our elevation properties and we can actually instead of.
+16:03
+Doing those classes. And breaking it, we can actually make them can customise them to look better.
+16:13
+So we can go from maybe zero. To Tim.
+16:21
+Five, 10. Can do 20 to 40.
+16:39
+60. One hundred.
+16:52
+One hundred and fifty. 200 and 300.
+17:00
+Play changes a little bit because I'm changing the track rods, but that's not a big deal.
+17:09
+But now at least. When I go back to my map, I'm going to have decent numbers in here.
+17:14
+And I might want to just omit this minus one because it's going to confuse people.
+17:23
+So what I'll do is update all. And then.
+17:29
+Remove the unwanted stuff that I don't. One key.
+17:36
+I'm. Hi.
+17:42
+By then for my elevation. We remove this minus one because it would just confuse people and, oh, I have my Légion looking nice, align it over here.
+17:49
+Now I have my map legend, which is pretty cool. So now we added are necessary cryptographic elements.
+18:03
+North Arrow critical. A map legend.
+18:12
+And my school. Going to save it.
+18:18
+And then on the next video, let's add some stuff to fill in that space up here.
+9
+Kate, back to the last part of our map design. Videos.
+0:01
+So we have army map. We have a map. We have our scale.
+0:06
+We have this empty space here. And maybe you would be nice to have one else.
+0:12
+Maybe an overview map over here of where this region is in the country.
+0:16
+Maybe we could use that air photo to maybe have like a look up on the cast.
+0:20
+So since the castle is what interests us most, but let's see how we can do that.
+0:24
+The first thing that we're going to do to make sure nothing happens is to come here on our map one.
+0:30
+And we're going to do lock layers, lock styles.
+0:40
+And then I'm just going to come and look everything just to be sure it's not we can't measure this.
+0:45
+And we did like layers and look styles, because if we're going to do a different map in here, we're gonna have to change.
+0:51
+What we're seeing on her Kirgiz canvas, but I don't want it to change in the main window as well.
+0:59
+So that's why I locked everything OK? No, I can come back to my canvas.
+1:05
+I can turn all of this off. And I can turn on my overview map.
+1:13
+And I think I like. The simple overview.
+1:26
+Better. And now I can come back to my cameras in here and I can click and add a second map.
+1:33
+I know, which is going to be my overview map. I can place it in here.
+1:44
+And can light up maybe a little bigger.
+1:50
+And then it can come into my move and content, maybe zoom in a little bit or.
+1:58
+Now I have that's one million.
+2:07
+For 10 million. Good or 50.
+2:14
+Too much. Hundred and twenty.
+2:21
+I definitely want to make it big enough that I can read. You can't read something on a map.
+

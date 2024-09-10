@@ -25,8 +25,8 @@ For this practical you will use the "OS open road" and "OS Terrain 50 Digital Te
 (@) Go the `Ordnance Survey` section of the site, and then pick the `View maps and download data` option on the right.
 
 (@) Following the steps shown on the instructions video, download the following datasets *for the NS89 BNG tile only*:
-  - OS Open Roads (under *Vector Data*)
-  - "OS Terrain 50 Digital Terrain Model" (*NOT Terrain 5 and NOT Contours!*, under Land and Height Data)
+  - OS Open Roads (under *Vector Data*) - choose the `SHP` format
+  - "OS Terrain 50 Digital Terrain Model" (*NOT Terrain 5 and NOT Contours!*, under Land and Height Data) - choose the `ASC` format
 
 If you have correctly searched for tile NS89 and checked the required datatsets, you will see a screen like this:
 
@@ -126,7 +126,7 @@ A QGIS project is a file, which will remember all the data layers you have loade
 
 
 
-(@) Add to your project the layers `NS_RoadLink.shp` from the OS Roads dataset and the `NS89.asc` terrain data from your organized project folders.
+(@) Add to your project the layers `NS_RoadLink.shp` from the OS Roads dataset and the `NS89.asc` terrain data from your organized project folders. Don't worry if the extents don't match - it's just that the OS DEM and the OS Roads are distributed in different sized 'chunks'.
 
 (@) Save your project inside the `00_qgis` folder. You can save your project by clicking on the *Save* button, going to `Project > Save` menu, or by holding the keys `Ctrl+S (Command+S on Mac)`.
 
@@ -142,8 +142,8 @@ A QGIS project is a file, which will remember all the data layers you have loade
   
     - For *measurement units*, make sure distance units are set in meters, and area units in squared meters, also on the `General` tab. Any QGIS operations that calculate distances or areas will use the units set by the project.
   
-    - For the CRS, go to the `CRS` tab and search for **27700** in the `Filter` box. That is the *EPSG code* that identifies the *OSGB 1936 British National Grid* coordinate reference system (CRS). Select it by clicking on it.
-    
+  - For the CRS, go to the `CRS` tab (to the left) and search for **27700** in the `Filter` box. That is the *EPSG code* that identifies the *OSGB 1936 British National Grid* coordinate reference system (CRS). Select it by clicking on it - you may need to expand your search results by clicking on the small arrows besides `Projected` and `Transverse Mercator`. 
+  
 ::: {.callout-note}
 EPSG stands for "European Petroleum Survey Group", and designates a database with standard codes for hundreds of coordinate reference systems. Over time, you will probably memorize the EPSG codes for the CRSs you use more often. 
 :::
@@ -184,7 +184,7 @@ No, layer names within the project are independent of file names -  but as defau
 (@) Select `Rendering type` to be `Single Band Pseudocolor`, and change the `Color ramp` option by clicling on the down-arrow button to the right and picking the  `spectral` colour ramp. If you click on the colour ramp itself it will open a new window to custmize it. This is now what we need for now, so just close it and use the down-arrow. 
 (@) Click on `Classify` (under the dropdown menu that says * Mode: continuous*). The colours will be matched to the range of elevation values in the layer.
 
-(@) Click again on the down-arrow button and select `Invert Color Ramp` at the top of the options, so that the lowest heights are coloured blue. Then click on `OK`. 
+(@) Click again on the little down-arrow button beside the colour palette button and select `Invert Color Ramp` at the top of the options, so that the lowest heights are coloured blue. Then click on `OK`. 
 
 (@) Note how the legend for you terrain layer has changed on the Layers panel. it now shows the minimum and maximum elevations and the colour ramp. Save your project.
 
@@ -212,7 +212,7 @@ The core of GIS work is to use the many built-in operations (also known as funct
 
 (@) This time, we will save the output. Click on the `...` button to the right of the `Clipped` text box, and then choose `Save to file`. Save your new layer on the folder `GEOU9SP/lab_1/02_processing/`, naming it `clipped_roads.shp`. Make sure the `SHP file` format is selected below the file name. Then click on `Run` to execute the operation. Close the window.
 
-(@) Turn the original roads layer on and off to see the result of your operation. Then right-click on the original roads layer, and select `Styles > Copy Style > All Style Categories`. Then right click on the new (clipped) roads layer and select `Styles > Paste Style > All Style Categories`. This is a great way top style several layers ion the same way wirthout effort. 
+(@) Turn the original roads layer on and off to see the result of your operation. Then right-click on the original roads layer, and select `Styles > Copy Style > All Style Categories`. Then right click on the new (`Clipped`) roads layer and select `Styles > Paste Style > All Style Categories`. This is a great way top style several layers ion the same way wirthout effort. 
 
 (@) Remove the original roads layer from your project by right clicking on it and selecting `Remove Layer...`, and then rename you clipped layer to "Roads". Save your project. 
 
