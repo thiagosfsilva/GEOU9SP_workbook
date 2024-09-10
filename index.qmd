@@ -10,6 +10,6 @@ If you have any questions follow the instructions on Canvas on how to [contact t
 
 You can download PDf versions of each week's material here:
 
-[Week 1](https://thiagosfsilva.github.io/GEOU9SP_workbook/pdfs/Week_1_GEOU9SP-GIS-Workbook.pdf)
-[Week 2](https://thiagosfsilva.github.io/GEOU9SP_workbook/pdfs/Week_2_GEOU9SP-GIS-Workbook.pdf)
-[Week 3](https://thiagosfsilva.github.io/GEOU9SP_workbook/pdfs/Week_3_GEOU9SP-GIS-Workbook.pdf)
+[Week 1](https://github.com/thiagosfsilva/GEOU9SP_workbook/blob/main/pdfs/Week_1_GEOU9SP-GIS-Workbook.pdf)
+[Week 2](https://github.com/thiagosfsilva/GEOU9SP_workbook/blob/main/pdfs/Week_2_GEOU9SP-GIS-Workbook.pdf)
+[Week 3](https://github.com/thiagosfsilva/GEOU9SP_workbook/blob/main/pdfs/Week_3_GEOU9SP-GIS-Workbook.pdf)
