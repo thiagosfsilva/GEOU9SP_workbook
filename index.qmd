@@ -8,8 +8,5 @@ The content of this book is organised into sections, which will correspond to th
 
 If you have any questions follow the instructions on Canvas on how to [contact the module coordinator](). 
 
-You can download PDf versions of each week's material here:
+[You can download PDf versions of each week's material from here](https://stir-my.sharepoint.com/:f:/g/personal/ala2_stir_ac_uk/EsP4F6F1Cq9AmT49tSHyTeUByKL4zoPEdZ4zvwGnJZF68A?e=77wlDJ)
 
-[Week 1](https://github.com/thiagosfsilva/GEOU9SP_workbook/blob/main/pdfs/Week_1_GEOU9SP-GIS-Workbook.pdf)
-[Week 2](https://github.com/thiagosfsilva/GEOU9SP_workbook/blob/main/pdfs/Week_2_GEOU9SP-GIS-Workbook.pdf)
-[Week 3](https://github.com/thiagosfsilva/GEOU9SP_workbook/blob/main/pdfs/Week_3_GEOU9SP-GIS-Workbook.pdf)
