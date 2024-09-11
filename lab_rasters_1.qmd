@@ -150,7 +150,7 @@ Why don't the edges of each raster dataset line up perfectly?
 a) Again, this is a side effect from raster layers being grids. As each one has a different pixel size, the `decision` of which pixel is inside our outside the GB vector polygon will be different for each layer. Also, the coastline will always appear 'ragged' because we can't represent any detail smaller than a single pixel on a raster file - and the pixel grids of the three layers do not align because of the pixel sizes. 
 :::
 
-## Guided Exercise 4 - Styling raster data
+## Guided Exercise 4 - Styling raster data 
 
 Just as with vector data, QGIS offers many options for the symbology of raster data. You will see some similarities between the symbology options for vectors and rasters, but also some differences because of the nature of each data model. 
 
@@ -211,9 +211,9 @@ d) This is an old `trick` to reduce file sizes while keeping some precision. Let
 
 (@) Explore some of the other climatic variables contained in the BIOCLIM dataset, using different colour ramps.
 
-Finally, let’s work on the symbology for the SRTM data. For that, we will take advantage of some nice scientific colour palettes that are built-in on QGIS. We will talk aboout what makes these palettes special on Week 4, but let us just use them now.  
+Finally, let’s work on the symbology for the SRTM data. For that, we will take advantage of some nice scientific colour palettes that are built-in on QGIS. We will talk about what makes these palettes special on Week 4, but let us just use them now.  
 
-(@) On the `Properties > Symbology` window of the SRTM layer, choose the `Singleband Pseudocolor` option, and then on th downarrow button besides the `Color Ramp` option, select Create New Color Ramp. On the small options window that comes up, select Catalog:cpt-city.
+(@) On the `Properties > Symbology` window of the SRTM layer, choose the `Singleband Pseudocolor` option, and then on th down arrow button besides the `Color Ramp` option, select `Create New Color Ramp`. On the small options window that comes up, select `Catalog:cpt-city`.
 
 (@) Once the catalogue window opens, go to the `Topography` list and select the `cd-a` palette. Then manually enter `Min` and  `Max` values, using `0` and `900` respectively. `Apply` and see how it changes. But before clicking on `OK`, go to the `Transparency` tab and drag the slider at the top to around `60%`. That will let other layers under it to show through and blend with the colours.
 

@@ -182,8 +182,21 @@ ul.task-list li input[type="checkbox"] {
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text">Week 4 - Making maps</span></span>
+      <div class="sidebar-item-container"> 
+            <a href="./sec_w4_cartography.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 4 - Making maps</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lab_carto_1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Lab 7: Making Maps - Part I</span></span></a>
+  </div>
+</li>
+      </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
@@ -197,7 +210,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./lab_geoprocessing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Lab 9: Geoprocessing tools</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Lab 9: Geoprocessing tools</span></span></a>
   </div>
 </li>
       </ul>
@@ -648,9 +661,9 @@ Click for answer
 <ol start="23" class="example" type="1">
 <li>Explore some of the other climatic variables contained in the BIOCLIM dataset, using different colour ramps.</li>
 </ol>
-<p>Finally, let’s work on the symbology for the SRTM data. For that, we will take advantage of some nice scientific colour palettes that are built-in on QGIS. We will talk aboout what makes these palettes special on Week 4, but let us just use them now.</p>
+<p>Finally, let’s work on the symbology for the SRTM data. For that, we will take advantage of some nice scientific colour palettes that are built-in on QGIS. We will talk about what makes these palettes special on Week 4, but let us just use them now.</p>
 <ol start="24" class="example" type="1">
-<li><p>On the <code>Properties &gt; Symbology</code> window of the SRTM layer, choose the <code>Singleband Pseudocolor</code> option, and then on th downarrow button besides the <code>Color Ramp</code> option, select Create New Color Ramp. On the small options window that comes up, select Catalog:cpt-city.</p></li>
+<li><p>On the <code>Properties &gt; Symbology</code> window of the SRTM layer, choose the <code>Singleband Pseudocolor</code> option, and then on th down arrow button besides the <code>Color Ramp</code> option, select <code>Create New Color Ramp</code>. On the small options window that comes up, select <code>Catalog:cpt-city</code>.</p></li>
 <li><p>Once the catalogue window opens, go to the <code>Topography</code> list and select the <code>cd-a</code> palette. Then manually enter <code>Min</code> and <code>Max</code> values, using <code>0</code> and <code>900</code> respectively. <code>Apply</code> and see how it changes. But before clicking on <code>OK</code>, go to the <code>Transparency</code> tab and drag the slider at the top to around <code>60%</code>. That will let other layers under it to show through and blend with the colours.</p></li>
 <li><p>Right-click on the SRTM layer name and select <code>Duplicate layer</code>. This option creates a ‘virtual’ copy of the layer - it will still point to the same file on disk, but you are able to select a different symbology for it.</p></li>
 </ol>

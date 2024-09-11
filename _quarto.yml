@@ -21,6 +21,8 @@ book:
       - lab_rasters_1.qmd
       - lab_rasters_2.qmd
   - part: sec_w4_cartography.qmd
+    chapters:
+      - lab_carto_1.qmd
   - part: sec_w5_spatial_analysis_I.qmd
     chapters:
       - lab_geoprocessing.qmd

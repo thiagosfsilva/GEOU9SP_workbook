@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Thiago Silva">
-<meta name="dcterms.date" content="2025-12-07">
 
-<title>GEOU9SP GIS Workbook</title>
+<title>GEOU9SP GIS Workbook - 7&nbsp; Lab 7: Making Maps - Part I</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -32,7 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./sec_w1_intro_toGIS.html" rel="next">
+<link href="./sec_w5_spatial_analysis_I.html" rel="next">
+<link href="./sec_w4_cartography.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -82,7 +81,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Welcome!</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./sec_w4_cartography.html">Week 4 - Making maps</a></li><li class="breadcrumb-item"><a href="./lab_carto_1.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Lab 7: Making Maps - Part I</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -109,7 +108,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Welcome!</span></a>
   </div>
 </li>
@@ -193,7 +192,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lab_carto_1.html" class="sidebar-item-text sidebar-link">
+  <a href="./lab_carto_1.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Lab 7: Making Maps - Part I</span></span></a>
   </div>
 </li>
@@ -238,35 +237,27 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#welcome" id="toc-welcome" class="nav-link active" data-scroll-target="#welcome">Welcome!</a></li>
+  <li><a href="#context" id="toc-context" class="nav-link active" data-scroll-target="#context"><span class="header-section-number">7.1</span> Context</a></li>
+  <li><a href="#guided-exercise-1---getting-the-data" id="toc-guided-exercise-1---getting-the-data" class="nav-link" data-scroll-target="#guided-exercise-1---getting-the-data"><span class="header-section-number">7.2</span> Guided Exercise 1 - Getting the data</a></li>
+  <li><a href="#guided-exercise-2---starting-the-project-and-organising-data" id="toc-guided-exercise-2---starting-the-project-and-organising-data" class="nav-link" data-scroll-target="#guided-exercise-2---starting-the-project-and-organising-data"><span class="header-section-number">7.3</span> Guided exercise 2 - Starting the project and organising data</a></li>
+  <li><a href="#guided-exercise-3---styling-the-dem" id="toc-guided-exercise-3---styling-the-dem" class="nav-link" data-scroll-target="#guided-exercise-3---styling-the-dem"><span class="header-section-number">7.4</span> Guided Exercise 3 - Styling the DEM</a></li>
+  <li><a href="#guided-exercise-4-adding-and-styling-the-vector-layers" id="toc-guided-exercise-4-adding-and-styling-the-vector-layers" class="nav-link" data-scroll-target="#guided-exercise-4-adding-and-styling-the-vector-layers"><span class="header-section-number">7.5</span> Guided Exercise 4: Adding and styling the vector layers</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./sec_w4_cartography.html">Week 4 - Making maps</a></li><li class="breadcrumb-item"><a href="./lab_carto_1.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Lab 7: Making Maps - Part I</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">GEOU9SP GIS Workbook</h1>
+<h1 class="title"><span id="sec-carto1" class="quarto-section-identifier"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Lab 7: Making Maps - Part I</span></span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Thiago Silva </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">December 7, 2025</p>
-    </div>
-  </div>
   
     
   </div>
@@ -276,13 +267,187 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="welcome" class="level1 unnumbered">
-<h1 class="unnumbered">Welcome!</h1>
-<p>This e-book was created as a lab companion for the <em>GEOU9SP - Geographic Information Systems</em> module at University of Stirling. It contains all the practical exercises that will be covered throughout the module.</p>
-<p>This book is <strong>not a replacement to Canvas</strong>, so make sure you are engaging with the material on Canvas on a weekly basis!</p>
-<p>The content of this book is organised into sections, which will correspond to the teaching weeks and practical lab sessions. You will always see the main content in the center window, with a detailed menu covering all entries in the book on the left, and a chapter-specific table of contents on the right. The Canvas pages for each lab session will always link to the corresponding chapter in this book.</p>
-<p>If you have any questions follow the instructions on Canvas on how to <a href="">contact the module coordinator</a>.</p>
-<p><a href="https://stir-my.sharepoint.com/:f:/g/personal/ala2_stir_ac_uk/EsP4F6F1Cq9AmT49tSHyTeUByKL4zoPEdZ4zvwGnJZF68A?e=77wlDJ">You can download PDf versions of each week’s material from here</a></p>
+<section id="context" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="context"><span class="header-section-number">7.1</span> Context</h2>
+<p>One of my favorite TV shows of all time is the series <a href="https://en.wikipedia.org/wiki/The_Last_Kingdom_(TV_series)">’The Last Kingdom</a>. I was already a fan of the [books](https://en.wikipedia.org/wiki/The_Saxon_Stories, and I think they translated it to TV very well.</p>
+<p>One of the key plots in the show is that the main character Uthred, wants to reclaim his birthright, the castle of Bebbanburg. Turns out this is a real castle, and it still exists today, known as <a href="https://en.wikipedia.org/wiki/Bamburgh_Castle">Bamburgh Castle</a>, in Northumberland. It is a great place to visit, very scenic and right by the ocean!</p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Bamburgh_Castle%2C_beautiful_day.jpg/1023px-Bamburgh_Castle%2C_beautiful_day.jpg" class="img-fluid"></p>
+<p>So for this mapping exercise, we will create a map that could be used to guide someone wanting to visit the location, including road and train access, some context information, and a close-up aerial view of the castle. It will be fun!</p>
+<p>This week’s exercises are essential for you to successfully complete your first summative assessment, so don’t skip it!</p>
+</section>
+<section id="guided-exercise-1---getting-the-data" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="guided-exercise-1---getting-the-data"><span class="header-section-number">7.2</span> Guided Exercise 1 - Getting the data</h2>
+<p>We will use several datasets from the Ordnance Survey for this exercise, most of it from Digimap. To standardise the focus area, we will be downloading data and mapping the land portion of the <em>NU OS tile</em>:</p>
+<p><img src="images/lab_7/lab7_fig1_nu.jpg" class="img-fluid"></p>
+<ol class="example" type="1">
+<li>First, grab these datasets from the <code>Ordnance Survey</code> collection on Digimap, selecting the NU tile, and using <code>SHP</code> as the format if asked:</li>
+</ol>
+<p>OS Terrain 50 DEM</p>
+<p>Strategi (under the <code>Archived Datasets</code> heading )</p>
+<p>Vector Map District</p>
+<p><strong>Make sure you submit the order before you continue</strong>. Digimap will not carry over your selection when you switch collections.</p>
+<ol start="2" class="example" type="1">
+<li>Now go to the <code>Aerial</code> collection on Digimap, and grab a high-res aerial photo of the castle. To find Bamburgh, just type the name on the search box at the top of the Digimap window, and then pick <code>Bamburgh (Northumberland)</code>. From there, zoom in and then draw a selection around the castle:</li>
+</ol>
+<p><img src="images/lab_7/lab7_fig3_aerial.jpg" class="img-fluid"></p>
+<ol start="3" class="example" type="1">
+<li>With your selection made, you should only get one tile for the <code>Aerial Imagery (Latest)</code> option. Order that tile.</li>
+</ol>
+<p>Now let us get a polygon for the actual castle:</p>
+<ol start="4" class="example" type="1">
+<li><p>Head to the <a href="https://historicengland.org.uk/listing/the-list/data-downloads/">Open Data Hub of Historical England</a>, and grab the dataset for <code>Listed Building data</code>. You want the option <code>Listed Buildings as Polygons</code>, and then when the mapping window opens, zoom in into Bamburgh (<a href="https://www.openstreetmap.org/search?query=Bamburgh#map=14/55.59675/-1.72005">Open Street Map location if you need help finding it</a>).</p></li>
+<li><p>Draw a rectangle around it using the <code>Select Area</code> tool (in red below), and then picking the option <code>Filter to this area</code>. The you can click on the <code>Download</code> button in the left panel, and pick either shapefile or geopackage. If you don’t do a selection first, you’ll download all listed buildings in England, which may take a while…</p></li>
+</ol>
+<p><img src="images/lab_7/lab7_fig2_histo.jpg" class="img-fluid"></p>
+<p>Finally, we will get a nice premade map of the UK to use as a base map for a broader location map inset. The map is also from Ordnance Survey, but is not on Digimap, so we will grab it from the OS Open Data Hub:</p>
+<ol start="6" class="example" type="1">
+<li>Go to the <a href="https://osdatahub.os.uk/downloads/open">OS Open Dat Hub</a> and find the <code>GB Overview Maps</code> collection.Click on it and download the only available file.</li>
+</ol>
+<p>Okay, we should have enough data to make an informative map, so let us start laying it out.</p>
+</section>
+<section id="guided-exercise-2---starting-the-project-and-organising-data" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="guided-exercise-2---starting-the-project-and-organising-data"><span class="header-section-number">7.3</span> Guided exercise 2 - Starting the project and organising data</h2>
+<p>Before we start mapping, we need to organise our downloads and set up a project to start bringing in the data.</p>
+<ol start="7" class="example" type="1">
+<li>Create a home folder for this proejct (e.g.&nbsp;<code>lab_7</code>), and then extract the zipped files and organise the data as you are used to.</li>
+</ol>
+<div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Stop and Think
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>What data models and file formats are your datasets on?</p>
+</div>
+</div>
+<div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The aerial photo, DEM and GB Overview are raster files. The DEM is in the <a href="https://support.geocue.com/ascii-raster-files-asc/">ESRI ASCII</a> raster file format, and the Aerial Image is in <a href="https://en.wikipedia.org/wiki/JPEG">JPEG</a> format. JPEGS don’t natively store coordinates, so a <code>.jgw</code> <em>sidecar</em> file is used to store the spatial information. The GB Overview files are <a href="https://www.ogc.org/standard/geotiff/">GeoTIFF</a> files.</p>
+<p>The vector district files are all vector files, some being polygons, some being lines and some being points. They will be in <a href="https://en.wikipedia.org/wiki/Shapefile">Shapefile</a> format.</p>
+</div>
+</div>
+</div>
+<ol start="8" class="example" type="1">
+<li><p>Create a new empty project in QGIS, and set its CRS to OSGB (EPSG:27700). Save it.</p></li>
+<li><p>As starter, bring in the DEM tiles into the project. If you downloaded the NU region correctly, you should have 15 separate DEM tiles (files ending in <code>.asc</code>). They should look like this:</p></li>
+</ol>
+<p><img src="images/lab_7/lab7_fig4_demsl.jpg" class="img-fluid"></p>
+<ol start="10" class="example" type="1">
+<li><p>We will want to style this data, but copying and pasting the style 15 times is too cumbersome. So use your skills from last week and make a <em>mosaic</em> of all the DEM tiles. Save it as a new file on the proper location in your folder organization, and them remove all the individual tiles from the project to keep it ‘clean’.</p></li>
+<li><p>Now look at the data you downloaded from the OS Vector District dataset. It should contain several shapefiles names <code>NU_xxxxxx.shp</code>, where <code>xxxxx</code> will be a descriptive name for what the layer holds. You will want to bring in the layers below into your project. Don’t worry yet about how each layer looks or the order, just make sure you got it all.</p></li>
+</ol>
+<ul>
+<li><code>NU_Building</code></li>
+<li><code>NU_foreshore</code></li>
+<li><code>NU_NamedPlace</code></li>
+<li><code>NU_RailwayStation</code></li>
+<li><code>NU_RailwayTrack</code></li>
+<li><code>NU_Road</code></li>
+<li><code>NU_SurfaceWater_Area</code></li>
+<li><code>NU_SurfaceWater_Line</code></li>
+<li><code>NU_Woodland</code></li>
+</ul>
+<ol start="12" class="example" type="1">
+<li>Save your project, and then use the <code>Zoom Full</code> tool (<img src="https://docs.qgis.org/3.10/en/_images/mActionZoomFullExtent.png" class="img-fluid">) to see the full extent of your data. You will notice that some of the datasets go beyond the limits of the actual NU tile:</li>
+</ol>
+<p><img src="images/lab_7/lab7_fig5_toomuch.jpg" class="img-fluid"></p>
+<div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Stop and Think
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Thinking of the GIS tools you already learned, could you think of an explanation why some of the layers go beyond the NU limits despite your selection on Digimap?</p>
+</div>
+</div>
+<div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>On week 2 you learned about <code>Clip</code> and <code>Select by Location</code>. It seems that internally, when you draw a selection, Digimap is making a <code>Select by Location</code> operation, selecting all polygons that overlap with the NU square. For large polygons that cross OS grid tiles, you will end bringing the whole tile. So now let us do a proper <code>Clip</code>.</p>
+</div>
+</div>
+</div>
+<ol start="13" class="example" type="1">
+<li>Using your skills from previous labs, create a <code>Layer Extent</code> polygon based on the DEM mosaic, and then use this polygon to <code>Clip</code> the offending layers. As you clip and save the clipped versions, remove the original ones to avoid confusion and keep the project tidy. Once they are all clipped and neat, save your project.</li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you are feeling adventurous, take a look at the QGIS documentation about <code>Batch Processing</code> in QGIS to clip all layers in a single sweep:</p>
+<p><a href="https://docs.qgis.org/3.34/en/docs/user_manual/processing/batch.html">https://docs.qgis.org/3.34/en/docs/user_manual/processing/batch.html</a></p>
+</div>
+</div>
+<p>We now have all the data we need to start laying out our map</p>
+</section>
+<section id="guided-exercise-3---styling-the-dem" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="guided-exercise-3---styling-the-dem"><span class="header-section-number">7.4</span> Guided Exercise 3 - Styling the DEM</h2>
+<ol start="14" class="example" type="1">
+<li>Let us start with the DEM, as it will be the background for our main map. Turn off all the layers except for the DEM, and then open the DEMs <code>Properties &gt; Symbology</code>, and select <code>Singleband Pseudocolor</code> for <code>Render Type</code>.</li>
+</ol>
+<p>We could pick one of the colour ramps from the drop down menu, but we can do better. QGIS actually have several built-in colour palettes that are professionally designed to be <em>perceptually equivalent</em>, <em>colour blind friendly</em>, and so on. The two main collections of paletets are the <a href="https://colorbrewer2.org/#type=sequential&amp;scheme=BuGn&amp;n=3">ColorBrewer</a> palettes and the <a href="http://seaviewsensing.com/pub/cpt-city/">cpt-city</a> archive. We will use one of the topography optimised cpt-city palettes.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Cartography is an equal mix of art and technique, and always has a strong amount of subjectivity and self-expression. Throughout this exercise, feel free to explore different symbology options instead of picking the exact ones shown, to develop your won cartographic style.</p>
+</div>
+</div>
+<ol start="15" class="example" type="1">
+<li><p>Click the small down-arrow to the right of the <code>Color Ramp</code> button, and select the option <code>Create New Color Ramp</code>. On the small window that will appear, select <code>Catalog: cpt-city</code> and click <code>OK</code>. A new window will appear with all the (many) cpt-city palettes.</p></li>
+<li><p>Pick the <code>Topography</code> category on the left, and then click on the <code>cd-a</code> palette (or another of your choice), and then <code>OK</code>. You will then be back at the <code>Symbology</code> window.</p></li>
+<li><p>Now let us customise our colour palette. First, for <code>Min</code> and <code>Max</code>, pick <code>0</code> and <code>300</code> respectively. Continuous palettes are easier to interpret if they use nice, round values. Then change the <code>Mode</code> to <code>Equal Interval</code> with <code>7</code> classes. That will give us nice round steps of 50m. The <code>Apply</code> and <code>OK</code>. Your DEM should now look like this:</p></li>
+</ol>
+<p><img src="images/lab_7/lab7_fig6_coldem.jpg" class="img-fluid"></p>
+<ol start="18" class="example" type="1">
+<li>We can add a bit more pop to the DEM by reproducing our <code>3D</code> effect using transparency and the <code>hillshade</code> symbology that we learned on {<a href="lab_rasters_1.html" class="quarto-xref"><span>Chapter 5</span></a>}. If you can’t quite remember how to do it, refer back to Guided Exercise 4 for that lab. For my map, I set the transparency of the coloured DEM layer to <code>60%</code>, and then went back to the <code>Symbology</code> of the hillshade layer and tweaked a bit the <code>brightness</code> (<code>20</code>) and <code>contrast</code> (<code>-10</code>) options under the <code>Layer Rendering</code> section. We want the effect to be subtle, and the whole DEM to have a <code>light</code> appearance since it will be a background.</li>
+</ol>
+<p><img src="images/lab_7/lab7_fig7_hillshade.jpg" class="img-fluid"></p>
+<ol start="19" class="example" type="1">
+<li>Make any additional adjustments to the DEM style to your taste, and then save your project.</li>
+</ol>
+</section>
+<section id="guided-exercise-4-adding-and-styling-the-vector-layers" class="level2" data-number="7.5">
+<h2 data-number="7.5" class="anchored" data-anchor-id="guided-exercise-4-adding-and-styling-the-vector-layers"><span class="header-section-number">7.5</span> Guided Exercise 4: Adding and styling the vector layers</h2>
 
 
 </section>
@@ -699,10 +864,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./sec_w4_cartography.html" class="pagination-link" aria-label="Week 4 - Making maps">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Week 4 - Making maps</span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./sec_w1_intro_toGIS.html" class="pagination-link" aria-label="Week 1 - Introduction">
-        <span class="nav-page-text">Week 1 - Introduction</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./sec_w5_spatial_analysis_I.html" class="pagination-link" aria-label="Week 5 - Spatial analysis I">
+        <span class="nav-page-text">Week 5 - Spatial analysis I</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
