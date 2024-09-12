@@ -141,7 +141,7 @@ a) As you move further away from the centre of the projection, shape gets progre
 b) In metres. You can check that on the layer's  `Properties > Information` tab.
 :::
 
-(@) Now add to the project the file called CNTR_BN_10M_2020_3035.geojson. Notice the different last four numbers on the file name.
+(@) Now add to the project the file called CNTR_BN_20M_2020_3035.geojson. Notice the different last four numbers on the file name.
 
 
 ::: {.callout-important title="Stop and Think"}
