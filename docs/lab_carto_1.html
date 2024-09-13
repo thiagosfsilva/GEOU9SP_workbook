@@ -241,7 +241,8 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#guided-exercise-1---getting-the-data" id="toc-guided-exercise-1---getting-the-data" class="nav-link" data-scroll-target="#guided-exercise-1---getting-the-data"><span class="header-section-number">7.2</span> Guided Exercise 1 - Getting the data</a></li>
   <li><a href="#guided-exercise-2---starting-the-project-and-organising-data" id="toc-guided-exercise-2---starting-the-project-and-organising-data" class="nav-link" data-scroll-target="#guided-exercise-2---starting-the-project-and-organising-data"><span class="header-section-number">7.3</span> Guided exercise 2 - Starting the project and organising data</a></li>
   <li><a href="#guided-exercise-3---styling-the-dem" id="toc-guided-exercise-3---styling-the-dem" class="nav-link" data-scroll-target="#guided-exercise-3---styling-the-dem"><span class="header-section-number">7.4</span> Guided Exercise 3 - Styling the DEM</a></li>
-  <li><a href="#guided-exercise-4-adding-and-styling-the-vector-layers" id="toc-guided-exercise-4-adding-and-styling-the-vector-layers" class="nav-link" data-scroll-target="#guided-exercise-4-adding-and-styling-the-vector-layers"><span class="header-section-number">7.5</span> Guided Exercise 4: Adding and styling the vector layers</a></li>
+  <li><a href="#guided-exercise-4-adding-and-styling-the-transportation-layers" id="toc-guided-exercise-4-adding-and-styling-the-transportation-layers" class="nav-link" data-scroll-target="#guided-exercise-4-adding-and-styling-the-transportation-layers"><span class="header-section-number">7.5</span> Guided Exercise 4: Adding and styling the transportation layers</a></li>
+  <li><a href="#guided-exercise-5---adding-contextual-elements" id="toc-guided-exercise-5---adding-contextual-elements" class="nav-link" data-scroll-target="#guided-exercise-5---adding-contextual-elements"><span class="header-section-number">7.6</span> Guided Exercise 5 - Adding contextual elements</a></li>
   </ul>
 </nav>
     </div>
@@ -446,8 +447,75 @@ Tip
 <li>Make any additional adjustments to the DEM style to your taste, and then save your project.</li>
 </ol>
 </section>
-<section id="guided-exercise-4-adding-and-styling-the-vector-layers" class="level2" data-number="7.5">
-<h2 data-number="7.5" class="anchored" data-anchor-id="guided-exercise-4-adding-and-styling-the-vector-layers"><span class="header-section-number">7.5</span> Guided Exercise 4: Adding and styling the vector layers</h2>
+<section id="guided-exercise-4-adding-and-styling-the-transportation-layers" class="level2" data-number="7.5">
+<h2 data-number="7.5" class="anchored" data-anchor-id="guided-exercise-4-adding-and-styling-the-transportation-layers"><span class="header-section-number">7.5</span> Guided Exercise 4: Adding and styling the transportation layers</h2>
+<p>Now that we have a nice looking base layer, let us start adding our vector elements. At this time, it is a good idea to stop and think again what is the main purpose of our map - what should the main subject be, what additional information is more immportant, and so on. In the end, we want to have a <em>visual hierarchy</em> that naturally guides the viewer attention to the most important aspects of the map.</p>
+<ol start="20" class="example" type="1">
+<li><p>Turn back on the ‘railway tracks’ and ‘roads’ layers. Since one of our main objecives is to get people to reach Bamburgh Castle, these should be very evident in our map.</p></li>
+<li><p>Let us start with the railway track, as it is simpler. Open its <code>Properties &gt; Symbology</code> and on then change the symbol presets lisr from to <code>All Symbols</code> (see figure below) and then scroll the presets list until you find <code>Topo Railway</code>. Click on it to select it, and then <code>Apply</code>.</p></li>
+</ol>
+<p><img src="images/lab_7/lab7_fig8_symb.jpg" class="img-fluid"> ::: {.callout-tip} If you’re interested on how this more complex symbol was made keep reading, otherwise feel free to skip it!</p>
+<p>Note how QGIS allows you to create very complex symbols. If you look at the top of the <code>Symbology</code> window, you will notice this railway track symbol is actually composed of several ‘subsymbols’:</p>
+<p><img src="images/lab_7/lab7_fig9_track.jpg" class="img-fluid"></p>
+<p>The general symbol category is <code>Line</code>, and them the differen elements of the symbology are added to it using the green <code>+</code> symbol at the left. The <code>Maker Line</code> subsymbol defines that you want markers around a line, and if you click on it, the symbology option will give you options relating to it (see if you can change the spacing of the rail crosslines!). Then <code>Simple Marker</code> is another subsymbol, that defines which marker will be repeated along the line (try to make it a bit thicker!). Finally, the <code>Simple Line</code>subsymbol is the one we are used to, that sets the appearance of the main track line.</p>
+<p>You can create very complex symbols using these advanced features - but don’t feel like you need to for the purposes of this module! :::</p>
+<ol start="22" class="example" type="1">
+<li>Play with the width of the track line and the color to make it well separated from the background terrain, but not too strong/dominating.</li>
+</ol>
+<div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Stop and Think
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Did you notice the crosslines along the track seem to have unconsisten spacing? Can you think of a reason why? How could you fix it?</p>
+</div>
+</div>
+<div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>In the railway layer the different railway line segments are separate features (try selecting them). So for each segment the symbology is ‘restarted’. To fix it, use the <code>Dissolve</code> tool to turn all line segments into a single multiline feature.</p>
+<p>It will solve most problems but not all. If you zoom in very close to where the crosslines seem to be too close or too far, you will notice there are actually gaps in between the lines, and <code>Dissolve</code> will only dissolve connecting lines.</p>
+</div>
+</div>
+</div>
+<ol start="23" class="example" type="1">
+<li><p>Now we can focus on the roads. Open the <code>Attribute Table</code> of the roads layer, and notice there is an attribute indicating the type of road (local street, minor road, etc). Use the <code>Select by Expression</code> tool to investigate what are the unique possible values of this attribute. It would be nice if we could style the roads based on their type!</p></li>
+<li><p>Close the attribute table and open the <code>Properties &gt; Symbology</code> for the roads layer. Change it from <code>Single Symbol</code> to <code>Categorized</code>, then pick <code>CLASSIFICA</code> as the <code>Value</code>, and <code>Classify</code> to assign random colours to each road type.</p></li>
+<li><p>We want however, to have some consistency and visual hierarchy for the roads, instead of simply random colours. But you can edit the symbols for each individal class by double clicking on it on the individual symbols in the list of classified values.</p></li>
+<li><p>Take a look at the <a href="https://www.gov.uk/government/publications/guidance-on-road-classification-and-the-primary-route-network/guidance-on-road-classification-and-the-primary-route-network">UK roads classification</a> and then style them with proper visual hierarchy. Colour A and B roads red, but use different widths, and then the remaining roads dark grey, but again with hierarchy indicated by line width. Feel free to use the same symbol for classes you think are too similar (I used the same for the two types of primary road, and I removed pedestrianized and private roads). This is what my map looks like by now:</p></li>
+</ol>
+<p><img src="images/lab_7/lab7_fig10_demnroads.jpg" class="img-fluid"></p>
+<p>Now that we have our main roads, let us add some more context to the map.</p>
+</section>
+<section id="guided-exercise-5---adding-contextual-elements" class="level2" data-number="7.6">
+<h2 data-number="7.6" class="anchored" data-anchor-id="guided-exercise-5---adding-contextual-elements"><span class="header-section-number">7.6</span> Guided Exercise 5 - Adding contextual elements</h2>
+<p>Even with the roads and railways clearly visible in the map, it would still be difficult to navigate using this map, as there isn’t much context available. Let us add some contextual elements to our map. They should be there to <em>support</em> the main themes, and thus not stand out more than necessary.</p>
+<ol start="27" class="example" type="1">
+<li>Reactivate the woodland, surface water (area and line) and buildings layers. Notice how cluttered the map looks now. This is why good visual hierarchy is so important.</li>
+</ol>
+<p>We can start by styling the water surfaces. We want colours that help interpretation, so we should make them a light coloured blue. And since many of these features are small and/or narrow features, we can make them look less evident and cluttered by setting the <code>stroke</code> symbol to be the same colour as the <code>fill</code> symbol -i.e.&nbsp;so that they look borderless.</p>
+<ol start="28" class="example" type="1">
+<li>Open the <code>Properties &gt; Symbology</code> of the surface water <em>lines</em>, and set the fill colour to a light blue of your choosing. Leave it as a thin line. Before you leave the symblogy window for that layer, open the colour picking window again and copy the <code>HTML notation</code> for the colour you selected:</li>
+</ol>
+<p><img src="images/lab_7/lab7_fig11_copycolour.jpg" class="img-fluid"></p>
+<ol start="29" class="example" type="1">
+<li><p>Now close the window and open the <code>Symbology</code> for the surface water <em>areas</em>. Then open the color picking windows for both line and fill, and paste the <code>HTML notation</code> you copied before. Now they will all have the same colour.</p></li>
+<li><p>Now style the woodlands using a muted green colour, and the buildings using a brownish gray. Make them both borderless, as you did with the water surfaces.</p></li>
+</ol>
 
 
 </section>

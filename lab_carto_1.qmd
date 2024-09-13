@@ -134,8 +134,64 @@ Cartography is an equal mix of art and technique, and always has a strong amount
 
 (@) Make any additional adjustments to the DEM style to your taste, and then save your project.
 
-## Guided Exercise 4: Adding and styling the vector layers
+## Guided Exercise 4: Adding and styling the transportation layers
 
+Now that we have a nice looking base layer, let us start adding our vector elements. At this time, it is a good idea to stop and think again what is the main purpose of our map - what should the main subject be, what additional information is more immportant, and so on. In the end, we want to have a 
+*visual hierarchy* that naturally guides the viewer attention to the most important aspects of the map. 
 
+(@) Turn back on the 'railway tracks' and 'roads' layers. Since one of our main objecives is to get people to reach Bamburgh Castle, these should be very evident in our map.
 
+(@) Let us start with the railway track, as it is simpler. Open its `Properties > Symbology` and on then change the symbol presets lisr from to `All Symbols` (see figure below) and then scroll the presets list until you find `Topo Railway`. Click on it to select it, and then `Apply`. 
 
+![](images/lab_7/lab7_fig8_symb.jpg)
+::: {.callout-tip}
+If you're interested on how this more complex symbol was made keep reading, otherwise feel free to skip it!
+
+Note how QGIS allows you to create very complex symbols. If you look at the top of the `Symbology` window, you will notice this railway track symbol is actually composed of several 'subsymbols':
+
+![](images/lab_7/lab7_fig9_track.jpg)
+
+The general symbol category is `Line`, and them the differen elements of the symbology are added to it using the green `+` symbol at the left. The `Maker Line` subsymbol defines that you want markers around a line, and if you click on it, the symbology option will give you options relating to it (see if you can change the spacing of the rail crosslines!). Then `Simple Marker` is another subsymbol, that defines which marker will be repeated along the line (try to make it a bit thicker!). Finally, the `Simple Line`subsymbol is the one we are used to, that sets the appearance of the main track line. 
+
+You can create very complex symbols using these advanced features - but don't feel like you need to for the purposes of this module!
+:::
+
+(@) Play with the width of the track line and the color to make it well separated from the background terrain, but not too strong/dominating.
+
+::: {.callout-important title="Stop and Think"}
+Did you notice the crosslines along the track seem to have unconsisten spacing? Can you think of a reason why? How could you fix it?
+:::
+
+::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
+In the railway layer the different railway line segments are separate features (try selecting them). So for each segment the symbology is 'restarted'. To fix it, use the `Dissolve` tool to turn all line segments into a single multiline feature.
+
+It will solve most problems but not all. If you zoom in very close to where the crosslines seem to be too close or too far, you will notice there are actually gaps in between the lines, and `Dissolve` will only dissolve connecting lines.  
+:::
+
+(@) Now we can focus on the roads. Open the `Attribute Table` of the roads layer, and notice there is an attribute indicating the type of road (local street, minor road, etc). Use the `Select by Expression` tool to investigate what are the unique possible values of this attribute. It would be nice if we could style the roads based on their type!
+
+(@) Close the attribute table and open the `Properties > Symbology` for the roads layer. Change it from `Single Symbol` to `Categorized`, then pick `CLASSIFICA` as the `Value`, and `Classify` to assign random colours to each road type.
+
+(@) We want however, to have some consistency and visual hierarchy for the roads, instead of simply random colours. But you can edit the symbols for each individal class by double clicking on it on the individual symbols in the list of classified values. 
+
+(@) Take a look at the [UK roads classification](https://www.gov.uk/government/publications/guidance-on-road-classification-and-the-primary-route-network/guidance-on-road-classification-and-the-primary-route-network) and then style them with proper visual hierarchy. Colour A and B roads red, but use different widths, and then the remaining roads dark grey, but again with hierarchy indicated by line width. Feel free to use the same symbol for classes you think are too similar (I used the same for the two types of primary road, and I removed pedestrianized and private roads). This is what my map looks like by now:
+
+![](images/lab_7/lab7_fig10_demnroads.jpg)
+
+Now that we have our main roads, let us add some more context to the map.
+
+## Guided Exercise 5 - Adding contextual elements
+
+Even with the roads and railways clearly visible in the map, it would still be difficult to navigate using this map, as there isn't much context available. Let us add some contextual elements to our map. They should be there to *support* the main themes, and thus not stand out more than necessary.
+
+(@) Reactivate the woodland, surface water (area and line) and buildings layers. Notice how cluttered the map looks now. This is why good visual hierarchy is so important.
+
+We can start by styling the water surfaces. We want colours that help interpretation, so we should make them a light coloured blue. And since many of these features are small and/or narrow features, we can make them look less evident and cluttered by setting the `stroke` symbol to be the same colour as the `fill` symbol -i.e. so that they look borderless. 
+
+(@) Open the `Properties > Symbology` of the surface water *lines*, and set the fill colour to a light blue of your choosing. Leave it as a thin line. Before you leave the symblogy window for that layer, open the colour picking window again and copy the `HTML notation` for the colour you selected:
+
+![](images/lab_7/lab7_fig11_copycolour.jpg)
+
+(@) Now close the window and open the `Symbology` for the surface water *areas*. Then open the color picking windows for both line and fill, and paste the `HTML notation` you copied before. Now they will all have the same colour. 
+
+(@) Now style the woodlands using a muted green colour, and the buildings using a brownish gray. Make them both borderless, as you did with the water surfaces.

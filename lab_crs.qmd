@@ -189,7 +189,7 @@ Why are the clipping results different even though the initial 3035 and 4236 lay
 Because although they have been reprojected visually to match on screen, the files still have different CRSs, and this affects the lining up of the `Input` and overlay layers. To get proper results, you need permanently translate (reproject) both datasets to the same CRS. 
 :::
 
-(@) Now go to `Vector > Data Management Tools > Reproject Data`. Select the 4326 world layer as your  `Input Layer`, and EPSG:3035 as your `Target CRS`. Let the result be a temporary file and click `OK`. The new layer will be automatically named as  “Reprojected”. What is the CRS of this new layer (check on the layer properties window)?
+(@) Now go to `Vector > Data Management Tools > Reproject Layer`. Select the 4326 world layer as your  `Input Layer`, and EPSG:3035 as your `Target CRS`. Let the result be a temporary file and click `OK`. The new layer will be automatically named as  “Reprojected”. What is the CRS of this new layer (check on the layer properties window)?
 
 (@) Now repeat the use of the `Clip` tool using “Reprojected” as the `Input Layer` and "clip_bounds" as the `Overlay Layer`. Rename the resulting layer to 'Clipped_Reprojected'. Which of the two originally clipped layers (“Clipped_3035” or “Clipped_4236?) better matches the "Clipped_Reprojected" layer? 
 
