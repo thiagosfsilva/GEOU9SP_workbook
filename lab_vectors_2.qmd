@@ -38,7 +38,7 @@ Now that we identified the earthquakes on the continents, we may want to add thi
 
 (@) Return to the `Field Calculator` and this time use the  `Update Existing Field` option to the right, instead of `Create a new field`. Make sure the option `Only update selected features` is still enabled. Pick `Origin` as the field to be updated, and now just write `'Ocean'` on the Expression window. Click `OK`.
 
-(@) Now use the `Origin` attribute to style the colour or shape of your Earthquake points differently for land and ocean, using the `Symbology` options.
+(@) Now use the `Origin` attribute to style the colour or shape of your Earthquake points differently for land and ocean, using the `Symbology` options. Pick the `Categorized` symbology option at the top, and then the set the `Value` to the `Origin`attribute, and then `Classify`.
 
 ::: {.callout-important title="Stop and Think"}
 Do you understand why you did the steps above?
