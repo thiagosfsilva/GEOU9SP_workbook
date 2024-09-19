@@ -286,7 +286,7 @@ The `Visibility Analysis` plugin adds some option to the `Processing panel` of Q
 
 ![](images/lab_5/lab5_fig7_proc.jpg)
 
-(@) Load the `observation_point,shp` file you have downloaded as part of the lab data.  
+(@) Download the `observation_point,shp` [file from this link](https://stir-my.sharepoint.com/:u:/g/personal/ala2_stir_ac_uk/EWG4zHZtEchMnkRo4Dyg-0ABn8kz7vnY4MABGkHJtBn8xg?e=zMQBZu).  
 
 
 (@) Open the `Visibility Analysis` heading on the `Processing Toolbox`, and then double click on `Create Viewpoints`. A new window will open. On this window, you need to pick the `Observer Location`, which will be the Observation point layer, and then the DEM, which will be the Central Scotland SRTM (make sure you *don't* pick the slope or aspect layers by mistake!). 

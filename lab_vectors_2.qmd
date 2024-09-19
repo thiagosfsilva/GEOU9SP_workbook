@@ -101,7 +101,7 @@ To further solidify your knowledge, do the Independent Exercise below, which rev
 
 You want to investigate how priority areas for wildcat conservation (WPAs) overlap with protected areas, and the risk of wildcat roadkill.  
 
-For that, obtain the following layers from the [NatureScot Open Data Hub](https://opendata.nature.scot/):
+For that, obtain the following layers from the [NatureScot Open Data Hub](https://opendata.nature.scot/). Get them in *shapefile* format.
 
 - Wildcat Priority Areas (WPA)
 - Sites of Special Scientific Interest (SSSI)
@@ -119,7 +119,7 @@ Organize the data and create a new project where you load all four datasets. Ord
     d) How many features does the WPA dataset have?
     e) How many attributes does the WPA dataset have?
     
-2) The UK boundaries file has a different CRS from the rest, and it also contains all countries. Reproject this layer to the same CRS as the other layers, and then create a new layer containing the Scotland boundary only. Renove the UK layer from the porject after that.
+2) The UK boundaries file has a different CRS from the rest, and it also contains all countries. Reproject this layer to the same CRS as the other layers, and then create a new layer containing the Scotland boundary only. Remove the UK layer from the project after that.
 
 3) The roads layer covers all of the UK, making it very heavy and slow to use. But our analysis concerns Scotland only, so create a new layer containing only the road links (lines) inside the Scottish boundaries. Remove the full UK layer from the project after that.
     
