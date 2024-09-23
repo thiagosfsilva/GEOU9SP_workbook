@@ -322,7 +322,7 @@ Click for answer
 <li><p>Still on the Attribute Table of the Earthquakes layer, open the <code>Field Calculator</code>, and create a new <code>Text(string)</code> field called <code>Origin</code>. Make sure the option <code>Only update selected features</code> <strong>is</strong> enabled this time. Then on the Expression window, just write <code>'Land'</code>. That means the word <code>Land</code> will be added as the attribute value for every selected feature.</p></li>
 <li><p>Now back on the Attribute Table window, click on the <code>Invert Selection</code> button (<img src="https://docs.qgis.org/3.34/en/_images/mActionInvertSelection.png" class="img-fluid">).</p></li>
 <li><p>Return to the <code>Field Calculator</code> and this time use the <code>Update Existing Field</code> option to the right, instead of <code>Create a new field</code>. Make sure the option <code>Only update selected features</code> is still enabled. Pick <code>Origin</code> as the field to be updated, and now just write <code>'Ocean'</code> on the Expression window. Click <code>OK</code>.</p></li>
-<li><p>Now use the <code>Origin</code> attribute to style the colour or shape of your Earthquake points differently for land and ocean, using the <code>Symbology</code> options.</p></li>
+<li><p>Now use the <code>Origin</code> attribute to style the colour or shape of your Earthquake points differently for land and ocean, using the <code>Symbology</code> options. Pick the <code>Categorized</code> symbology option at the top, and then the set the <code>Value</code> to the <code>Origin</code>attribute, and then <code>Classify</code>.</p></li>
 </ol>
 <div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
 <div class="callout-header d-flex align-content-center">
@@ -445,7 +445,7 @@ Click for answer
 <section id="independent-exercise---supporting-wildcat-conservation-in-scotland." class="level2" data-number="4.4">
 <h2 data-number="4.4" class="anchored" data-anchor-id="independent-exercise---supporting-wildcat-conservation-in-scotland."><span class="header-section-number">4.4</span> Independent Exercise - Supporting Wildcat conservation in Scotland.</h2>
 <p>You want to investigate how priority areas for wildcat conservation (WPAs) overlap with protected areas, and the risk of wildcat roadkill.</p>
-<p>For that, obtain the following layers from the <a href="https://opendata.nature.scot/">NatureScot Open Data Hub</a>:</p>
+<p>For that, obtain the following layers from the <a href="https://opendata.nature.scot/">NatureScot Open Data Hub</a>. Get them in <em>shapefile</em> format.</p>
 <ul>
 <li>Wildcat Priority Areas (WPA)</li>
 <li>Sites of Special Scientific Interest (SSSI)</li>
@@ -462,7 +462,7 @@ Click for answer
 <li>How many features does the WPA dataset have?</li>
 <li>How many attributes does the WPA dataset have?</li>
 </ol></li>
-<li><p>The UK boundaries file has a different CRS from the rest, and it also contains all countries. Reproject this layer to the same CRS as the other layers, and then create a new layer containing the Scotland boundary only. Renove the UK layer from the porject after that.</p></li>
+<li><p>The UK boundaries file has a different CRS from the rest, and it also contains all countries. Reproject this layer to the same CRS as the other layers, and then create a new layer containing the Scotland boundary only. Remove the UK layer from the project after that.</p></li>
 <li><p>The roads layer covers all of the UK, making it very heavy and slow to use. But our analysis concerns Scotland only, so create a new layer containing only the road links (lines) inside the Scottish boundaries. Remove the full UK layer from the project after that.</p></li>
 <li><p>The attribute <code>Shape_Area</code> of the WPA dataset does not indicate any units. It is always useful to have field names that hint at the unit for the values, making the data more self-explanatory. Recalculate the area of each WPA <em>in square km</em>, naming the new field ‘Area_km2’. Then delete the ‘Shape_Area’ attribute from the dataset to avoid confusion for future users.</p></li>
 <li><p>The Sites of Specific Scientific Interest (SSSIs) are a category of protected area in Scotland. These may offer additional protection to wildcats. Find all the SSSIs that overlap with WPAs, and create a new layer containing only these sites. Then calculate the total area of these SSSIs.</p></li>
