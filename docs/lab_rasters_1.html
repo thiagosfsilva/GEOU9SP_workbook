@@ -196,6 +196,12 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Lab 7: Making Maps - Part I</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lab_carto_2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Lab 8: Making Maps - Part II</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -210,7 +216,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./lab_geoprocessing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Lab 9: Geoprocessing tools</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Lab 9: Geoprocessing tools</span></span></a>
   </div>
 </li>
       </ul>
@@ -423,7 +429,7 @@ Click for answer
 <h2 data-number="5.4" class="anchored" data-anchor-id="guided-exercise-3---masking-rasters-using-vectors"><span class="header-section-number">5.4</span> Guided Exercise 3 - Masking rasters using vectors</h2>
 <p>We often want to remove portions (specific cells) of a raster, a process called <em>masking</em>. For example, some of our datasets include the Republic of Ireland and bits of mainland Europe, and some datasets include the Shetland Islands, while others don’t. Let use the UK boundaries from the GADM dataset to mask our data to the Island of Great Britain (Scotland, England and Wales) only.</p>
 <ol start="8" class="example" type="1">
-<li>First add the GADm data (<code>gadm36_GBR.gpkg</code>) to your project. This geopackage holds multiple layers for the different levels of admin boundaries. You can just add the level 0 layer, which gets the UK as a whole.</li>
+<li>First add the GADM data (<code>gadm36_GBR.gpkg</code>) to your project. This geopackage holds multiple layers for the different levels of admin boundaries. You can just add the level 0 layer, which gets the UK as a whole.</li>
 </ol>
 <div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
 <div class="callout-header d-flex align-content-center">
@@ -454,14 +460,17 @@ Click for answer
 </div>
 </div>
 </div>
-<p>As we learned on Week 1, trying to do clipping (and masking) operations between layers with mismatched CRSs gives us wrong results. So before you do anything, reproject the UK boundaries layer to EPSG 27700. You also need to extract the main British Island from the rest of the dataset. Turns out there is a quick way to do both at once, but first we need to deal with a little issue with the vector layer:</p>
 <ol start="9" class="example" type="1">
+<li>As we learned on Week 1, trying to do clipping (and masking) operations between layers with mismatched CRSs gives us wrong results. So before you do anything, reproject the UK boundaries layer to EPSG 27700. <strong>DO NOT</strong> go to <code>Properties &gt; Layer CRS</code> - that won’t reproject the data, just force a new CRS definition on it without changing the actual coordinates, and you will ruin your data. Go to <code>Vector &gt; Data Management Tools &gt; Reproject Layer</code>.</li>
+</ol>
+<p>You also need to extract the <strong>mainland</strong> British Island from the rest of the dataset (just the one polygon that represents the bigger land mass). Turns out there is a quick way to do both at once, but first we need to deal with a little issue with the vector layer:</p>
+<ol start="10" class="example" type="1">
 <li>Open the Attribute Table of the UK boundaries layer. How many features does it have?</li>
 </ol>
 <p>This is what is called a <code>multipart</code> polygon - a set of disjoint polygons all treated as a single feature. Before we can use the layer, we need to split the individual polygons apart to be able to select the main island only:</p>
-<ol start="10" class="example" type="1">
+<ol start="11" class="example" type="1">
 <li><p>Go to <code>Vector &gt; Geometry Tools &gt; Multipart to Singleparts</code>, and select the GADM layer. You can leave it as a temporary layer since we will only export one polygon for it in the next step. A new temp layer called <code>Single parts</code> will be created. Inspect its Attribute Table.</p></li>
-<li><p>Now use the feature selection tool (<img src="https://docs.qgis.org/3.34/en/_images/mActionSelectRectangle.png" class="img-fluid">) to select Great Britain only, and then right-click on the Single Part layer name and choose <code>Export &gt; Save selected features as...</code>. Pick a folder location and name the file <code>GB_Island.shp</code>. Before you click on OK, however, change the <code>CRS</code> drop-down menu to EPSG:27000. That is it, QGIS will now reproject the layer before saving it! Click <code>OK</code>to save, and then remove the original GADM and the temp layer from your project to keep things tidy. Save your project.</p></li>
+<li><p>Now use the feature selection tool (<img src="https://docs.qgis.org/3.34/en/_images/mActionSelectRectangle.png" class="img-fluid">) to select the one polygon for the mainland Great Britain only (no smaller islands!), and then right-click on the Single Part layer name and choose <code>Export &gt; Save selected features as...</code>. Pick a folder location and name the file <code>GB_Island.shp</code>. Before you click on OK, however, change the <code>CRS</code> drop-down menu to EPSG:27000. That is it, QGIS will now reproject the layer before saving it! Click <code>OK</code>to save, and then remove the original GADM and the temp layer from your project to keep things tidy. Save your project.</p></li>
 <li><p>Double check what is the CRS of the new <code>GB_island</code> layer you have created.</p></li>
 <li><p>You are now ready to mask the raster data. Go to <code>Raster &gt; Extraction &gt; Clip Raster by Mask Layer...</code>. As <code>Input layer</code>, select the SRTM layer, and as <code>Mask layer</code>, select the GB island layer. Then on the option <code>Assign a specific nodata value to output bands</code>, enter the number <code>-32768</code>. <em>Make sure you include the minus sign</em>! Leave the other options as default, but do check both the <code>Match the extent of the clipped raster to the extent of the mask layer</code> and <code>Keep resolution of input raster</code> options. Pick a folder and name your file <code>UK_SRTM_BG_GBmask.tif</code>. Now we can know at a glance that this is the SRTM data, reprojected to British Grid and masked to Great Britain.</p></li>
 </ol>
@@ -476,7 +485,7 @@ Stop and Think
 </div>
 <div class="callout-body-container callout-body">
 <ol type="a">
-<li><p>Why did we pick a value of -999 for ‘nodata’?</p></li>
+<li><p>Why did we pick a value of -32768 for ‘nodata’?</p></li>
 <li><p>Why should we check the <code>Match the extent...</code> and <code>Keep Resolution..</code> boxes?</p></li>
 </ol>
 </div>
@@ -500,9 +509,9 @@ Click for answer
 </div>
 </div>
 </div>
-<ol start="14" class="example" type="1">
+<ol start="15" class="example" type="1">
 <li><p>Use the <code>Identify Features</code> tool (<img src="https://docs.qgis.org/3.34/en/_images/mActionIdentify.png" class="img-fluid">) to click on blank area of the masked SRTM layer (near the shore). Make sure you have the SRTM layer selected on the Layers panel before you click the tool. What pixel values do you get? -32768 or ‘nodata’?</p></li>
-<li><p>Now go to the <code>Properties &gt; Transparency</code> tab of the SRTM raster layer, and uncheck the <code>No data value -999</code> box. Look at your raster again, and probe the same areas with the <code>Identify Features</code> tool. Can you see now how the actual raster is still a rectangle, with the pixels outside the mask set to -32768? Before you proceed, go back and check the <code>No data -999</code> box again.</p></li>
+<li><p>Now go to the <code>Properties &gt; Transparency</code> tab of the SRTM raster layer, and uncheck the <code>No data value: -32768</code> box. Look at your raster again, and probe the same areas with the <code>Identify Features</code> tool. Can you see now how the actual raster is still a rectangle, with the pixels outside the mask set to -32768? Before you proceed, go back and check the <code>No data: -32768</code> box again.</p></li>
 <li><p>Now repeat the masking for the CORINE and BIOCLIM layers. You can use the same nodata number for the CORINE and BIOCLIM layers. the CORINE layer actually already has nodata defined as <code>-32768</code> so we just keep it. And for Bioclim, it is an unlikely value for any of the climatic variables, and because the climate data is a floating point number (decimal), it is almost impossible that a perfect value of -32768.000000 would exist in the data naturally.</p></li>
 <li><p>Remove the non-masked raster datasets from your project and save it.</p></li>
 <li><p>Now zoom in into any place on the coastline, and answer:</p></li>
@@ -542,7 +551,7 @@ Click for answer
 <section id="guided-exercise-4---styling-raster-data" class="level2" data-number="5.5">
 <h2 data-number="5.5" class="anchored" data-anchor-id="guided-exercise-4---styling-raster-data"><span class="header-section-number">5.5</span> Guided Exercise 4 - Styling raster data</h2>
 <p>Just as with vector data, QGIS offers many options for the symbology of raster data. You will see some similarities between the symbology options for vectors and rasters, but also some differences because of the nature of each data model.</p>
-<ol start="19" class="example" type="1">
+<ol start="20" class="example" type="1">
 <li>Turn off all layers except the CORINE land cover, and then go to its <code>Properties &gt; Symbology</code>. Note that the default <code>Render Type</code> for single-band rasters is <code>Singleband gray</code>. That means pixels are coloured by a shade of grey that is proportional to its numeric value, with higher values being closer to white. Change it to <code>Paletted / Unique Values</code>. Maintain the <code>Band 1</code> selection (there is only one band anyway) and <code>Random Colors</code> options, and then click on <code>Classify</code>. Apply the result to your raster and visualise it.</li>
 </ol>
 <div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
@@ -583,7 +592,7 @@ Click for answer
 </div>
 </div>
 <p>WHoa, there are a lot of classes, and the random colours selection picked colours that are very similar to one another for some of the classes. Fortunately for us, the data producers of CORINE include a colour map file as part of the metadata. Let us use it!</p>
-<ol start="20" class="example" type="1">
+<ol start="21" class="example" type="1">
 <li><p>Back on the <code>Properties &gt; Symbology</code> window, click on the <code>...</code> button to the right of <code>Delete All</code> and choose <code>Load Color Map from File...</code>. Within the CORINE files you unzipped, find and select the metadata file named <code>CLC2018_CLC2018_V2018_20_QGIS.txt</code>. <code>Apply</code>and then click <code>OK</code>. Not only we get the colours selected by the CORIEN mapping team, but also all the proper class names! That was nice!</p></li>
 <li><p>Now let us have a look at the BIOCLIM dataset. First, read the metadata included with the data files (<code>Bioclim_metadata.txt</code>) to understand what each band of this dataset represents. Then turn on the BIOLCIM layer and turn the remaining layers off.</p></li>
 </ol>
@@ -616,7 +625,7 @@ Click for answer
 </div>
 </div>
 </div>
-<ol start="22" class="example" type="1">
+<ol start="23" class="example" type="1">
 <li>Go to the <code>Properties &gt;  Symbology</code> window for the BIOCLIM dataset. Notice the default symbology choice of <code>Multiband color</code>. Since each band of our data represents a different climatic variable, with continuous numeric values (not categories or classes), we need to pick the <code>Single band - pseudocolor</code> option. Choose the <code>bio1</code> band, and for the colour ramp, click on the down-arrow button to the right of the colour palette button, and select the <code>magma</code> colour ramp. Classify the existing values and then <code>Apply</code> and click <code>OK</code>. How does the layer look like now?</li>
 </ol>
 <div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
@@ -658,11 +667,11 @@ Click for answer
 </div>
 </div>
 </div>
-<ol start="23" class="example" type="1">
+<ol start="24" class="example" type="1">
 <li>Explore some of the other climatic variables contained in the BIOCLIM dataset, using different colour ramps.</li>
 </ol>
 <p>Finally, let’s work on the symbology for the SRTM data. For that, we will take advantage of some nice scientific colour palettes that are built-in on QGIS. We will talk about what makes these palettes special on Week 4, but let us just use them now.</p>
-<ol start="24" class="example" type="1">
+<ol start="25" class="example" type="1">
 <li><p>On the <code>Properties &gt; Symbology</code> window of the SRTM layer, choose the <code>Singleband Pseudocolor</code> option, and then on th down arrow button besides the <code>Color Ramp</code> option, select <code>Create New Color Ramp</code>. On the small options window that comes up, select <code>Catalog:cpt-city</code>.</p></li>
 <li><p>Once the catalogue window opens, go to the <code>Topography</code> list and select the <code>cd-a</code> palette. Then manually enter <code>Min</code> and <code>Max</code> values, using <code>0</code> and <code>900</code> respectively. <code>Apply</code> and see how it changes. But before clicking on <code>OK</code>, go to the <code>Transparency</code> tab and drag the slider at the top to around <code>60%</code>. That will let other layers under it to show through and blend with the colours.</p></li>
 <li><p>Right-click on the SRTM layer name and select <code>Duplicate layer</code>. This option creates a ‘virtual’ copy of the layer - it will still point to the same file on disk, but you are able to select a different symbology for it.</p></li>
@@ -705,15 +714,15 @@ Click for answer
 <section id="plugins" class="level3" data-number="5.6.1">
 <h3 data-number="5.6.1" class="anchored" data-anchor-id="plugins"><span class="header-section-number">5.6.1</span> Plugins</h3>
 <p>In this exercise, you will also learn about one of the most powerful aspects of QGIS: <em>plugins</em>. As you may know, QGIS is a free and open-source software, meaning anyone can contribute with the code. QGIS also makes it easy for it’s functionality to be extended via plugins, separate little ‘apps’ that add new tools and capabilities to the main QGIS app. For this exercise, we will install and use two official QGIS plugins, the <code>QuickMapServices</code> and <code>Visibility Analysis</code>.</p>
-<ol start="27" class="example" type="1">
+<ol start="28" class="example" type="1">
 <li>Head to the menu <code>Plugins &gt; Manage and Install Plugins</code>. You will se a window like the one below. Then select the <code>Not Installed</code> tab, and then on the search bar search for <code>QuickMapServices</code>. Select it on the left panel, and then click on <code>Install Plugin</code>. Then repeat this process to find and install the <code>Visibility Analysis</code> plugin.</li>
 </ol>
 <p><img src="images/lab_5/lab5_fig2_quickmap.jpg" class="img-fluid"></p>
-<ol start="28" class="example" type="1">
+<ol start="29" class="example" type="1">
 <li>The <code>QuickMapServices</code> plugin will add a new menu entry: <code>Web &gt; QuickMapServices</code>. Once yo8u click on it, you will see a list of web map services - but there is more. Go to <code>Web &gt; QuickMapServices &gt; Settings</code>, and then click on the <code>More services</code> tab. Then read the warning and click on <code>Get contributed pack</code>, and once you get a confirmation message, click on <code>Save</code> and exit the window.</li>
 </ol>
 <p><img src="images/lab_5/lab5_fig3_moremaps.jpg" class="img-fluid"></p>
-<ol start="29" class="example" type="1">
+<ol start="30" class="example" type="1">
 <li><p>Now go back to <code>Web &gt; QuickMapServices &gt; Settings</code>, and you will see a list of providers. For example, go to the <code>Web &gt; QuickMapServices &gt; Google</code> option and add the <code>Google Hybrid</code> dataset directly as layer in your project! These layers will require you to be connected to Internet to work, and they won;t give you many symbology options, but they are very handy to help in navigation when working on a project.</p></li>
 <li><p>Take some time to explore the layers available in this plugin.</p></li>
 </ol>
@@ -721,11 +730,11 @@ Click for answer
 <section id="masking-by-area" class="level3" data-number="5.6.2">
 <h3 data-number="5.6.2" class="anchored" data-anchor-id="masking-by-area"><span class="header-section-number">5.6.2</span> Masking by area</h3>
 <p>Earlier today you have learned how to use a vector polygon to mask a raster layer. But sometimes we just want to ‘freeform’ cut a piece of a raster, without the need to be too precise. In that case, we can use the <code>Clip Raster by Extent</code> function.</p>
-<ol start="31" class="example" type="1">
+<ol start="32" class="example" type="1">
 <li>Make sure you <code>Google Hybrid</code> web layer is visible, and navigate until you frame the ‘Stirling-Glasgow-Edinburgh triangle’ in your canvas, like the image below:</li>
 </ol>
 <p><img src="images/lab_5/lab5_fig4_stirglaedi.jpg" class="img-fluid"> (@) Then go to <code>Raster &gt; Extract &gt; Clip Raster by Extent...</code>. Pick the SRTM layer as <code>Input layer</code>, and then for <code>Clipping Extent</code>, click on the small button to the right with a small arrow figure. That will set the <code>cut area</code> to be exactly what you are viewing on the canvas. But there are other options. If you click on the small down-arrow button to the right, you can use the extent (bounding box) of another layer, as well some more advanced options. You can also click on <code>Draw on map canvas</code> to be allowed to drag a rectangle over your map canvas that sets the extent of the cut.</p>
-<ol start="32" class="example" type="1">
+<ol start="33" class="example" type="1">
 <li>Mask the SRTM layer to the region including Stirling, Glasgow and Edinburgh, either by setting you map canvas zoom and using it as extent, or by clicking and dragging to set the extent. Then pick a proper folder and save it as <code>UK_SRTM_BG_centralscotland.tif</code>. You should end up with something like this (but your extent will likely vary):</li>
 </ol>
 <p><img src="images/lab_5/lab5_fig5_centralscot.jpg" class="img-fluid"></p>
@@ -733,11 +742,11 @@ Click for answer
 <section id="calculating-slope-and-aspect" class="level3" data-number="5.6.3">
 <h3 data-number="5.6.3" class="anchored" data-anchor-id="calculating-slope-and-aspect"><span class="header-section-number">5.6.3</span> Calculating slope and aspect</h3>
 <p>We can now use our Central Scotland subset to demonstrate how to calculate slope and aspect.</p>
-<ol start="33" class="example" type="1">
+<ol start="34" class="example" type="1">
 <li>Go to <code>Raster &gt; Analysis &gt; Slope...</code>, and pick the Central Scotland DEM you created as <code>Input Layer</code>. Leave everything else as default and then pick a proper folder to save the new file as <code>UK_SRTM_BG_centralscot_slope.tif</code>. Then <code>Run</code> and <code>Close</code>. You will get a new raster layer, where the pixel values indicate the steepness of each pixel, in degrees. Steep slopes will appear as light grey/white, and flat areas will appear dark:</li>
 </ol>
 <p><img src="images/lab_5/lab5_fig6_slope.jpg" class="img-fluid"></p>
-<ol start="34" class="example" type="1">
+<ol start="35" class="example" type="1">
 <li><p>Now go to <code>Raster &gt; Analysis &gt; Aspect...</code>, and again pick the Central Scotland DEM you created as <code>Input Layer</code>. Leave everything else as default and pick a folder to save the new file as <code>UK_SRTM_BG_centralscot_aspect.tif</code>. <code>Run</code> and <code>Close</code>. This layer will now tell you the cardinal direction, in degrees (North = 0/360),, that each slope is facing.</p></li>
 <li><p>Use the <code>Indentify Features...</code> tool to explore some of the aspect and slope values you have calculated.</p></li>
 </ol>
@@ -747,7 +756,7 @@ Click for answer
 <p>Finally, let us calculate a ‘viewshed’ - raster indicating which points in the Earth surface are visible from a given point, considering the topography. Viewshed analysis is often used for landscape planning - for example, determining from where a wind power turbine may be visible or not.</p>
 <p>The <code>Visibility Analysis</code> plugin adds some option to the <code>Processing panel</code> of QGIS. To see it, click on the <code>Processing Toolbox</code> button on the main QGIS toolbar (<img src="https://docs.qgis.org/3.34/en/_images/processingAlgorithm.png" class="img-fluid">), and the panel will open to the right. This panel houses many, many more GIS functions beyond those available on the <code>Vector</code> and <code>Raster</code> menus, and we will use it often during the last weeks of the module.</p>
 <p><img src="images/lab_5/lab5_fig7_proc.jpg" class="img-fluid"></p>
-<ol start="36" class="example" type="1">
+<ol start="37" class="example" type="1">
 <li><p>Download the <code>observation_point,shp</code> <a href="https://stir-my.sharepoint.com/:u:/g/personal/ala2_stir_ac_uk/EWG4zHZtEchMnkRo4Dyg-0ABn8kz7vnY4MABGkHJtBn8xg?e=zMQBZu">file from this link</a>.</p></li>
 <li><p>Open the <code>Visibility Analysis</code> heading on the <code>Processing Toolbox</code>, and then double click on <code>Create Viewpoints</code>. A new window will open. On this window, you need to pick the <code>Observer Location</code>, which will be the Observation point layer, and then the DEM, which will be the Central Scotland SRTM (make sure you <em>don’t</em> pick the slope or aspect layers by mistake!).</p></li>
 <li><p>There are many options that you don’t need to worry about for now, but three warrant some explanation: <code>Radius of Analysis</code> specifies how far you want to calculate the viewshed - it is an expensive computation so it may make sense to limit it. Let’s use 20,000 meters for our analysis. Then pat attention to <code>Observer Height</code> and <code>Target Height</code>. They determine what is the height of the observation being made (above the elevation of the observation point), and also what would be the height of the target. So again, if you are wondering if a wind power turbine would be visible from that location, you should add the height of the turbine to the <code>Target Height</code> field. You can leave these options at 1.6m and zero, respectively. Then pick a folder and save the viewpoint as <code>viewpoint.shp</code>, and <code>Run</code> the tool.</p></li>
@@ -756,7 +765,7 @@ Click for answer
 <p>You should get an output similar to the figure below, where white pixels (value <code>1</code>) indicate ‘visible’ and black pixels (value <code>0</code>) indicate “not visible’.</p>
 <p><img src="images/lab_5/lab5_fig8_viewshed.jpg" class="img-fluid"> ## Guided Exercise 6 - Cleaning up and saving your project for the next lab</p>
 <p>We will use the data you produced on this lab to get started on the next, so let us ’package’it properly.</p>
-<ol start="40" class="example" type="1">
+<ol start="41" class="example" type="1">
 <li><p>Remove all layers from the project except for the SRTM, CORINE, BIOCLIM and GADM layers that you have reprojected and masked for the GB island. Save your project</p></li>
 <li><p>Delete from the folder all files except for the files for the four data layers above. If you saved the GB island vector as a shapefile, remember you need to keep all files with the same name but different extensions (<code>.shp</code>, <code>.shx</code>, <code>.dbf</code>, <code>.prj</code>)</p></li>
 <li><p>On your systems file explorer, find the base folder for today’s lab according to your organization, and right click on it. On Windows, choose <code>Compress to...</code> to create a zipfile containing your entire project. Name it as <code>lab_5_final_results.zip</code> or something similar.</p></li>

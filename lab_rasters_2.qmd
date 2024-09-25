@@ -19,6 +19,8 @@ At the end of last week's lab you saved the final results of your project as a z
 - Raster file of the CORINE land cover dataset (reprojected to EPSG:27700 and masked to the GB island)
 - Raster file of the BIOCLIM climatic dataset (reprojected to EPSG:27700 and masked to the GB island)
 
+(if this doesn't work, I have a copy of the files [here](https://stir-my.sharepoint.com/:u:/g/personal/ala2_stir_ac_uk/Eb28YoDGBM9MlraOgrbiehcBv9Q8BulLcloDNVypXmCUBw?e=DZfrqZ). But you should *really* try to make it work with your own saved data - storing and retrieving prioject data is a key skill you need to develop!)
+
 ### Global raster statistics
 
 Winter is coming, and you want to escape the worst of the cold and rain. You therefore decide to use your GIS skills to find the ideal place to spend your winter in the UK - an urban area with lower precipitation and higher minimum temperatures. For convenience, we will restrict oour search to the Island of Great Britain, as we already have data for it ready to go. 
@@ -77,7 +79,7 @@ Only one band, holding the results of the calculation.
 
 Every time you enter an expression involving a raster band and a single number in the `Raster Calculator` you are telling QGIS to apply the same expression to each pixel of that band. In our case, we divided all pixel values by 10.
 
-### Guided Exercise 3 - Boolean (logical) operations with the raster calculator
+## Guided Exercise 3 - Boolean (logical) operations with the raster calculator
 
 The `Raster Calculator` also fulfills the role of the vector `Select by expression` tool for rasters. The result of any raster logical operation is either `1` (True) or `0` (False), i.e. a *binary raster*, sometimes called a *raster mask*.
 
@@ -90,7 +92,7 @@ By default, QGIS will paint pixels with a value of `1` white, and `2` black. So 
 
 (@) Now repeat the process for the precipitation layer. Our minimum annual precipitation value was just above 500, so let us limit us to areas under 700mm of precipitation. Save the result as `GB_anprec_lt_700.tif`.
 
-### Guided Exercise 4 - Raster reclassification
+## Guided Exercise 4 - Raster reclassification
 
 An alternative to the `Raster Calculator` that can be handier when you have multiple ranges to recode is the `Reclassify by table` tool in the `Processing` panel, also under the `Raster Analysis` heading. Find the tool and open it, and you will see this:
 
@@ -117,7 +119,7 @@ You could do `"CORINE_BG_GBmask@1" = 111 OR "CORINE_BG_GBmask@1" = 112`. Notice 
 You could also do ranges, using an expression such as `"CORINE_BG_GBmask@1" > 110 AND "CORINE_BG_GBmask@1" < 113` (notice the use of `AND` instead of `OR` for ranges) since they are consecutive values, or use `"CORINE_BG_GBmask@1" >=111 AND "CORINE_BG_GBmask@1" <= 112`). Using ranges is more quicker than using `=` and `OR` when you have many consecutive values to search for.
 :::
 
-### Guided Exercise 5 - raster vs. raster calculations
+## Guided Exercise 5 - raster vs. raster calculations
 
 We now have three *raster masks* showing us 1) all the GB areas that don't go below zero Celsius, 2) the areas that have less than 700mm of rain, and 3) the areas that are urban. How can we combine them into a single layer?
 
@@ -128,7 +130,7 @@ Doing it using the `Raster Calculator` is as simple as it sounds:
 
 (@) Open the `Raster Calculator` and enter the expression `"GB_anprec_lt_700@1" * "GB_mintemp_gt_0@1" * GB_urban_areas@1`. Then save you layer with name `UKs_winter_havens.tif`.  
 
-### Guided Exercise 6 - Vectorizing rasters
+## Guided Exercise 6 - Vectorizing rasters
 
 The final result of your analysis should consist of only a handful of pixels - such is lifev in the UK. And since these are discrete locations, it may occur to you they would be better represented and visualised as vectors. Turns out we can convert raster to vectors and vice versa:
 
@@ -146,7 +148,7 @@ You now have polygons representing all adjacent areas that were values as '1' in
 
 (@) In the `Processing` panel, you will find a tool called `Raster Pixels to Points`, which you can use to generate the points. I'll leave the detauils to you, but here is a tip: before you use the tool, go the `Properties > Transparency` of your raster results layer, and set 0 as an `Additional Nodata Value`. Otherwise `Raster Pixels to Points` will create one point for every pixel, including the pixels with a value of 0. That's a lot of points. 
 
-### Guided Exercise 7 - Mosaicking and Stacking rasters
+## Guided Exercise 7 - Mosaicking and Stacking rasters
 
 Raster files are often very large and 'heavy', so it is common to distribute them as *tiles* or *scenes*, i.e. smaller adjacent pieces that can be merged back together to cover a certain area of interest. For satellite images, it is also common for each image band to be stored as a separate file (unlike regular photos that only have Blue, Red and Geeen bands, satellite images can have several more bands, covering areas of the spectrum we can't normally see. The Sentinel-2 satellite, for example, has  a total of 13 bands:
 
@@ -170,7 +172,7 @@ Raster files are often very large and 'heavy', so it is common to distribute the
 
 In this exercise, we will learn how to a) *mosaic* rasters - 'glue' them together side by side to cover a larger area and b) *stack* rasters - merge the different band files into a single file. 
 
-(@) Download the data for this specific exercise from this link. It contains four aerial photographs covering the University of Stirling campus and the Wallace Monument area. Extract the data and organise it as usual.
+(@) [Download the data for this specific exercise from this link](https://stir-my.sharepoint.com/:u:/g/personal/ala2_stir_ac_uk/EWWIMudbgUlImqIZ5ZYoVw4BNhL1rRn5swLLTvJnli2r_A?e=NIVOuW). It contains four aerial photographs covering the University of Stirling campus and the Wallace Monument area. Extract the data and organise it as usual.
 
 ::: {.callout-tip}
 These images were originally downloaded from the 'Aerial' section of Digimap - if you ever need very detailed imagery of the UK land, check it out!
@@ -212,7 +214,7 @@ Everything looks good colour-wise now, bur our airphoto is still actually four s
 
 (@) This time, check the four tiled RGB images as your `Input Layers` - order doesn't matter. Then make sure to **not check** the `Place each input file into a separate band` option. That will tell QGIS you want a mosaic and not a stack. Set the `Output Data Type` to `Byte` again, and save it as `UoS_RGB_mosaic.tif`. You should now have a single airphoto layer covering the entire area. Remove the previous individual layers from the project and save it again.
 
-### Guided Exercise 8 - Raster image stretching
+## Guided Exercise 8 - Raster image stretching
 
 When working with multiband color images in a GIS environment, we can often manipulate the contrast of an image by applying different *contrast stretches*  to each band. Especially when working with satellite images, which tend to look a bit 'faded' because of the atmospheric effect, stretching can make our images more vivid and easier to interpret. 
 

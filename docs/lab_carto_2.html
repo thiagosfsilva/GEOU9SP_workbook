@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>GEOU9SP GIS Workbook - Week 2 - Vector data</title>
+<title>GEOU9SP GIS Workbook - 8&nbsp; Lab 8: Making Maps - Part II</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./lab_vectors_1.html" rel="next">
-<link href="./lab_crs.html" rel="prev">
+<link href="./sec_w5_spatial_analysis_I.html" rel="next">
+<link href="./lab_carto_1.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -81,7 +81,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./sec_w2_vectors.html">Week 2 - Vector data</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./sec_w4_cartography.html">Week 4 - Making maps</a></li><li class="breadcrumb-item"><a href="./lab_carto_2.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Lab 8: Making Maps - Part II</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -137,7 +137,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./sec_w2_vectors.html" class="sidebar-item-text sidebar-link active">
+            <a href="./sec_w2_vectors.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 2 - Vector data</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -198,7 +198,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lab_carto_2.html" class="sidebar-item-text sidebar-link">
+  <a href="./lab_carto_2.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Lab 8: Making Maps - Part II</span></span></a>
   </div>
 </li>
@@ -243,21 +243,17 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#ilos-covered" id="toc-ilos-covered" class="nav-link active" data-scroll-target="#ilos-covered">ILOs covered</a></li>
-  <li><a href="#what-will-you-learn" id="toc-what-will-you-learn" class="nav-link" data-scroll-target="#what-will-you-learn">What will you learn</a>
-  <ul class="collapse">
-  <li><a href="#theoretical-knowledge-for-week-2" id="toc-theoretical-knowledge-for-week-2" class="nav-link" data-scroll-target="#theoretical-knowledge-for-week-2">Theoretical knowledge for Week 2:</a></li>
-  <li><a href="#practical-knowledge" id="toc-practical-knowledge" class="nav-link" data-scroll-target="#practical-knowledge">Practical knowledge:</a></li>
-  </ul></li>
+  <li><a href="#getting-ready" id="toc-getting-ready" class="nav-link active" data-scroll-target="#getting-ready"><span class="header-section-number">8.1</span> Getting Ready</a></li>
+  <li><a href="#guided-exercise-1---digitizing-the-castle." id="toc-guided-exercise-1---digitizing-the-castle." class="nav-link" data-scroll-target="#guided-exercise-1---digitizing-the-castle."><span class="header-section-number">8.2</span> Guided Exercise 1 - Digitizing the castle.</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./sec_w4_cartography.html">Week 4 - Making maps</a></li><li class="breadcrumb-item"><a href="./lab_carto_2.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Lab 8: Making Maps - Part II</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Week 2 - Vector data</h1>
+<h1 class="title"><span id="sec-carto2" class="quarto-section-identifier"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Lab 8: Making Maps - Part II</span></span></h1>
 </div>
 
 
@@ -274,85 +270,58 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>In our second week, we will take a deeper dive into understanding GIS spatial vector data. This is the most common data model you will encounter while working with GIS, so make sure you take your time to understand it fully.</p>
-<section id="ilos-covered" class="level2">
-<h2 class="anchored" data-anchor-id="ilos-covered">ILOs covered</h2>
-<ol type="1">
-<li><p>Understand the structure of spatial data and choose appropriate data types and models for storing and representing it;</p></li>
-<li><p>Obtain and assess the quality of spatial data from online and offline sources and produce new spatial data using computer and field methods;</p></li>
-<li><p>Create map visualisations that adhere to cartographic principles and can be easily and unambiguously interpreted by the non-specialist public;</p></li>
-<li><p>Plan and execute GIS analytical steps to solve spatial problems successfully;</p></li>
-</ol>
+<p>In this lab we will continue working on our map of the Bamburgh Castle region, this time focusing on manually digitizing polygons, labeling, and finishing our actual map page layout.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>To complete this lab, you <em>must</em> watch the practical videos on how to manually digitise features in QGIS, which are available on the Week 4 prep page on Canvas</p>
+</div>
+</div>
+<section id="getting-ready" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="getting-ready"><span class="header-section-number">8.1</span> Getting Ready</h2>
+<p>Make sure you restore the project folder and files you created in the previous lab, and then open your project.</p>
 </section>
-<section id="what-will-you-learn" class="level2">
-<h2 class="anchored" data-anchor-id="what-will-you-learn">What will you learn</h2>
-<p>Use this list as a ‘check-list’ to gauge your learning for each week. If you don’t feel confident you have learned any specific topic, then revisit the week’s material!</p>
-<section id="theoretical-knowledge-for-week-2" class="level3">
-<h3 class="anchored" data-anchor-id="theoretical-knowledge-for-week-2">Theoretical knowledge for Week 2:</h3>
-<ul>
-<li>What are data models vs data formats (file formats) vs data types (attribute types)?</li>
-<li>What is the vector data model?
-<ul>
-<li>How are vectors represented?</li>
-<li>What are the components of a vector file (geometry + attribute)?</li>
-</ul></li>
-<li>What are the main vector file formats?</li>
-<li>What are the main data types we use to represent attributes?</li>
-<li>What kinds of data can we represent using vector data?</li>
-<li>What kinds of questions can we answer using attributes?</li>
-<li>What kinds of questions can we answer using geometries?</li>
-<li>What kinds of questions can we answer using both (i.e.&nbsp;geometry-based attribute calculations).</li>
-</ul>
-</section>
-<section id="practical-knowledge" class="level3">
-<h3 class="anchored" data-anchor-id="practical-knowledge">Practical knowledge:</h3>
-<p><a href="lab_vectors_1.html" class="quarto-xref"><span>3&nbsp; Lab 3: Working with vector attributes</span></a></p>
-<ul>
-<li>How to identify a vector file format</li>
-<li>How to load a vector file</li>
-<li>How to use the identify tool to get information on the fly</li>
-<li>The concept of ‘selecting’ a feature.</li>
-<li>How to select features using the click tools in QGIS</li>
-<li>How to access the attribute table</li>
-<li>How to use the statistical summary tool
-<ul>
-<li>Global summaries vs summaries on selected data</li>
-</ul></li>
-<li>How to select using simple queries (filter) on attributes
-<ul>
-<li>Boolean operators</li>
-<li>String based operators</li>
-</ul></li>
-<li>How to use attributes to set symbology
-<ul>
-<li>Single symbol</li>
-<li>Categorised</li>
-<li>Graduated</li>
-</ul></li>
-</ul>
-<p><a href="lab_vectors_2.html" class="quarto-xref"><span>4&nbsp; Lab 4: Working with vector geometries</span></a></p>
-<ul>
-<li>How to do combined attribute queries (AND / OR)</li>
-<li>How to calculate new attributes
-<ul>
-<li>Numeric attributes</li>
-<li>String attributes</li>
-<li>Geometry attributes<br>
-</li>
-</ul></li>
-<li>How to convert data types if needed</li>
-<li>Attribute selection vs attribute filtering</li>
-<li>How to select based on location
-<ul>
-<li>The different selection options</li>
-<li>Importance of CRS matching</li>
-<li>Select by location vs clipping -How to combine spatial and attribute selection</li>
-<li>Selecting within selections or saving intermediate results</li>
-</ul></li>
-</ul>
+<section id="guided-exercise-1---digitizing-the-castle." class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="guided-exercise-1---digitizing-the-castle."><span class="header-section-number">8.2</span> Guided Exercise 1 - Digitizing the castle.</h2>
+<div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Stop and Think
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>What data models and file formats are your datasets on?</p>
+</div>
+</div>
+<div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The aerial photo, DEM and GB Overview are raster files. The DEM is in the <a href="https://support.geocue.com/ascii-raster-files-asc/">ESRI ASCII</a> raster file format, and the Aerial Image is in <a href="https://en.wikipedia.org/wiki/JPEG">JPEG</a> format. JPEGS don’t natively store coordinates, so a <code>.jgw</code> <em>sidecar</em> file is used to store the spatial information. The GB Overview files are <a href="https://www.ogc.org/standard/geotiff/">GeoTIFF</a> files.</p>
+<p>The vector district files are all vector files, some being polygons, some being lines and some being points. They will be in <a href="https://en.wikipedia.org/wiki/Shapefile">Shapefile</a> format.</p>
+</div>
+</div>
+</div>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -767,13 +736,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./lab_crs.html" class="pagination-link" aria-label="Lab 2: Coordinate Reference Systems">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Lab 2: Coordinate Reference Systems</span></span>
+      <a href="./lab_carto_1.html" class="pagination-link" aria-label="Lab 7: Making Maps - Part I">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Lab 7: Making Maps - Part I</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./lab_vectors_1.html" class="pagination-link" aria-label="Lab 3: Working with vector attributes">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Lab 3: Working with vector attributes</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./sec_w5_spatial_analysis_I.html" class="pagination-link" aria-label="Week 5 - Spatial analysis I">
+        <span class="nav-page-text">Week 5 - Spatial analysis I</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

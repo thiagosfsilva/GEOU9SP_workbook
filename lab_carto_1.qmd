@@ -1,10 +1,9 @@
 # Lab 7: Making Maps - Part I {#sec-carto1}
 
 
-
 ## Context
 
-One of my favorite TV shows of all time is the series ['The Last Kingdom](https://en.wikipedia.org/wiki/The_Last_Kingdom_(TV_series)). I was already a fan of the [books](https://en.wikipedia.org/wiki/The_Saxon_Stories), and I think they translated it to TV very well. 
+One of my favourite TV shows of all time is the series ['The Last Kingdom](https://en.wikipedia.org/wiki/The_Last_Kingdom_(TV_series)). I was already a fan of the [books](https://en.wikipedia.org/wiki/The_Saxon_Stories), and I think they translated it to TV very well. 
 
 One of the key plots in the show is that the main character, Uthred, wants to reclaim his birthright - the castle of Bebbanburg. Turns out this is a real castle, and it still exists today as [Bamburgh Castle](https://en.wikipedia.org/wiki/Bamburgh_Castle), in Northumberland. It is a great place to visit, very scenic and right by the ocean!
 

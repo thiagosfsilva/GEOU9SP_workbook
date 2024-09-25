@@ -14,9 +14,44 @@ For every week, we will list the main theoretical and practical learning goals. 
 
 ### Theoretical knowledge for Week 4:
 
+- What is a map?
+    - How is a map different from a simple figure/image?
+- What are main types of maps?
+- What makes a good map?
+- What are visual variables?
+    - What is the difference between differentiation, ordered and proportionality - variables?
+    - What is perceptual equivalence in colour scales?
+    - How can colour choice aid semantic interpretation?
+    - How to avoid issues with colour vision deficiencies?
+- What are the main cartographic elements that make a map a map?
+    - What does a proper map legend consist of?
+    - What is map scale?
+    - What is a graticule?
+- When and why to use labels on a map
+
 ### Practical knowledge:
 
 [@sec-carto1]
 
+- Styling rasters
+    - Using built in colour palettes
+- Creating a hillshade effect
+- Styling line and polygon vectors
+    - Using symbology presets
+    - Setting custom categorized symbols
+    - Creating borderless polygons
+    - Copying colours between layers
+- Deciding on framing, scaling and ordering of layers
+
 [@sec-carto2]
 
+- Adding and labelling points of interest
+    - Automatic labelling
+    - Manual labelling
+- Adding cartographic elements
+    - Legend
+    - Graticule
+    - Scale Bar
+    - North Arrow
+- Adding author and CRS information
+- Exporting your map

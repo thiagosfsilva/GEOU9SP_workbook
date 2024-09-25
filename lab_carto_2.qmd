@@ -1,0 +1,36 @@
+# Lab 8: Making Maps - Part II {#sec-carto2}
+
+In this lab we will continue working on our map of the Bamburgh Castle region, this time focusing on manually digitizing polygons, labeling, and finishing our actual map page layout. 
+
+::: {.callout-warning}
+To complete this lab, you *must* watch the practical videos on how to manually digitise features in QGIS, which are available on the Week 4 prep page on Canvas
+:::
+
+## Getting Ready
+
+Make sure you restore the project folder and files you created in the previous lab, and then open your project. 
+
+## Guided Exercise 1 - Digitizing the castle.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+::: {.callout-important title="Stop and Think"}
+What data models and file formats are your datasets on?
+:::
+
+::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
+The aerial photo, DEM and GB Overview are raster files. The DEM is in the [ESRI ASCII](https://support.geocue.com/ascii-raster-files-asc/) raster file format, and the Aerial Image is in [JPEG](https://en.wikipedia.org/wiki/JPEG) format. JPEGS don't natively store coordinates, so a `.jgw` *sidecar*  file is used to store the spatial information. The GB Overview files are [GeoTIFF](https://www.ogc.org/standard/geotiff/) files.
+
+The vector district files are all vector files, some being polygons, some being lines and some being points. They will be in [Shapefile](https://en.wikipedia.org/wiki/Shapefile) format.  
+:::

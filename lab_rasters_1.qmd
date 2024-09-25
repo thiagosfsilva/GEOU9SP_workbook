@@ -96,7 +96,7 @@ As we learned in week 1, the UK looks “squished” because the data is project
 
 We often want to remove portions (specific cells) of a raster, a process called *masking*. For example, some of our datasets include the Republic of Ireland and bits of mainland Europe, and some datasets include the Shetland Islands, while others don't. Let use the UK boundaries from the GADM dataset to mask our data to the Island of Great Britain (Scotland, England and Wales) only. 
 
-(@) First add the GADm data (`gadm36_GBR.gpkg`) to your project. This geopackage holds multiple layers for the different levels of admin boundaries. You can just add the level 0 layer, which gets the UK as a whole. 
+(@) First add the GADM data (`gadm36_GBR.gpkg`) to your project. This geopackage holds multiple layers for the different levels of admin boundaries. You can just add the level 0 layer, which gets the UK as a whole. 
 
 ::: {.callout-important title="Stop and Think"}
 Why did you get a warning window when you added the layer to the project?
@@ -106,7 +106,9 @@ Why did you get a warning window when you added the layer to the project?
 Because this layer has a different CRS than the project, and QGIS it is asking you how to deal with it. 
 :::
 
-As we learned on Week 1, trying to do clipping (and masking) operations between layers with mismatched CRSs gives us wrong results. So before you do anything, reproject the UK boundaries layer to EPSG 27700. You also need to extract the main British Island from the rest of the dataset. Turns out there is a quick way to do both at once, but first we need to deal with a little issue with the vector layer:
+(@) As we learned on Week 1, trying to do clipping (and masking) operations between layers with mismatched CRSs gives us wrong results. So before you do anything, reproject the UK boundaries layer to EPSG 27700. **DO NOT** go to `Properties > Layer CRS` -  that won't reproject the data, just force a new CRS definition on it without changing the actual coordinates, and you will ruin your data. Go to `Vector > Data Management Tools > Reproject Layer`.
+
+You also need to extract the **mainland** British Island from the rest of the dataset (just the one polygon that represents the bigger land mass). Turns out there is a quick way to do both at once, but first we need to deal with a little issue with the vector layer:
 
 (@) Open the Attribute Table of the UK boundaries layer. How many features does it have? 
 
@@ -114,14 +116,14 @@ This is what is called a `multipart` polygon - a set of disjoint polygons all tr
 
 (@) Go to `Vector > Geometry Tools > Multipart to Singleparts`, and select the GADM layer. You can leave it as a temporary layer since we will only export one polygon for it in the next step. A new temp layer called `Single parts` will be created. Inspect its Attribute Table. 
 
-(@) Now use the feature selection tool (![](https://docs.qgis.org/3.34/en/_images/mActionSelectRectangle.png)) to select Great Britain only, and then right-click on the Single Part layer name  and choose  `Export > Save selected features as...`. Pick a folder location and name the file `GB_Island.shp`. Before you click on OK, however, change the `CRS` drop-down menu to EPSG:27000. That is it, QGIS will now reproject the layer before saving it! Click `OK`to save, and then remove the original GADM and the temp layer from your project to keep things tidy. Save your project.
+(@) Now use the feature selection tool (![](https://docs.qgis.org/3.34/en/_images/mActionSelectRectangle.png)) to select the one polygon for the mainland Great Britain only (no smaller islands!), and then right-click on the Single Part layer name and choose  `Export > Save selected features as...`. Pick a folder location and name the file `GB_Island.shp`. Before you click on OK, however, change the `CRS` drop-down menu to EPSG:27000. That is it, QGIS will now reproject the layer before saving it! Click `OK`to save, and then remove the original GADM and the temp layer from your project to keep things tidy. Save your project.
 
 (@) Double check what is the CRS of the new `GB_island` layer you have created.
 
 (@) You are now ready to mask the raster data. Go to `Raster > Extraction > Clip Raster by Mask Layer...`. As `Input layer`, select the SRTM layer, and as `Mask layer`, select the GB island layer. Then on the option `Assign a specific nodata value to output bands`, enter the number `-32768`. *Make sure you include the minus sign*! Leave the other options as default, but do check both the `Match the extent of the clipped raster to the extent of the mask layer` and `Keep resolution of input raster` options. Pick a folder and name your file `UK_SRTM_BG_GBmask.tif`. Now we can know at a glance that this is the SRTM data, reprojected to British Grid and masked to Great Britain. 
 
 ::: {.callout-important title="Stop and Think"}
-a) Why did we pick a value of -999 for 'nodata'? 
+a) Why did we pick a value of -32768 for 'nodata'? 
 
 b) Why should we check the `Match the extent...` and `Keep Resolution..` boxes?
 :::
@@ -134,7 +136,7 @@ b) By selecting the `Match the extent of the clipped raster to the extent of the
 
 (@) Use the `Identify Features` tool (![](https://docs.qgis.org/3.34/en/_images/mActionIdentify.png)) to click on blank area of the masked SRTM layer (near the shore). Make sure you have the SRTM layer selected on the Layers panel before you click the tool. What pixel values do you get? -32768 or 'nodata'?
 
-(@) Now go to the `Properties > Transparency` tab of the SRTM raster layer, and uncheck the  `No data value -999` box. Look at your raster again, and probe the same areas with the `Identify Features` tool. Can you see now how the actual raster is still a rectangle, with the pixels outside the mask set to -32768? Before you proceed, go back and check the `No data -999` box again. 
+(@) Now go to the `Properties > Transparency` tab of the SRTM raster layer, and uncheck the  `No data value: -32768` box. Look at your raster again, and probe the same areas with the `Identify Features` tool. Can you see now how the actual raster is still a rectangle, with the pixels outside the mask set to -32768? Before you proceed, go back and check the `No data: -32768` box again. 
 
 (@) Now repeat the masking for the CORINE and BIOCLIM layers. You can use the same nodata number for the  CORINE and BIOCLIM layers. the CORINE layer actually already has nodata defined as `-32768` so we just keep it. And for Bioclim, it is an unlikely value for any of the climatic variables, and because the climate data is a floating point number (decimal), it is almost impossible that a perfect value of -32768.000000 would exist in the data naturally. 
 
