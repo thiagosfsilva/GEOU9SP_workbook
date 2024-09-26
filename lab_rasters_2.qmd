@@ -106,9 +106,6 @@ Let us use this tool to extract the urban areas from the CORINE dataset. looking
 
 (@) Click on te blue arrow to go back to main tool window, then set the `nodata value` back to `-32768`, the `Range Boundaries` to `min <= value <= max` and the `Output Data Type` to `Byte`. Save it as `GB_urban_areas.tif`.
 
-
-(@) Repeat the process above with the expression . 
-
 ::: {.callout-important title="Stop and Think"}
 How could you have done the analysis above using the `Raster Calculator` instead?
 :::
@@ -248,7 +245,7 @@ A second way to calculate the stretch is to use standard deviations. You may rem
 
 As you have learned, raster data consists of a *grid* of pixel values (i.e. a matrix). So quite often, when working with rasters, you may need to shift the pixels from one grid to another. One main example is raster reprojection - if you reproject your raster to a different CRS, the new raster grid will be aligned with this new CRS, and won't match the original perfectly, as in the figure below.
 
-FIGURE mismatched grids.
+![](images/lab_6/lab_6_fig14_mismatched_grids.jpg)
 
 That is why the raster reprojection tool is called `Warp(Reproject)` - it is as if you are *warping* the image during the transformation. Other times you may need to make two different raster datasets match the same extent and pixel size, which would also require warping one of the rasters to match the other. 
 
