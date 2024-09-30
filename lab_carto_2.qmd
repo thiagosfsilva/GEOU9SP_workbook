@@ -10,27 +10,237 @@ To complete this lab, you *must* watch the practical videos on how to manually d
 
 Make sure you restore the project folder and files you created in the previous lab, and then open your project. 
 
-## Guided Exercise 1 - Digitizing the castle.
+## Guided Exercise 1 - Digitizing the castle
 
+One thing that seems to be missing from our map is more emphasis on the castle's location. Let us use the aerial photo we acquired to digitize the castle area.
 
-
-
-
-
-
-
-
-
-
-
-
+(@) Add to your project the aerial orthophoto you downloaded at the start of the previous lab. If you had a wide selection and downloaded multiple tiles, the correct file is `nu1835_rgb_250_03.jpg`. It may be that the photo comes without a CRS defined (a question mark icon will appear to the right of the layer name). If that happens, just right click on the layer name, and select `Layer CRS > Set Layer CRS` to pick EPSG:27700. 
 
 ::: {.callout-important title="Stop and Think"}
-What data models and file formats are your datasets on?
+Why did we use `Set Layer CRS` and not `Reproject`?
 :::
 
 ::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
-The aerial photo, DEM and GB Overview are raster files. The DEM is in the [ESRI ASCII](https://support.geocue.com/ascii-raster-files-asc/) raster file format, and the Aerial Image is in [JPEG](https://en.wikipedia.org/wiki/JPEG) format. JPEGS don't natively store coordinates, so a `.jgw` *sidecar*  file is used to store the spatial information. The GB Overview files are [GeoTIFF](https://www.ogc.org/standard/geotiff/) files.
+In this case, we *know* the aerial photo uses the EPSG:27700 CRS (by looking at the metadata, and also by knowing that any UK official cartographic product uses it). It is just a matter if informing QGIS what the CRS is, as it was not properly detected when the layer was added to the project. We use `Reproject` when the layer *already* has a defined CRS, and we want to *change it* to a different CRS (meaning likely a different datum, projection and maybe even a different coordinate type - such as from degrees to meters), and thus we need to *transform* (i.e. calculate) a new set of coordinates. 
+::: 
 
-The vector district files are all vector files, some being polygons, some being lines and some being points. They will be in [Shapefile](https://en.wikipedia.org/wiki/Shapefile) format.  
+(@) No we need a new empy layer to digitise on. Click on the `New shapefile layer` button (![](https://docs.qgis.org/3.34/en/_images/mActionNewVectorLayer.png) ) on the main QGIS toolbar. You  will get the `New Shapefile Layer` window:
+
+![](images/lab_8/lab8_fig1_newshape_window.jpg)
+
+(@) First pick a folder to save your file and name it `bamburgh_castle`, on the `File Name` box. Then for `Geometry type`, pick `Polygon`, and pick ESPG:27700 for the CRS. Notice how QGIS automatically creates an integer attribute named `id`. We want a text attribute to hold the castle name, though, so enter `name` as the name of the field on the `New Field` options, then pick the `Text (string)` data type and a length of `80` (the default) and click on `Add to Fields List`. You should see the new `name` field added to the fields list. Then click `OK`.
+
+(@) Find your new layer on the `Layer Panel`. It doesn't have any geometries yet, so you won't see anything on your map. Highlight your new layer, and then put it into editing mode by clicking on the `Toggle Editing` button (![](https://docs.qgis.org/3.34/en/_images/mActionToggleEditing.png)) on the main QGIS toolbar. Make sure you are editing the right layer (it should have a pencil symbol on top of the symbology colour on the layer list).
+
+(@) Now right-click on the aerial photo layer and select `Zoom to Layer(s)` to centre the map canvas on it. Then manually set a scale of 1:1500 on the bottom QGIS bar. It is important to be aware of the scale you are digitizing at, and keep it constant so that the level of detail is also constant. Drag the castle to the middle of the canvas using the `Pan Map` tool (the hand).
+
+(@) Now highlight the new shapefile layer again. The `Digitizing tools` (![](images/lab_8/lab8_fig2_digi_tools.jpg)) should be available. Click on the `Add Polygn Feature` button (![](https://docs.qgis.org/3.34/en/_images/mActionCapturePolygon.png)) to enter a polygon drawing mode. Start clicking anywhere in the castle outer walls, and then keep clicking to trace the entire castle shape. Once you finish you polygon, right-click to end the drawing. A window will pop-up asking you to enter an `id` and `name`. Enter `1` and `Bamburgh Castle` respectively. 
+
+(@) If you want to edit the polygon shape after the fact, use the `Vertex Tool` (![](https://docs.qgis.org/3.34/en/_images/mActionVertexToolActiveLayer.png)). Then click once on a vertex to select it, and then cick again to reposition it, or the Delete key on your keyboard to delete it. You can also add a new vertex by hovering the mouse in between vertices until you see a red `x`. You should end up with something like this:
+
+![](images/lab_8/lab8_fig4_digitsed_castle.jpg)
+(@) Once you're happy with your polygon, remember to the `Save Layer Edits` button (on the editing toolbar - *not*  the save project button) and exit editing mode. Set you map back to the 1:80000 scale you decided on in the previous lab, and pick a strong and visible colour for the castle polygon. Tur off the aerial image again, and save your project. 
+
+## Guided Exercise 2 -  Adding places and labels
+
+No good map is complete without the addition of informative *labels*, which help add context and reference. QGIS has very powerful labelling features (which we will only lightly explore), but you should always spend some good effort on labelling - it often turns a good map into a great map. 
+
+
+::: {.callout-important title="Stop and Think"}
+When should I use labels and when should I use the map legend to name things?
 :::
+
+::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
+As a rule of thumb, legend names indicates *categories* or *groups* of things, as well as *continuous* variables. Labels identify *unique* things. For example, if there were multiple castles in the map, you could have a legend symbol indicating "castle" (a category of thing), and then labels showing the names of each castle. If you wanted to indicate a specific mountain peak in your elevation map, you would still have an "Elevation" item on the legend explaining the elevation symbology (a continuous variable), and then a point symbol and a label to identify the particular peak. If there were multiple peaks, then you would add a "Mountain Peak" item to the legend, associated with the point symbol you selected to indicate peaks. But this is not essential when there is only a single item in the category (like our single castle).    
+::: 
+
+(@) Right click on the castle layer you created and go to `Properties > Labels`. Change the `No Labels` box to `Single Labels`, to reveal several options. For `Value`, pick the `name` attribute, which contains our layer name. On the `Text` sub-tab, increase the font size to `14`, and on the `Buffer` sub-tab, click on `Draw Text Buffer`. Click on `Apply`, and you should get a label like in the figure below:
+
+![](images/lab_8/lab8_fig5_label_window.jpg)
+
+(@) The label is however hiding the actual castle polygon. So return to `Properties > Labels` and go to the `Placement` sub-tab, and change the `Mode` to `Outside Polygons`, and set a `Distance` to 1 millimetre. The label should move to the right of the polygon now. 
+
+Next, let us add some named places to the map, to help with navigation. For that we will use another layer from the *VectorMap*  OS database, the `NU_Named_Place` layer. 
+
+(@) Add the `NU_NamedPlace.shp` layer to your project. You will see a large number of points appear, probably too many to look good. The dataset has information on the type of place however (`CLASSIFICA`), and also an indication of place importance (`FONTHEIGHT`), that we could to reduce the number of points. 
+
+::: {.callout-important title="Stop and Think"}
+a) How would you reduce the  models and file formats are your datasets on?
+
+b) Why do the attributes have truncated names such as `CLASSIFICA`?
+:::
+
+::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
+a) You could go to the attribute table and use `Select by expression` to select the specific combination of attributes you wanted. But we will learn a different way below. 
+
+b) Because shapefile is a very old format, back when memory and storage were *very* limited. So they have an imposed limitation of ten characters as the maximum length of a field name - if you create a new field on a `.shp` file and name it something longer than 10 characters, the name will be cut-off at the tenth character. Geopackages don't have that restriction. 
+:::
+
+If we want to limit the number of features that are *available* to us in a layer, we can use the `Filter` method instead of`Select by Expression`. Why the latter is useful to create a *selection* that you can then export or summarise, filtering will essentially *hide* the information filtered out from view and manipulation - as if it didn't exist. Let us filter our named places to only medium and large populated places. 
+
+(@) Right click on the `NU_namedPlace layer` and select `Filter...`. You will see a new window similar to the `Select by Expression` window. On this window, you can pick attributes on the top left, and then list all unique values of each attribute in the top right. You can then double click on attribute names, values and operators, or simply type your filter expression. For this dataset, we want to filter using the following expression: `"CLASSIFICA" = 'Populated Place' AND ("FONTHEIGHT" = 'Medium' OR "FONTHEIGHT" = 'Large')`. Notice the parentheses! Then click on `OK`.   
+
+![](images/lab_8/lab8_fig6_filtering.jpg)
+
+::: {.callout-important title="Stop and Think"}
+Why do we use a set of parentheses to encapsulate the `OR` statement in the expression above?
+:::
+
+::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
+Boolean operators are processed as mathematical operations, from left to right. So if we typed `"CLASSIFICA" = 'Populated Place' AND "FONTHEIGHT" = 'Medium' OR "FONTHEIGHT" = 'Large'` without parentheses, QGIS would first look for the features that are a populated place *and* medium, and then try to find large places within this first selection. But we want for it to first find all medium *or* large places and then from these pick only the ones that are *also* (the `AND`) populated places. As with maths, the parentheses ensure we solve the `OR` first. 
+:::
+
+You should now have a lot less Named Places scattered through the map, and if you inspect the attribute table, you will see only the filtered results. It is as if the rest of the data doesn't exist! You will always know if a layer is being filtered by the 'funnel' symbol to the right of the layer name (and you can click on the symbol to edit or clear the filter). 
+
+(@) Now follow the same procedure you used to label Bamburgh Castle to label the populated places, using the `DISTNAME` attribute - but use a font size of `10` to keep the *visual hierarchy* in relation to the castle, and keep the `Placement` option as the default `Cartographic` option. 
+
+(@) Change the `Symbology` of the `NU_NamedPlaces` layer to the preset symbol `topo pop capital` (a white circle with a black dot in the middle), with a `Size` of `2.4`.
+
+(@) Add the `NU_RailwayStation.shp` file to your map, and label it using the `DISTNAME` attribute as well (you should see only one station, 'Chathill'). Make the label size `10`, colour it `blue` and make its style `bold italic`, and do not use a `buffer` this time.
+
+(@) Now go to the `Symbology` tab for the railway station layer, and pick `Single Symbol`. Select the `Simple Marker` sub-item, and then change the `Symbol layer type` from `Simple Marker` to `SVG Marker`. SVG stands for 'Scalable Vector Graphics' and is a commonly used format to store figures in desktop publishing.
+
+(@) Once you change the `Symbol layer type`, a new `SVG Browser` section will appear below. In there, find the `transport` folder on the browser to the left, and pick the railway symbol (looks like a train). Then above it, change the `Fill Color` to the same blue you used for the label, and decrease the `Stroke Width` until it says `No stroke`. Increase the size of the symbol to `6` (width and height should be linked by default). Your options should look like this (`stroke colour` doesn't matter):
+
+![](images/lab_8/lab8_fig8_train_symbol.jpg)
+
+Good job with labelling! Your map should now be looking like this:
+
+![](images/lab_8/lab8_fig7_map_with_labels.jpg)
+
+(@) Save your project.
+
+## Guided Exercise 3 - Laying out the final map
+
+We have now added everything we want to our map, and styled and labelled it properly. Now it is time to work on the final page layout for our map. This is where we add the critical *cartographic elements* that turn a *figure*  into a *map* (legend, scale, graticule,north arrow), and include some *map insets* and *annotations* to facilitate map interpretation. 
+
+### The Legend
+
+The map legend is the most important cartographic element, as it associates meaning to all the *visual variables* (colours, symbols, sizes, patterns) you have used on your map. QGIS has a handy tool to generate the legend automatically, but the we should always tweak the end results to improve map readibility. 
+
+(@) Go to the menu `Project > Layouts` and pick the layout you created in the previous lab, when you were deciding on the scale and coverage of your map. The `Layout editor` window will launch separately from the main QGIS window. 
+
+(@) Either go to the menu `Add Item > Add Legend` or click the `Add Legend` button on the vertical toolbar to the right (![](https://docs.qgis.org/3.34/en/_images/mActionAddLegend.png). The cursor will turn into a cross. Then *click and drag*  to create a legend on the lower right corner of the page. It will look to big and go outside the page - don't worry, we will fix it next.
+
+![](images/lab_8/lab8_fig9_ugly_legend.jpg)
+(@) The first thing we will do is clean up the legend. By default QGIS will add all active layers to the legend. Select the `Legend` item on the top left of the Layout window (under `Items`), and then select the `Item Properties` tab on the bottom right.
+
+(@) First set the name of the legend as `Legend` (type it on the box). Then uncheck the `Auto Update` option, and then remove items by selecting them and clicking on the red 'minus' button at the bottom of the layer list. You want to end up with a legend like the one below (use the green 'plus' button to add a layer back if you remove it by mistake):
+
+![](images/lab_8/lab8_fig10_clean_legend.jpg)
+
+(@) In my case, I also used the same symbology for `Primary Road` and `Primary Road Collapsed Dual Carriageway`, so no need to have both in the legend. Again, I can expand the `NU_Road_clip` layer on the legend layer list, select only the `Primary Road Collapsed Dual Carriageway` item and remove it with the red minus button. 
+
+(@) For the `OS_50_DEm_NU` layer, we don't need the `Band 1(Grey)` sub-name, so remove it as well. The legend should now be looking like this:
+
+![](images/lab_8/lab8_fig11_cleaner_legend.jpg)
+
+(@) This legend is occupying a lot of space in our map. Scroll down past the layer list on the legend `Item Properties`, until you find the option `Fonts and Text Formatting`. Expand it by clicking on the arrow, and then reduce the font sizes of the several options by 4 points. To do that, click on the down-arrow to the right of each `Font` box, and change the font size at the top of the menu.  
+
+![](images/lab_8/lab8_fig12_fontsize.jpg)
+
+(@) The spacing between items seems to be excessive now, so find the `Spacing` option and reduce all non-zero spacing by 1mm, *except* for the `Column Space` option - set that one to `3`. It will have an effect later/  
+
+Our legend is looking much better, but there is a big problem: the item names reflect the file names, and your map readers won't know what `NU_NamedPlace` means. So we should rename our layers to have intelligible names. You *can* rename your layers in the Map Layout only by going back to the legend `Item Properties` and double clicking each item. But I think it is a better idea to rename the actual layers in the QGIS project. This way, if you decide to add/remove other layers to the legend, you won't need to rename then again. 
+
+(@) Go back to the main QGIS window, and rename all the layers in the legend to proper, readable names. For example, `NU_RailwayStation` to Railway Station, `NU_NamedPlace` to `City/Town`, etc. Try to use short names:
+
+![](images/lab_8/lab8_fig13_named_legend.jpg)
+
+(@) Now that we have nice and short names, we can also save space by breaking the legend into columns. Go back to the Layout editor, and to the legend `Item Properties`. Find the `Columns` option and increase `Count` to `2`. Your legend should now have two columns, spaced 3mm (remember the `Column Space` option you set a few steps above?)
+
+(@) The extra space gives us the chance to expand our elevation bar a bit. Go back to the list of legend layers, and double click on the `Elevation` colour bar. Leave the `Width` as `default`, and set  the height to `20`. Also add `m` as the `Suffix` so we have clearly labelled units. Your final legend should now look like this:
+
+![](images/lab_8/lab8_fig14_final_legend.jpg)
+
+(@) Save your layout.
+
+### Adding a scale bar
+
+Every proper map needs a scale bar. Luckily, since all data in QGIS is *georeferenced*, the Map Layout editor can automatically calculate the correct size for indicating scaled distances in our map.  
+
+(@) Go to the menu `Add Item > Add Scale Bar`, or click the `Add Scale Bar` button (![](https://docs.qgis.org/3.34/en/_images/mActionScaleBar.png)), and drag a box to add a scale. to the top left of the map area, over the 'ocean'.
+
+(@) Save your layout.
+
+::: {.callout-tip}
+We want to make sure the cartographic elements do not cover information on the map. Because we have a large plain ocean area in this map, which is not of much interest, it is OK to add the scale bar there. But if the map had relevant info throughout, it would be better to place the scale outside the map area.  
+:::
+
+(@) Repeat this process and add a second scale bar below the first. Then select one of the scale bars on the `Items` list, and then on its `Item Properties` change the units from `Kilometers` to `Miles`. We now made our map accessible to both ~~civilized and barbarian people~~ metric and imperial thinkers. 
+
+::: {.callout-tip}
+Feel free to play with the `Style`, `Segments` and other `Item Properties` of your scale bars to tailor them to your taste. 
+:::
+
+(@) Save your layout.
+
+### Adding a Graticule
+
+The *graticule* (coordinate grid) is another essential cartographic element -  without it our map is not showing proper *spatial* information. A good graticule facilitates navigation without obscuring the map elements. Let us add a graticule to our map:
+
+(@) On the `Items` list, select the `Map 1` object. That is your main map area. Go to its `Item Properties` and find the `Grids` option. Expand it and click on the green plus button to create a new graticule, which will show up below it as `Grid 1`.
+
+(@) Select `Grid 1` and click on `Modify Grid`. A new set of options will appear:
+
+![](images/lab_8/lab8_fig15_grid_options.jpg)
+
+(@) We will set several options here to have a nice grid. First, we need to decide our `Interval` in the `X` and `Y` directions. This is the spacing between coordinate lines. We are using the OSGB CRS (EPSG:27700) with metric coordinates, so this interval will be in meters. Let us add coordinates every 5km by changing both `X` and `Y` spacing to `5000`. You should now see a grid of lines in the map. 
+
+(@) The squares formed by the lines seem a bit 'offset' in relation to the map area. We can shift them so they are nicely centred in the vertical and horizontal direction by adding `X` and `Y` offsets. On my map, an `X` offset of `500` and a `Y` offset of `-1500` centres the grid nicely. You may need to use different values depending on your choice of framing.
+
+(@) I now have coordinate lines, but they have no coordinate numbers, thus so far my grid is useless. Next set the `Frame Style` option to `Exterior Ticks`, then keep scrolling down until you reach the `Draw Coordinates` option. Check the box and coordinate numbers will appear at each line. But they do not align well with the frame, and also have useless decimal places. 
+
+(@) Our coordinates also have no axis indication, so change the `Format` option from `Decimal` to `Decimal with Suffix`. That will add the easting (E) and Northing(N) indicators.
+
+(@) Below `Draw Coordinates`, you see sets of options labelled `Left`, `Right`, `Top` and `Bottom`. Change the third option for `Left` from `Horizontal` to `Vertical Ascending`, and for `Right` to `Vertical Descending`. Then at the bottom of the `Draw Coordinates` section, set `Coordinate Precision` to `0` to remove the decimal places.
+
+(@) If we expected our map users to navigate using a compass, the actual grid lines would be useful. But since this is unlikely, the actual black grid lines are too obtrusive. Go back to the top of the `Map Grid Properties`, and change the `Grid Type` from `Solid` to `Frame and Annotations Only`. 
+
+(@) Finally, let us add a black border to our map for aesthetic purposes. Go back to the main `Item Properties` for `Map 1`, and find the `Framè` option. Enable the checkbox to add a frame. Save your layout.
+
+My map layout is now looking like this:
+
+![](images/lab_8/lab8_fig16_layout_with_grid.jpg)
+
+### Adding a North Arrow
+
+A North Arrow is only strictly necessary if your longitude grid lines are not parallel, but we will add one so you know how (and make sure you show us you've learned how on the assessment!). 
+
+(@) Go to the menu `Add Item > Add North Arrow` or click on the `Add North Arrow`Button (can you spot it?), and drag the mouse where you want your North arrow to be. It is by convention usually placed on the top left corner, so I'll move the scale bars a little to the left and then place my arrow there.
+
+(@) If you select the `North Arrow` item and go to its `Item Properties` you will see there are many SVG symbols for north arrows, in the `arrows` and `wind roses` folders. Pick any one you like. Save your layout.
+
+## Guided Exercise 4 - Adding map insets
+
+A common element of maps that aids map use is the inclusion of *map insets*, 'sub maps' that show either a portion of the main map in higher detail or the location of the main map on a broader scale map. We will add both to our map. 
+
+(@) Insert a new map area on the top left corner of your layout using the `Add Map` (![](https://docs.qgis.org/3.34/en/_images/mActionAddMap.png)) button. It will be by default named as `Map 2` on the `Items` list:
+
+![](images/lab_8/lab8_fig17_first_inset.jpg)
+
+(@) Before we move forward, let us rename our map items to make our work easier. Double-click on `Map 1` in the `Items` list and rename it to `Main Map`, then double-click on `Map 2` and rename it `Overview Map`. Save your layout.
+
+For now our overview map shows the exact same as the main map - the maps are by default tied to the QGIS main window. To be able to show separate maps, we need to associate each map with a QGIS *theme*. We will do this now.
+
+(@) First, go back to the main QGIS window, and add the `GB_Overview_Plus.tif` file to your layers. Turn its visibility *off*.
+
+(@) Now make sure all (and only) the layers you want to be visible on the main map are on, and the others are off. Then click on the small 'eye' button on the top of the `Layers` panel, and click on `Add Theme`. Name your theme `Main Map`.
+
+(@) Now turn off all layers *except* the GB Overview Layer, and repeat the steps above to create an `Overview` theme.
+
+(@) Click again on the 'eye' button and select the `Main Map` theme. It will revert to the selection of layers (and symbology!) you had on when you created the theme. Themes are a useful way to have shortcuts to different symbologies and map views.
+
+::: {.callout-tip}
+If you need to change an existing theme, activate and style the layers as you want, and then click on the eye button and select `Replace Theme`. 
+:::
+
+(@) Now go back to the Layout Editor window, and select the `Main Map` item. On its `Item Properties`, find the `Layers` option and enable the `Follow Map Theme` option, picking the `Main Map`theme. Then do the same with the `Overview Map`, and set it to the `Overview` theme. 
+
+(@) Set the scale of the overview map (on its `Item Properties`) to 5000000 (five million), and use the `Move item content` (![](https://docs.qgis.org/3.34/en/_images/mActionMoveItemContent.png)) tool so that Newcastle is about centred on the map. This map has 'painted-on' labels, so make sure you don't cut off any labels when placing your map.
+
+(@) As a 'mini' independent exercise, now add a coordinate grid to this Overview map. But instead of the OSGB CRS, use WGS84 as the CRS, so that the coordinates are in degrees (to determine where in the globe somewhere is,  degrees make more sense than meters). To do that, manually pick EPSG:4326 as the `CRS` on the `Map Grid Porperties` of the new grid. Use `Frame and Annotations Only`, and this time we want coordinates and ticks just on the top and right of the map. So under the `Frame` options uncheck the `Bottom side` and `Left side` boxes, and on the `Draw Coordinates` section, set the first option of `Bottom` and `Left` to `Disabled`. Make the font size `8`, make the coordinates on the right `Vertical Descending`, and get rid of the unnecessary decimal places (i.e. the zeroes). Then set the Overview map `Frame` option to on. It should look like this:
+
+![](images/lab_8/lab8_fig18_overview_map_coords.jpg)
+
+*To be continued...*
