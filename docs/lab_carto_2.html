@@ -253,7 +253,10 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#adding-a-graticule" id="toc-adding-a-graticule" class="nav-link" data-scroll-target="#adding-a-graticule"><span class="header-section-number">8.4.3</span> Adding a Graticule</a></li>
   <li><a href="#adding-a-north-arrow" id="toc-adding-a-north-arrow" class="nav-link" data-scroll-target="#adding-a-north-arrow"><span class="header-section-number">8.4.4</span> Adding a North Arrow</a></li>
   </ul></li>
-  <li><a href="#guided-exercise-4---adding-map-insets" id="toc-guided-exercise-4---adding-map-insets" class="nav-link" data-scroll-target="#guided-exercise-4---adding-map-insets"><span class="header-section-number">8.5</span> Guided Exercise 4 - Adding map insets</a></li>
+  <li><a href="#guided-exercise-4---adding-map-annotations" id="toc-guided-exercise-4---adding-map-annotations" class="nav-link" data-scroll-target="#guided-exercise-4---adding-map-annotations"><span class="header-section-number">8.5</span> Guided Exercise 4 - Adding map annotations</a></li>
+  <li><a href="#guided-exercise-5---adding-map-insets" id="toc-guided-exercise-5---adding-map-insets" class="nav-link" data-scroll-target="#guided-exercise-5---adding-map-insets"><span class="header-section-number">8.6</span> Guided Exercise 5 - Adding map insets</a></li>
+  <li><a href="#independent-exercise-1---adding-a-second-coordinate-grid-and-a-second-inset-map" id="toc-independent-exercise-1---adding-a-second-coordinate-grid-and-a-second-inset-map" class="nav-link" data-scroll-target="#independent-exercise-1---adding-a-second-coordinate-grid-and-a-second-inset-map"><span class="header-section-number">8.7</span> Independent Exercise 1 - Adding a second coordinate grid and a second inset map</a></li>
+  <li><a href="#independent-exercise-2---exporting-your-map" id="toc-independent-exercise-2---exporting-your-map" class="nav-link" data-scroll-target="#independent-exercise-2---exporting-your-map"><span class="header-section-number">8.8</span> Independent Exercise 2 - Exporting your map</a></li>
   </ul>
 </nav>
     </div>
@@ -333,17 +336,20 @@ Click for answer
 </div>
 </div>
 <ol start="2" class="example" type="1">
-<li>No we need a new empy layer to digitise on. Click on the <code>New shapefile layer</code> button (<img src="https://docs.qgis.org/3.34/en/_images/mActionNewVectorLayer.png" class="img-fluid"> ) on the main QGIS toolbar. You will get the <code>New Shapefile Layer</code> window:</li>
+<li>No we need a new empty layer to digitise on. Click on the <code>New shapefile layer</code> button (<img src="https://docs.qgis.org/3.34/en/_images/mActionNewVectorLayer.png" class="img-fluid"> ) on the main QGIS toolbar. You will get the <code>New Shapefile Layer</code> window:</li>
 </ol>
 <p><img src="images/lab_8/lab8_fig1_newshape_window.jpg" class="img-fluid"></p>
 <ol start="3" class="example" type="1">
-<li><p>First pick a folder to save your file and name it <code>bamburgh_castle</code>, on the <code>File Name</code> box. Then for <code>Geometry type</code>, pick <code>Polygon</code>, and pick ESPG:27700 for the CRS. Notice how QGIS automatically creates an integer attribute named <code>id</code>. We want a text attribute to hold the castle name, though, so enter <code>name</code> as the name of the field on the <code>New Field</code> options, then pick the <code>Text (string)</code> data type and a length of <code>80</code> (the default) and click on <code>Add to Fields List</code>. You should see the new <code>name</code> field added to the fields list. Then click <code>OK</code>.</p></li>
+<li><p>First pick a folder to save your file and name it <code>bamburgh_castle</code>, on the <code>File Name</code> box. Then for <code>Geometry type</code>, pick <code>Polygon</code>, and pick EPSG:27700 for the CRS. Notice how QGIS automatically creates an integer attribute named <code>id</code>. We want a text attribute to hold the castle name, though, so enter <code>name</code> as the name of the field on the <code>New Field</code> options, then pick the <code>Text (string)</code> data type and a length of <code>80</code> (the default) and click on <code>Add to Fields List</code>. You should see the new <code>name</code> field added to the fields list. Then click <code>OK</code>.</p></li>
 <li><p>Find your new layer on the <code>Layer Panel</code>. It doesn’t have any geometries yet, so you won’t see anything on your map. Highlight your new layer, and then put it into editing mode by clicking on the <code>Toggle Editing</code> button (<img src="https://docs.qgis.org/3.34/en/_images/mActionToggleEditing.png" class="img-fluid">) on the main QGIS toolbar. Make sure you are editing the right layer (it should have a pencil symbol on top of the symbology colour on the layer list).</p></li>
 <li><p>Now right-click on the aerial photo layer and select <code>Zoom to Layer(s)</code> to centre the map canvas on it. Then manually set a scale of 1:1500 on the bottom QGIS bar. It is important to be aware of the scale you are digitizing at, and keep it constant so that the level of detail is also constant. Drag the castle to the middle of the canvas using the <code>Pan Map</code> tool (the hand).</p></li>
-<li><p>Now highlight the new shapefile layer again. The <code>Digitizing tools</code> (<img src="images/lab_8/lab8_fig2_digi_tools.jpg" class="img-fluid">) should be available. Click on the <code>Add Polygn Feature</code> button (<img src="https://docs.qgis.org/3.34/en/_images/mActionCapturePolygon.png" class="img-fluid">) to enter a polygon drawing mode. Start clicking anywhere in the castle outer walls, and then keep clicking to trace the entire castle shape. Once you finish you polygon, right-click to end the drawing. A window will pop-up asking you to enter an <code>id</code> and <code>name</code>. Enter <code>1</code> and <code>Bamburgh Castle</code> respectively.</p></li>
+<li><p>Now highlight the new shapefile layer (which is being edited) again. The <code>Digitizing tools</code> toolbar (<img src="images/lab_8/lab8_fig2_digi_tools.jpg" class="img-fluid">) should be available. Click on the <code>Add Polygn Feature</code> button (<img src="https://docs.qgis.org/3.34/en/_images/mActionCapturePolygon.png" class="img-fluid">) to enter a polygon drawing mode. Start clicking anywhere in the castle outer walls, and then keep clicking to trace the entire castle shape. Once you finish you polygon, right-click to end the drawing. A window will pop-up asking you to enter an <code>id</code> and <code>name</code>. Enter <code>1</code> and <code>Bamburgh Castle</code> respectively.</p></li>
 <li><p>If you want to edit the polygon shape after the fact, use the <code>Vertex Tool</code> (<img src="https://docs.qgis.org/3.34/en/_images/mActionVertexToolActiveLayer.png" class="img-fluid">). Then click once on a vertex to select it, and then cick again to reposition it, or the Delete key on your keyboard to delete it. You can also add a new vertex by hovering the mouse in between vertices until you see a red <code>x</code>. You should end up with something like this:</p></li>
 </ol>
-<p><img src="images/lab_8/lab8_fig4_digitsed_castle.jpg" class="img-fluid"> (@) Once you’re happy with your polygon, remember to the <code>Save Layer Edits</code> button (on the editing toolbar - <em>not</em> the save project button) and exit editing mode. Set you map back to the 1:80000 scale you decided on in the previous lab, and pick a strong and visible colour for the castle polygon. Tur off the aerial image again, and save your project.</p>
+<p><img src="images/lab_8/lab8_fig4_digitsed_castle.jpg" class="img-fluid"></p>
+<ol start="8" class="example" type="1">
+<li>Once you’re happy with your polygon, remember to click the <code>Save Layer Edits</code> button (on the editing toolbar - <em>not</em> the <code>Save project</code> button) and then exit editing mode. Set you map back to the 1:80000 scale you decided on in the previous lab, and pick a strong and visible colour for the castle polygon. Turn off the aerial image again, and save your project.</li>
+</ol>
 </section>
 <section id="guided-exercise-2---adding-places-and-labels" class="level2" data-number="8.3">
 <h2 data-number="8.3" class="anchored" data-anchor-id="guided-exercise-2---adding-places-and-labels"><span class="header-section-number">8.3</span> Guided Exercise 2 - Adding places and labels</h2>
@@ -377,16 +383,16 @@ Click for answer
 </div>
 </div>
 </div>
-<ol start="8" class="example" type="1">
+<ol start="9" class="example" type="1">
 <li>Right click on the castle layer you created and go to <code>Properties &gt; Labels</code>. Change the <code>No Labels</code> box to <code>Single Labels</code>, to reveal several options. For <code>Value</code>, pick the <code>name</code> attribute, which contains our layer name. On the <code>Text</code> sub-tab, increase the font size to <code>14</code>, and on the <code>Buffer</code> sub-tab, click on <code>Draw Text Buffer</code>. Click on <code>Apply</code>, and you should get a label like in the figure below:</li>
 </ol>
 <p><img src="images/lab_8/lab8_fig5_label_window.jpg" class="img-fluid"></p>
-<ol start="9" class="example" type="1">
-<li>The label is however hiding the actual castle polygon. So return to <code>Properties &gt; Labels</code> and go to the <code>Placement</code> sub-tab, and change the <code>Mode</code> to <code>Outside Polygons</code>, and set a <code>Distance</code> to 1 millimetre. The label should move to the right of the polygon now.</li>
-</ol>
-<p>Next, let us add some named places to the map, to help with navigation. For that we will use another layer from the <em>VectorMap</em> OS database, the <code>NU_Named_Place</code> layer.</p>
 <ol start="10" class="example" type="1">
-<li>Add the <code>NU_NamedPlace.shp</code> layer to your project. You will see a large number of points appear, probably too many to look good. The dataset has information on the type of place however (<code>CLASSIFICA</code>), and also an indication of place importance (<code>FONTHEIGHT</code>), that we could to reduce the number of points.</li>
+<li>The label is however hiding the actual castle polygon. So return to <code>Properties &gt; Labels</code> and go to the <code>Placement</code> sub-tab, change the <code>Mode</code> to <code>Outside Polygons</code>, and set <code>Distance</code> to 1 millimetre. The label should move to the right of the polygon now.</li>
+</ol>
+<p>Next, let us add some named places to the map, to help with navigation. For that we will use another layer from the <em>Vector Map District</em> OS database we downloaded, the <code>NU_Named_Place</code> layer.</p>
+<ol start="11" class="example" type="1">
+<li>Add the <code>NU_NamedPlace.shp</code> layer to your project. You will see a large number of points appear, probably too many to look good. But this dataset has information on the type of place (<code>CLASSIFICA</code>) and an indication of place importance (<code>FONTHEIGHT</code>), that we could use to reduce the number of points.</li>
 </ol>
 <div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
 <div class="callout-header d-flex align-content-center">
@@ -399,7 +405,7 @@ Stop and Think
 </div>
 <div class="callout-body-container callout-body">
 <ol type="a">
-<li><p>How would you reduce the models and file formats are your datasets on?</p></li>
+<li><p>How would you reduce the number of points show based on the above attributes?</p></li>
 <li><p>Why do the attributes have truncated names such as <code>CLASSIFICA</code>?</p></li>
 </ol>
 </div>
@@ -423,9 +429,9 @@ Click for answer
 </div>
 </div>
 </div>
-<p>If we want to limit the number of features that are <em>available</em> to us in a layer, we can use the <code>Filter</code> method instead of<code>Select by Expression</code>. Why the latter is useful to create a <em>selection</em> that you can then export or summarise, filtering will essentially <em>hide</em> the information filtered out from view and manipulation - as if it didn’t exist. Let us filter our named places to only medium and large populated places.</p>
-<ol start="11" class="example" type="1">
-<li>Right click on the <code>NU_namedPlace layer</code> and select <code>Filter...</code>. You will see a new window similar to the <code>Select by Expression</code> window. On this window, you can pick attributes on the top left, and then list all unique values of each attribute in the top right. You can then double click on attribute names, values and operators, or simply type your filter expression. For this dataset, we want to filter using the following expression: <code>"CLASSIFICA" = 'Populated Place' AND ("FONTHEIGHT" = 'Medium' OR "FONTHEIGHT" = 'Large')</code>. Notice the parentheses! Then click on <code>OK</code>.</li>
+<p>If we want to limit the number of features that are <em>available</em> to us in a layer, we can use the <code>Filter</code> method instead of<code>Select by Expression</code>. While selecting is useful to create a <em>selection</em> that you can then export or summarise, filtering will essentially <em>hide</em> the information from view and manipulation - as if it didn’t exist. Let us filter our named places to only medium and large populated places.</p>
+<ol start="12" class="example" type="1">
+<li>Right click on the <code>NU_namedPlace layer</code> and select <code>Filter...</code>. You will see a new window similar to the <code>Select by Expression</code> window. On this window, you can pick attributes on the top left, and then list all unique values of each attribute in the top right (select the attribute then click on<code>All</code>). You can then double click on attribute names, values and operators, or simply type your expression in the bottom window. For this dataset, we want to filter using the following expression: <code>"CLASSIFICA" = 'Populated Place' AND ("FONTHEIGHT" = 'Medium' OR "FONTHEIGHT" = 'Large')</code>. Notice the parentheses! Then click on <code>OK</code>.</li>
 </ol>
 <p><img src="images/lab_8/lab8_fig6_filtering.jpg" class="img-fluid"></p>
 <div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
@@ -458,7 +464,7 @@ Click for answer
 </div>
 </div>
 <p>You should now have a lot less Named Places scattered through the map, and if you inspect the attribute table, you will see only the filtered results. It is as if the rest of the data doesn’t exist! You will always know if a layer is being filtered by the ‘funnel’ symbol to the right of the layer name (and you can click on the symbol to edit or clear the filter).</p>
-<ol start="12" class="example" type="1">
+<ol start="13" class="example" type="1">
 <li><p>Now follow the same procedure you used to label Bamburgh Castle to label the populated places, using the <code>DISTNAME</code> attribute - but use a font size of <code>10</code> to keep the <em>visual hierarchy</em> in relation to the castle, and keep the <code>Placement</code> option as the default <code>Cartographic</code> option.</p></li>
 <li><p>Change the <code>Symbology</code> of the <code>NU_NamedPlaces</code> layer to the preset symbol <code>topo pop capital</code> (a white circle with a black dot in the middle), with a <code>Size</code> of <code>2.4</code>.</p></li>
 <li><p>Add the <code>NU_RailwayStation.shp</code> file to your map, and label it using the <code>DISTNAME</code> attribute as well (you should see only one station, ‘Chathill’). Make the label size <code>10</code>, colour it <code>blue</code> and make its style <code>bold italic</code>, and do not use a <code>buffer</code> this time.</p></li>
@@ -468,57 +474,57 @@ Click for answer
 <p><img src="images/lab_8/lab8_fig8_train_symbol.jpg" class="img-fluid"></p>
 <p>Good job with labelling! Your map should now be looking like this:</p>
 <p><img src="images/lab_8/lab8_fig7_map_with_labels.jpg" class="img-fluid"></p>
-<ol start="17" class="example" type="1">
+<ol start="18" class="example" type="1">
 <li>Save your project.</li>
 </ol>
 </section>
 <section id="guided-exercise-3---laying-out-the-final-map" class="level2" data-number="8.4">
 <h2 data-number="8.4" class="anchored" data-anchor-id="guided-exercise-3---laying-out-the-final-map"><span class="header-section-number">8.4</span> Guided Exercise 3 - Laying out the final map</h2>
-<p>We have now added everything we want to our map, and styled and labelled it properly. Now it is time to work on the final page layout for our map. This is where we add the critical <em>cartographic elements</em> that turn a <em>figure</em> into a <em>map</em> (legend, scale, graticule,north arrow), and include some <em>map insets</em> and <em>annotations</em> to facilitate map interpretation.</p>
+<p>We have now added everything we want to our map, and styled and labelled it properly. Now it is time to work on the final page layout for our map. This is where we add the critical <em>cartographic elements</em> that turn a <em>figure</em> into a <em>map</em> (legend, scale, graticule, north arrow), and include some <em>map insets</em> and <em>annotations</em> to facilitate map interpretation.</p>
 <section id="the-legend" class="level3" data-number="8.4.1">
 <h3 data-number="8.4.1" class="anchored" data-anchor-id="the-legend"><span class="header-section-number">8.4.1</span> The Legend</h3>
-<p>The map legend is the most important cartographic element, as it associates meaning to all the <em>visual variables</em> (colours, symbols, sizes, patterns) you have used on your map. QGIS has a handy tool to generate the legend automatically, but the we should always tweak the end results to improve map readibility.</p>
-<ol start="18" class="example" type="1">
+<p>The map legend is the most important cartographic element, as it associates meaning to all the <em>visual variables</em> (colours, symbols, sizes, patterns) you have used on your map. QGIS has a handy tool to generate the legend automatically, but we should always tweak the end results to improve map readability.</p>
+<ol start="19" class="example" type="1">
 <li><p>Go to the menu <code>Project &gt; Layouts</code> and pick the layout you created in the previous lab, when you were deciding on the scale and coverage of your map. The <code>Layout editor</code> window will launch separately from the main QGIS window.</p></li>
-<li><p>Either go to the menu <code>Add Item &gt; Add Legend</code> or click the <code>Add Legend</code> button on the vertical toolbar to the right (<img src="https://docs.qgis.org/3.34/en/_images/mActionAddLegend.png" class="img-fluid">. The cursor will turn into a cross. Then <em>click and drag</em> to create a legend on the lower right corner of the page. It will look to big and go outside the page - don’t worry, we will fix it next.</p></li>
+<li><p>Either go to the menu <code>Add Item &gt; Add Legend</code> or click the <code>Add Legend</code> button (<img src="https://docs.qgis.org/3.34/en/_images/mActionAddLegend.png" class="img-fluid">) on the vertical toolbar to the right. The cursor will turn into a cross. Then <em>click and drag</em> to create a legend on the lower right corner of the page. It will look to big and go outside the page - don’t worry, we will fix it next.</p></li>
 </ol>
-<p><img src="images/lab_8/lab8_fig9_ugly_legend.jpg" class="img-fluid"> (@) The first thing we will do is clean up the legend. By default QGIS will add all active layers to the legend. Select the <code>Legend</code> item on the top left of the Layout window (under <code>Items</code>), and then select the <code>Item Properties</code> tab on the bottom right.</p>
-<ol start="20" class="example" type="1">
-<li>First set the name of the legend as <code>Legend</code> (type it on the box). Then uncheck the <code>Auto Update</code> option, and then remove items by selecting them and clicking on the red ‘minus’ button at the bottom of the layer list. You want to end up with a legend like the one below (use the green ‘plus’ button to add a layer back if you remove it by mistake):</li>
+<p><img src="images/lab_8/lab8_fig9_ugly_legend.jpg" class="img-fluid"></p>
+<ol start="21" class="example" type="1">
+<li><p>The first thing we will do is clean up the legend. By default QGIS will add all active layers to the legend. Select the <code>Legend</code> item on the top left of the Layout window (under <code>Items</code>), and then select the <code>Item Properties</code> tab on the bottom right.</p></li>
+<li><p>First set the name of the legend as <code>Legend</code> (type it on the box). Then uncheck the <code>Auto Update</code> option, and start removing items by selecting them and clicking on the red ‘minus’ button at the bottom of the layer list. You want to end up with a legend like the one below (use the green ‘plus’ button to add a layer back if you remove it by mistake):</p></li>
 </ol>
 <p><img src="images/lab_8/lab8_fig10_clean_legend.jpg" class="img-fluid"></p>
-<ol start="21" class="example" type="1">
+<ol start="23" class="example" type="1">
 <li><p>In my case, I also used the same symbology for <code>Primary Road</code> and <code>Primary Road Collapsed Dual Carriageway</code>, so no need to have both in the legend. Again, I can expand the <code>NU_Road_clip</code> layer on the legend layer list, select only the <code>Primary Road Collapsed Dual Carriageway</code> item and remove it with the red minus button.</p></li>
-<li><p>For the <code>OS_50_DEm_NU</code> layer, we don’t need the <code>Band 1(Grey)</code> sub-name, so remove it as well. The legend should now be looking like this:</p></li>
+<li><p>For the <code>OS_50_DEM_NU</code> layer, we don’t need the <code>Band 1(Grey)</code> sub-name, so remove it as well. The legend should now be looking like this:</p></li>
 </ol>
 <p><img src="images/lab_8/lab8_fig11_cleaner_legend.jpg" class="img-fluid"></p>
-<ol start="23" class="example" type="1">
+<ol start="25" class="example" type="1">
 <li>This legend is occupying a lot of space in our map. Scroll down past the layer list on the legend <code>Item Properties</code>, until you find the option <code>Fonts and Text Formatting</code>. Expand it by clicking on the arrow, and then reduce the font sizes of the several options by 4 points. To do that, click on the down-arrow to the right of each <code>Font</code> box, and change the font size at the top of the menu.</li>
 </ol>
 <p><img src="images/lab_8/lab8_fig12_fontsize.jpg" class="img-fluid"></p>
-<ol start="24" class="example" type="1">
-<li>The spacing between items seems to be excessive now, so find the <code>Spacing</code> option and reduce all non-zero spacing by 1mm, <em>except</em> for the <code>Column Space</code> option - set that one to <code>3</code>. It will have an effect later/</li>
+<ol start="26" class="example" type="1">
+<li>The spacing between items seems to be excessive now, so find the <code>Spacing</code> option for the Legend item and reduce all non-zero spacing by 1mm, <em>except</em> for the <code>Column Space</code> option - set that one to <code>3</code>. It will have an effect later.</li>
 </ol>
-<p>Our legend is looking much better, but there is a big problem: the item names reflect the file names, and your map readers won’t know what <code>NU_NamedPlace</code> means. So we should rename our layers to have intelligible names. You <em>can</em> rename your layers in the Map Layout only by going back to the legend <code>Item Properties</code> and double clicking each item. But I think it is a better idea to rename the actual layers in the QGIS project. This way, if you decide to add/remove other layers to the legend, you won’t need to rename then again.</p>
-<ol start="25" class="example" type="1">
+<p>Our legend is looking much better, but there is a big problem: the item names reflect the file names, and your map readers won’t know what <code>NU_NamedPlace</code> means. So we should rename our layers to have intelligible names. You <em>can</em> rename your layers in the Map Layout by going back to the legend <code>Item Properties</code> and double clicking each item. But I think it is a better idea to rename the actual layers in the QGIS project. This way, if you decide to add/remove other layers to the legend, you won’t need to rename then again.</p>
+<ol start="27" class="example" type="1">
 <li>Go back to the main QGIS window, and rename all the layers in the legend to proper, readable names. For example, <code>NU_RailwayStation</code> to Railway Station, <code>NU_NamedPlace</code> to <code>City/Town</code>, etc. Try to use short names:</li>
 </ol>
 <p><img src="images/lab_8/lab8_fig13_named_legend.jpg" class="img-fluid"></p>
-<ol start="26" class="example" type="1">
-<li><p>Now that we have nice and short names, we can also save space by breaking the legend into columns. Go back to the Layout editor, and to the legend <code>Item Properties</code>. Find the <code>Columns</code> option and increase <code>Count</code> to <code>2</code>. Your legend should now have two columns, spaced 3mm (remember the <code>Column Space</code> option you set a few steps above?)</p></li>
-<li><p>The extra space gives us the chance to expand our elevation bar a bit. Go back to the list of legend layers, and double click on the <code>Elevation</code> colour bar. Leave the <code>Width</code> as <code>default</code>, and set the height to <code>20</code>. Also add <code>m</code> as the <code>Suffix</code> so we have clearly labelled units. Your final legend should now look like this:</p></li>
+<ol start="28" class="example" type="1">
+<li><p>Now that we have nice and short names, we can also save space by breaking the legend into columns. Go back to the Layout editor, and on the Legend <code>Item Properties</code> find the <code>Columns</code> option and increase <code>Count</code> to <code>2</code>. Your legend should now have two columns, spaced 3mm (remember the <code>Column Space</code> option you set a few steps above?)</p></li>
+<li><p>The extra space gives us the chance to expand our elevation bar a bit. Go back to the list of legend layers in the Legend <code>Item Properties</code>, and double click on the <code>Elevation</code> colour bar. Leave the <code>Width</code> as <code>default</code>, and set the height to <code>20</code>. Also add <code>m</code> as the <code>Suffix</code> so we have clearly labelled units. Your final legend should now look like this:</p></li>
 </ol>
 <p><img src="images/lab_8/lab8_fig14_final_legend.jpg" class="img-fluid"></p>
-<ol start="28" class="example" type="1">
+<ol start="30" class="example" type="1">
 <li>Save your layout.</li>
 </ol>
 </section>
 <section id="adding-a-scale-bar" class="level3" data-number="8.4.2">
 <h3 data-number="8.4.2" class="anchored" data-anchor-id="adding-a-scale-bar"><span class="header-section-number">8.4.2</span> Adding a scale bar</h3>
 <p>Every proper map needs a scale bar. Luckily, since all data in QGIS is <em>georeferenced</em>, the Map Layout editor can automatically calculate the correct size for indicating scaled distances in our map.</p>
-<ol start="29" class="example" type="1">
-<li><p>Go to the menu <code>Add Item &gt; Add Scale Bar</code>, or click the <code>Add Scale Bar</code> button (<img src="https://docs.qgis.org/3.34/en/_images/mActionScaleBar.png" class="img-fluid">), and drag a box to add a scale. to the top left of the map area, over the ‘ocean’.</p></li>
-<li><p>Save your layout.</p></li>
+<ol start="31" class="example" type="1">
+<li>Go to the menu <code>Add Item &gt; Add Scale Bar</code>, or click the <code>Add Scale Bar</code> button (<img src="https://docs.qgis.org/3.34/en/_images/mActionScaleBar.png" class="img-fluid">), and drag a box to add a scale to the top left of the map area, over the ‘ocean’.</li>
 </ol>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -533,7 +539,7 @@ Tip
 <p>We want to make sure the cartographic elements do not cover information on the map. Because we have a large plain ocean area in this map, which is not of much interest, it is OK to add the scale bar there. But if the map had relevant info throughout, it would be better to place the scale outside the map area.</p>
 </div>
 </div>
-<ol start="31" class="example" type="1">
+<ol start="32" class="example" type="1">
 <li>Repeat this process and add a second scale bar below the first. Then select one of the scale bars on the <code>Items</code> list, and then on its <code>Item Properties</code> change the units from <code>Kilometers</code> to <code>Miles</code>. We now made our map accessible to both <del>civilized and barbarian people</del> metric and imperial thinkers.</li>
 </ol>
 <div class="callout callout-style-default callout-tip callout-titled">
@@ -549,19 +555,19 @@ Tip
 <p>Feel free to play with the <code>Style</code>, <code>Segments</code> and other <code>Item Properties</code> of your scale bars to tailor them to your taste.</p>
 </div>
 </div>
-<ol start="32" class="example" type="1">
+<ol start="33" class="example" type="1">
 <li>Save your layout.</li>
 </ol>
 </section>
 <section id="adding-a-graticule" class="level3" data-number="8.4.3">
 <h3 data-number="8.4.3" class="anchored" data-anchor-id="adding-a-graticule"><span class="header-section-number">8.4.3</span> Adding a Graticule</h3>
 <p>The <em>graticule</em> (coordinate grid) is another essential cartographic element - without it our map is not showing proper <em>spatial</em> information. A good graticule facilitates navigation without obscuring the map elements. Let us add a graticule to our map:</p>
-<ol start="33" class="example" type="1">
-<li><p>On the <code>Items</code> list, select the <code>Map 1</code> object. That is your main map area. Go to its <code>Item Properties</code> and find the <code>Grids</code> option. Expand it and click on the green plus button to create a new graticule, which will show up below it as <code>Grid 1</code>.</p></li>
+<ol start="34" class="example" type="1">
+<li><p>On the <code>Items</code> list, select the <code>Map 1</code> object. That is your main map frame. Go to its <code>Item Properties</code> and find the <code>Grids</code> option. Expand it and click on the green plus button to create a new graticule, which will show up below it as <code>Grid 1</code>.</p></li>
 <li><p>Select <code>Grid 1</code> and click on <code>Modify Grid</code>. A new set of options will appear:</p></li>
 </ol>
 <p><img src="images/lab_8/lab8_fig15_grid_options.jpg" class="img-fluid"></p>
-<ol start="35" class="example" type="1">
+<ol start="36" class="example" type="1">
 <li><p>We will set several options here to have a nice grid. First, we need to decide our <code>Interval</code> in the <code>X</code> and <code>Y</code> directions. This is the spacing between coordinate lines. We are using the OSGB CRS (EPSG:27700) with metric coordinates, so this interval will be in meters. Let us add coordinates every 5km by changing both <code>X</code> and <code>Y</code> spacing to <code>5000</code>. You should now see a grid of lines in the map.</p></li>
 <li><p>The squares formed by the lines seem a bit ‘offset’ in relation to the map area. We can shift them so they are nicely centred in the vertical and horizontal direction by adding <code>X</code> and <code>Y</code> offsets. On my map, an <code>X</code> offset of <code>500</code> and a <code>Y</code> offset of <code>-1500</code> centres the grid nicely. You may need to use different values depending on your choice of framing.</p></li>
 <li><p>I now have coordinate lines, but they have no coordinate numbers, thus so far my grid is useless. Next set the <code>Frame Style</code> option to <code>Exterior Ticks</code>, then keep scrolling down until you reach the <code>Draw Coordinates</code> option. Check the box and coordinate numbers will appear at each line. But they do not align well with the frame, and also have useless decimal places.</p></li>
@@ -576,28 +582,48 @@ Tip
 <section id="adding-a-north-arrow" class="level3" data-number="8.4.4">
 <h3 data-number="8.4.4" class="anchored" data-anchor-id="adding-a-north-arrow"><span class="header-section-number">8.4.4</span> Adding a North Arrow</h3>
 <p>A North Arrow is only strictly necessary if your longitude grid lines are not parallel, but we will add one so you know how (and make sure you show us you’ve learned how on the assessment!).</p>
-<ol start="42" class="example" type="1">
-<li><p>Go to the menu <code>Add Item &gt; Add North Arrow</code> or click on the <code>Add North Arrow</code>Button (can you spot it?), and drag the mouse where you want your North arrow to be. It is by convention usually placed on the top left corner, so I’ll move the scale bars a little to the left and then place my arrow there.</p></li>
+<ol start="43" class="example" type="1">
+<li><p>Go to the menu <code>Add Item &gt; Add North Arrow</code> or click on the <code>Add North Arrow</code> button (can you spot it?), and drag the mouse where you want your North arrow to be. It is by convention usually placed on the top left corner, so I’ll move the scale bars a little to the left and then place my arrow there.</p></li>
 <li><p>If you select the <code>North Arrow</code> item and go to its <code>Item Properties</code> you will see there are many SVG symbols for north arrows, in the <code>arrows</code> and <code>wind roses</code> folders. Pick any one you like. Save your layout.</p></li>
 </ol>
 </section>
 </section>
-<section id="guided-exercise-4---adding-map-insets" class="level2" data-number="8.5">
-<h2 data-number="8.5" class="anchored" data-anchor-id="guided-exercise-4---adding-map-insets"><span class="header-section-number">8.5</span> Guided Exercise 4 - Adding map insets</h2>
-<p>A common element of maps that aids map use is the inclusion of <em>map insets</em>, ‘sub maps’ that show either a portion of the main map in higher detail or the location of the main map on a broader scale map. We will add both to our map.</p>
-<ol start="44" class="example" type="1">
-<li>Insert a new map area on the top left corner of your layout using the <code>Add Map</code> (<img src="https://docs.qgis.org/3.34/en/_images/mActionAddMap.png" class="img-fluid">) button. It will be by default named as <code>Map 2</code> on the <code>Items</code> list:</li>
+<section id="guided-exercise-4---adding-map-annotations" class="level2" data-number="8.5">
+<h2 data-number="8.5" class="anchored" data-anchor-id="guided-exercise-4---adding-map-annotations"><span class="header-section-number">8.5</span> Guided Exercise 4 - Adding map annotations</h2>
+<p>Annotations help our readers understand the map. The main piece of annotation any <em>standalone</em> map should have is a <strong>title</strong> (you can omit the title if your map is a figure in a document, where there will be an explanatory caption under it). We also want to add some information such as data sources, map author, the CRS used and the map scale.</p>
+<ol start="45" class="example" type="1">
+<li>Add an annotation frame under the map legend using <code>Add Item &gt; Add Label</code> or the <code>Add Label</code> button (<img src="https://docs.qgis.org/3.34/en/_images/mActionLabel.png" class="img-fluid">). On the <code>Item Properties</code> for your new label, you will see a text box saying <code>Lorem Ipsum</code>. These are two words in Latin from a text passage that has historically been used by designers to indicate placeholder text (see <a href="https://en.wikipedia.org/wiki/Lorem_ipsum">lorem ipsum</a>). Replace the <code>Lorem Ipsum</code> by the following text, including the line breaks and line spaces:</li>
+</ol>
+<p>EPSG:27700</p>
+<p>1:80000</p>
+<p>Author: (your student number)</p>
+<p>Data source: Digimap 2024</p>
+<ol start="46" class="example" type="1">
+<li><p>Under the text box, select <code>Center</code> for <code>Horizontal Alignment</code>, and set font size to <code>8</code>. Then move your legend up until you can fit this annotation under it.</p></li>
+<li><p>Now add a Map title, using the same Text Label tool, such as <code>Bamburgh Castle -  Northumberland, UK</code>. You may want to resize your main map frame a bit to make room for the title above it. Set it to <code>bold</code> and font size <code>14</code>.</p></li>
+</ol>
+<p>My map now looks like this:</p>
+<p><img src="images/lab_8/lab8_fig19_almost_done.jpg" class="img-fluid"></p>
+<ol start="48" class="example" type="1">
+<li>Save your layout.</li>
+</ol>
+</section>
+<section id="guided-exercise-5---adding-map-insets" class="level2" data-number="8.6">
+<h2 data-number="8.6" class="anchored" data-anchor-id="guided-exercise-5---adding-map-insets"><span class="header-section-number">8.6</span> Guided Exercise 5 - Adding map insets</h2>
+<p>A common element of maps that aids map use is the inclusion of <em>map insets</em>, ‘sub maps’ that show either a portion of the main map in higher detail or the location of the main map on a broader scale map. We will add both to our design</p>
+<ol start="49" class="example" type="1">
+<li>Insert a new map area on the top left corner of your layout using the <code>Add Map</code> (<img src="https://docs.qgis.org/3.34/en/_images/mActionAddMap.png" class="img-fluid">) button. It will by default be named as <code>Map 2</code> on the <code>Items</code> list:</li>
 </ol>
 <p><img src="images/lab_8/lab8_fig17_first_inset.jpg" class="img-fluid"></p>
-<ol start="45" class="example" type="1">
-<li>Before we move forward, let us rename our map items to make our work easier. Double-click on <code>Map 1</code> in the <code>Items</code> list and rename it to <code>Main Map</code>, then double-click on <code>Map 2</code> and rename it <code>Overview Map</code>. Save your layout.</li>
+<ol start="50" class="example" type="1">
+<li>Before we move forward, let us rename our map items to make our work easier. Double-click on <code>Map 1</code> in the <code>Items</code> list and rename it to <code>Main Map</code>, then double-click on <code>Map 2</code> and rename it to <code>Overview Map</code>. Save your layout.</li>
 </ol>
-<p>For now our overview map shows the exact same as the main map - the maps are by default tied to the QGIS main window. To be able to show separate maps, we need to associate each map with a QGIS <em>theme</em>. We will do this now.</p>
-<ol start="46" class="example" type="1">
+<p>For now our overview map shows the exact same content as the main map - the maps are by default tied to the QGIS main window. To be able to show separate maps, we need to associate each map with a QGIS <em>theme</em>. We will do this now.</p>
+<ol start="51" class="example" type="1">
 <li><p>First, go back to the main QGIS window, and add the <code>GB_Overview_Plus.tif</code> file to your layers. Turn its visibility <em>off</em>.</p></li>
 <li><p>Now make sure all (and only) the layers you want to be visible on the main map are on, and the others are off. Then click on the small ‘eye’ button on the top of the <code>Layers</code> panel, and click on <code>Add Theme</code>. Name your theme <code>Main Map</code>.</p></li>
 <li><p>Now turn off all layers <em>except</em> the GB Overview Layer, and repeat the steps above to create an <code>Overview</code> theme.</p></li>
-<li><p>Click again on the ‘eye’ button and select the <code>Main Map</code> theme. It will revert to the selection of layers (and symbology!) you had on when you created the theme. Themes are a useful way to have shortcuts to different symbologies and map views.</p></li>
+<li><p>Click again on the ‘eye’ button and select the <code>Main Map</code> theme. It will revert to the selection of layers you had turned on when you created the theme. Themes are a useful way to have shortcuts to different sets of visible layers.</p></li>
 </ol>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -609,16 +635,54 @@ Tip
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>If you need to change an existing theme, activate and style the layers as you want, and then click on the eye button and select <code>Replace Theme</code>.</p>
+<p>If you need to change an existing theme, activate/deactivate the layers you want, and then click on the eye button and select <code>Replace Theme</code>.</p>
 </div>
 </div>
-<ol start="50" class="example" type="1">
+<ol start="55" class="example" type="1">
 <li><p>Now go back to the Layout Editor window, and select the <code>Main Map</code> item. On its <code>Item Properties</code>, find the <code>Layers</code> option and enable the <code>Follow Map Theme</code> option, picking the <code>Main Map</code>theme. Then do the same with the <code>Overview Map</code>, and set it to the <code>Overview</code> theme.</p></li>
 <li><p>Set the scale of the overview map (on its <code>Item Properties</code>) to 5000000 (five million), and use the <code>Move item content</code> (<img src="https://docs.qgis.org/3.34/en/_images/mActionMoveItemContent.png" class="img-fluid">) tool so that Newcastle is about centred on the map. This map has ‘painted-on’ labels, so make sure you don’t cut off any labels when placing your map.</p></li>
-<li><p>As a ‘mini’ independent exercise, now add a coordinate grid to this Overview map. But instead of the OSGB CRS, use WGS84 as the CRS, so that the coordinates are in degrees (to determine where in the globe somewhere is, degrees make more sense than meters). To do that, manually pick EPSG:4326 as the <code>CRS</code> on the <code>Map Grid Porperties</code> of the new grid. Use <code>Frame and Annotations Only</code>, and this time we want coordinates and ticks just on the top and right of the map. So under the <code>Frame</code> options uncheck the <code>Bottom side</code> and <code>Left side</code> boxes, and on the <code>Draw Coordinates</code> section, set the first option of <code>Bottom</code> and <code>Left</code> to <code>Disabled</code>. Make the font size <code>8</code>, make the coordinates on the right <code>Vertical Descending</code>, and get rid of the unnecessary decimal places (i.e.&nbsp;the zeroes). Then set the Overview map <code>Frame</code> option to on. It should look like this:</p></li>
 </ol>
+<p>Now we need to indicate ‘where’ in the overview map is the main map located. QGIS has a nice feature to do that for us automatically:</p>
+<ol start="57" class="example" type="1">
+<li>Go to the <code>Item Options</code> of the <code>Overview Map</code> and find the <code>Overviews</code> option. Expand it and click on the green plus symbol to add an overview. Select the newly created <code>Overview 1</code>, and on the <code>Map Frame</code> option below it, select <code>Main Map</code>. You should now see a transparent pink box indicating the location and coverage of the Main Map on the Overview map inset.</li>
+</ol>
+<p>The map should now look like this:</p>
+<p><img src="images/lab_8/lab8_fig20_almost__almost_done.jpg" class="img-fluid"></p>
+</section>
+<section id="independent-exercise-1---adding-a-second-coordinate-grid-and-a-second-inset-map" class="level2" data-number="8.7">
+<h2 data-number="8.7" class="anchored" data-anchor-id="independent-exercise-1---adding-a-second-coordinate-grid-and-a-second-inset-map"><span class="header-section-number">8.7</span> Independent Exercise 1 - Adding a second coordinate grid and a second inset map</h2>
+<ol type="1">
+<li>Now add a coordinate grid to the Overview map. following the same steps as you did for the main map, but with the following changes:</li>
+</ol>
+<ul>
+<li><p>Instead of the OSGB CRS, use WGS84 as the CRS, so that the coordinates are in degrees (to determine ‘where in the world’ somewhere is, degrees make more sense than meters). To do that, manually pick <code>EPSG:4326</code> as the <code>CRS</code> on the <code>Map Grid Properties</code> of the new grid.</p></li>
+<li><p>Use <code>Frame and Annotations Only</code> as for the Main Map, but this time we want coordinates and ticks just on the top and right of the map. So under the <code>Frame</code> options uncheck the <code>Bottom side</code> and <code>Left side</code> boxes, and on the <code>Draw Coordinates</code> section, change the first option of <code>Bottom</code> and <code>Left</code> from <code>Show all</code> to <code>Disabled</code>.</p></li>
+<li><p>Make the font size <code>8</code>, make the coordinates on the right <code>Vertical Descending</code>, and get rid of the unnecessary decimal places (i.e.&nbsp;the zeroes).</p></li>
+<li><p>Set the Overview map <code>Frame</code> option to on.</p></li>
+</ul>
+<p>The final Overview map should look like this:</p>
 <p><img src="images/lab_8/lab8_fig18_overview_map_coords.jpg" class="img-fluid"></p>
-<p><em>To be continued…</em></p>
+<ol start="2" type="1">
+<li>Now add a second inset map showing the aerial photo view of the castle. Follow the steps used for the Overview map, with the following changes:</li>
+</ol>
+<ul>
+<li><p>Create a third theme on QGIS, where only the air photo is visible, and name it <code>Close Up</code>.</p></li>
+<li><p>Add a new map frame in the space left between the Overview map and the Legend, rename it from <code>Map 3</code> to <code>Close Up</code>, and set it to follow the <code>Close Up</code> theme.</p></li>
+<li><p>Adjust this inset map scale to show all of the castle as close up as possible. Aroubnd 15000 should work well.</p></li>
+<li><p>Do not add a coordinate grid to this map inset, but do add a Scale Bar. To make the scale relative to the <code>Close Up map</code>, create the scale bar then go to its <code>Item Properties</code>, and on the first option called <code>Map</code>, make sure it is set to <code>Close Up Map</code>. Make the scale only one segment long, and place it within the close up image.</p></li>
+<li><p>Add a small text below the Close Up Map, saying <code>Aerial View of Bamburgh Castle</code>.</p></li>
+</ul>
+<p>Your final map should look like this:</p>
+<p><img src="images/lab_8/lab8_fig21_done.jpg" class="img-fluid"></p>
+</section>
+<section id="independent-exercise-2---exporting-your-map" class="level2" data-number="8.8">
+<h2 data-number="8.8" class="anchored" data-anchor-id="independent-exercise-2---exporting-your-map"><span class="header-section-number">8.8</span> Independent Exercise 2 - Exporting your map</h2>
+<p>Your map is done! Now all is left is to export it. Your main choices are to export it as an <em>image</em> (to add it in a report or similar), or as a <em>PDF</em> if you want the map to be a standalone file.</p>
+<ul>
+<li><p>To export as an image, on the Layout Editor window go to <code>Layout &gt; Export as Image...</code>. Pick a folder and file name to save it, and then it will show you some options. You can normally use the default options, or check the <code>Crop to Content</code> box if you want your image edges to cover only the content of the map (i.e.&nbsp;no white margins).</p></li>
+<li><p>To export as a PDF, go to <code>Layout &gt; Export as PDF...</code>. Pick a folder and file name to save it, and then it will show you some options as well. The defaults are fine for most cases.</p></li>
+</ul>
+<p>Well done! You havemade a very complex and (arguably) nice looking map! You are now ready to take on the first module Assessment, and make a beautiful map showing the not-so-beautiful issue of deforestation in the Amazon.</p>
 
 
 </section>

@@ -41,7 +41,7 @@ Okay, we should have enough data to make an informative map, so let us start lay
 
 ## Guided exercise 2 - Starting the project and organising data
 
-Before we start mapping, we need to organise our downloads and set up a project to start bringing in the data. 
+Before we start mapping, we need to organise our downloads and set up a project to start bringing in the data. We will use the same data for this lab and the next.
 
 (@) Create a home folder for this project named `labs_7_8`), and then extract the zipped files and organise the data as you are used to.  
 
@@ -55,7 +55,7 @@ The aerial photo, DEM and GB Overview are raster files. The DEM is in the [ESRI 
 The vector district files are all vector files, some being polygons, some being lines and some being points. They will be in [Shapefile](https://en.wikipedia.org/wiki/Shapefile) format.  
 :::
 
-(@) Create a new empty project in QGIS, and set its CRS to OSGB (EPSG:27700). Save it.
+(@) Create a new empty project in QGIS, name it `labs_7_8` and set its CRS to OSGB (EPSG:27700). Save it.
 
 (@) As starter, bring in the DEM tiles into the project. If you downloaded the NU region correctly, you should have 15 separate DEM tiles (files ending in `.asc`). They should look like this:
 
@@ -85,7 +85,7 @@ Thinking of the GIS tools you already learned, could you think of an explanation
 :::
 
 ::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
-On week 2 you learned about `Clip` and `Select by Location`. It seems that internally, when you draw a selection, Digimap is making a `Select by Location` operation, selecting all polygons that overlap with the NU square. For large polygons that cross OS grid tiles, you will end bringing the whole polygon. So now let us do a proper `Clip`. 
+On week 2 you learned about `Clip` and `Select by Location`. It seems that internally, when you draw a selection, Digimap is making a `Select by Location` operation, selecting all polygons that overlap with the NU square. For large polygons that cross OS grid tiles, you end bringing the whole polygon. So now let us do a proper `Clip`. 
 :::
 
 (@) Using your skills from previous labs, create a `Layer Extent` polygon based on the DEM mosaic, and then use this polygon to `Clip` all layers. As you clip and save the clipped versions, remove the original ones to avoid confusion and keep the project tidy. Once they are all clipped and neat, save your project. **From now on, when I refer to any of these layers in the instructions, I will be meaning the clipped versions**. You may even want to delete the originals from your folder to prevent confusion. 
@@ -116,7 +116,7 @@ Cartography is an equal mix of art and technique, and always has a strong amount
 
 ![](images/lab_7/lab7_fig6_coldem.jpg)
 
-(@) We can add a bit more pop to the DEM by reproducing the `3D` effect using transparency and `hillshade` symbology that we learned on @sec-labras1. If you can't quite remember how to do it, refer back to Guided Exercise 4 for that lab. For my map, I set the transparency of the coloured DEM layer to `60%`, and then went back to the `Symbology` of the hillshade layer and tweaked a bit the `brightness` (`20`) and `contrast` (`-10`) options under the `Layer Rendering` section. We want the effect to be subtle, and the whole DEM to have a `light` appearance since it will be a background:
+(@) We can add a bit more pop to the DEM by reproducing the `3D` effect using transparency and `hillshade` symbology that we learned on @sec-labras1. If you can't quite remember how to do it, refer back to Guided Exercise 4 for that lab. For my map, I set the transparency of the coloured DEM layer to `60%`, and then went back to the `Symbology` of the hillshade layer and tweaked a bit the `brightness` (`20`) and `contrast` (`-10`) options under the `Layer Rendering` section. We want the effect to be subtle, and the whole DEM to have a 'light' appearance since it will be a background:
 
 ![](images/lab_7/lab7_fig7_hillshade.jpg)
 
@@ -127,9 +127,9 @@ Cartography is an equal mix of art and technique, and always has a strong amount
 Now that we have a nice looking base layer, let us start adding our vector elements. At this time, it is a good idea to *stop and think* again about what is the main purpose of our map - what should the main subject be, what additional information is more important, and so on. In the end, we want to have a 
 *visual hierarchy* that naturally guides the viewer attention to the most important aspects of the map. 
 
-(@) Turn back on the 'railway tracks' and 'roads' layers. Since one of our main objectives is to get people to reach Bamburgh Castle, these should be very evident in our map.
+(@) Turn on the 'railway tracks' and 'roads' layers. Since one of our main objectives is to get people to reach Bamburgh Castle, these should be very evident in our map.
 
-(@) Let us start with the railway track, as it is simpler. Open its `Properties > Symbology` and then change the *symbol presets list* from `Favorites` to `All Symbols` (see figure below) and then scroll through the presets list until you find `Topo Railway`. Click on it to select it, and then `Apply`. 
+(@) Let us start with the railway track, as it is simpler. Open its `Properties > Symbology` and then change the *symbol presets list* from `Favorites` to `All Symbols` (see figure below). Then scroll through the presets list until you find `Topo Railway`. Click on it to select it, and then `Apply`. 
 
 ![](images/lab_7/lab7_fig8_symb.jpg)
 
@@ -138,9 +138,9 @@ Note how QGIS allows you to create very complex symbols. If you look at the top 
 
 ![](images/lab_7/lab7_fig9_track.jpg)
 
-The general symbol category is `Line`, and then the different elements of the symbology are added to it using the green `+` symbol at the left. The `Maker Line` sub- rail crosslines!). Then the `Simple Marker` is another sub-symbol defining what the actual `Marker` is, which will be repeated along the line (try to make it a bit thicker!). Finally, the `Simple Line` sub-symbol is the one we are used to, that sets the appearance of the main track line. 
+The general symbol category is `Line`, and then the different elements of the symbology are added to it using the green `+` symbol at the left. The `Maker Line` sub-symbol defines the type of additional symbol to overlay on the line, and how (try to change the distance between rail crosslines!). Then the `Simple Marker` sub-symbol defines what the symbol for the actual `Marker` is, which will be repeated along the line (try to make it a bit thicker!). Finally, the `Simple Line` sub-symbol is the one we are used to, that sets the appearance of the main track line. 
 
-You can create very complex symbols using these advanced features - but don't feel like you need to for the purposes of this module! You can go very far by just picking on of the presets and then tweaking it to your taste. 
+You can create very complex symbols using these advanced features - but don't feel like you need to for the purposes of this module! You can go far by just picking one of the presets and then tweaking it to your taste. 
 :::
 
 (@) Play with the width of the track line and the colour to make it well separated from the background terrain, but not too strong/dominating. 
@@ -159,13 +159,13 @@ It will solve most problems but not all. If you zoom in very close to where the 
 
 (@) Close the attribute table and open the `Properties > Symbology` for the roads layer. Change it from `Single Symbol` to `Categorized`, then pick `CLASSIFICA` as the `Value`, and `Classify` to assign random colours to each road type.
 
-(@) We want however, to have some consistency and visual hierarchy for the roads, instead of simply random colours. You can edit the symbols for each road class by double clicking on each individual symbol in the list of classified values. 
+We want however, to have some consistency and visual hierarchy for the roads, instead of simply random colours. But you can edit the symbols for each road class by double clicking on each individual symbol in the list of classified values. 
 
-(@) Take a look at the [UK roads classification](https://www.gov.uk/government/publications/guidance-on-road-classification-and-the-primary-route-network/guidance-on-road-classification-and-the-primary-route-network) and then style them with proper visual hierarchy. Colour A and B roads red, but use different widths, and then the remaining roads dark grey, but again with hierarchy indicated by line width. Feel free to use the same symbol for classes you think are too similar (I used the same symbol for the two types of primary road, and I removed the symbols for pedestrianized and private roads). This is what my map looks like by now:
+(@) Take a look at the [UK roads classification](https://www.gov.uk/government/publications/guidance-on-road-classification-and-the-primary-route-network/guidance-on-road-classification-and-the-primary-route-network) and then style them with proper visual hierarchy. Colour A and B roads red, but use different widths for each, and then style the remaining roads dark grey, but again with hierarchy indicated by line width. Feel free to use the same symbol for classes you think are too similar (I used the same symbol for the two types of ` primary road`, and I removed the symbols for pedestrianized and private roads). This is what my map looks like by now:
 
 ![](images/lab_7/lab7_fig10_demnroads.jpg)
 
-Now that we have our main roads, let us add some more context to the map.
+Now that we have our main roads, let us add some more context to the map. But first save yoiur project!
 
 ## Guided Exercise 5 - Adding contextual elements
 
@@ -179,15 +179,15 @@ We can start by styling the water surfaces. We want colours that help interpreta
 
 ![](images/lab_7/lab7_fig11_copycolour.jpg)
 
-(@) Now close the window and open the `Symbology` for the surface water *areas*. Then within `Simple Fill` open the colour picking window `Fill color` and paste the `HTML notation` you copied before. Then repeat it for the `Stroke Color` so they will all have the same colour. 
+(@) Now close the window and open the `Symbology` for the surface water *areas*. Then within `Simple Fill` open the colour picking window for the `Fill color` option and paste the `HTML notation` you copied before. Then repeat it for the `Stroke Color` so they will all have the same colour. 
 
-(@) Now style the woodlands using a muted green colour, and the buildings using a brownish grey. Make them both borderless, as you did with the surface water areas.
+(@) Now style the woodlands using a muted green colour, and the buildings using a brownish grey. Make them both borderless, as you did with the surface water areas. Save your project. 
 
 ## Guided Exercise 6: Deciding on the framing and scale, and adding some finishing touches
 
 We are getting close to a complete map, and it seems now it is a good time to decide on our framing and scale. We want to find a good balance between showing enough of the surroundings without overwhelming the map user. We also need to take into consideration what will be the final format of our map. Let us assume we will deliver it in A4 size, landscape orientation.
 
-(@) Go to `Project > New Print Layout`, and create a new layout called `bamburgh_map`. Then use the `Add Map` (![](https://docs.qgis.org/3.34/en/_images/mActionAddMap.png)) tool to add your map to the page. Leave some room at the right side for the legend and annotations:
+(@) Go to `Project > New Print Layout`, and create a new layout called `bamburgh_map`. Then in the new Layout Editor windiow use the `Add Map` (![](https://docs.qgis.org/3.34/en/_images/mActionAddMap.png)) tool to add your map to the page. Leave some room at the right side for the legend and annotations:
 
 ![](images/lab_7/lab7_fig12_frame.jpg)
 
@@ -225,4 +225,4 @@ Before we finish our session for today, one last thing to consider is the orderi
 
 (@) We will continue working on our map on the next lab, so make sure you *1) Save your project* and *2) Copy the entire Lab 7 folder to your OneDrive or an external drive (if you are working locally)*. You may want to *zip* the entire folder to make it smaller and more portable/manageable. 
 
-Good job so far! We will pick up exactly where we left in the next session. If you finished this lab early, feel free to get started with Lab 8!    
+Good job so far! We will pick up exactly where we left in the next session. If you finished this lab early and you are having a good time, feel free to get started with Lab 8!    

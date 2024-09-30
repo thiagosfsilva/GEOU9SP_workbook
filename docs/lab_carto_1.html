@@ -339,7 +339,7 @@ window.Quarto = {
 </section>
 <section id="guided-exercise-2---starting-the-project-and-organising-data" class="level2" data-number="7.3">
 <h2 data-number="7.3" class="anchored" data-anchor-id="guided-exercise-2---starting-the-project-and-organising-data"><span class="header-section-number">7.3</span> Guided exercise 2 - Starting the project and organising data</h2>
-<p>Before we start mapping, we need to organise our downloads and set up a project to start bringing in the data.</p>
+<p>Before we start mapping, we need to organise our downloads and set up a project to start bringing in the data. We will use the same data for this lab and the next.</p>
 <ol start="5" class="example" type="1">
 <li>Create a home folder for this project named <code>labs_7_8</code>), and then extract the zipped files and organise the data as you are used to.</li>
 </ol>
@@ -374,7 +374,7 @@ Click for answer
 </div>
 </div>
 <ol start="6" class="example" type="1">
-<li><p>Create a new empty project in QGIS, and set its CRS to OSGB (EPSG:27700). Save it.</p></li>
+<li><p>Create a new empty project in QGIS, name it <code>labs_7_8</code> and set its CRS to OSGB (EPSG:27700). Save it.</p></li>
 <li><p>As starter, bring in the DEM tiles into the project. If you downloaded the NU region correctly, you should have 15 separate DEM tiles (files ending in <code>.asc</code>). They should look like this:</p></li>
 </ol>
 <p><img src="images/lab_7/lab7_fig4_demsl.jpg" class="img-fluid"></p>
@@ -422,7 +422,7 @@ Click for answer
 </div>
 <div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>On week 2 you learned about <code>Clip</code> and <code>Select by Location</code>. It seems that internally, when you draw a selection, Digimap is making a <code>Select by Location</code> operation, selecting all polygons that overlap with the NU square. For large polygons that cross OS grid tiles, you will end bringing the whole polygon. So now let us do a proper <code>Clip</code>.</p>
+<p>On week 2 you learned about <code>Clip</code> and <code>Select by Location</code>. It seems that internally, when you draw a selection, Digimap is making a <code>Select by Location</code> operation, selecting all polygons that overlap with the NU square. For large polygons that cross OS grid tiles, you end bringing the whole polygon. So now let us do a proper <code>Clip</code>.</p>
 </div>
 </div>
 </div>
@@ -471,7 +471,7 @@ Tip
 </ol>
 <p><img src="images/lab_7/lab7_fig6_coldem.jpg" class="img-fluid"></p>
 <ol start="16" class="example" type="1">
-<li>We can add a bit more pop to the DEM by reproducing the <code>3D</code> effect using transparency and <code>hillshade</code> symbology that we learned on <a href="lab_rasters_1.html" class="quarto-xref"><span>Chapter 5</span></a>. If you can’t quite remember how to do it, refer back to Guided Exercise 4 for that lab. For my map, I set the transparency of the coloured DEM layer to <code>60%</code>, and then went back to the <code>Symbology</code> of the hillshade layer and tweaked a bit the <code>brightness</code> (<code>20</code>) and <code>contrast</code> (<code>-10</code>) options under the <code>Layer Rendering</code> section. We want the effect to be subtle, and the whole DEM to have a <code>light</code> appearance since it will be a background:</li>
+<li>We can add a bit more pop to the DEM by reproducing the <code>3D</code> effect using transparency and <code>hillshade</code> symbology that we learned on <a href="lab_rasters_1.html" class="quarto-xref"><span>Chapter 5</span></a>. If you can’t quite remember how to do it, refer back to Guided Exercise 4 for that lab. For my map, I set the transparency of the coloured DEM layer to <code>60%</code>, and then went back to the <code>Symbology</code> of the hillshade layer and tweaked a bit the <code>brightness</code> (<code>20</code>) and <code>contrast</code> (<code>-10</code>) options under the <code>Layer Rendering</code> section. We want the effect to be subtle, and the whole DEM to have a ‘light’ appearance since it will be a background:</li>
 </ol>
 <p><img src="images/lab_7/lab7_fig7_hillshade.jpg" class="img-fluid"></p>
 <ol start="17" class="example" type="1">
@@ -482,8 +482,8 @@ Tip
 <h2 data-number="7.5" class="anchored" data-anchor-id="guided-exercise-4-adding-and-styling-the-transportation-layers"><span class="header-section-number">7.5</span> Guided Exercise 4: Adding and styling the transportation layers</h2>
 <p>Now that we have a nice looking base layer, let us start adding our vector elements. At this time, it is a good idea to <em>stop and think</em> again about what is the main purpose of our map - what should the main subject be, what additional information is more important, and so on. In the end, we want to have a <em>visual hierarchy</em> that naturally guides the viewer attention to the most important aspects of the map.</p>
 <ol start="18" class="example" type="1">
-<li><p>Turn back on the ‘railway tracks’ and ‘roads’ layers. Since one of our main objectives is to get people to reach Bamburgh Castle, these should be very evident in our map.</p></li>
-<li><p>Let us start with the railway track, as it is simpler. Open its <code>Properties &gt; Symbology</code> and then change the <em>symbol presets list</em> from <code>Favorites</code> to <code>All Symbols</code> (see figure below) and then scroll through the presets list until you find <code>Topo Railway</code>. Click on it to select it, and then <code>Apply</code>.</p></li>
+<li><p>Turn on the ‘railway tracks’ and ‘roads’ layers. Since one of our main objectives is to get people to reach Bamburgh Castle, these should be very evident in our map.</p></li>
+<li><p>Let us start with the railway track, as it is simpler. Open its <code>Properties &gt; Symbology</code> and then change the <em>symbol presets list</em> from <code>Favorites</code> to <code>All Symbols</code> (see figure below). Then scroll through the presets list until you find <code>Topo Railway</code>. Click on it to select it, and then <code>Apply</code>.</p></li>
 </ol>
 <p><img src="images/lab_7/lab7_fig8_symb.jpg" class="img-fluid"></p>
 <div class="callout callout-style-default callout-tip callout-titled">
@@ -498,8 +498,8 @@ Tip
 <div class="callout-body-container callout-body">
 <p>Note how QGIS allows you to create very complex symbols. If you look at the top of the <code>Symbology</code> window, you will notice this railway track symbol is actually composed of several ‘sub-symbols’:</p>
 <p><img src="images/lab_7/lab7_fig9_track.jpg" class="img-fluid"></p>
-<p>The general symbol category is <code>Line</code>, and then the different elements of the symbology are added to it using the green <code>+</code> symbol at the left. The <code>Maker Line</code> sub- rail crosslines!). Then the <code>Simple Marker</code> is another sub-symbol defining what the actual <code>Marker</code> is, which will be repeated along the line (try to make it a bit thicker!). Finally, the <code>Simple Line</code> sub-symbol is the one we are used to, that sets the appearance of the main track line.</p>
-<p>You can create very complex symbols using these advanced features - but don’t feel like you need to for the purposes of this module! You can go very far by just picking on of the presets and then tweaking it to your taste.</p>
+<p>The general symbol category is <code>Line</code>, and then the different elements of the symbology are added to it using the green <code>+</code> symbol at the left. The <code>Maker Line</code> sub-symbol defines the type of additional symbol to overlay on the line, and how (try to change the distance between rail crosslines!). Then the <code>Simple Marker</code> sub-symbol defines what the symbol for the actual <code>Marker</code> is, which will be repeated along the line (try to make it a bit thicker!). Finally, the <code>Simple Line</code> sub-symbol is the one we are used to, that sets the appearance of the main track line.</p>
+<p>You can create very complex symbols using these advanced features - but don’t feel like you need to for the purposes of this module! You can go far by just picking one of the presets and then tweaking it to your taste.</p>
 </div>
 </div>
 <ol start="20" class="example" type="1">
@@ -538,47 +538,49 @@ Click for answer
 <ol start="21" class="example" type="1">
 <li><p>Now we can focus on the roads. Open the <code>Attribute Table</code> of the roads layer, and notice there is an attribute named <code>CLASSIFICA</code> indicating the type of road (local street, minor road, etc.). Use the <code>Select by Expression</code> tool to investigate what are the unique possible values of this attribute. It would be nice if we could style the roads based on their type!</p></li>
 <li><p>Close the attribute table and open the <code>Properties &gt; Symbology</code> for the roads layer. Change it from <code>Single Symbol</code> to <code>Categorized</code>, then pick <code>CLASSIFICA</code> as the <code>Value</code>, and <code>Classify</code> to assign random colours to each road type.</p></li>
-<li><p>We want however, to have some consistency and visual hierarchy for the roads, instead of simply random colours. You can edit the symbols for each road class by double clicking on each individual symbol in the list of classified values.</p></li>
-<li><p>Take a look at the <a href="https://www.gov.uk/government/publications/guidance-on-road-classification-and-the-primary-route-network/guidance-on-road-classification-and-the-primary-route-network">UK roads classification</a> and then style them with proper visual hierarchy. Colour A and B roads red, but use different widths, and then the remaining roads dark grey, but again with hierarchy indicated by line width. Feel free to use the same symbol for classes you think are too similar (I used the same symbol for the two types of primary road, and I removed the symbols for pedestrianized and private roads). This is what my map looks like by now:</p></li>
+</ol>
+<p>We want however, to have some consistency and visual hierarchy for the roads, instead of simply random colours. But you can edit the symbols for each road class by double clicking on each individual symbol in the list of classified values.</p>
+<ol start="23" class="example" type="1">
+<li>Take a look at the <a href="https://www.gov.uk/government/publications/guidance-on-road-classification-and-the-primary-route-network/guidance-on-road-classification-and-the-primary-route-network">UK roads classification</a> and then style them with proper visual hierarchy. Colour A and B roads red, but use different widths for each, and then style the remaining roads dark grey, but again with hierarchy indicated by line width. Feel free to use the same symbol for classes you think are too similar (I used the same symbol for the two types of <code>primary road</code>, and I removed the symbols for pedestrianized and private roads). This is what my map looks like by now:</li>
 </ol>
 <p><img src="images/lab_7/lab7_fig10_demnroads.jpg" class="img-fluid"></p>
-<p>Now that we have our main roads, let us add some more context to the map.</p>
+<p>Now that we have our main roads, let us add some more context to the map. But first save yoiur project!</p>
 </section>
 <section id="guided-exercise-5---adding-contextual-elements" class="level2" data-number="7.6">
 <h2 data-number="7.6" class="anchored" data-anchor-id="guided-exercise-5---adding-contextual-elements"><span class="header-section-number">7.6</span> Guided Exercise 5 - Adding contextual elements</h2>
 <p>Even with the roads and railways clearly visible in the map, it would still be difficult to navigate using this map, as there isn’t much context available. Let us add some contextual elements to <em>support</em> the main themes -meaning they should not stand out more than necessary.</p>
-<ol start="25" class="example" type="1">
+<ol start="24" class="example" type="1">
 <li>Reactivate the woodland, surface water (area and line) and buildings layers. Notice how cluttered the map looks now. This is why good visual hierarchy is so important.</li>
 </ol>
 <p>We can start by styling the water surfaces. We want colours that help interpretation, so we should make them a light coloured blue. And since many of these features are small and/or narrow features, we can make them look less evident and cluttered by setting the <code>stroke</code> symbol to be the same colour as the <code>fill</code> symbol (i.e.&nbsp;so that they look <em>borderless</em>).</p>
-<ol start="26" class="example" type="1">
+<ol start="25" class="example" type="1">
 <li>Open the <code>Properties &gt; Symbology</code> of the surface water <em>lines</em>, and set the <code>Simple Line</code> <code>Color</code> to a light blue of your choosing. Leave it as a thin line. Before you leave the <code>Symbology</code> window for that layer, open the colour picking window again and copy the <code>HTML notation</code> for the colour you selected:</li>
 </ol>
 <p><img src="images/lab_7/lab7_fig11_copycolour.jpg" class="img-fluid"></p>
-<ol start="27" class="example" type="1">
-<li><p>Now close the window and open the <code>Symbology</code> for the surface water <em>areas</em>. Then within <code>Simple Fill</code> open the colour picking window <code>Fill color</code> and paste the <code>HTML notation</code> you copied before. Then repeat it for the <code>Stroke Color</code> so they will all have the same colour.</p></li>
-<li><p>Now style the woodlands using a muted green colour, and the buildings using a brownish grey. Make them both borderless, as you did with the surface water areas.</p></li>
+<ol start="26" class="example" type="1">
+<li><p>Now close the window and open the <code>Symbology</code> for the surface water <em>areas</em>. Then within <code>Simple Fill</code> open the colour picking window for the <code>Fill color</code> option and paste the <code>HTML notation</code> you copied before. Then repeat it for the <code>Stroke Color</code> so they will all have the same colour.</p></li>
+<li><p>Now style the woodlands using a muted green colour, and the buildings using a brownish grey. Make them both borderless, as you did with the surface water areas. Save your project.</p></li>
 </ol>
 </section>
 <section id="guided-exercise-6-deciding-on-the-framing-and-scale-and-adding-some-finishing-touches" class="level2" data-number="7.7">
 <h2 data-number="7.7" class="anchored" data-anchor-id="guided-exercise-6-deciding-on-the-framing-and-scale-and-adding-some-finishing-touches"><span class="header-section-number">7.7</span> Guided Exercise 6: Deciding on the framing and scale, and adding some finishing touches</h2>
 <p>We are getting close to a complete map, and it seems now it is a good time to decide on our framing and scale. We want to find a good balance between showing enough of the surroundings without overwhelming the map user. We also need to take into consideration what will be the final format of our map. Let us assume we will deliver it in A4 size, landscape orientation.</p>
-<ol start="29" class="example" type="1">
-<li>Go to <code>Project &gt; New Print Layout</code>, and create a new layout called <code>bamburgh_map</code>. Then use the <code>Add Map</code> (<img src="https://docs.qgis.org/3.34/en/_images/mActionAddMap.png" class="img-fluid">) tool to add your map to the page. Leave some room at the right side for the legend and annotations:</li>
+<ol start="28" class="example" type="1">
+<li>Go to <code>Project &gt; New Print Layout</code>, and create a new layout called <code>bamburgh_map</code>. Then in the new Layout Editor windiow use the <code>Add Map</code> (<img src="https://docs.qgis.org/3.34/en/_images/mActionAddMap.png" class="img-fluid">) tool to add your map to the page. Leave some room at the right side for the legend and annotations:</li>
 </ol>
 <p><img src="images/lab_7/lab7_fig12_frame.jpg" class="img-fluid"></p>
-<ol start="30" class="example" type="1">
+<ol start="29" class="example" type="1">
 <li>Now switch to the <code>Move item content</code> (<img src="https://docs.qgis.org/3.34/en/_images/mActionMoveItemContent.png" class="img-fluid">) tool, and zoom in and drag the map around, testing how to best use the space.</li>
 </ol>
 <p>Once you find a framing and scale that you are happy with, it is a good idea to slightly change the scale so it is a nice, round number. In my case, I ended up with a map scale of 1:82011, and so I will round it to 80000. Once I have settled on this scale, I want to then <em>fix</em> it, to prevent accidental zooming later:</p>
-<ol start="31" class="example" type="1">
+<ol start="30" class="example" type="1">
 <li>Click on the menu-looking button to the right of the scale number box, and then on <code>Edit</code> (see figure below). The familiar expression window will appear. Then just type <code>80000</code> (or whatever scale you decided to use) and click <code>OK</code>. The menu-looking button now changed to a yellow <span class="math inline">\(\epsilon\)</span>, to indicate the value is set by an expression.</li>
 </ol>
 <p><img src="images/lab_7/lab7_fig13_setscale.jpg" class="img-fluid"></p>
 <p>This is my final framing and scale:</p>
 <p><img src="images/lab_7/lab7_fig14_finalframe.jpg" class="img-fluid"></p>
 <p>Before we finish for today, let us tweak the appearance of the shoreline a bit. As it is now, it looks very undefined and may be confusing to your map users.</p>
-<ol start="32" class="example" type="1">
+<ol start="31" class="example" type="1">
 <li><p>Back on the main QGIS window, activate the <code>NU_TidalBoundary</code> and <code>NU_Foreshore</code> layers. Copy and paste the style of the Surface Water Line layer to the Tidal Boundary, and then open its <code>Properties &gt; Symbology</code>, and make it a bit darker so it stands out from the background. Before you close the window, copy the <code>HTML notation</code> of the colour you picked.</p></li>
 <li><p>Now enable the Foreshore layer, and open its <code>Properties &gt; Symbology</code>. Within the <code>Simpe Fill</code> sub-symbol, change both the <code>Fill color</code> and <code>Stroke color</code> to the colour you copied from the step above, and change the <code>Fill style</code> from <code>Solid</code> to <code>Dense 6</code>. Click <code>OK</code>. You should obtain an effect similar to the image below.</p></li>
 </ol>
@@ -614,10 +616,10 @@ Click for answer
 </div>
 <p>Before we finish our session for today, one last thing to consider is the ordering of the layers you have. To facilitate map reading, they should overlap in a logical order - for example, roads should cross over rivers, and railways should cross over both. Rearrange your layers so they are in the order below:</p>
 <p><img src="images/lab_7/lab7_fig16_layer_order.jpg" class="img-fluid"></p>
-<ol start="34" class="example" type="1">
+<ol start="33" class="example" type="1">
 <li>We will continue working on our map on the next lab, so make sure you <em>1) Save your project</em> and <em>2) Copy the entire Lab 7 folder to your OneDrive or an external drive (if you are working locally)</em>. You may want to <em>zip</em> the entire folder to make it smaller and more portable/manageable.</li>
 </ol>
-<p>Good job so far! We will pick up exactly where we left in the next session. If you finished this lab early, feel free to get started with Lab 8!</p>
+<p>Good job so far! We will pick up exactly where we left in the next session. If you finished this lab early and you are having a good time, feel free to get started with Lab 8!</p>
 
 
 </section>
