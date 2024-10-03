@@ -887,7 +887,7 @@
     "href": "lab_zonal.html",
     "title": "12  Lab 12 - Zonal Statistics and Overlap analysis",
     "section": "",
-    "text": "12.1 Guided Exercise 1 - Data preparation\nIn this exercise, we will look at air pollution data from the city of Amsterdam, in the Netherlands. Importantly for this exercise, Amsterdam is broken up into 8 districts or boroughs (stadsdelen), which are further divided into neighbourhoods (buurten).\nMore specifically, we will be looking at NO\\(_2\\) (Nitrogen Dioxide) pollution. NO\\(_2\\) is mainly produced by combustion engines, and impacts respiratory health.\nThe data for this exercise has been pre-packaged and can be [downloaded here], and it consists of the following datasets:\nIf you are curious, these files were obtained from the City of Amsterdam geodata portal.",
+    "text": "12.1 Guided Exercise 1 - Data preparation\nIn this exercise, we will look at air pollution data from the city of Amsterdam, in the Netherlands. Importantly for this exercise, Amsterdam is broken up into 8 districts or boroughs (stadsdelen), which are further divided into neighbourhoods (buurten).\nMore specifically, we will be looking at NO\\(_2\\) (Nitrogen Dioxide) pollution. NO\\(_2\\) is mainly produced by combustion engines, and impacts respiratory health.\nThe data for this exercise has been pre-packaged and can be downloaded here, and it consists of the following datasets:\nIf you are curious, these files were obtained from the City of Amsterdam geodata portal.",
     "crumbs": [
       "Week 6 - Spatial analysis II",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Lab 12 - Zonal Statistics and Overlap analysis</span>"

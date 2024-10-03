@@ -10,7 +10,7 @@ In this exercise, we will look at air pollution data from the city of [Amsterdam
 
 More specifically, we will be looking at [NO$_2$ (Nitrogen Dioxide) pollution](https://www.gov.uk/government/statistics/air-quality-statistics/ntrogen-dioxide). NO$_2$ is mainly produced by combustion engines, and impacts respiratory health. 
 
-The data for this exercise has been pre-packaged and can be [downloaded here], and it consists of the following datasets:
+The data for this exercise has been pre-packaged and can be [downloaded here](https://stir-my.sharepoint.com/:u:/g/personal/ala2_stir_ac_uk/ESlllBAgUyBJqNE2dGCSKkoBPKZlxKg-mTw8hjSkG0fpVA?e=Qg4Psg), and it consists of the following datasets:
 
 - A geopackage file containing four layers:
     - The location of several NO2 measurement sites, as point vectors.
