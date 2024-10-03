@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>GEOU9SP GIS Workbook - 10&nbsp; Lab 10: Geoprocessing tools</title>
+<title>GEOU9SP GIS Workbook - 11&nbsp; Lab 11 - Data Joins</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./sec_w6_spatial_analysis_II.html" rel="next">
-<link href="./lab_catchup1.html" rel="prev">
+<link href="./lab_zonal.html" rel="next">
+<link href="./sec_w6_spatial_analysis_II.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -69,35 +69,6 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
@@ -110,7 +81,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./sec_w5_spatial_analysis_I.html">Week 5 - Spatial analysis I</a></li><li class="breadcrumb-item"><a href="./lab_geoprocessing.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Lab 10: Geoprocessing tools</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./sec_w6_spatial_analysis_II.html">Week 6 - Spatial analysis II</a></li><li class="breadcrumb-item"><a href="./lab_joins.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Lab 11 - Data Joins</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -250,7 +221,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lab_geoprocessing.html" class="sidebar-item-text sidebar-link active">
+  <a href="./lab_geoprocessing.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Lab 10: Geoprocessing tools</span></span></a>
   </div>
 </li>
@@ -267,7 +238,7 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lab_joins.html" class="sidebar-item-text sidebar-link">
+  <a href="./lab_joins.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Lab 11 - Data Joins</span></span></a>
   </div>
 </li>
@@ -297,21 +268,20 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#guided-exercise-assessing-children-access-to-schools" id="toc-guided-exercise-assessing-children-access-to-schools" class="nav-link active" data-scroll-target="#guided-exercise-assessing-children-access-to-schools"><span class="header-section-number">10.1</span> Guided Exercise: assessing children access to schools</a>
-  <ul class="collapse">
-  <li><a href="#obtaining-the-data" id="toc-obtaining-the-data" class="nav-link" data-scroll-target="#obtaining-the-data"><span class="header-section-number">10.1.1</span> Obtaining the data</a></li>
-  <li><a href="#preparing-the-data" id="toc-preparing-the-data" class="nav-link" data-scroll-target="#preparing-the-data"><span class="header-section-number">10.1.2</span> Preparing the data</a></li>
-  <li><a href="#answering-the-question" id="toc-answering-the-question" class="nav-link" data-scroll-target="#answering-the-question"><span class="header-section-number">10.1.3</span> Answering the question</a></li>
-  </ul></li>
+  <li><a href="#guided-exercise-1---working-with-wcs-and-wms-layers." id="toc-guided-exercise-1---working-with-wcs-and-wms-layers." class="nav-link active" data-scroll-target="#guided-exercise-1---working-with-wcs-and-wms-layers."><span class="header-section-number">11.1</span> Guided Exercise 1 - Working with WCS and WMS layers.</a></li>
+  <li><a href="#guided-exercise-2---importing-tabular-data" id="toc-guided-exercise-2---importing-tabular-data" class="nav-link" data-scroll-target="#guided-exercise-2---importing-tabular-data"><span class="header-section-number">11.2</span> Guided Exercise 2 - Importing tabular data</a></li>
+  <li><a href="#guided-exercise-3---table-joins" id="toc-guided-exercise-3---table-joins" class="nav-link" data-scroll-target="#guided-exercise-3---table-joins"><span class="header-section-number">11.3</span> Guided Exercise 3 - Table Joins</a></li>
+  <li><a href="#guided-exercise-4---spatial-joins" id="toc-guided-exercise-4---spatial-joins" class="nav-link" data-scroll-target="#guided-exercise-4---spatial-joins"><span class="header-section-number">11.4</span> Guided Exercise 4 - Spatial Joins</a></li>
+  <li><a href="#independent-exercise-5---counting-points-in-polygons" id="toc-independent-exercise-5---counting-points-in-polygons" class="nav-link" data-scroll-target="#independent-exercise-5---counting-points-in-polygons"><span class="header-section-number">11.5</span> Independent Exercise 5 - Counting points in polygons</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./sec_w5_spatial_analysis_I.html">Week 5 - Spatial analysis I</a></li><li class="breadcrumb-item"><a href="./lab_geoprocessing.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Lab 10: Geoprocessing tools</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./sec_w6_spatial_analysis_II.html">Week 6 - Spatial analysis II</a></li><li class="breadcrumb-item"><a href="./lab_joins.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Lab 11 - Data Joins</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-spatan1" class="quarto-section-identifier"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Lab 10: Geoprocessing tools</span></span></h1>
+<h1 class="title"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Lab 11 - Data Joins</span></h1>
 </div>
 
 
@@ -328,43 +298,72 @@ window.Quarto = {
 </header>
 
 
-<p>The ‘geoprocessing’ term is sometimes used as a catch all for all GIS operations, but within QGIS, it pertains to a specific set of tools. With the exception of the <code>Buffer</code> tool, the geoprocessing tools are aimed at creating new geometries based on the overlay of two separate vector layers.</p>
-<p>You already learned and used one geoprocessing tool: the <code>Clip</code> tool. If finds the areas that are common between two layers, and ‘cookie cuts’ one of them based on the shape of the other.</p>
-<p>Other geoprocessing tools will work similarly. For example, imagine that you have a polygon layer with all the woodlands in Scotland, and another with all the protected areas in Scotland. If you wanted to know all the woodland areas that are protected, you could <code>Clip</code> the woodland layer by the protected area layer. But what if you wanted the opposite - all the woodlands that are <em>not</em> protected. You will need some sort of <code>reverse clip</code> tool - turns out that is the <code>Difference</code> geoprocessing tool.</p>
-<p>The diagram below summarises the main geoprocessing tools:</p>
-<p><img src="images/lab_11/lab11_fig1_Geoprocessing.png" class="img-fluid"></p>
-<section id="guided-exercise-assessing-children-access-to-schools" class="level2" data-number="10.1">
-<h2 data-number="10.1" class="anchored" data-anchor-id="guided-exercise-assessing-children-access-to-schools"><span class="header-section-number">10.1</span> Guided Exercise: assessing children access to schools</h2>
-<p>You are a GIS analyst at the Stirling council, and you have been asked to perform an analysis regarding children access to schools. Your manager has indicated which data sources you should use, and they want you to answer <strong>how many children within the relevant age range live within less than 1km, between 1km and 2km, and further than 2km of <em>any</em> primary (4 to 10 years old) and secondary (11 to 17 years old) school. You have been instructed to use the census data at the most detailed level (Output Area, OA), and to limit your analysis to the OAs and schools that are within Stirling Council Area limits</strong>. You should report the results as a table.</p>
-<section id="obtaining-the-data" class="level3" data-number="10.1.1">
-<h3 data-number="10.1.1" class="anchored" data-anchor-id="obtaining-the-data"><span class="header-section-number">10.1.1</span> Obtaining the data</h3>
+<p>In this lab we will learn about <em>data joins</em> - operations that link data tables based on specific attributes, or based on locations. We will also learn how to read tabular data that has coordinates as columns as an actual spatial dataset, and will learn about Web Feature Service (WCS) layers - a standardized way to <em>stream</em> geospatial data without having to download it. Don’t skip the <em>Independent Exercise</em> either - you will learn two bonus GIS tools as part of it!</p>
+<section id="guided-exercise-1---working-with-wcs-and-wms-layers." class="level2" data-number="11.1">
+<h2 data-number="11.1" class="anchored" data-anchor-id="guided-exercise-1---working-with-wcs-and-wms-layers."><span class="header-section-number">11.1</span> Guided Exercise 1 - Working with WCS and WMS layers.</h2>
+<p>Both WFS (Web Feature Services), WMS (Web Map Services), and WCS (Web Coverage Services) are standardised web sharing formats defined by the <a href="https://www.ogc.org/">Open Geospatial Consortium (OGC)</a>. WMS and WCS are designed to serve images (i.e.&nbsp;rasters), while WFS is designed to serve features (i.e.&nbsp;vectors). This is similar to the streaming of Google Maps or Open Street Maps you have used with QGIS already, with the difference that layers streamed via WFS function just like layers you download to your computer.</p>
+<p>The advantage of these formats is that you can connect direct with the data provider without having to download the data to disk first - but that is also the disadvantage, since if you lose internet connection you then have no data. More and more data providers are offering these options, so we will explore one example of a WFS layer here, and use it for the rest of the exercises.</p>
 <ol class="example" type="1">
-<li>The first piece of data needed for this exercise is of course the limits of the Stirling Council Area. The official administrative boundary data for the UK is contained within the Ordnance Survey Boundary Line dataset. It can be downloaded from the <a href="https://osdatahub.os.uk/">Ordnance Survey Open Data Hub</a> or from Digimap, but the files cover all of the UK, and thus are a very large download. To save precious lab time, we have already isolated the Stirling Council boundary as a separate file that you can download here. You are welcome!</li>
+<li><p>Create a <code>lab_11</code> folder to organise your data and then start a new QGIS project and save it as <code>lab_11</code>. Set the project CRS to EPSG:27700.</p></li>
+<li><p>The Scotland Spatial Hub <a href="https://data.spatialhub.scot/">https://data.spatialhub.scot/</a> hosts official datasets from the Scotland Government. One of the layers is a vector file with the administrative boundaries for Scotland, the Scotland Council Areas. We can access this dataset via WFS. First, copy the link below:</p></li>
 </ol>
-<p>You can then download the two other datasets needed:</p>
-<ol start="2" class="example" type="1">
-<li><p><strong>Scottish School Roll and Locations</strong>: this dataset is provided by the Scottish Government, and contains information on all Scottish schools. Download the ‘<em>Scottish School Roll and Locations ZIP</em>’ (NOT the one with ‘Table’ on the name) <a href="https://www.data.gov.uk/dataset/9a6f9d86-9698-4a5d-a2c8-89f3b212c52c/scottish-school-roll-and-locations">from here</a>.</p></li>
-<li><p><strong>Census data on population age</strong>: the Digimap platform offers access to the 2011 Census variables in spatial format. To obtain it, go to the <em>Society</em> tab, and then select the ‘Download’ option on the leftmost toolbar (a down arrow going into a ‘box’). That will bring up the familiar Digimap download interface. This time we will use our Stirling Council shapefile to set the search area. For that, click on the <code>Import Polygons</code> button, and then on <code>Choose File</code>. Then choose the <em>zipped</em> Stirling dataset you have downloaded and click on import. Finally, under the <code>2011 Census data layers</code> tab, select the <code>Age</code> dataset. Your window should look like this:</p></li>
+<p>https://geo.spatialhub.scot/geoserver/sh_las/wfs?authkey=b85aa063-d598-4582-8e45-e7e6048718fc</p>
+<ol start="3" class="example" type="1">
+<li>Now on the <code>Browser</code> panel of QGIS, find the <code>WFS / OGC API Features</code> option, then right-click on it and select <code>New Connection</code>:</li>
 </ol>
-<p><img src="images/lab_geoprocessing/Fig1_digimap_stirlinghsire.png" class="img-fluid"></p>
-<div class="callout callout-style-default callout-warning callout-titled">
+<p><img src="images/lab_11/lab_11_fig_1_WFS_new.jpg" class="img-fluid"></p>
+<ol start="4" class="example" type="1">
+<li>You will get a new window. On this new window, paste the link above on the <code>URL</code> box, and then type <code>Scotland Spatial Hub</code> on the <code>Name</code> box. Then click <code>OK</code>.</li>
+</ol>
+<p><img src="images/lab_11/lab_11_fig_2_WFS_config.jpg" class="img-fluid"></p>
+<ol start="5" class="example" type="1">
+<li><p>You should now have a new <code>Scotland Spatial Hub</code> entry under <code>WFS / OGC API Features</code> on the <code>Browser</code> panel. Expand it and double-click on <code>Local Authority Boundaries - Scotland</code>. It will add this layer to your <code>Layers</code> panel.</p></li>
+<li><p>Inspect the attribute table of this layer, and play with its <code>Symbology</code>. You will see it behaves exactly like a downloaded shapefile or geopackage. Just remember you must have an internet connection for it to be available - and some operations will feel slower, since it has to communicate back and forth with the data server.</p></li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Warning
+Tip
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The data for the 2022 census have been officially published by National Records of Scotland, but are not available on Digimap yet. Since we are only practising our GIS knowledge, it is OK to use mismatched data (schools from 2024 vs.&nbsp;age data from 2011). In a real application scenario, it would be very important to make sure the temporal coverage of the datasets matches as well as possible.</p>
+<p>You can always make the WFS layer ‘local’ by right-clicking on it and selecting <code>Export &gt; Save Feature As...</code>, and then saving a copy of it as a shapefile or geopackage.</p>
 </div>
 </div>
-<ol start="4" class="example" type="1">
-<li>Add your data to the basket and finish the order, then download the data as you have done in previous labs.</li>
-<li>Now create a folder structure for your project and extract and organise the contents of the three datasets. Then create a new QGIS project and import the three datasets. The census geopackage will contain layers for different levels of aggregation, remember you want the Output Area polygons. If everything worked correctly, you should have something like this:</li>
+</section>
+<section id="guided-exercise-2---importing-tabular-data" class="level2" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="guided-exercise-2---importing-tabular-data"><span class="header-section-number">11.2</span> Guided Exercise 2 - Importing tabular data</h2>
+<p>Sometimes you may have data that has coordinate information, but it is not in a spatial file format. For example, perhaps someone took soil samples along a beach and manually recorded the sampling locations by writing down the coordinates from a GPS receiver. We can still transform this data into spatial data - as long as we know which was the CRS used to record the coordinates. This is often a big problem, as people that are not GIS savvy (like yourself) do not understand CRSs and just write down the coordinates.</p>
+<p>Another common issue is that people will see coordinates like -5.67543 degrees on the GPS device, and then round it down when writing. But (at the equator) one degree of latitude/longitude is about 111km, so if you round down the above coordinate to -5.67, you are rounding it up to the nearest 1km, and introducing a huge error.</p>
+<p>In this exercise, we will import some data from Police Scotland about traffic incidents, which is provided in tabular format.</p>
+<ol start="7" class="example" type="1">
+<li>To obtain the data, follow <a href="https://www.scotland.police.uk/about-us/how-we-do-it/road-traffic-collision-data/">this link to the Police Scotland website</a>. Then download the <em>Road Traffic Collisions - Circumstances Raw Data</em> dataset, which should be an Excel file (<code>.xsls</code>).</li>
 </ol>
-<p><img src="images/lab_geoprocessing/Fig2_qgis_import.png" class="img-fluid"></p>
+<p>QGIS is not able to understand Excel files, so we need to convert it to a <em>Comma Separated Value (CSV)</em> file. A CSV is just a plain text file where each line is a row on the table, and the data for each column is separated by…you guess it…a comma (actually sometimes it is a semicolon - especially in countries that use the comma instead of the period as a decimal separator).</p>
+<ol start="8" class="example" type="1">
+<li><p>Open the file you downloaded in Excel. The first thing you’ll notice is that they have a VERY professional way of marking the data as official - a floating red text box saying ‘official’. Delete this box, then go to <code>File &gt; Save As</code> and then change the save format from <code>Excel workbook (.xlsx)</code> to <code>CSV UTF-8 (Comma Separated Value) (.csv)</code>. You can save it with the same name on the same folder you downloaded it.</p></li>
+<li><p>Open the <code>Notepad</code> application (on Windows, on Mac use <code>TextEdit</code>) and then open the csv file you created, just to see how a CSV file is organized. Then close it.</p></li>
+<li><p>Back on QGIS (in your <code>lab_11</code> project), open the <code>Data Source Manager</code> by clicking on the <img src="https://docs.qgis.org/3.34/en/_images/mActionDataSourceManager.png" class="img-fluid"> button on the main QGIS toolbar. Then pick the option <code>Delimited Text</code>. On the top box, find the <code>.csv</code> file you have created. Then make sure your options look the same as the figure below, including picking the correct data type for <code>date_of_collision</code> (<code>date</code>) and <code>time_of_collision</code> (<code>time</code>). Once you have everything set, click on <code>Add</code>, then <code>Close</code>.</p></li>
+</ol>
+<p><img src="images/lab_11/lab_11_fig_3_data_source_manager.jpg" class="img-fluid"></p>
+<ol start="11" class="example" type="1">
+<li><p>You should now see a new layer in your project, with the same name as the CSV file, and a number of different data points that roughly form the shape of Scotland. Inspect the attribute table of this new layer, and pay attention to the name of the last attribute column in the dataset.</p></li>
+<li><p>At this point QGIS is still reading the data straight from the CSV, which is not very efficient. Let us save the data by right-clicking on the layer name and going to <code>Export &gt; Save Features As...</code> and saving it as a geopackage. You can then remove the imported csv layer from the project.</p></li>
+</ol>
+</section>
+<section id="guided-exercise-3---table-joins" class="level2" data-number="11.3">
+<h2 data-number="11.3" class="anchored" data-anchor-id="guided-exercise-3---table-joins"><span class="header-section-number">11.3</span> Guided Exercise 3 - Table Joins</h2>
+<p>We now have two separate layers with separate data tables - the Local Authority boundaries and the Traffic Accidents. But they share an attribute in common: <code>local_authority</code> in the former and <code>GIS_Local_Authority</code> in the latter. We can use these attributes to <em>join</em> the two tables.</p>
+<ol start="13" class="example" type="1">
+<li>Right-Click on the Traffic Accidents layer and go to <code>Properties &gt; Joins</code>. Then click on the green plus button at the bottom to create a new join. A new window will appear - pick the Local Authority layer as <code>Join Layer</code>, and <code>local_authority</code> as the <code>Join field</code> (notice these are the attributes of the Local Authority layer). Then pick <code>GIS_Local_Authority</code> as the <code>Target field</code> (notice these are the attributes of the traffic layer). It should look like the figure below. Click <code>OK</code> on this window and notice a new join has been added. Click <code>OK</code> again.</li>
+</ol>
+<p><img src="images/lab_11/lab_11_fig_4_newjoin.jpg" class="img-fluid"></p>
+<ol start="14" class="example" type="1">
+<li>Open the attribute table of the traffic collision layer again. Look at the last attribute columns of the table - there should now be two additional columns, showing the <code>code</code> and <code>hectares</code> fields of the Local Authority layer! Notice that while the Local Authority Layer only has one row per Authority area, the respective values of <code>code</code> and <code>hectare</code> are repeated for all traffic incidents occurring in the same Authority area.</li>
+</ol>
 <div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -375,11 +374,7 @@ Stop and Think
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<ol type="1">
-<li><p>What are the data models and file formats of each dataset?</p></li>
-<li><p>What are the attributes contained in each dataset?</p></li>
-<li><p>What is the CRS of each dataset? Are they all the same?</p></li>
-</ol>
+<p>On the joined attribute table of the Traffic Collisions layer, the local authorities of Dumfries &amp; Galloway, Argyll &amp; Bute, Perth &amp; Kinross and Eilean Siar have all <code>code</code> and <code>hectare</code> fields as <code>NULL</code>, while they seem fine on the Local Authority attribute table. Can you identify what the problem is?</p>
 </div>
 </div>
 <div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
@@ -394,24 +389,22 @@ Click for answer
 </div>
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<ol type="1">
-<li><p>They all use the vector data model. The schools are vector points, the other are vector polygons.</p></li>
-<li><p>The attributes of each dataset can be seen by either inspecting the <em>attribute table</em> of each dataset or by looking at the layer <code>Properties &gt; Fields</code> tab.</p></li>
-<li><p>All three datasets are in OS British Standard Grid (EPSG 27700). You can find this out by either going to the <code>Properties &gt; Information</code> tab or by right-clicking on the layer name then on <code>Layer CRS</code>.<br>
-</p></li>
-</ol>
+<p>The main issue is that computers are dumb :-). Dumfries &amp; Galloway, Argyll &amp; Bute, and Perth &amp; Kinross are spelled with an <code>&amp;</code> on the Traffic Collision layer but with an <code>and</code> on the Local Authority layer, and Eilean Siar (the Outer Hebrides) is spelled as Na h-Eileanan an Ia. As far as the computer is concerned, these things are not the same, and so it does not make the join for these data rows. This is a classic example of the many small data inconsistencies that need to be fixed when working with real-world data.</p>
 </div>
 </div>
 </div>
 </section>
-<section id="preparing-the-data" class="level3" data-number="10.1.2">
-<h3 data-number="10.1.2" class="anchored" data-anchor-id="preparing-the-data"><span class="header-section-number">10.1.2</span> Preparing the data</h3>
-<p>You may have noticed that your Digimap census data download includes many OA polygons that are outside of Stirling Council. This is because of a (sadly) very common problem with spatial data from different sources - the census output areas (OAs) do not perfectly line up with the administrative boundaries of the council. So when the Digimap interface tries to determine which OAs overlap with Stirling, we get more data than we need.</p>
-<ol start="6" class="example" type="1">
-<li>Set the symbology of the Stirling boundaries to a red outline without fill. Then make sure this layer is on top of the census layer. Then zoom in very close to the Stirling boundary. You will see they are offset by about 1.5m:</li>
+<section id="guided-exercise-4---spatial-joins" class="level2" data-number="11.4">
+<h2 data-number="11.4" class="anchored" data-anchor-id="guided-exercise-4---spatial-joins"><span class="header-section-number">11.4</span> Guided Exercise 4 - Spatial Joins</h2>
+<p>You may be tempted to fix the problem above by using the <code>Field Calculator</code> to replace the spelling on one table by the spelling on the other. But there is another way - using a <em>spatial join</em> instead of an attribute join. Just like you can select data rows by attribute or by location, you can also join data tables by either attributes or location. Let’s do it.</p>
+<ol start="15" class="example" type="1">
+<li><p>First, remove the attribute join your created before. Go to the <code>Properties &gt; Joins</code> of the Traffic Collision layer, select the existing join and remove it using the red minus symbol. Then click <code>OK</code>.</p></li>
+<li><p>No go to the menu <code>Vector &gt; Data Management Tools &gt; Join Attributes by Location...</code>. You will see a new window similar to the <code>Select by Location</code> window. Then specify you want to <code>Join features in</code> the Traffic Collision layer that <code>Are Within</code> the Local Authority layer. Because there are many traffic incidents for each Authority area, you want to keep the <code>Join type</code> as <code>one-to-many</code>. For reference, check the figure below. This operation creates a new layer containing the joined table, so pick a folder and save your result as a vector file named <code>traffic_collisions_authority_joined</code>, then click <code>Run</code> then <code>Close</code>.</p></li>
 </ol>
-<p><img src="images/lab_geoprocessing/Fig3_boundary_offset.png" class="img-fluid"></p>
-<p>We thus need to further subset our data to match the actual extent of the Stirling coucil.</p>
+<p><img src="images/lab_11/lab_11_fig_5_spatial_join.jpg" class="img-fluid"></p>
+<ol start="17" class="example" type="1">
+<li>Check the attribute table of the new joined layer you created. There should now be three new columns at the end - the three columns from the Local Area layer: <code>local_authority</code>, <code>code</code> and <code>hectares</code> (when we join by attribute QGIS knows not to repeat the matching field, so it only brings in <code>code</code> and <code>hectare</code> - but when we join by location then it brings all attributes).</li>
+</ol>
 <div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -422,7 +415,7 @@ Stop and Think
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>What are the options of GIS operations that you have to subset the datasets?</p>
+<p>We can see that for most cases our Spatial Join fixed the name mismatch issues, and we see values of <code>GIS_Local_Authorities</code> like <code>Dumfries &amp; Galloway</code> matched to <code>local_authority</code> values like <code>Dumfries and Galloway</code>. But if you sort your joined attributed table by <code>local_authority</code>, you will see there are now 11 rows with <code>NULL</code> values. Can you identify the problem this time?</p>
 </div>
 </div>
 <div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
@@ -437,182 +430,34 @@ Click for answer
 </div>
 <div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>You could use <code>Clip</code> or <code>Intersection</code> if you wanted to change (‘cut’) the geometries of the target layer, or use <code>Select by Location</code> if you wanted to fidn the overlapping polygins without changing geometries.</p>
+<p>These 11 traffic incidents may have been recorded with wrong or uncertain coordinates, and they fall ‘outside’ of the Local Authority polygons. For example, manually select the row for Dundee City (click on the row number) and then click on the <code>Zoom Map to Select Rows</code> button (at the top of the attribute table, looks like a magnifying glass). The check the QGIS map canvas, and you will see this data point is located over water, so it is not joined to any Authority polygon - maybe a boat traffic incident?</p>
 </div>
 </div>
 </div>
-<p>After consulting with your manager, you both decide that clipping or intersecting the data would not be a good option as it would change the geometry of the OAs, and there are official limits. So you decide to use <code>Select by Location</code>:</p>
-<ol start="7" class="example" type="1">
-<li><p>Go to <code>Vector &gt; Research Tools &gt; Select by Location...</code> or click on the <img src="https://docs.qgis.org/3.34/en/_images/mAlgorithmSelectLocation.png" class="img-fluid"> button.</p></li>
-<li><p>Select all polygons from the census layer that <code>are within</code> the Stirling bounds layer. Check the selection results.</p></li>
-<li><p>Change your criteria to include both <code>intersect</code> and <code>are within</code> the Stirling bounds layer. Check the selection results.</p></li>
-</ol>
-<div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Stop and Think
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Why both selection attempts give you wrong results? How would you fix it?</p>
-</div>
-</div>
-<div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Click for answer
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Because of the mismatch between the boundaries of the OAs and the Stirlingshire boundaries. So inner OAs that are the edges of the council area are not considered fully <code>within</code> (they extend a sliver outwards from the actual bounds), and outer OAs also at the edges will be considered to <code>intersect</code> Stirling since they extend a sliver within the bounds.</p>
-<p>Think a bit on how to fix it, then continue below for a solution.</p>
-</div>
-</div>
-</div>
-<p>You could manually deselect the polygons that are not part of Stirling council, but then you have an idea: what if you buffer the Stirlingshire boundaries to expand them a tiny bit, and then try selecting the polygons <code>within</code> the buffer. That way OAs inside the council area that slightly extend outwards will fall within the buffer, while OAs outside the council area that slightly extend inward will still not be fully within it.</p>
-<ol start="10" class="example" type="1">
-<li><p>Go to <code>Vector &gt; Geoprocessing &gt; Buffer</code> and create a 20m buffer around the Stirling layer. You can just leave it as a temporary layer, as we will only use it for our spatial selection.</p></li>
-<li><p>Now repeat the <code>Select by location</code> operation for OA polygons <code>within</code> the buffered area. Bingo!</p></li>
-<li><p>Save the selection as a new layer by right clicking on the census layer name and selecting <code>Export &gt; Save Selected Features As..</code>. Once this new census layer is added to your project, remove the original one to avoid confusion.</p></li>
-</ol>
 </section>
-<section id="answering-the-question" class="level3" data-number="10.1.3">
-<h3 data-number="10.1.3" class="anchored" data-anchor-id="answering-the-question"><span class="header-section-number">10.1.3</span> Answering the question</h3>
-<p>Now we can answer the actual study question. As a reminder, it is <strong>how many children in the relevant age range live within less than 1km, between 1km and 2km, and further than 2km of <em>any</em> primary (4 to 10 years old) and secondary (11 to 17 years old) school?</strong>. You will need to use some of the Geoprocessing tools you just learned to answer that, as well as tools from previous weeks.</p>
-<div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Stop and Think
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Before you continue, try to think about the solution yourself. Look at the attributes of each layer, and then try to sketch a step by step plan to achieve the results you need. Then continue.</p>
-</div>
-</div>
-<ol start="13" class="example" type="1">
-<li><p>You will first need to add up the number of children at each 1yr age bracket to compute the totals for the primary and secondary school age ranges (4-10 yo and 11-17 yo). For that, you can use the <code>Field Calculator</code>, as in previous labs. Just add up the numbers for columns <code>age_4</code> to <code>age_10</code> into a new <code>age_4-10</code> column, and then add columns <code>age_11</code> to <code>age_17</code> into a new <code>age_11-17</code> column.</p></li>
-<li><p>Then you will need to select only the schools within the Stirling council area. You can use <code>Select by location</code> as above, using the Stirling bounds, or by using the <code>LAname</code> field in the attribute table of the School Roll layer. Both methods should give you a selection of 48 schools. Create a new layer containing just these schools, then remove the original school layer from the project.</p></li>
-<li><p>The next step is to calculate the area covered by each distance bracket (1km, 2km) from the schools. For that, you should create a <code>Buffer</code> for the 1km distance, then a second <code>Buffer</code> for the 2km distance. Make sure you select the <code>Dissolve result</code> option when creating the buffers, since many locations will be within less than the specified distance from multiple schools, and we don’t want to repeat them.</p></li>
-<li><p>Then compute the <code>Difference</code> between the 2km and 1km buffers to create “rings” covering the range of 1km to 2km. This is important so we don’t “double count” the 1km bracket - see below.</p></li>
+<section id="independent-exercise-5---counting-points-in-polygons" class="level2" data-number="11.5">
+<h2 data-number="11.5" class="anchored" data-anchor-id="independent-exercise-5---counting-points-in-polygons"><span class="header-section-number">11.5</span> Independent Exercise 5 - Counting points in polygons</h2>
+<p>In this exercise, you will practice using joins and spatial joins, and will also independently learn another two GIS tools: <code>Count Points in Polygons</code> (<a href="https://docs.qgis.org/3.34/en/docs/user_manual/processing_algs/qgis/vectoranalysis.html#count-points-in-polygon">QGIS Documentation</a>) and <code>Statistics by Categories</code> (<a href="https://docs.qgis.org/3.34/en/docs/user_manual/processing_algs/qgis/vectoranalysis.html#qgisstatisticsbycategories">QGIS Documentation</a>).</p>
+<p>You have been tasked with calculating a) the total amount of traffic incidents and b) the rate of incidents per capita, for all census Output Areas. To achieve that, together with the Traffic Collision layer you already have, you have been given a shapefile with the boundaries of the census Output Areas, and a csv file with the population information for each Output Area (<a href="https://stir-my.sharepoint.com/:u:/g/personal/ala2_stir_ac_uk/EbDVBY1vzPFFmXze9NnPAXMB_5agSBMugN0pEkmlDoBo1w?e=FcK74N">download them here</a>)</p>
+<ol type="1">
+<li><p>Download, extract and organise your files, and start a new project.</p></li>
+<li><p>Load the data into QGIS. The CSV file doesn’t have any coordinates, so you can just drag it and drop it in the <code>Layers</code> panel. It will show up as a non-spatial table (no geometries to show, but still has an attribute table).</p></li>
+<li><p>Guess what? The Output Area shapefile has topology errors. Use the <code>Fix Geometries</code> tool (<code>Procesing</code> panel, under the <code>Vector Geometry</code> category) to create a new shapefile with fixed geometries. Once you create it, rebuild the spatial index of this new fixed layer by going to <code>Vector &gt; Data Management Tools &gt; Create Spatial Index</code>. Otherwise your next step will be very slow.</p></li>
+<li><p>Now do a <em>spatial join</em> between the fixed OA layer and the Traffic Collision layer. You want to join features from the traffic collision that <code>are within</code> the OAs. Save this new result as a new layer.</p></li>
+<li><p>Your resulting layer should now have all the traffic collisions joined to their respective OA codes. Now use the <code>Statistics by Categories</code> tool to count how many traffic collisions per Output Area code. The tool is in the <code>Processing</code> panel, under the <code>Vector Analysis</code> category. You want to calculate the counts, using the <code>code</code> attribute as the category for calculation. The window should look like this:</p></li>
 </ol>
-<p>Now you have to deal with the biggest limitation of your analysis - the OAs are still very big, and many will span areas both within and outside the 1k and 2km distances. You discuss the problem with your manager again, and you decide that the best approach is to <em>weight</em> the children count of each OA by the respective <em>area</em> of the OA that is <em>within</em> each distance bracket. So if an OA has 15 children aged 11-17, and 40% of the OA area is within 1km of a school, then you should multiply 15 by 0.4 to obtain the estimated number of children within 1km.</p>
-<ol start="17" class="example" type="1">
-<li>The first step is to calculate the total area of each OA. You can do that by using the <code>Field Calculator</code> tool and creating a new field called <code>oa_area</code> that takes the <code>$area</code> parameter under the <code>Geometry</code> calculator operations. Remember to make this new field a <strong>Decimal number</strong> with two decimal places.</li>
+<p><img src="images/lab_11/lab_11_fig_6_stats_by_cats.jpg" class="img-fluid"></p>
+<ol start="6" type="1">
+<li>The output of the above step will be another non-spatial table. Join this table to the OA polygons using <code>code</code> as the common attribute - the OA layer should be one receiving the join. Then do a second join to bring in the age data from the CSV file as well. For this join, bring only the <code>ALl_people</code> field from the csv file - enable the <code>Joined fields</code> box on the new join window, and then check only the box for <code>ALl_people</code>. Your attribute table now should look like this:</li>
 </ol>
-<div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Stop and Think
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>What units were used for the area calculation? Does it matter?</p>
-</div>
-</div>
-<div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Click for answer
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-10" class="callout-10-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Unless you have set it differently in your <em>Project properties</em>, areas are calculated in squared metres by default. This is not an ideal unit for such large areas (km<span class="math inline">\(^2\)</span> would have been better), but since we will only need to calculate the percentage of this total area within each distance bracket, it shouldn’t matter much.</p>
-</div>
-</div>
-</div>
-<p>Now that you have the total areas for each OA, it is time to find out the portions within each distance bracket. For that, we can either <code>Clip</code> or get the <code>Intersection</code> of the buffer layers with the census layer.</p>
-<div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Stop and Think
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>What will change in your results if you use <code>Intersection</code> instead of <code>Clip</code>?</p>
-</div>
-</div>
-<div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Click for answer
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-12" class="callout-12-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p><code>Intersection</code> will combine the attributes of both layers, while <code>CLip</code> will only preserve the attributes of the target layer.</p>
-</div>
-</div>
-</div>
-<ol start="18" class="example" type="1">
-<li>Since the buffers have been <em>dissolved</em>, they can’t be linked to individual schools anymore - whenever the buffers of two schools overlap their attribute tables will just keep the name of one of the schools when they are dissolved. So no need to preserve the buffer attributes, and we can use <code>Clip</code>. Create two new layers, the first being the clipping of the census layer by the 1km buffer layer, and the second being the clipping of the census layer by the 1km-2km ‘donuts’ layer. We use it instead of the 2km buffer otherwise when we calculate the percentage of area within 2km we will be double counting the area within 1km - which is already covered by the 1km buffer.</li>
+<p><img src="images/lab_11/lab_11_fig_7_double_join.jpg" class="img-fluid"></p>
+<ol start="7" type="1">
+<li><p>The <code>Statistics_by_category_count</code> attribute answers question a) above - total number of traffic collisions per OA. To answer question b), use the <code>Field calculator</code> to divide this number by <code>All_people</code>, to get the total collisions per capita.</p></li>
+<li><p>Because you only wanted counts of points to answer a), there is a simpler alternative to joining then summarising. Go to <code>Vector &gt; Analysis Tools &gt; Count Points in Polygons</code>. The pick the (fixed) Output Area polygons as your <code>Polygons</code> and the Traffic Collisions layer as your <code>Points</code>, then save and run the results. You will see it calculates a new column named <code>NUMPOINTS</code>. You could then do a table join of this layer to the CSV table to get the <code>All_people</code> column, and answer question b). There are often multiple ways to achieve the same result in GIS!</p></li>
+<li><p>Make two visualisations of the results: one colouring the OA polygons by the number of total collisions, and another by the total collisions per capita.</p></li>
 </ol>
-<p>You should end up with something like the figure below. To make sure the layers don’t overlap, style them using hatching in different directions. If you see a cross-hatch, then they are overlapping, and it means you used the full 2km buffer instead of the 1km-2km ‘donut’:</p>
-<p><img src="images/lab_geoprocessing/fig4_clipped_buffers.png" class="img-fluid"></p>
-<ol start="19" class="example" type="1">
-<li><p>Now we can calculate the area percentages. First, re-calculate the polygon areas for the clipped layers, using the <code>Field Calculator</code>. Create a new attribute called <code>clip_area</code>, and assign the <code>$area</code> operator to it again. Remember to set it as a decimal number.</p></li>
-<li><p>Still using the <code>Field Calculator</code>, you can now calculate the percent area by creating a new attribute called <code>perc_area</code>, which will be <code>clip_area / oa_area</code>. It should also be a decimal number.</p></li>
-<li><p>Finally, calculate the weighted number of children by creating new fields. First calculate <code>perc_4-10</code> as <code>age_4-10 * perc_area</code>, and then <code>perc_11-17</code> as <code>age_11-17 * perc_area</code>. These fields should be integers, unless you are sending partial children to school.</p></li>
-</ol>
-<p>Great, you are almost there! The last step is to aggregate all the data at the council level, and then also determine the number of children beyond 2km:</p>
-<ol start="22" class="example" type="1">
-<li><p>Use the <code>Statistical Summary</code> tool to calculate the respective sums of <code>perc_4-10</code> and <code>perc_11-17</code>. These are the final answers for <strong>how many children in the relevant age range live within less than 1km, between 1km and 2km?</strong>.</p></li>
-<li><p>To get the number of children beyond 2km, use the <code>Statistical Summary</code> tool to calculate the total number of children within each age bracket (<code>age_4-10</code> and <code>age_11-17</code>) in the council, and then subtract the number of children within 1km and between 1km and 2km from this total.</p></li>
-</ol>
-<p>Your final results should be:</p>
-<table class="table">
-<thead>
-<tr class="header">
-<th></th>
-<th>1km</th>
-<th>2km</th>
-<th>&gt;2km</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Primary</td>
-<td>6451</td>
-<td>6656</td>
-<td>89</td>
-</tr>
-<tr class="even">
-<td>Secondary</td>
-<td>7572</td>
-<td>7880</td>
-<td>91</td>
-</tr>
-</tbody>
-</table>
-<p>That is the end of this lab. From now on the exercises will be a bit more involved, like the one above - but at the same you will notice that much of it is still the same - loading data, organising it, doing queries - we will just be adding new tools that open up new (but quite specific) analysis possibilities and/or make some of the things you did before faster/simpler. But the general workflow of GIS is always the same.</p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -1027,13 +872,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./lab_catchup1.html" class="pagination-link" aria-label="Lab 9 - Catch Up / Assignment Work session">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Lab 9 - Catch Up / Assignment Work session</span></span>
+      <a href="./sec_w6_spatial_analysis_II.html" class="pagination-link" aria-label="Week 6 - Spatial analysis II">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Week 6 - Spatial analysis II</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./sec_w6_spatial_analysis_II.html" class="pagination-link" aria-label="Week 6 - Spatial analysis II">
-        <span class="nav-page-text">Week 6 - Spatial analysis II</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./lab_zonal.html" class="pagination-link" aria-label="Lab 12 - Zonal Statistics and Overlap analysis">
+        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Lab 12 - Zonal Statistics and Overlap analysis</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

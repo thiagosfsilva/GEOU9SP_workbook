@@ -1,0 +1,121 @@
+# Lab 11 - Data Joins
+
+In this lab we will learn about *data joins* - operations that link data tables based on specific attributes, or based on locations. We will also learn how to read tabular data that has coordinates as columns as an actual spatial dataset, and will learn about Web Feature Service (WCS) layers - a standardized way to *stream* geospatial data without having to download it. Don't skip the *Independent Exercise* either - you will learn two bonus GIS tools as part of it!
+
+## Guided Exercise 1 - Working with WCS and WMS layers.
+
+Both WFS (Web Feature Services), WMS (Web Map Services), and WCS (Web Coverage Services) are standardised web sharing formats defined by the [Open Geospatial Consortium (OGC)](https://www.ogc.org/). WMS and WCS are designed to serve images (i.e. rasters), while WFS is designed to serve features (i.e. vectors). This is similar to the streaming of Google Maps or Open Street Maps you have used with QGIS already, with the difference that layers streamed via WFS function just like layers you download to your computer.
+
+The advantage of these formats is that you can connect direct with the data provider without having to download the data to disk first - but that is also the disadvantage, since if you lose internet connection you then have no data. More and more data providers are offering these options, so we will explore one example of a WFS layer here, and use it for the rest of the exercises.
+
+(@) Create a `lab_11` folder to organise your data and then start a new QGIS project and save it as `lab_11`. Set the project CRS to EPSG:27700. 
+
+(@) The Scotland Spatial Hub [https://data.spatialhub.scot/](https://data.spatialhub.scot/) hosts official datasets from the Scotland Government. One of the layers is a vector file with the administrative boundaries for Scotland, the Scotland Council Areas. We can access this dataset via WFS. First, copy the link below:
+
+https://geo.spatialhub.scot/geoserver/sh_las/wfs?authkey=b85aa063-d598-4582-8e45-e7e6048718fc
+
+(@) Now on the `Browser` panel of QGIS, find the `WFS / OGC API Features` option, then right-click on it and select `New Connection`:
+
+![](images/lab_11/lab_11_fig_1_WFS_new.jpg)
+
+(@) You will get a new window. On this new window, paste the link above on the `URL` box, and then type `Scotland Spatial Hub` on the `Name` box. Then click `OK`.
+
+![](images/lab_11/lab_11_fig_2_WFS_config.jpg)
+
+(@) You should now have a new `Scotland Spatial Hub` entry under `WFS / OGC API Features` on the `Browser` panel. Expand it and double-click on ` Local Authority Boundaries - Scotland`. It will add this layer to your `Layers`  panel.
+
+(@) Inspect the attribute table of this layer, and play with its `Symbology`. You will see it behaves exactly like a downloaded shapefile or geopackage. Just remember you must have an internet connection for it to be available - and some operations will feel slower, since it has to communicate back and forth with the data server. 
+
+::: {.callout-tip}
+You can always make the WFS layer 'local' by right-clicking on it and selecting `Export > Save Feature As...`, and then saving a copy of it as a shapefile or geopackage.
+:::
+
+## Guided Exercise 2 - Importing tabular data
+
+Sometimes you may have data that has coordinate information, but it is not in a spatial file format. For example, perhaps someone took soil samples along a beach and manually recorded the sampling locations by writing down the coordinates from a GPS receiver. We can still transform this data into spatial data - as long as we know which was the CRS used to record the coordinates. This is often a big problem, as people that are not GIS savvy (like yourself) do not understand CRSs and just write down the coordinates. 
+
+Another common issue is that people will see coordinates like -5.67543 degrees on the GPS device, and then round it down when writing. But (at the equator) one degree of latitude/longitude is about 111km, so if you round down the above coordinate to -5.67, you are rounding it up to the nearest 1km, and introducing a huge error. 
+
+In this exercise, we will import some data from Police Scotland about traffic incidents, which is provided in tabular format. 
+
+(@) To obtain the data, follow [this link to the Police Scotland website](https://www.scotland.police.uk/about-us/how-we-do-it/road-traffic-collision-data/). Then download the *Road Traffic Collisions - Circumstances Raw Data* dataset, which should be an Excel file (`.xsls`).
+
+QGIS is not able to understand Excel files, so we need to convert it to a *Comma Separated Value (CSV)* file. A CSV is just a plain text file where each line is a row on the table, and the data for each column is separated by...you guess it...a comma (actually sometimes it is a semicolon - especially in countries that use the comma instead of the period as a decimal separator).
+
+(@) Open the file you downloaded in Excel. The first thing you'll notice is that they have a VERY professional way of marking the data as official - a floating red text box saying 'official'. Delete this box, then go to `File > Save As` and then change the save format from `Excel workbook (.xlsx)` to `CSV UTF-8 (Comma Separated Value) (.csv)`. You can save it with the same name on the same folder you downloaded it.
+
+(@) Open the `Notepad` application (on Windows, on Mac use `TextEdit`) and then open the csv file you created, just to see how a CSV file is organized. Then close it. 
+
+(@) Back on QGIS (in your `lab_11` project), open the `Data Source Manager` by clicking on the ![](https://docs.qgis.org/3.34/en/_images/mActionDataSourceManager.png) button on the main QGIS toolbar. Then pick the option `Delimited Text`. On the top box, find the `.csv` file you have created. Then make sure your options look the same as the figure below, including picking the correct data type for `date_of_collision` (`date`) and `time_of_collision` (`time`). Once you have everything set, click on `Add`, then `Close`.
+
+![](images/lab_11/lab_11_fig_3_data_source_manager.jpg)
+
+(@) You should now see a new layer in your project, with the same name as the CSV file, and a number of different data points that roughly form the shape of Scotland. Inspect the attribute table of this new layer, and pay attention to the name of the last attribute column in the dataset.
+
+(@) At this point QGIS is still reading the data straight from the CSV, which is not very efficient. Let us save the data by right-clicking on the layer name and going to `Export > Save Features As...` and saving it as a geopackage. You can then remove the imported csv layer from the project. 
+
+## Guided Exercise 3 - Table Joins
+
+We now have two separate layers with separate data tables -  the Local Authority boundaries and the Traffic Accidents. But they share an attribute in common: `local_authority` in the former and `GIS_Local_Authority` in the latter. We can use these attributes to *join* the two tables. 
+
+(@) Right-Click on the Traffic Accidents layer and go to `Properties > Joins`. Then click on the green plus button at the bottom to create a new join. A new window will appear - pick the Local Authority layer as `Join Layer`, and `local_authority` as the `Join field` (notice these are the attributes of the Local Authority layer). Then pick `GIS_Local_Authority` as the `Target field` (notice these are the attributes of the traffic layer). It should look like the figure below. Click `OK` on this window and notice a new join has been added. Click `OK` again.
+
+![](images/lab_11/lab_11_fig_4_newjoin.jpg)
+
+(@) Open the attribute table of the traffic collision layer again. Look at the last attribute columns of the table - there should now be two additional columns, showing the `code` and `hectares` fields of the Local Authority layer! Notice that while the Local Authority Layer only has one row per Authority area, the respective values of `code` and `hectare` are repeated for all traffic incidents occurring in the same Authority area.
+
+::: {.callout-important title="Stop and Think"}
+On the joined attribute table of the Traffic Collisions layer, the local authorities of Dumfries & Galloway, Argyll & Bute, Perth & Kinross and Eilean Siar have all `code` and `hectare` fields as `NULL`, while they seem fine on the Local Authority attribute table. Can you identify what the problem is?
+:::
+
+::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
+The main issue is that computers are dumb :-). Dumfries & Galloway, Argyll & Bute, and Perth & Kinross are spelled with an `&` on the Traffic Collision layer but with an `and` on the Local Authority layer, and Eilean Siar (the Outer Hebrides) is spelled as Na h-Eileanan an Ia. As far as the computer is concerned, these things are not the same, and so it does not make the join for these data rows. This is a classic example of the many small data inconsistencies that need to be fixed when working with real-world data.
+:::
+
+## Guided Exercise 4 - Spatial Joins 
+
+You may be tempted to fix the problem above by using the `Field Calculator` to replace the spelling on one table by the spelling on the other. But there is another way - using a *spatial join* instead of an attribute join. Just like you can select data rows by attribute or by location, you can also join data tables by either attributes or location. Let's do it.
+
+(@) First, remove the attribute join your created before. Go to the `Properties > Joins` of the Traffic Collision layer, select the existing join and remove it using the red minus symbol. Then click `OK`.
+
+(@) No go to the menu `Vector > Data Management Tools > Join Attributes by Location...`. You will see a new window similar to the `Select by Location` window. Then specify you want to `Join features in` the Traffic Collision layer that `Are Within` the Local Authority layer. Because there are many traffic incidents for each Authority area, you want to keep the `Join type` as `one-to-many`. For reference, check the figure below. This operation creates a new layer containing the joined table, so pick a folder and save your result as a vector file named  `traffic_collisions_authority_joined`, then click `Run` then `Close`.
+
+![](images/lab_11/lab_11_fig_5_spatial_join.jpg)
+
+(@) Check the attribute table of the new joined layer you created. There should now be three new columns at the end - the three columns from the Local Area layer: `local_authority`, `code` and `hectares` (when we join by attribute QGIS knows not to repeat the matching field, so it only brings in `code ` and `hectare` -  but when we join by location then it brings all attributes). 
+
+::: {.callout-important title="Stop and Think"}
+We can see that for most cases our Spatial Join fixed the name mismatch issues, and we see values of `GIS_Local_Authorities` like `Dumfries & Galloway` matched to `local_authority` values like `Dumfries and Galloway`. But if you sort your joined attributed table by `local_authority`, you will see there are now 11 rows with `NULL` values. Can you identify the problem this time?
+:::
+
+::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
+These 11 traffic incidents may have been recorded with wrong or uncertain coordinates, and they fall 'outside' of the Local Authority polygons. For example, manually select the row for Dundee City (click on the row number) and then click on the `Zoom Map to Select Rows` button (at the top of the attribute table, looks like a magnifying glass). The check the QGIS map canvas, and you will see this data point is located over water, so it is not joined to any Authority polygon - maybe a boat traffic incident?
+:::
+
+## Independent Exercise 5 - Counting points in polygons
+
+In this exercise, you will practice using joins and spatial joins, and will also independently learn another two GIS tools: `Count Points in Polygons` ([QGIS Documentation](https://docs.qgis.org/3.34/en/docs/user_manual/processing_algs/qgis/vectoranalysis.html#count-points-in-polygon)) and `Statistics by Categories` ([QGIS Documentation](https://docs.qgis.org/3.34/en/docs/user_manual/processing_algs/qgis/vectoranalysis.html#qgisstatisticsbycategories)). 
+
+You have been tasked with calculating a) the total amount of traffic incidents and b) the rate of incidents per capita, for all census Output Areas. To achieve that, together with the Traffic Collision layer you already have, you have been given a shapefile with the boundaries of the census Output Areas, and a csv file with the population information for each Output Area ([download them here](https://stir-my.sharepoint.com/:u:/g/personal/ala2_stir_ac_uk/EbDVBY1vzPFFmXze9NnPAXMB_5agSBMugN0pEkmlDoBo1w?e=FcK74N))
+
+1) Download, extract and organise your files, and start a new project.
+
+2) Load the data into QGIS. The CSV file doesn't have any coordinates, so you can just drag it and drop it in the `Layers` panel. It will show up as a non-spatial table (no geometries to show, but still has an attribute table).
+
+3) Guess what? The Output Area shapefile has topology errors. Use the `Fix Geometries` tool (`Procesing` panel, under the `Vector Geometry` category) to create a new shapefile with fixed geometries. Once you create it, rebuild the spatial index of this new fixed layer by going to `Vector > Data Management Tools > Create Spatial Index`. Otherwise your next step will be very slow. 
+
+3) Now do a *spatial join* between the fixed OA layer and the Traffic Collision layer. You want to join features from the traffic collision that `are within` the OAs. Save this new result as a new layer. 
+
+5) Your resulting layer should now have all the traffic collisions joined to their respective OA codes. Now use the `Statistics by Categories` tool to count how many traffic collisions per Output Area code. The tool is in the `Processing` panel, under the `Vector Analysis` category. You want to calculate the counts, using the `code` attribute as the category for calculation. The window should look like this:
+
+![](images/lab_11/lab_11_fig_6_stats_by_cats.jpg)
+
+6) The output of the above step will be another non-spatial table. Join this table to the OA polygons using `code` as the common attribute - the OA layer should be one receiving the join. Then do a second join to bring in the age data from the CSV file as well. For this join, bring only the `ALl_people` field from the csv file - enable the `Joined fields` box on the new join window, and then check only the box for `ALl_people`. Your attribute table now should look like this:
+
+![](images/lab_11/lab_11_fig_7_double_join.jpg)
+
+7) The `Statistics_by_category_count` attribute answers question a) above - total number of traffic collisions per OA. To answer question b), use the `Field calculator` to divide this number by `All_people`, to get the total collisions per capita. 
+
+8) Because you only wanted counts of points to answer a), there is a simpler alternative to joining then summarising. Go to `Vector > Analysis Tools > Count Points in Polygons`. The pick the (fixed) Output Area polygons as your `Polygons` and the Traffic Collisions layer as your `Points`, then save and run the results. You will see it calculates a new column named `NUMPOINTS`. You could then do a table join of this layer to the CSV table to get the `All_people` column, and answer question b). There are often multiple ways to achieve the same result in GIS!
+
+9) Make two visualisations of the results: one colouring the OA polygons by the number of total collisions, and another by the total collisions per capita. 

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>GEOU9SP GIS Workbook - 10&nbsp; Lab 10: Geoprocessing tools</title>
+<title>GEOU9SP GIS Workbook - 12&nbsp; Lab 12 - Zonal Statistics and Overlap analysis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./sec_w6_spatial_analysis_II.html" rel="next">
-<link href="./lab_catchup1.html" rel="prev">
+<link href="./sec_w8_spatial_analysis_III.html" rel="next">
+<link href="./lab_joins.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -110,7 +110,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./sec_w5_spatial_analysis_I.html">Week 5 - Spatial analysis I</a></li><li class="breadcrumb-item"><a href="./lab_geoprocessing.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Lab 10: Geoprocessing tools</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./sec_w6_spatial_analysis_II.html">Week 6 - Spatial analysis II</a></li><li class="breadcrumb-item"><a href="./lab_zonal.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Lab 12 - Zonal Statistics and Overlap analysis</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -250,7 +250,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lab_geoprocessing.html" class="sidebar-item-text sidebar-link active">
+  <a href="./lab_geoprocessing.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Lab 10: Geoprocessing tools</span></span></a>
   </div>
 </li>
@@ -273,7 +273,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lab_zonal.html" class="sidebar-item-text sidebar-link">
+  <a href="./lab_zonal.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Lab 12 - Zonal Statistics and Overlap analysis</span></span></a>
   </div>
 </li>
@@ -297,21 +297,20 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#guided-exercise-assessing-children-access-to-schools" id="toc-guided-exercise-assessing-children-access-to-schools" class="nav-link active" data-scroll-target="#guided-exercise-assessing-children-access-to-schools"><span class="header-section-number">10.1</span> Guided Exercise: assessing children access to schools</a>
-  <ul class="collapse">
-  <li><a href="#obtaining-the-data" id="toc-obtaining-the-data" class="nav-link" data-scroll-target="#obtaining-the-data"><span class="header-section-number">10.1.1</span> Obtaining the data</a></li>
-  <li><a href="#preparing-the-data" id="toc-preparing-the-data" class="nav-link" data-scroll-target="#preparing-the-data"><span class="header-section-number">10.1.2</span> Preparing the data</a></li>
-  <li><a href="#answering-the-question" id="toc-answering-the-question" class="nav-link" data-scroll-target="#answering-the-question"><span class="header-section-number">10.1.3</span> Answering the question</a></li>
-  </ul></li>
+  <li><a href="#guided-exercise-1---data-preparation" id="toc-guided-exercise-1---data-preparation" class="nav-link active" data-scroll-target="#guided-exercise-1---data-preparation"><span class="header-section-number">12.1</span> Guided Exercise 1 - Data preparation</a></li>
+  <li><a href="#guided-exercise-2---zonal-statistics" id="toc-guided-exercise-2---zonal-statistics" class="nav-link" data-scroll-target="#guided-exercise-2---zonal-statistics"><span class="header-section-number">12.2</span> Guided Exercise 2 - Zonal Statistics</a></li>
+  <li><a href="#guided-exercise-3---overlap-analysis" id="toc-guided-exercise-3---overlap-analysis" class="nav-link" data-scroll-target="#guided-exercise-3---overlap-analysis"><span class="header-section-number">12.3</span> Guided Exercise 3 - Overlap Analysis</a></li>
+  <li><a href="#guided-exercise---sample-raster-values" id="toc-guided-exercise---sample-raster-values" class="nav-link" data-scroll-target="#guided-exercise---sample-raster-values"><span class="header-section-number">12.4</span> Guided Exercise - Sample Raster Values</a></li>
+  <li><a href="#independent-exercise---taiwanese-hemlock-and-climate-change" id="toc-independent-exercise---taiwanese-hemlock-and-climate-change" class="nav-link" data-scroll-target="#independent-exercise---taiwanese-hemlock-and-climate-change"><span class="header-section-number">12.5</span> Independent Exercise - Taiwanese hemlock and climate change</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./sec_w5_spatial_analysis_I.html">Week 5 - Spatial analysis I</a></li><li class="breadcrumb-item"><a href="./lab_geoprocessing.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Lab 10: Geoprocessing tools</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./sec_w6_spatial_analysis_II.html">Week 6 - Spatial analysis II</a></li><li class="breadcrumb-item"><a href="./lab_zonal.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Lab 12 - Zonal Statistics and Overlap analysis</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-spatan1" class="quarto-section-identifier"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Lab 10: Geoprocessing tools</span></span></h1>
+<h1 class="title"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Lab 12 - Zonal Statistics and Overlap analysis</span></h1>
 </div>
 
 
@@ -328,43 +327,51 @@ window.Quarto = {
 </header>
 
 
-<p>The ‘geoprocessing’ term is sometimes used as a catch all for all GIS operations, but within QGIS, it pertains to a specific set of tools. With the exception of the <code>Buffer</code> tool, the geoprocessing tools are aimed at creating new geometries based on the overlay of two separate vector layers.</p>
-<p>You already learned and used one geoprocessing tool: the <code>Clip</code> tool. If finds the areas that are common between two layers, and ‘cookie cuts’ one of them based on the shape of the other.</p>
-<p>Other geoprocessing tools will work similarly. For example, imagine that you have a polygon layer with all the woodlands in Scotland, and another with all the protected areas in Scotland. If you wanted to know all the woodland areas that are protected, you could <code>Clip</code> the woodland layer by the protected area layer. But what if you wanted the opposite - all the woodlands that are <em>not</em> protected. You will need some sort of <code>reverse clip</code> tool - turns out that is the <code>Difference</code> geoprocessing tool.</p>
-<p>The diagram below summarises the main geoprocessing tools:</p>
-<p><img src="images/lab_11/lab11_fig1_Geoprocessing.png" class="img-fluid"></p>
-<section id="guided-exercise-assessing-children-access-to-schools" class="level2" data-number="10.1">
-<h2 data-number="10.1" class="anchored" data-anchor-id="guided-exercise-assessing-children-access-to-schools"><span class="header-section-number">10.1</span> Guided Exercise: assessing children access to schools</h2>
-<p>You are a GIS analyst at the Stirling council, and you have been asked to perform an analysis regarding children access to schools. Your manager has indicated which data sources you should use, and they want you to answer <strong>how many children within the relevant age range live within less than 1km, between 1km and 2km, and further than 2km of <em>any</em> primary (4 to 10 years old) and secondary (11 to 17 years old) school. You have been instructed to use the census data at the most detailed level (Output Area, OA), and to limit your analysis to the OAs and schools that are within Stirling Council Area limits</strong>. You should report the results as a table.</p>
-<section id="obtaining-the-data" class="level3" data-number="10.1.1">
-<h3 data-number="10.1.1" class="anchored" data-anchor-id="obtaining-the-data"><span class="header-section-number">10.1.1</span> Obtaining the data</h3>
+<p>So far we have been mostly keeping to one of the two main data models: vectors and rasters. We have learned several ways to work with either, but they are mostly treated separately. The two exceptions are the <code>Mask by Layer</code> tool, that lets us clip a raster based on a vector shape, and the <code>Polygonize</code> tool, which converts rasters into vectors.</p>
+<p>In this lab you will learn about <code>Zonal Statistics</code> (<a href="https://docs.qgis.org/3.34/en/docs/user_manual/processing_algs/qgis/rasteranalysis.html#zonal-statistics">QGIS Documentation</a>), one of the main tools that mixes vectors and rasters, and lets you compute pixel statistics for regions defined by polygons. You will also learn about a related tool for points, called <code>Sample Raster Values</code> (<a href="https://docs.qgis.org/3.34/en/docs/user_manual/processing_algs/qgis/rasteranalysis.html#sample-raster-values">QGIS Documentation</a>), and a <code>cousin</code> tool to Zonal Statistics, the <code>Overlap Analysis</code> tool (<a href="https://docs.qgis.org/3.34/en/docs/user_manual/processing_algs/qgis/vectoranalysis.html#overlap-analysis">QGIS Documentation</a>).</p>
+<section id="guided-exercise-1---data-preparation" class="level2" data-number="12.1">
+<h2 data-number="12.1" class="anchored" data-anchor-id="guided-exercise-1---data-preparation"><span class="header-section-number">12.1</span> Guided Exercise 1 - Data preparation</h2>
+<p>In this exercise, we will look at air pollution data from the city of <a href="https://en.wikipedia.org/wiki/Amsterdam">Amsterdam</a>, in the Netherlands. Importantly for this exercise, Amsterdam is broken up into 8 districts or boroughs (stadsdelen), which are further divided into neighbourhoods (buurten).</p>
+<p>More specifically, we will be looking at <a href="https://www.gov.uk/government/statistics/air-quality-statistics/ntrogen-dioxide">NO<span class="math inline">\(_2\)</span> (Nitrogen Dioxide) pollution</a>. NO<span class="math inline">\(_2\)</span> is mainly produced by combustion engines, and impacts respiratory health.</p>
+<p>The data for this exercise has been pre-packaged and can be [downloaded here], and it consists of the following datasets:</p>
+<ul>
+<li>A geopackage file containing four layers:
+<ul>
+<li>The location of several NO2 measurement sites, as point vectors.</li>
+<li>The extent and location of parks and green spaces in Amsterdam, as a polygon vector layer.</li>
+<li>The official boundaries of Amsterdam’s neighbourhoods, as polygon vectors.</li>
+<li>A rectangular polygon defining the extent of the study.</li>
+</ul></li>
+<li>A CSV file containing annual NO<span class="math inline">\(_2\)</span> measurements for several sites, including the sites identified in the geopackage above.</li>
+</ul>
+<p>If you are curious, these files were obtained from the City of Amsterdam <a href="https://maps.amsterdam.nl/open_geodata/">geodata portal</a>.</p>
+<ul>
+<li>A raster file showing modelled annual NO2 concentrations for the year 2008, produced as an output from <a href="https://www.nature.com/articles/sdata201935">this research article</a>. The original files cover all of the Netherlands, but have been cropped to make the file size more manageable for this exercise.</li>
+</ul>
 <ol class="example" type="1">
-<li>The first piece of data needed for this exercise is of course the limits of the Stirling Council Area. The official administrative boundary data for the UK is contained within the Ordnance Survey Boundary Line dataset. It can be downloaded from the <a href="https://osdatahub.os.uk/">Ordnance Survey Open Data Hub</a> or from Digimap, but the files cover all of the UK, and thus are a very large download. To save precious lab time, we have already isolated the Stirling Council boundary as a separate file that you can download here. You are welcome!</li>
+<li>Download the data and create a project folder and a QGIS project for this exercise. The project should be set to EPSG:28899 - Amersfoort / RD New, the standard CRS for the Netherlands.</li>
 </ol>
-<p>You can then download the two other datasets needed:</p>
-<ol start="2" class="example" type="1">
-<li><p><strong>Scottish School Roll and Locations</strong>: this dataset is provided by the Scottish Government, and contains information on all Scottish schools. Download the ‘<em>Scottish School Roll and Locations ZIP</em>’ (NOT the one with ‘Table’ on the name) <a href="https://www.data.gov.uk/dataset/9a6f9d86-9698-4a5d-a2c8-89f3b212c52c/scottish-school-roll-and-locations">from here</a>.</p></li>
-<li><p><strong>Census data on population age</strong>: the Digimap platform offers access to the 2011 Census variables in spatial format. To obtain it, go to the <em>Society</em> tab, and then select the ‘Download’ option on the leftmost toolbar (a down arrow going into a ‘box’). That will bring up the familiar Digimap download interface. This time we will use our Stirling Council shapefile to set the search area. For that, click on the <code>Import Polygons</code> button, and then on <code>Choose File</code>. Then choose the <em>zipped</em> Stirling dataset you have downloaded and click on import. Finally, under the <code>2011 Census data layers</code> tab, select the <code>Age</code> dataset. Your window should look like this:</p></li>
-</ol>
-<p><img src="images/lab_geoprocessing/Fig1_digimap_stirlinghsire.png" class="img-fluid"></p>
-<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Warning
+Tip
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The data for the 2022 census have been officially published by National Records of Scotland, but are not available on Digimap yet. Since we are only practising our GIS knowledge, it is OK to use mismatched data (schools from 2024 vs.&nbsp;age data from 2011). In a real application scenario, it would be very important to make sure the temporal coverage of the datasets matches as well as possible.</p>
+<p>Two useful websites to find information about coordinate reference systems are <a href="https://epsg.io/">https://epsg.io/</a> and <a href="https://spatialreference.org/">https://spatialreference.org/</a>. Search for EPSG:28899 in thee websites and see what information they provide.</p>
 </div>
 </div>
-<ol start="4" class="example" type="1">
-<li>Add your data to the basket and finish the order, then download the data as you have done in previous labs.</li>
-<li>Now create a folder structure for your project and extract and organise the contents of the three datasets. Then create a new QGIS project and import the three datasets. The census geopackage will contain layers for different levels of aggregation, remember you want the Output Area polygons. If everything worked correctly, you should have something like this:</li>
+<ol start="2" class="example" type="1">
+<li>Now load all five layers and the CSV file into your project. This CSV file has no coordinates, so you can just drag it to your <code>Layers</code> panel without needing to use the <code>Import Delimited Text</code> tool.</li>
 </ol>
-<p><img src="images/lab_geoprocessing/Fig2_qgis_import.png" class="img-fluid"></p>
+</section>
+<section id="guided-exercise-2---zonal-statistics" class="level2" data-number="12.2">
+<h2 data-number="12.2" class="anchored" data-anchor-id="guided-exercise-2---zonal-statistics"><span class="header-section-number">12.2</span> Guided Exercise 2 - Zonal Statistics</h2>
+<p>You are now a GIS analyst at the Amsterdam city administration, and have been asked to analyse the pollution levels per city neighbourhood, using the data for 2008 published by the scientific study above. Specifically, you have been asked to calculate the average NO<span class="math inline">\(_2\)</span> concentrations for each neighbourhood.</p>
+<p>You have access to the neighbourhood boundaries in vector format, but the study data is given as a raster data.</p>
 <div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -375,11 +382,7 @@ Stop and Think
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<ol type="1">
-<li><p>What are the data models and file formats of each dataset?</p></li>
-<li><p>What are the attributes contained in each dataset?</p></li>
-<li><p>What is the CRS of each dataset? Are they all the same?</p></li>
-</ol>
+<p>Using the GIS tools you have learned so far, how would you accomplish this?</p>
 </div>
 </div>
 <div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
@@ -394,24 +397,25 @@ Click for answer
 </div>
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<ol type="1">
-<li><p>They all use the vector data model. The schools are vector points, the other are vector polygons.</p></li>
-<li><p>The attributes of each dataset can be seen by either inspecting the <em>attribute table</em> of each dataset or by looking at the layer <code>Properties &gt; Fields</code> tab.</p></li>
-<li><p>All three datasets are in OS British Standard Grid (EPSG 27700). You can find this out by either going to the <code>Properties &gt; Information</code> tab or by right-clicking on the layer name then on <code>Layer CRS</code>.<br>
-</p></li>
+<p>Since at this point we don’t know many tools that interface rasters and vectors, we would have to do it in a rather convoluted way. First, we would need to separate each neighbourhood into a separate vector file, and then mask the NO<span class="math inline">\(_2\)</span> raster multiple times to generate one pollution raster for each neighbourhood. We could then calculate the <code>Raster Layer Statistics</code> for each one of the masked neighbourhoods, and manually copy each average to a table. No big deal, there are only 518 neighbourhoods after all. There must be a better way - keep reading!</p>
+<p>Still, this is a good example of how you can get by in GIS even with just basic knowledge and some creative thinking. There are always multiple ways to achieve the same result in GIS, even if some of these ways are not fast or optimal.</p>
+</div>
+</div>
+</div>
+<p>The right way to accomplish this task is to use the <code>Zonal Statistics</code> tool. It will calculate descriptive statistics (min, max, average, range, etc.) for raster values (pixels) contained within each polygon of a vector layer, and output it as a new vector layer with the same polygons and attributes of the original vector layer, with added attribute columns for the statistics.</p>
+<ol start="3" class="example" type="1">
+<li><p>Go to the <code>Processing</code> panel and find the <code>Zonal statistics</code> tool (NOT <code>Raster layer zonal statistics</code>), under the <code>Raster analysis</code> category. It will launch a new window.</p></li>
+<li><p>On the <code>Zonal Statistics</code> window, select the neighbourhoods layer as the <code>Input Layer</code>, and the NO<span class="math inline">\(_2\)</span> concentration map as the <code>Raster Layer</code>. Notice how you could select a specific band if your raster contained multiple bands. For <code>Output column prefix</code> write <code>NO2_</code> - this prefix will be added to the name of each calculated statistic to generate the new attributes. Right click on the <code>...</code> button to the right of the <code>Statistics to calculate</code> box to see which statistics are available for calculation. In this case we only want the means, so you can uncheck all other boxes. Then save your layer appropriately and <code>Run</code> then <code>Close</code>.</p></li>
 </ol>
-</div>
-</div>
-</div>
+<p><img src="images/lab_12/lab12_fig1_zonastats.jpg" class="img-fluid"></p>
+<ol start="5" class="example" type="1">
+<li><p>Now style the new layer you obtained using a continuous colour scale to show NO<span class="math inline">\(_2\)</span> concentrations for each neighbourhood.</p></li>
+<li><p>Load the <code>OpenStreetMap</code> layer (on the <code>Browser Panel</code>, under the <code>XYZ Tiles</code> category). Does it look like NO<span class="math inline">\(_2\)</span> pollution is worse on densely urbanised areas?</p></li>
+</ol>
 </section>
-<section id="preparing-the-data" class="level3" data-number="10.1.2">
-<h3 data-number="10.1.2" class="anchored" data-anchor-id="preparing-the-data"><span class="header-section-number">10.1.2</span> Preparing the data</h3>
-<p>You may have noticed that your Digimap census data download includes many OA polygons that are outside of Stirling Council. This is because of a (sadly) very common problem with spatial data from different sources - the census output areas (OAs) do not perfectly line up with the administrative boundaries of the council. So when the Digimap interface tries to determine which OAs overlap with Stirling, we get more data than we need.</p>
-<ol start="6" class="example" type="1">
-<li>Set the symbology of the Stirling boundaries to a red outline without fill. Then make sure this layer is on top of the census layer. Then zoom in very close to the Stirling boundary. You will see they are offset by about 1.5m:</li>
-</ol>
-<p><img src="images/lab_geoprocessing/Fig3_boundary_offset.png" class="img-fluid"></p>
-<p>We thus need to further subset our data to match the actual extent of the Stirling coucil.</p>
+<section id="guided-exercise-3---overlap-analysis" class="level2" data-number="12.3">
+<h2 data-number="12.3" class="anchored" data-anchor-id="guided-exercise-3---overlap-analysis"><span class="header-section-number">12.3</span> Guided Exercise 3 - Overlap Analysis</h2>
+<p>As you continue with your GIS analysis, you notice you have also been given a map with all the parks and green spaces in Amsterdam, and you wonder if they could be related to improved air quality. Maybe you could create an attribute that computed the amount of green spaces within each neighbourhood, and then use that information. You have two polygon vector layers now - one of the neighbourhoods and another of the green spaces.</p>
 <div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -422,7 +426,7 @@ Stop and Think
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>What are the options of GIS operations that you have to subset the datasets?</p>
+<p>Again, using the GIS tools you have learned so far, how would you accomplish this?</p>
 </div>
 </div>
 <div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
@@ -437,182 +441,81 @@ Click for answer
 </div>
 <div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>You could use <code>Clip</code> or <code>Intersection</code> if you wanted to change (‘cut’) the geometries of the target layer, or use <code>Select by Location</code> if you wanted to fidn the overlapping polygins without changing geometries.</p>
+<p>So far the tools we have learned for overlaying separate vector layers are the set of <em>geoprocessing</em> tools. You could calculate the <code>Intersection</code> of the green spaces and neighbourhoods layer - that would create a new layer showing only the extent of green spaces inside each neighbourhood. And because it is an intersection, you will carry all the attributes from both layers, including the neighbourhood names.</p>
+<p>You could then use the <code>Field calculator</code> to calculate the area of green space for each neighbourhood from the intersection layer, and then use a <code>Join</code> to join these areas to the original neighbourhood layer, bringing in the green space area attribute. If you wanted a percentage instead of an area, you could then use the <code>Field calculator</code> again to divide the green space area by total neighbourhood area to get a percentage cover.</p>
+<p>But again, there is a faster way. This will be a common theme for many of the tools you will learn from this week on - they don’t necessarily offer new possibilities of analysis, but they will optimise/facilitate the same analysis with less steps. What separates a GIS user from a good GIS user is knowing which approach is optimal for each situation.</p>
 </div>
 </div>
 </div>
-<p>After consulting with your manager, you both decide that clipping or intersecting the data would not be a good option as it would change the geometry of the OAs, and there are official limits. So you decide to use <code>Select by Location</code>:</p>
 <ol start="7" class="example" type="1">
-<li><p>Go to <code>Vector &gt; Research Tools &gt; Select by Location...</code> or click on the <img src="https://docs.qgis.org/3.34/en/_images/mAlgorithmSelectLocation.png" class="img-fluid"> button.</p></li>
-<li><p>Select all polygons from the census layer that <code>are within</code> the Stirling bounds layer. Check the selection results.</p></li>
-<li><p>Change your criteria to include both <code>intersect</code> and <code>are within</code> the Stirling bounds layer. Check the selection results.</p></li>
+<li>Go back to the <code>Processing</code> panel and find the <code>Overlap Analysis</code> tool, under the <code>Vector Analysis</code> category, and launch it. This tool only takes two parameters: <code>Input layer</code> is the main layer you want as output (the neighbourhood layer in this case), and the <code>Overlay layers</code> are the layers you want to calculate the overlap with (in our case, only one, the green spaces layer). Set these two parameters and then save your result to a proper location. A new layer will be produced.</li>
 </ol>
-<div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Stop and Think
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Why both selection attempts give you wrong results? How would you fix it?</p>
-</div>
-</div>
-<div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Click for answer
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Because of the mismatch between the boundaries of the OAs and the Stirlingshire boundaries. So inner OAs that are the edges of the council area are not considered fully <code>within</code> (they extend a sliver outwards from the actual bounds), and outer OAs also at the edges will be considered to <code>intersect</code> Stirling since they extend a sliver within the bounds.</p>
-<p>Think a bit on how to fix it, then continue below for a solution.</p>
-</div>
-</div>
-</div>
-<p>You could manually deselect the polygons that are not part of Stirling council, but then you have an idea: what if you buffer the Stirlingshire boundaries to expand them a tiny bit, and then try selecting the polygons <code>within</code> the buffer. That way OAs inside the council area that slightly extend outwards will fall within the buffer, while OAs outside the council area that slightly extend inward will still not be fully within it.</p>
-<ol start="10" class="example" type="1">
-<li><p>Go to <code>Vector &gt; Geoprocessing &gt; Buffer</code> and create a 20m buffer around the Stirling layer. You can just leave it as a temporary layer, as we will only use it for our spatial selection.</p></li>
-<li><p>Now repeat the <code>Select by location</code> operation for OA polygons <code>within</code> the buffered area. Bingo!</p></li>
-<li><p>Save the selection as a new layer by right clicking on the census layer name and selecting <code>Export &gt; Save Selected Features As..</code>. Once this new census layer is added to your project, remove the original one to avoid confusion.</p></li>
+<p><img src="images/lab_12/lab12_fig2_overlap.jpg" class="img-fluid"></p>
+<p>This new layer has all the same attributes and polygons as the original neighbourhoods layer, but two additional fields, named with the name of the overlap layer followed by a <code>_area</code> or <code>_pc</code> suffix: the first gives you the overlap area (in the same units as the CRS you are using, so m<span class="math inline">\(^2\)</span>), and the second gives you the percentage of area overlap. It should look somewhat like this:</p>
+<p><img src="images/lab_12/lab12_fig_no2-per-neig.jpg" class="img-fluid"></p>
+<ol start="8" class="example" type="1">
+<li>Style this new overlap layer to show the percentage of green spaces as a continuous colour. Does it seem to be inversely correlated to NO<span class="math inline">\(_2\)</span> pollution?</li>
 </ol>
 </section>
-<section id="answering-the-question" class="level3" data-number="10.1.3">
-<h3 data-number="10.1.3" class="anchored" data-anchor-id="answering-the-question"><span class="header-section-number">10.1.3</span> Answering the question</h3>
-<p>Now we can answer the actual study question. As a reminder, it is <strong>how many children in the relevant age range live within less than 1km, between 1km and 2km, and further than 2km of <em>any</em> primary (4 to 10 years old) and secondary (11 to 17 years old) school?</strong>. You will need to use some of the Geoprocessing tools you just learned to answer that, as well as tools from previous weeks.</p>
-<div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Stop and Think
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Before you continue, try to think about the solution yourself. Look at the attributes of each layer, and then try to sketch a step by step plan to achieve the results you need. Then continue.</p>
-</div>
-</div>
-<ol start="13" class="example" type="1">
-<li><p>You will first need to add up the number of children at each 1yr age bracket to compute the totals for the primary and secondary school age ranges (4-10 yo and 11-17 yo). For that, you can use the <code>Field Calculator</code>, as in previous labs. Just add up the numbers for columns <code>age_4</code> to <code>age_10</code> into a new <code>age_4-10</code> column, and then add columns <code>age_11</code> to <code>age_17</code> into a new <code>age_11-17</code> column.</p></li>
-<li><p>Then you will need to select only the schools within the Stirling council area. You can use <code>Select by location</code> as above, using the Stirling bounds, or by using the <code>LAname</code> field in the attribute table of the School Roll layer. Both methods should give you a selection of 48 schools. Create a new layer containing just these schools, then remove the original school layer from the project.</p></li>
-<li><p>The next step is to calculate the area covered by each distance bracket (1km, 2km) from the schools. For that, you should create a <code>Buffer</code> for the 1km distance, then a second <code>Buffer</code> for the 2km distance. Make sure you select the <code>Dissolve result</code> option when creating the buffers, since many locations will be within less than the specified distance from multiple schools, and we don’t want to repeat them.</p></li>
-<li><p>Then compute the <code>Difference</code> between the 2km and 1km buffers to create “rings” covering the range of 1km to 2km. This is important so we don’t “double count” the 1km bracket - see below.</p></li>
+<section id="guided-exercise---sample-raster-values" class="level2" data-number="12.4">
+<h2 data-number="12.4" class="anchored" data-anchor-id="guided-exercise---sample-raster-values"><span class="header-section-number">12.4</span> Guided Exercise - Sample Raster Values</h2>
+<p><code>Zonal Statistics</code> lets us sample and summarise raster values based on areas (i.e.&nbsp;polygons). But sometimes, we may be interested in knowing what are the specific raster values under a point coordinate. Again, as a GIS analyst, you have been now asked to determine if NO<span class="math inline">\(_2\)</span> levels have declined between 2008 and 2023. But the point location measurements only go as far back as 2010, so you need to compare the 2023 field measurements to the 2008 modelled values.</p>
+<ol start="9" class="example" type="1">
+<li><p>Before we proceed with the analysis, we need to link the NO<span class="math inline">\(_2\)</span> measured values (in the CSV file) with the measurement locations (one of the geopackage layers). You can do that using a <code>Join</code>, and the <code>CodeJ</code> field of the CSV table and the <code>Code</code> field of the locations layer.</p></li>
+<li><p>Now we can extract the concentration values from the 2008 raster using the <code>Sample Raster Values</code> tool. You will find it in the <code>Processing</code> panel, under the <code>Raster Analysis</code> section. Similarly to the <code>Zonal Statistics</code> tool, you will be asked to select an <code>Input Layer</code> (the vector points) and a <code>Raster Layer</code> (the pollution raster), and to pick a prefix for the field name (we can use <code>NO2_</code> again). Save your result in the appropriate location and click on <code>Run</code> then <code>Close</code>.</p></li>
 </ol>
-<p>Now you have to deal with the biggest limitation of your analysis - the OAs are still very big, and many will span areas both within and outside the 1k and 2km distances. You discuss the problem with your manager again, and you decide that the best approach is to <em>weight</em> the children count of each OA by the respective <em>area</em> of the OA that is <em>within</em> each distance bracket. So if an OA has 15 children aged 11-17, and 40% of the OA area is within 1km of a school, then you should multiply 15 by 0.4 to obtain the estimated number of children within 1km.</p>
-<ol start="17" class="example" type="1">
-<li>The first step is to calculate the total area of each OA. You can do that by using the <code>Field Calculator</code> tool and creating a new field called <code>oa_area</code> that takes the <code>$area</code> parameter under the <code>Geometry</code> calculator operations. Remember to make this new field a <strong>Decimal number</strong> with two decimal places.</li>
+<p><img src="images/lab_12/lab12_fig3_sampleraster.jpg" class="img-fluid"></p>
+<ol start="11" class="example" type="1">
+<li><p>The new layer created by the <code>Sample raster values</code> tool will be a copy of the input point layer, but will have one additional attribute at the end, named <code>NO2_1</code>. The *_1* refers to the band number. If the raster file had multiple bands, it would generate one column for each band. You can now use the <code>Field calculator</code> to calculate the difference between 2023 and 2008 concentrations as a new decimal number field.</p></li>
+<li><p>Style the layer to show the direction and amount of changes in emissions for each neighbourhood, using a divergent continuous colour scale (so that positive changes are shaded in one colour and negative changes as another - you can use the ColorBrewer palettes for that).</p></li>
 </ol>
-<div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Stop and Think
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>What units were used for the area calculation? Does it matter?</p>
-</div>
-</div>
-<div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Click for answer
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-10" class="callout-10-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Unless you have set it differently in your <em>Project properties</em>, areas are calculated in squared metres by default. This is not an ideal unit for such large areas (km<span class="math inline">\(^2\)</span> would have been better), but since we will only need to calculate the percentage of this total area within each distance bracket, it shouldn’t matter much.</p>
-</div>
-</div>
-</div>
-<p>Now that you have the total areas for each OA, it is time to find out the portions within each distance bracket. For that, we can either <code>Clip</code> or get the <code>Intersection</code> of the buffer layers with the census layer.</p>
-<div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Stop and Think
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>What will change in your results if you use <code>Intersection</code> instead of <code>Clip</code>?</p>
-</div>
-</div>
-<div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Click for answer
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-12" class="callout-12-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p><code>Intersection</code> will combine the attributes of both layers, while <code>CLip</code> will only preserve the attributes of the target layer.</p>
-</div>
-</div>
-</div>
-<ol start="18" class="example" type="1">
-<li>Since the buffers have been <em>dissolved</em>, they can’t be linked to individual schools anymore - whenever the buffers of two schools overlap their attribute tables will just keep the name of one of the schools when they are dissolved. So no need to preserve the buffer attributes, and we can use <code>Clip</code>. Create two new layers, the first being the clipping of the census layer by the 1km buffer layer, and the second being the clipping of the census layer by the 1km-2km ‘donuts’ layer. We use it instead of the 2km buffer otherwise when we calculate the percentage of area within 2km we will be double counting the area within 1km - which is already covered by the 1km buffer.</li>
-</ol>
-<p>You should end up with something like the figure below. To make sure the layers don’t overlap, style them using hatching in different directions. If you see a cross-hatch, then they are overlapping, and it means you used the full 2km buffer instead of the 1km-2km ‘donut’:</p>
-<p><img src="images/lab_geoprocessing/fig4_clipped_buffers.png" class="img-fluid"></p>
-<ol start="19" class="example" type="1">
-<li><p>Now we can calculate the area percentages. First, re-calculate the polygon areas for the clipped layers, using the <code>Field Calculator</code>. Create a new attribute called <code>clip_area</code>, and assign the <code>$area</code> operator to it again. Remember to set it as a decimal number.</p></li>
-<li><p>Still using the <code>Field Calculator</code>, you can now calculate the percent area by creating a new attribute called <code>perc_area</code>, which will be <code>clip_area / oa_area</code>. It should also be a decimal number.</p></li>
-<li><p>Finally, calculate the weighted number of children by creating new fields. First calculate <code>perc_4-10</code> as <code>age_4-10 * perc_area</code>, and then <code>perc_11-17</code> as <code>age_11-17 * perc_area</code>. These fields should be integers, unless you are sending partial children to school.</p></li>
-</ol>
-<p>Great, you are almost there! The last step is to aggregate all the data at the council level, and then also determine the number of children beyond 2km:</p>
-<ol start="22" class="example" type="1">
-<li><p>Use the <code>Statistical Summary</code> tool to calculate the respective sums of <code>perc_4-10</code> and <code>perc_11-17</code>. These are the final answers for <strong>how many children in the relevant age range live within less than 1km, between 1km and 2km?</strong>.</p></li>
-<li><p>To get the number of children beyond 2km, use the <code>Statistical Summary</code> tool to calculate the total number of children within each age bracket (<code>age_4-10</code> and <code>age_11-17</code>) in the council, and then subtract the number of children within 1km and between 1km and 2km from this total.</p></li>
-</ol>
-<p>Your final results should be:</p>
-<table class="table">
-<thead>
-<tr class="header">
-<th></th>
-<th>1km</th>
-<th>2km</th>
-<th>&gt;2km</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Primary</td>
-<td>6451</td>
-<td>6656</td>
-<td>89</td>
-</tr>
-<tr class="even">
-<td>Secondary</td>
-<td>7572</td>
-<td>7880</td>
-<td>91</td>
-</tr>
-</tbody>
-</table>
-<p>That is the end of this lab. From now on the exercises will be a bit more involved, like the one above - but at the same you will notice that much of it is still the same - loading data, organising it, doing queries - we will just be adding new tools that open up new (but quite specific) analysis possibilities and/or make some of the things you did before faster/simpler. But the general workflow of GIS is always the same.</p>
-
-
 </section>
+<section id="independent-exercise---taiwanese-hemlock-and-climate-change" class="level2" data-number="12.5">
+<h2 data-number="12.5" class="anchored" data-anchor-id="independent-exercise---taiwanese-hemlock-and-climate-change"><span class="header-section-number">12.5</span> Independent Exercise - Taiwanese hemlock and climate change</h2>
+<p>As the GIS specialist for an International NGO (Non-governmental organization), you have been tasked with generating a report on the possible susceptibility of the tree species <a href="https://en.wikipedia.org/wiki/Tsuga_chinensis"><em>Tsuga chinensis</em></a> (Chinese Hemlock or Taiwanese Hemlock) to climate change in <a href="https://en.wikipedia.org/wiki/Taiwan">Taiwan</a>.</p>
+<p><img src="images/lab_12/lab12_fig4_tsuga.jpg" class="img-fluid"></p>
+<ol type="1">
+<li>The first step in your analysis is to obtain data on the distribution of <em>T. chinensis</em>. For this exercise, I am giving both a pre-downloaded link and the instructions to download the orignal data - if working with species distribution data is of interest to you for the feature.</li>
+</ol>
+<p>Option 1: Download the data package from here.</p>
+<p>Option 2: To download the data, you need to gather species occurrence data from the <a href="https://www.gbif.org/">Global Biodiversity Species Facility (GBIF)</a>. You will need to create anm account to download.</p>
+<p>On the top left of the webpage, go to <code>Get data &gt; Ocurrences</code>“. You can search for data using the different parameters on the left column. Expand the <code>Scientific name</code> field and search for <code>Tsuga chinensis</code>. Then click on <code>Download</code> (above the table). The data will come as a tab-separated text file.</p>
+<ol start="2" type="1">
+<li>You also need climate data. After doing some research, you find the WordlCLim database, which provides global maps of pastpresent and future climate data (<a href="https://www.worldclim.org/data/index.html">https://www.worldclim.org/data/index.html/</a>.</li>
+</ol>
+<p>Within this database, you also learn about the <a href="https://www.worldclim.org/data/bioclim.html">BIOCLIM variables</a>, a set of climatic descriptors devised to capture climatic conditions that are related to species survival.</p>
+<p>Since you are working with a plant, you decide to use:</p>
+<ul>
+<li><p>BIO5 = Max Temperature of Warmest Month</p></li>
+<li><p>BIO6 = Min Temperature of Coldest Month</p></li>
+<li><p>BIO16 = Precipitation of Wettest Quarter</p></li>
+<li><p>BIO17 = Precipitation of Driest Quarter</p></li>
+</ul>
+<p>For the current climate, you can download all Bioclim variables from here: <a href="https://www.worldclim.org/data/worldclim21.html">https://www.worldclim.org/data/worldclim21.html</a>. Make sure you get the <code>bio 30s data</code>:</p>
+<p><img src="images/lab_12/lab12_fig5_bioclim_present.jpg" class="img-fluid"></p>
+<p>For future climate analysis, there are multiple year ranges, multiple warming scenarios, and multipler climate models to choose from. You decide to focus on the longet term scenario (2081-2100), and the most extreme change pathway (ssp585), using the HadGEM3-GC31-LL climate model. The download page is <a href="https://www.worldclim.org/data/cmip6/cmip6_clim30s.html">https://www.worldclim.org/data/cmip6/cmip6_clim30s.html</a>.</p>
+<p><img src="images/lab_12/lab12_fig6_bioclim_fut.jpg" class="img-fluid"> You note on the documentation that Bio 5 and Bio 6 are given in degrees Celsius and precipitation has values in mm of rain.</p>
+<ol start="3" type="1">
+<li>Finally, you decide to grab the Taiwan country borders from the <a href="https://gadm.org/download_country.html">GADM website</a>.</li>
+</ol>
+<p>Important: before adding any layer to QGIS, go to the file explorer on your PC and make sure all files are unzipped (look inside each folder you have downloaded).</p>
+<p>With that data in hand, you are ready to start your project. You prepare an initial list of the tasks you need to accomplish to achieve your goal:</p>
+<ol type="1">
+<li><p>Import the data into QGIS: organise them under groups with meaningful names. You may add OpenStreetMap (from the XYZ Tiles) to help you to recognise where these data are located in the world. Also, open the attribute tables and raster info to understand the structure of each data file, unit, etc.</p></li>
+<li><p>This exercise focuses on species observation in Taiwan, so clean up all the data to include only records from Taiwan, and only actual observations (e.g.&nbsp;not a specimen in a museum) - records having the word “observation” on the basisofRec attribute field (think about selection tools).</p></li>
+<li><p>Calculate the convex hull Links to an external site.of the species observations to represent the species distribution range.</p></li>
+<li><p>Use this polygon to extract the minimum and maximum values for each present climate layer, therefore determining the climate envelope of the species. You can then assume that any location where one or more of the climatic variables are outside this range is not suitable for the species’ survival.</p></li>
+<li><p>Average the outputs of the three climatic models for each of your future climatic layers.</p></li>
+<li><p>Find out which locations in the future will be within the climate envelope you calculated previously. (Hint: if only one variable is out of range, you already assume the location is outside the climate envelope, even of the other three are within range).</p></li>
+<li><p>Calculate the total area of suitable habitat expected for T. chinensis in the years 2071-2010, according to the SSP370 scenario, and determine how much smaller/larger it is than the current range.</p></li>
+<li><p>Make a nice map showing your results.</p></li>
+</ol>
+<p>Now that you have a plan in mind, execute it!</p>
+<p>GIS operations to consider: Select by Location, Select by Expression, Minimum Bounding Geometry (Processing tab - NOT the tool called Convex Hull), Zonal Statistics, Raster Calculator, Raster to Vector conversion, Field Calculator.</p>
+<p>Obs: this is a very crude method to determine species distribution and niche, but this is a GIS module, not a Biogeography one. If you find this interesting, search for Species Distribution Modelling (SDM) or Environmental Niche Modelling (ENM). It is a well-developed field with specialised tools and methods, which nonetheless are still GIS operations at heart.</p>
+<p>Answers:</p>
+
+
 </section>
 
 </main> <!-- /main -->
@@ -1027,13 +930,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./lab_catchup1.html" class="pagination-link" aria-label="Lab 9 - Catch Up / Assignment Work session">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Lab 9 - Catch Up / Assignment Work session</span></span>
+      <a href="./lab_joins.html" class="pagination-link" aria-label="Lab 11 - Data Joins">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Lab 11 - Data Joins</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./sec_w6_spatial_analysis_II.html" class="pagination-link" aria-label="Week 6 - Spatial analysis II">
-        <span class="nav-page-text">Week 6 - Spatial analysis II</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./sec_w8_spatial_analysis_III.html" class="pagination-link" aria-label="Week 8 - Spatial analysis III">
+        <span class="nav-page-text">Week 8 - Spatial analysis III</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

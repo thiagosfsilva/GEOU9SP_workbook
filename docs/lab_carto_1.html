@@ -244,15 +244,40 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./lab_catchup1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Lab 9 - Catch Up / Assignment Work session</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./lab_geoprocessing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Lab 9: Geoprocessing tools</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Lab 10: Geoprocessing tools</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text">Week 6 - Spatial analysis II</span></span>
+      <div class="sidebar-item-container"> 
+            <a href="./sec_w6_spatial_analysis_II.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 6 - Spatial analysis II</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lab_joins.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Lab 11 - Data Joins</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lab_zonal.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Lab 12 - Zonal Statistics and Overlap analysis</span></span></a>
+  </div>
+</li>
+      </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <span class="sidebar-item-text sidebar-link text-start">
@@ -275,7 +300,7 @@ window.Quarto = {
   <li><a href="#context" id="toc-context" class="nav-link active" data-scroll-target="#context"><span class="header-section-number">7.1</span> Context</a></li>
   <li><a href="#guided-exercise-1---getting-the-data" id="toc-guided-exercise-1---getting-the-data" class="nav-link" data-scroll-target="#guided-exercise-1---getting-the-data"><span class="header-section-number">7.2</span> Guided Exercise 1 - Getting the data</a></li>
   <li><a href="#guided-exercise-2---starting-the-project-and-organising-data" id="toc-guided-exercise-2---starting-the-project-and-organising-data" class="nav-link" data-scroll-target="#guided-exercise-2---starting-the-project-and-organising-data"><span class="header-section-number">7.3</span> Guided exercise 2 - Starting the project and organising data</a></li>
-  <li><a href="#guided-exercise-3---styling-the-dem" id="toc-guided-exercise-3---styling-the-dem" class="nav-link" data-scroll-target="#guided-exercise-3---styling-the-dem"><span class="header-section-number">7.4</span> Guided Exercise 3 - Styling the DEM</a></li>
+  <li><a href="#guided-exercise-3---styling-the-dtm" id="toc-guided-exercise-3---styling-the-dtm" class="nav-link" data-scroll-target="#guided-exercise-3---styling-the-dtm"><span class="header-section-number">7.4</span> Guided Exercise 3 - Styling the DTM</a></li>
   <li><a href="#guided-exercise-4-adding-and-styling-the-transportation-layers" id="toc-guided-exercise-4-adding-and-styling-the-transportation-layers" class="nav-link" data-scroll-target="#guided-exercise-4-adding-and-styling-the-transportation-layers"><span class="header-section-number">7.5</span> Guided Exercise 4: Adding and styling the transportation layers</a></li>
   <li><a href="#guided-exercise-5---adding-contextual-elements" id="toc-guided-exercise-5---adding-contextual-elements" class="nav-link" data-scroll-target="#guided-exercise-5---adding-contextual-elements"><span class="header-section-number">7.6</span> Guided Exercise 5 - Adding contextual elements</a></li>
   <li><a href="#guided-exercise-6-deciding-on-the-framing-and-scale-and-adding-some-finishing-touches" id="toc-guided-exercise-6-deciding-on-the-framing-and-scale-and-adding-some-finishing-touches" class="nav-link" data-scroll-target="#guided-exercise-6-deciding-on-the-framing-and-scale-and-adding-some-finishing-touches"><span class="header-section-number">7.7</span> Guided Exercise 6: Deciding on the framing and scale, and adding some finishing touches</a></li>
@@ -320,7 +345,7 @@ window.Quarto = {
 <li>First, grab these datasets from the <code>Ordnance Survey</code> collection on Digimap, selecting the NU tile, and using <code>SHP</code> as the format if asked:</li>
 </ol>
 <ul>
-<li><p>OS Terrain 50 DEM</p></li>
+<li><p>OS Terrain 50 DTM</p></li>
 <li><p>Vector Map District</p></li>
 </ul>
 <p><strong>Make sure you submit the order before you continue</strong>. Digimap will not carry over your selection when you switch collections.</p>
@@ -368,18 +393,18 @@ Click for answer
 </div>
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>The aerial photo, DEM and GB Overview are raster files. The DEM is in the <a href="https://support.geocue.com/ascii-raster-files-asc/">ESRI ASCII</a> raster file format, and the Aerial Image is in <a href="https://en.wikipedia.org/wiki/JPEG">JPEG</a> format. JPEGS don’t natively store coordinates, so a <code>.jgw</code> <em>sidecar</em> file is used to store the spatial information. The GB Overview files are <a href="https://www.ogc.org/standard/geotiff/">GeoTIFF</a> files.</p>
+<p>The aerial photo, DTM and GB Overview are raster files. The DTM is in the <a href="https://support.geocue.com/ascii-raster-files-asc/">ESRI ASCII</a> raster file format, and the Aerial Image is in <a href="https://en.wikipedia.org/wiki/JPEG">JPEG</a> format. JPEGS don’t natively store coordinates, so a <code>.jgw</code> <em>sidecar</em> file is used to store the spatial information. The GB Overview files are <a href="https://www.ogc.org/standard/geotiff/">GeoTIFF</a> files.</p>
 <p>The vector district files are all vector files, some being polygons, some being lines and some being points. They will be in <a href="https://en.wikipedia.org/wiki/Shapefile">Shapefile</a> format.</p>
 </div>
 </div>
 </div>
 <ol start="6" class="example" type="1">
 <li><p>Create a new empty project in QGIS, name it <code>labs_7_8</code> and set its CRS to OSGB (EPSG:27700). Save it.</p></li>
-<li><p>As starter, bring in the DEM tiles into the project. If you downloaded the NU region correctly, you should have 15 separate DEM tiles (files ending in <code>.asc</code>). They should look like this:</p></li>
+<li><p>As starter, bring in the DTM tiles into the project. If you downloaded the NU region correctly, you should have 15 separate DTM tiles (files ending in <code>.asc</code>). They should look like this:</p></li>
 </ol>
 <p><img src="images/lab_7/lab7_fig4_demsl.jpg" class="img-fluid"></p>
 <ol start="8" class="example" type="1">
-<li><p>We will want to style this data, but copying and pasting the style 15 times is too cumbersome. So use your skills from last week and make a <em>mosaic</em> of all the DEM tiles. Save it as a new file on the proper location in your folder organization, and them remove all the individual tiles from the project to keep it ‘clean’.</p></li>
+<li><p>We will want to style this data, but copying and pasting the style 15 times is too cumbersome. So use your skills from last week and make a <em>mosaic</em> of all the DTM tiles. Save it as a new file on the proper location in your folder organization, and them remove all the individual tiles from the project to keep it ‘clean’.</p></li>
 <li><p>Now look at the data you downloaded from the OS Vector District dataset. It should contain several shapefiles named <code>NU_xxxxxx.shp</code>, where <code>xxxxx</code> will be a descriptive name for what the layer holds. You will want to bring in the layers below into your project. Don’t worry yet about how each layer looks or their ordering, just make sure you got it all.</p></li>
 </ol>
 <ul>
@@ -427,7 +452,7 @@ Click for answer
 </div>
 </div>
 <ol start="11" class="example" type="1">
-<li>Using your skills from previous labs, create a <code>Layer Extent</code> polygon based on the DEM mosaic, and then use this polygon to <code>Clip</code> all layers. As you clip and save the clipped versions, remove the original ones to avoid confusion and keep the project tidy. Once they are all clipped and neat, save your project. <strong>From now on, when I refer to any of these layers in the instructions, I will be meaning the clipped versions</strong>. You may even want to delete the originals from your folder to prevent confusion.</li>
+<li>Using your skills from previous labs, create a layer extent polygon (<code>Vector &gt; Research Tools &gt; Extract Layer Extent</code>) based on the DTM mosaic, and then use this polygon to <code>Clip</code> all layers. As you clip and save the clipped versions, remove the original ones to avoid confusion and keep the project tidy. Once they are all clipped and neat, save your project. <strong>From now on, when I refer to any of these layers in the instructions, I will be meaning the clipped versions</strong>. You may even want to delete the originals from your folder to prevent confusion.</li>
 </ol>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -445,10 +470,10 @@ Tip
 </div>
 <p>We now have all the data we need to start laying out our map. Save your project and continue.</p>
 </section>
-<section id="guided-exercise-3---styling-the-dem" class="level2" data-number="7.4">
-<h2 data-number="7.4" class="anchored" data-anchor-id="guided-exercise-3---styling-the-dem"><span class="header-section-number">7.4</span> Guided Exercise 3 - Styling the DEM</h2>
+<section id="guided-exercise-3---styling-the-dtm" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="guided-exercise-3---styling-the-dtm"><span class="header-section-number">7.4</span> Guided Exercise 3 - Styling the DTM</h2>
 <ol start="12" class="example" type="1">
-<li>Let us start with the DEM, as it will be the background for our main map. Turn off all the layers except for the DEM, and open the DEM <code>Properties &gt; Symbology</code>, then select <code>Singleband Pseudocolor</code> for <code>Render Type</code>.</li>
+<li>Let us start with the DTM, as it will be the background for our main map. Turn off all the layers except for the DTM, and open the DTM <code>Properties &gt; Symbology</code>, then select <code>Singleband Pseudocolor</code> for <code>Render Type</code>.</li>
 </ol>
 <p>We could pick one of the colour ramps from the drop down menu, but we can do better. QGIS actually has several built-in colour palettes that are professionally designed to be <em>perceptually equivalent</em>, <em>colour blind friendly</em>, and so on. The two main collections of palettes are the <a href="https://colorbrewer2.org/#type=sequential&amp;scheme=BuGn&amp;n=3">ColorBrewer</a> palettes and the <a href="http://seaviewsensing.com/pub/cpt-city/">cpt-city</a> archive. We will use one of the topography optimised cpt-city palettes.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
@@ -467,15 +492,15 @@ Tip
 <ol start="13" class="example" type="1">
 <li><p>Click the small down-arrow to the right of the <code>Color Ramp</code> button, and select the option <code>Create New Color Ramp</code>. On the small window that will appear, select <code>Catalog: cpt-city</code> and click <code>OK</code>. A new window will appear with all the (many) cpt-city palettes.</p></li>
 <li><p>Pick the <code>Topography</code> category on the left, and then click on the <code>cd-a</code> palette (or another of your choice), and then <code>OK</code>. You will then be back at the <code>Symbology</code> window.</p></li>
-<li><p>Now let us customise our colour palette. First, for <code>Min</code> and <code>Max</code>, pick <code>0</code> and <code>300</code> respectively. Continuous palettes are easier to interpret if they use nice, round values. Then change the <code>Mode</code> to <code>Equal Interval</code> with <code>7</code> classes. That will give us nice round steps of 50m. Then <code>Apply</code> and <code>OK</code>. Your DEM should now look like this:</p></li>
+<li><p>Now let us customise our colour palette. First, for <code>Min</code> and <code>Max</code>, pick <code>0</code> and <code>300</code> respectively. Continuous palettes are easier to interpret if they use nice, round values. Then change the <code>Mode</code> to <code>Equal Interval</code> with <code>7</code> classes. That will give us nice round steps of 50m. Then <code>Apply</code> and <code>OK</code>. Your DTM should now look like this:</p></li>
 </ol>
 <p><img src="images/lab_7/lab7_fig6_coldem.jpg" class="img-fluid"></p>
 <ol start="16" class="example" type="1">
-<li>We can add a bit more pop to the DEM by reproducing the <code>3D</code> effect using transparency and <code>hillshade</code> symbology that we learned on <a href="lab_rasters_1.html" class="quarto-xref"><span>Chapter 5</span></a>. If you can’t quite remember how to do it, refer back to Guided Exercise 4 for that lab. For my map, I set the transparency of the coloured DEM layer to <code>60%</code>, and then went back to the <code>Symbology</code> of the hillshade layer and tweaked a bit the <code>brightness</code> (<code>20</code>) and <code>contrast</code> (<code>-10</code>) options under the <code>Layer Rendering</code> section. We want the effect to be subtle, and the whole DEM to have a ‘light’ appearance since it will be a background:</li>
+<li>We can add a bit more pop to the DTM by reproducing the <code>3D</code> effect using transparency and <code>hillshade</code> symbology that we learned on <a href="lab_rasters_1.html" class="quarto-xref"><span>Chapter 5</span></a>. If you can’t quite remember how to do it, refer back to Guided Exercise 4 for that lab. For my map, I set the transparency of the coloured DTM layer to <code>60%</code>, and then went back to the <code>Symbology</code> of the hillshade layer and tweaked a bit the <code>brightness</code> (<code>20</code>) and <code>contrast</code> (<code>-10</code>) options under the <code>Layer Rendering</code> section. We want the effect to be subtle, and the whole DTM to have a ‘light’ appearance since it will be a background:</li>
 </ol>
 <p><img src="images/lab_7/lab7_fig7_hillshade.jpg" class="img-fluid"></p>
 <ol start="17" class="example" type="1">
-<li>Make any additional adjustments to the DEM style to your taste, and then save your project.</li>
+<li>Make any additional adjustments to the DTM style to your taste, and then save your project.</li>
 </ol>
 </section>
 <section id="guided-exercise-4-adding-and-styling-the-transportation-layers" class="level2" data-number="7.5">
@@ -544,7 +569,7 @@ Click for answer
 <li>Take a look at the <a href="https://www.gov.uk/government/publications/guidance-on-road-classification-and-the-primary-route-network/guidance-on-road-classification-and-the-primary-route-network">UK roads classification</a> and then style them with proper visual hierarchy. Colour A and B roads red, but use different widths for each, and then style the remaining roads dark grey, but again with hierarchy indicated by line width. Feel free to use the same symbol for classes you think are too similar (I used the same symbol for the two types of <code>primary road</code>, and I removed the symbols for pedestrianized and private roads). This is what my map looks like by now:</li>
 </ol>
 <p><img src="images/lab_7/lab7_fig10_demnroads.jpg" class="img-fluid"></p>
-<p>Now that we have our main roads, let us add some more context to the map. But first save yoiur project!</p>
+<p>Now that we have our main roads, let us add some more context to the map. But first save your project!</p>
 </section>
 <section id="guided-exercise-5---adding-contextual-elements" class="level2" data-number="7.6">
 <h2 data-number="7.6" class="anchored" data-anchor-id="guided-exercise-5---adding-contextual-elements"><span class="header-section-number">7.6</span> Guided Exercise 5 - Adding contextual elements</h2>

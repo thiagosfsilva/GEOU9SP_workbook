@@ -1,0 +1,170 @@
+# Lab 12 - Zonal Statistics and Overlap analysis
+
+So far we have been mostly keeping to one of the two main data models: vectors and rasters. We have learned several ways to work with either, but they are mostly treated separately. The two exceptions are the `Mask by Layer` tool, that lets us clip a raster based on a vector shape, and the `Polygonize` tool, which converts rasters into vectors. 
+
+In this lab you will learn about `Zonal Statistics` ([QGIS Documentation](https://docs.qgis.org/3.34/en/docs/user_manual/processing_algs/qgis/rasteranalysis.html#zonal-statistics)), one of the main tools that mixes vectors and rasters, and lets you compute pixel statistics for regions defined by polygons. You will also learn about a related tool for points, called `Sample Raster Values` ([QGIS Documentation](https://docs.qgis.org/3.34/en/docs/user_manual/processing_algs/qgis/rasteranalysis.html#sample-raster-values)), and a  `cousin` tool to Zonal Statistics, the `Overlap Analysis` tool ([QGIS Documentation](https://docs.qgis.org/3.34/en/docs/user_manual/processing_algs/qgis/vectoranalysis.html#overlap-analysis)).    
+
+## Guided Exercise 1 - Data preparation
+
+In this exercise, we will look at air pollution data from the city of [Amsterdam](https://en.wikipedia.org/wiki/Amsterdam), in the Netherlands. Importantly for this exercise, Amsterdam is broken up into 8 districts or boroughs (stadsdelen), which are further divided into neighbourhoods (buurten).
+
+More specifically, we will be looking at [NO$_2$ (Nitrogen Dioxide) pollution](https://www.gov.uk/government/statistics/air-quality-statistics/ntrogen-dioxide). NO$_2$ is mainly produced by combustion engines, and impacts respiratory health. 
+
+The data for this exercise has been pre-packaged and can be [downloaded here], and it consists of the following datasets:
+
+- A geopackage file containing four layers:
+    - The location of several NO2 measurement sites, as point vectors.
+    - The extent and location of parks and green spaces in Amsterdam, as a polygon vector layer.
+    - The official boundaries of Amsterdam's neighbourhoods, as polygon vectors.
+    - A rectangular polygon defining the extent of the study.
+- A CSV file containing annual NO$_2$ measurements for several sites, including the sites identified in the geopackage above.  
+    
+If you are curious, these files were obtained from the City of Amsterdam [geodata portal](https://maps.amsterdam.nl/open_geodata/).
+
+- A raster file showing modelled annual NO2 concentrations for the year 2008, produced as an output from [this research article](https://www.nature.com/articles/sdata201935). The original files cover all of the Netherlands, but have been cropped to make the file size more manageable for this exercise.
+
+(@) Download the data and create a project folder and a QGIS project for this exercise. The project should be set to EPSG:28899 - Amersfoort / RD New, the standard CRS for the Netherlands. 
+
+::: {.callout-tip}
+Two useful websites to find information about coordinate reference systems are [https://epsg.io/](https://epsg.io/) and [https://spatialreference.org/](https://spatialreference.org/). Search for EPSG:28899 in thee websites and see what information they provide. 
+:::
+
+(@) Now load all five layers and the CSV file into your project. This CSV file has no coordinates, so you can just drag it to your `Layers` panel without needing to use the `Import Delimited Text` tool. 
+
+## Guided Exercise 2 - Zonal Statistics
+
+You are now a GIS analyst at the Amsterdam city administration, and have been asked to analyse the pollution levels per city neighbourhood, using the data for 2008 published by the scientific study above. Specifically, you have been asked to calculate the average NO$_2$ concentrations for each neighbourhood. 
+
+You have access to the neighbourhood boundaries in vector format, but the study data is given as a raster data. 
+
+::: {.callout-important title="Stop and Think"}
+Using the GIS tools you have learned so far, how would you accomplish this?
+:::
+
+::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
+Since at this point we don't know many tools that interface rasters and vectors, we would have to do it in a rather convoluted way. First, we would need to separate each neighbourhood into a separate vector file, and then mask the NO$_2$ raster multiple times to generate one pollution raster for each neighbourhood. We could then calculate the `Raster Layer Statistics` for each one of the masked neighbourhoods, and manually copy each average to a table. No big deal, there are only 518 neighbourhoods after all. There must be a better way - keep reading!
+
+Still, this is a good example of how you can get by in GIS even with just basic knowledge and some creative thinking. There are always multiple ways to achieve the same result in GIS, even if some of these ways are not fast or optimal. 
+:::
+
+The right way to accomplish this task is to use the `Zonal Statistics` tool. It will calculate descriptive statistics (min, max, average, range, etc.) for raster values (pixels) contained within each polygon of a vector layer, and output it as a new vector layer with the same polygons and attributes of the original vector layer, with added attribute columns for the statistics. 
+
+(@) Go to the `Processing` panel and find the `Zonal statistics` tool (NOT `Raster layer zonal statistics`), under the `Raster analysis` category. It will launch a new window.
+
+(@) On the `Zonal Statistics` window, select the neighbourhoods layer as the `Input Layer`, and the NO$_2$ concentration map as the `Raster Layer`. Notice how you could select a specific band if your raster contained multiple bands. For `Output column prefix` write `NO2_` - this prefix will be added to the name of each calculated statistic to generate the new attributes. Right click on the `...` button to the right of the `Statistics to calculate` box to see which statistics are available for calculation. In this case we only want the means, so you can uncheck all other boxes. Then save your layer appropriately and `Run` then `Close`.
+
+![](images/lab_12/lab12_fig1_zonastats.jpg)
+
+(@) Now style the new layer you obtained using a continuous colour scale to show NO$_2$ concentrations for each neighbourhood. 
+
+(@) Load the `OpenStreetMap` layer (on the `Browser Panel`, under the `XYZ Tiles` category). Does it look like NO$_2$ pollution is worse on densely urbanised areas?
+
+## Guided Exercise 3 - Overlap Analysis
+
+As you continue with your GIS analysis, you notice you have also been given a map with all the parks and green spaces in Amsterdam, and you wonder if they could be related to improved air quality. Maybe you could create an attribute that computed the amount of green spaces within each neighbourhood, and then use that information. You have two polygon vector layers now - one of the neighbourhoods and another of the green spaces.
+
+::: {.callout-important title="Stop and Think"}
+Again, using the GIS tools you have learned so far, how would you accomplish this?
+:::
+
+::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
+So far the tools we have learned for overlaying separate vector layers are the set of *geoprocessing* tools. You could calculate the `Intersection` of the green spaces and neighbourhoods layer - that would create a new layer showing only the extent of green spaces inside each neighbourhood. And because it is an intersection, you will carry all the attributes from both layers, including the neighbourhood names. 
+
+You could then use the `Field calculator` to calculate the area of green space for each neighbourhood from the intersection layer, and then use a `Join` to join these areas to the original neighbourhood layer, bringing in the green space area attribute. If you wanted a percentage instead of an area, you could then use the `Field calculator` again to divide the green space area by total neighbourhood area to get a percentage cover. 
+
+But again, there is a faster way. This will be a common theme for many of the tools you will learn from this week on - they don't necessarily offer new possibilities of analysis, but they will optimise/facilitate the same analysis with less steps. What separates a GIS user from a good GIS user is knowing which approach is optimal for each situation. 
+:::
+
+(@) Go back to the `Processing` panel and find the `Overlap Analysis` tool, under the `Vector Analysis` category, and launch it. This tool only takes two parameters: `Input layer` is the main layer you want as output (the neighbourhood layer in this case), and the `Overlay layers` are the layers you want to calculate the overlap with (in our case, only one, the green spaces layer). Set these two parameters and then save your result to a proper location. A new layer will be produced. 
+
+![](images/lab_12/lab12_fig2_overlap.jpg)
+
+This new layer has all the same attributes and polygons as the original neighbourhoods layer, but two additional fields, named with the name of the overlap layer followed by a `_area` or `_pc` suffix: the first gives you the overlap area (in the same units as the CRS you are using, so m$^2$), and the second gives you the percentage of area overlap. It should look somewhat like this:
+
+![](images/lab_12/lab12_fig_no2-per-neig.jpg)
+
+
+(@) Style this new overlap layer to show the percentage of green spaces as a continuous colour. Does it seem to be inversely correlated to NO$_2$ pollution?
+
+## Guided Exercise - Sample Raster Values
+
+`Zonal Statistics` lets us sample and summarise raster values based on areas (i.e. polygons). But sometimes, we may be interested in knowing what are the specific raster values under a point coordinate. Again, as a GIS analyst, you have been now asked to determine if NO$_2$ levels have declined between 2008 and 2023. But the point location measurements only go as far back as 2010, so you need to compare the 2023 field measurements to the 2008 modelled values. 
+
+(@) Before we proceed with the analysis, we need to link the NO$_2$ measured values (in the CSV file) with the measurement locations (one of the geopackage layers). You can do that using a `Join`, and the `CodeJ` field of the CSV table and the `Code` field of the locations layer. 
+
+(@) Now we can extract the concentration values from the 2008 raster using the `Sample Raster Values` tool. You will find it in the `Processing` panel, under the `Raster Analysis` section. Similarly to the `Zonal Statistics` tool, you will be asked to select an `Input Layer` (the vector points) and a `Raster Layer` (the pollution raster), and to pick a prefix for the field name (we can use `NO2_` again). Save your result in the appropriate location and click on `Run` then `Close`.
+
+![](images/lab_12/lab12_fig3_sampleraster.jpg)
+
+(@) The new layer created by the `Sample raster values` tool will be a copy of the input point layer, but will have one additional attribute at the end, named `NO2_1`. The *_1* refers to the band number. If the raster file had multiple bands, it would generate one column for each band. You can now use the `Field calculator` to calculate the difference between 2023 and 2008 concentrations as a new decimal number field. 
+
+(@) Style the layer to show the direction and amount of changes in emissions for each neighbourhood, using a divergent continuous colour scale (so that positive changes are shaded in one colour and negative changes as another -  you can use the ColorBrewer palettes for that).
+
+## Independent Exercise - Taiwanese hemlock and climate change
+
+As the GIS specialist for an International NGO (Non-governmental organization), you have been tasked with generating a report on the possible susceptibility of the tree species [*Tsuga chinensis*](https://en.wikipedia.org/wiki/Tsuga_chinensis) (Chinese Hemlock or Taiwanese Hemlock) to climate change in [Taiwan](https://en.wikipedia.org/wiki/Taiwan).
+
+![](images/lab_12/lab12_fig4_tsuga.jpg)
+
+1) The first step in your analysis is to obtain data on the distribution of *T. chinensis*. For this exercise, I am giving both a pre-downloaded link and the instructions to download the orignal data - if working with species distribution data is of interest to you for the feature.  
+
+Option 1: Download the data package from here.
+
+Option 2: To download the data, you need to gather species occurrence data from the [Global Biodiversity Species Facility (GBIF)](https://www.gbif.org/). You will need to create anm account to download. 
+
+On the top left of the webpage, go to  `Get data > Ocurrences`".  You can search for data using the different parameters on the left column. Expand the `Scientific name` field and search for `Tsuga chinensis`. Then click on `Download` (above the table). The data will come as a tab-separated text file.
+
+2) You also need climate data. After doing some research, you find the WordlCLim database, which provides global maps of pastpresent and future climate data ([https://www.worldclim.org/data/index.html/](https://www.worldclim.org/data/index.html).
+
+Within this database, you also learn about the [BIOCLIM variables](https://www.worldclim.org/data/bioclim.html), a set of climatic descriptors devised to capture climatic conditions that are related to species survival.
+
+Since you are working with a plant, you decide to use:
+
+- BIO5 = Max Temperature of Warmest Month
+
+- BIO6 = Min Temperature of Coldest Month 
+
+- BIO16 = Precipitation of Wettest Quarter
+
+- BIO17 = Precipitation of Driest Quarter
+
+For the current climate, you can download all Bioclim variables from here: [https://www.worldclim.org/data/worldclim21.html](https://www.worldclim.org/data/worldclim21.html). Make sure you get the `bio 30s data`:
+
+![](images/lab_12/lab12_fig5_bioclim_present.jpg)
+
+For future climate analysis, there are multiple year ranges, multiple warming scenarios, and multipler climate models to choose from. You decide to focus on the longet term scenario (2081-2100), and the most extreme change pathway (ssp585), using the HadGEM3-GC31-LL climate model. The download page is [https://www.worldclim.org/data/cmip6/cmip6_clim30s.html](https://www.worldclim.org/data/cmip6/cmip6_clim30s.html).
+
+![](images/lab_12/lab12_fig6_bioclim_fut.jpg)
+You note on the documentation that Bio 5 and Bio 6 are given in degrees Celsius and precipitation has values in mm of rain.
+
+3) Finally, you decide to grab the Taiwan country borders from the [GADM website](https://gadm.org/download_country.html).
+
+Important: before adding any layer to QGIS, go to the file explorer on your PC and make sure all files are unzipped (look inside each folder you have downloaded).
+
+With that data in hand, you are ready to start your project. You prepare an initial list of the tasks you need to accomplish to achieve your goal:
+
+1) Import the data into QGIS: organise them under groups with meaningful names. You may add OpenStreetMap (from the XYZ Tiles) to help you to recognise where these data are located in the world. Also, open the attribute tables and raster info to understand the structure of each data file, unit, etc.
+
+2) This exercise focuses on species observation in Taiwan, so clean up all the data to include only records from Taiwan, and only actual observations (e.g. not a specimen in a museum) - records having the word "observation" on the basisofRec attribute field (think about selection tools).
+
+3) Calculate the convex hull Links to an external site.of the species observations to represent the species distribution range.
+
+4) Use this polygon to extract the minimum and maximum values for each present climate layer, therefore determining the climate envelope of the species. You can then assume that any location where one or more of the climatic variables are outside this range is not suitable for the species' survival.
+
+5) Average the outputs of the three climatic models for each of your future climatic layers.
+
+6) Find out which locations in the future will be within the climate envelope you calculated previously. (Hint: if only one variable is out of range, you already assume the location is outside the climate envelope, even of the other three are within range).
+
+7) Calculate the total area of suitable habitat expected for T. chinensis  in the years 2071-2010, according to the SSP370 scenario, and determine how much smaller/larger it is than the current range. 
+
+8) Make a nice map showing your results. 
+
+Now that you have a plan in mind, execute it!
+
+GIS operations to consider: Select by Location, Select by Expression, Minimum Bounding Geometry (Processing tab - NOT the tool called Convex Hull), Zonal Statistics, Raster Calculator, Raster to Vector conversion, Field Calculator.
+
+ 
+
+Obs: this is a very crude method to determine species distribution and niche, but this is a GIS module, not a Biogeography one. If you find this interesting, search for Species Distribution Modelling (SDM) or Environmental Niche Modelling (ENM). It is a well-developed field with specialised tools and methods, which nonetheless are still GIS operations at heart. 
+
+Answers:

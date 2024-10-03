@@ -21,7 +21,7 @@ We will use several datasets from the Ordnance Survey for this exercise, most of
 
 (@) First, grab these datasets from the `Ordnance Survey` collection on Digimap, selecting the NU tile, and using `SHP` as the format if asked:
 
-- OS Terrain 50 DEM
+- OS Terrain 50 DTM
 
 - Vector Map District
 
@@ -50,18 +50,18 @@ What data models and file formats are your datasets on?
 :::
 
 ::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
-The aerial photo, DEM and GB Overview are raster files. The DEM is in the [ESRI ASCII](https://support.geocue.com/ascii-raster-files-asc/) raster file format, and the Aerial Image is in [JPEG](https://en.wikipedia.org/wiki/JPEG) format. JPEGS don't natively store coordinates, so a `.jgw` *sidecar*  file is used to store the spatial information. The GB Overview files are [GeoTIFF](https://www.ogc.org/standard/geotiff/) files.
+The aerial photo, DTM and GB Overview are raster files. The DTM is in the [ESRI ASCII](https://support.geocue.com/ascii-raster-files-asc/) raster file format, and the Aerial Image is in [JPEG](https://en.wikipedia.org/wiki/JPEG) format. JPEGS don't natively store coordinates, so a `.jgw` *sidecar*  file is used to store the spatial information. The GB Overview files are [GeoTIFF](https://www.ogc.org/standard/geotiff/) files.
 
 The vector district files are all vector files, some being polygons, some being lines and some being points. They will be in [Shapefile](https://en.wikipedia.org/wiki/Shapefile) format.  
 :::
 
 (@) Create a new empty project in QGIS, name it `labs_7_8` and set its CRS to OSGB (EPSG:27700). Save it.
 
-(@) As starter, bring in the DEM tiles into the project. If you downloaded the NU region correctly, you should have 15 separate DEM tiles (files ending in `.asc`). They should look like this:
+(@) As starter, bring in the DTM tiles into the project. If you downloaded the NU region correctly, you should have 15 separate DTM tiles (files ending in `.asc`). They should look like this:
 
 ![](images/lab_7/lab7_fig4_demsl.jpg)
 
-(@) We will want to style this data, but copying and pasting the style 15 times is too cumbersome. So use your skills from last week and make a *mosaic* of all the DEM tiles. Save it as a new file on the proper location in your folder organization, and them remove all the individual tiles from the project to keep it 'clean'.
+(@) We will want to style this data, but copying and pasting the style 15 times is too cumbersome. So use your skills from last week and make a *mosaic* of all the DTM tiles. Save it as a new file on the proper location in your folder organization, and them remove all the individual tiles from the project to keep it 'clean'.
 
 (@) Now look at the data you downloaded from the OS Vector District dataset. It should contain several shapefiles named `NU_xxxxxx.shp`, where `xxxxx` will be a descriptive name for what the layer holds. You will want to bring in the layers below into your project. Don't worry yet about how each layer looks or their ordering, just make sure you got it all.
 
@@ -88,7 +88,7 @@ Thinking of the GIS tools you already learned, could you think of an explanation
 On week 2 you learned about `Clip` and `Select by Location`. It seems that internally, when you draw a selection, Digimap is making a `Select by Location` operation, selecting all polygons that overlap with the NU square. For large polygons that cross OS grid tiles, you end bringing the whole polygon. So now let us do a proper `Clip`. 
 :::
 
-(@) Using your skills from previous labs, create a `Layer Extent` polygon based on the DEM mosaic, and then use this polygon to `Clip` all layers. As you clip and save the clipped versions, remove the original ones to avoid confusion and keep the project tidy. Once they are all clipped and neat, save your project. **From now on, when I refer to any of these layers in the instructions, I will be meaning the clipped versions**. You may even want to delete the originals from your folder to prevent confusion. 
+(@) Using your skills from previous labs, create a layer extent polygon (`Vector > Research Tools > Extract Layer Extent`) based on the DTM mosaic, and then use this polygon to `Clip` all layers. As you clip and save the clipped versions, remove the original ones to avoid confusion and keep the project tidy. Once they are all clipped and neat, save your project. **From now on, when I refer to any of these layers in the instructions, I will be meaning the clipped versions**. You may even want to delete the originals from your folder to prevent confusion. 
 
 ::: {.callout-tip}
 If you are feeling adventurous, take a look at the QGIS documentation about `Batch Processing` in QGIS to clip all layers in a single sweep:
@@ -98,9 +98,9 @@ If you are feeling adventurous, take a look at the QGIS documentation about `Bat
 
 We now have all the data we need to start laying out our map. Save your project and continue.
 
-## Guided Exercise 3 - Styling the DEM
+## Guided Exercise 3 - Styling the DTM
 
-(@) Let us start with the DEM, as it will be the background for our main map. Turn off all the layers except for the DEM, and open the DEM `Properties > Symbology`, then select `Singleband Pseudocolor` for `Render Type`.
+(@) Let us start with the DTM, as it will be the background for our main map. Turn off all the layers except for the DTM, and open the DTM `Properties > Symbology`, then select `Singleband Pseudocolor` for `Render Type`.
 
 We could pick one of the colour ramps from the drop down menu, but we can do better. QGIS actually has several built-in colour palettes that are professionally designed to be *perceptually equivalent*, *colour blind friendly*, and so on. The two main collections of palettes are the [ColorBrewer](https://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3)  palettes and the [cpt-city](http://seaviewsensing.com/pub/cpt-city/) archive. We will use one of the topography optimised cpt-city palettes.
 
@@ -112,15 +112,15 @@ Cartography is an equal mix of art and technique, and always has a strong amount
 
 (@) Pick the `Topography` category on the left, and then click on the `cd-a` palette (or another of your choice), and then `OK`. You will then be back at the `Symbology`  window. 
 
-(@) Now let us customise our colour palette. First, for `Min` and `Max`, pick `0` and `300` respectively. Continuous palettes are easier to interpret if they use nice, round values. Then change the `Mode` to `Equal Interval` with `7` classes. That will give us nice round steps of 50m. Then `Apply` and `OK`. Your DEM should now look like this:
+(@) Now let us customise our colour palette. First, for `Min` and `Max`, pick `0` and `300` respectively. Continuous palettes are easier to interpret if they use nice, round values. Then change the `Mode` to `Equal Interval` with `7` classes. That will give us nice round steps of 50m. Then `Apply` and `OK`. Your DTM should now look like this:
 
 ![](images/lab_7/lab7_fig6_coldem.jpg)
 
-(@) We can add a bit more pop to the DEM by reproducing the `3D` effect using transparency and `hillshade` symbology that we learned on @sec-labras1. If you can't quite remember how to do it, refer back to Guided Exercise 4 for that lab. For my map, I set the transparency of the coloured DEM layer to `60%`, and then went back to the `Symbology` of the hillshade layer and tweaked a bit the `brightness` (`20`) and `contrast` (`-10`) options under the `Layer Rendering` section. We want the effect to be subtle, and the whole DEM to have a 'light' appearance since it will be a background:
+(@) We can add a bit more pop to the DTM by reproducing the `3D` effect using transparency and `hillshade` symbology that we learned on @sec-labras1. If you can't quite remember how to do it, refer back to Guided Exercise 4 for that lab. For my map, I set the transparency of the coloured DTM layer to `60%`, and then went back to the `Symbology` of the hillshade layer and tweaked a bit the `brightness` (`20`) and `contrast` (`-10`) options under the `Layer Rendering` section. We want the effect to be subtle, and the whole DTM to have a 'light' appearance since it will be a background:
 
 ![](images/lab_7/lab7_fig7_hillshade.jpg)
 
-(@) Make any additional adjustments to the DEM style to your taste, and then save your project.
+(@) Make any additional adjustments to the DTM style to your taste, and then save your project.
 
 ## Guided Exercise 4: Adding and styling the transportation layers
 
@@ -165,7 +165,7 @@ We want however, to have some consistency and visual hierarchy for the roads, in
 
 ![](images/lab_7/lab7_fig10_demnroads.jpg)
 
-Now that we have our main roads, let us add some more context to the map. But first save yoiur project!
+Now that we have our main roads, let us add some more context to the map. But first save your project!
 
 ## Guided Exercise 5 - Adding contextual elements
 

@@ -1,4 +1,16 @@
-# Lab 9: Geoprocessing tools
+# Lab 10: Geoprocessing tools {#sec-spatan1}
+
+The 'geoprocessing' term is sometimes used as a catch all for all GIS operations, but within QGIS, it pertains to a specific set of tools. With the exception of the `Buffer` tool, the geoprocessing tools are aimed at creating new geometries based on the overlay of two separate vector layers. 
+
+You already learned and used one geoprocessing tool: the `Clip` tool. If finds the areas that are common between two layers, and 'cookie cuts' one of them based on the shape of the other. 
+
+Other geoprocessing tools will work similarly. For example, imagine that you have a polygon layer with all the woodlands in Scotland, and another with all the protected areas in Scotland. If you wanted to know all the woodland areas that are protected, you could `Clip` the woodland layer by the protected area layer. But what if you wanted the opposite - all the woodlands that are *not* protected. You will need some sort of `reverse clip` tool - turns out that is the `Difference` geoprocessing tool.
+
+The diagram below summarises the main geoprocessing tools:
+
+![](images/lab_11/lab11_fig1_Geoprocessing.png)
+
+
 
 ## Guided Exercise: assessing children access to schools
 
@@ -149,3 +161,4 @@ Your final results should be:
 | Primary	| 6451	| 6656 | 89   |
 | Secondary	| 7572	| 7880 | 91   |
 
+That is the end of this lab. From now on the exercises will be a bit more involved, like the one above -  but at the same you will notice that much of it is still the same -  loading data, organising it, doing queries - we will just be adding new tools that open up new (but quite specific) analysis possibilities and/or make some of the things you did before faster/simpler. But the general workflow of GIS is always the same. 

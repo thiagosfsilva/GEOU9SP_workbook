@@ -26,8 +26,12 @@ book:
       - lab_carto_2.qmd
   - part: sec_w5_spatial_analysis_I.qmd
     chapters:
+      - lab_catchup1.qmd
       - lab_geoprocessing.qmd
   - part: sec_w6_spatial_analysis_II.qmd
+    chapters:
+      - lab_joins.qmd
+      - lab_zonal.qmd
   - part: sec_w8_spatial_analysis_III.qmd
   - part: sec_w10_gnss.qmd
 
@@ -37,5 +41,5 @@ format:
   pdf:
     documentclass: scrreprt
 
-
+pdf-engine: lualatex
 

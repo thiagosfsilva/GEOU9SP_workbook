@@ -1,6 +1,6 @@
 # Week 5 - Spatial analysis I
 
-This week, we will 
+This week, we will get started on the 'second half' of the module, where we start to explore a variatey of spatial analysis tools that extend/optimse your GIS analytical capabilities. The usual GIS workflow (get data, organise data, load data, analyse data) will remain the same, and most of the steps for the exercises from now on will still be based on the base knowledge from weeks 1-4. SO it important you feel confident with these base skills before you progress with new spatial analysis tools. 
 
 ## ILOs covered
 
@@ -16,6 +16,9 @@ For every week, we will list the main theoretical and practical learning goals. 
 
 ### Practical knowledge:
 
+[@sec-catch1]
+
+No new knowledge for this section - it is reserved for you to catch up with previoous content
+
 [@sec-spatan1]
 
-[@sec-spatan2]
