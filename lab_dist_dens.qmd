@@ -1,0 +1,86 @@
+# Lab 13 - Densities and distances {sec_spatan4}
+
+## Guided Exercise 1 - Obtaining and organising the data
+
+For this set of exercises, we will be working with crime occurrence data for the city of New York (USA), for the year 2023. You have been hired to support an analysis of NYC criminality to help better manage police resources and reduce crime.
+
+The data package for this exercise can be downloaded here, and has been obtained from City of New York [Police Department website](https://www.nyc.gov/site/nypd/stats/crime-statistics/citywide-crime-stats.page) and the [NYC Open Data hub ](https://opendata.cityofnewyork.us/), and contains the following:
+
+
+- Arrest incidents for the year 2023, as a point vector shapefile - derived from a shapefile containing all arrest incidents from 2013 to present.
+
+- A polygon vector shapefile with the boundaries for the NYC neighbourhoods.
+
+- A polygon vector shapefile with the boundaries of each [Police Precinct](https://www.nyc.gov/site/nypd/bureaus/patrol/find-your-precinct.page) in NYC. Each police precinct is the responsibility of a different police team.
+
+- A point vector shapefile with the locations of all police stations in NYC. Most precincts have one station, with a few exceptions for additional speciality police stations such as mounted police. 
+
+(@) Download and extract the data package, and create a new folder and QGIS project for this lab. Import all three layers to your project. If you wish, add the OpenStreet Map or some other web layer from the `QuickMapServices` plugin to help with context and navigation. 
+
+::: {.callout-important title="Stop and Think"}
+Zoom to the full extent of the arrests layer - can you spot a problem with it? How can you fix it?  
+:::
+
+::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
+You can right click on the layer name and then on `Zoom to Layer(s)`. Apparently, an arrest has been made near Africa...This is a common error when people enter missing coordinates as zero instead of a blank value - and then the point will be located at 0 degrees lat / 0 degrees long. To fix it, select the problematic point using the 'Select Features` tool in the toolbar, then put the arrests layer into editing mode, delete the point, save the edits and exit edit mode. 
+
+If you skip this step your density rasters will get quite big...
+:::
+
+## Guided Exercise 2 -  Looking for crime hotspots
+
+The first question you have been asked is where are the crime *hotspots* in the city, meaning the areas with the largest *density* of occurrences. The word density usually refers to a count of things divided by some area or volume measurement. For example, population density is number of people; oxygen density in normal atmospheric conditions is 1.43 grams / litre. 
+
+In GIS, density will be usually related to counts of things over areas; the more 'things' happen per unit area for ex. km$^2$, the higher the density. This is often called *Hotspot analysis*  in GIS, where the hotspots are areas of remarkably high density. And the main tool used for that is known as *Kernel Density Estimation (KDE)*. I have made a video explanation on KDE that you can watch on Canvas.
+
+(@) The first way to generate a density map is to use change the layer `Symbology`. Select the crime layer and go to `Properties > Syymbology`, then change the symbology type from `Single Symbol` to `Heatmap`. Pick `Rocket` as the `Color ramp`, and a `Radius` of 1000 `meters at scale` (change from `millimiters`). Then `Apply` and `Close`. To add some context, place the boroughs layer on top of it, with no fill and a bright yellow outline.
+
+::: {.callout-important title="Stop and Think"}
+A) Based on the hotspot map, which police precincts seems to have their hands full with crime occurrences? And what neighbourhood is it?
+
+B) What is the CRS of the datasets (which should be also set as the CRS for the project)? What datum, projection and coordinate system does it use?
+:::
+
+::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
+A) We can use the `Identify Features` tool to query the precinct and neighbourhood layers. The 14th precinct seems to deal with the highest crime hotspot, which is mainly located in Midtown South Manhattan.
+
+B) We can find that by looking at the `Properties > Information` for any of the layers. The CRS is EPSG:2831 - NAD83(HARN) / New York Long Island. It uses the NAD83 datum, the Lambert Conformal Conic Projection and metric coordinates.
+:::
+
+The `heatmap` symbology is useful for a quick inspection, but it is also restrictive. It would be more useful if the heatmap was an actual layer. We can create such permanent heatmap using the `Heatmap (Kernel Density Estimation)` tool in the `Processing` panel, under the `Interpolation` category. Once you open it, it will give you a few more options than the symbology route, in the following window:
+
+(@) Pick the crime layer as your `Point Layer`, then set a radius of 1000 `meters` (or 1 `kilometers`). One important additional option here is that we get to set the *resolution* (pixel size) of our output raster density map. Smaller pixels will look smoother, but will result in larger files and longer processing times. The units here are the same as the layer CRS, so let us use 50 meters for both X and Y. Leave the remaining options as default, and save your result in an appropriate location with the name `crime_density_1km_quartic.tif`.
+
+(@) Notice how the output of `Heatmap (Kernel Density Estimation)` is a raster, and that *nodata* values are used for regions that not within 1km of any point (unlike the `Heatmap` symbology, which paints everything as a zero). Since it is a raster, we can style it with symbology options just the same as any raster. Pick a `Singleband pseudocolor` colour ramp for your hotspots, and use the same ramp you used for the `Heatmap` symbology.  
+
+::: {.callout-important title="Stop and Think"}
+Does the heatmap produced as a layer look the same as the heatmap produced by the symbology?
+:::
+
+::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
+They look close, but not identical. Kernel density estimations are very sensitive to the kernel radius, the shape of the kernel function, the scaling, and the resolution of the output raster, and you can get wildly different results by manipulating these parameters. Therefore KDE is considered a *semi-quantitative* tool - there is never as *correct* or *best* set of parameters to use for generating the maps.
+:::
+
+(@) To demonstrate the above, generate a second heatmap layer, this time using 5km as `Radius`, a `Pixel size` of 100 metres, the `Uniform` kernel shape, and `Scaled` output values. Not only the layer looks very different, but the actual location of the hotspots seem to have changed, and the density units are also very different. It always takes a lot of trial and error to converge on a KDE estimation that is sensible for the problem at hand. 
+
+(@) If you'd like, try different combinations of radii, kernel shapes and pixel sizes. Once you are done, remove them all from your project, leaving only the first density map we created (radius 1000, quartic kernel, pixel size 50m).
+
+(@) To make the hotspot layer look better, create a new layer by using `Dissolve` on the precincts or neighbourhood layers, then `Mask` the density raster to the boundaries of NYC only. 
+
+(@) We can now use tools we already know to associate the crime density information to the precincts and neighbourhoods. Using `Zonal Statistics` ([#sec-spatan3]), extract the `mean` and `maximum` density values for each precinct. Then make one visualization colouring the polygons by average crime density, and the other by maximum crime density. Repeat the analysis for the neighbourhoods polygon. 
+
+::: {.callout-important title="Stop and Think"}
+Which precinct and neighbourhood seem to be the most problematic in terms of crime, *i.e.* have the highest average and/or maximum crime density?
+:::
+
+::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
+
+:::
+
+- visualise with isolines
+
+- distance to hubs
+
+- distance map
+
+- raster calc to density cutoff and sitance cutoff ad example of multicriteria analysis

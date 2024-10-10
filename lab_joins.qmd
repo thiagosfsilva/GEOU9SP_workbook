@@ -1,8 +1,8 @@
-# Lab 11 - Data Joins
+# Lab 11 - Data Joins {#sec-spatan2}
 
 In this lab we will learn about *data joins* - operations that link data tables based on specific attributes, or based on locations. We will also learn how to read tabular data that has coordinates as columns as an actual spatial dataset, and will learn about Web Feature Service (WCS) layers - a standardized way to *stream* geospatial data without having to download it. Don't skip the *Independent Exercise* either - you will learn two bonus GIS tools as part of it!
 
-## Guided Exercise 1 - Working with WCS and WMS layers.
+## Guided Exercise 1 - Working with WFS layers.
 
 Both WFS (Web Feature Services), WMS (Web Map Services), and WCS (Web Coverage Services) are standardised web sharing formats defined by the [Open Geospatial Consortium (OGC)](https://www.ogc.org/). WMS and WCS are designed to serve images (i.e. rasters), while WFS is designed to serve features (i.e. vectors). This is similar to the streaming of Google Maps or Open Street Maps you have used with QGIS already, with the difference that layers streamed via WFS function just like layers you download to your computer.
 

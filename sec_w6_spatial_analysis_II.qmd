@@ -1,6 +1,6 @@
 # Week 6 - Spatial analysis II
 
-This week, we will 
+This week, we will continue our journey through some advance GIS analysis tools, this time with a focus on the spatial distribution of data and on calculating distances. We will also continue to practice many of the tools you have learned from previous weeks - there is rarely a GIS question that can be solved using only one tool!
 
 ## ILOs covered
 
@@ -12,10 +12,20 @@ This week, we will
 
 For every week, we will list the main theoretical and practical learning goals. Use these as a 'checklist' to gauge your learning for each week. If you don't feel confident you have learned any specific topic, then revisit the week's material!
 
-### Theoretical knowledge for Week 1:
-
 ### Practical knowledge:
 
-[@sec-spatan1]
-
 [@sec-spatan2]
+
+- WFS layers
+- Importing non-spatial tables
+- Table Joins
+    - Attribute Joins
+    - Spatial Joins
+- Counting Points in Polygons
+
+[@sec-spatan3]
+
+- Zonal Statistics
+- Overlap Analysis
+- Sample Raster Values
+

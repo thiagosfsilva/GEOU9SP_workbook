@@ -33,6 +33,8 @@ book:
       - lab_joins.qmd
       - lab_zonal.qmd
   - part: sec_w8_spatial_analysis_III.qmd
+    chapters:
+      - lab_dist_dens.qmd
   - part: sec_w10_gnss.qmd
 
 format:

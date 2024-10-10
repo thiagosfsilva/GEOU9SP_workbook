@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>GEOU9SP GIS Workbook - 9&nbsp; Lab 9 - Catch Up / Assignment Work session</title>
+<title>GEOU9SP GIS Workbook - 13&nbsp; Lab 13 - Densities and distances</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./lab_geoprocessing.html" rel="next">
-<link href="./sec_w5_spatial_analysis_I.html" rel="prev">
+<link href="./sec_w10_gnss.html" rel="next">
+<link href="./sec_w8_spatial_analysis_III.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -69,6 +69,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -81,7 +110,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./sec_w5_spatial_analysis_I.html">Week 5 - Spatial analysis I</a></li><li class="breadcrumb-item"><a href="./lab_catchup1.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Lab 9 - Catch Up / Assignment Work session</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./sec_w8_spatial_analysis_III.html">Week 8 - Spatial analysis III</a></li><li class="breadcrumb-item"><a href="./lab_dist_dens.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Lab 13 - Densities and distances</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -215,7 +244,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lab_catchup1.html" class="sidebar-item-text sidebar-link active">
+  <a href="./lab_catchup1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Lab 9 - Catch Up / Assignment Work session</span></span></a>
   </div>
 </li>
@@ -261,7 +290,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lab_dist_dens.html" class="sidebar-item-text sidebar-link">
+  <a href="./lab_dist_dens.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Lab 13 - Densities and distances</span></span></a>
   </div>
 </li>
@@ -277,14 +306,21 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#guided-exercise-1---obtaining-and-organising-the-data" id="toc-guided-exercise-1---obtaining-and-organising-the-data" class="nav-link active" data-scroll-target="#guided-exercise-1---obtaining-and-organising-the-data"><span class="header-section-number">13.1</span> Guided Exercise 1 - Obtaining and organising the data</a></li>
+  <li><a href="#guided-exercise-2---looking-for-crime-hotspots" id="toc-guided-exercise-2---looking-for-crime-hotspots" class="nav-link" data-scroll-target="#guided-exercise-2---looking-for-crime-hotspots"><span class="header-section-number">13.2</span> Guided Exercise 2 - Looking for crime hotspots</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./sec_w5_spatial_analysis_I.html">Week 5 - Spatial analysis I</a></li><li class="breadcrumb-item"><a href="./lab_catchup1.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Lab 9 - Catch Up / Assignment Work session</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./sec_w8_spatial_analysis_III.html">Week 8 - Spatial analysis III</a></li><li class="breadcrumb-item"><a href="./lab_dist_dens.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Lab 13 - Densities and distances</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-catch1" class="quarto-section-identifier"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Lab 9 - Catch Up / Assignment Work session</span></span></h1>
+<h1 class="title"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Lab 13 - Densities and distances</span></h1>
 </div>
 
 
@@ -301,9 +337,170 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>This lab session is reserved for you to catch up with previous content and/or work on your Map assignment. We will still be present to answer any questions you may have.</p>
+<section id="guided-exercise-1---obtaining-and-organising-the-data" class="level2" data-number="13.1">
+<h2 data-number="13.1" class="anchored" data-anchor-id="guided-exercise-1---obtaining-and-organising-the-data"><span class="header-section-number">13.1</span> Guided Exercise 1 - Obtaining and organising the data</h2>
+<p>For this set of exercises, we will be working with crime occurrence data for the city of New York (USA), for the year 2023. You have been hired to support an analysis of NYC criminality to help better manage police resources and reduce crime.</p>
+<p>The data package for this exercise can be downloaded here, and has been obtained from City of New York <a href="https://www.nyc.gov/site/nypd/stats/crime-statistics/citywide-crime-stats.page">Police Department website</a> and the <a href="https://opendata.cityofnewyork.us/">NYC Open Data hub</a>, and contains the following:</p>
+<ul>
+<li><p>Arrest incidents for the year 2023, as a point vector shapefile - derived from a shapefile containing all arrest incidents from 2013 to present.</p></li>
+<li><p>A polygon vector shapefile with the boundaries for the NYC neighbourhoods.</p></li>
+<li><p>A polygon vector shapefile with the boundaries of each <a href="https://www.nyc.gov/site/nypd/bureaus/patrol/find-your-precinct.page">Police Precinct</a> in NYC. Each police precinct is the responsibility of a different police team.</p></li>
+<li><p>A point vector shapefile with the locations of all police stations in NYC. Most precincts have one station, with a few exceptions for additional speciality police stations such as mounted police.</p></li>
+</ul>
+<ol class="example" type="1">
+<li>Download and extract the data package, and create a new folder and QGIS project for this lab. Import all three layers to your project. If you wish, add the OpenStreet Map or some other web layer from the <code>QuickMapServices</code> plugin to help with context and navigation.</li>
+</ol>
+<div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Stop and Think
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Zoom to the full extent of the arrests layer - can you spot a problem with it? How can you fix it?</p>
+</div>
+</div>
+<div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>You can right click on the layer name and then on <code>Zoom to Layer(s)</code>. Apparently, an arrest has been made near Africa…This is a common error when people enter missing coordinates as zero instead of a blank value - and then the point will be located at 0 degrees lat / 0 degrees long. To fix it, select the problematic point using the ’Select Features` tool in the toolbar, then put the arrests layer into editing mode, delete the point, save the edits and exit edit mode.</p>
+<p>If you skip this step your density rasters will get quite big…</p>
+</div>
+</div>
+</div>
+</section>
+<section id="guided-exercise-2---looking-for-crime-hotspots" class="level2" data-number="13.2">
+<h2 data-number="13.2" class="anchored" data-anchor-id="guided-exercise-2---looking-for-crime-hotspots"><span class="header-section-number">13.2</span> Guided Exercise 2 - Looking for crime hotspots</h2>
+<p>The first question you have been asked is where are the crime <em>hotspots</em> in the city, meaning the areas with the largest <em>density</em> of occurrences. The word density usually refers to a count of things divided by some area or volume measurement. For example, population density is number of people; oxygen density in normal atmospheric conditions is 1.43 grams / litre.</p>
+<p>In GIS, density will be usually related to counts of things over areas; the more ‘things’ happen per unit area for ex. km<span class="math inline">\(^2\)</span>, the higher the density. This is often called <em>Hotspot analysis</em> in GIS, where the hotspots are areas of remarkably high density. And the main tool used for that is known as <em>Kernel Density Estimation (KDE)</em>. I have made a video explanation on KDE that you can watch on Canvas.</p>
+<ol start="2" class="example" type="1">
+<li>The first way to generate a density map is to use change the layer <code>Symbology</code>. Select the crime layer and go to <code>Properties &gt; Syymbology</code>, then change the symbology type from <code>Single Symbol</code> to <code>Heatmap</code>. Pick <code>Rocket</code> as the <code>Color ramp</code>, and a <code>Radius</code> of 1000 <code>meters at scale</code> (change from <code>millimiters</code>). Then <code>Apply</code> and <code>Close</code>. To add some context, place the boroughs layer on top of it, with no fill and a bright yellow outline.</li>
+</ol>
+<div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Stop and Think
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="A">
+<li><p>Based on the hotspot map, which police precincts seems to have their hands full with crime occurrences? And what neighbourhood is it?</p></li>
+<li><p>What is the CRS of the datasets (which should be also set as the CRS for the project)? What datum, projection and coordinate system does it use?</p></li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="A">
+<li><p>We can use the <code>Identify Features</code> tool to query the precinct and neighbourhood layers. The 14th precinct seems to deal with the highest crime hotspot, which is mainly located in Midtown South Manhattan.</p></li>
+<li><p>We can find that by looking at the <code>Properties &gt; Information</code> for any of the layers. The CRS is EPSG:2831 - NAD83(HARN) / New York Long Island. It uses the NAD83 datum, the Lambert Conformal Conic Projection and metric coordinates.</p></li>
+</ol>
+</div>
+</div>
+</div>
+<p>The <code>heatmap</code> symbology is useful for a quick inspection, but it is also restrictive. It would be more useful if the heatmap was an actual layer. We can create such permanent heatmap using the <code>Heatmap (Kernel Density Estimation)</code> tool in the <code>Processing</code> panel, under the <code>Interpolation</code> category. Once you open it, it will give you a few more options than the symbology route, in the following window:</p>
+<ol start="3" class="example" type="1">
+<li><p>Pick the crime layer as your <code>Point Layer</code>, then set a radius of 1000 <code>meters</code> (or 1 <code>kilometers</code>). One important additional option here is that we get to set the <em>resolution</em> (pixel size) of our output raster density map. Smaller pixels will look smoother, but will result in larger files and longer processing times. The units here are the same as the layer CRS, so let us use 50 meters for both X and Y. Leave the remaining options as default, and save your result in an appropriate location with the name <code>crime_density_1km_quartic.tif</code>.</p></li>
+<li><p>Notice how the output of <code>Heatmap (Kernel Density Estimation)</code> is a raster, and that <em>nodata</em> values are used for regions that not within 1km of any point (unlike the <code>Heatmap</code> symbology, which paints everything as a zero). Since it is a raster, we can style it with symbology options just the same as any raster. Pick a <code>Singleband pseudocolor</code> colour ramp for your hotspots, and use the same ramp you used for the <code>Heatmap</code> symbology.</p></li>
+</ol>
+<div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Stop and Think
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Does the heatmap produced as a layer look the same as the heatmap produced by the symbology?</p>
+</div>
+</div>
+<div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>They look close, but not identical. Kernel density estimations are very sensitive to the kernel radius, the shape of the kernel function, the scaling, and the resolution of the output raster, and you can get wildly different results by manipulating these parameters. Therefore KDE is considered a <em>semi-quantitative</em> tool - there is never as <em>correct</em> or <em>best</em> set of parameters to use for generating the maps.</p>
+</div>
+</div>
+</div>
+<ol start="5" class="example" type="1">
+<li><p>To demonstrate the above, generate a second heatmap layer, this time using 5km as <code>Radius</code>, a <code>Pixel size</code> of 100 metres, the <code>Uniform</code> kernel shape, and <code>Scaled</code> output values. Not only the layer looks very different, but the actual location of the hotspots seem to have changed, and the density units are also very different. It always takes a lot of trial and error to converge on a KDE estimation that is sensible for the problem at hand.</p></li>
+<li><p>If you’d like, try different combinations of radii, kernel shapes and pixel sizes. Once you are done, remove them all from your project, leaving only the first density map we created (radius 1000, quartic kernel, pixel size 50m).</p></li>
+<li><p>To make the hotspot layer look better, create a new layer by using <code>Dissolve</code> on the precincts or neighbourhood layers, then <code>Mask</code> the density raster to the boundaries of NYC only.</p></li>
+<li><p>We can now use tools we already know to associate the crime density information to the precincts and neighbourhoods. Using <code>Zonal Statistics</code> ([#sec-spatan3]), extract the <code>mean</code> and <code>maximum</code> density values for each precinct. Then make one visualization colouring the polygons by average crime density, and the other by maximum crime density. Repeat the analysis for the neighbourhoods polygon.</p></li>
+</ol>
+<div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Stop and Think
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Which precinct and neighbourhood seem to be the most problematic in terms of crime, <em>i.e.</em> have the highest average and/or maximum crime density?</p>
+</div>
+</div>
+<div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+
+</div>
+</div>
+</div>
+<ul>
+<li><p>visualise with isolines</p></li>
+<li><p>distance to hubs</p></li>
+<li><p>distance map</p></li>
+<li><p>raster calc to density cutoff and sitance cutoff ad example of multicriteria analysis</p></li>
+</ul>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -717,13 +914,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./sec_w5_spatial_analysis_I.html" class="pagination-link" aria-label="Week 5 - Spatial analysis I">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Week 5 - Spatial analysis I</span>
+      <a href="./sec_w8_spatial_analysis_III.html" class="pagination-link" aria-label="Week 8 - Spatial analysis III">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Week 8 - Spatial analysis III</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./lab_geoprocessing.html" class="pagination-link" aria-label="Lab 10: Geoprocessing tools">
-        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Lab 10: Geoprocessing tools</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./sec_w10_gnss.html" class="pagination-link" aria-label="Week 10 - Obtaining spatial data in the field">
+        <span class="nav-page-text">Week 10 - Obtaining spatial data in the field</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>GEOU9SP GIS Workbook - 12&nbsp; Lab 12 - Zonal Statistics and Overlap analysis</title>
+<title>GEOU9SP GIS Workbook - 12&nbsp; Lab 12 - Zonal Statistics and Overlap Analysis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -110,7 +110,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./sec_w6_spatial_analysis_II.html">Week 6 - Spatial analysis II</a></li><li class="breadcrumb-item"><a href="./lab_zonal.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Lab 12 - Zonal Statistics and Overlap analysis</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./sec_w6_spatial_analysis_II.html">Week 6 - Spatial analysis II</a></li><li class="breadcrumb-item"><a href="./lab_zonal.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Lab 12 - Zonal Statistics and Overlap Analysis</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -274,14 +274,27 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./lab_zonal.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Lab 12 - Zonal Statistics and Overlap analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Lab 12 - Zonal Statistics and Overlap Analysis</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text">Week 8 - Spatial analysis III</span></span>
+      <div class="sidebar-item-container"> 
+            <a href="./sec_w8_spatial_analysis_III.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 8 - Spatial analysis III</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lab_dist_dens.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Lab 13 - Densities and distances</span></span></a>
+  </div>
+</li>
+      </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <span class="sidebar-item-text sidebar-link text-start">
@@ -301,16 +314,21 @@ window.Quarto = {
   <li><a href="#guided-exercise-2---zonal-statistics" id="toc-guided-exercise-2---zonal-statistics" class="nav-link" data-scroll-target="#guided-exercise-2---zonal-statistics"><span class="header-section-number">12.2</span> Guided Exercise 2 - Zonal Statistics</a></li>
   <li><a href="#guided-exercise-3---overlap-analysis" id="toc-guided-exercise-3---overlap-analysis" class="nav-link" data-scroll-target="#guided-exercise-3---overlap-analysis"><span class="header-section-number">12.3</span> Guided Exercise 3 - Overlap Analysis</a></li>
   <li><a href="#guided-exercise---sample-raster-values" id="toc-guided-exercise---sample-raster-values" class="nav-link" data-scroll-target="#guided-exercise---sample-raster-values"><span class="header-section-number">12.4</span> Guided Exercise - Sample Raster Values</a></li>
-  <li><a href="#independent-exercise---taiwanese-hemlock-and-climate-change" id="toc-independent-exercise---taiwanese-hemlock-and-climate-change" class="nav-link" data-scroll-target="#independent-exercise---taiwanese-hemlock-and-climate-change"><span class="header-section-number">12.5</span> Independent Exercise - Taiwanese hemlock and climate change</a></li>
+  <li><a href="#independent-exercise---taiwanese-hemlock-and-climate-change" id="toc-independent-exercise---taiwanese-hemlock-and-climate-change" class="nav-link" data-scroll-target="#independent-exercise---taiwanese-hemlock-and-climate-change"><span class="header-section-number">12.5</span> Independent Exercise - Taiwanese hemlock and climate change</a>
+  <ul class="collapse">
+  <li><a href="#background" id="toc-background" class="nav-link" data-scroll-target="#background"><span class="header-section-number">12.5.1</span> Background</a></li>
+  <li><a href="#data-acquisition" id="toc-data-acquisition" class="nav-link" data-scroll-target="#data-acquisition"><span class="header-section-number">12.5.2</span> Data Acquisition</a></li>
+  <li><a href="#data-analysis" id="toc-data-analysis" class="nav-link" data-scroll-target="#data-analysis"><span class="header-section-number">12.5.3</span> Data Analysis</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./sec_w6_spatial_analysis_II.html">Week 6 - Spatial analysis II</a></li><li class="breadcrumb-item"><a href="./lab_zonal.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Lab 12 - Zonal Statistics and Overlap analysis</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./sec_w6_spatial_analysis_II.html">Week 6 - Spatial analysis II</a></li><li class="breadcrumb-item"><a href="./lab_zonal.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Lab 12 - Zonal Statistics and Overlap Analysis</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Lab 12 - Zonal Statistics and Overlap analysis</span></h1>
+<h1 class="title"><span id="sec-spatan3" class="quarto-section-identifier"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Lab 12 - Zonal Statistics and Overlap Analysis</span></span></h1>
 </div>
 
 
@@ -472,50 +490,55 @@ Click for answer
 </section>
 <section id="independent-exercise---taiwanese-hemlock-and-climate-change" class="level2" data-number="12.5">
 <h2 data-number="12.5" class="anchored" data-anchor-id="independent-exercise---taiwanese-hemlock-and-climate-change"><span class="header-section-number">12.5</span> Independent Exercise - Taiwanese hemlock and climate change</h2>
+<section id="background" class="level3" data-number="12.5.1">
+<h3 data-number="12.5.1" class="anchored" data-anchor-id="background"><span class="header-section-number">12.5.1</span> Background</h3>
 <p>As the GIS specialist for an International NGO (Non-governmental organization), you have been tasked with generating a report on the possible susceptibility of the tree species <a href="https://en.wikipedia.org/wiki/Tsuga_chinensis"><em>Tsuga chinensis</em></a> (Chinese Hemlock or Taiwanese Hemlock) to climate change in <a href="https://en.wikipedia.org/wiki/Taiwan">Taiwan</a>.</p>
 <p><img src="images/lab_12/lab12_fig4_tsuga.jpg" class="img-fluid"></p>
-<ol type="1">
-<li>The first step in your analysis is to obtain data on the distribution of <em>T. chinensis</em>. For this exercise, I am giving both a pre-downloaded link and the instructions to download the orignal data - if working with species distribution data is of interest to you for the feature.</li>
-</ol>
-<p>Option 1: Download the data package from here.</p>
-<p>Option 2: To download the data, you need to gather species occurrence data from the <a href="https://www.gbif.org/">Global Biodiversity Species Facility (GBIF)</a>. You will need to create anm account to download.</p>
-<p>On the top left of the webpage, go to <code>Get data &gt; Ocurrences</code>“. You can search for data using the different parameters on the left column. Expand the <code>Scientific name</code> field and search for <code>Tsuga chinensis</code>. Then click on <code>Download</code> (above the table). The data will come as a tab-separated text file.</p>
-<ol start="2" type="1">
-<li>You also need climate data. After doing some research, you find the WordlCLim database, which provides global maps of pastpresent and future climate data (<a href="https://www.worldclim.org/data/index.html">https://www.worldclim.org/data/index.html/</a>.</li>
-</ol>
-<p>Within this database, you also learn about the <a href="https://www.worldclim.org/data/bioclim.html">BIOCLIM variables</a>, a set of climatic descriptors devised to capture climatic conditions that are related to species survival.</p>
-<p>Since you are working with a plant, you decide to use:</p>
+</section>
+<section id="data-acquisition" class="level3" data-number="12.5.2">
+<h3 data-number="12.5.2" class="anchored" data-anchor-id="data-acquisition"><span class="header-section-number">12.5.2</span> Data Acquisition</h3>
+<p>For this exercise, I am giving you a pre-downloaded dataset, because there are large data files that also require a registration to download. But I am also describing below how to download the original data - <em>you will need it for the Final Project</em>, and also if working with species distribution data is of interest to you in the feature.</p>
+<p><a href="https://stir-my.sharepoint.com/:u:/g/personal/ala2_stir_ac_uk/EdX5iTojX65Mv3Jf_DD-PvEBGKnlQIuu7Njo5XFdu4SQmA?e=krTy3W">Download the data package from here</a>.</p>
+<p>The first step in your analysis is to obtain data on the distribution of <em>T. chinensis</em>. You go to the main source of species occurrence data worldwide, the <a href="https://www.gbif.org/">Global Biodiversity Species Facility (GBIF)</a>. GBIF requires creating an account to download.</p>
+<p>Once you have an account, go to the top left of the webpage and click on <code>Get data &gt; Ocurrences</code>“. You can search for data using the different parameters on the left column. Expand the <code>Scientific name</code> field and search for <code>Tsuga chinensis</code>. Then click on <code>Download</code> (above the table). The data will come as a tab-separated text file.</p>
+<p>Then you would need climate data. There are many climatic datasets out there, but after doing some research you decide to use the <em>Climatologies at High resolution for the Earth’s Land Surface Areas</em> (CHELSA) database, which provides global maps of past, present and future climate data: <a href="https://chelsa-climate.org/">https://chelsa-climate.org/</a>.</p>
+<p>To use this dataset, you need to understand the definition of the standard BIOCLIM variables. These are derived from a different climate fataset called WorldClim, and are a set of climatic descriptors devised to capture climatic conditions that are related to species survival. They are explained here:<a href="https://www.worldclim.org/data/">https://www.worldclim.org/data/bioclim.html</a>. The CHELSA database also provides <em>extended</em> BIOCLIM variables (BIOCLIM+, <a href="https://chelsa-climate.org/exchelsa-extended-bioclim/">https://chelsa-climate.org/exchelsa-extended-bioclim/</a>)for additional important variables.</p>
+<p>Since you are working with a plant species, you decide to use the following variables:</p>
 <ul>
-<li><p>BIO5 = Max Temperature of Warmest Month</p></li>
-<li><p>BIO6 = Min Temperature of Coldest Month</p></li>
-<li><p>BIO16 = Precipitation of Wettest Quarter</p></li>
-<li><p>BIO17 = Precipitation of Driest Quarter</p></li>
+<li><p><strong>Bio5</strong> = Max Temperature of Warmest Month (upper thermal tolerance)</p></li>
+<li><p><strong>Bio6</strong> = Min Temperature of Coldest Month (lower thermal tolerance)</p></li>
+<li><p><strong>BIOCLIM+ gsp</strong>* = Growing Season Precipitation Sum, represents water availability during the growing season.</p></li>
+<li><p><strong>BIOCLIM+ gdd5</strong> = Growing Degree Days above 5 Degrees Celsius. A ‘growing degree day’ is a day that has temperatures in the needed range for plant growth, and the variable is calculated by summing the temperature of all GDDs.</p></li>
 </ul>
-<p>For the current climate, you can download all Bioclim variables from here: <a href="https://www.worldclim.org/data/worldclim21.html">https://www.worldclim.org/data/worldclim21.html</a>. Make sure you get the <code>bio 30s data</code>:</p>
-<p><img src="images/lab_12/lab12_fig5_bioclim_present.jpg" class="img-fluid"></p>
-<p>For future climate analysis, there are multiple year ranges, multiple warming scenarios, and multipler climate models to choose from. You decide to focus on the longet term scenario (2081-2100), and the most extreme change pathway (ssp585), using the HadGEM3-GC31-LL climate model. The download page is <a href="https://www.worldclim.org/data/cmip6/cmip6_clim30s.html">https://www.worldclim.org/data/cmip6/cmip6_clim30s.html</a>.</p>
-<p><img src="images/lab_12/lab12_fig6_bioclim_fut.jpg" class="img-fluid"> You note on the documentation that Bio 5 and Bio 6 are given in degrees Celsius and precipitation has values in mm of rain.</p>
-<ol start="3" type="1">
-<li>Finally, you decide to grab the Taiwan country borders from the <a href="https://gadm.org/download_country.html">GADM website</a>.</li>
-</ol>
-<p>Important: before adding any layer to QGIS, go to the file explorer on your PC and make sure all files are unzipped (look inside each folder you have downloaded).</p>
+<p>You note on the documentation that Bio 5 and Bio 6 are given in degrees Celsius, growing degree days are given as the total heat summed over all growing days, also in Celsius, and growing season precipitation has values in mm of rain.</p>
+<p>CHELSA also provides data for future climate analysis, including multiple future date prediction targets, various <a href="https://www.carbonbrief.org/explainer-how-shared-socioeconomic-pathways-explore-future-climate-change/">Shared Socioeconomic Pathways</a> (SSPs, aka climate scenarios), and predictions from different climate models in the <a href="https://www.carbonbrief.org/cmip6-the-next-generation-of-climate-models-explained/">CMPI6 group</a>.</p>
+<p>You settle on using projections for the SSP 370 (middle-of-the-road scenario) for the years 2081-2100 prediction, and to restrict your analysis to the average prediction of three climate model outputs:</p>
+<p>IPSL-CM6A-LR (<a href="https://cmc.ipsl.fr/ipsl-climate-models/ipsl-cm6/">https://cmc.ipsl.fr/ipsl-climate-models/ipsl-cm6/</a>)</p>
+<p>MIROC-ES2L (<a href="info:%20https://catalogue.ceda.ac.uk/uuid/a31ca90e3d524c99aef5d8223135f397">https://catalogue.ceda.ac.uk/uuid/a31ca90e3d524c99aef5d8223135f397</a>)</p>
+<p>GFDL-ESM4 (<a href="https://www.gfdl.noaa.gov/earth-system-esm4/">https://www.gfdl.noaa.gov/earth-system-esm4/</a>)</p>
+<p><em>Note: The CHELSA datasets come as global layers, but to reduce download sizes, I have already cropped them to cover Taiwan only. Don’t say I never did anything for you :-).</em></p>
+<p>Finally, you decide to grab the Taiwan country borders from the <a href="https://gadm.org/download_country.html">GADM website</a>.</p>
+</section>
+<section id="data-analysis" class="level3" data-number="12.5.3">
+<h3 data-number="12.5.3" class="anchored" data-anchor-id="data-analysis"><span class="header-section-number">12.5.3</span> Data Analysis</h3>
 <p>With that data in hand, you are ready to start your project. You prepare an initial list of the tasks you need to accomplish to achieve your goal:</p>
 <ol type="1">
-<li><p>Import the data into QGIS: organise them under groups with meaningful names. You may add OpenStreetMap (from the XYZ Tiles) to help you to recognise where these data are located in the world. Also, open the attribute tables and raster info to understand the structure of each data file, unit, etc.</p></li>
-<li><p>This exercise focuses on species observation in Taiwan, so clean up all the data to include only records from Taiwan, and only actual observations (e.g.&nbsp;not a specimen in a museum) - records having the word “observation” on the basisofRec attribute field (think about selection tools).</p></li>
-<li><p>Calculate the convex hull Links to an external site.of the species observations to represent the species distribution range.</p></li>
-<li><p>Use this polygon to extract the minimum and maximum values for each present climate layer, therefore determining the climate envelope of the species. You can then assume that any location where one or more of the climatic variables are outside this range is not suitable for the species’ survival.</p></li>
+<li><p>Organise the data into a folder and then import the data into a QGIS project. You may add OpenStreetMap (from the XYZ Tiles) to help you to recognise where these data are located in the world. Also, open the attribute tables and raster info to understand the structure of each data file, unit, etc.</p></li>
+<li><p>Import the T. chinensis species ocurrence file. Although it is named CSV, you notice it uses <em>tab</em> as a custom column delimiter. The spatial information is on fields <code>decimalLatitude</code> and <code>decimalLongitude</code>.</p></li>
+<li><p>Make sure the project CRS is adequate and that all data uses the same CRS, or reproject if not.</p></li>
+<li><p>This exercise focuses on species observation in Taiwan, so clean up all the data to include only records from Taiwan, and only actual observations (e.g.&nbsp;not a specimen in a museum) - i.e.&nbsp;records having the word “observation” on the <code>basisofRec</code> attribute field.</p></li>
+<li><p>Use the species occurrence points to extract the minimum and maximum values for each <em>present</em> climate layer, therefore determining the <a href="https://www.usgs.gov/centers/wetland-and-aquatic-research-center/science/climate-envelope-modeling-evaluating">climate envelope</a> of the species. You can then assume that any location where one or more of the climatic variables are outside this range is not suitable for the species’ survival.</p></li>
 <li><p>Average the outputs of the three climatic models for each of your future climatic layers.</p></li>
-<li><p>Find out which locations in the future will be within the climate envelope you calculated previously. (Hint: if only one variable is out of range, you already assume the location is outside the climate envelope, even of the other three are within range).</p></li>
-<li><p>Calculate the total area of suitable habitat expected for T. chinensis in the years 2071-2010, according to the SSP370 scenario, and determine how much smaller/larger it is than the current range.</p></li>
+<li><p>Find out which locations in the future will be within the climate envelope you calculated previously. (Hint: an area has to be within the envelope of all four variables to be considered suitable).</p></li>
+<li><p>Calculate the total area of suitable habitat expected for <em>T. chinensis</em> in the years 2071-2100, according to the SSP370 scenario, and determine how much smaller/larger it is than the current suitable area.</p></li>
 <li><p>Make a nice map showing your results.</p></li>
 </ol>
 <p>Now that you have a plan in mind, execute it!</p>
-<p>GIS operations to consider: Select by Location, Select by Expression, Minimum Bounding Geometry (Processing tab - NOT the tool called Convex Hull), Zonal Statistics, Raster Calculator, Raster to Vector conversion, Field Calculator.</p>
+<p>GIS operations to consider: Import Delimited Text File, Select by Location, Select by Expression, Sample Raster Values, Raster Calculator, Raster to Vector conversion, Field Calculator.</p>
 <p>Obs: this is a very crude method to determine species distribution and niche, but this is a GIS module, not a Biogeography one. If you find this interesting, search for Species Distribution Modelling (SDM) or Environmental Niche Modelling (ENM). It is a well-developed field with specialised tools and methods, which nonetheless are still GIS operations at heart.</p>
-<p>Answers:</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

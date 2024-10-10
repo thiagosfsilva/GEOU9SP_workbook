@@ -1,6 +1,8 @@
 # Week 5 - Spatial analysis I
 
-This week, we will get started on the 'second half' of the module, where we start to explore a variatey of spatial analysis tools that extend/optimse your GIS analytical capabilities. The usual GIS workflow (get data, organise data, load data, analyse data) will remain the same, and most of the steps for the exercises from now on will still be based on the base knowledge from weeks 1-4. SO it important you feel confident with these base skills before you progress with new spatial analysis tools. 
+This week, we will get started on the 'second half' of the module, where we start to explore a variety of spatial analysis tools that extend/optimise your GIS analytical capabilities. The usual GIS workflow (get data, organise data, load data, analyse data) will remain the same, and most of the steps for the exercises from now on will still be based on the base knowledge from weeks 1-4. So it important you feel confident with these base skills before you progress with new spatial analysis tools. 
+
+For this week, we will cover the family of geoprocessing tools.
 
 ## ILOs covered
 
@@ -12,8 +14,6 @@ This week, we will get started on the 'second half' of the module, where we star
 
 For every week, we will list the main theoretical and practical learning goals. Use these as a 'checklist' to gauge your learning for each week. If you don't feel confident you have learned any specific topic, then revisit the week's material!
 
-### Theoretical knowledge for Week 1:
-
 ### Practical knowledge:
 
 [@sec-catch1]
@@ -22,3 +22,9 @@ No new knowledge for this section - it is reserved for you to catch up with prev
 
 [@sec-spatan1]
 
+- Geoprocessing tools
+    - Clip vs Intersection
+    - Union
+    - Difference and Symmetrical Difference
+    - Dissolve
+    - Buffers

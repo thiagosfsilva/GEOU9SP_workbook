@@ -245,14 +245,27 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./lab_zonal.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Lab 12 - Zonal Statistics and Overlap analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Lab 12 - Zonal Statistics and Overlap Analysis</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text">Week 8 - Spatial analysis III</span></span>
+      <div class="sidebar-item-container"> 
+            <a href="./sec_w8_spatial_analysis_III.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 8 - Spatial analysis III</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lab_dist_dens.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Lab 13 - Densities and distances</span></span></a>
+  </div>
+</li>
+      </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <span class="sidebar-item-text sidebar-link text-start">
@@ -268,7 +281,7 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#guided-exercise-1---working-with-wcs-and-wms-layers." id="toc-guided-exercise-1---working-with-wcs-and-wms-layers." class="nav-link active" data-scroll-target="#guided-exercise-1---working-with-wcs-and-wms-layers."><span class="header-section-number">11.1</span> Guided Exercise 1 - Working with WCS and WMS layers.</a></li>
+  <li><a href="#guided-exercise-1---working-with-wfs-layers." id="toc-guided-exercise-1---working-with-wfs-layers." class="nav-link active" data-scroll-target="#guided-exercise-1---working-with-wfs-layers."><span class="header-section-number">11.1</span> Guided Exercise 1 - Working with WFS layers.</a></li>
   <li><a href="#guided-exercise-2---importing-tabular-data" id="toc-guided-exercise-2---importing-tabular-data" class="nav-link" data-scroll-target="#guided-exercise-2---importing-tabular-data"><span class="header-section-number">11.2</span> Guided Exercise 2 - Importing tabular data</a></li>
   <li><a href="#guided-exercise-3---table-joins" id="toc-guided-exercise-3---table-joins" class="nav-link" data-scroll-target="#guided-exercise-3---table-joins"><span class="header-section-number">11.3</span> Guided Exercise 3 - Table Joins</a></li>
   <li><a href="#guided-exercise-4---spatial-joins" id="toc-guided-exercise-4---spatial-joins" class="nav-link" data-scroll-target="#guided-exercise-4---spatial-joins"><span class="header-section-number">11.4</span> Guided Exercise 4 - Spatial Joins</a></li>
@@ -281,7 +294,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./sec_w6_spatial_analysis_II.html">Week 6 - Spatial analysis II</a></li><li class="breadcrumb-item"><a href="./lab_joins.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Lab 11 - Data Joins</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Lab 11 - Data Joins</span></h1>
+<h1 class="title"><span id="sec-spatan2" class="quarto-section-identifier"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Lab 11 - Data Joins</span></span></h1>
 </div>
 
 
@@ -299,8 +312,8 @@ ul.task-list li input[type="checkbox"] {
 
 
 <p>In this lab we will learn about <em>data joins</em> - operations that link data tables based on specific attributes, or based on locations. We will also learn how to read tabular data that has coordinates as columns as an actual spatial dataset, and will learn about Web Feature Service (WCS) layers - a standardized way to <em>stream</em> geospatial data without having to download it. Don’t skip the <em>Independent Exercise</em> either - you will learn two bonus GIS tools as part of it!</p>
-<section id="guided-exercise-1---working-with-wcs-and-wms-layers." class="level2" data-number="11.1">
-<h2 data-number="11.1" class="anchored" data-anchor-id="guided-exercise-1---working-with-wcs-and-wms-layers."><span class="header-section-number">11.1</span> Guided Exercise 1 - Working with WCS and WMS layers.</h2>
+<section id="guided-exercise-1---working-with-wfs-layers." class="level2" data-number="11.1">
+<h2 data-number="11.1" class="anchored" data-anchor-id="guided-exercise-1---working-with-wfs-layers."><span class="header-section-number">11.1</span> Guided Exercise 1 - Working with WFS layers.</h2>
 <p>Both WFS (Web Feature Services), WMS (Web Map Services), and WCS (Web Coverage Services) are standardised web sharing formats defined by the <a href="https://www.ogc.org/">Open Geospatial Consortium (OGC)</a>. WMS and WCS are designed to serve images (i.e.&nbsp;rasters), while WFS is designed to serve features (i.e.&nbsp;vectors). This is similar to the streaming of Google Maps or Open Street Maps you have used with QGIS already, with the difference that layers streamed via WFS function just like layers you download to your computer.</p>
 <p>The advantage of these formats is that you can connect direct with the data provider without having to download the data to disk first - but that is also the disadvantage, since if you lose internet connection you then have no data. More and more data providers are offering these options, so we will explore one example of a WFS layer here, and use it for the rest of the exercises.</p>
 <ol class="example" type="1">
@@ -877,8 +890,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./lab_zonal.html" class="pagination-link" aria-label="Lab 12 - Zonal Statistics and Overlap analysis">
-        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Lab 12 - Zonal Statistics and Overlap analysis</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./lab_zonal.html" class="pagination-link" aria-label="Lab 12 - Zonal Statistics and Overlap Analysis">
+        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Lab 12 - Zonal Statistics and Overlap Analysis</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
