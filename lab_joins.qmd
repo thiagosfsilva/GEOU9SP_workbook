@@ -92,7 +92,7 @@ We can see that for most cases our Spatial Join fixed the name mismatch issues, 
 These 11 traffic incidents may have been recorded with wrong or uncertain coordinates, and they fall 'outside' of the Local Authority polygons. For example, manually select the row for Dundee City (click on the row number) and then click on the `Zoom Map to Select Rows` button (at the top of the attribute table, looks like a magnifying glass). The check the QGIS map canvas, and you will see this data point is located over water, so it is not joined to any Authority polygon - maybe a boat traffic incident?
 :::
 
-## Independent Exercise 5 - Counting points in polygons
+## Independent Exercise 1 - Counting points in polygons
 
 In this exercise, you will practice using joins and spatial joins, and will also independently learn another two GIS tools: `Count Points in Polygons` ([QGIS Documentation](https://docs.qgis.org/3.34/en/docs/user_manual/processing_algs/qgis/vectoranalysis.html#count-points-in-polygon)) and `Statistics by Categories` ([QGIS Documentation](https://docs.qgis.org/3.34/en/docs/user_manual/processing_algs/qgis/vectoranalysis.html#qgisstatisticsbycategories)). 
 
@@ -119,3 +119,28 @@ You have been tasked with calculating a) the total amount of traffic incidents a
 8) Because you only wanted counts of points to answer a), there is a simpler alternative to joining then summarising. Go to `Vector > Analysis Tools > Count Points in Polygons`. The pick the (fixed) Output Area polygons as your `Polygons` and the Traffic Collisions layer as your `Points`, then save and run the results. You will see it calculates a new column named `NUMPOINTS`. You could then do a table join of this layer to the CSV table to get the `All_people` column, and answer question b). There are often multiple ways to achieve the same result in GIS!
 
 9) Make two visualisations of the results: one colouring the OA polygons by the number of total collisions, and another by the total collisions per capita. 
+
+## Independent Exercise 2 - Practicing Joins
+
+First, download the data files from here. They contain population information per Council Area for Scotland from the 2011 and 2022 census, respectively. 
+
+1) Add the CSV data to QGIS as non-spatial layers (tables). 
+
+2) Add the "Local Authority Boundaries" WFS layer from Guided Exercise 1
+
+3) Join the Census 2011 layer to the Local Authority layer using the fields 'Scottish Council Area' and 'local_authority'. Select only the columns 'All people', 'Males' and 'Females'. Also toggle the Custom field name prefix option and type '2011_'. 
+
+3) Now repeat the process to join the same three columns from the 2022 data. Don't forget to use the '2022_' prefix to distinguish them from the 2011 data. 
+
+4) Export the joined data as a new Geopackage or Shapefile file.
+
+5) Make three thematic visualisations of the following information:
+    - The total change in population per Council Area between 2011 and 2022.
+    - The total change in population density (people/km2) per Council Area between 2011 and 2022.
+    - The change in sex ratios (male/female) per Council Area between 2011 and 2022.
+    
+6) One of the measures for quality of life and healthy living is access to green spaces. Using the population census layer you created, and the [OS Open Greenspaces dataset](https://osdatahub.os.uk/downloads/open/OpenGreenspace), calculate how many m$^2$ of green space are available per capita for each Council Area in Scotland, and make a map showing this result. 
+
+::: {.callout-tip title="Hint" collapse="true" appearance="minimal"}
+Hint: You will need to do two separate joins: one to add the corresponding Council Area Name to each green space entry. Then you will need to calculate the total green space area per CA using the Statistics by Category tool. You can then join the Area attribute of this new layer to the original Local Authority attribute table containing the joined census data, and then calculate the proportions as a new field.
+:::
