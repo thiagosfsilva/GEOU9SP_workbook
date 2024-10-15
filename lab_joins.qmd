@@ -122,7 +122,7 @@ You have been tasked with calculating a) the total amount of traffic incidents a
 
 ## Independent Exercise 2 - Practicing Joins
 
-First, download the data files from here. They contain population information per Council Area for Scotland from the 2011 and 2022 census, respectively. 
+First, [download the data files from here](https://stir-my.sharepoint.com/:u:/g/personal/ala2_stir_ac_uk/EUBu4Ns8Rw5NskcNdkV9_oEBCu1LwAEV8HyFA3NQksyvvA?e=Jb5Fl9). They contain population information per Council Area for Scotland from the 2011 and 2022 census, respectively. 
 
 1) Add the CSV data to QGIS as non-spatial layers (tables). 
 

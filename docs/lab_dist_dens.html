@@ -312,6 +312,10 @@ window.Quarto = {
   <ul>
   <li><a href="#guided-exercise-1---obtaining-and-organising-the-data" id="toc-guided-exercise-1---obtaining-and-organising-the-data" class="nav-link active" data-scroll-target="#guided-exercise-1---obtaining-and-organising-the-data"><span class="header-section-number">13.1</span> Guided Exercise 1 - Obtaining and organising the data</a></li>
   <li><a href="#guided-exercise-2---looking-for-crime-hotspots" id="toc-guided-exercise-2---looking-for-crime-hotspots" class="nav-link" data-scroll-target="#guided-exercise-2---looking-for-crime-hotspots"><span class="header-section-number">13.2</span> Guided Exercise 2 - Looking for crime hotspots</a></li>
+  <li><a href="#guided-exercise-3---looking-more-closely" id="toc-guided-exercise-3---looking-more-closely" class="nav-link" data-scroll-target="#guided-exercise-3---looking-more-closely"><span class="header-section-number">13.3</span> Guided Exercise 3 - Looking more closely</a></li>
+  <li><a href="#guided-exercise-4---visualizing-densities-as-isolines" id="toc-guided-exercise-4---visualizing-densities-as-isolines" class="nav-link" data-scroll-target="#guided-exercise-4---visualizing-densities-as-isolines"><span class="header-section-number">13.4</span> Guided Exercise 4 - Visualizing densities as isolines</a></li>
+  <li><a href="#guided-exercise-5---distance-to-hubs" id="toc-guided-exercise-5---distance-to-hubs" class="nav-link" data-scroll-target="#guided-exercise-5---distance-to-hubs"><span class="header-section-number">13.5</span> Guided Exercise 5 - Distance to Hubs</a></li>
+  <li><a href="#guided-exercise-6---distance-maps" id="toc-guided-exercise-6---distance-maps" class="nav-link" data-scroll-target="#guided-exercise-6---distance-maps"><span class="header-section-number">13.6</span> Guided Exercise 6 - Distance Maps</a></li>
   </ul>
 </nav>
     </div>
@@ -425,7 +429,7 @@ Click for answer
 </div>
 <p>The <code>heatmap</code> symbology is useful for a quick inspection, but it is also restrictive. It would be more useful if the heatmap was an actual layer. We can create such permanent heatmap using the <code>Heatmap (Kernel Density Estimation)</code> tool in the <code>Processing</code> panel, under the <code>Interpolation</code> category. Once you open it, it will give you a few more options than the symbology route, in the following window:</p>
 <ol start="3" class="example" type="1">
-<li><p>Pick the crime layer as your <code>Point Layer</code>, then set a radius of 1000 <code>meters</code> (or 1 <code>kilometers</code>). One important additional option here is that we get to set the <em>resolution</em> (pixel size) of our output raster density map. Smaller pixels will look smoother, but will result in larger files and longer processing times. The units here are the same as the layer CRS, so let us use 50 meters for both X and Y. Leave the remaining options as default, and save your result in an appropriate location with the name <code>crime_density_1km_quartic.tif</code>.</p></li>
+<li><p>Pick the crime layer as your <code>Point Layer</code>, then set a radius of 1000 <code>meters</code> (or 1 <code>kilometers</code>). One important additional option here is that we get to set the <em>resolution</em> (pixel size) of our output raster density map. Smaller pixels will look smoother, but will result in larger files and longer processing times. The units here are the same as the layer CRS, so let us use <code>50</code> meters for both <code>X</code> and <code>Y</code>. Leave the <code>Kernel Shape</code> as quartic and the other options as default. Save your result in an appropriate location with the name <code>crime_density_1km_quartic_50m.tif</code>.</p></li>
 <li><p>Notice how the output of <code>Heatmap (Kernel Density Estimation)</code> is a raster, and that <em>nodata</em> values are used for regions that not within 1km of any point (unlike the <code>Heatmap</code> symbology, which paints everything as a zero). Since it is a raster, we can style it with symbology options just the same as any raster. Pick a <code>Singleband pseudocolor</code> colour ramp for your hotspots, and use the same ramp you used for the <code>Heatmap</code> symbology.</p></li>
 </ol>
 <div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
@@ -458,7 +462,7 @@ Click for answer
 </div>
 </div>
 <ol start="5" class="example" type="1">
-<li><p>To demonstrate the above, generate a second heatmap layer, this time using 5km as <code>Radius</code>, a <code>Pixel size</code> of 100 metres, the <code>Uniform</code> kernel shape, and <code>Scaled</code> output values. Not only the layer looks very different, but the actual location of the hotspots seem to have changed, and the density units are also very different. It always takes a lot of trial and error to converge on a KDE estimation that is sensible for the problem at hand.</p></li>
+<li><p>To demonstrate the above, generate a second heatmap layer, this time using 5km as <code>Radius</code>, a <code>Pixel size</code> of <code>100</code> metres, the <code>Uniform</code> kernel shape, and <code>Scaled</code> output values. Not only the layer looks very different, but the actual location of the hotspots seem to have changed, and the density units are also very different. It always takes a lot of trial and error to converge on a KDE estimation that is sensible for the problem at hand.</p></li>
 <li><p>If you’d like, try different combinations of radii, kernel shapes and pixel sizes. Once you are done, remove them all from your project, leaving only the first density map we created (radius 1000, quartic kernel, pixel size 50m).</p></li>
 <li><p>To make the hotspot layer look better, create a new layer by using <code>Dissolve</code> on the precincts or neighbourhood layers, then <code>Mask</code> the density raster to the boundaries of NYC only.</p></li>
 <li><p>We can now use tools we already know to associate the crime density information to the precincts and neighbourhoods. Using <code>Zonal Statistics</code> ([#sec-spatan3]), extract the <code>mean</code> and <code>maximum</code> density values for each precinct. Then make one visualization colouring the polygons by average crime density, and the other by maximum crime density. Repeat the analysis for the neighbourhoods polygon.</p></li>
@@ -488,15 +492,180 @@ Click for answer
 </div>
 <div id="callout-8" class="callout-8-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-
+<p>The zonal statistics analysis confirms our visual analysys that Midtown / Midtown South Manhattan has the highest maximum and average densities of arrest incidents. Not suprsingly, the <a href="https://www.nyc.gov/site/nypd/bureaus/patrol/precincts/midtown-south-precinct.page">14th Precinct</a>, also knownas Midtown South Precinct, also has the highest average and maximum density.</p>
 </div>
 </div>
 </div>
+</section>
+<section id="guided-exercise-3---looking-more-closely" class="level2" data-number="13.3">
+<h2 data-number="13.3" class="anchored" data-anchor-id="guided-exercise-3---looking-more-closely"><span class="header-section-number">13.3</span> Guided Exercise 3 - Looking more closely</h2>
+<p>Our incident dataset however includes several types, from traffic violations, to serious crimes. The <code>law_cat_cd</code> field contains codes indentifying the type of incident.</p>
+<div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Stop and Think
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>What are the unique existing values for the <code>law_cat_cd</code> field?</p>
+</div>
+</div>
+<div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We can use the <code>Select by Expression</code> tool from the Attribute Table, then select the <code>law_cat_cd</code> field and ask for a list of its unique values. From less serious to more serious, the values are: I = Infraction, V = Violation, M = Misdemeanor, F = Felony. We also have what appear to be some missing values (<code>NULL</code>) and some wrong entries (<code>9</code>).</p>
+</div>
+</div>
+</div>
+<p>It may be that if we give different weights to crime according to their seriousness, our results change. But for that, we need a numeric attribute that indicates the weight to be given to each type of crime. To do that, we will learn a new function that can be used in the <code>Field Calculator</code>, the <code>CASE WHEN</code> conditional operator.</p>
+<ol start="9" class="example" type="1">
+<li>Open the attribute table for the arrest incidents layer, and then open the <code>Field Calculator</code>. Then enter the <code>CASE</code> expression like shown on the figure below. The syntax is quite self explanatory: once you type <code>CASE</code>, you <em>open</em> what we call a <em>block</em>. Inside the block, you then list a series of conditions (i.e.&nbsp;<em>cases</em>) for what value the new attribute should have for different values of <code>law_cat_cd</code>. At the last line in the block you add the <code>ELSE</code> operator, meaning that if none of the cases is matched, then the new attribute should have a value of 0. That would include the ‘NULL’s and the ’9’ values that are not informative to us. You then <em>close</em> the block with <code>END</code>. We have more than 600k entries, so it will take a while!</li>
+</ol>
+<p><img src="images/lab_13/lab13_fig_case.jpg" class="img-fluid"></p>
+<ol start="10" class="example" type="1">
+<li>Now repeat the <code>Heatmap (Kernel Density)</code> calculation you did before, using a <code>radius</code> of 1000 meters, 50m ‘X’ and ‘Y’ pixel sizes, the <code>Quartic</code> <code>Kernel Shape</code> with <code>Raw</code> values, but this time pick the new <code>crim_weigh</code> field for <code>Weight from Field</code>. Save your results with an informative name such as <code>crime_density_1km_quartic_50m_weighted.tif</code> and check the results.</li>
+</ol>
+<div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Stop and Think
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>How much did the results change?</p>
+</div>
+</div>
+<div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Not much, but we can see incident density being reduced or increased in some areas after the weighting, especially a reduction in the northern part of precinct 11th, in the Bronx neighbourhood.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="guided-exercise-4---visualizing-densities-as-isolines" class="level2" data-number="13.4">
+<h2 data-number="13.4" class="anchored" data-anchor-id="guided-exercise-4---visualizing-densities-as-isolines"><span class="header-section-number">13.4</span> Guided Exercise 4 - Visualizing densities as isolines</h2>
+<p><em>Isolines</em> or ‘contour lines’ are lines that delineate areas within the same ranges of values. The most common use for them is to indicate topography:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://media.hswstatic.com/eyJidWNrZXQiOiJjb250ZW50Lmhzd3N0YXRpYy5jb20iLCJrZXkiOiJnaWZcL3RvcG9ncmFwaGljLW1hcC1jb250b3VyX3YyLmpwZyIsImVkaXRzIjp7InJlc2l6ZSI6eyJ3aWR0aCI6ODI4fSwidG9Gb3JtYXQiOiJhdmlmIn19.png" class="img-fluid figure-img"></p>
+<figcaption>https://www.mapquest.com/travel/outdoor-activities/hiking/how-to-read-a-topographic-map.htm</figcaption>
+</figure>
+</div>
+<p>However, we can use isolines to show any type of continuous value surface. For weather prediction, for example, contour lines indicating zones of equal pressure are called <em>isobars</em> :</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://bam.files.bbci.co.uk/bam/live/content/zdjngk7/large.png" class="img-fluid figure-img"></p>
+<figcaption>https://www.bbc.co.uk/bitesize/guides/zqwpm39/revision/2</figcaption>
+</figure>
+</div>
+<p>We can therefore, visualise density maps as contour lines. This has the advantage of making it easier to overlay on top of other information. To create an isoline map from our crime hotspots, we have two options. The first is to use the <code>Symbology</code>, the second is to create a new layer.</p>
+<ol start="11" class="example" type="1">
+<li><p>The density values on our crime density layer are very small, and that may throw the symbology options off. So we will first scale the densities to a relative percentage. First go to the <code>Processing</code> panel and find the <code>Raster Layer Statistics</code> tool. Use it to find the maximum density value for the layer. Mine was 0.09126630425453186. Then head to the <code>Raster Caclulator</code> and create a new layer named <code>relative_density.tif</code>, by dividing all pixels of the crime density layer by the maximum (<code>"NYC_crime_heatmap_1km_quartic@1" \ 0.09126630425453186</code> in my case, but your layer may be named differently.)</p></li>
+<li><p>Select the new relative crime density layer you created and go to <code>Properties &gt; Symbology</code>. It should be set to <code>singleband gray</code> - switch the symbology type to <code>Contours</code>. The default values for the contours and the index contours are too high (they are adjusted for elevation), so let us use 0.1 as the contour interval, and 0.5 as the index contour. Pick a colour for the isolines that differentiates well from the colour palette of your density layer, and overlay both. Now make a map that uses only the contours to show the crime hotspots over the OpenStreetMap layer, together with the Neighbourhood layer.</p></li>
+<li><p>Now turn off this contour styled layer, and instead go to <code>Raster &gt; Extraction &gt; Contour...</code>. Pick your relative density layer as <code>Input Layer</code>, and 0.1 as the <code>Interval between contour lines</code>. For attribute name, enter <code>REL_DENS</code>, leave the rest as default and save the result as <code>isolines_relative_density.shp</code>. The output should be identical to the symbology option, but it will a new line vector layer that can be treated as any other layer.</p></li>
+</ol>
+<div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Stop and Think
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Challenge: can you add labels to the contour lines using the label options in QGIS?</p>
+</div>
+</div>
+<div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>If you need some help, take a look a t this step by step: <a href="https://mapscaping.com/mastering-contour-lines-and-labels-in-qgis/">https://mapscaping.com/mastering-contour-lines-and-labels-in-qgis/</a></p>
+</div>
+</div>
+</div>
+</section>
+<section id="guided-exercise-5---distance-to-hubs" class="level2" data-number="13.5">
+<h2 data-number="13.5" class="anchored" data-anchor-id="guided-exercise-5---distance-to-hubs"><span class="header-section-number">13.5</span> Guided Exercise 5 - Distance to Hubs</h2>
+<p>Continuing with our crime analysis, we now want to get insights on possible response times to incidents, based on the distance from police stations. There are different ways to represent and explore distances in GIS, and we already explored one of them: buffers. You can create buffers that represent specific distances, and then use these buffers to count ocurrences within the range.</p>
+<div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Stop and Think
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Can you calculate the percentage of crime incidents in the dataset that happened within 1 km of a police station? Hint: <code>Buffer</code> and <code>Count Points in Polygons</code> should do the trick.</p>
+</div>
+</div>
+<div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-16" class="callout-16-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>First select the police station point layer and go to <code>Vector &gt; Geoprocessign &gt; Buffer</code> to create the 1km buffers. Make sure you dissolve them, since your question is within 1km of <em>any</em> station, and there may be places where the buffers of nearby police stations overlap. Then use <code>Count Points in Polygons</code> to count how many crime incidents occurred within the buffer. Then divide this number by the total number of records in the crime incidence dataset. I got 423223 points in the buffer, which divided by 616835 crime incident records gives me 68.6%.</p>
+</div>
+</div>
+</div>
+<p>But now let’s say we want to know the <em>average</em> distance of a crime incident to the nearest police station. For this, we would need to know the exact distances for each point, and buffers won’t give us that. The tool we want in that case is <code>Distance to the Nearest Hub (Points)</code> tool, in the <code>Processing</code> panel.</p>
+<ol start="14" class="example" type="1">
+<li><p>Open the <code>Distance to the Nearest Hub (Points)</code> tool in the <code>Processing</code> panel. Then pick the crime incident layer as the <code>Source Points Layer</code>, and the police station layer as the <code>Destination hubs layer</code>. Pick <code>FACNAME</code> as the hub layer name attribute (the name of each police station), and <code>Meters</code> as the <code>Distance unit</code>, save it as <code>crime_incidents_with_hubs.shp</code>, then <code>Run</code>. It will take a while (after all, QGIS needs to look into each of the 616835 crimes one by one and determine which police station is nearest).</p></li>
+<li><p>Now open the attribute table of the new layer your created. It should have all the original attributes of the crime incident layer, plus two new attributes at the end: <code>HubName</code> and <code>HubDist</code>. You can then use the <code>Summary Tool</code> to find out the average for the <code>HubDist</code> attribute, and answer the question above (I got 749 meters). And since the name of the police station is also brought to the table, you could use <code>Statistics by Category</code> (<code>Processing</code> panel) to calculate the total or average number of nearest crime incidents per police station - that could give insight in how overwhelmed some stations could be in relation to others. Or you could calculate the average distances to each hub, and have an idea of which police stations are being responsible for covering the largest areas.</p></li>
+</ol>
+</section>
+<section id="guided-exercise-6---distance-maps" class="level2" data-number="13.6">
+<h2 data-number="13.6" class="anchored" data-anchor-id="guided-exercise-6---distance-maps"><span class="header-section-number">13.6</span> Guided Exercise 6 - Distance Maps</h2>
+<p>There are times, however, where you want to create a <em>distance map</em> - a layer that shows for every location how far it is from something else. For example, if you were planning the location to install a new wind turbine, you may want to prioritise areas that are closer to a power line. In our crime example, maybe we want to identify regions in the city that are too far away from any police station - and therefore good candidates for creating a new one. The tool for that is called <code>Proximity (raster distance)</code> in QGIS. This tool however only works with rasters, so we need to convert our police stations into a raster first</p>
+<ol start="16" class="example" type="1">
+<li><p>Go to <code>Raster &gt; Conversion &gt; Rasterize</code>. Then pick the police stations as <code>Input Layer</code>, and <code>1</code> as a <code>Fixed value to burn</code>. then pick <code>Georeferenced Units</code> for <code>Output raster size units</code>, pick <code>50</code> for both horizontal and vertical resolution (those would be meters), and set the <code>Output Extent</code> to match the neighbourhoods layer extent - click ion the small down arrow, then pick <code>Calculate from layer</code> and select the neighbourhoods layer. This option determines how large your raster will be. Set the <code>Output data type</code> to <code>Byte</code>, and then save the result as <code>police_stattions.tif</code>. You will get a raster with a pixel value of <code>1</code> wherever a police station exists, and zero (which is the default <code>nodata</code> option, so it will show as such) otherwise.</p></li>
+<li><p>Now open the <code>Proximity (raster distance)</code> tool in the <code>Processing</code> panel, under <code>Raster Analysis</code>. Pick the rasterized police stations as the <code>Input Layer</code>, and add the number <code>1</code> as the <code>List of pixel values....</code> option. Change the distance units to <code>Georeferenced coordinates</code>, leave the rest as default, and save the output as <code>dist_from_police_Stations.tif</code> and <code>Run</code> it. The resulting layer is a raster map where the pixel values represent actual distances from a police station.</p></li>
+</ol>
 <ul>
-<li><p>visualise with isolines</p></li>
-<li><p>distance to hubs</p></li>
-<li><p>distance map</p></li>
-<li><p>raster calc to density cutoff and sitance cutoff ad example of multicriteria analysis</p></li>
+<li>raster calc to density cutoff and ditance cutoff ad example of multicriteria analysis</li>
 </ul>
 
 
