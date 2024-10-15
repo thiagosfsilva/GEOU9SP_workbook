@@ -2,38 +2,47 @@
 
 ## Guided Exercise 1 - Obtaining and organising the data
 
-For this set of exercises, we will be working with crime occurrence data for the city of New York (USA), for the year 2023. You have been hired to support an analysis of NYC criminality to help better manage police resources and reduce crime.
+For this set of exercises, we will be working with crime occurrence data (arrest incidents) for the city of New York (USA), for the year 2023. Imagine you have been hired to support an analysis of NYC criminality to help better manage police resources and reduce crime.
 
-The data package for this exercise can be downloaded here, and has been obtained from City of New York [Police Department website](https://www.nyc.gov/site/nypd/stats/crime-statistics/citywide-crime-stats.page) and the [NYC Open Data hub ](https://opendata.cityofnewyork.us/), and contains the following:
+The data package for this exercise can be downloaded here, and has been obtained from the City of New York [Police Department website](https://www.nyc.gov/site/nypd/stats/crime-statistics/citywide-crime-stats.page) and the [NYC Open Data hub ](https://opendata.cityofnewyork.us/), and contains the following:
 
 
 - Arrest incidents for the year 2023, as a point vector shapefile - derived from a shapefile containing all arrest incidents from 2013 to present.
 
 - A polygon vector shapefile with the boundaries for the NYC neighbourhoods.
 
-- A polygon vector shapefile with the boundaries of each [Police Precinct](https://www.nyc.gov/site/nypd/bureaus/patrol/find-your-precinct.page) in NYC. Each police precinct is the responsibility of a different police team.
+- A polygon vector shapefile with the boundaries of each [Police Precinct](https://www.nyc.gov/site/nypd/bureaus/patrol/find-your-precinct.page) in NYC. Each police precinct is the responsibility of a different police chief and team.
 
-- A point vector shapefile with the locations of all police stations in NYC. Most precincts have one station, with a few exceptions for additional speciality police stations such as mounted police. 
+- A point vector shapefile with the locations of all police stations in NYC. Most precincts have one station, with a few exceptions in the case of additional speciality police stations such as mounted police. 
 
-(@) Download and extract the data package, and create a new folder and QGIS project for this lab. Import all three layers to your project. If you wish, add the OpenStreet Map or some other web layer from the `QuickMapServices` plugin to help with context and navigation. 
+(@) First, download and extract the data package, and create a new folder and QGIS project for this lab. Import all four layers to your project. If you wish, add the OpenStreetMap or some other web layer from the `QuickMapServices` plugin to help with context and navigation. 
 
 ::: {.callout-important title="Stop and Think"}
 Zoom to the full extent of the arrests layer - can you spot a problem with it? How can you fix it?  
 :::
 
 ::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
-You can right click on the layer name and then on `Zoom to Layer(s)`. Apparently, an arrest has been made near Africa...This is a common error when people enter missing coordinates as zero instead of a blank value - and then the point will be located at 0 degrees lat / 0 degrees long. To fix it, select the problematic point using the 'Select Features` tool in the toolbar, then put the arrests layer into editing mode, delete the point, save the edits and exit edit mode. 
+You can right click on the layer name and then on `Zoom to Layer(s)`. Apparently, an arrest has been made near ther coast of Africa...This is a common error when people enter missing coordinates as zero instead of a blank value - and then the point will be located at 0 degrees lat / 0 degrees long. To fix it, select the problematic point using the `Select Features` tool in the toolbar, then put the arrests layer into editing mode, delete the point, save the edits as `arrest_incidents_fixed.shp` and exit edit mode. Remove the original from the project to avoid confusion.
 
-If you skip this step your density rasters will get quite big...
+Don't skip this step or your density rasters will get quite large...
 :::
 
 ## Guided Exercise 2 -  Looking for crime hotspots
 
-The first question you have been asked is where are the crime *hotspots* in the city, meaning the areas with the largest *density* of occurrences. The word density usually refers to a count of things divided by some area or volume measurement. For example, population density is number of people; oxygen density in normal atmospheric conditions is 1.43 grams / litre. 
+The first question you have been asked is where are the crime *hotspots* in the city, meaning the areas with the largest *density* of occurrences. The word density usually refers to a count of things divided by some area or volume measurement. For example, population density is number of people per area; oxygen density in normal atmospheric conditions is 1.43 grams / litre. 
 
-In GIS, density will be usually related to counts of things over areas; the more 'things' happen per unit area for ex. km$^2$, the higher the density. This is often called *Hotspot analysis*  in GIS, where the hotspots are areas of remarkably high density. And the main tool used for that is known as *Kernel Density Estimation (KDE)*. I have made a video explanation on KDE that you can watch on Canvas.
+In GIS, density will be usually related to counts of 'things' over areas - the more things happening per unit area, the higher the density. This is often called *hotspot analysis* in GIS, where the hotspots are areas of remarkably high density. And the main tool used for that is known as *Kernel Density Estimation (KDE)*. I have made a video explanation on KDE that you can watch on Canvas. We will now learn about two ways of generating density maps. 
 
-(@) The first way to generate a density map is to use change the layer `Symbology`. Select the crime layer and go to `Properties > Syymbology`, then change the symbology type from `Single Symbol` to `Heatmap`. Pick `Rocket` as the `Color ramp`, and a `Radius` of 1000 `meters at scale` (change from `millimiters`). Then `Apply` and `Close`. To add some context, place the boroughs layer on top of it, with no fill and a bright yellow outline.
+(@) The first way to generate a density map is to change the layer `Symbology` (see image below). Select the crime layer and go to `Properties > Syymbology`, then change the symbology type from `Single Symbol` to `Heatmap`. Pick `Reds` as the `Color ramp`, and a `Radius` of 1000, changing the radius unit from `Millimiters` to `meters at scale` . Then `Apply` and `Close`. It will take a bit of time to change the appearance.
+
+
+
+![](images/lab_13/lab13_fig_heatmap_symbology.jpg)
+
+
+(@) To add some context, place the neighbourhoods layer on top of it, with no fill and a dark outline. It should look somewhat like this:
+
+![](images/lab_13/lab13_fig_heatmap_outcome_symb.jpg)
 
 ::: {.callout-important title="Stop and Think"}
 A) Based on the hotspot map, which police precincts seems to have their hands full with crime occurrences? And what neighbourhood is it?
@@ -47,39 +56,55 @@ A) We can use the `Identify Features` tool to query the precinct and neighbourho
 B) We can find that by looking at the `Properties > Information` for any of the layers. The CRS is EPSG:2831 - NAD83(HARN) / New York Long Island. It uses the NAD83 datum, the Lambert Conformal Conic Projection and metric coordinates.
 :::
 
-The `heatmap` symbology is useful for a quick inspection, but it is also restrictive. It would be more useful if the heatmap was an actual layer. We can create such permanent heatmap using the `Heatmap (Kernel Density Estimation)` tool in the `Processing` panel, under the `Interpolation` category. Once you open it, it will give you a few more options than the symbology route, in the following window:
+The `heatmap` symbology is useful for a quick inspection, but it is also restrictive -  and it needs to redraw every time you zoom or pan the map, so it can be annoying. It would be more useful if the heatmap was an actual layer. We can create such permanent heatmap using the `Heatmap (Kernel Density Estimation)` tool. 
 
-(@) Pick the crime layer as your `Point Layer`, then set a radius of 1000 `meters` (or 1 `kilometers`). One important additional option here is that we get to set the *resolution* (pixel size) of our output raster density map. Smaller pixels will look smoother, but will result in larger files and longer processing times. The units here are the same as the layer CRS, so let us use `50` meters for both `X` and `Y`. Leave the `Kernel Shape` as quartic and the other options as default. Save your result in an appropriate location with the name `crime_density_1km_quartic_50m.tif`.
+(@) Launch the `Heatmap (Kernel Density Estimation)` tool in the `Processing` panel, under the `Interpolation` category. It will show a new window like this:
 
-(@) Notice how the output of `Heatmap (Kernel Density Estimation)` is a raster, and that *nodata* values are used for regions that not within 1km of any point (unlike the `Heatmap` symbology, which paints everything as a zero). Since it is a raster, we can style it with symbology options just the same as any raster. Pick a `Singleband pseudocolor` colour ramp for your hotspots, and use the same ramp you used for the `Heatmap` symbology.  
+![](images/lab_13/lab13_fig_kernel_window.jpg)
+
+(@) Pick the crime layer as your `Point Layer`, then set a radius of 1000 `meters` (or 1 `kilometers`). One important additional option here is that we get to set the *resolution* (pixel size) of our output raster density map. Smaller pixels will look smoother, but will result in larger files and longer processing times. The units here are the same as the layer CRS, so let us use `50` meters for both `Pixel X` and `Y`. Leave the `Kernel Shape` as quartic and the other options as default. Save your result in an appropriate location with the name `crime_density_1km_quartic_50m.tif`.
+
+(@) Notice how the output of `Heatmap (Kernel Density Estimation)` is a raster, and that *nodata* values are used for regions that are not within 1km of any point (unlike the `Heatmap` symbology, which paints everything including the zero). Since it is a raster, we can style it with symbology options just the same as any raster. Pick a `Singleband pseudocolor` colour ramp for your hotspots, and use the same `Reds` colour ramp you used for the `Heatmap` symbology in the previous steps.  
 
 ::: {.callout-important title="Stop and Think"}
 Does the heatmap produced as a layer look the same as the heatmap produced by the symbology?
 :::
 
 ::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
-They look close, but not identical. Kernel density estimations are very sensitive to the kernel radius, the shape of the kernel function, the scaling, and the resolution of the output raster, and you can get wildly different results by manipulating these parameters. Therefore KDE is considered a *semi-quantitative* tool - there is never as *correct* or *best* set of parameters to use for generating the maps.
+They look close, but not identical. Kernel density estimations are very sensitive to the kernel radius, the shape of the kernel function, the scaling, and the resolution of the output raster, and you can get wildly different results by manipulating these parameters. We can't set as many parameters when using the `Symbology` option, so we can't get the exact same result.
+
+Therefore KDE is considered a *semi-quantitative* tool - there is never as *correct* or *best* set of parameters to use for generating the maps.
 :::
 
-(@) To demonstrate the above, generate a second heatmap layer, this time using 5km as `Radius`, a `Pixel size` of `100` metres, the `Uniform` kernel shape, and `Scaled` output values. Not only the layer looks very different, but the actual location of the hotspots seem to have changed, and the density units are also very different. It always takes a lot of trial and error to converge on a KDE estimation that is sensible for the problem at hand. 
+(@) To demonstrate the issue above, generate a second heatmap layer, this time using 5km as `Radius`, a `Pixel size` of `100` metres, the `Uniform` kernel shape, and `Scaled` output values. Save it as `crime_density_5km_uni_100m_scaled.tif`. The style it with the `Reds` colour ramp as well.
 
-(@) If you'd like, try different combinations of radii, kernel shapes and pixel sizes. Once you are done, remove them all from your project, leaving only the first density map we created (radius 1000, quartic kernel, pixel size 50m).
+Not only the layer looks very different, but the actual location of the hotspots seem to have changed, and the density values are also very different. It always takes a lot of trial and error to converge on a KDE estimation that is sensible for the problem at hand. 
 
-(@) To make the hotspot layer look better, create a new layer by using `Dissolve` on the precincts or neighbourhood layers, then `Mask` the density raster to the boundaries of NYC only. 
+(@) If you'd like, try different combinations of radii, kernel shapes and pixel sizes. Once you are done, remove them all from your project, leaving only the first density map we created (radius 1000, quartic kernel, pixel size 50m). Also, change the symbology of the crime points layer back to `Single Symbol`.
 
-(@) We can now use tools we already know to associate the crime density information to the precincts and neighbourhoods. Using `Zonal Statistics` ([#sec-spatan3]), extract the `mean` and `maximum` density values for each precinct. Then make one visualization colouring the polygons by average crime density, and the other by maximum crime density. Repeat the analysis for the neighbourhoods polygon. 
+(@) We can now use tools we already know to associate the crime density information to the precincts and neighbourhoods. Using `Zonal Statistics`, extract the `mean` and `maximum` density values for each precinct. Then make two map visualizations, one colouring the polygons by average crime density, and the other by maximum crime density. Do the same for the neighbourhoods layer. This is what they should look like:
+
+![Neighbourhoods Mean Density](images/lab_13/lab13_fig_neighs_mean_density.jpg)
+
+![Neighbourhoods Max Density](images/lab_13/lab13_fig_neighs_max_density.jpg)
+
+![Precincts Mean Density](images/lab_13/lab13_fig_precs_mean_density.jpg)
+
+![Precincts Max Density](images/lab_13/lab13_fig_precs_max_density.jpg)
+
+
 
 ::: {.callout-important title="Stop and Think"}
 Which precinct and neighbourhood seem to be the most problematic in terms of crime, *i.e.* have the highest average and/or maximum crime density?
 :::
 
 ::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
-The zonal statistics analysis confirms our visual analysys that Midtown / Midtown South Manhattan has the highest maximum and average densities of arrest incidents. Not suprsingly, the [14th Precinct](https://www.nyc.gov/site/nypd/bureaus/patrol/precincts/midtown-south-precinct.page), also knownas Midtown South Precinct, also has the highest average and maximum density.
+We can look at the attribute table of the zonal statistics results to answer that. This confirms our visual analysis that Midtown / Midtown South Manhattan has the highest maximum and average densities of arrest incidents. Not surprisingly, the [14th Precinct](https://www.nyc.gov/site/nypd/bureaus/patrol/precincts/midtown-south-precinct.page), also known Midtown South Precinct, also has the highest average and maximum densities.
 :::
 
-## Guided Exercise 3 - Looking more closely
+## Guided Exercise 3 - Weighted Kernel Desnities
 
-Our incident dataset however includes several types, from traffic violations, to serious crimes. The `law_cat_cd` field contains codes indentifying the type of incident. 
+The analysis above seems good, but one thing we are not considering is the type of crime. Our incident dataset includes several types, from traffic violations to serious crimes. The `law_cat_cd` field contains codes identifying the type of incident. 
 
 ::: {.callout-important title="Stop and Think"}
 What are the unique existing values for the `law_cat_cd` field?
@@ -87,42 +112,52 @@ What are the unique existing values for the `law_cat_cd` field?
 
 ::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
 We can use the `Select by Expression` tool from the Attribute Table, then select the `law_cat_cd` field and ask for a list of its unique values. From less serious to more serious, the values are: 
-I = Infraction, V = Violation, M = Misdemeanor, F =  Felony. We also have what appear to be some missing values (`NULL`) and some wrong entries (`9`).
+I = Infraction, V = Violation, M = Misdemeanor, F =  Felony. We also have what appear to be some missing values (`NULL`s) and some wrong entries (`9`).
 :::
 
-It may be that if we give different weights to crime according to their seriousness, our results change. But for that, we need a numeric attribute that indicates the weight to be given to each type of crime. To do that, we will learn a new function that can be used in the `Field Calculator`, the `CASE WHEN` conditional operator.
+Perhaps if we give different weights to crime according to their seriousness, our results may change. But for that, we need a numeric attribute that indicates the weight to be given to each type of crime. We could use the `Field calculator` multiple times by selecting each type of crime and filling a new attribute with the respective number, but there is a quicker way: the `CASE WHEN` conditional operator.
 
-(@) Open the attribute table for the arrest incidents layer, and then open the `Field Calculator`. Then enter the `CASE` expression like shown on the figure below. The syntax is quite self explanatory: once you type `CASE`, you *open* what we call a *block*. Inside the block, you then list a series of conditions (i.e. *cases*) for what value the new attribute should have for different values of `law_cat_cd`. At the last line in the block you add the `ELSE` operator, meaning that if none of the cases is matched, then the new attribute should have a value of 0. That would include the 'NULL's and the '9' values that are not informative to us. You then *close* the block with `END`. We have more than 600k entries, so it will take a while!
+(@) Open the attribute table for the arrest incidents layer, and then open the `Field Calculator`. 
+
+(@) Then enter the `CASE` expression like it is shown on the figure below. The syntax is quite self explanatory: once you type `CASE`, you *open* what we call a *block*. Inside the block, you then list a series of conditions (i.e. *cases*) for what numeric value the new attribute should have for different string values of `law_cat_cd`. At the last line in the block you add the `ELSE` operator, meaning that if none of the cases are matched, then the new attribute should have a value of 0. That would include the `NULL`s and the `9` values that are not informative to us. You then *close* the block with `END`. We have more than 600k entries, so it will take a while to run!
 
 ![](images/lab_13/lab13_fig_case.jpg)
 
-(@) Now repeat the `Heatmap (Kernel Density)` calculation you did before, using a `radius` of 1000 meters, 50m 'X' and 'Y' pixel sizes, the `Quartic` `Kernel Shape` with `Raw` values, but this time pick the new `crim_weigh` field for `Weight from Field`. Save your results with an informative name such as `crime_density_1km_quartic_50m_weighted.tif` and check the results.
+(@) Now repeat the `Heatmap (Kernel Density)` calculation you did before, using a `radius` of 1000 meters, 50m `X` and `Y` pixel sizes, the `Quartic` `Kernel Shape` with `Raw` values, but this time pick the new `crim_weigh` field for `Weight from Field`. Save your results with an informative name such as `crime_density_1km_quartic_50m_weighted.tif` and check the results.
+
+(@) To facilitate comparison between the original and the new density layer, change the `Singleband Pseudocolor` symbology  `Mode` from `Continuous` to `Quantile`, with 10 `Classes`, for both layers.
 
 ::: {.callout-important title="Stop and Think"}
 How much did the results change?
 :::
 
 ::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
-Not much, but we can see incident density being reduced or increased in some areas after the weighting, especially a reduction in the northern part of precinct 11th, in the Bronx neighbourhood. 
+Not much, but we can see incident densities being slightly reduced or increased in some areas after the weighting. The most noticeable is a reduction in density in the northern part of precinct 11th, in the Bronx neighbourhood. 
 :::
 
 ## Guided Exercise 4 - Visualizing densities as isolines
 
-*Isolines* or 'contour lines' are lines that delineate areas within the same ranges of values. The most common use for them is to indicate topography:
+Our density maps are good and informative, but they will hide any layers below them. *Isolines* or 'contour lines' are lines that delineate areas within the same ranges of values, and make for good data overlays. The most common use for them is to indicate topography (see below). Each brown line is associated with an elevation, and some thicker lines are used as *reference isolines* to facilitate navigation.
 
-![https://www.mapquest.com/travel/outdoor-activities/hiking/how-to-read-a-topographic-map.htm](https://media.hswstatic.com/eyJidWNrZXQiOiJjb250ZW50Lmhzd3N0YXRpYy5jb20iLCJrZXkiOiJnaWZcL3RvcG9ncmFwaGljLW1hcC1jb250b3VyX3YyLmpwZyIsImVkaXRzIjp7InJlc2l6ZSI6eyJ3aWR0aCI6ODI4fSwidG9Gb3JtYXQiOiJhdmlmIn19)
+![https://en.wikipedia.org/wiki/Topographic_map](https://upload.wikimedia.org/wikipedia/commons/7/79/Topographic_map_example.png)
 
 However, we can use isolines to show any type of continuous value surface. For weather prediction, for example, contour lines indicating zones of equal pressure are called *isobars* :
 
-![https://www.bbc.co.uk/bitesize/guides/zqwpm39/revision/2](https://bam.files.bbci.co.uk/bam/live/content/zdjngk7/large)
+![https://www.bbc.co.uk/bitesize/guides/zqwpm39/revision/2](images/lab_13/isobar.png)
 
-We can therefore, visualise density maps as contour lines. This has the advantage of making it easier to overlay on top of other information. To create an isoline map from our crime hotspots, we have two options. The first is to use the `Symbology`, the second is to create a new layer.
 
-(@) The density values on our crime density layer are very small, and that may throw the symbology options off. So we will first scale the densities to a relative percentage. First go to the `Processing` panel and find the `Raster Layer Statistics` tool. Use it to find the maximum density value for the layer. Mine was 0.09126630425453186. Then head to the `Raster Caclulator` and create a new layer named `relative_density.tif`, by dividing all pixels of the crime density layer by the maximum (`"NYC_crime_heatmap_1km_quartic@1" \ 0.09126630425453186` in my case, but your layer may be named differently.)
+We can therefore also visualise density maps as contour lines. This has the advantage of making it easier to overlay the hotspots on top of other information. To create an isoline map from our crime hotspots, we have two options, similarly to the heatmaps themselves. The first is to use a `Symbology`, the second is to create a new layer.
 
-(@) Select the new relative crime density layer you created and go to `Properties > Symbology`. It should be set to `singleband gray` - switch the symbology type to `Contours`. The default values for the contours and the index contours are too high (they are adjusted for elevation), so let us use 0.1 as the contour interval, and 0.5 as the index contour. Pick a colour for the isolines that differentiates well from the colour palette of your density layer, and overlay both. Now make a map that uses only the contours to show the crime hotspots over the OpenStreetMap layer, together with the Neighbourhood layer. 
+(@) So we don't lose the original heatmap symbology, right click on the crime density layer and select `Duplicate Layer` to make a copy of it. Make sure the layer copy is on top of the original layer.
 
-(@) Now turn off this contour styled layer, and instead go to `Raster > Extraction > Contour...`. Pick your relative density layer as `Input Layer`, and 0.1 as the `Interval between contour lines`. For attribute name, enter `REL_DENS`, leave the rest as default and save the result as `isolines_relative_density.shp`. The output should be identical to the symbology option, but it will a new line vector layer that can be treated as any other layer. 
+(@) Now select the layer copy you created and go to `Properties > Symbology`. Switch the symbology type to `Contours`. The default values for the contours and the index contours are too low (they are set for elevation), so let us use `1000` as the `contour interval`, and `2000` as the `index contour`. Notice how the contour lines align with the hotspots of the original layer.  
+
+(@) Now turn off the hotpots and make a map that uses only the contours to show the crime hotspots over the OpenStreetMap layer, together with the Neighbourhood layer. Something like this:
+
+
+![](images/lab_13/lab13_fig_Isolines.jpg)
+
+(@) Now turn off this contour-styled layer, and instead go to `Raster > Extraction > Contour...`. Pick your crime density layer as `Input Layer`, and 1000 as the `Interval between contour lines`. For attribute name, enter `DENS`, leave the rest as default and save the result as `isolines_density.shp`. The output should be identical to the symbology option, but it will be a new line vector layer that can be treated as any other layer, and it will have an attribute that can be used to label the lines.
 
 ::: {.callout-important title="Stop and Think"}
 Challenge: can you add labels to the contour lines using the label options in QGIS?
@@ -134,32 +169,53 @@ If you need some help, take a look a t this step by step: [https://mapscaping.co
 
 ## Guided Exercise 5 - Distance to Hubs
 
-Continuing with our crime analysis, we now want to get insights on possible response times to incidents, based on the distance from police stations. There are different ways to represent and explore distances in GIS, and we already explored one of them: buffers. You can create buffers that represent specific distances, and then use these buffers to count ocurrences within the range.
-
+Continuing with our crime analysis, we now want to get insights on possible response times to incidents, based on the distance from police stations. There are different ways to represent and explore distances in GIS, and we already explored one of them: buffers. You can create buffers that represent specific distances, and then use these buffers to count occurrences within the range.
 
 ::: {.callout-important title="Stop and Think"}
 Can you calculate the percentage of crime incidents in the dataset that happened within 1 km of a police station? Hint: `Buffer` and `Count Points in Polygons` should do the trick. 
 :::
 
 ::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
-First select the police station point layer and go to `Vector > Geoprocessign > Buffer` to create the 1km buffers. Make sure you dissolve them, since your question is within 1km of *any* station, and there may be places where the buffers of nearby police stations overlap. Then use `Count Points in Polygons` to count how many crime incidents occurred within the buffer. Then divide this number by the total number of records in the crime incidence dataset. I got 423223 points in the buffer, which divided by 616835 crime incident records gives me 68.6%.
+First select the police station point layer and go to `Vector > Geoprocessign > Buffer` to create the 1km buffers. Make sure you dissolve them, since your question is "within 1km of *any* station", and there may be places where the buffers of nearby police stations overlap. Then use `Count Points in Polygons` to count how many crime incidents occurred within the buffer polygon. Check the count on the attribute table of the new layer, then divide this number by the total number of records in the crime incidence dataset. I got 423223 points in the buffer, which divided by 616835 crime incident records gives me 68.6%.
 :::
 
 But now let's say we want to know the *average* distance of a crime incident to the nearest police station. For this, we would need to know the exact distances for each point, and buffers won't give us that. The tool we want in that case is `Distance to the Nearest Hub (Points)` tool, in the `Processing` panel. 
 
-(@) Open the `Distance to the Nearest Hub (Points)` tool in the `Processing` panel. Then pick the crime incident layer as the `Source Points Layer`, and the police station layer as the `Destination hubs layer`. Pick `FACNAME` as the hub layer name attribute (the name of each police station), and `Meters` as the `Distance unit`, save it as `crime_incidents_with_hubs.shp`, then `Run`. It will take a while (after all, QGIS needs to look into each of the 616835 crimes one by one and determine which police station is nearest). 
+(@) Open the `Distance to the Nearest Hub (Points)` tool in the `Processing` panel. Then pick the crime incident layer as the `Source Points Layer`, and the police station layer as the `Destination hubs layer`. Pick `FACNAME` as the hub layer name attribute (the name of each police station), and `Meters` as the `Distance unit`, save it as `crime_incidents_from_hubs.shp`, then `Run`. It will take a while (after all, QGIS needs to look into each of the 616835 crimes one by one and determine which police station is nearest). 
 
-(@) Now open the attribute table of the new layer your created. It should have all the original attributes of the crime incident layer, plus two new attributes at the end: `HubName` and `HubDist`. You can then use the `Summary Tool` to find out the average for the `HubDist` attribute, and answer the question above (I got 749 meters). And since the name of the police station is also brought to the table, you could use `Statistics by Category` (`Processing` panel) to calculate the total or average number of nearest crime incidents per police station - that could give insight in how overwhelmed some stations could be in relation to others. Or you could calculate the average distances to each hub, and have an idea of which police stations are being responsible for covering the largest areas. 
+![](images/lab_13/lab_13_fig_distohubs.jpg)
+
+(@) Now open the attribute table of the new layer your created. It should have all the original attributes of the crime incident layer, plus two new attributes at the end: `HubName` and `HubDist`. You can then use the `Summary Tool` to find out the average for the `HubDist` attribute, and answer the question above (I got 749 meters). 
+
+
+::: {.callout-tip}
+Since the name of the police station is also brought to the table, you could use `Statistics by Category` (`Processing` panel) to calculate the total or average number of nearest crime incidents per police station - that could give you insight in how overwhelmed some stations could be in relation to others. Or you could calculate the average distances to each hub, and have an idea of which police stations are being responsible for covering the largest distances.  
+:::
 
 ## Guided Exercise 6 - Distance Maps
 
-There are times, however, where you want to create a *distance map* - a layer that shows for every location how far it is from something else. For example, if you were planning the location to install a new wind turbine, you may want to prioritise areas that are closer to a power line. In our crime example, maybe we want to identify regions in the city that are too far away from any police station - and therefore good candidates for creating a new one. The tool for that is called `Proximity (raster distance)` in QGIS. This tool however only works with rasters, so we need to convert our police stations into a raster first
+There are times, however, when you want to create a *distance map* - a layer that shows how far every location is from some reference point(s). For example, if you were planning the location to install a new wind turbine, you may want to prioritise areas that are closer to a power line. In our crime example, maybe we want to identify regions in the city that are too far away from any police station - and therefore good candidates for creating a new one. The tool for that is called `Proximity (raster distance)` in QGIS. This tool however only works with rasters, so we need to convert our police stations into a raster first:
 
-(@) Go to `Raster > Conversion > Rasterize`. Then pick the police stations as `Input Layer`, and `1` as a `Fixed value to burn`. then pick `Georeferenced Units` for `Output raster size units`, pick `50` for both horizontal and vertical resolution (those would be meters), and set the `Output Extent` to match the neighbourhoods layer extent - click ion the small down arrow, then pick `Calculate from layer` and select the neighbourhoods layer. This option determines how large your raster will be. Set the `Output data type` to `Byte`, and then save the result as `police_stattions.tif`. You will get a raster with a pixel value of `1` wherever a police station exists, and zero (which is the default `nodata` option, so it will show as such) otherwise.  
+(@) Go to `Raster > Conversion > Rasterize`. Then pick the police stations as `Input Layer`, and `1` as a `Fixed value to burn`. Then pick `Georeferenced Units` for `Output raster size units`, pick `50` for both horizontal and vertical resolution (those would be meters), and set the `Output Extent` to match the neighbourhoods layer extent - click on the small down arrow, then pick `Calculate from layer` and select the neighbourhoods layer. This option determines how large your raster will be. Set the `Output data type` to `Byte`, and then save the result as `raster_police_stations.tif`. You will get a raster with a pixel value of `1` 'burned in' wherever a police station exists, and `0` (which is the default `nodata` option, so it will show as such) otherwise. You may need to zoom in to see the dots, but they are there.
 
-
-(@) Now open the `Proximity (raster distance)` tool in the `Processing` panel, under `Raster Analysis`. Pick the rasterized police stations as the `Input Layer`, and add the number `1` as the `List of pixel values....` option. Change the distance units to `Georeferenced coordinates`, leave the rest as default, and save the output as `dist_from_police_Stations.tif` and `Run` it. The resulting layer is a raster map where the pixel values represent actual distances from a police station. 
-
+![](images/lab_13/lab13_fig_rasterise.jpg)
 
 
-- raster calc to density cutoff and ditance cutoff ad example of multicriteria analysis
+(@) Now open the `Proximity (raster distance)` tool in the `Processing` panel, under `Raster Analysis`. Pick the rasterised police stations as the `Input Layer`, and add the number `1` as the `List of pixel values....` option. Change the distance units to `Georeferenced coordinates`, leave the rest as default, and save the output as `dist_from_police_Stations.tif` and `Run` it. 
+
+![](images/lab_13/lab_13_proximity.jpg)
+
+(@) The resulting layer is a raster map where the pixel values represent actual distances from a police station. Apply the `Singleband Pseudocolor` symbology with the `Reds` colour palette to it, and then overlay the neighbourhoods vector on it for reference.
+
+![](images/lab_13/lab13_fig_distmap.jpg)
+
+
+(@) Let us assume that any area beyond 4km of a police station would be a good candidate for a new station. Use the `Raster calculator` to create a new layer showing only these areas, from the distance map you just created. Then polygonise the results and clip them by the neighbourhoods layer to create vector polygons of 'Potential New Station Locations'. It should look like this:
+
+![](images/lab_13/lab_13_potential_areas.jpg)
+
+Done! This is the end of Lab 13. You now know how to create heatmaps and contour lines, and different tools to work with distances in GIS. In the next lab we will learn some additional distance-based tools, and then practice with an Independent Exercise. 
+
+
+
+
