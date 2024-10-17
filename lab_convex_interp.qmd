@@ -1,0 +1,5 @@
+# Lab 14 - Convex Hulls and Interpolation {#sec-spatan5}
+
+## Guided Exercise 1 - Convex hulls
+
+This exercise will be based on actual research data collected by [Dr. Adam Fell](https://www.stir.ac.uk/people/1457157) as part of their [PhD research](https://dspace.stir.ac.uk/handle/1893/36203) developed at University of Stirling. Adam has monitored the movement of bird species in Panama, to understand how land cover affects their movement and behaviour. 

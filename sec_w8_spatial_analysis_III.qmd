@@ -17,13 +17,16 @@ For every week, we will list the main theoretical and practical learning goals. 
 [@sec-spatan4]
 
 - Density Tools
-    - Kernel Desnsity Estimation
-- Interpolation Tools
-    - Inverse Distance Weighting
-
-[@sec-spatan5]
-
+    - Kernel Density Estimation
+    - Count Points in Polygons
 - Distance tools
     - Distance to Nearest Hub
     - Distance Maps
+
+
+[@sec-spatan5]
+
+
 - Convex Hulls
+- Interpolation Tools
+    - Inverse Distance Weighting

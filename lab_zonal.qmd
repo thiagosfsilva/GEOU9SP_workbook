@@ -23,7 +23,7 @@ If you are curious, these files were obtained from the City of Amsterdam [geodat
 
 - A raster file showing modelled annual NO2 concentrations for the year 2008, produced as an output from [this research article](https://www.nature.com/articles/sdata201935). The original files cover all of the Netherlands, but have been cropped to make the file size more manageable for this exercise.
 
-(@) Download the data and create a project folder and a QGIS project for this exercise. The project should be set to EPSG:28899 - Amersfoort / RD New, the standard CRS for the Netherlands. 
+(@) Download the data and create a project folder and a QGIS project for this exercise. The project should be set to EPSG:28992 - Amersfoort / RD New, the standard CRS for the Netherlands. 
 
 ::: {.callout-tip}
 Two useful websites to find information about coordinate reference systems are [https://epsg.io/](https://epsg.io/) and [https://spatialreference.org/](https://spatialreference.org/). Search for EPSG:28899 in thee websites and see what information they provide. 
