@@ -984,7 +984,7 @@
     "href": "sec_w8_spatial_analysis_III.html#what-will-you-learn",
     "title": "Week 8 - Spatial analysis III",
     "section": "What will you learn",
-    "text": "What will you learn\nFor every week, we will list the main theoretical and practical learning goals. Use these as a ‘checklist’ to gauge your learning for each week. If you don’t feel confident you have learned any specific topic, then revisit the week’s material!\n\nPractical knowledge:\n?sec-spatan4\n\nDensity Tools\n\nKernel Density Estimation\nCount Points in Polygons\n\nDistance tools\n\nDistance to Nearest Hub\nDistance Maps\n\n\n?sec-spatan5\n\nConvex Hulls\nInterpolation Tools\n\nInverse Distance Weighting",
+    "text": "What will you learn\nFor every week, we will list the main theoretical and practical learning goals. Use these as a ‘checklist’ to gauge your learning for each week. If you don’t feel confident you have learned any specific topic, then revisit the week’s material!\n\nPractical knowledge:\n?sec-spatan4\n\nDensity Tools\n\nKernel Density Estimation\nCount Points in Polygons\n\nDistance tools\n\nDistance to Nearest Hub\nDistance Maps\n\n\n14  Lab 14 - Convex Hulls and Interpolation\n\nConvex Hulls\nInterpolation Tools\n\nInverse Distance Weighting",
     "crumbs": [
       "Week 8 - Spatial analysis III"
     ]
@@ -1064,6 +1064,28 @@
     "crumbs": [
       "Week 8 - Spatial analysis III",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Lab 13 - Densities and distances</span>"
+    ]
+  },
+  {
+    "objectID": "lab_convex_interp.html",
+    "href": "lab_convex_interp.html",
+    "title": "14  Lab 14 - Convex Hulls and Interpolation",
+    "section": "",
+    "text": "14.1 Guided Exercise 1 - Convex hulls\nThis exercise will be based on actual research data collected by Dr. Adam Fell as part of their PhD research developed at University of Stirling.\nAdam has monitored the movement of bird species in Panama, to understand how land cover affects their movement and behaviour. He used GPS tracking tags attached via Teflon strings, like a backpack, to the back of the bird. The tags were programmed to measure locations from every 30 mins to every two hours during daytime (05:00 – 19:00), with bursts of every 30 mins if the batteries were fully charged. At night, the tags were scheduled to turn off to save battery energy, knowing that after dark, these species would not be active. Along with the GPS module, each tag also measured three-dimensional acceleration (ACC). Since ACC measurements consumed very little energy, the tags were programmed to take ACC measurements every 10 mins during a 24-hour period. These measurements confirmed little activity during night-time hours. Data was first stored on the device, then remotely downloaded through a radio link once a week to ensure that the device had not fallen off the individual.",
+    "crumbs": [
+      "Week 8 - Spatial analysis III",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Lab 14 - Convex Hulls and Interpolation</span>"
+    ]
+  },
+  {
+    "objectID": "lab_convex_interp.html#guided-exercise-1---convex-hulls",
+    "href": "lab_convex_interp.html#guided-exercise-1---convex-hulls",
+    "title": "14  Lab 14 - Convex Hulls and Interpolation",
+    "section": "",
+    "text": "14.1.1 The data\nThe data consists of point vector file containing the location, timestamp, and other information for each tracking tag, and can be downloaded here. The original data is hosted by the Movebank database, a global database of animal movement data.\nIn total, there are four birds monitored:\nOrtalis cinereiceps (grey-headed Chachalaca):\n\n\n\nBy Kathy & Sam from Beaverton OR, USA CC BY 2.0, https://commons.wikimedia.org/w/index.php?curid=18783698",
+    "crumbs": [
+      "Week 8 - Spatial analysis III",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Lab 14 - Convex Hulls and Interpolation</span>"
     ]
   },
   {

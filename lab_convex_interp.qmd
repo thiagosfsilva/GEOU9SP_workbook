@@ -1,5 +1,19 @@
 # Lab 14 - Convex Hulls and Interpolation {#sec-spatan5}
 
+**IN PREPARATION**
+
 ## Guided Exercise 1 - Convex hulls
 
-This exercise will be based on actual research data collected by [Dr. Adam Fell](https://www.stir.ac.uk/people/1457157) as part of their [PhD research](https://dspace.stir.ac.uk/handle/1893/36203) developed at University of Stirling. Adam has monitored the movement of bird species in Panama, to understand how land cover affects their movement and behaviour. 
+This exercise will be based on actual research data collected by [Dr. Adam Fell](https://www.stir.ac.uk/people/1457157) as part of their [PhD research](https://dspace.stir.ac.uk/handle/1893/36203) developed at University of Stirling. 
+
+Adam has monitored the movement of bird species in Panama, to understand how land cover affects their movement and behaviour. He used GPS tracking tags attached via Teflon strings, like a backpack, to the back of the bird. The tags were programmed to measure locations from every 30 mins to every two hours during daytime (05:00 – 19:00), with bursts of every 30 mins if the batteries were fully charged. At night, the tags were scheduled to turn off to save battery energy, knowing that after dark, these species would not be active. Along with the GPS module, each tag also measured three-dimensional acceleration (ACC). Since ACC measurements consumed very little energy, the tags were programmed to take ACC measurements every 10 mins during a 24-hour period. These measurements confirmed little activity during night-time hours. Data was first stored on the device, then remotely downloaded through a radio link once a week to ensure that the device had not fallen off the individual. 
+
+### The data
+
+The data consists of point vector file containing the location, timestamp, and other information for each tracking tag, and can be downloaded here. The original data is hosted by the [Movebank database](https://www.movebank.org/cms/webapp?gwt_fragment=page=studies,path=study2074159777), a global database of animal movement data. 
+
+In total, there are four birds monitored:
+
+*Ortalis cinereiceps* ([grey-headed Chachalaca](https://en.wikipedia.org/wiki/Grey-headed_chachalaca)):
+
+![By Kathy & Sam from Beaverton OR, USA CC BY 2.0, https://commons.wikimedia.org/w/index.php?curid=18783698](https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Ortalis_cinereiceps_-near_Rancho_Naturalista%2C_Cordillera_de_Talamanca%2C_Costa_Rica-8.jpg/1008px-Ortalis_cinereiceps_-near_Rancho_Naturalista%2C_Cordillera_de_Talamanca%2C_Costa_Rica-8.jpg)

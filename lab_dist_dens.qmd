@@ -4,7 +4,7 @@
 
 For this set of exercises, we will be working with crime occurrence data (arrest incidents) for the city of New York (USA), for the year 2023. Imagine you have been hired to support an analysis of NYC criminality to help better manage police resources and reduce crime.
 
-The data package for this exercise can be downloaded here, and has been obtained from the City of New York [Police Department website](https://www.nyc.gov/site/nypd/stats/crime-statistics/citywide-crime-stats.page) and the [NYC Open Data hub ](https://opendata.cityofnewyork.us/), and contains the following:
+The data package for this exercise [can be downloaded here](https://stir-my.sharepoint.com/:u:/g/personal/ala2_stir_ac_uk/EV4-dGBg819Al09dLzpJa7YBz1tERVtYuY6gaIqxLrkBGA?e=W5gSgV), and has been obtained from the City of New York [Police Department website](https://www.nyc.gov/site/nypd/stats/crime-statistics/citywide-crime-stats.page) and the [NYC Open Data hub ](https://opendata.cityofnewyork.us/), and contains the following:
 
 
 - Arrest incidents for the year 2023, as a point vector shapefile - derived from a shapefile containing all arrest incidents from 2013 to present.

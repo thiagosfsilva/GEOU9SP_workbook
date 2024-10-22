@@ -35,6 +35,7 @@ book:
   - part: sec_w8_spatial_analysis_III.qmd
     chapters:
       - lab_dist_dens.qmd
+      - lab_convex_interp.qmd
   - part: sec_w10_gnss.qmd
 
 format:

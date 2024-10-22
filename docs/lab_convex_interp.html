@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>GEOU9SP GIS Workbook - Week 8 - Spatial analysis III</title>
+<title>GEOU9SP GIS Workbook - 14&nbsp; Lab 14 - Convex Hulls and Interpolation</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./lab_dist_dens.html" rel="next">
-<link href="./lab_zonal.html" rel="prev">
+<link href="./sec_w10_gnss.html" rel="next">
+<link href="./lab_dist_dens.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -81,7 +81,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./sec_w8_spatial_analysis_III.html">Week 8 - Spatial analysis III</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./sec_w8_spatial_analysis_III.html">Week 8 - Spatial analysis III</a></li><li class="breadcrumb-item"><a href="./lab_convex_interp.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Lab 14 - Convex Hulls and Interpolation</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -252,7 +252,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./sec_w8_spatial_analysis_III.html" class="sidebar-item-text sidebar-link active">
+            <a href="./sec_w8_spatial_analysis_III.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 8 - Spatial analysis III</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -267,7 +267,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lab_convex_interp.html" class="sidebar-item-text sidebar-link">
+  <a href="./lab_convex_interp.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Lab 14 - Convex Hulls and Interpolation</span></span></a>
   </div>
 </li>
@@ -287,10 +287,9 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#ilos-covered" id="toc-ilos-covered" class="nav-link active" data-scroll-target="#ilos-covered">ILOs covered</a></li>
-  <li><a href="#what-will-you-learn" id="toc-what-will-you-learn" class="nav-link" data-scroll-target="#what-will-you-learn">What will you learn</a>
+  <li><a href="#guided-exercise-1---convex-hulls" id="toc-guided-exercise-1---convex-hulls" class="nav-link active" data-scroll-target="#guided-exercise-1---convex-hulls"><span class="header-section-number">14.1</span> Guided Exercise 1 - Convex hulls</a>
   <ul class="collapse">
-  <li><a href="#practical-knowledge" id="toc-practical-knowledge" class="nav-link" data-scroll-target="#practical-knowledge">Practical knowledge:</a></li>
+  <li><a href="#the-data" id="toc-the-data" class="nav-link" data-scroll-target="#the-data"><span class="header-section-number">14.1.1</span> The data</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -298,9 +297,9 @@ ul.task-list li input[type="checkbox"] {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./sec_w8_spatial_analysis_III.html">Week 8 - Spatial analysis III</a></li><li class="breadcrumb-item"><a href="./lab_convex_interp.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Lab 14 - Convex Hulls and Interpolation</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Week 8 - Spatial analysis III</h1>
+<h1 class="title"><span id="sec-spatan5" class="quarto-section-identifier"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Lab 14 - Convex Hulls and Interpolation</span></span></h1>
 </div>
 
 
@@ -317,40 +316,22 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>This week, we will continue our learning of additional/advanced GIS tools. The focus for this week is on density and interpolation methods, distance calculation tools and convex hulls.</p>
-<section id="ilos-covered" class="level2">
-<h2 class="anchored" data-anchor-id="ilos-covered">ILOs covered</h2>
-<ol start="2" type="1">
-<li><p>Obtain and assess the quality of spatial data from online and offline sources and produce new spatial data using computer and field methods;</p></li>
-<li><p>Plan and execute GIS analytical steps to solve spatial problems successfully;</p></li>
-</ol>
-</section>
-<section id="what-will-you-learn" class="level2">
-<h2 class="anchored" data-anchor-id="what-will-you-learn">What will you learn</h2>
-<p>For every week, we will list the main theoretical and practical learning goals. Use these as a ‘checklist’ to gauge your learning for each week. If you don’t feel confident you have learned any specific topic, then revisit the week’s material!</p>
-<section id="practical-knowledge" class="level3">
-<h3 class="anchored" data-anchor-id="practical-knowledge">Practical knowledge:</h3>
-<p><span class="quarto-unresolved-ref">?sec-spatan4</span></p>
-<ul>
-<li>Density Tools
-<ul>
-<li>Kernel Density Estimation</li>
-<li>Count Points in Polygons</li>
-</ul></li>
-<li>Distance tools
-<ul>
-<li>Distance to Nearest Hub</li>
-<li>Distance Maps</li>
-</ul></li>
-</ul>
-<p><a href="lab_convex_interp.html" class="quarto-xref"><span>14&nbsp; Lab 14 - Convex Hulls and Interpolation</span></a></p>
-<ul>
-<li>Convex Hulls</li>
-<li>Interpolation Tools
-<ul>
-<li>Inverse Distance Weighting</li>
-</ul></li>
-</ul>
+<p><strong>IN PREPARATION</strong></p>
+<section id="guided-exercise-1---convex-hulls" class="level2" data-number="14.1">
+<h2 data-number="14.1" class="anchored" data-anchor-id="guided-exercise-1---convex-hulls"><span class="header-section-number">14.1</span> Guided Exercise 1 - Convex hulls</h2>
+<p>This exercise will be based on actual research data collected by <a href="https://www.stir.ac.uk/people/1457157">Dr.&nbsp;Adam Fell</a> as part of their <a href="https://dspace.stir.ac.uk/handle/1893/36203">PhD research</a> developed at University of Stirling.</p>
+<p>Adam has monitored the movement of bird species in Panama, to understand how land cover affects their movement and behaviour. He used GPS tracking tags attached via Teflon strings, like a backpack, to the back of the bird. The tags were programmed to measure locations from every 30 mins to every two hours during daytime (05:00 – 19:00), with bursts of every 30 mins if the batteries were fully charged. At night, the tags were scheduled to turn off to save battery energy, knowing that after dark, these species would not be active. Along with the GPS module, each tag also measured three-dimensional acceleration (ACC). Since ACC measurements consumed very little energy, the tags were programmed to take ACC measurements every 10 mins during a 24-hour period. These measurements confirmed little activity during night-time hours. Data was first stored on the device, then remotely downloaded through a radio link once a week to ensure that the device had not fallen off the individual.</p>
+<section id="the-data" class="level3" data-number="14.1.1">
+<h3 data-number="14.1.1" class="anchored" data-anchor-id="the-data"><span class="header-section-number">14.1.1</span> The data</h3>
+<p>The data consists of point vector file containing the location, timestamp, and other information for each tracking tag, and can be downloaded here. The original data is hosted by the <a href="https://www.movebank.org/cms/webapp?gwt_fragment=page=studies,path=study2074159777">Movebank database</a>, a global database of animal movement data.</p>
+<p>In total, there are four birds monitored:</p>
+<p><em>Ortalis cinereiceps</em> (<a href="https://en.wikipedia.org/wiki/Grey-headed_chachalaca">grey-headed Chachalaca</a>):</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Ortalis_cinereiceps_-near_Rancho_Naturalista%2C_Cordillera_de_Talamanca%2C_Costa_Rica-8.jpg/1008px-Ortalis_cinereiceps_-near_Rancho_Naturalista%2C_Cordillera_de_Talamanca%2C_Costa_Rica-8.jpg" class="img-fluid figure-img"></p>
+<figcaption>By Kathy &amp; Sam from Beaverton OR, USA CC BY 2.0, https://commons.wikimedia.org/w/index.php?curid=18783698</figcaption>
+</figure>
+</div>
 
 
 </section>
@@ -768,13 +749,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./lab_zonal.html" class="pagination-link" aria-label="Lab 12 - Zonal Statistics and Overlap Analysis">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Lab 12 - Zonal Statistics and Overlap Analysis</span></span>
+      <a href="./lab_dist_dens.html" class="pagination-link" aria-label="Lab 13 - Densities and distances">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Lab 13 - Densities and distances</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./lab_dist_dens.html" class="pagination-link" aria-label="Lab 13 - Densities and distances">
-        <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Lab 13 - Densities and distances</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./sec_w10_gnss.html" class="pagination-link" aria-label="Week 10 - Obtaining spatial data in the field">
+        <span class="nav-page-text">Week 10 - Obtaining spatial data in the field</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
