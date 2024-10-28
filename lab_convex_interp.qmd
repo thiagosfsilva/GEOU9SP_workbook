@@ -2,18 +2,169 @@
 
 **IN PREPARATION**
 
-## Guided Exercise 1 - Convex hulls
+## Guided Exercise 1 - Preparing the data
 
 This exercise will be based on actual research data collected by [Dr. Adam Fell](https://www.stir.ac.uk/people/1457157) as part of their [PhD research](https://dspace.stir.ac.uk/handle/1893/36203) developed at University of Stirling. 
 
 Adam has monitored the movement of bird species in Panama, to understand how land cover affects their movement and behaviour. He used GPS tracking tags attached via Teflon strings, like a backpack, to the back of the bird. The tags were programmed to measure locations from every 30 mins to every two hours during daytime (05:00 – 19:00), with bursts of every 30 mins if the batteries were fully charged. At night, the tags were scheduled to turn off to save battery energy, knowing that after dark, these species would not be active. Along with the GPS module, each tag also measured three-dimensional acceleration (ACC). Since ACC measurements consumed very little energy, the tags were programmed to take ACC measurements every 10 mins during a 24-hour period. These measurements confirmed little activity during night-time hours. Data was first stored on the device, then remotely downloaded through a radio link once a week to ensure that the device had not fallen off the individual. 
 
-### The data
+The data consists of a Comma Separated Values (CSV) file containing the location, timestamp, and other information for each tracking tag, and [can be downloaded here](https://stir-my.sharepoint.com/:u:/g/personal/ala2_stir_ac_uk/EeG76lKhlLRNjQgGBJOIJYoBxn0ZWhxwjQOhnFiB0LFejQ?e=mZ4qmR). The original data is hosted by the [Movebank database](https://www.movebank.org/cms/webapp?gwt_fragment=page=studies,path=study2074159777), a global database of animal movement data. 
 
-The data consists of point vector file containing the location, timestamp, and other information for each tracking tag, and can be downloaded here. The original data is hosted by the [Movebank database](https://www.movebank.org/cms/webapp?gwt_fragment=page=studies,path=study2074159777), a global database of animal movement data. 
+In total, there are four bird species monitored:
 
-In total, there are four birds monitored:
+*Ortalis cinereiceps* ([grey-headed Chachalaca](https://en.wikipedia.org/wiki/Grey-headed_chachalaca)): three individuals, identified in the `individual_local_identifier` field as `Chachalaca_1` to `_4`.
 
-*Ortalis cinereiceps* ([grey-headed Chachalaca](https://en.wikipedia.org/wiki/Grey-headed_chachalaca)):
+![By Kathy & Sam from Beaverton OR, USA CC BY 2.0](https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Ortalis_cinereiceps_-near_Rancho_Naturalista%2C_Cordillera_de_Talamanca%2C_Costa_Rica-8.jpg/640px-Ortalis_cinereiceps_-near_Rancho_Naturalista%2C_Cordillera_de_Talamanca%2C_Costa_Rica-8.jpg)
 
-![By Kathy & Sam from Beaverton OR, USA CC BY 2.0, https://commons.wikimedia.org/w/index.php?curid=18783698](https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Ortalis_cinereiceps_-near_Rancho_Naturalista%2C_Cordillera_de_Talamanca%2C_Costa_Rica-8.jpg/1008px-Ortalis_cinereiceps_-near_Rancho_Naturalista%2C_Cordillera_de_Talamanca%2C_Costa_Rica-8.jpg)
+*Ramphastos swainsonii* ([Chestnut-mandibled Toucan](https://en.wikipedia.org/wiki/Chestnut-mandibled_toucan)): two individuals identified in the `individual_local_identifier` field as `Chesnut_1` and `_2`.\
+
+![chuck624 from Upstate NY, USA, CC BY 2.0](https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Ramphastos_ambiguus_-Costa_Rica-8a_%281%29.jpg/577px-Ramphastos_ambiguus_-Costa_Rica-8a_%281%29.jpg)
+
+*Ramphastos sulfuratus* ([Keel-billed Toucan](https://en.wikipedia.org/wiki/Keel-billed_toucan)): two individuals identified in the `individual_local_identifier` field as `Keel-billed_1` and `_2`.
+
+![Chris Down, CC BY 2.0](https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Keel-billed_toucan_in_Costa_Rica.jpg/480px-Keel-billed_toucan_in_Costa_Rica.jpg)
+
+*Amazona autumnalis* ([Red-lored parrot](https://en.wikipedia.org/wiki/Red-lored_amazon)): one individual identified in the `individual_local_identifier` field as `Parrot_1`.
+
+![Tomasz Wagner from Burnaby, BC, Canada, CC BY 2.0 ](https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Amazona_autumnalis_-Xcaret_theme_park_-Riviera_Maya-8a.jpg/389px-Amazona_autumnalis_-Xcaret_theme_park_-Riviera_Maya-8a.jpg)
+
+There is also a GeoTIFF raster with land cover data for the same region, obtained from the [ESRI Living Atlas Sentinel-2 10m Global Land Cover](https://www.arcgis.com/home/item.html?id=cfcb7609de5f478eb7666240902d4d3d)  dataset.
+
+### Preparing the data
+
+(@) [Download the data](https://stir-my.sharepoint.com/:u:/g/personal/ala2_stir_ac_uk/EeG76lKhlLRNjQgGBJOIJYoBxn0ZWhxwjQOhnFiB0LFejQ?e=mZ4qmR) and create a project folder and a new QGIS project. 
+
+(@) Then import the bird movement data using the `Source Data Manager > Delimited Text`, like in the figure below. Make sure you pick the CRS indicated (`EPSG:32617 WGS84 - UTM zone 17N`), and that the `timestamp` field is of type `Date & Time`.
+
+![](images/lab_14/lab14_fig0_import_csv.jpg)
+
+The file has both Latitude Longitude and Universal Transverse Mercator (UTM) coordinates, which are similar to British Grid coordinates, but for the entire world. UTM coordinates are ideal for field data that does not span large areas ([you can read more about it here](https://en.wikipedia.org/wiki/Universal_Transverse_Mercator_coordinate_system)). We will use UTM coordinates since they are metric, and thus some automatic area calculations that will happen later on will have the right units.
+
+(@) Now split the file into separate layers for each individual bird, saving each file as a separate `geopackage` (to preserve long field names) named as the `individual_local_identifier` tag (ex: Chachalaca_1.gpkg). Use `Select by expression` on the `individual_local_identifier`field and then `Export > Save selected features as...` to create each subset.
+
+::: {.callout-important title="Stop and Think"}
+How many records, covering what timespan, are available for each individual bird? 
+:::
+
+::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
+To check it, you can use the `Statistical Summary` tool and the `timestamp` field you have created. Here are my calculations:
+
+- Chachalaca_1: 9731, 2022-01-14 to 2023-02-17
+- Chachalaca_2: 660, 2022-01-14 to 2022-03-19
+- Chachalaca_3: 2841, 2022-01-14 to 2023-02-17
+- Chachalaca_4: 3641, 2022-01-14 to 2023-02-18
+- Chesnut_1: 385, 2022-03-05 to 2023-02-17
+- Chensut_2: 296, 2022-03-18 to 2022-03-19
+- Keel-billed_1: 311, 2022-01-15 to 2022-02-09
+- Keel-billed_2: 1568, 2022-02-22 to 2023-02-18
+- Parrot_1: 41933, 2020-03-17 to 2022-04-18
+
+:::
+
+## Guided Exercise 2 - Convex Hulls
+
+[Convex hulls](https://en.wikipedia.org/wiki/Convex_hul) are a type of Minimum Enclosing Polygon. The best way to think of it is as if the points were pegs on a board, and you wrapped a stretch band around them. The convex hull is the shape with the *smallest perimeter* enclosing all points. 
+
+![https://en.wikipedia.org/wiki/Convex_hull](https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/ConvexHull.svg/440px-ConvexHull.svg.png)
+
+In animal and movement research, convex hulls are commonly to used to define [species ranges](https://en.wikipedia.org/wiki/Species_distribution) or, for individuals, [home ranges](https://en.wikipedia.org/wiki/Home_range). 
+
+::: {.callout-important}
+There are two separate tools to calculate convex hulls in QGIS. The first is called `Convex Hulls` in `Vector > Geoprocessing`, but is usually **NOT** what you want. This tools calculates convex hulls for irregular polygons. To calculate convex hulls for points, you instead want to go to the `Processing` tab and then choose the `Minimum Bounding Geometry` tool under the `Vector Geometry` category.
+:::
+
+For this exercise, we will first focus on the Chachalaca birds. We will also not consider `Chachalaca_2` since it was only monitored for two months. 
+
+The first question we may want to ask as animal movement researchers is if there are well-defined territories for the birds, and if these territories overlap (i.e. do the birds interact?). 
+
+### Calculating Convex Hulls
+
+(@) Go to the `Processing` tab and then launch the `Minimum Bounding Geometry` tool under the `Vector Geometry` category.
+
+![](images/lab_14/lab14_fig1_convex_hull.jpg)
+
+(@) Select the `Chachalaca_1` layer as `Input Layer`, and then `Convex Hull` for the `Geometry Type` (click on the `Help` button to see what each type of geometry represents). Save the file as `Chachalaca_1_home_range.shp`. 
+
+(@) Repeat for `Chachalaca_3` and `Chachalaca_4`. 
+
+(@) Now set the home range polygon symbologies to an outline that is the same colour as the original points with no fill (or a transparent fill), to evaluate the overlap in home ranges. Also add the ESRI Satellite Layer from the `QuickMap Plugin` for reference. Mine looks like this:
+
+![](images/lab_14/lab14_fig3_convex_hulls_on_map.jpg)
+
+
+
+::: {.callout-important title="Stop and Think"}
+Now using the `Geoprocessing tools` you have learned, calculate the amount of percent overlap between each home range. Based on this, which individuals may be interacting with each other? 
+:::
+
+::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
+First you need to recalculate the areas in proper units. The `Convex Hull` tool calculates the area using the layer units, which for this dataset are degrees. 
+
+You can use the `Intersection` tool to find the overlap between home ranges. You need to calculate it two times for Chachalaca_1 x Chachalaca_3 and Chachalaca_1 x Chachalaca_4. You can see from the previous step that Chachalaca_3 and Chachalaca_4 do not overlap, so no need to calculate it. 
+
+The intersection polygons will have the `area` fields from both original layers (one of them renamed as `area_2`), and you can use the `Field Calculator` to calculate the area of the intersection.  
+
+- C1: 121393 m$^2$ 
+- C3: 91856 m$^2$
+- C4: 230018 m$^2$
+- C1 x C3: 59654 m$^2$ (49% of C1 and 65% of C3)
+- C1 x C4: 2867 m$^2$ (2.3% of C1 and 1.2% of C4)
+
+So we can conclude that Chachalaca 1 and 3 interacted very often, Chachalaca 1 and 4 interacted more rarely, and Chachalaca 3 and 4 did not interact at all during the study.
+:::
+
+## Guided Exercise 3 - Habitat Use
+
+The second question we may want to explore is what is the main types of habitats each bird is using. For that, we can use the convex hulls that determine our home rages, and the land cover layer included in the dataset. The [data documentation](https://www.arcgis.com/home/item.html?id=cfcb7609de5f478eb7666240902d4d3d) includes a table with a key for each land cover type.
+
+::: {.callout-important title="Stop and Think"}
+Using the tools you already know, determine which habitats comprise each Chachalaca home range, and their respective area.
+:::
+
+::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
+We have the home ranges as polygons, and the land cover dataset as a raster. There are thus two ways of achieving this. One is to `Polygonize` the raster, and then use `Clip` to cut the resulting vector land cover map by each of the home ranges, and then recalculate the areas of each habitat using the `Field Calculator`. The second is to cut the raster by each of the home ranges using `Extract by Mask Layer`, and then use `Raster Layer Unique Values Report` in the `Processing` panel. These are the values I got using the second option (less steps):
+
+Chachalaca 1: Class 7 (Built Area) = 106800m$^2$; Class 2 (Trees) = 14400m$^2$ 
+
+Chachalaca 3: Class 7 (Built Area) = 85900m$^2$; Class 11 (Rangeland) = 6200m$^2$
+
+Chachalaca 4: Class 2 (Trees) = 151600m$^2$; Class 7 (Built Area) = 79900m$^2$
+
+So we can see that while Chachalaca 1 and 3 have decided to explore mainly urban habitats, Chachalaca 4 is mainly exploring the forest habitat, indicating possible behavioural adaptations and/or territoriality. 
+:::
+
+### Guided Exercise 4 -  Creating temporal animations with QGIS
+
+QGIS includes a feature called *Temporal Layers*, which allow us to animate the layers follwing time stamp information, to see how patterns change over time. We will use it now to look at the Chachalaca movement in time. 
+
+(@) First, select the `Chachalaca_1` point layer and go to `Properties > Temporal`. Then check the `Dynamic Temporal Control` box, and select `Single Field with Date/Time` as the `Configurations`, and `Include Start, Include End` as `Limit`. Then pick the `timestamp` field for `Field`, and set the event duration to 30 minutes (the minimum duration as per our metada). Click in `Apply`, then `OK`. A clock symbol will appear to the right of the layer name to indicate it is time-enabled.
+
+![](images/lab_14/lab14_fig4_time_enabled.jpg)
+
+(@) Now repeat the process for Chachalaca_3 and Chachalaca_4.  
+
+(@) Now launch the `Temporal Controller Panel` ([](https://docs.qgis.org/3.34/en/_images/temporal.png)) from the main QGIS toolbar. It will look like the panel below. If it looks different, make sure you click on the `Animated Temporal Navigation` button (small green play button within a circle).
+
+![](images/lab_14/lab14_fig5_time_panel.jpg)
+
+(@) Then calculate the time range for all time-enabled layers by clicking on the button with two blue arrows. Set the `Step` to `1 hour`, and then press the back play button. You will see Chachalaca_1 and Chachalaca_3 at first (remember there is no recording during the night, so there will be some periods with no points).
+
+(@) Now pause the animation, click on the double back-arrow to return to the start, and then change the `Step` to `1 day`. Notice how even though Chachalaca 1 and 3 have a lot of overlap in their home ranges, on a daily basis they tend to mostly stay away from each other, seldom crossing paths. Also notice how Chachalaca 4 really tends to keep within the trees, rarely venturing into open areas.
+
+(@) Now pause and reset again, and then set the `Step` to `One week`. Notice how Chachalaca 4 tends to avoid crossing the big open patch that divides its home range, and only some times ventures into the northern area. 
+
+(@) Pause and reset the animation again. Then launch the Windows `Snipping Tool` by going to the `Start Menu` and then typing its name ([see here for Mac](https://support.apple.com/en-gb/102618)). 
+
+It will look lime this:
+
+![](images/lab_14/lab14_fig6_snipping_tool.png)
+
+(@) **Read this entire section before doing it**. Change the snip type from image (photo camera) to video (video camera), Then click on `New`. Drag the mouse to capture the mao area of QGIS, and then click on `Start Recording`. There will be a countdown from 3, and then the recording will start. Once it starts, press the play button in QGIS to start the animation, and let it run through. Then stop the recording.
+
+You should now have a video recording that could be used on a presentation! Here is mine (press the play button!) 
+
+{{< video images/lab_14/lab14_animated_movement.mp4 >}}
+
+You could also use the `Export Animation` function of QGIS by clicking on the Disk icon of the `Temporal Controller`. What it does however is it saves each animation frame as one separate image, which you need to combine into a video later using video creation software, or as an animated GIF using an online tool such as [EZGIF](https://ezgif.com/maker):
+
+![](images/lab_14/animated_movement.gif)

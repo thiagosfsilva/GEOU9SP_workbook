@@ -41,6 +41,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/videojs/video.min.js"></script>
+<link href="site_libs/quarto-contrib/videojs/video-js.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -69,6 +71,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -287,9 +318,17 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#guided-exercise-1---convex-hulls" id="toc-guided-exercise-1---convex-hulls" class="nav-link active" data-scroll-target="#guided-exercise-1---convex-hulls"><span class="header-section-number">14.1</span> Guided Exercise 1 - Convex hulls</a>
+  <li><a href="#guided-exercise-1---preparing-the-data" id="toc-guided-exercise-1---preparing-the-data" class="nav-link active" data-scroll-target="#guided-exercise-1---preparing-the-data"><span class="header-section-number">14.1</span> Guided Exercise 1 - Preparing the data</a>
   <ul class="collapse">
-  <li><a href="#the-data" id="toc-the-data" class="nav-link" data-scroll-target="#the-data"><span class="header-section-number">14.1.1</span> The data</a></li>
+  <li><a href="#preparing-the-data" id="toc-preparing-the-data" class="nav-link" data-scroll-target="#preparing-the-data"><span class="header-section-number">14.1.1</span> Preparing the data</a></li>
+  </ul></li>
+  <li><a href="#guided-exercise-2---convex-hulls" id="toc-guided-exercise-2---convex-hulls" class="nav-link" data-scroll-target="#guided-exercise-2---convex-hulls"><span class="header-section-number">14.2</span> Guided Exercise 2 - Convex Hulls</a>
+  <ul class="collapse">
+  <li><a href="#calculating-convex-hulls" id="toc-calculating-convex-hulls" class="nav-link" data-scroll-target="#calculating-convex-hulls"><span class="header-section-number">14.2.1</span> Calculating Convex Hulls</a></li>
+  </ul></li>
+  <li><a href="#guided-exercise-3---habitat-use" id="toc-guided-exercise-3---habitat-use" class="nav-link" data-scroll-target="#guided-exercise-3---habitat-use"><span class="header-section-number">14.3</span> Guided Exercise 3 - Habitat Use</a>
+  <ul class="collapse">
+  <li><a href="#guided-exercise-4---creating-temporal-animations-with-qgis" id="toc-guided-exercise-4---creating-temporal-animations-with-qgis" class="nav-link" data-scroll-target="#guided-exercise-4---creating-temporal-animations-with-qgis"><span class="header-section-number">14.3.1</span> Guided Exercise 4 - Creating temporal animations with QGIS</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -317,21 +356,236 @@ ul.task-list li input[type="checkbox"] {
 
 
 <p><strong>IN PREPARATION</strong></p>
-<section id="guided-exercise-1---convex-hulls" class="level2" data-number="14.1">
-<h2 data-number="14.1" class="anchored" data-anchor-id="guided-exercise-1---convex-hulls"><span class="header-section-number">14.1</span> Guided Exercise 1 - Convex hulls</h2>
+<section id="guided-exercise-1---preparing-the-data" class="level2" data-number="14.1">
+<h2 data-number="14.1" class="anchored" data-anchor-id="guided-exercise-1---preparing-the-data"><span class="header-section-number">14.1</span> Guided Exercise 1 - Preparing the data</h2>
 <p>This exercise will be based on actual research data collected by <a href="https://www.stir.ac.uk/people/1457157">Dr.&nbsp;Adam Fell</a> as part of their <a href="https://dspace.stir.ac.uk/handle/1893/36203">PhD research</a> developed at University of Stirling.</p>
 <p>Adam has monitored the movement of bird species in Panama, to understand how land cover affects their movement and behaviour. He used GPS tracking tags attached via Teflon strings, like a backpack, to the back of the bird. The tags were programmed to measure locations from every 30 mins to every two hours during daytime (05:00 – 19:00), with bursts of every 30 mins if the batteries were fully charged. At night, the tags were scheduled to turn off to save battery energy, knowing that after dark, these species would not be active. Along with the GPS module, each tag also measured three-dimensional acceleration (ACC). Since ACC measurements consumed very little energy, the tags were programmed to take ACC measurements every 10 mins during a 24-hour period. These measurements confirmed little activity during night-time hours. Data was first stored on the device, then remotely downloaded through a radio link once a week to ensure that the device had not fallen off the individual.</p>
-<section id="the-data" class="level3" data-number="14.1.1">
-<h3 data-number="14.1.1" class="anchored" data-anchor-id="the-data"><span class="header-section-number">14.1.1</span> The data</h3>
-<p>The data consists of point vector file containing the location, timestamp, and other information for each tracking tag, and can be downloaded here. The original data is hosted by the <a href="https://www.movebank.org/cms/webapp?gwt_fragment=page=studies,path=study2074159777">Movebank database</a>, a global database of animal movement data.</p>
-<p>In total, there are four birds monitored:</p>
-<p><em>Ortalis cinereiceps</em> (<a href="https://en.wikipedia.org/wiki/Grey-headed_chachalaca">grey-headed Chachalaca</a>):</p>
+<p>The data consists of a Comma Separated Values (CSV) file containing the location, timestamp, and other information for each tracking tag, and <a href="https://stir-my.sharepoint.com/:u:/g/personal/ala2_stir_ac_uk/EeG76lKhlLRNjQgGBJOIJYoBxn0ZWhxwjQOhnFiB0LFejQ?e=mZ4qmR">can be downloaded here</a>. The original data is hosted by the <a href="https://www.movebank.org/cms/webapp?gwt_fragment=page=studies,path=study2074159777">Movebank database</a>, a global database of animal movement data.</p>
+<p>In total, there are four bird species monitored:</p>
+<p><em>Ortalis cinereiceps</em> (<a href="https://en.wikipedia.org/wiki/Grey-headed_chachalaca">grey-headed Chachalaca</a>): three individuals, identified in the <code>individual_local_identifier</code> field as <code>Chachalaca_1</code> to <code>_4</code>.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Ortalis_cinereiceps_-near_Rancho_Naturalista%2C_Cordillera_de_Talamanca%2C_Costa_Rica-8.jpg/1008px-Ortalis_cinereiceps_-near_Rancho_Naturalista%2C_Cordillera_de_Talamanca%2C_Costa_Rica-8.jpg" class="img-fluid figure-img"></p>
-<figcaption>By Kathy &amp; Sam from Beaverton OR, USA CC BY 2.0, https://commons.wikimedia.org/w/index.php?curid=18783698</figcaption>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Ortalis_cinereiceps_-near_Rancho_Naturalista%2C_Cordillera_de_Talamanca%2C_Costa_Rica-8.jpg/640px-Ortalis_cinereiceps_-near_Rancho_Naturalista%2C_Cordillera_de_Talamanca%2C_Costa_Rica-8.jpg" class="img-fluid figure-img"></p>
+<figcaption>By Kathy &amp; Sam from Beaverton OR, USA CC BY 2.0</figcaption>
 </figure>
 </div>
+<p><em>Ramphastos swainsonii</em> (<a href="https://en.wikipedia.org/wiki/Chestnut-mandibled_toucan">Chestnut-mandibled Toucan</a>): two individuals identified in the <code>individual_local_identifier</code> field as <code>Chesnut_1</code> and <code>_2</code>.<br>
+</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Ramphastos_ambiguus_-Costa_Rica-8a_%281%29.jpg/577px-Ramphastos_ambiguus_-Costa_Rica-8a_%281%29.jpg" class="img-fluid figure-img"></p>
+<figcaption>chuck624 from Upstate NY, USA, CC BY 2.0</figcaption>
+</figure>
+</div>
+<p><em>Ramphastos sulfuratus</em> (<a href="https://en.wikipedia.org/wiki/Keel-billed_toucan">Keel-billed Toucan</a>): two individuals identified in the <code>individual_local_identifier</code> field as <code>Keel-billed_1</code> and <code>_2</code>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Keel-billed_toucan_in_Costa_Rica.jpg/480px-Keel-billed_toucan_in_Costa_Rica.jpg" class="img-fluid figure-img"></p>
+<figcaption>Chris Down, CC BY 2.0</figcaption>
+</figure>
+</div>
+<p><em>Amazona autumnalis</em> (<a href="https://en.wikipedia.org/wiki/Red-lored_amazon">Red-lored parrot</a>): one individual identified in the <code>individual_local_identifier</code> field as <code>Parrot_1</code>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Amazona_autumnalis_-Xcaret_theme_park_-Riviera_Maya-8a.jpg/389px-Amazona_autumnalis_-Xcaret_theme_park_-Riviera_Maya-8a.jpg" class="img-fluid figure-img"></p>
+<figcaption>Tomasz Wagner from Burnaby, BC, Canada, CC BY 2.0</figcaption>
+</figure>
+</div>
+<p>There is also a GeoTIFF raster with land cover data for the same region, obtained from the <a href="https://www.arcgis.com/home/item.html?id=cfcb7609de5f478eb7666240902d4d3d">ESRI Living Atlas Sentinel-2 10m Global Land Cover</a> dataset.</p>
+<section id="preparing-the-data" class="level3" data-number="14.1.1">
+<h3 data-number="14.1.1" class="anchored" data-anchor-id="preparing-the-data"><span class="header-section-number">14.1.1</span> Preparing the data</h3>
+<ol class="example" type="1">
+<li><p><a href="https://stir-my.sharepoint.com/:u:/g/personal/ala2_stir_ac_uk/EeG76lKhlLRNjQgGBJOIJYoBxn0ZWhxwjQOhnFiB0LFejQ?e=mZ4qmR">Download the data</a> and create a project folder and a new QGIS project.</p></li>
+<li><p>Then import the bird movement data using the <code>Source Data Manager &gt; Delimited Text</code>, like in the figure below. Make sure you pick the CRS indicated (<code>EPSG:32617 WGS84 - UTM zone 17N</code>), and that the <code>timestamp</code> field is of type <code>Date &amp; Time</code>.</p></li>
+</ol>
+<p><img src="images/lab_14/lab14_fig0_import_csv.jpg" class="img-fluid"></p>
+<p>The file has both Latitude Longitude and Universal Transverse Mercator (UTM) coordinates, which are similar to British Grid coordinates, but for the entire world. UTM coordinates are ideal for field data that does not span large areas (<a href="https://en.wikipedia.org/wiki/Universal_Transverse_Mercator_coordinate_system">you can read more about it here</a>). We will use UTM coordinates since they are metric, and thus some automatic area calculations that will happen later on will have the right units.</p>
+<ol start="3" class="example" type="1">
+<li>Now split the file into separate layers for each individual bird, saving each file as a separate <code>geopackage</code> (to preserve long field names) named as the <code>individual_local_identifier</code> tag (ex: Chachalaca_1.gpkg). Use <code>Select by expression</code> on the <code>individual_local_identifier</code>field and then <code>Export &gt; Save selected features as...</code> to create each subset.</li>
+</ol>
+<div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Stop and Think
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>How many records, covering what timespan, are available for each individual bird?</p>
+</div>
+</div>
+<div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>To check it, you can use the <code>Statistical Summary</code> tool and the <code>timestamp</code> field you have created. Here are my calculations:</p>
+<ul>
+<li>Chachalaca_1: 9731, 2022-01-14 to 2023-02-17</li>
+<li>Chachalaca_2: 660, 2022-01-14 to 2022-03-19</li>
+<li>Chachalaca_3: 2841, 2022-01-14 to 2023-02-17</li>
+<li>Chachalaca_4: 3641, 2022-01-14 to 2023-02-18</li>
+<li>Chesnut_1: 385, 2022-03-05 to 2023-02-17</li>
+<li>Chensut_2: 296, 2022-03-18 to 2022-03-19</li>
+<li>Keel-billed_1: 311, 2022-01-15 to 2022-02-09</li>
+<li>Keel-billed_2: 1568, 2022-02-22 to 2023-02-18</li>
+<li>Parrot_1: 41933, 2020-03-17 to 2022-04-18</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="guided-exercise-2---convex-hulls" class="level2" data-number="14.2">
+<h2 data-number="14.2" class="anchored" data-anchor-id="guided-exercise-2---convex-hulls"><span class="header-section-number">14.2</span> Guided Exercise 2 - Convex Hulls</h2>
+<p><a href="https://en.wikipedia.org/wiki/Convex_hul">Convex hulls</a> are a type of Minimum Enclosing Polygon. The best way to think of it is as if the points were pegs on a board, and you wrapped a stretch band around them. The convex hull is the shape with the <em>smallest perimeter</em> enclosing all points.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/ConvexHull.svg/440px-ConvexHull.svg.png" class="img-fluid figure-img"></p>
+<figcaption>https://en.wikipedia.org/wiki/Convex_hull</figcaption>
+</figure>
+</div>
+<p>In animal and movement research, convex hulls are commonly to used to define <a href="https://en.wikipedia.org/wiki/Species_distribution">species ranges</a> or, for individuals, <a href="https://en.wikipedia.org/wiki/Home_range">home ranges</a>.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>There are two separate tools to calculate convex hulls in QGIS. The first is called <code>Convex Hulls</code> in <code>Vector &gt; Geoprocessing</code>, but is usually <strong>NOT</strong> what you want. This tools calculates convex hulls for irregular polygons. To calculate convex hulls for points, you instead want to go to the <code>Processing</code> tab and then choose the <code>Minimum Bounding Geometry</code> tool under the <code>Vector Geometry</code> category.</p>
+</div>
+</div>
+<p>For this exercise, we will first focus on the Chachalaca birds. We will also not consider <code>Chachalaca_2</code> since it was only monitored for two months.</p>
+<p>The first question we may want to ask as animal movement researchers is if there are well-defined territories for the birds, and if these territories overlap (i.e.&nbsp;do the birds interact?).</p>
+<section id="calculating-convex-hulls" class="level3" data-number="14.2.1">
+<h3 data-number="14.2.1" class="anchored" data-anchor-id="calculating-convex-hulls"><span class="header-section-number">14.2.1</span> Calculating Convex Hulls</h3>
+<ol start="4" class="example" type="1">
+<li>Go to the <code>Processing</code> tab and then launch the <code>Minimum Bounding Geometry</code> tool under the <code>Vector Geometry</code> category.</li>
+</ol>
+<p><img src="images/lab_14/lab14_fig1_convex_hull.jpg" class="img-fluid"></p>
+<ol start="5" class="example" type="1">
+<li><p>Select the <code>Chachalaca_1</code> layer as <code>Input Layer</code>, and then <code>Convex Hull</code> for the <code>Geometry Type</code> (click on the <code>Help</code> button to see what each type of geometry represents). Save the file as <code>Chachalaca_1_home_range.shp</code>.</p></li>
+<li><p>Repeat for <code>Chachalaca_3</code> and <code>Chachalaca_4</code>.</p></li>
+<li><p>Now set the home range polygon symbologies to an outline that is the same colour as the original points with no fill (or a transparent fill), to evaluate the overlap in home ranges. Also add the ESRI Satellite Layer from the <code>QuickMap Plugin</code> for reference. Mine looks like this:</p></li>
+</ol>
+<p><img src="images/lab_14/lab14_fig3_convex_hulls_on_map.jpg" class="img-fluid"></p>
+<div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Stop and Think
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Now using the <code>Geoprocessing tools</code> you have learned, calculate the amount of percent overlap between each home range. Based on this, which individuals may be interacting with each other?</p>
+</div>
+</div>
+<div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>First you need to recalculate the areas in proper units. The <code>Convex Hull</code> tool calculates the area using the layer units, which for this dataset are degrees.</p>
+<p>You can use the <code>Intersection</code> tool to find the overlap between home ranges. You need to calculate it two times for Chachalaca_1 x Chachalaca_3 and Chachalaca_1 x Chachalaca_4. You can see from the previous step that Chachalaca_3 and Chachalaca_4 do not overlap, so no need to calculate it.</p>
+<p>The intersection polygons will have the <code>area</code> fields from both original layers (one of them renamed as <code>area_2</code>), and you can use the <code>Field Calculator</code> to calculate the area of the intersection.</p>
+<ul>
+<li>C1: 121393 m<span class="math inline">\(^2\)</span></li>
+<li>C3: 91856 m<span class="math inline">\(^2\)</span></li>
+<li>C4: 230018 m<span class="math inline">\(^2\)</span></li>
+<li>C1 x C3: 59654 m<span class="math inline">\(^2\)</span> (49% of C1 and 65% of C3)</li>
+<li>C1 x C4: 2867 m<span class="math inline">\(^2\)</span> (2.3% of C1 and 1.2% of C4)</li>
+</ul>
+<p>So we can conclude that Chachalaca 1 and 3 interacted very often, Chachalaca 1 and 4 interacted more rarely, and Chachalaca 3 and 4 did not interact at all during the study.</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="guided-exercise-3---habitat-use" class="level2" data-number="14.3">
+<h2 data-number="14.3" class="anchored" data-anchor-id="guided-exercise-3---habitat-use"><span class="header-section-number">14.3</span> Guided Exercise 3 - Habitat Use</h2>
+<p>The second question we may want to explore is what is the main types of habitats each bird is using. For that, we can use the convex hulls that determine our home rages, and the land cover layer included in the dataset. The <a href="https://www.arcgis.com/home/item.html?id=cfcb7609de5f478eb7666240902d4d3d">data documentation</a> includes a table with a key for each land cover type.</p>
+<div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Stop and Think
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Using the tools you already know, determine which habitats comprise each Chachalaca home range, and their respective area.</p>
+</div>
+</div>
+<div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Click for answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We have the home ranges as polygons, and the land cover dataset as a raster. There are thus two ways of achieving this. One is to <code>Polygonize</code> the raster, and then use <code>Clip</code> to cut the resulting vector land cover map by each of the home ranges, and then recalculate the areas of each habitat using the <code>Field Calculator</code>. The second is to cut the raster by each of the home ranges using <code>Extract by Mask Layer</code>, and then use <code>Raster Layer Unique Values Report</code> in the <code>Processing</code> panel. These are the values I got using the second option (less steps):</p>
+<p>Chachalaca 1: Class 7 (Built Area) = 106800m<span class="math inline">\(^2\)</span>; Class 2 (Trees) = 14400m<span class="math inline">\(^2\)</span></p>
+<p>Chachalaca 3: Class 7 (Built Area) = 85900m<span class="math inline">\(^2\)</span>; Class 11 (Rangeland) = 6200m<span class="math inline">\(^2\)</span></p>
+<p>Chachalaca 4: Class 2 (Trees) = 151600m<span class="math inline">\(^2\)</span>; Class 7 (Built Area) = 79900m<span class="math inline">\(^2\)</span></p>
+<p>So we can see that while Chachalaca 1 and 3 have decided to explore mainly urban habitats, Chachalaca 4 is mainly exploring the forest habitat, indicating possible behavioural adaptations and/or territoriality.</p>
+</div>
+</div>
+</div>
+<section id="guided-exercise-4---creating-temporal-animations-with-qgis" class="level3" data-number="14.3.1">
+<h3 data-number="14.3.1" class="anchored" data-anchor-id="guided-exercise-4---creating-temporal-animations-with-qgis"><span class="header-section-number">14.3.1</span> Guided Exercise 4 - Creating temporal animations with QGIS</h3>
+<p>QGIS includes a feature called <em>Temporal Layers</em>, which allow us to animate the layers follwing time stamp information, to see how patterns change over time. We will use it now to look at the Chachalaca movement in time.</p>
+<ol start="8" class="example" type="1">
+<li>First, select the <code>Chachalaca_1</code> point layer and go to <code>Properties &gt; Temporal</code>. Then check the <code>Dynamic Temporal Control</code> box, and select <code>Single Field with Date/Time</code> as the <code>Configurations</code>, and <code>Include Start, Include End</code> as <code>Limit</code>. Then pick the <code>timestamp</code> field for <code>Field</code>, and set the event duration to 30 minutes (the minimum duration as per our metada). Click in <code>Apply</code>, then <code>OK</code>. A clock symbol will appear to the right of the layer name to indicate it is time-enabled.</li>
+</ol>
+<p><img src="images/lab_14/lab14_fig4_time_enabled.jpg" class="img-fluid"></p>
+<ol start="9" class="example" type="1">
+<li><p>Now repeat the process for Chachalaca_3 and Chachalaca_4.</p></li>
+<li><p>Now launch the <code>Temporal Controller Panel</code> (<a href="https://docs.qgis.org/3.34/en/_images/temporal.png"></a>) from the main QGIS toolbar. It will look like the panel below. If it looks different, make sure you click on the <code>Animated Temporal Navigation</code> button (small green play button within a circle).</p></li>
+</ol>
+<p><img src="images/lab_14/lab14_fig5_time_panel.jpg" class="img-fluid"></p>
+<ol start="11" class="example" type="1">
+<li><p>Then calculate the time range for all time-enabled layers by clicking on the button with two blue arrows. Set the <code>Step</code> to <code>1 hour</code>, and then press the back play button. You will see Chachalaca_1 and Chachalaca_3 at first (remember there is no recording during the night, so there will be some periods with no points).</p></li>
+<li><p>Now pause the animation, click on the double back-arrow to return to the start, and then change the <code>Step</code> to <code>1 day</code>. Notice how even though Chachalaca 1 and 3 have a lot of overlap in their home ranges, on a daily basis they tend to mostly stay away from each other, seldom crossing paths. Also notice how Chachalaca 4 really tends to keep within the trees, rarely venturing into open areas.</p></li>
+<li><p>Now pause and reset again, and then set the <code>Step</code> to <code>One week</code>. Notice how Chachalaca 4 tends to avoid crossing the big open patch that divides its home range, and only some times ventures into the northern area.</p></li>
+<li><p>Pause and reset the animation again. Then launch the Windows <code>Snipping Tool</code> by going to the <code>Start Menu</code> and then typing its name (<a href="https://support.apple.com/en-gb/102618">see here for Mac</a>).</p></li>
+</ol>
+<p>It will look lime this:</p>
+<p><img src="images/lab_14/lab14_fig6_snipping_tool.png" class="img-fluid"></p>
+<ol start="15" class="example" type="1">
+<li><strong>Read this entire section before doing it</strong>. Change the snip type from image (photo camera) to video (video camera), Then click on <code>New</code>. Drag the mouse to capture the mao area of QGIS, and then click on <code>Start Recording</code>. There will be a countdown from 3, and then the recording will start. Once it starts, press the play button in QGIS to start the animation, and let it run through. Then stop the recording.</li>
+</ol>
+<p>You should now have a video recording that could be used on a presentation! Here is mine (press the play button!)</p>
+<div class="quarto-video"><video id="video_shortcode_videojs_video1" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="images/lab_14/lab14_animated_movement.mp4"></video></div>
+<p>You could also use the <code>Export Animation</code> function of QGIS by clicking on the Disk icon of the <code>Temporal Controller</code>. What it does however is it saves each animation frame as one separate image, which you need to combine into a video later using video creation software, or as an animated GIF using an online tool such as <a href="https://ezgif.com/maker">EZGIF</a>:</p>
+<p><img src="images/lab_14/animated_movement.gif" class="img-fluid"></p>
 
 
 </section>
@@ -760,6 +1014,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
 </nav>
 </div> <!-- /content -->
+<script>videojs(video_shortcode_videojs_video1);</script>
 
 
 
