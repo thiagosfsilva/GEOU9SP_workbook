@@ -1,6 +1,4 @@
-# Lab 14 - Convex Hulls and Interpolation {#sec-spatan5}
-
-**IN PREPARATION**
+# Lab 14 - Convex Hulls {#sec-spatan5}
 
 ## Guided Exercise 1 - Preparing the data
 

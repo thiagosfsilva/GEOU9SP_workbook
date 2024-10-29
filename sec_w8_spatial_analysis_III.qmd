@@ -1,6 +1,6 @@
 # Week 8 - Spatial analysis III
 
-This week, we will continue our learning of additional/advanced GIS tools. The focus for this week is on density and interpolation methods, distance calculation tools and convex hulls.
+This week, we will continue our learning of additional/advanced GIS tools. The focus for this week is on density methods, distance calculation tools and convex hulls.
 
 ## ILOs covered
 
@@ -26,7 +26,4 @@ For every week, we will list the main theoretical and practical learning goals. 
 
 [@sec-spatan5]
 
-
 - Convex Hulls
-- Interpolation Tools
-    - Inverse Distance Weighting
