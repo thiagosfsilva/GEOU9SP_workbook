@@ -166,3 +166,7 @@ You should now have a video recording that could be used on a presentation! Here
 You could also use the `Export Animation` function of QGIS by clicking on the Disk icon of the `Temporal Controller`. What it does however is it saves each animation frame as one separate image, which you need to combine into a video later using video creation software, or as an animated GIF using an online tool such as [EZGIF](https://ezgif.com/maker):
 
 ![](images/lab_14/animated_movement.gif)
+
+Congratulations, we have reached the end of the GIS content we are covering this module (with the exception of using GPS receivers). Well done! You should now feel confident in using the tools you have learned to solve spatial problems, and also comfortable learning new tools independently as the need arises. Good luck on you GIS journey!
+
+And stay spatial!
