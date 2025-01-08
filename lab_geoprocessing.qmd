@@ -62,7 +62,7 @@ You may have noticed that your Digimap census data download includes many OA pol
 
 ![](images/lab_geoprocessing/Fig3_boundary_offset.png)
 
-We thus need to further subset our data to match the actual extent of the Stirling coucil. 
+We thus need to further subset our data to match the actual extent of the Stirling council. 
 
 ::: {.callout-important title="Stop and Think"}
 What are the options of GIS operations that you have to subset the datasets?
@@ -103,7 +103,7 @@ You could manually deselect the polygons that are not part of Stirling council, 
 Now we can answer the actual study question. As a reminder, it is **how many children in the relevant age range live within less than 1km, between 1km and 2km, and further than 2km of *any* primary (4 to 10 years old) and secondary (11 to 17 years old) school?**. You will need to use some of the Geoprocessing tools you just learned to answer that, as well as tools from previous weeks. 
 
 ::: {.callout-important title="Stop and Think"}
-Before you continue, try to think about the solution yourself. Look at the attributes of each layer, and then try to sketch a step by step plan to achieve the results you need. Then continue. 
+Before you continue, try to think about the solution yourself. Look at the attributes of each layer, and then try to sketch a step-by-step plan to achieve the results you need. Then continue. 
 :::
 
 (@) You will first need to add up the number of children at each 1yr age bracket to compute the totals for the primary and secondary school age ranges (4-10 yo and 11-17 yo). For that, you can use the `Field Calculator`, as in previous labs. Just add up the numbers for columns `age_4` to `age_10` into a new `age_4-10` column, and then add columns `age_11` to `age_17` into a new `age_11-17` column. 
@@ -133,10 +133,10 @@ What will change in your results if you use `Intersection` instead of `Clip`?
 :::
 
 ::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
-`Intersection` will combine the attributes of both layers, while `CLip` will only preserve the attributes of the target layer. 
+`Intersection` will combine the attributes of both layers, while `Clip` will only preserve the attributes of the target layer. 
 :::
 
-(@) Since the buffers have been *dissolved*, they can't be linked to individual schools anymore - whenever the buffers of two schools overlap their attribute tables will just keep the name of one of the schools when they are dissolved. So no need to preserve the buffer attributes, and we can use `Clip`. Create two new layers, the first being the clipping of the census layer by the 1km buffer layer, and the second being the clipping of the census layer by the 1km-2km 'donuts' layer. We use it instead of the 2km buffer otherwise when we calculate the percentage of area within 2km we will be double counting the area within 1km - which is already covered by the 1km buffer. 
+(@) Since the buffers have been *dissolved*, they can't be linked to individual schools anymore - whenever the buffers of two schools overlap, their attribute tables will just keep the name of one of the schools when they are dissolved. So no need to preserve the buffer attributes, and we can use `Clip`. Create two new layers, the first being the clipping of the census layer by the 1km buffer layer, and the second being the clipping of the census layer by the 1km-2km 'donuts' layer. We use it instead of the 2km buffer otherwise when we calculate the percentage of area within 2km we will be double counting the area within 1km - which is already covered by the 1km buffer. 
 
 You should end up with something like the figure below. To make sure the layers don't overlap, style them using hatching in different directions. If you see a cross-hatch, then they are overlapping, and it means you used the full 2km buffer instead of the 1km-2km 'donut':
 
@@ -161,4 +161,4 @@ Your final results should be:
 | Primary	| 6451	| 6656 | 89   |
 | Secondary	| 7572	| 7880 | 91   |
 
-That is the end of this lab. From now on the exercises will be a bit more involved, like the one above -  but at the same you will notice that much of it is still the same -  loading data, organising it, doing queries - we will just be adding new tools that open up new (but quite specific) analysis possibilities and/or make some of the things you did before faster/simpler. But the general workflow of GIS is always the same. 
+That is the end of this lab. From now on the exercises will be a bit more involved, like the one above. But at the same time you will notice that much of the work is always the same - loading data, organising it, doing queries - we will just be adding new tools that open up new (but quite specific) analysis possibilities and/or make some of the things you did before faster/simpler. Overall, the general workflow of GIS is always the same. 
