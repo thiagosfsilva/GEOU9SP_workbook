@@ -4,8 +4,8 @@ project:
 
 book:
   title: "GEOU9SP GIS Workbook"
-  author: "Thiago Silva"
-  date: "24/07/2024"
+  author: "Thiago Silva, Allan Audsley, Lindis Kipp"
+  date: "08/01/2025"
   chapters:
   - index.qmd
   - part: sec_w1_intro_toGIS.qmd
