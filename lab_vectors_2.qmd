@@ -18,7 +18,7 @@ For our next step in the analysis, we would like to focus only on earthquakes on
 
 ![](images/lab_4/lab4_fig1_select_loc.jpg)
 
-(@) Select the Earthquakes layer as `Select features from`. Then check *only* the `Are within` query option. Then pick your World Countries layer for `By comparing to the fetaures from`. Click `Run`, and after it is finished, click `Close`.
+(@) Select the Earthquakes layer as `Select features from`. Then check *only* the `Are within` query option. Then pick your World Countries layer for `By comparing to the features from`. Click `Run`, and after it is finished, click `Close`.
 
 (@) Visually inspect the results of your selection, and then open the Attribute Table for the Earthquakes layer.
 
@@ -38,7 +38,7 @@ Now that we identified the earthquakes on the continents, we may want to add thi
 
 (@) Return to the `Field Calculator` and this time use the  `Update Existing Field` option to the right, instead of `Create a new field`. Make sure the option `Only update selected features` is still enabled. Pick `Origin` as the field to be updated, and now just write `'Ocean'` on the Expression window. Click `OK`.
 
-(@) Now use the `Origin` attribute to style the colour or shape of your Earthquake points differently for land and ocean, using the `Symbology` options. Pick the `Categorized` symbology option at the top, and then the set the `Value` to the `Origin`attribute, and then `Classify`.
+(@) Now use the `Origin` attribute to style the colour or shape of your Earthquake points differently for land and ocean, using the `Symbology` options. Pick the `Categorized` symbology option at the top, set the `Value` to the `Origin` attribute, and then `Classify`.
 
 ::: {.callout-important title="Stop and Think"}
 Do you understand why you did the steps above?
@@ -62,7 +62,7 @@ Another way to relate geometries to attributes is when we want to store some pro
 
 As an example, let us calculate the areas and border length (perimeter) of all the World's countries. 
 
-(@) Before using any of the geometry-based operators, we need to set up our desired units for the project. Go to the menu `File > Properties...` to open your project properties. Then on the `General` tab, set the `Units for distance measurement` to `Kilometers` and the `Units for area measurement` to `Square Kilometers` (yes, we will use [SI](https://en.wikipedia.org/wiki/International_System_of_Units) units because we scientists!). 
+(@) Before using any of the geometry-based operators, we need to set up our desired units for the project. Go to the menu `File > Properties...` to open your project properties. Then on the `General` tab, set the `Units for distance measurement` to `Kilometers` and the `Units for area measurement` to `Square Kilometers` (yes, we will use [SI](https://en.wikipedia.org/wiki/International_System_of_Units) units because we are scientists!). 
 
 It is always important to think about your problem before choosing the units for length and area calculations. In this case, using the default of meters and squared meters would not make sense for things as large as countries. 
 
@@ -152,4 +152,4 @@ e) GIS analyses will almost always have a visual component, as maps are a natura
 - The WPAs;
 - The boundaries of the SSSIs, distinguishing between those that do and do not overlap with WPAs;
 - All Scottish roads differentiated by class using line width; 
-- All the road segments that are Motorways, A or B roads within WPAs that are longer than 100m. These should use the same line widths as above to differentiate road class, but have a different colour from other roads.
+- All the road segments that are Motorways, A or B roads within WPAs which are longer than 100m. These should use the same line widths as above to differentiate road class but have a different colour from other roads.
