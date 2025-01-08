@@ -1,12 +1,12 @@
 # Lab 12 - Zonal Statistics and Overlap Analysis {#sec-spatan3}
 
-So far we have been mostly keeping to one of the two main data models: vectors and rasters. We have learned several ways to work with either, but they are mostly treated separately. The two exceptions are the `Mask by Layer` tool, that lets us clip a raster based on a vector shape, and the `Polygonize` tool, which converts rasters into vectors. 
+So far we have been mostly keeping to one of the two main data models: vectors and rasters. We have learned several ways to work with either, but they are mostly treated separately. The two exceptions are the `Mask by Layer` tool that lets us clip a raster based on a vector shape, and the `Polygonize` tool, which converts rasters into vectors. 
 
 In this lab you will learn about `Zonal Statistics` ([QGIS Documentation](https://docs.qgis.org/3.34/en/docs/user_manual/processing_algs/qgis/rasteranalysis.html#zonal-statistics)), one of the main tools that mixes vectors and rasters, and lets you compute pixel statistics for regions defined by polygons. You will also learn about a related tool for points, called `Sample Raster Values` ([QGIS Documentation](https://docs.qgis.org/3.34/en/docs/user_manual/processing_algs/qgis/rasteranalysis.html#sample-raster-values)), and a  `cousin` tool to Zonal Statistics, the `Overlap Analysis` tool ([QGIS Documentation](https://docs.qgis.org/3.34/en/docs/user_manual/processing_algs/qgis/vectoranalysis.html#overlap-analysis)).    
 
 ## Guided Exercise 1 - Data preparation
 
-In this exercise, we will look at air pollution data from the city of [Amsterdam](https://en.wikipedia.org/wiki/Amsterdam), in the Netherlands. Importantly for this exercise, Amsterdam is broken up into 8 districts or boroughs (stadsdelen), which are further divided into neighbourhoods (buurten).
+In this exercise, we will look at air pollution data from the city of [Amsterdam](https://en.wikipedia.org/wiki/Amsterdam) in the Netherlands. Importantly for this exercise, Amsterdam is broken up into 8 districts or boroughs (stadsdelen), which are further divided into neighbourhoods (buurten).
 
 More specifically, we will be looking at [NO$_2$ (Nitrogen Dioxide) pollution](https://www.gov.uk/government/statistics/air-quality-statistics/ntrogen-dioxide). NO$_2$ is mainly produced by combustion engines, and impacts respiratory health. 
 
@@ -26,14 +26,14 @@ If you are curious, these files were obtained from the City of Amsterdam [geodat
 (@) Download the data and create a project folder and a QGIS project for this exercise. The project should be set to EPSG:28992 - Amersfoort / RD New, the standard CRS for the Netherlands. 
 
 ::: {.callout-tip}
-Two useful websites to find information about coordinate reference systems are [https://epsg.io/](https://epsg.io/) and [https://spatialreference.org/](https://spatialreference.org/). Search for EPSG:28899 in thee websites and see what information they provide. 
+Two useful websites to find information about coordinate reference systems are [https://epsg.io/](https://epsg.io/) and [https://spatialreference.org/](https://spatialreference.org/). Search for EPSG:28992 in thee websites and see what information they provide. 
 :::
 
 (@) Now load all five layers and the CSV file into your project. This CSV file has no coordinates, so you can just drag it to your `Layers` panel without needing to use the `Import Delimited Text` tool. 
 
 ## Guided Exercise 2 - Zonal Statistics
 
-You are now a GIS analyst at the Amsterdam city administration, and have been asked to analyse the pollution levels per city neighbourhood, using the data for 2008 published by the scientific study above. Specifically, you have been asked to calculate the average NO$_2$ concentrations for each neighbourhood. 
+You are now a GIS analyst at the Amsterdam city administration, and have been asked to analyse the pollution levels per city neighbourhood using the data for 2008 published by the scientific study above. Specifically, you have been asked to calculate the average NO$_2$ concentrations for each neighbourhood. 
 
 You have access to the neighbourhood boundaries in vector format, but the study data is given as a raster data. 
 
@@ -47,7 +47,7 @@ Since at this point we don't know many tools that interface rasters and vectors,
 Still, this is a good example of how you can get by in GIS even with just basic knowledge and some creative thinking. There are always multiple ways to achieve the same result in GIS, even if some of these ways are not fast or optimal. 
 :::
 
-The right way to accomplish this task is to use the `Zonal Statistics` tool. It will calculate descriptive statistics (min, max, average, range, etc.) for raster values (pixels) contained within each polygon of a vector layer, and output it as a new vector layer with the same polygons and attributes of the original vector layer, with added attribute columns for the statistics. 
+The right way to accomplish this task is to use the `Zonal Statistics` tool. It will calculate descriptive statistics (min, max, average, range, etc.) for raster values (pixels) contained within each polygon of a vector layer and output it as a new vector layer with the same polygons and attributes of the original vector layer, with added attribute columns for the statistics. 
 
 (@) Go to the `Processing` panel and find the `Zonal statistics` tool (NOT `Raster layer zonal statistics`), under the `Raster analysis` category. It will launch a new window.
 
@@ -88,7 +88,7 @@ This new layer has all the same attributes and polygons as the original neighbou
 
 ## Guided Exercise - Sample Raster Values
 
-`Zonal Statistics` lets us sample and summarise raster values based on areas (i.e. polygons). But sometimes, we may be interested in knowing what are the specific raster values under a point coordinate. Again, as a GIS analyst, you have been now asked to determine if NO$_2$ levels have declined between 2008 and 2023. But the point location measurements only go as far back as 2010, so you need to compare the 2023 field measurements to the 2008 modelled values. 
+`Zonal Statistics` lets us sample and summarise raster values based on areas (i.e. polygons). But sometimes, we may be interested in knowing what the specific raster values under a point coordinate are. Again, as a GIS analyst, you have been now asked to determine if NO$_2$ levels have declined between 2008 and 2023. But the point location measurements only go as far back as 2010, so you need to compare the 2023 field measurements to the 2008 modelled values. 
 
 (@) Before we proceed with the analysis, we need to link the NO$_2$ measured values (in the CSV file) with the measurement locations (one of the geopackage layers). You can do that using a `Join`, and the `CodeJ` field of the CSV table and the `Code` field of the locations layer. 
 
@@ -110,17 +110,17 @@ As the GIS specialist for an International NGO (Non-governmental organization), 
 
 ### Data Acquisition
 
-For this exercise, I am giving you a pre-downloaded dataset, because there are large data files that also require a registration to download. But I am also describing below how to download the original data - *you will need it for the Final Project*, and also if working with species distribution data is of interest to you in the feature. 
+For this exercise, I am giving you a pre-downloaded dataset, because the source files are large and also require a registration to download. But I am describing below how to download the original data - *you will need it for the Final Project* and the information is relevant if working with species distribution data is of interest to you in the future. 
 
 [Download the data package from here](https://stir-my.sharepoint.com/:u:/g/personal/ala2_stir_ac_uk/EdX5iTojX65Mv3Jf_DD-PvEBGKnlQIuu7Njo5XFdu4SQmA?e=krTy3W).
 
 The first step in your analysis is to obtain data on the distribution of *T. chinensis*. You go to the main source of species occurrence data worldwide, the [Global Biodiversity Species Facility (GBIF)](https://www.gbif.org/). GBIF requires creating an account to download. 
 
-Once you have an account, go to the top left of the webpage and click on `Get data > Ocurrences`".  You can search for data using the different parameters on the left column. Expand the `Scientific name` field and search for `Tsuga chinensis`. Then click on `Download` (above the table). The data will come as a tab-separated text file.
+Once you have an account, go to the top left of the webpage and click on `Get data > Ocurrences`.  You can search for data using the different parameters on the left column. Expand the `Scientific name` field and search for `Tsuga chinensis`. Then click on `Download` (above the table). The data will come as a tab-separated text file.
 
 Then you would need climate data. There are many climatic datasets out there, but after doing some research you decide to use the *Climatologies at High resolution for the Earth’s Land Surface Areas* (CHELSA) database, which provides global maps of past, present and future climate data: [https://chelsa-climate.org/](https://chelsa-climate.org/). 
 
-To use this dataset, you need to understand the definition of the standard BIOCLIM variables. These are derived from a different climate fataset called WorldClim, and are a set of climatic descriptors devised to capture climatic conditions that are related to species survival. They are explained here:[https://www.worldclim.org/data/bioclim.html](https://www.worldclim.org/data/). The CHELSA database also provides *extended* BIOCLIM variables (BIOCLIM+, [https://chelsa-climate.org/exchelsa-extended-bioclim/](https://chelsa-climate.org/exchelsa-extended-bioclim/))for additional important variables.
+To use this dataset, you need to understand the definition of the standard BIOCLIM variables. These are derived from a different climate dataset called WorldClim, and are a set of climatic descriptors devised to capture climatic conditions that are related to species survival. They are explained here:[https://www.worldclim.org/data/bioclim.html](https://www.worldclim.org/data/). The CHELSA database also provides *extended* BIOCLIM variables (BIOCLIM+, [https://chelsa-climate.org/exchelsa-extended-bioclim/](https://chelsa-climate.org/exchelsa-extended-bioclim/))for additional important variables.
 
 Since you are working with a plant species, you decide to use the following variables:
 
@@ -154,7 +154,7 @@ With that data in hand, you are ready to start your project. You prepare an init
 
 1) Organise the data into a folder and then import the data into a QGIS project. You may add OpenStreetMap (from the XYZ Tiles) to help you to recognise where these data are located in the world. Also, open the attribute tables and raster info to understand the structure of each data file, unit, etc.
 
-2) Import the T. chinensis species ocurrence file. Although it is named CSV, you notice it uses *tab* as a custom column delimiter. The spatial information is on fields `decimalLatitude` and `decimalLongitude`.
+2) Import the *T. chinensis* species occurrence file. Although it is named CSV, you notice it uses *tab* as a custom column delimiter. The spatial information is on fields `decimalLatitude` and `decimalLongitude`.
 
 3) Make sure the project CRS is adequate and that all data uses the same CRS, or reproject if not. 
 
