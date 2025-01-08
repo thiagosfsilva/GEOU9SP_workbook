@@ -4,14 +4,14 @@ The purpose of this lab is to help you understand why we need to pay attention t
 
 ## Guided Exercise 1: Understanding Coordinate Reference Systems
 
-In this exercise, you will learn how to use QGIS to identify the coordinate reference system (CRS, sometimes wrongly called as just "projection") of spatial data you acquire, and also how to manage data and project coordinate reference systems. 
+In this exercise, you will learn how to use QGIS to identify the coordinate reference system (CRS, sometimes wrongly called as just "projection") of spatial data you acquire and how to manage data and project coordinate reference systems. 
 
 ::: {.callout-important title="Stop and Think"}
 Why are coordinate reference systems and 'projections' not the same thing?
 :::
 
 ::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
-Coordinate reference systems combine a **datum**, which defines a geometric representation of the Earth's shape and how it 'intersects' with the real surface of the Earth, a **coordinate system** (for example latitude and longitude or northings and eastings) and a **map projection** which is a set of mathematical rules to project the 3D surface of the datum's *ellpisoid* into a flat plane (such as a screen or a map). 
+Coordinate reference systems combine a **datum**, which defines a geometric representation of the Earth's shape and how it 'intersects' with the real surface of the Earth, a **coordinate system** (for example latitude and longitude or northings and eastings) and a **map projection** which is a set of mathematical rules to project the 3D surface of the datum's *ellipsoid* into a flat plane (such as a screen or a map). 
 :::
 
 ### Obtaining the required data
@@ -29,26 +29,26 @@ b) What are the conditions (provisions) of use for the data?
 :::
 
 ::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
-a) The page providing the data is managed by Eurostat, the statistical office of the European Union. Therefore you would be inclined to trust in the quality and correctness of the data provided.
+a) The page providing the data is managed by Eurostat, the statistical office of the European Union. Therefore, you would be inclined to trust in the quality and correctness of the data provided.
 
-b) The webpage presents a link to "[dowload rules](https://ec.europa.eu/eurostat/web/gisco/geodata/administrative-units)' which describe the authorised uses of the data. This informartion can also be found in the data's *metadata*  file. 
+b) The webpage presents a link to "[rules](https://ec.europa.eu/eurostat/web/gisco/geodata/administrative-units)" which describe the authorised uses of the data. This information can also be found in the data's *metadata* file. 
 :::
 
 
 (@) Create a lab_2 folder in your GEOU9SP main folder. Then create a simple folder structure to organise the data, and extract the zipped downloaded data in its proper location. If you are not sure how to do this, please revisit @sec-exoverview.
 
-(@) Open QGIS and start a new project. Save it as `lab_2` in its proper folder. Then look at the contents of the folder holding the country data, using the [QGIS browser panel](https://docs.qgis.org/3.34/en/docs/user_manual/managing_data_source/opening_data.html#the-browser-panel). If the panel is not available, you can enable it by going to the `View > Panels` menu and checking the box for `browser`. You should see several layers on tghe folder:
+(@) Open QGIS and start a new project. Save it as `lab_2` in its proper folder. Then look at the contents of the folder holding the country data, using the [QGIS browser panel](https://docs.qgis.org/3.34/en/docs/user_manual/managing_data_source/opening_data.html#the-browser-panel). If the panel is not available, you can enable it by going to the `View > Panels` menu and checking the box for `browser`. You should see several layers on the folder:
 
 ![](images/lab_2/lab_2_img2_layers.png)
 
 (@) Load the `CNTR_BN_20M_2020_4326` file into your project. Pay attention to the file name as there are many files with similar names. 
 
 ::: {.callout-important title="Stop and Think"}
-Good file names are always informative of their content. Can you gess the contents of the different GeoJSON files you have downloaded based on their names?
+Good file names are always informative of their content. Can you guess the contents of the different GeoJSON files you have downloaded based on their names?
 :::
 
 ::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
-All file names start with `CNTR` for 'countries', followed by a two letter code. `BN` seems to stand for 'boundary'(vector lines), `RG` for 'region'(vector polygons), and `LB` for 'labels' (vector points). Then `2020` specified the reference year, and `20M` indicates the 1:20 million mapping scale. the final four-letter number indicates the EPSG code for the data CRS: 4326 ('unprojected' WGS84), 3857 (WGS 84 with Pseudo-Mercator projection) or 3035 (ETRS89-extended / Lambert Azimuthal Equal Area for Europe).
+All file names start with `CNTR` for 'countries', followed by a two-letter code. `BN` seems to stand for 'boundary'(vector lines), `RG` for 'region'(vector polygons), and `LB` for 'labels' (vector points). Then `2020` specified the reference year, and `20M` indicates the 1:20 million mapping scale. The final four-letter number indicates the EPSG code for the data CRS: 4326 ('unprojected' WGS84), 3857 (WGS 84 with Pseudo-Mercator projection) or 3035 (ETRS89-extended / Lambert Azimuthal Equal Area for Europe).
 :::
 
 ### Visualising data with different CRS
@@ -56,7 +56,7 @@ All file names start with `CNTR` for 'countries', followed by a two letter code.
 (@) Set the symbology for the outline and fill as you prefer. Try to manipulate more visual variables than just colour. 
 
 ::: {.callout-important title="Stop and Think"}
-Why can't you set a fill color for the countries?
+Why can't you set a fill colour for the countries?
 :::
 
 ::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
@@ -81,14 +81,14 @@ Accuracy: Based on World Geodetic System 1984 ensemble (EPSG:6326), which has a 
 Reference: Dynamic (relies on a datum which is not plate-fixed)
 :::
 
-(@) Note, on the bottom QGIS status bar, that as you move your mouse pointer around, the coordinates for the mouse position are updated in real time. Also note what the map scale is, how it changes as zoom in and out. You can also type the second part of a scale nuber to zoom at the desired map scale (for example 50000 if you want to see the map at a 1:50000 scale)
+(@) Note, on the bottom QGIS status bar, that as you move your mouse pointer around, the coordinates for the mouse position are updated in real time. Also note what the map scale is and how it changes as you zoom in and out. You can also type the second part of a scale number to zoom at the desired map scale (for example 50000 if you want to see the map at a 1:50000 scale)
 
 ![](images/lab_2/lab_2_img4_status_bar.png)
 
 ::: {.callout-important title="Stop and Think"}
 a) Why doesn’t the scale shown on the bar match the “advertised” scale for the dataset (1:10 million)?
  
-b) The box on the very bottom right of the QGIS status bar tells you what is the current project CRS. How is it different from a layer CRS?
+b) The box on the very bottom right of the QGIS status bar tells you what the current project CRS is. How is it different from a layer CRS?
 :::
 
 ::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
@@ -110,7 +110,7 @@ The UK looks 'squished` vertically. That is because the data is being viewed in 
 (@) Click on the project projection box at the bottom right of the status bar (or go to `Project > Properties... > CRS tab`). On the `Filter` text box, search for EPSG:3035. Select this projection for the project and click `OK`. A warning box will appear, make sure you read it through before selecting `OK` again. 
 
 ::: {.callout-important title="Stop and Think"}
-a) what is the name of the Coordinate Reference System specified by EPSG 3035?
+a) What is the name of the Coordinate Reference System specified by EPSG 3035?
 
 b) What did the warning window warned you about? 
 :::
@@ -145,11 +145,11 @@ b) In metres. You can check that on the layer's  `Properties > Information` tab.
 
 
 ::: {.callout-important title="Stop and Think"}
-What is the CRS for this new layer, and how well dos it visually align with the p[revious layer. 
+What is the CRS for this new layer, and how well does it visually align with the previous layer? 
 :::
 
 ::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
-This second layers uses the EPSG 3035 CRS, while the previous layer used EPSG 4326. Notice how ech layer maintains its original CRS when added to the project, but if necessary they are reprojected 'on the fly' to match up visually. 
+This second layers uses the EPSG 3035 CRS, while the previous layer used EPSG 4326. Notice how each layer maintains its original CRS when added to the project, but if necessary they are reprojected 'on the fly' to match up visually. 
 :::
 
 
@@ -158,7 +158,7 @@ This second layers uses the EPSG 3035 CRS, while the previous layer used EPSG 43
 
 (@) Now go back to the project CRS properties and check the box that says `No CRS ` at the top of the window. This disables the on-the-fly projection. Then click OK and go back to your map. 
 
-(@) Right click on the 4326 layer and select `Zoom to Layer`. Then select the zoom out tool (the loupe with a minus sign) at the top button row, and start clicking at the centre of the map. Keep clicking as it gets really smalll - you should click about 17 times until the second dataset is fully visible. Check the properties of each layer to make sure they still have the same CRS of when you loaded them.
+(@) Right click on the 4326 layer and select `Zoom to Layer`. Then select the zoom out tool (the loupe with a minus sign) at the top button row, and start clicking at the centre of the map. Keep clicking as it gets really small - you should click about 17 times until the second dataset is fully visible. Check the properties of each layer to make sure they still have the same CRS of when you loaded them.
 
 ::: {.callout-important title="Stop and Think"}
 What has happened? Why are the two datasets suddenly very different in size?
@@ -170,7 +170,7 @@ Since you turned off on-the-fly reprojection, each dataset is now drawn at their
 
 ### Potential issues with using mismatched data 
 
-(@) Download [this vector shapefile (link)](https://stir-my.sharepoint.com/:u:/g/personal/ala2_stir_ac_uk/EWwn64TEDgFCvLE-JUwjUZEBMRXc6NKtQ0KWHk769hI4Jw?e=iR9RdT), unzip it and add it to your QGIS project. Check what is the CRS of this layer. 
+(@) Download [this vector shapefile (link)](https://stir-my.sharepoint.com/:u:/g/personal/ala2_stir_ac_uk/EWwn64TEDgFCvLE-JUwjUZEBMRXc6NKtQ0KWHk769hI4Jw?e=iR9RdT), unzip it and add it to your QGIS project. Check what the CRS of this layer is. 
 
 (@) Set the Project CRS back to EPSG:3035. Then go to the top menu bar and select `Vector > Geoprocessing > Clip`. Select the layer that has the EPSG 3035 projection as your `Input` Layer, and the new “clip_bounds” layer as your `Overlay` Layer. You can just leave the output as a temporary file. Click Run. 
 
@@ -186,21 +186,21 @@ Why are the clipping results different even though the initial 3035 and 4236 lay
 :::
 
 ::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
-Because although they have been reprojected visually to match on screen, the files still have different CRSs, and this affects the lining up of the `Input` and overlay layers. To get proper results, you need permanently translate (reproject) both datasets to the same CRS. 
+Because although they have been reprojected visually to match on screen, the files still have different CRSs, and this affects the lining up of the `Input` and overlay layers. To get proper results, you need to permanently translate (reproject) both datasets to the same CRS. 
 :::
 
 (@) Now go to `Vector > Data Management Tools > Reproject Layer`. Select the 4326 world layer as your  `Input Layer`, and EPSG:3035 as your `Target CRS`. Let the result be a temporary file and click `OK`. The new layer will be automatically named as  “Reprojected”. What is the CRS of this new layer (check on the layer properties window)?
 
-(@) Now repeat the use of the `Clip` tool using “Reprojected” as the `Input Layer` and "clip_bounds" as the `Overlay Layer`. Rename the resulting layer to 'Clipped_Reprojected'. Which of the two originally clipped layers (“Clipped_3035” or “Clipped_4236?) better matches the "Clipped_Reprojected" layer? 
+(@) Now repeat the use of the `Clip` tool using “Reprojected” as the `Input Layer` and "clip_bounds" as the `Overlay Layer`. Rename the resulting layer to "Clipped_Reprojected". Which of the two originally clipped layers (“Clipped_3035” or “Clipped_4236?) better matches the "Clipped_Reprojected" layer? 
 
 ::: {.callout-important title="Stop and Think"}
 What does the `Reproject` operation do?
 :::
 
 ::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
-It actually applies a permament mathematical transformation to the coordinates of the input data, translating the data from one CRS to another. For any GIS project that involves multiple data layers with different CRSs, you should pick the CRS that makes more sense for your project as the 'project CRS', and then reproject all layers to the same CRS before anything else. 
+It applies a permanent mathematical transformation to the coordinates of the input data, translating the data from one CRS to another. For any GIS project that involves multiple data layers with different CRSs, you should pick the CRS that makes more sense for your project as the 'project CRS', and then reproject all layers to the same CRS before anything else. 
 :::
 
-This is the end of Lab 2! You shoudl now understand why different datasets may have different Coordinate Reference Systems, what are the problems with working with data that has mismatched CRSs, and how to reproject data to match a given CRS. As this is your first week, there are no additional independent exercises - lets take it easy! 
+This is the end of Lab 2! You should now understand why different datasets may have different Coordinate Reference Systems, what the problems are with working with data that has mismatched CRSs, and how to reproject data to match a given CRS. As this is your first week, there are no additional independent exercises - let's take it easy! 
 
 If you still want to practice more, check the exercises from the [QGIS Training Manual](https://docs.qgis.org/3.34/en/docs/training_manual/basic_map/index.html)!
