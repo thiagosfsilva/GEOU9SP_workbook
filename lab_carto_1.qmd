@@ -5,7 +5,7 @@
 
 One of my favourite TV shows of all time is the series ['The Last Kingdom](https://en.wikipedia.org/wiki/The_Last_Kingdom_(TV_series)). I was already a fan of the [books](https://en.wikipedia.org/wiki/The_Saxon_Stories), and I think they translated it to TV very well. 
 
-One of the key plots in the show is that the main character, Uthred, wants to reclaim his birthright - the castle of Bebbanburg. Turns out this is a real castle, and it still exists today as [Bamburgh Castle](https://en.wikipedia.org/wiki/Bamburgh_Castle), in Northumberland. It is a great place to visit, very scenic and right by the ocean!
+One of the key plots in the show is that the main character, Uthred, wants to reclaim his birthright - the castle of Bebbanburg. Turns out this is a real castle, and it still exists today as [Bamburgh Castle](https://en.wikipedia.org/wiki/Bamburgh_Castle) in Northumberland. It is a great place to visit, very scenic and right by the ocean!
 
 ![](https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Bamburgh_Castle%2C_beautiful_day.jpg/1023px-Bamburgh_Castle%2C_beautiful_day.jpg)
 
@@ -61,7 +61,7 @@ The vector district files are all vector files, some being polygons, some being 
 
 ![](images/lab_7/lab7_fig4_demsl.jpg)
 
-(@) We will want to style this data, but copying and pasting the style 15 times is too cumbersome. So use your skills from last week and make a *mosaic* of all the DTM tiles. Save it as a new file on the proper location in your folder organization, and them remove all the individual tiles from the project to keep it 'clean'.
+(@) We will want to style this data, but copying and pasting the style 15 times is too cumbersome. So use your skills from last week and make a *mosaic* of all the DTM tiles. Save it as a new file on the proper location in your folder organization, and then remove all the individual tiles from the project to keep it 'clean'.
 
 (@) Now look at the data you downloaded from the OS Vector District dataset. It should contain several shapefiles named `NU_xxxxxx.shp`, where `xxxxx` will be a descriptive name for what the layer holds. You will want to bring in the layers below into your project. Don't worry yet about how each layer looks or their ordering, just make sure you got it all.
 
@@ -74,6 +74,7 @@ The vector district files are all vector files, some being polygons, some being 
 - `NU_SurfaceWater_Area`
 - `NU_SurfaceWater_Line`
 - `NU_Woodland`
+- `NU_TidalBoundary`
 
 (@) Save your project, and then use the `Zoom Full` tool (![](https://docs.qgis.org/3.10/en/_images/mActionZoomFullExtent.png)) to see the full extent of your data. You will notice that some of the datasets go beyond the limits of the actual NU tile:
 
@@ -102,7 +103,7 @@ We now have all the data we need to start laying out our map. Save your project 
 
 (@) Let us start with the DTM, as it will be the background for our main map. Turn off all the layers except for the DTM, and open the DTM `Properties > Symbology`, then select `Singleband Pseudocolor` for `Render Type`.
 
-We could pick one of the colour ramps from the drop down menu, but we can do better. QGIS actually has several built-in colour palettes that are professionally designed to be *perceptually equivalent*, *colour blind friendly*, and so on. The two main collections of palettes are the [ColorBrewer](https://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3)  palettes and the [cpt-city](http://seaviewsensing.com/pub/cpt-city/) archive. We will use one of the topography optimised cpt-city palettes.
+We could pick one of the colour ramps from the drop-down menu, but we can do better. QGIS actually has several built-in colour palettes that are professionally designed to be *perceptually equivalent*, *colour blind friendly*, and so on. The two main collections of palettes are the [ColorBrewer](https://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3)  palettes and the [cpt-city](http://seaviewsensing.com/pub/cpt-city/) archive. We will use one of the topography optimised cpt-city palettes.
 
 ::: {.callout-tip}
 Cartography is an equal mix of art and technique, and always has a strong amount of subjectivity and self-expression. Throughout this exercise, feel free to explore different symbology options instead of picking the exact ones shown, to develop your own cartographic style.
@@ -116,7 +117,7 @@ Cartography is an equal mix of art and technique, and always has a strong amount
 
 ![](images/lab_7/lab7_fig6_coldem.jpg)
 
-(@) We can add a bit more pop to the DTM by reproducing the `3D` effect using transparency and `hillshade` symbology that we learned on @sec-labras1. If you can't quite remember how to do it, refer back to Guided Exercise 4 for that lab. For my map, I set the transparency of the coloured DTM layer to `60%`, and then went back to the `Symbology` of the hillshade layer and tweaked a bit the `brightness` (`20`) and `contrast` (`-10`) options under the `Layer Rendering` section. We want the effect to be subtle, and the whole DTM to have a 'light' appearance since it will be a background:
+(@) We can add a bit more pop to the DTM by reproducing the `3D` effect using transparency and `hillshade` symbology that we learned on @sec-labras1. If you can't quite remember how to do it, refer back to Guided Exercise 4 for that lab. For my map, I set the transparency of the coloured DTM layer to `60%`, and then went back to the `Symbology` of the hillshade layer and tweaked the `brightness` (`20`) and `contrast` (`-10`) options under the `Layer Rendering` section. We want the effect to be subtle, and the whole DTM to have a 'light' appearance since it will be a background:
 
 ![](images/lab_7/lab7_fig7_hillshade.jpg)
 
@@ -124,9 +125,7 @@ Cartography is an equal mix of art and technique, and always has a strong amount
 
 ## Guided Exercise 4: Adding and styling the transportation layers
 
-Now that we have a nice looking base layer, let us start adding our vector elements. At this time, it is a good idea to *stop and think* again about what is the main purpose of our map - what should the main subject be, what additional information is more important, and so on. In the end, we want to have a 
-*visual hierarchy* that naturally guides the viewer attention to the most important aspects of the map. 
-
+Now that we have a nice-looking base layer, let us start adding our vector elements. At this time, it is a good idea to *stop and think* again about what the main purpose of our map is - what should the main subject be, what additional information is more important, and so on. In the end, we want to have a *visual hierarchy* that naturally guides the viewer attention to the most important aspects of the map. 
 (@) Turn on the 'railway tracks' and 'roads' layers. Since one of our main objectives is to get people to reach Bamburgh Castle, these should be very evident in our map.
 
 (@) Let us start with the railway track, as it is simpler. Open its `Properties > Symbology` and then change the *symbol presets list* from `Favorites` to `All Symbols` (see figure below). Then scroll through the presets list until you find `Topo Railway`. Click on it to select it, and then `Apply`. 
@@ -152,7 +151,7 @@ Did you notice the crosslines along the track seem to have inconsistent spacing?
 ::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
 In the railway layer the different railway line segments are separate features (try selecting them). So for each segment the symbology is 'restarted'. To fix it, use the `Dissolve` tool to turn all line segments into a single multiline feature.
 
-It will solve most problems but not all. If you zoom in very close to where the crosslines seem to be too close or too far, you will notice there are actually gaps in between the lines, and `Dissolve` will only dissolve connecting lines. The only way to fix that would be to manually edit and connect the lines - too much work for the purposes of our map. 
+It will solve most problems but not all. If you zoom in very close to where the crosslines seem to be too close or too far, you will notice there are actually gaps between the lines, and `Dissolve` will only dissolve connecting lines. The only way to fix that would be to manually edit and connect the lines - too much work for the purposes of our map. 
 :::
 
 (@) Now we can focus on the roads. Open the `Attribute Table` of the roads layer, and notice there is an attribute named `CLASSIFICA` indicating the type of road (local street, minor road, etc.). Use the `Select by Expression` tool to investigate what are the unique possible values of this attribute. It would be nice if we could style the roads based on their type!
@@ -173,7 +172,7 @@ Even with the roads and railways clearly visible in the map, it would still be d
 
 (@) Reactivate the woodland, surface water (area and line) and buildings layers. Notice how cluttered the map looks now. This is why good visual hierarchy is so important.
 
-We can start by styling the water surfaces. We want colours that help interpretation, so we should make them a light coloured blue. And since many of these features are small and/or narrow features, we can make them look less evident and cluttered by setting the `stroke` symbol to be the same colour as the `fill` symbol (i.e. so that they look *borderless*). 
+We can start by styling the water surfaces. We want colours that help interpretation, so we should make them a light-coloured blue. And since many of these features are small and/or narrow features, we can make them look less evident and cluttered by setting the `stroke` symbol to be the same colour as the `fill` symbol (i.e. so that they look *borderless*). 
 
 (@) Open the `Properties > Symbology` of the surface water *lines*, and set the `Simple Line` `Color` to a light blue of your choosing. Leave it as a thin line. Before you leave the `Symbology` window for that layer, open the colour picking window again and copy the `HTML notation` for the colour you selected:
 
@@ -187,7 +186,7 @@ We can start by styling the water surfaces. We want colours that help interpreta
 
 We are getting close to a complete map, and it seems now it is a good time to decide on our framing and scale. We want to find a good balance between showing enough of the surroundings without overwhelming the map user. We also need to take into consideration what will be the final format of our map. Let us assume we will deliver it in A4 size, landscape orientation.
 
-(@) Go to `Project > New Print Layout`, and create a new layout called `bamburgh_map`. Then in the new Layout Editor windiow use the `Add Map` (![](https://docs.qgis.org/3.34/en/_images/mActionAddMap.png)) tool to add your map to the page. Leave some room at the right side for the legend and annotations:
+(@) Go to `Project > New Print Layout`, and create a new layout called `bamburgh_map`. Then in the new Layout Editor window use the `Add Map` (![](https://docs.qgis.org/3.34/en/_images/mActionAddMap.png)) tool to add your map to the page. Leave some room at the right side for the legend and annotations:
 
 ![](images/lab_7/lab7_fig12_frame.jpg)
 
@@ -216,7 +215,7 @@ Can you fix the ugly vertical and horizontal lines that are appearing on the for
 :::
 
 ::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
-This is a similar problem to the railways before. Whomever digitised the foreshore areas appears to have done it in steps, following a reference grid, and thus you get adjacent but separate polygons with straight borders for larger foreshore areas. Dissolving the layer should fix it. 
+This is a similar problem to the railways before. Whoever digitised the foreshore areas appears to have done it in steps, following a reference grid, and thus you get adjacent but separate polygons with straight borders for larger foreshore areas. Dissolving the layer should fix it. 
 :::
 
 Before we finish our session for today, one last thing to consider is the ordering of the layers you have. To facilitate map reading, they should overlap in a logical order - for example, roads should cross over rivers, and railways should cross over both. Rearrange your layers so they are in the order below:
