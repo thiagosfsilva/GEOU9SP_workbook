@@ -1,6 +1,6 @@
 # Week 6 - Spatial analysis II
 
-This week, we will continue our journey through some advance GIS analysis tools, this time with a focus on the spatial distribution of data and on calculating distances. We will also continue to practice many of the tools you have learned from previous weeks - there is rarely a GIS question that can be solved using only one tool!
+This week, we will continue our journey through some advanced GIS analysis tools, this time with a focus on the spatial distribution of data and on calculating distances. We will also continue to practice many of the tools you have learned from previous weeks - there is rarely a GIS question that can be solved using only one tool!
 
 ## ILOs covered
 
