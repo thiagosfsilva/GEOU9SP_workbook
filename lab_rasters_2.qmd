@@ -19,13 +19,13 @@ At the end of last week's lab you saved the final results of your project as a z
 - Raster file of the CORINE land cover dataset (reprojected to EPSG:27700 and masked to the GB island)
 - Raster file of the BIOCLIM climatic dataset (reprojected to EPSG:27700 and masked to the GB island)
 
-(if this doesn't work, I have a copy of the files [here](https://stir-my.sharepoint.com/:u:/g/personal/ala2_stir_ac_uk/Eb28YoDGBM9MlraOgrbiehcBv9Q8BulLcloDNVypXmCUBw?e=DZfrqZ). But you should *really* try to make it work with your own saved data - storing and retrieving prioject data is a key skill you need to develop!)
+(if this doesn't work, I have a copy of the files [here](https://stir-my.sharepoint.com/:u:/g/personal/ala2_stir_ac_uk/Eb28YoDGBM9MlraOgrbiehcBv9Q8BulLcloDNVypXmCUBw?e=DZfrqZ). But you should *really* try to make it work with your own saved data - storing and retrieving project data is a key skill you need to develop!)
 
 ### Global raster statistics
 
-Winter is coming, and you want to escape the worst of the cold and rain. You therefore decide to use your GIS skills to find the ideal place to spend your winter in the UK - an urban area with lower precipitation and higher minimum temperatures. For convenience, we will restrict oour search to the Island of Great Britain, as we already have data for it ready to go. 
+Winter is coming, and you want to escape the worst of the cold and rain. You therefore decide to use your GIS skills to find the ideal place to spend your winter in the UK - an urban area with lower precipitation and higher minimum temperatures. For convenience, we will restrict our search to the Island of Great Britain (i.e. 'the main big island'), as we already have data for it ready to go. 
 
-To get started, you would like to know what is the overall range of precipitation and temperature values for the entire island, using the BIOCLIM data. If this was a vector dataset, you would use the `Statistical Summary Tool` - but it is a raster. What would be the equivalent operation?
+To get started, you would like to know what the overall range of precipitation and temperature values for the entire island is, using the BIOCLIM data. If this was a vector dataset, you would use the `Statistical Summary Tool` - but it is a raster. What would be the equivalent operation?
 
 (@) The tool we need is called `Raster Layer Statistics`, but it is *not* located in the `Raster` menu. Instead, we need to launch the `Processing` panel ( ![](https://docs.qgis.org/3.34/en/_images/processingAlgorithm.png). This panel contains a lot of additional GIS functions, and we will use it often now. 
 
@@ -35,7 +35,7 @@ To get started, you would like to know what is the overall range of precipitatio
 
 Looking at the BIOCLIM data description, the two useful pieces of climatic data you need to get statistics for are *BIO6 - Minimum Temperature of the Coldest Month*, *and BIO12 - Annual Precipitation*. The BIO variables are ordered in the file, so *band 6* is BIO6, and *Band 12* is BIO12. 
 
-(@) In the `Raster Layer Statistics` window, select the BIOCLIM layer as `Input Layer` and `band 06` as band number. You can keep the results as a temporaty file. `Run` it and `Close` the window. A new panel will have appeared under the `Processing` panel, called `Results Viewer`. It will have an entry called `Statistics`. Double click on it and take note of the minimum and maximum BIO6 values (-75 and 33).
+(@) In the `Raster Layer Statistics` window, select the BIOCLIM layer as `Input Layer` and `band 06` as band number. You can keep the results as a temporary file. `Run` it and `Close` the window. A new panel will have appeared under the `Processing` panel, called `Results Viewer`. It will have an entry called `Statistics`. Double click on it and take note of the minimum and maximum BIO6 values (-75 and 33).
 
 ::: {.callout-important title="Stop and Think"}
 Do these values seem too extreme for the UK? What is going on here?
@@ -52,7 +52,7 @@ What are the units for precipitation?
 :::
 
 ::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
-The metadata for the BIO layers states that annual precipitation is given in mm. One milimitre of rain is equal to one liter per squared metre.
+The metadata for the BIO layers states that annual precipitation is given in mm. One millilitre of rain is equal to one litre per square metre.
 :::
 
 ## Guided Exercise 2 - Per-pixel calculations with the raster calculator
@@ -70,7 +70,7 @@ The general idea is similar to the `Field Calculator`, with a slightly different
 (@) For `Output Layer`, click on the `...` button and pick a folder to save the new file. Name it `UK_bioclim_BG_GBmasked_BIO6_celsius.tif`. Leave the rest as default and click in `OK`.
 
 ::: {.callout-important title="Stop and Think"}
-How many bands has your newly created file?
+How many bands does your newly created file have?
 :::
 
 ::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
@@ -81,7 +81,7 @@ Every time you enter an expression involving a raster band and a single number i
 
 ## Guided Exercise 3 - Boolean (logical) operations with the raster calculator
 
-The `Raster Calculator` also fulfills the role of the vector `Select by expression` tool for rasters. The result of any raster logical operation is either `1` (True) or `0` (False), i.e. a *binary raster*, sometimes called a *raster mask*.
+The `Raster Calculator` also fulfils the role of the vector `Select by expression` tool for rasters. The result of any raster logical operation is either `1` (True) or `0` (False), i.e. a *binary raster*, sometimes called a *raster mask*.
 
 Let us find the warmer places in Great Britain. Our highest minimum temperature of the coldest month (BIO6) value was 3.3 degrees, not too far from zero. So let us limit our search to any places that don't go below 0 Celsius. 
 
@@ -90,7 +90,7 @@ Let us find the warmer places in Great Britain. Our highest minimum temperature 
 ![](images/lab_6/lab_6_fig3_mintemp_gt_0.jpg)
 By default, QGIS will paint pixels with a value of `1` white, and `2` black. So the white areas now show us all regions of Great Britain that *on average* don't go below zero in the worst of winter (these are long term climatic averages). Use the `Identify Features` tool to check if the pixel values are really `0` and `1`.
 
-(@) Now repeat the process for the precipitation layer. Our minimum annual precipitation value was just above 500, so let us limit us to areas under 700mm of precipitation. Save the result as `GB_anprec_lt_700.tif`.
+(@) Now repeat the process for the precipitation layer. Our minimum annual precipitation value was just above 500, so let us limit our search to areas under 700mm of precipitation. Save the result as `GB_anprec_lt_700.tif`.
 
 ## Guided Exercise 4 - Raster reclassification
 
@@ -98,13 +98,13 @@ An alternative to the `Raster Calculator` that can be handier when you have mult
 
 ![](images/lab_6/lab_6_fig4_rec_by_table.jpg)
 
-Let us use this tool to extract the urban areas from the CORINE dataset. looking at the metadata, the two classes od interest are `Continuous Urban Fabric` (pixel value 111) and `Discontinuous Urban Fabric` (112) classes, which are the classes were we would expect existing housing to be located.
+Let us use this tool to extract the urban areas from the CORINE dataset. looking at the metadata, the two classes of interest are `Continuous Urban Fabric` (pixel value 111) and `Discontinuous Urban Fabric` (112) classes, which are the classes were we would expect existing housing to be located.
 
 (@) On the `Reclassify by table` window, pick the CORINE layer as your `Raster layer`, and `band 1` as your `Band Number`. Then click on the `...` button besides the box to open the `Reclassification  table`, and fill the table like the figure below. Click to add rows as necessary.
 
 ![](images/lab_6/lab_6_fig5_rec_table.jpg)
 
-(@) Click on te blue arrow to go back to main tool window, then set the `nodata value` back to `-32768`, the `Range Boundaries` to `min <= value <= max` and the `Output Data Type` to `Byte`. Save it as `GB_urban_areas.tif`.
+(@) Click on the blue arrow to go back to main tool window, then set the `nodata value` back to `-32768`, the `Range Boundaries` to `min <= value <= max` and the `Output Data Type` to `Byte`. Save it as `GB_urban_areas.tif`.
 
 ::: {.callout-important title="Stop and Think"}
 How could you have done the analysis above using the `Raster Calculator` instead?
@@ -113,14 +113,14 @@ How could you have done the analysis above using the `Raster Calculator` instead
 ::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
 You could do `"CORINE_BG_GBmask@1" = 111 OR "CORINE_BG_GBmask@1" = 112`. Notice how you can use `AND` and `OR` to chain logical expressions as you can for vectors - but because computers are dumb, you need to repeat the name of the layer after the `OR` (and for each additional expression you add).
 
-You could also do ranges, using an expression such as `"CORINE_BG_GBmask@1" > 110 AND "CORINE_BG_GBmask@1" < 113` (notice the use of `AND` instead of `OR` for ranges) since they are consecutive values, or use `"CORINE_BG_GBmask@1" >=111 AND "CORINE_BG_GBmask@1" <= 112`). Using ranges is more quicker than using `=` and `OR` when you have many consecutive values to search for.
+You could also do ranges, using an expression such as `"CORINE_BG_GBmask@1" > 110 AND "CORINE_BG_GBmask@1" < 113` (notice the use of `AND` instead of `OR` for ranges) since they are consecutive values, or use `"CORINE_BG_GBmask@1" >=111 AND "CORINE_BG_GBmask@1" <= 112`). Using ranges is quicker than using `=` and `OR` when you have many consecutive values to search for.
 :::
 
 ## Guided Exercise 5 - raster vs. raster calculations
 
 We now have three *raster masks* showing us 1) all the GB areas that don't go below zero Celsius, 2) the areas that have less than 700mm of rain, and 3) the areas that are urban. How can we combine them into a single layer?
 
-The answer to the above question is still the `Raster Calculator`. We know the pixels we 'want' are numbered `1` on each layer, otherwise they are `0`. So if we could multiply one layer by the other, i.e. multiply the value of each set of overlapping pixels, we would get a new raster whith values of $1 \times 1 \times 1 = 1$ when both conditions are met, and a result of $0$ if any of the the conditions is not met.
+The answer to the above question is still the `Raster Calculator`. We know the pixels we 'want' are numbered `1` on each layer, otherwise they are `0`. So if we could multiply one layer by the other, i.e. multiply the value of each set of overlapping pixels, we would get a new raster with values of $1 \times 1 \times 1 = 1$ when both conditions are met, and a result of $0$ if any of the conditions is not met.
 This is why binary rasters are also called raster *masks* - when you multiply any other raster by it, it *masks* (i.e. zeroes out) anything that is not `True` in the mask. 
 
 Doing it using the `Raster Calculator` is as simple as it sounds:
@@ -129,9 +129,9 @@ Doing it using the `Raster Calculator` is as simple as it sounds:
 
 ## Guided Exercise 6 - Vectorizing rasters
 
-The final result of your analysis should consist of only a handful of pixels - such is lifev in the UK. And since these are discrete locations, it may occur to you they would be better represented and visualised as vectors. Turns out we can convert raster to vectors and vice versa:
+The final result of your analysis should consist of only a handful of pixels - such is life in the UK. And since these are discrete locations, it may occur to you they would be better represented and visualised as vectors. Turns out we can convert raster to vectors and vice versa:
 
-(@) Go to `Raster > Conversion > Polygonize (Raster to Vector)...`. In the new window, pick your results layer as the `Input Layer`, `Band 1` as the `Band number`, and leave the rest as default (`DN` here means *digital number*, another name for pixel values. Then pick a folder ans save the results as `UK_winter_havens_poly.shp` (or geopackage if you prefer).
+(@) Go to `Raster > Conversion > Polygonize (Raster to Vector)...`. In the new window, pick your results layer as the `Input Layer`, `Band 1` as the `Band number`, and leave the rest as default (`DN` here means *digital number*, another name for pixel values. Then pick a folder and save the results as `UK_winter_havens_poly.shp` (or geopackage if you prefer).
 
 (@) You will notice that a very large polygon was also created for the 0 areas of the raster. You can then put the new vector layer in editing mode, use the `Selection Tool` to select this polygon, and then hit the `Delete` key on your keyboard to get rid of it. Then save the changes and exit edit mode.
 
@@ -143,11 +143,11 @@ So if you start an analysis with raster data, try to do as much as you can in th
 
 You now have polygons representing all adjacent areas that were values as '1' in your raster. But many of them are still only one pixel. What if you wanted to have points instead of polygons?
 
-(@) In the `Processing` panel, you will find a tool called `Raster Pixels to Points`, which you can use to generate the points. I'll leave the detauils to you, but here is a tip: before you use the tool, go the `Properties > Transparency` of your raster results layer, and set 0 as an `Additional Nodata Value`. Otherwise `Raster Pixels to Points` will create one point for every pixel, including the pixels with a value of 0. That's a lot of points. 
+(@) In the `Processing` panel, you will find a tool called `Raster Pixels to Points`, which you can use to generate the points. I'll leave the details to you, but here is a tip: before you use the tool, go the `Properties > Transparency` of your raster results layer, and set 0 as an `Additional Nodata Value`. Otherwise `Raster Pixels to Points` will create one point for every pixel, including the pixels with a value of 0. That's a lot of points. 
 
 ## Guided Exercise 7 - Mosaicking and Stacking rasters
 
-Raster files are often very large and 'heavy', so it is common to distribute them as *tiles* or *scenes*, i.e. smaller adjacent pieces that can be merged back together to cover a certain area of interest. For satellite images, it is also common for each image band to be stored as a separate file (unlike regular photos that only have Blue, Red and Geeen bands, satellite images can have several more bands, covering areas of the spectrum we can't normally see. The Sentinel-2 satellite, for example, has  a total of 13 bands:
+Raster files are often very large and 'heavy', so it is common to distribute them as *tiles* or *scenes*, i.e. smaller adjacent pieces that can be merged back together to cover a certain area of interest. For satellite images, it is also common for each image band to be stored as a separate file (unlike regular photos that only have Blue, Red and Green bands, satellite images can have several more bands, covering areas of the spectrum we can't normally see. The Sentinel-2 satellite, for example, has  a total of 13 bands:
 
 
 
@@ -172,7 +172,7 @@ In this exercise, we will learn how to a) *mosaic* rasters - 'glue' them togethe
 (@) [Download the data for this specific exercise from this link](https://stir-my.sharepoint.com/:u:/g/personal/ala2_stir_ac_uk/EWWIMudbgUlImqIZ5ZYoVw4BNhL1rRn5swLLTvJnli2r_A?e=NIVOuW). It contains four aerial photographs covering the University of Stirling campus and the Wallace Monument area. Extract the data and organise it as usual.
 
 ::: {.callout-tip}
-These images were originally downloaded from the 'Aerial' section of Digimap - if you ever need very detailed imagery of the UK land, check it out!
+These images were originally downloaded from the 'Aerial' section of Digimap - if you ever need very detailed imagery within the UK, check it out!
 :::
 
 (@) Each image is stored within its own folder, named `nsXXXX`, where `XXXX` is a four digit number. *Start a new project* and load into QGIS all the `.tif` files in all four folders. There should be six files in total.
@@ -203,7 +203,7 @@ Why do we change `Output Data Type` to `Byte`?
 The RGB colour system uses one byte (8-bits, 0-255 integer numbers) per colour channel to designate any colour. For example, the University of Stirling official green colour (![](images/lab_6/lab_6_fig9_StirColor.jpg)) is R=0 G=105 B=56. The `Byte` option ensures we only use 8-bits per band, and keep the file size smaller. If we left it as `Float32`, the same 0-225 integer numbers would be stored as 32-bit decimal numbers, quadrupling the size of the file for no reason. 
 :::
 
-(@) You should now have a properly colored image for tile ns8196. Remove the three original single band layers from the project and then save it. 
+(@) You should now have a properly coloured image for tile ns8196. Remove the three original single band layers from the project and then save it. 
 
 Everything looks good colour-wise now, bur our airphoto is still actually four separate adjacent photos. That means any processing we may want to do involving the entire area would have to be repeated four times. We can however merge these four tiles in a single airphoto *mosaic*.
 
@@ -215,10 +215,10 @@ Everything looks good colour-wise now, bur our airphoto is still actually four s
 
 When working with multiband color images in a GIS environment, we can often manipulate the contrast of an image by applying different *contrast stretches*  to each band. Especially when working with satellite images, which tend to look a bit 'faded' because of the atmospheric effect, stretching can make our images more vivid and easier to interpret. 
 
-(@) Right-click on the airphoto mosaic layer you created and go to `Properties > Symbology`. You will se that the symbology type is `Multiband color`, which is the correct choice for representing images. Note that each band is associated to a colour channel (R, G, B), but this association can be changed at will. Change the `Red band` to band 2, and the `Green band` to band 1, then `Apply`. Now the vegetation appears red! Change it back to the proper colour order and `Apply` again.
+(@) Right-click on the airphoto mosaic layer you created and go to `Properties > Symbology`. You will see that the symbology type is `Multiband color`, which is the correct choice for representing images. Note that each band is associated to a colour channel (R, G, B), but this association can be changed at will. Change the `Red band` to band 2, and the `Green band` to band 1, then `Apply`. Now the vegetation appears red! Change it back to the proper colour order and `Apply` again.
 
 ::: {.callout-tip}
-This is a useful feature when working with satellite images, which often have bands representing spectral regions that we cannot see, such as Near Infrared or Microwave. We can then freely associate these bands to colour channels and create `false colour compositions` that highlight different surface features. The example below shows the UoS campus as seen from the Sentinel-2 satellite. Here we place Band 13 - Short Wave Infared (SWIR) in the blue channel, Band 8 - Near-Infrared band (NIR) in the green channel, and Band 11 - SWIR in the red channel. Since water does not reflect IR, the loch appears black. Plants reflect strongly in the NIR region so they appear bright green, and bare ground / concrete reflects mostly in the SWIR, thus appearing purplish (red+blue).
+This is a useful feature when working with satellite images, which often have bands representing spectral regions that we cannot see, such as Near Infrared or Microwave. We can then freely associate these bands to colour channels and create `false colour compositions` that highlight different surface features. The example below shows the UoS campus as seen from the Sentinel-2 satellite. Here we place Band 13 - Short Wave Infrared (SWIR) in the blue channel, Band 8 - Near-Infrared band (NIR) in the green channel, and Band 11 - SWIR in the red channel. Since water does not reflect IR, the loch appears black. Plants reflect strongly in the NIR region so they appear bright green, and bare ground / concrete reflects mostly in the SWIR, thus appearing purplish (red+blue).
 
 ![](images/lab_6/lab_6_fig10_StirSentinel.jpg)
 :::
@@ -237,9 +237,9 @@ A second way to calculate the stretch is to use standard deviations. You may rem
 
 ![](images/lab_6/lab_6_fig11_normal.jpg)
 
-(@) Change the `Min/Max Value Settings` option to `Mean +/- Standard Deviation x`, and leave the multiplier at `2`. Aplly and check the contrast. Then change the multiplier to `1` and `Apply`, and compare the contrast of using $\pm 1 \sigma$ vs. $\pm 2 \sigma$. 
+(@) Change the `Min/Max Value Settings` option to `Mean +/- Standard Deviation x`, and leave the multiplier at `2`. Apply and check the contrast. Then change the multiplier to `1` and `Apply`, and compare the contrast of using $\pm 1 \sigma$ vs. $\pm 2 \sigma$. 
 
-(@) Set the final image contrast to your linking, and exit the `Properties` window. Save your project. 
+(@) Set the final image contrast to your liking and exit the `Properties` window. Save your project. 
 
 ### Independent Exercise - Raster resampling
 
@@ -258,11 +258,11 @@ NN is fast because it requires no additional computations, and also has the bene
 
  Let us now practice our raster skills in an independent exercise, while also demonstrating the effect of resampling: 
 
-1. On your UK SRTM layer, find the location of Stirling and the university campus, and then use the `Raster > Extraction > Clip Raster by Extent` function to clip it to an area similar to the image below. For reference, I am using a `Singleband Pseudolcolor` symbology with the inverted `Spectral` colour palette, *stretched* to the values between 0 and 200m. If you find it hard to find Stirling, use the OpenStreetMap online layer as a reference. Don't worry about matching my area perfectly, the clip is just to speed up our computations.
+1. On your UK SRTM layer, find the location of Stirling and the university campus, and then use the `Raster > Extraction > Clip Raster by Extent` function to clip it to an area similar to the image below. For reference, I am using a `Singleband Pseudocolor` symbology with the inverted `Spectral` colour palette, *stretched* to the values between 0 and 200m. If you find it hard to find Stirling, use the OpenStreetMap online layer as a reference. Don't worry about matching my area perfectly, the clip is just to speed up our computations.
 
 ![](images/lab_6/lab_6_fig8_StirSRTM.jpg)
 
-2. Now use `Warp(Reproject)` to reproject this dataset back to EPSG:4326, but twice. Do it the first time using `Nearest Neighbour` as the `Resampling method to use`, and then a seocnd time using the `Cubic(4x4 kernel)` resampling method. Remember to pick the correct layer to reproject (it should be your Stirling-clipped SRTM layer). **Hint:** If you save it as a temporaty file, it may not recognise the CRS after the warp - you will see a question mark to the right of the layer name. If that happens, just click on the question mark and pick ESPG:4326 as the CRS. 
+2. Now use `Warp(Reproject)` to reproject this dataset back to EPSG:4326, but twice. Do it the first time using `Nearest Neighbour` as the `Resampling method to use`, and then a second time using the `Cubic(4x4 kernel)` resampling method. Remember to pick the correct layer to reproject (it should be your Stirling-clipped SRTM layer). **Hint:** If you save it as a temporary file, it may not recognise the CRS after the warp - you will see a question mark to the right of the layer name. If that happens, just click on the question mark and pick ESPG:4326 as the CRS. 
 
 3. Apply a symbology to the original Stirling SRTM that makes it easier for you to see all terrain features. Then use `Copy Style` and `Paste Style` to make sure both of the new warped versions have the same symbology.
 
