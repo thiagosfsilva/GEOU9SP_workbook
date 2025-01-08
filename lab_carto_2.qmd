@@ -1,6 +1,6 @@
 # Lab 8: Making Maps - Part II {#sec-carto2}
 
-In this lab we will continue working on our map of the Bamburgh Castle region, this time focusing on manually digitizing polygons, labeling, and finishing our actual map page layout. 
+In this lab we will continue working on our map of the Bamburgh Castle region, this time focusing on manually digitizing polygons, labelling, and finishing our actual map page layout. 
 
 ::: {.callout-warning}
 To complete this lab, you *must* watch the practical videos on how to manually digitise features in QGIS, which are available on the Week 4 prep page on Canvas
@@ -21,10 +21,10 @@ Why did we use `Set Layer CRS` and not `Reproject`?
 :::
 
 ::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
-In this case, we *know* the aerial photo uses the EPSG:27700 CRS (by looking at the metadata, and also by knowing that any UK official cartographic product uses it). It is just a matter if informing QGIS what the CRS is, as it was not properly detected when the layer was added to the project. We use `Reproject` when the layer *already* has a defined CRS, and we want to *change it* to a different CRS (meaning likely a different datum, projection and maybe even a different coordinate type - such as from degrees to meters), and thus we need to *transform* (i.e. calculate) a new set of coordinates. 
+In this case, we *know* the aerial photo uses the EPSG:27700 CRS (by looking at the metadata, and also by knowing that any UK official cartographic product uses it). It is just a matter of informing QGIS what the CRS is, as it was not properly detected when the layer was added to the project. We use `Reproject` when the layer *already* has a defined CRS, and we want to *change it* to a different CRS (meaning likely a different datum, projection and maybe even a different coordinate type - such as from degrees to meters), and thus we need to *transform* (i.e. calculate) a new set of coordinates. 
 ::: 
 
-(@) No we need a new empty layer to digitise on. Click on the `New shapefile layer` button (![](https://docs.qgis.org/3.34/en/_images/mActionNewVectorLayer.png) ) on the main QGIS toolbar. You  will get the `New Shapefile Layer` window:
+(@) Now we need a new empty layer to digitise on. Click on the `New shapefile layer` button (![](https://docs.qgis.org/3.34/en/_images/mActionNewVectorLayer.png) ) on the main QGIS toolbar. You  will get the `New Shapefile Layer` window:
 
 ![](images/lab_8/lab8_fig1_newshape_window.jpg)
 
@@ -34,7 +34,7 @@ In this case, we *know* the aerial photo uses the EPSG:27700 CRS (by looking at 
 
 (@) Now right-click on the aerial photo layer and select `Zoom to Layer(s)` to centre the map canvas on it. Then manually set a scale of 1:1500 on the bottom QGIS bar. It is important to be aware of the scale you are digitizing at, and keep it constant so that the level of detail is also constant. Drag the castle to the middle of the canvas using the `Pan Map` tool (the hand).
 
-(@) Now highlight the new shapefile layer (which is being edited) again. The `Digitizing tools` toolbar (![](images/lab_8/lab8_fig2_digi_tools.jpg)) should be available. Click on the `Add Polygn Feature` button (![](https://docs.qgis.org/3.34/en/_images/mActionCapturePolygon.png)) to enter a polygon drawing mode. Start clicking anywhere in the castle outer walls, and then keep clicking to trace the entire castle shape. Once you finish you polygon, right-click to end the drawing. A window will pop-up asking you to enter an `id` and `name`. Enter `1` and `Bamburgh Castle` respectively. 
+(@) Now highlight the new shapefile layer (which is being edited) again. The `Digitizing tools` toolbar (![](images/lab_8/lab8_fig2_digi_tools.jpg)) should be available. Click on the `Add Polygon Feature` button (![](https://docs.qgis.org/3.34/en/_images/mActionCapturePolygon.png)) to enter a polygon drawing mode. Start clicking anywhere in the castle outer walls, and then keep clicking to trace the entire castle shape. Once you finish you polygon, right-click to end the drawing. A window will pop-up asking you to enter an `id` and `name`. Enter `1` and `Bamburgh Castle` respectively. 
 
 (@) If you want to edit the polygon shape after the fact, use the `Vertex Tool` (![](https://docs.qgis.org/3.34/en/_images/mActionVertexToolActiveLayer.png)). Then click once on a vertex to select it, and then cick again to reposition it, or the Delete key on your keyboard to delete it. You can also add a new vertex by hovering the mouse in between vertices until you see a red `x`. You should end up with something like this:
 
@@ -52,7 +52,7 @@ When should I use labels and when should I use the map legend to name things?
 :::
 
 ::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
-As a rule of thumb, legend names indicates *categories* or *groups* of things, as well as *continuous* variables. Labels identify *unique* things. For example, if there were multiple castles in the map, you could have a legend symbol indicating "castle" (a category of thing), and then labels showing the names of each castle. If you wanted to indicate a specific mountain peak in your elevation map, you would still have an "Elevation" item on the legend explaining the elevation symbology (a continuous variable), and then a point symbol and a label to identify the particular peak. If there were multiple peaks, then you would add a "Mountain Peak" item to the legend, associated with the point symbol you selected to indicate peaks. But this is not essential when there is only a single item in the category (like our single castle).    
+As a rule of thumb, legend names indicate *categories* or *groups* of things, as well as *continuous* variables. Labels identify *unique* things. For example, if there were multiple castles in the map, you could have a legend symbol indicating "castle" (a category of thing), and then labels showing the names of each castle. If you wanted to indicate a specific mountain peak in your elevation map, you would still have an "Elevation" item on the legend explaining the elevation symbology (a continuous variable), and then a point symbol and a label to identify the particular peak. If there were multiple peaks, then you would add a "Mountain Peak" item to the legend, associated with the point symbol you selected to indicate peaks. But this is not essential when there is only a single item in the category (like our single castle).    
 ::: 
 
 (@) Right click on the castle layer you created and go to `Properties > Labels`. Change the `No Labels` box to `Single Labels`, to reveal several options. For `Value`, pick the `name` attribute, which contains our layer name. On the `Text` sub-tab, increase the font size to `14`, and on the `Buffer` sub-tab, click on `Draw Text Buffer`. Click on `Apply`, and you should get a label like in the figure below:
@@ -91,13 +91,13 @@ Why do we use a set of parentheses to encapsulate the `OR` statement in the expr
 Boolean operators are processed as mathematical operations, from left to right. So if we typed `"CLASSIFICA" = 'Populated Place' AND "FONTHEIGHT" = 'Medium' OR "FONTHEIGHT" = 'Large'` without parentheses, QGIS would first look for the features that are a populated place *and* medium, and then try to find large places within this first selection. But we want for it to first find all medium *or* large places and then from these pick only the ones that are *also* (the `AND`) populated places. As with maths, the parentheses ensure we solve the `OR` first. 
 :::
 
-You should now have a lot less Named Places scattered through the map, and if you inspect the attribute table, you will see only the filtered results. It is as if the rest of the data doesn't exist! You will always know if a layer is being filtered by the 'funnel' symbol to the right of the layer name (and you can click on the symbol to edit or clear the filter). 
+You should now have a lot fewer Named Places scattered through the map, and if you inspect the attribute table, you will see only the filtered results. It is as if the rest of the data doesn't exist! You will always know if a layer is being filtered by the 'funnel' symbol to the right of the layer name (and you can click on the symbol to edit or clear the filter). 
 
 (@) Now follow the same procedure you used to label Bamburgh Castle to label the populated places, using the `DISTNAME` attribute - but use a font size of `10` to keep the *visual hierarchy* in relation to the castle, and keep the `Placement` option as the default `Cartographic` option. 
 
 (@) Change the `Symbology` of the `NU_NamedPlaces` layer to the preset symbol `topo pop capital` (a white circle with a black dot in the middle), with a `Size` of `2.4`.
 
-(@) Add the `NU_RailwayStation.shp` file to your map, and label it using the `DISTNAME` attribute as well (you should see only one station, 'Chathill'). Make the label size `10`, colour it `blue` and make its style `bold italic`, and do not use a `buffer` this time.
+(@) Add the `NU_RailwayStation.shp` file to your map, and label it using the `DISTNAME` attribute as well (you should see only one station, 'Chathill'). Make the label size `10`, colour it `blue` and make its style `bold italic`; do not use a `buffer` this time.
 
 (@) Now go to the `Symbology` tab for the railway station layer, and pick `Single Symbol`. Select the `Simple Marker` sub-item, and then change the `Symbol layer type` from `Simple Marker` to `SVG Marker`. SVG stands for 'Scalable Vector Graphics' and is a commonly used format to store figures in desktop publishing.
 
@@ -197,7 +197,7 @@ The *graticule* (coordinate grid) is another essential cartographic element -  w
 
 (@) If we expected our map users to navigate using a compass, the actual grid lines would be useful. But since this is unlikely, the actual black grid lines are too obtrusive. Go back to the top of the `Map Grid Properties`, and change the `Grid Type` from `Solid` to `Frame and Annotations Only`. 
 
-(@) Finally, let us add a black border to our map for aesthetic purposes. Go back to the main `Item Properties` for `Map 1`, and find the `Framè` option. Enable the checkbox to add a frame. Save your layout.
+(@) Finally, let us add a black border to our map for aesthetic purposes. Go back to the main `Item Properties` for `Map 1`, and find the `Frame` option. Enable the checkbox to add a frame. Save your layout.
 
 My map layout is now looking like this:
 
@@ -293,7 +293,7 @@ The final Overview map should look like this:
 
 - Add a new map frame in the space left between the Overview map and the Legend, rename it from `Map 3` to `Close Up`, and set it to follow the `Close Up` theme.
 
-- Adjust this inset map scale to show all of the castle as close up as possible. Aroubnd 15000 should work well. 
+- Adjust this inset map scale to show all of the castle as close up as possible. Around 15000 should work well. 
 
 - Do not add a coordinate grid to this map inset, but do add a Scale Bar. To make the scale relative to the `Close Up map`, create the scale bar then go to its `Item Properties`, and on the first option called `Map`, make sure it is set to `Close Up Map`. Make the scale only one segment long, and place it within the close up image.
 
