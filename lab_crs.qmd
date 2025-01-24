@@ -49,14 +49,14 @@ b) The webpage presents a link to "[rules](https://ec.europa.eu/eurostat/web/gis
 
 ![](images/lab_2/lab_2_img2_layers.png)
 
-(@) Load the `CNTR_BN_20M_2020_4326` file into your project. Pay attention to the file name as there are many files with similar names. 
+(@) Load the `CNTR_BN_20M_2024_4326` file into your project. Pay attention to the file name as there are many files with similar names. 
 
 ::: {.callout-important title="Stop and Think"}
 Good file names are always informative of their content. Can you guess the contents of the different GeoJSON files you have downloaded based on their names?
 :::
 
 ::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
-All file names start with `CNTR` for 'countries', followed by a two-letter code. As you seen `BN` seems to stand for 'boundary'(vector lines), `RG` for 'region'(vector polygons), and `LB` for 'labels' (vector points). Then `2020` specified the reference year, and `20M` indicates the 1:20 million mapping scale. The final four-letter number indicates the EPSG code for the data CRS: 4326 ('unprojected' WGS84), 3857 (WGS 84 with Pseudo-Mercator projection) or 3035 (ETRS89-extended / Lambert Azimuthal Equal Area for Europe).
+All file names start with `CNTR` for 'countries', followed by a two-letter code. As you seen `BN` seems to stand for 'boundary'(vector lines), `RG` for 'region'(vector polygons), and `LB` for 'labels' (vector points). Then `2024` specified the reference year, and `20M` indicates the 1:20 million mapping scale. The final four-letter number indicates the EPSG code for the data CRS: 4326 ('unprojected' WGS84), 3857 (WGS 84 with Pseudo-Mercator projection) or 3035 (ETRS89-extended / Lambert Azimuthal Equal Area for Europe).
 :::
 
 ### Visualising data with different CRS
@@ -149,7 +149,7 @@ a) As you move further away from the centre of the projection, shape gets progre
 b) In metres. You can check that on the layer's  `Properties > Information` tab.
 :::
 
-(@) Now add to the project the file called CNTR_BN_20M_2020_3035.geojson. Notice the different last four numbers on the file name.
+(@) Now add to the project the file called CNTR_BN_20M_2024_3035.geojson. Notice the different last four numbers on the file name.
 
 
 ::: {.callout-important title="Stop and Think"}
