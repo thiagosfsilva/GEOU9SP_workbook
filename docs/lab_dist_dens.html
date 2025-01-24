@@ -268,7 +268,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./lab_convex_interp.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Lab 14 - Convex Hulls and Interpolation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Lab 14 - Convex Hulls</span></span></a>
   </div>
 </li>
       </ul>
@@ -289,7 +289,7 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#guided-exercise-1---obtaining-and-organising-the-data" id="toc-guided-exercise-1---obtaining-and-organising-the-data" class="nav-link active" data-scroll-target="#guided-exercise-1---obtaining-and-organising-the-data"><span class="header-section-number">13.1</span> Guided Exercise 1 - Obtaining and organising the data</a></li>
   <li><a href="#guided-exercise-2---looking-for-crime-hotspots" id="toc-guided-exercise-2---looking-for-crime-hotspots" class="nav-link" data-scroll-target="#guided-exercise-2---looking-for-crime-hotspots"><span class="header-section-number">13.2</span> Guided Exercise 2 - Looking for crime hotspots</a></li>
-  <li><a href="#guided-exercise-3---weighted-kernel-desnities" id="toc-guided-exercise-3---weighted-kernel-desnities" class="nav-link" data-scroll-target="#guided-exercise-3---weighted-kernel-desnities"><span class="header-section-number">13.3</span> Guided Exercise 3 - Weighted Kernel Desnities</a></li>
+  <li><a href="#guided-exercise-3---weighted-kernel-densities" id="toc-guided-exercise-3---weighted-kernel-densities" class="nav-link" data-scroll-target="#guided-exercise-3---weighted-kernel-densities"><span class="header-section-number">13.3</span> Guided Exercise 3 - Weighted Kernel Densities</a></li>
   <li><a href="#guided-exercise-4---visualizing-densities-as-isolines" id="toc-guided-exercise-4---visualizing-densities-as-isolines" class="nav-link" data-scroll-target="#guided-exercise-4---visualizing-densities-as-isolines"><span class="header-section-number">13.4</span> Guided Exercise 4 - Visualizing densities as isolines</a></li>
   <li><a href="#guided-exercise-5---distance-to-hubs" id="toc-guided-exercise-5---distance-to-hubs" class="nav-link" data-scroll-target="#guided-exercise-5---distance-to-hubs"><span class="header-section-number">13.5</span> Guided Exercise 5 - Distance to Hubs</a></li>
   <li><a href="#guided-exercise-6---distance-maps" id="toc-guided-exercise-6---distance-maps" class="nav-link" data-scroll-target="#guided-exercise-6---distance-maps"><span class="header-section-number">13.6</span> Guided Exercise 6 - Distance Maps</a></li>
@@ -356,7 +356,7 @@ Click for answer
 </div>
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>You can right click on the layer name and then on <code>Zoom to Layer(s)</code>. Apparently, an arrest has been made near ther coast of Africa…This is a common error when people enter missing coordinates as zero instead of a blank value - and then the point will be located at 0 degrees lat / 0 degrees long. To fix it, select the problematic point using the <code>Select Features</code> tool in the toolbar, then put the arrests layer into editing mode, delete the point, save the edits as <code>arrest_incidents_fixed.shp</code> and exit edit mode. Remove the original from the project to avoid confusion.</p>
+<p>You can right click on the layer name and then on <code>Zoom to Layer(s)</code>. Apparently, an arrest has been made near the coast of Africa…This is a common error when people enter missing coordinates as zero instead of a blank value - and then the point will be located at 0 degrees lat / 0 degrees long. To fix it, select the problematic point using the <code>Select Features</code> tool in the toolbar, then put the arrests layer into editing mode, delete the point, save the edits as <code>arrest_incidents_fixed.shp</code> and exit edit mode. Remove the original from the project to avoid confusion.</p>
 <p>Don’t skip this step or your density rasters will get quite large…</p>
 </div>
 </div>
@@ -364,7 +364,7 @@ Click for answer
 </section>
 <section id="guided-exercise-2---looking-for-crime-hotspots" class="level2" data-number="13.2">
 <h2 data-number="13.2" class="anchored" data-anchor-id="guided-exercise-2---looking-for-crime-hotspots"><span class="header-section-number">13.2</span> Guided Exercise 2 - Looking for crime hotspots</h2>
-<p>The first question you have been asked is where are the crime <em>hotspots</em> in the city, meaning the areas with the largest <em>density</em> of occurrences. The word density usually refers to a count of things divided by some area or volume measurement. For example, population density is number of people per area; oxygen density in normal atmospheric conditions is 1.43 grams / litre.</p>
+<p>The first question you have been asked is where the crime <em>hotspots</em> in the city are, meaning the areas with the largest <em>density</em> of occurrences. The word density usually refers to a count of things divided by some area or volume measurement. For example, population density is number of people per area; oxygen density in normal atmospheric conditions is 1.43 grams / litre.</p>
 <p>In GIS, density will be usually related to counts of ‘things’ over areas - the more things happening per unit area, the higher the density. This is often called <em>hotspot analysis</em> in GIS, where the hotspots are areas of remarkably high density. And the main tool used for that is known as <em>Kernel Density Estimation (KDE)</em>. I have made a video explanation on KDE that you can watch on Canvas. We will now learn about two ways of generating density maps.</p>
 <ol start="2" class="example" type="1">
 <li>The first way to generate a density map is to change the layer <code>Symbology</code> (see image below). Select the crime layer and go to <code>Properties &gt; Syymbology</code>, then change the symbology type from <code>Single Symbol</code> to <code>Heatmap</code>. Pick <code>Reds</code> as the <code>Color ramp</code>, and a <code>Radius</code> of 1000, changing the radius unit from <code>Millimiters</code> to <code>meters at scale</code> . Then <code>Apply</code> and <code>Close</code>. It will take a bit of time to change the appearance.</li>
@@ -451,7 +451,7 @@ Click for answer
 <ol start="7" class="example" type="1">
 <li>To demonstrate the issue above, generate a second heatmap layer, this time using 5km as <code>Radius</code>, a <code>Pixel size</code> of <code>100</code> metres, the <code>Uniform</code> kernel shape, and <code>Scaled</code> output values. Save it as <code>crime_density_5km_uni_100m_scaled.tif</code>. The style it with the <code>Reds</code> colour ramp as well.</li>
 </ol>
-<p>Not only the layer looks very different, but the actual location of the hotspots seem to have changed, and the density values are also very different. It always takes a lot of trial and error to converge on a KDE estimation that is sensible for the problem at hand.</p>
+<p>Not only the layer looks very different, but the actual locations of the hotspots seem to have changed, and the density values are also very different. It always takes a lot of trial and error to converge on a KDE estimation that is sensible for the problem at hand.</p>
 <ol start="8" class="example" type="1">
 <li><p>If you’d like, try different combinations of radii, kernel shapes and pixel sizes. Once you are done, remove them all from your project, leaving only the first density map we created (radius 1000, quartic kernel, pixel size 50m). Also, change the symbology of the crime points layer back to <code>Single Symbol</code>.</p></li>
 <li><p>We can now use tools we already know to associate the crime density information to the precincts and neighbourhoods. Using <code>Zonal Statistics</code>, extract the <code>mean</code> and <code>maximum</code> density values for each precinct. Then make two map visualizations, one colouring the polygons by average crime density, and the other by maximum crime density. Do the same for the neighbourhoods layer. This is what they should look like:</p></li>
@@ -510,8 +510,8 @@ Click for answer
 </div>
 </div>
 </section>
-<section id="guided-exercise-3---weighted-kernel-desnities" class="level2" data-number="13.3">
-<h2 data-number="13.3" class="anchored" data-anchor-id="guided-exercise-3---weighted-kernel-desnities"><span class="header-section-number">13.3</span> Guided Exercise 3 - Weighted Kernel Desnities</h2>
+<section id="guided-exercise-3---weighted-kernel-densities" class="level2" data-number="13.3">
+<h2 data-number="13.3" class="anchored" data-anchor-id="guided-exercise-3---weighted-kernel-densities"><span class="header-section-number">13.3</span> Guided Exercise 3 - Weighted Kernel Densities</h2>
 <p>The analysis above seems good, but one thing we are not considering is the type of crime. Our incident dataset includes several types, from traffic violations to serious crimes. The <code>law_cat_cd</code> field contains codes identifying the type of incident.</p>
 <div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
 <div class="callout-header d-flex align-content-center">
@@ -584,7 +584,7 @@ Click for answer
 </section>
 <section id="guided-exercise-4---visualizing-densities-as-isolines" class="level2" data-number="13.4">
 <h2 data-number="13.4" class="anchored" data-anchor-id="guided-exercise-4---visualizing-densities-as-isolines"><span class="header-section-number">13.4</span> Guided Exercise 4 - Visualizing densities as isolines</h2>
-<p>Our density maps are good and informative, but they will hide any layers below them. <em>Isolines</em> or ‘contour lines’ are lines that delineate areas within the same ranges of values, and make for good data overlays. The most common use for them is to indicate topography (see below). Each brown line is associated with an elevation, and some thicker lines are used as <em>reference isolines</em> to facilitate navigation.</p>
+<p>Our density maps are good and informative, but they will hide any layers below them. <em>Isolines</em> or ‘contour lines’ are lines that delineate areas within the same ranges of values - and make for good data overlays. The most common use for them is to indicate topography (see below). Each brown line is associated with an elevation, and some thicker lines are used as <em>reference isolines</em> to facilitate navigation.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://upload.wikimedia.org/wikipedia/commons/7/79/Topographic_map_example.png" class="img-fluid figure-img"></p>
@@ -633,7 +633,7 @@ Click for answer
 </div>
 <div id="callout-14" class="callout-14-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>If you need some help, take a look a t this step by step: <a href="https://mapscaping.com/mastering-contour-lines-and-labels-in-qgis/">https://mapscaping.com/mastering-contour-lines-and-labels-in-qgis/</a></p>
+<p>If you need some help, take a look at this step by step: <a href="https://mapscaping.com/mastering-contour-lines-and-labels-in-qgis/">https://mapscaping.com/mastering-contour-lines-and-labels-in-qgis/</a></p>
 </div>
 </div>
 </div>
@@ -666,7 +666,7 @@ Click for answer
 </div>
 <div id="callout-16" class="callout-16-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>First select the police station point layer and go to <code>Vector &gt; Geoprocessign &gt; Buffer</code> to create the 1km buffers. Make sure you dissolve them, since your question is “within 1km of <em>any</em> station”, and there may be places where the buffers of nearby police stations overlap. Then use <code>Count Points in Polygons</code> to count how many crime incidents occurred within the buffer polygon. Check the count on the attribute table of the new layer, then divide this number by the total number of records in the crime incidence dataset. I got 423223 points in the buffer, which divided by 616835 crime incident records gives me 68.6%.</p>
+<p>First select the police station point layer and go to <code>Vector &gt; Geoprocessing &gt; Buffer</code> to create the 1km buffers. Make sure you dissolve them, since your question is “within 1km of <em>any</em> station”, and there may be places where the buffers of nearby police stations overlap. Then use <code>Count Points in Polygons</code> to count how many crime incidents occurred within the buffer polygon. Check the count on the attribute table of the new layer, then divide this number by the total number of records in the crime incidence dataset. I got 423223 points in the buffer, which divided by 616835 crime incident records gives me 68.6%.</p>
 </div>
 </div>
 </div>
@@ -688,7 +688,7 @@ Tip
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Since the name of the police station is also brought to the table, you could use <code>Statistics by Category</code> (<code>Processing</code> panel) to calculate the total or average number of nearest crime incidents per police station - that could give you insight in how overwhelmed some stations could be in relation to others. Or you could calculate the average distances to each hub, and have an idea of which police stations are being responsible for covering the largest distances.</p>
+<p>Since the name of the police station is also brought to the table, you could use <code>Statistics by Category</code> (<code>Processing</code> panel) to calculate the total or average number of nearest crime incidents per police station - that could give you insight in how overwhelmed some stations could be in relation to others. Or you could calculate the average distances to each hub, and have an idea of which police stations are responsible for covering the largest distances.</p>
 </div>
 </div>
 </section>
@@ -1133,8 +1133,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./lab_convex_interp.html" class="pagination-link" aria-label="Lab 14 - Convex Hulls and Interpolation">
-        <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Lab 14 - Convex Hulls and Interpolation</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./lab_convex_interp.html" class="pagination-link" aria-label="Lab 14 - Convex Hulls">
+        <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Lab 14 - Convex Hulls</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

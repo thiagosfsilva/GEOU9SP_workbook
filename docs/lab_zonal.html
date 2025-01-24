@@ -297,7 +297,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./lab_convex_interp.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Lab 14 - Convex Hulls and Interpolation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Lab 14 - Convex Hulls</span></span></a>
   </div>
 </li>
       </ul>
@@ -351,11 +351,11 @@ window.Quarto = {
 </header>
 
 
-<p>So far we have been mostly keeping to one of the two main data models: vectors and rasters. We have learned several ways to work with either, but they are mostly treated separately. The two exceptions are the <code>Mask by Layer</code> tool, that lets us clip a raster based on a vector shape, and the <code>Polygonize</code> tool, which converts rasters into vectors.</p>
+<p>So far we have been mostly keeping to one of the two main data models: vectors and rasters. We have learned several ways to work with either, but they are mostly treated separately. The two exceptions are the <code>Mask by Layer</code> tool that lets us clip a raster based on a vector shape, and the <code>Polygonize</code> tool, which converts rasters into vectors.</p>
 <p>In this lab you will learn about <code>Zonal Statistics</code> (<a href="https://docs.qgis.org/3.34/en/docs/user_manual/processing_algs/qgis/rasteranalysis.html#zonal-statistics">QGIS Documentation</a>), one of the main tools that mixes vectors and rasters, and lets you compute pixel statistics for regions defined by polygons. You will also learn about a related tool for points, called <code>Sample Raster Values</code> (<a href="https://docs.qgis.org/3.34/en/docs/user_manual/processing_algs/qgis/rasteranalysis.html#sample-raster-values">QGIS Documentation</a>), and a <code>cousin</code> tool to Zonal Statistics, the <code>Overlap Analysis</code> tool (<a href="https://docs.qgis.org/3.34/en/docs/user_manual/processing_algs/qgis/vectoranalysis.html#overlap-analysis">QGIS Documentation</a>).</p>
 <section id="guided-exercise-1---data-preparation" class="level2" data-number="12.1">
 <h2 data-number="12.1" class="anchored" data-anchor-id="guided-exercise-1---data-preparation"><span class="header-section-number">12.1</span> Guided Exercise 1 - Data preparation</h2>
-<p>In this exercise, we will look at air pollution data from the city of <a href="https://en.wikipedia.org/wiki/Amsterdam">Amsterdam</a>, in the Netherlands. Importantly for this exercise, Amsterdam is broken up into 8 districts or boroughs (stadsdelen), which are further divided into neighbourhoods (buurten).</p>
+<p>In this exercise, we will look at air pollution data from the city of <a href="https://en.wikipedia.org/wiki/Amsterdam">Amsterdam</a> in the Netherlands. Importantly for this exercise, Amsterdam is broken up into 8 districts or boroughs (stadsdelen), which are further divided into neighbourhoods (buurten).</p>
 <p>More specifically, we will be looking at <a href="https://www.gov.uk/government/statistics/air-quality-statistics/ntrogen-dioxide">NO<span class="math inline">\(_2\)</span> (Nitrogen Dioxide) pollution</a>. NO<span class="math inline">\(_2\)</span> is mainly produced by combustion engines, and impacts respiratory health.</p>
 <p>The data for this exercise has been pre-packaged and can be <a href="https://stir-my.sharepoint.com/:u:/g/personal/ala2_stir_ac_uk/ESlllBAgUyBJqNE2dGCSKkoBPKZlxKg-mTw8hjSkG0fpVA?e=Qg4Psg">downloaded here</a>, and it consists of the following datasets:</p>
 <ul>
@@ -385,7 +385,7 @@ Tip
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Two useful websites to find information about coordinate reference systems are <a href="https://epsg.io/">https://epsg.io/</a> and <a href="https://spatialreference.org/">https://spatialreference.org/</a>. Search for EPSG:28899 in thee websites and see what information they provide.</p>
+<p>Two useful websites to find information about coordinate reference systems are <a href="https://epsg.io/">https://epsg.io/</a> and <a href="https://spatialreference.org/">https://spatialreference.org/</a>. Search for EPSG:28992 in thee websites and see what information they provide.</p>
 </div>
 </div>
 <ol start="2" class="example" type="1">
@@ -394,7 +394,7 @@ Tip
 </section>
 <section id="guided-exercise-2---zonal-statistics" class="level2" data-number="12.2">
 <h2 data-number="12.2" class="anchored" data-anchor-id="guided-exercise-2---zonal-statistics"><span class="header-section-number">12.2</span> Guided Exercise 2 - Zonal Statistics</h2>
-<p>You are now a GIS analyst at the Amsterdam city administration, and have been asked to analyse the pollution levels per city neighbourhood, using the data for 2008 published by the scientific study above. Specifically, you have been asked to calculate the average NO<span class="math inline">\(_2\)</span> concentrations for each neighbourhood.</p>
+<p>You are now a GIS analyst at the Amsterdam city administration, and have been asked to analyse the pollution levels per city neighbourhood using the data for 2008 published by the scientific study above. Specifically, you have been asked to calculate the average NO<span class="math inline">\(_2\)</span> concentrations for each neighbourhood.</p>
 <p>You have access to the neighbourhood boundaries in vector format, but the study data is given as a raster data.</p>
 <div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
 <div class="callout-header d-flex align-content-center">
@@ -426,7 +426,7 @@ Click for answer
 </div>
 </div>
 </div>
-<p>The right way to accomplish this task is to use the <code>Zonal Statistics</code> tool. It will calculate descriptive statistics (min, max, average, range, etc.) for raster values (pixels) contained within each polygon of a vector layer, and output it as a new vector layer with the same polygons and attributes of the original vector layer, with added attribute columns for the statistics.</p>
+<p>The right way to accomplish this task is to use the <code>Zonal Statistics</code> tool. It will calculate descriptive statistics (min, max, average, range, etc.) for raster values (pixels) contained within each polygon of a vector layer and output it as a new vector layer with the same polygons and attributes of the original vector layer, with added attribute columns for the statistics.</p>
 <ol start="3" class="example" type="1">
 <li><p>Go to the <code>Processing</code> panel and find the <code>Zonal statistics</code> tool (NOT <code>Raster layer zonal statistics</code>), under the <code>Raster analysis</code> category. It will launch a new window.</p></li>
 <li><p>On the <code>Zonal Statistics</code> window, select the neighbourhoods layer as the <code>Input Layer</code>, and the NO<span class="math inline">\(_2\)</span> concentration map as the <code>Raster Layer</code>. Notice how you could select a specific band if your raster contained multiple bands. For <code>Output column prefix</code> write <code>NO2_</code> - this prefix will be added to the name of each calculated statistic to generate the new attributes. Right click on the <code>...</code> button to the right of the <code>Statistics to calculate</code> box to see which statistics are available for calculation. In this case we only want the means, so you can uncheck all other boxes. Then save your layer appropriately and <code>Run</code> then <code>Close</code>.</p></li>
@@ -483,7 +483,7 @@ Click for answer
 </section>
 <section id="guided-exercise---sample-raster-values" class="level2" data-number="12.4">
 <h2 data-number="12.4" class="anchored" data-anchor-id="guided-exercise---sample-raster-values"><span class="header-section-number">12.4</span> Guided Exercise - Sample Raster Values</h2>
-<p><code>Zonal Statistics</code> lets us sample and summarise raster values based on areas (i.e.&nbsp;polygons). But sometimes, we may be interested in knowing what are the specific raster values under a point coordinate. Again, as a GIS analyst, you have been now asked to determine if NO<span class="math inline">\(_2\)</span> levels have declined between 2008 and 2023. But the point location measurements only go as far back as 2010, so you need to compare the 2023 field measurements to the 2008 modelled values.</p>
+<p><code>Zonal Statistics</code> lets us sample and summarise raster values based on areas (i.e.&nbsp;polygons). But sometimes, we may be interested in knowing what the specific raster values under a point coordinate are. Again, as a GIS analyst, you have been now asked to determine if NO<span class="math inline">\(_2\)</span> levels have declined between 2008 and 2023. But the point location measurements only go as far back as 2010, so you need to compare the 2023 field measurements to the 2008 modelled values.</p>
 <ol start="9" class="example" type="1">
 <li><p>Before we proceed with the analysis, we need to link the NO<span class="math inline">\(_2\)</span> measured values (in the CSV file) with the measurement locations (one of the geopackage layers). You can do that using a <code>Join</code>, and the <code>CodeJ</code> field of the CSV table and the <code>Code</code> field of the locations layer.</p></li>
 <li><p>Now we can extract the concentration values from the 2008 raster using the <code>Sample Raster Values</code> tool. You will find it in the <code>Processing</code> panel, under the <code>Raster Analysis</code> section. Similarly to the <code>Zonal Statistics</code> tool, you will be asked to select an <code>Input Layer</code> (the vector points) and a <code>Raster Layer</code> (the pollution raster), and to pick a prefix for the field name (we can use <code>NO2_</code> again). Save your result in the appropriate location and click on <code>Run</code> then <code>Close</code>.</p></li>
@@ -503,12 +503,12 @@ Click for answer
 </section>
 <section id="data-acquisition" class="level3" data-number="12.5.2">
 <h3 data-number="12.5.2" class="anchored" data-anchor-id="data-acquisition"><span class="header-section-number">12.5.2</span> Data Acquisition</h3>
-<p>For this exercise, I am giving you a pre-downloaded dataset, because there are large data files that also require a registration to download. But I am also describing below how to download the original data - <em>you will need it for the Final Project</em>, and also if working with species distribution data is of interest to you in the feature.</p>
+<p>For this exercise, I am giving you a pre-downloaded dataset, because the source files are large and also require a registration to download. But I am describing below how to download the original data - <em>you will need it for the Final Project</em> and the information is relevant if working with species distribution data is of interest to you in the future.</p>
 <p><a href="https://stir-my.sharepoint.com/:u:/g/personal/ala2_stir_ac_uk/EdX5iTojX65Mv3Jf_DD-PvEBGKnlQIuu7Njo5XFdu4SQmA?e=krTy3W">Download the data package from here</a>.</p>
 <p>The first step in your analysis is to obtain data on the distribution of <em>T. chinensis</em>. You go to the main source of species occurrence data worldwide, the <a href="https://www.gbif.org/">Global Biodiversity Species Facility (GBIF)</a>. GBIF requires creating an account to download.</p>
-<p>Once you have an account, go to the top left of the webpage and click on <code>Get data &gt; Ocurrences</code>“. You can search for data using the different parameters on the left column. Expand the <code>Scientific name</code> field and search for <code>Tsuga chinensis</code>. Then click on <code>Download</code> (above the table). The data will come as a tab-separated text file.</p>
+<p>Once you have an account, go to the top left of the webpage and click on <code>Get data &gt; Ocurrences</code>. You can search for data using the different parameters on the left column. Expand the <code>Scientific name</code> field and search for <code>Tsuga chinensis</code>. Then click on <code>Download</code> (above the table). The data will come as a tab-separated text file.</p>
 <p>Then you would need climate data. There are many climatic datasets out there, but after doing some research you decide to use the <em>Climatologies at High resolution for the Earth’s Land Surface Areas</em> (CHELSA) database, which provides global maps of past, present and future climate data: <a href="https://chelsa-climate.org/">https://chelsa-climate.org/</a>.</p>
-<p>To use this dataset, you need to understand the definition of the standard BIOCLIM variables. These are derived from a different climate fataset called WorldClim, and are a set of climatic descriptors devised to capture climatic conditions that are related to species survival. They are explained here:<a href="https://www.worldclim.org/data/">https://www.worldclim.org/data/bioclim.html</a>. The CHELSA database also provides <em>extended</em> BIOCLIM variables (BIOCLIM+, <a href="https://chelsa-climate.org/exchelsa-extended-bioclim/">https://chelsa-climate.org/exchelsa-extended-bioclim/</a>)for additional important variables.</p>
+<p>To use this dataset, you need to understand the definition of the standard BIOCLIM variables. These are derived from a different climate dataset called WorldClim, and are a set of climatic descriptors devised to capture climatic conditions that are related to species survival. They are explained here:<a href="https://www.worldclim.org/data/">https://www.worldclim.org/data/bioclim.html</a>. The CHELSA database also provides <em>extended</em> BIOCLIM variables (BIOCLIM+, <a href="https://chelsa-climate.org/exchelsa-extended-bioclim/">https://chelsa-climate.org/exchelsa-extended-bioclim/</a>)for additional important variables.</p>
 <p>Since you are working with a plant species, you decide to use the following variables:</p>
 <ul>
 <li><p><strong>Bio5</strong> = Max Temperature of Warmest Month (upper thermal tolerance)</p></li>
@@ -530,7 +530,7 @@ Click for answer
 <p>With that data in hand, you are ready to start your project. You prepare an initial list of the tasks you need to accomplish to achieve your goal:</p>
 <ol type="1">
 <li><p>Organise the data into a folder and then import the data into a QGIS project. You may add OpenStreetMap (from the XYZ Tiles) to help you to recognise where these data are located in the world. Also, open the attribute tables and raster info to understand the structure of each data file, unit, etc.</p></li>
-<li><p>Import the T. chinensis species ocurrence file. Although it is named CSV, you notice it uses <em>tab</em> as a custom column delimiter. The spatial information is on fields <code>decimalLatitude</code> and <code>decimalLongitude</code>.</p></li>
+<li><p>Import the <em>T. chinensis</em> species occurrence file. Although it is named CSV, you notice it uses <em>tab</em> as a custom column delimiter. The spatial information is on fields <code>decimalLatitude</code> and <code>decimalLongitude</code>.</p></li>
 <li><p>Make sure the project CRS is adequate and that all data uses the same CRS, or reproject if not.</p></li>
 <li><p>This exercise focuses on species observation in Taiwan, so clean up all the data to include only records from Taiwan, and only actual observations (e.g.&nbsp;not a specimen in a museum) - i.e.&nbsp;records having the word “observation” on the <code>basisofRec</code> attribute field.</p></li>
 <li><p>Use the species occurrence points to extract the minimum and maximum values for each <em>present</em> climate layer, therefore determining the <a href="https://www.usgs.gov/centers/wetland-and-aquatic-research-center/science/climate-envelope-modeling-evaluating">climate envelope</a> of the species. You can then assume that any location where one or more of the climatic variables are outside this range is not suitable for the species’ survival.</p></li>

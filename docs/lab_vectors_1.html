@@ -268,7 +268,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./lab_convex_interp.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Lab 14 - Convex Hulls and Interpolation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Lab 14 - Convex Hulls</span></span></a>
   </div>
 </li>
       </ul>
@@ -428,10 +428,10 @@ Click for answer
 <p>One of the main applications of vector data is the ability to <em>select</em> and then <em>summarise</em> the different attributes of each layer to extract relevant information.</p>
 <ol start="7" class="example" type="1">
 <li><p>Turn off the “Rivers” and “Earthquakes” layers. (Tip: to turn multiple layers off or on at once, highlight all the layers you need to make hidden (or visible) by holding down the <code>Control</code> key of your keyboard while you click, then hit the spacebar on your keyboard).</p></li>
-<li><p>Go to <code>Layer Properties &gt; Symbology</code> for the World Countries layer, and change the top option from <code>Single Symbol</code> to <code>Categorized</code>. This lets you assign different colours based on attribute values. We will colour the countries based on the main region where they are. So for <code>Value</code>, choose the <code>REGION_UN</code> attribute. Leave the <code>Symbol</code> option as is, and for <code>Color Ramp</code>, select <code>Random Colors</code> if not already. Then click on the <code>Classify</code> button on the bottom left of the large white space in the middle of the window. Then click on <code>OK</code>.</p></li>
+<li><p>Go to <code>Layer Properties &gt; Symbology</code> for the World Countries layer, and change the top option from <code>Single Symbol</code> to <code>Categorized</code>. This lets you assign different colours based on attribute values. We will colour the countries based on the main region where they are. For <code>Value</code>, choose the <code>REGION_UN</code> attribute. Leave the <code>Symbol</code> option as is, and for <code>Color Ramp</code>, select <code>Random Colors</code> if it is not already. Then click on the <code>Classify</code> button on the bottom left of the large white space in the middle of the window. Then click on <code>OK</code>.</p></li>
 <li><p>Look at your layer and notice how it has been styled. Try to manually change the colours of each region to your liking.</p></li>
 </ol>
-<p>Now lets use visualisation to understand the distribution of world population.</p>
+<p>Now let’s use visualisation to understand the distribution of world population.</p>
 <ol start="10" class="example" type="1">
 <li><p>Return to the <code>Symbology</code> window and select <code>Graduated</code> instead of <code>Categorized</code>. Change your <code>Value</code> to the <code>POP_EST</code> attribute. Choose <code>Magma</code> as your colour ramp (click on the little arrow to the right), and select the <code>Invert Color Ramp</code> option.</p></li>
 <li><p>Change the classification <code>Mode</code> (above the classify button) to <code>Equal interval</code>, leave the number of <code>Classes</code> as 5 (to the left of <code>Mode</code>), and then click on <code>Classify</code>, then <code>OK</code>.</p></li>
@@ -466,7 +466,7 @@ Click for answer
 <div class="callout-body-container callout-body">
 <ol type="a">
 <li><p><code>Categorized</code> is for <em>categorical</em>, non-numeric variables (i.e.&nbsp;names, classes, etc.). <code>Graduated</code> is for <em>continuous</em> variables (i.e.&nbsp;quantities, measurements).</p></li>
-<li><p>No, because China, India and to a lesser extent the US have much numbers than the rest, which biases the breakpoints. We will fix it in the next step.</p></li>
+<li><p>No, because China, India and to a lesser extent the US have much larger population numbers than the rest, which biases the breakpoints. We will fix it in the next step.</p></li>
 </ol>
 </div>
 </div>
@@ -474,13 +474,13 @@ Click for answer
 <ol start="12" class="example" type="1">
 <li>Return to the <code>Symbology</code> window, and change the <code>Mode</code> from <code>Equal Interval</code> to <code>Natural Breaks (Jenks)</code>, and increase the number of <code>Classes</code> to 10. Click on <code>OK</code>.</li>
 </ol>
-<p>When you are mapping your own data, make sure you explore the different methods for calculating breakpoints, and also play with the number of classes. You can see the ful explanation of each <code>Mode</code> on the <a href="https://docs.qgis.org/3.34/en/docs/user_manual/working_with_vector/vector_properties.html#graduated-renderer">QGIS Documentation</a>.</p>
+<p>When you are mapping your own data, make sure you explore the different methods for calculating breakpoints, and also play with the number of classes. You can see the full explanation of each <code>Mode</code> on the <a href="https://docs.qgis.org/3.34/en/docs/user_manual/working_with_vector/vector_properties.html#graduated-renderer">QGIS Documentation</a>.</p>
 </section>
 <section id="guided-exercise-3-selections-based-on-layer-attributes" class="level2" data-number="3.4">
 <h2 data-number="3.4" class="anchored" data-anchor-id="guided-exercise-3-selections-based-on-layer-attributes"><span class="header-section-number">3.4</span> Guided Exercise 3: Selections based on layer attributes</h2>
-<p>Now we will look into using <em>expressions</em> to search and select specific features according to their attributes. As GIS vector data emerged from the database world, these searches as sometimes refered to as <em>queries</em>.</p>
+<p>Now we will look into using <em>expressions</em> to search and select specific features according to their attributes. As GIS vector data emerged from the database world, these searches as sometimes refereed to as <em>queries</em>.</p>
 <ol start="13" class="example" type="1">
-<li><p>Change the symbology of the Countries layer to <code>Single Symbol</code>, and pick a dark gray. Then turn on the Rivers layer, change its symbology to a light blue, and make sure it is on top of the Countries layer.</p></li>
+<li><p>Change the symbology of the Countries layer to <code>Single Symbol</code>, and pick a dark grey. Then turn on the Rivers layer, change its symbology to a light blue, and make sure it is on top of the Countries layer.</p></li>
 <li><p>Open the Rivers layer attribute table (right click on its name then on <code>Open attribute table</code>). Then click on the <code>Select features using expression</code> button (<img src="https://docs.qgis.org/3.34/en/_images/mIconExpressionSelect.png" class="img-fluid">). You will see a new window with three panels, like the one below. If you only see two panels, then click on <code>Show help</code>:</p></li>
 </ol>
 <p><img src="images/lab_3/lab3_fig2_select_feat_exp.jpg" class="img-fluid"></p>
@@ -522,11 +522,11 @@ Click for answer
 </div>
 </div>
 <ol start="19" class="example" type="1">
-<li>Return to the attribute table and make sure that the rivers larger than 5000km are still selected. Then create a new expression: <code>SYSTEM" = 'Amazon'</code>. Notice that we enclose the word Amazon with single quotes. This identifies this as a <em>string</em>, i.e.&nbsp;a character value, and differentiates it from an attribute name. Then instead of clicking on <code>Select Features</code>, click on the small arrow to the right and click in <code>Add to Current Selection</code>. Now your selection should include all river features that are longer than 5000 km <em>or</em> belong to the Amazon system (26 features in total).</li>
+<li>Return to the attribute table and make sure that the rivers larger than 5000km are still selected. Then create a new expression: <code>SYSTEM" = 'Amazon'</code>. Notice that we enclose the word Amazon with single quotes. This identifies this as a <em>string</em>, i.e.&nbsp;a character value (like a word) within an attribute, and differentiates it from an attribute name. Then instead of clicking on <code>Select Features</code>, click on the small arrow to the right and click in <code>Add to Current Selection</code>. Now your selection should include all river features that are longer than 5000 km <em>or</em> belong to the Amazon system (26 features in total).</li>
 </ol>
 <p>Tip: If you can’t remember all the possible values of an attribute, select the attribute under <code>Fields and Values</code> and then on the right panel, double click on <code>All Unique</code>. QGIS will list all possible value options for that particular attribute.</p>
 <ol start="20" class="example" type="1">
-<li>Now deselect all features by clicking on the <code>Deselect</code> button in the Attribute Table (<img src="https://docs.qgis.org/3.34/en/_images/mActionDeselectActiveLayer.png" class="img-fluid">) or the <code>Deselect from all layers</code> button in the main QGIS toolbar (<img src="https://docs.qgis.org/3.34/en/_images/mActionDeselectAll.png" class="img-fluid">). It is always good to clear selections when you are done with a certain analysis, to avoid unexpected consequences.</li>
+<li>Now deselect all features by clicking on the <code>Deselect</code> button in the Attribute Table (<img src="https://docs.qgis.org/3.34/en/_images/mActionDeselectActiveLayer.png" class="img-fluid">) or the <code>Deselect from all Layers</code> button in the main QGIS toolbar (<img src="https://docs.qgis.org/3.34/en/_images/mActionDeselectAll.png" class="img-fluid">). It is always good to clear selections when you are done with a certain analysis, to avoid unexpected consequences.</li>
 </ol>
 <p>We can use several operators to create expressions. For numeric values, we can use all logical operators: ‘greater than’ (<code>&gt;</code>), ‘lesser than’ (<code>&lt;</code>), their ‘or equal’ variants (<code>&lt;=</code>, <code>&gt;=</code>) as well as ‘equal’ (<code>=</code>) or ‘not equal’ (<code>&lt;&gt;</code>). For strings (text), <code>=</code> and <code>&lt;&gt;</code> also work, but you can use the operators <code>IS</code> and <code>IS NOT</code> (all upper case) instead. In the example above, we could have used <code>"SYSTEM" IS 'Amazon'</code> to get the same result.</p>
 <p>Another class of useful operators are called <em>Boolean</em> operators: <code>AND</code>, <code>OR</code> and <code>NOT</code>. They allow us to create compound expressions with multiple criteria:</p>
@@ -570,7 +570,7 @@ Click for answer
 </div>
 </div>
 <ol start="26" class="example" type="1">
-<li>Finally, create a selection with the expression <code>"NAME" LIKE 'AM%'</code> (notice the uppercase). You won’t get any results. Then change the expression to <code>"NAME" ILIKE 'AM%'</code>. You should get the same three rivers starting with ‘Am’ again.</li>
+<li>Finally, create a selection with the expression <code>"NAME" LIKE 'AM%'</code> (notice the upper-case). You won’t get any results. Then change the expression to <code>"NAME" ILIKE 'AM%'</code>. You should get the same three rivers starting with ‘Am’ again.</li>
 </ol>
 <div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
 <div class="callout-header d-flex align-content-center">
@@ -607,7 +607,7 @@ Click for answer
 </section>
 <section id="guided-exercise-3-summarising-layer-attributes" class="level2" data-number="3.5">
 <h2 data-number="3.5" class="anchored" data-anchor-id="guided-exercise-3-summarising-layer-attributes"><span class="header-section-number">3.5</span> Guided Exercise 3: Summarising layer attributes</h2>
-<p>The <code>Statisitcal Summary Tool</code> (<img src="https://docs.qgis.org/3.34/en/_images/mActionSum.png" class="img-fluid">) is a quick way to summarise attribute values, and can be quite powerful when combined with attribute selections.</p>
+<p>The <code>Statistical Summary Tool</code> (<img src="https://docs.qgis.org/3.34/en/_images/mActionSum.png" class="img-fluid">) is a quick way to summarise attribute values, and can be quite powerful when combined with attribute selections.</p>
 <ol start="28" class="example" type="1">
 <li>On the main QGIS window, click on the <code>Statistical Summary</code> tool button. A new panel will open on the bottom left corner of the QGIS window.</li>
 </ol>
@@ -658,7 +658,7 @@ Stop and Think
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Why do you get a blank value for <code>Majority</code> and a 0 for <code>Minimum Lenght</code>?</p>
+<p>Why do you get a blank value for <code>Majority</code> and a 0 for <code>Minimum Length</code>?</p>
 </div>
 </div>
 <div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
@@ -738,7 +738,7 @@ Click for answer
 </ol>
 <p>Tip: if you want to rename an attribute, create a new one with the new name and just use the name of the old one as the expression on the <code>Field Calculator</code>. It will copy all values to the new attribute. Then remove the old one.</p>
 <ol start="38" class="example" type="1">
-<li>We will continue working with this data in the next lab. If you want to keeo your project, this is the best way to do it: on your computer’s file explorer, find the root folder for the project (<code>lab_3</code>, or whatever you have named it as). Then right click on it and select (on Windows) <code>Compress to Zip file</code>. That will create a new zipfile of the folder contents, with the same name as the folder. Then you can copy this zip file to your OneDrive folder or to an external drive.</li>
+<li>We will continue working with this data in the next lab. If you want to keep your project, this is the best way to do it: on your computer’s file explorer, find the root folder for the project (<code>lab_3</code>, or whatever you have named it as). Then right click on it and select (on Windows) <code>Compress to Zip file</code>. That will create a new zipfile of the folder contents, with the same name as the folder. Then you can copy this zip file to your OneDrive folder or to an external drive.</li>
 </ol>
 <p>Good job, we have now finished our first guided tour of vector attributes. We will revisit it in the next lab, when we also learn about geometry-based selections.</p>
 <p>Make sure you have a go at the independent exercise below, to make sure you feel comfortable with attribute selections, calculations and summaries. You will keep using these skills for the rest of the module (and your GIS life).</p>

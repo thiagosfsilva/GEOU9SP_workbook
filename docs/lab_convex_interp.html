@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>GEOU9SP GIS Workbook - 14&nbsp; Lab 14 - Convex Hulls and Interpolation</title>
+<title>GEOU9SP GIS Workbook - 14&nbsp; Lab 14 - Convex Hulls</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -112,7 +112,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./sec_w8_spatial_analysis_III.html">Week 8 - Spatial analysis III</a></li><li class="breadcrumb-item"><a href="./lab_convex_interp.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Lab 14 - Convex Hulls and Interpolation</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./sec_w8_spatial_analysis_III.html">Week 8 - Spatial analysis III</a></li><li class="breadcrumb-item"><a href="./lab_convex_interp.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Lab 14 - Convex Hulls</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -299,7 +299,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./lab_convex_interp.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Lab 14 - Convex Hulls and Interpolation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Lab 14 - Convex Hulls</span></span></a>
   </div>
 </li>
       </ul>
@@ -336,9 +336,9 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./sec_w8_spatial_analysis_III.html">Week 8 - Spatial analysis III</a></li><li class="breadcrumb-item"><a href="./lab_convex_interp.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Lab 14 - Convex Hulls and Interpolation</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./sec_w8_spatial_analysis_III.html">Week 8 - Spatial analysis III</a></li><li class="breadcrumb-item"><a href="./lab_convex_interp.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Lab 14 - Convex Hulls</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-spatan5" class="quarto-section-identifier"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Lab 14 - Convex Hulls and Interpolation</span></span></h1>
+<h1 class="title"><span id="sec-spatan5" class="quarto-section-identifier"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Lab 14 - Convex Hulls</span></span></h1>
 </div>
 
 
@@ -355,7 +355,6 @@ window.Quarto = {
 </header>
 
 
-<p><strong>IN PREPARATION</strong></p>
 <section id="guided-exercise-1---preparing-the-data" class="level2" data-number="14.1">
 <h2 data-number="14.1" class="anchored" data-anchor-id="guided-exercise-1---preparing-the-data"><span class="header-section-number">14.1</span> Guided Exercise 1 - Preparing the data</h2>
 <p>This exercise will be based on actual research data collected by <a href="https://www.stir.ac.uk/people/1457157">Dr.&nbsp;Adam Fell</a> as part of their <a href="https://dspace.stir.ac.uk/handle/1893/36203">PhD research</a> developed at University of Stirling.</p>
@@ -399,7 +398,7 @@ window.Quarto = {
 <li><p>Then import the bird movement data using the <code>Source Data Manager &gt; Delimited Text</code>, like in the figure below. Make sure you pick the CRS indicated (<code>EPSG:32617 WGS84 - UTM zone 17N</code>), and that the <code>timestamp</code> field is of type <code>Date &amp; Time</code>.</p></li>
 </ol>
 <p><img src="images/lab_14/lab14_fig0_import_csv.jpg" class="img-fluid"></p>
-<p>The file has both Latitude Longitude and Universal Transverse Mercator (UTM) coordinates, which are similar to British Grid coordinates, but for the entire world. UTM coordinates are ideal for field data that does not span large areas (<a href="https://en.wikipedia.org/wiki/Universal_Transverse_Mercator_coordinate_system">you can read more about it here</a>). We will use UTM coordinates since they are metric, and thus some automatic area calculations that will happen later on will have the right units.</p>
+<p>The file has both Latitude Longitude and Universal Transverse Mercator (UTM) coordinates, which are similar to British Grid coordinates, but for the entire world. UTM coordinates are ideal for field data that does not span large areas (<a href="https://en.wikipedia.org/wiki/Universal_Transverse_Mercator_coordinate_system">you can read more about it here</a>). We will use UTM coordinates since they are metric, and thus some automatic area calculations that will happen later will have the right units.</p>
 <ol start="3" class="example" type="1">
 <li>Now split the file into separate layers for each individual bird, saving each file as a separate <code>geopackage</code> (to preserve long field names) named as the <code>individual_local_identifier</code> tag (ex: Chachalaca_1.gpkg). Use <code>Select by expression</code> on the <code>individual_local_identifier</code>field and then <code>Export &gt; Save selected features as...</code> to create each subset.</li>
 </ol>
@@ -454,7 +453,7 @@ Click for answer
 <figcaption>https://en.wikipedia.org/wiki/Convex_hull</figcaption>
 </figure>
 </div>
-<p>In animal and movement research, convex hulls are commonly to used to define <a href="https://en.wikipedia.org/wiki/Species_distribution">species ranges</a> or, for individuals, <a href="https://en.wikipedia.org/wiki/Home_range">home ranges</a>.</p>
+<p>In animal and movement research, convex hulls are commonly used to define <a href="https://en.wikipedia.org/wiki/Species_distribution">species ranges</a> or, for individuals, <a href="https://en.wikipedia.org/wiki/Home_range">home ranges</a>.</p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -465,7 +464,7 @@ Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>There are two separate tools to calculate convex hulls in QGIS. The first is called <code>Convex Hulls</code> in <code>Vector &gt; Geoprocessing</code>, but is usually <strong>NOT</strong> what you want. This tools calculates convex hulls for irregular polygons. To calculate convex hulls for points, you instead want to go to the <code>Processing</code> tab and then choose the <code>Minimum Bounding Geometry</code> tool under the <code>Vector Geometry</code> category.</p>
+<p>There are two separate tools to calculate convex hulls in QGIS. The first is called <code>Convex Hulls</code> in <code>Vector &gt; Geoprocessing</code>, but is usually <strong>NOT</strong> what you want. This tool calculates convex hulls for irregular polygons. To calculate convex hulls for points, you instead want to go to the <code>Processing</code> tab and then choose the <code>Minimum Bounding Geometry</code> tool under the <code>Vector Geometry</code> category.</p>
 </div>
 </div>
 <p>For this exercise, we will first focus on the Chachalaca birds. We will also not consider <code>Chachalaca_2</code> since it was only monitored for two months.</p>
@@ -525,7 +524,7 @@ Click for answer
 </section>
 <section id="guided-exercise-3---habitat-use" class="level2" data-number="14.3">
 <h2 data-number="14.3" class="anchored" data-anchor-id="guided-exercise-3---habitat-use"><span class="header-section-number">14.3</span> Guided Exercise 3 - Habitat Use</h2>
-<p>The second question we may want to explore is what is the main types of habitats each bird is using. For that, we can use the convex hulls that determine our home rages, and the land cover layer included in the dataset. The <a href="https://www.arcgis.com/home/item.html?id=cfcb7609de5f478eb7666240902d4d3d">data documentation</a> includes a table with a key for each land cover type.</p>
+<p>The second question we may want to explore is what the main types of habitats each bird is using are. For that, we can use the convex hulls that determine our home ranges, and the land cover layer included in the dataset. The <a href="https://www.arcgis.com/home/item.html?id=cfcb7609de5f478eb7666240902d4d3d">data documentation</a> includes a table with a key for each land cover type.</p>
 <div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -551,7 +550,7 @@ Click for answer
 </div>
 <div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>We have the home ranges as polygons, and the land cover dataset as a raster. There are thus two ways of achieving this. One is to <code>Polygonize</code> the raster, and then use <code>Clip</code> to cut the resulting vector land cover map by each of the home ranges, and then recalculate the areas of each habitat using the <code>Field Calculator</code>. The second is to cut the raster by each of the home ranges using <code>Extract by Mask Layer</code>, and then use <code>Raster Layer Unique Values Report</code> in the <code>Processing</code> panel. These are the values I got using the second option (less steps):</p>
+<p>We have the home ranges as polygons, and the land cover dataset as a raster. There are thus two ways of achieving this. One is to <code>Polygonize</code> the raster, and then use <code>Clip</code> to cut the resulting vector land cover map by each of the home ranges, and then recalculate the areas of each habitat using the <code>Field Calculator</code>. The second is to cut the raster by each of the home ranges using <code>Extract by Mask Layer</code>, and then use <code>Raster Layer Unique Values Report</code> in the <code>Processing</code> panel. These are the values I got using the second option (fewer steps):</p>
 <p>Chachalaca 1: Class 7 (Built Area) = 106800m<span class="math inline">\(^2\)</span>; Class 2 (Trees) = 14400m<span class="math inline">\(^2\)</span></p>
 <p>Chachalaca 3: Class 7 (Built Area) = 85900m<span class="math inline">\(^2\)</span>; Class 11 (Rangeland) = 6200m<span class="math inline">\(^2\)</span></p>
 <p>Chachalaca 4: Class 2 (Trees) = 151600m<span class="math inline">\(^2\)</span>; Class 7 (Built Area) = 79900m<span class="math inline">\(^2\)</span></p>
@@ -561,9 +560,9 @@ Click for answer
 </div>
 <section id="guided-exercise-4---creating-temporal-animations-with-qgis" class="level3" data-number="14.3.1">
 <h3 data-number="14.3.1" class="anchored" data-anchor-id="guided-exercise-4---creating-temporal-animations-with-qgis"><span class="header-section-number">14.3.1</span> Guided Exercise 4 - Creating temporal animations with QGIS</h3>
-<p>QGIS includes a feature called <em>Temporal Layers</em>, which allow us to animate the layers follwing time stamp information, to see how patterns change over time. We will use it now to look at the Chachalaca movement in time.</p>
+<p>QGIS includes a feature called <em>Temporal Layers</em>, which allow us to animate the layers following time stamp information, to see how patterns change over time. We will use it now to look at the Chachalaca movement in time.</p>
 <ol start="8" class="example" type="1">
-<li>First, select the <code>Chachalaca_1</code> point layer and go to <code>Properties &gt; Temporal</code>. Then check the <code>Dynamic Temporal Control</code> box, and select <code>Single Field with Date/Time</code> as the <code>Configurations</code>, and <code>Include Start, Include End</code> as <code>Limit</code>. Then pick the <code>timestamp</code> field for <code>Field</code>, and set the event duration to 30 minutes (the minimum duration as per our metada). Click in <code>Apply</code>, then <code>OK</code>. A clock symbol will appear to the right of the layer name to indicate it is time-enabled.</li>
+<li>First, select the <code>Chachalaca_1</code> point layer and go to <code>Properties &gt; Temporal</code>. Then check the <code>Dynamic Temporal Control</code> box, and select <code>Single Field with Date/Time</code> as the <code>Configurations</code>, and <code>Include Start, Include End</code> as <code>Limit</code>. Then pick the <code>timestamp</code> field for <code>Field</code>, and set the event duration to 30 minutes (the minimum duration as per our metadata). Click in <code>Apply</code>, then <code>OK</code>. A clock symbol will appear to the right of the layer name to indicate it is time-enabled.</li>
 </ol>
 <p><img src="images/lab_14/lab14_fig4_time_enabled.jpg" class="img-fluid"></p>
 <ol start="9" class="example" type="1">
@@ -573,19 +572,21 @@ Click for answer
 <p><img src="images/lab_14/lab14_fig5_time_panel.jpg" class="img-fluid"></p>
 <ol start="11" class="example" type="1">
 <li><p>Then calculate the time range for all time-enabled layers by clicking on the button with two blue arrows. Set the <code>Step</code> to <code>1 hour</code>, and then press the back play button. You will see Chachalaca_1 and Chachalaca_3 at first (remember there is no recording during the night, so there will be some periods with no points).</p></li>
-<li><p>Now pause the animation, click on the double back-arrow to return to the start, and then change the <code>Step</code> to <code>1 day</code>. Notice how even though Chachalaca 1 and 3 have a lot of overlap in their home ranges, on a daily basis they tend to mostly stay away from each other, seldom crossing paths. Also notice how Chachalaca 4 really tends to keep within the trees, rarely venturing into open areas.</p></li>
-<li><p>Now pause and reset again, and then set the <code>Step</code> to <code>One week</code>. Notice how Chachalaca 4 tends to avoid crossing the big open patch that divides its home range, and only some times ventures into the northern area.</p></li>
+<li><p>Now pause the animation, click on the double back-arrow to return to the start, and then change the <code>Step</code> to <code>1 day</code>. Notice how even though Chachalaca 1 and 3 have a lot of overlap in their home ranges - on a daily basis they tend to mostly stay away from each other, seldom crossing paths. Also notice how Chachalaca 4 really tends to keep within the trees, rarely venturing into open areas.</p></li>
+<li><p>Now pause and reset again, and then set the <code>Step</code> to <code>One week</code>. Notice how Chachalaca 4 tends to avoid crossing the big open patch that divides its home range, and only sometimes ventures into the northern area.</p></li>
 <li><p>Pause and reset the animation again. Then launch the Windows <code>Snipping Tool</code> by going to the <code>Start Menu</code> and then typing its name (<a href="https://support.apple.com/en-gb/102618">see here for Mac</a>).</p></li>
 </ol>
-<p>It will look lime this:</p>
+<p>It will look like this:</p>
 <p><img src="images/lab_14/lab14_fig6_snipping_tool.png" class="img-fluid"></p>
 <ol start="15" class="example" type="1">
-<li><strong>Read this entire section before doing it</strong>. Change the snip type from image (photo camera) to video (video camera), Then click on <code>New</code>. Drag the mouse to capture the mao area of QGIS, and then click on <code>Start Recording</code>. There will be a countdown from 3, and then the recording will start. Once it starts, press the play button in QGIS to start the animation, and let it run through. Then stop the recording.</li>
+<li><strong>Read this entire section before doing it</strong>. Change the snip type from image (photo camera) to video (video camera), Then click on <code>New</code>. Drag the mouse to capture the map area of QGIS, and then click on <code>Start Recording</code>. There will be a countdown from 3, and then the recording will start. Once it starts, press the play button in QGIS to start the animation, and let it run through. Then stop the recording.</li>
 </ol>
 <p>You should now have a video recording that could be used on a presentation! Here is mine (press the play button!)</p>
 <div class="quarto-video"><video id="video_shortcode_videojs_video1" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="images/lab_14/lab14_animated_movement.mp4"></video></div>
-<p>You could also use the <code>Export Animation</code> function of QGIS by clicking on the Disk icon of the <code>Temporal Controller</code>. What it does however is it saves each animation frame as one separate image, which you need to combine into a video later using video creation software, or as an animated GIF using an online tool such as <a href="https://ezgif.com/maker">EZGIF</a>:</p>
+<p>You could also use the <code>Export Animation</code> function of QGIS by clicking on the Disk icon of the <code>Temporal Controller</code>. What it does however is saving each animation frame as one separate image, which you need to combine into a video later using video creation software, or as an animated GIF using an online tool such as <a href="https://ezgif.com/maker">EZGIF</a>:</p>
 <p><img src="images/lab_14/animated_movement.gif" class="img-fluid"></p>
+<p>Congratulations, we have reached the end of the GIS content we are covering this module (with the exception of using GPS receivers). Well done! You should now feel confident in using the tools you have learned to solve spatial problems, and also comfortable learning new tools independently as the need arises. Good luck on you GIS journey!</p>
+<p>And stay spatial!</p>
 
 
 </section>

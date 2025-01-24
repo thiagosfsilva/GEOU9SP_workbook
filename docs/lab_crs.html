@@ -268,7 +268,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./lab_convex_interp.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Lab 14 - Convex Hulls and Interpolation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Lab 14 - Convex Hulls</span></span></a>
   </div>
 </li>
       </ul>
@@ -321,7 +321,7 @@ ul.task-list li input[type="checkbox"] {
 <p>The purpose of this lab is to help you understand why we need to pay attention to Coordinate Reference Systems (CRS) when working with spatial data. CRS’s are what make data <em>spatial</em> - they associate the actual data to locations on the surface of the Earth (or other planets!). But there are dozens of CRS’s in existence, each adapted for a specific world region and purpose. So quite often you will obtain spatial data in different coordinate systems, which can cause problems if not normalised before analysis.</p>
 <section id="guided-exercise-1-understanding-coordinate-reference-systems" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="guided-exercise-1-understanding-coordinate-reference-systems"><span class="header-section-number">2.1</span> Guided Exercise 1: Understanding Coordinate Reference Systems</h2>
-<p>In this exercise, you will learn how to use QGIS to identify the coordinate reference system (CRS, sometimes wrongly called as just “projection”) of spatial data you acquire, and also how to manage data and project coordinate reference systems.</p>
+<p>In this exercise, you will learn how to use QGIS to identify the coordinate reference system (CRS, sometimes wrongly called as just “projection”) of spatial data you acquire and how to manage data and project coordinate reference systems.</p>
 <div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -347,17 +347,23 @@ Click for answer
 </div>
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Coordinate reference systems combine a <strong>datum</strong>, which defines a geometric representation of the Earth’s shape and how it ‘intersects’ with the real surface of the Earth, a <strong>coordinate system</strong> (for example latitude and longitude or northings and eastings) and a <strong>map projection</strong> which is a set of mathematical rules to project the 3D surface of the datum’s <em>ellpisoid</em> into a flat plane (such as a screen or a map).</p>
+<p>Coordinate reference systems combine a <strong>datum</strong>, which defines a geometric representation of the Earth’s shape and how it ‘intersects’ with the real surface of the Earth, a <strong>coordinate system</strong> (for example latitude and longitude or northings and eastings) and a <strong>map projection</strong> which is a set of mathematical rules to project the 3D surface of the datum’s <em>ellipsoid</em> into a flat plane (such as a screen or a map).</p>
 </div>
 </div>
 </div>
 <section id="obtaining-the-required-data" class="level3" data-number="2.1.1">
 <h3 data-number="2.1.1" class="anchored" data-anchor-id="obtaining-the-required-data"><span class="header-section-number">2.1.1</span> Obtaining the required data</h3>
 <ol class="example" type="1">
-<li>Download the <strong>2020</strong> country boundary data in <strong>GeoJSON</strong> format, at the <strong>1:20</strong> million scale, from the link below. The GeoJSON format is a more recent GIS file format, commonly used for web-based mapping. It is derived from the JavaScript Object Notation (JSON) data file format, widely used to exchange data among websites and web servers. More info <a href="https://en.wikipedia.org/wiki/GeoJSON">here</a>.</li>
+<li>For this exercise, we will use the the <strong>2024</strong> country boundaries data in <strong>GeoJSON</strong> format, at the <strong>1:20</strong> million scale, that is availabl from the link below. The GeoJSON format is a more recent GIS file format, commonly used for web-based mapping. It is derived from the JavaScript Object Notation (JSON) data file format, widely used to exchange data among websites and web servers. More info <a href="https://en.wikipedia.org/wiki/GeoJSON">here</a>.</li>
 </ol>
 <p><a href="https://ec.europa.eu/eurostat/web/gisco/geodata/administrative-units/countries">https://ec.europa.eu/eurostat/web/gisco/geodata/administrative-units/countries</a></p>
-<p><img src="images/lab_2/lab2_fig1_eurostat.jpg" class="img-fluid"></p>
+<p>We will need two files for this exercise:</p>
+<ul>
+<li>The <em>boundaries</em> geometry type (BN) file in the <em>EPSG:4326</em> coordinate reference system.</li>
+<li>The <em>boundaries</em> geometry type (BN) file in the <em>EPSG:3035</em> coordinate reference system.</li>
+</ul>
+<p><img src="images/lab_2/lab2_fig1_eurostat_4326.png" class="img-fluid"></p>
+<p><img src="images/lab_2/lab2_fig1_eurostat_3035.png" class="img-fluid"></p>
 <div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -387,15 +393,15 @@ Click for answer
 <div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ol type="a">
-<li><p>The page providing the data is managed by Eurostat, the statistical office of the European Union. Therefore you would be inclined to trust in the quality and correctness of the data provided.</p></li>
-<li><p>The webpage presents a link to “<a href="https://ec.europa.eu/eurostat/web/gisco/geodata/administrative-units">dowload rules</a>’ which describe the authorised uses of the data. This informartion can also be found in the data’s <em>metadata</em> file.</p></li>
+<li><p>The page providing the data is managed by Eurostat, the statistical office of the European Union. Therefore, you would be inclined to trust in the quality and correctness of the data provided.</p></li>
+<li><p>The webpage presents a link to “<a href="https://ec.europa.eu/eurostat/web/gisco/geodata/administrative-units">rules</a>” which describe the authorised uses of the data. This information can also be found in the data’s <em>metadata</em> file.</p></li>
 </ol>
 </div>
 </div>
 </div>
 <ol start="2" class="example" type="1">
-<li><p>Create a lab_2 folder in your GEOU9SP main folder. Then create a simple folder structure to organise the data, and extract the zipped downloaded data in its proper location. If you are not sure how to do this, please revisit <a href="lab_intro.html" class="quarto-xref"><span>Chapter 1</span></a>.</p></li>
-<li><p>Open QGIS and start a new project. Save it as <code>lab_2</code> in its proper folder. Then look at the contents of the folder holding the country data, using the <a href="https://docs.qgis.org/3.34/en/docs/user_manual/managing_data_source/opening_data.html#the-browser-panel">QGIS browser panel</a>. If the panel is not available, you can enable it by going to the <code>View &gt; Panels</code> menu and checking the box for <code>browser</code>. You should see several layers on tghe folder:</p></li>
+<li><p>Create a lab_2 folder in your GEOU9SP main folder. Then create a simple folder structure to organise the data.</p></li>
+<li><p>Open QGIS and start a new project. Save it as <code>lab_2</code> in its proper folder. Then look at the contents of the folder holding the country data, using the <a href="https://docs.qgis.org/3.34/en/docs/user_manual/managing_data_source/opening_data.html#the-browser-panel">QGIS browser panel</a>. If the panel is not available, you can enable it by going to the <code>View &gt; Panels</code> menu and checking the box for <code>browser</code>. You should see the two layers on the folder:</p></li>
 </ol>
 <p><img src="images/lab_2/lab_2_img2_layers.png" class="img-fluid"></p>
 <ol start="4" class="example" type="1">
@@ -411,7 +417,7 @@ Stop and Think
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Good file names are always informative of their content. Can you gess the contents of the different GeoJSON files you have downloaded based on their names?</p>
+<p>Good file names are always informative of their content. Can you guess the contents of the different GeoJSON files you have downloaded based on their names?</p>
 </div>
 </div>
 <div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
@@ -426,7 +432,7 @@ Click for answer
 </div>
 <div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>All file names start with <code>CNTR</code> for ‘countries’, followed by a two letter code. <code>BN</code> seems to stand for ‘boundary’(vector lines), <code>RG</code> for ‘region’(vector polygons), and <code>LB</code> for ‘labels’ (vector points). Then <code>2020</code> specified the reference year, and <code>20M</code> indicates the 1:20 million mapping scale. the final four-letter number indicates the EPSG code for the data CRS: 4326 (‘unprojected’ WGS84), 3857 (WGS 84 with Pseudo-Mercator projection) or 3035 (ETRS89-extended / Lambert Azimuthal Equal Area for Europe).</p>
+<p>All file names start with <code>CNTR</code> for ‘countries’, followed by a two-letter code. As you seen <code>BN</code> seems to stand for ‘boundary’(vector lines), <code>RG</code> for ‘region’(vector polygons), and <code>LB</code> for ‘labels’ (vector points). Then <code>2020</code> specified the reference year, and <code>20M</code> indicates the 1:20 million mapping scale. The final four-letter number indicates the EPSG code for the data CRS: 4326 (‘unprojected’ WGS84), 3857 (WGS 84 with Pseudo-Mercator projection) or 3035 (ETRS89-extended / Lambert Azimuthal Equal Area for Europe).</p>
 </div>
 </div>
 </div>
@@ -446,7 +452,7 @@ Stop and Think
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Why can’t you set a fill color for the countries?</p>
+<p>Why can’t you set a fill colour for the countries?</p>
 </div>
 </div>
 <div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
@@ -499,7 +505,7 @@ Click for answer
 </div>
 </div>
 <ol start="7" class="example" type="1">
-<li>Note, on the bottom QGIS status bar, that as you move your mouse pointer around, the coordinates for the mouse position are updated in real time. Also note what the map scale is, how it changes as zoom in and out. You can also type the second part of a scale nuber to zoom at the desired map scale (for example 50000 if you want to see the map at a 1:50000 scale)</li>
+<li>Note, on the bottom QGIS status bar, that as you move your mouse pointer around, the coordinates for the mouse position are updated in real time. Also note what the map scale is and how it changes as you zoom in and out. You can also type the second part of a scale number to zoom at the desired map scale (for example 50000 if you want to see the map at a 1:50000 scale)</li>
 </ol>
 <p><img src="images/lab_2/lab_2_img4_status_bar.png" class="img-fluid"></p>
 <div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
@@ -513,8 +519,8 @@ Stop and Think
 </div>
 <div class="callout-body-container callout-body">
 <ol type="a">
-<li><p>Why doesn’t the scale shown on the bar match the “advertised” scale for the dataset (1:10 million)?</p></li>
-<li><p>The box on the very bottom right of the QGIS status bar tells you what is the current project CRS. How is it different from a layer CRS?</p></li>
+<li><p>Why doesn’t the scale shown on the bar match the “advertised” scale for the dataset (1:20 million)?</p></li>
+<li><p>The box on the very bottom right of the QGIS status bar tells you what the current project CRS is. How is it different from a layer CRS?</p></li>
 </ol>
 </div>
 </div>
@@ -583,7 +589,7 @@ Stop and Think
 </div>
 <div class="callout-body-container callout-body">
 <ol type="a">
-<li><p>what is the name of the Coordinate Reference System specified by EPSG 3035?</p></li>
+<li><p>What is the name of the Coordinate Reference System specified by EPSG 3035?</p></li>
 <li><p>What did the warning window warned you about?</p></li>
 </ol>
 </div>
@@ -661,7 +667,7 @@ Stop and Think
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>What is the CRS for this new layer, and how well dos it visually align with the p[revious layer.</p>
+<p>What is the CRS for this new layer, and how well does it visually align with the previous layer?</p>
 </div>
 </div>
 <div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
@@ -676,14 +682,14 @@ Click for answer
 </div>
 <div id="callout-20" class="callout-20-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>This second layers uses the EPSG 3035 CRS, while the previous layer used EPSG 4326. Notice how ech layer maintains its original CRS when added to the project, but if necessary they are reprojected ‘on the fly’ to match up visually.</p>
+<p>This second layers uses the EPSG 3035 CRS, while the previous layer used EPSG 4326. Notice how each layer maintains its original CRS when added to the project, but if necessary they are reprojected ‘on the fly’ to match up visually.</p>
 </div>
 </div>
 </div>
 <ol start="12" class="example" type="1">
 <li><p>Change the project CRS back to EPSG:4326.</p></li>
 <li><p>Now go back to the project CRS properties and check the box that says <code>No CRS</code> at the top of the window. This disables the on-the-fly projection. Then click OK and go back to your map.</p></li>
-<li><p>Right click on the 4326 layer and select <code>Zoom to Layer</code>. Then select the zoom out tool (the loupe with a minus sign) at the top button row, and start clicking at the centre of the map. Keep clicking as it gets really smalll - you should click about 17 times until the second dataset is fully visible. Check the properties of each layer to make sure they still have the same CRS of when you loaded them.</p></li>
+<li><p>Right click on the 4326 layer and select <code>Zoom to Layer</code>. Then select the zoom out tool (the loupe with a minus sign) at the top button row, and start clicking at the centre of the map. Keep clicking as it gets really small - you should click about 17 times until the second dataset is fully visible. Check the properties of each layer to make sure they still have the same CRS of when you loaded them.</p></li>
 </ol>
 <div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
 <div class="callout-header d-flex align-content-center">
@@ -718,7 +724,7 @@ Click for answer
 <section id="potential-issues-with-using-mismatched-data" class="level3" data-number="2.1.3">
 <h3 data-number="2.1.3" class="anchored" data-anchor-id="potential-issues-with-using-mismatched-data"><span class="header-section-number">2.1.3</span> Potential issues with using mismatched data</h3>
 <ol start="15" class="example" type="1">
-<li><p>Download <a href="https://stir-my.sharepoint.com/:u:/g/personal/ala2_stir_ac_uk/EWwn64TEDgFCvLE-JUwjUZEBMRXc6NKtQ0KWHk769hI4Jw?e=iR9RdT">this vector shapefile (link)</a>, unzip it and add it to your QGIS project. Check what is the CRS of this layer.</p></li>
+<li><p>Download <a href="https://stir-my.sharepoint.com/:u:/g/personal/ala2_stir_ac_uk/EWwn64TEDgFCvLE-JUwjUZEBMRXc6NKtQ0KWHk769hI4Jw?e=iR9RdT">this vector shapefile (link)</a>, unzip it and add it to your QGIS project. Check what the CRS of this layer is.</p></li>
 <li><p>Set the Project CRS back to EPSG:3035. Then go to the top menu bar and select <code>Vector &gt; Geoprocessing &gt; Clip</code>. Select the layer that has the EPSG 3035 projection as your <code>Input</code> Layer, and the new “clip_bounds” layer as your <code>Overlay</code> Layer. You can just leave the output as a temporary file. Click Run.</p></li>
 <li><p>Turn off the visibility of all layers except the new “Clipped” layer to see the result of the Clip operation.</p></li>
 <li><p>Rename the “Clipped” layer to “Clipped_3035” by right clicking on it and selecting <code>Rename layer</code>. Then repeat the <code>Clip</code> operation, this time selecting the 4326 world layer as <code>Input</code>, and “clip_bounds” as <code>Overlay</code> again. Rename the result to “Clipped_4326.”</p></li>
@@ -749,13 +755,13 @@ Click for answer
 </div>
 <div id="callout-24" class="callout-24-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Because although they have been reprojected visually to match on screen, the files still have different CRSs, and this affects the lining up of the <code>Input</code> and overlay layers. To get proper results, you need permanently translate (reproject) both datasets to the same CRS.</p>
+<p>Because although they are reprojected ‘on-the-fly’ to visually match on screen, GIS operations will not take this into consideration when doing their calculations in the background. As the files still have different CRSs, this affects the lining up between the <code>Input</code> and <code>Overlay</code> layers. That is why it is so important to always permanently translate (reproject) all datasets to the same CRS at the start of a project.</p>
 </div>
 </div>
 </div>
 <ol start="19" class="example" type="1">
 <li><p>Now go to <code>Vector &gt; Data Management Tools &gt; Reproject Layer</code>. Select the 4326 world layer as your <code>Input Layer</code>, and EPSG:3035 as your <code>Target CRS</code>. Let the result be a temporary file and click <code>OK</code>. The new layer will be automatically named as “Reprojected”. What is the CRS of this new layer (check on the layer properties window)?</p></li>
-<li><p>Now repeat the use of the <code>Clip</code> tool using “Reprojected” as the <code>Input Layer</code> and “clip_bounds” as the <code>Overlay Layer</code>. Rename the resulting layer to ‘Clipped_Reprojected’. Which of the two originally clipped layers (“Clipped_3035” or “Clipped_4236?) better matches the”Clipped_Reprojected” layer?</p></li>
+<li><p>Now repeat the use of the <code>Clip</code> tool using “Reprojected” as the <code>Input Layer</code> and “clip_bounds” as the <code>Overlay Layer</code>. Rename the resulting layer to “Clipped_Reprojected”. Which of the two originally clipped layers (“Clipped_3035” or “Clipped_4236?) better matches the”Clipped_Reprojected” layer?</p></li>
 </ol>
 <div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
 <div class="callout-header d-flex align-content-center">
@@ -782,11 +788,11 @@ Click for answer
 </div>
 <div id="callout-26" class="callout-26-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>It actually applies a permament mathematical transformation to the coordinates of the input data, translating the data from one CRS to another. For any GIS project that involves multiple data layers with different CRSs, you should pick the CRS that makes more sense for your project as the ‘project CRS’, and then reproject all layers to the same CRS before anything else.</p>
+<p>It applies a permanent mathematical transformation to the coordinates of the input data, translating the data from one CRS to another. For any GIS project that involves multiple data layers with different CRSs, you should pick the CRS that makes more sense for your project as the ‘project CRS’, and then reproject all layers to the same CRS before anything else.</p>
 </div>
 </div>
 </div>
-<p>This is the end of Lab 2! You shoudl now understand why different datasets may have different Coordinate Reference Systems, what are the problems with working with data that has mismatched CRSs, and how to reproject data to match a given CRS. As this is your first week, there are no additional independent exercises - lets take it easy!</p>
+<p>This is the end of Lab 2! You should now understand why different datasets may have different Coordinate Reference Systems, what the problems are with working with data that has mismatched CRSs, and how to reproject data to match a given CRS. As this is your first week, there are no additional independent exercises - let’s take it easy!</p>
 <p>If you still want to practice more, check the exercises from the <a href="https://docs.qgis.org/3.34/en/docs/training_manual/basic_map/index.html">QGIS Training Manual</a>!</p>
 
 

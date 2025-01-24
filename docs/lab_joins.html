@@ -297,7 +297,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./lab_convex_interp.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Lab 14 - Convex Hulls and Interpolation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Lab 14 - Convex Hulls</span></span></a>
   </div>
 </li>
       </ul>
@@ -347,7 +347,7 @@ window.Quarto = {
 </header>
 
 
-<p>In this lab we will learn about <em>data joins</em> - operations that link data tables based on specific attributes, or based on locations. We will also learn how to read tabular data that has coordinates as columns as an actual spatial dataset, and will learn about Web Feature Service (WCS) layers - a standardized way to <em>stream</em> geospatial data without having to download it. Don’t skip the <em>Independent Exercise</em> either - you will learn two bonus GIS tools as part of it!</p>
+<p>In this lab we will learn about <em>data joins</em> - operations that link data tables based on specific attributes, or based on locations. We will also learn how to read tabular data which has coordinates as columns but is not actual spatial dataset, and will learn about Web Feature Service (WCS) layers - a standardized way to <em>stream</em> geospatial data without having to download it. Don’t skip the <em>Independent Exercise</em> either - you will learn two bonus GIS tools as part of it!</p>
 <section id="guided-exercise-1---working-with-wfs-layers." class="level2" data-number="11.1">
 <h2 data-number="11.1" class="anchored" data-anchor-id="guided-exercise-1---working-with-wfs-layers."><span class="header-section-number">11.1</span> Guided Exercise 1 - Working with WFS layers.</h2>
 <p>Both WFS (Web Feature Services), WMS (Web Map Services), and WCS (Web Coverage Services) are standardised web sharing formats defined by the <a href="https://www.ogc.org/">Open Geospatial Consortium (OGC)</a>. WMS and WCS are designed to serve images (i.e.&nbsp;rasters), while WFS is designed to serve features (i.e.&nbsp;vectors). This is similar to the streaming of Google Maps or Open Street Maps you have used with QGIS already, with the difference that layers streamed via WFS function just like layers you download to your computer.</p>
@@ -385,7 +385,7 @@ Tip
 </section>
 <section id="guided-exercise-2---importing-tabular-data" class="level2" data-number="11.2">
 <h2 data-number="11.2" class="anchored" data-anchor-id="guided-exercise-2---importing-tabular-data"><span class="header-section-number">11.2</span> Guided Exercise 2 - Importing tabular data</h2>
-<p>Sometimes you may have data that has coordinate information, but it is not in a spatial file format. For example, perhaps someone took soil samples along a beach and manually recorded the sampling locations by writing down the coordinates from a GPS receiver. We can still transform this data into spatial data - as long as we know which was the CRS used to record the coordinates. This is often a big problem, as people that are not GIS savvy (like yourself) do not understand CRSs and just write down the coordinates.</p>
+<p>Sometimes you may have data that has coordinate information, but it is not in a spatial file format. For example, perhaps someone took soil samples along a beach and manually recorded the sampling locations by writing down the coordinates from a GPS receiver. We can still transform this data into spatial data - as long as we know which the CRS used to record the coordinates was. This is often a big problem, as people that are not GIS savvy (like yourself) do not understand CRSs and just write down the coordinates.</p>
 <p>Another common issue is that people will see coordinates like -5.67543 degrees on the GPS device, and then round it down when writing. But (at the equator) one degree of latitude/longitude is about 111km, so if you round down the above coordinate to -5.67, you are rounding it up to the nearest 1km, and introducing a huge error.</p>
 <p>In this exercise, we will import some data from Police Scotland about traffic incidents, which is provided in tabular format.</p>
 <ol start="7" class="example" type="1">
@@ -448,7 +448,7 @@ Click for answer
 <p>You may be tempted to fix the problem above by using the <code>Field Calculator</code> to replace the spelling on one table by the spelling on the other. But there is another way - using a <em>spatial join</em> instead of an attribute join. Just like you can select data rows by attribute or by location, you can also join data tables by either attributes or location. Let’s do it.</p>
 <ol start="15" class="example" type="1">
 <li><p>First, remove the attribute join your created before. Go to the <code>Properties &gt; Joins</code> of the Traffic Collision layer, select the existing join and remove it using the red minus symbol. Then click <code>OK</code>.</p></li>
-<li><p>No go to the menu <code>Vector &gt; Data Management Tools &gt; Join Attributes by Location...</code>. You will see a new window similar to the <code>Select by Location</code> window. Then specify you want to <code>Join features in</code> the Traffic Collision layer that <code>Are Within</code> the Local Authority layer. Because there are many traffic incidents for each Authority area, you want to keep the <code>Join type</code> as <code>one-to-many</code>. For reference, check the figure below. This operation creates a new layer containing the joined table, so pick a folder and save your result as a vector file named <code>traffic_collisions_authority_joined</code>, then click <code>Run</code> then <code>Close</code>.</p></li>
+<li><p>No go to the menu <code>Vector &gt; Data Management Tools &gt; Join Attributes by Location...</code>. You will see a new window similar to the <code>Select by Location</code> window. Then specify you want to <code>Join features in</code> the Traffic Collision layer that <code>Are Within</code> the Local Authority layer. Because there are many traffic incidents for each Authority area, you want to keep the <code>Join type</code> as <code>one-to-many</code>. For reference, check the figure below. This operation creates a new layer containing the joined table, so pick a folder and save your result as a vector file named <code>traffic_collisions_authority_joined</code>, then click <code>Run</code> followed by <code>Close</code>.</p></li>
 </ol>
 <p><img src="images/lab_11/lab_11_fig_5_spatial_join.jpg" class="img-fluid"></p>
 <ol start="17" class="example" type="1">
@@ -491,7 +491,7 @@ Click for answer
 <ol type="1">
 <li><p>Download, extract and organise your files, and start a new project.</p></li>
 <li><p>Load the data into QGIS. The CSV file doesn’t have any coordinates, so you can just drag it and drop it in the <code>Layers</code> panel. It will show up as a non-spatial table (no geometries to show, but still has an attribute table).</p></li>
-<li><p>Guess what? The Output Area shapefile has topology errors. Use the <code>Fix Geometries</code> tool (<code>Procesing</code> panel, under the <code>Vector Geometry</code> category) to create a new shapefile with fixed geometries. Once you create it, rebuild the spatial index of this new fixed layer by going to <code>Vector &gt; Data Management Tools &gt; Create Spatial Index</code>. Otherwise your next step will be very slow.</p></li>
+<li><p>Guess what? The Output Area shapefile has topology errors. Use the <code>Fix Geometries</code> tool (<code>Procesing</code> panel, under the <code>Vector Geometry</code> category) to create a new shapefile with fixed geometries. Once you create it, rebuild the spatial index of this new fixed layer by going to <code>Vector &gt; Data Management Tools &gt; Create Spatial Index</code>. Otherwise, your next step will be very slow.</p></li>
 <li><p>Now do a <em>spatial join</em> between the fixed OA layer and the Traffic Collision layer. You want to join features from the traffic collision that <code>are within</code> the OAs. Save this new result as a new layer.</p></li>
 <li><p>Your resulting layer should now have all the traffic collisions joined to their respective OA codes. Now use the <code>Statistics by Categories</code> tool to count how many traffic collisions per Output Area code. The tool is in the <code>Processing</code> panel, under the <code>Vector Analysis</code> category. You want to calculate the counts, using the <code>code</code> attribute as the category for calculation. The window should look like this:</p></li>
 </ol>

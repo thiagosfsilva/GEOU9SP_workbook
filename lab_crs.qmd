@@ -16,11 +16,19 @@ Coordinate reference systems combine a **datum**, which defines a geometric repr
 
 ### Obtaining the required data
 
-(@) Download the **2020** country boundary data in **GeoJSON** format, at the **1:20** million scale, from the link below. The GeoJSON format is a more recent GIS file format, commonly used for web-based mapping. It is derived from the JavaScript Object Notation (JSON) data file format, widely used to exchange data among websites and web servers. More info [here](https://en.wikipedia.org/wiki/GeoJSON). 
+(@) For this exercise, we will use the the **2024** country boundaries data in **GeoJSON** format, at the **1:20** million scale, that is availabl from the link below. The GeoJSON format is a more recent GIS file format, commonly used for web-based mapping. It is derived from the JavaScript Object Notation (JSON) data file format, widely used to exchange data among websites and web servers. More info [here](https://en.wikipedia.org/wiki/GeoJSON). 
 
 [https://ec.europa.eu/eurostat/web/gisco/geodata/administrative-units/countries](https://ec.europa.eu/eurostat/web/gisco/geodata/administrative-units/countries)
 
-![](images/lab_2/lab2_fig1_eurostat.jpg)
+We will need two files for this exercise:
+
+- The *boundaries* geometry type (BN) file in the *EPSG:4326* coordinate reference system.
+- The *boundaries* geometry type (BN) file in the *EPSG:3035* coordinate reference system.
+
+
+![](images/lab_2/lab2_fig1_eurostat_4326.png)
+
+![](images/lab_2/lab2_fig1_eurostat_3035.png)
 
 ::: {.callout-important title="Stop and Think"}
 a) What is the source of the data you are downloading? Does it seem reliable? 
@@ -35,9 +43,9 @@ b) The webpage presents a link to "[rules](https://ec.europa.eu/eurostat/web/gis
 :::
 
 
-(@) Create a lab_2 folder in your GEOU9SP main folder. Then create a simple folder structure to organise the data, and extract the zipped downloaded data in its proper location. If you are not sure how to do this, please revisit @sec-exoverview.
+(@) Create a lab_2 folder in your GEOU9SP main folder. Then create a simple folder structure to organise the data.
 
-(@) Open QGIS and start a new project. Save it as `lab_2` in its proper folder. Then look at the contents of the folder holding the country data, using the [QGIS browser panel](https://docs.qgis.org/3.34/en/docs/user_manual/managing_data_source/opening_data.html#the-browser-panel). If the panel is not available, you can enable it by going to the `View > Panels` menu and checking the box for `browser`. You should see several layers on the folder:
+(@) Open QGIS and start a new project. Save it as `lab_2` in its proper folder. Then look at the contents of the folder holding the country data, using the [QGIS browser panel](https://docs.qgis.org/3.34/en/docs/user_manual/managing_data_source/opening_data.html#the-browser-panel). If the panel is not available, you can enable it by going to the `View > Panels` menu and checking the box for `browser`. You should see the two layers on the folder:
 
 ![](images/lab_2/lab_2_img2_layers.png)
 
@@ -48,7 +56,7 @@ Good file names are always informative of their content. Can you guess the conte
 :::
 
 ::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
-All file names start with `CNTR` for 'countries', followed by a two-letter code. `BN` seems to stand for 'boundary'(vector lines), `RG` for 'region'(vector polygons), and `LB` for 'labels' (vector points). Then `2020` specified the reference year, and `20M` indicates the 1:20 million mapping scale. The final four-letter number indicates the EPSG code for the data CRS: 4326 ('unprojected' WGS84), 3857 (WGS 84 with Pseudo-Mercator projection) or 3035 (ETRS89-extended / Lambert Azimuthal Equal Area for Europe).
+All file names start with `CNTR` for 'countries', followed by a two-letter code. As you seen `BN` seems to stand for 'boundary'(vector lines), `RG` for 'region'(vector polygons), and `LB` for 'labels' (vector points). Then `2020` specified the reference year, and `20M` indicates the 1:20 million mapping scale. The final four-letter number indicates the EPSG code for the data CRS: 4326 ('unprojected' WGS84), 3857 (WGS 84 with Pseudo-Mercator projection) or 3035 (ETRS89-extended / Lambert Azimuthal Equal Area for Europe).
 :::
 
 ### Visualising data with different CRS
@@ -86,7 +94,7 @@ Reference: Dynamic (relies on a datum which is not plate-fixed)
 ![](images/lab_2/lab_2_img4_status_bar.png)
 
 ::: {.callout-important title="Stop and Think"}
-a) Why doesn’t the scale shown on the bar match the “advertised” scale for the dataset (1:10 million)?
+a) Why doesn’t the scale shown on the bar match the “advertised” scale for the dataset (1:20 million)?
  
 b) The box on the very bottom right of the QGIS status bar tells you what the current project CRS is. How is it different from a layer CRS?
 :::
@@ -186,7 +194,7 @@ Why are the clipping results different even though the initial 3035 and 4236 lay
 :::
 
 ::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
-Because although they have been reprojected visually to match on screen, the files still have different CRSs, and this affects the lining up of the `Input` and overlay layers. To get proper results, you need to permanently translate (reproject) both datasets to the same CRS. 
+Because although they are reprojected 'on-the-fly' to visually match on screen, GIS operations will not take this into consideration when doing their calculations in the background. As the files still have different CRSs, this affects the lining up between the `Input` and `Overlay` layers. That is why it is so important to always permanently translate (reproject) all datasets to the same CRS at the start of a project.  
 :::
 
 (@) Now go to `Vector > Data Management Tools > Reproject Layer`. Select the 4326 world layer as your  `Input Layer`, and EPSG:3035 as your `Target CRS`. Let the result be a temporary file and click `OK`. The new layer will be automatically named as  “Reprojected”. What is the CRS of this new layer (check on the layer properties window)?

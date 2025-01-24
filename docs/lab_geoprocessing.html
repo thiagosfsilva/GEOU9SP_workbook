@@ -297,7 +297,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./lab_convex_interp.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Lab 14 - Convex Hulls and Interpolation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Lab 14 - Convex Hulls</span></span></a>
   </div>
 </li>
       </ul>
@@ -430,7 +430,7 @@ Click for answer
 <li>Set the symbology of the Stirling boundaries to a red outline without fill. Then make sure this layer is on top of the census layer. Then zoom in very close to the Stirling boundary. You will see they are offset by about 1.5m:</li>
 </ol>
 <p><img src="images/lab_geoprocessing/Fig3_boundary_offset.png" class="img-fluid"></p>
-<p>We thus need to further subset our data to match the actual extent of the Stirling coucil.</p>
+<p>We thus need to further subset our data to match the actual extent of the Stirling council.</p>
 <div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -516,7 +516,7 @@ Stop and Think
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Before you continue, try to think about the solution yourself. Look at the attributes of each layer, and then try to sketch a step by step plan to achieve the results you need. Then continue.</p>
+<p>Before you continue, try to think about the solution yourself. Look at the attributes of each layer, and then try to sketch a step-by-step plan to achieve the results you need. Then continue.</p>
 </div>
 </div>
 <ol start="13" class="example" type="1">
@@ -584,12 +584,12 @@ Click for answer
 </div>
 <div id="callout-12" class="callout-12-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><code>Intersection</code> will combine the attributes of both layers, while <code>CLip</code> will only preserve the attributes of the target layer.</p>
+<p><code>Intersection</code> will combine the attributes of both layers, while <code>Clip</code> will only preserve the attributes of the target layer.</p>
 </div>
 </div>
 </div>
 <ol start="18" class="example" type="1">
-<li>Since the buffers have been <em>dissolved</em>, they can’t be linked to individual schools anymore - whenever the buffers of two schools overlap their attribute tables will just keep the name of one of the schools when they are dissolved. So no need to preserve the buffer attributes, and we can use <code>Clip</code>. Create two new layers, the first being the clipping of the census layer by the 1km buffer layer, and the second being the clipping of the census layer by the 1km-2km ‘donuts’ layer. We use it instead of the 2km buffer otherwise when we calculate the percentage of area within 2km we will be double counting the area within 1km - which is already covered by the 1km buffer.</li>
+<li>Since the buffers have been <em>dissolved</em>, they can’t be linked to individual schools anymore - whenever the buffers of two schools overlap, their attribute tables will just keep the name of one of the schools when they are dissolved. So no need to preserve the buffer attributes, and we can use <code>Clip</code>. Create two new layers, the first being the clipping of the census layer by the 1km buffer layer, and the second being the clipping of the census layer by the 1km-2km ‘donuts’ layer. We use it instead of the 2km buffer otherwise when we calculate the percentage of area within 2km we will be double counting the area within 1km - which is already covered by the 1km buffer.</li>
 </ol>
 <p>You should end up with something like the figure below. To make sure the layers don’t overlap, style them using hatching in different directions. If you see a cross-hatch, then they are overlapping, and it means you used the full 2km buffer instead of the 1km-2km ‘donut’:</p>
 <p><img src="images/lab_geoprocessing/fig4_clipped_buffers.png" class="img-fluid"></p>
@@ -628,7 +628,7 @@ Click for answer
 </tr>
 </tbody>
 </table>
-<p>That is the end of this lab. From now on the exercises will be a bit more involved, like the one above - but at the same you will notice that much of it is still the same - loading data, organising it, doing queries - we will just be adding new tools that open up new (but quite specific) analysis possibilities and/or make some of the things you did before faster/simpler. But the general workflow of GIS is always the same.</p>
+<p>That is the end of this lab. From now on the exercises will be a bit more involved, like the one above. But at the same time you will notice that much of the work is always the same - loading data, organising it, doing queries - we will just be adding new tools that open up new (but quite specific) analysis possibilities and/or make some of the things you did before faster/simpler. Overall, the general workflow of GIS is always the same.</p>
 
 
 </section>

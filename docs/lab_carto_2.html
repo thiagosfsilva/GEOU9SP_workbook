@@ -268,7 +268,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./lab_convex_interp.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Lab 14 - Convex Hulls and Interpolation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Lab 14 - Convex Hulls</span></span></a>
   </div>
 </li>
       </ul>
@@ -326,7 +326,7 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>In this lab we will continue working on our map of the Bamburgh Castle region, this time focusing on manually digitizing polygons, labeling, and finishing our actual map page layout.</p>
+<p>In this lab we will continue working on our map of the Bamburgh Castle region, this time focusing on manually digitizing polygons, labelling, and finishing our actual map page layout.</p>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -375,19 +375,19 @@ Click for answer
 </div>
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>In this case, we <em>know</em> the aerial photo uses the EPSG:27700 CRS (by looking at the metadata, and also by knowing that any UK official cartographic product uses it). It is just a matter if informing QGIS what the CRS is, as it was not properly detected when the layer was added to the project. We use <code>Reproject</code> when the layer <em>already</em> has a defined CRS, and we want to <em>change it</em> to a different CRS (meaning likely a different datum, projection and maybe even a different coordinate type - such as from degrees to meters), and thus we need to <em>transform</em> (i.e.&nbsp;calculate) a new set of coordinates.</p>
+<p>In this case, we <em>know</em> the aerial photo uses the EPSG:27700 CRS (by looking at the metadata, and also by knowing that any UK official cartographic product uses it). It is just a matter of informing QGIS what the CRS is, as it was not properly detected when the layer was added to the project. We use <code>Reproject</code> when the layer <em>already</em> has a defined CRS, and we want to <em>change it</em> to a different CRS (meaning likely a different datum, projection and maybe even a different coordinate type - such as from degrees to meters), and thus we need to <em>transform</em> (i.e.&nbsp;calculate) a new set of coordinates.</p>
 </div>
 </div>
 </div>
 <ol start="2" class="example" type="1">
-<li>No we need a new empty layer to digitise on. Click on the <code>New shapefile layer</code> button (<img src="https://docs.qgis.org/3.34/en/_images/mActionNewVectorLayer.png" class="img-fluid"> ) on the main QGIS toolbar. You will get the <code>New Shapefile Layer</code> window:</li>
+<li>Now we need a new empty layer to digitise on. Click on the <code>New shapefile layer</code> button (<img src="https://docs.qgis.org/3.34/en/_images/mActionNewVectorLayer.png" class="img-fluid"> ) on the main QGIS toolbar. You will get the <code>New Shapefile Layer</code> window:</li>
 </ol>
 <p><img src="images/lab_8/lab8_fig1_newshape_window.jpg" class="img-fluid"></p>
 <ol start="3" class="example" type="1">
 <li><p>First pick a folder to save your file and name it <code>bamburgh_castle</code>, on the <code>File Name</code> box. Then for <code>Geometry type</code>, pick <code>Polygon</code>, and pick EPSG:27700 for the CRS. Notice how QGIS automatically creates an integer attribute named <code>id</code>. We want a text attribute to hold the castle name, though, so enter <code>name</code> as the name of the field on the <code>New Field</code> options, then pick the <code>Text (string)</code> data type and a length of <code>80</code> (the default) and click on <code>Add to Fields List</code>. You should see the new <code>name</code> field added to the fields list. Then click <code>OK</code>.</p></li>
 <li><p>Find your new layer on the <code>Layer Panel</code>. It doesn’t have any geometries yet, so you won’t see anything on your map. Highlight your new layer, and then put it into editing mode by clicking on the <code>Toggle Editing</code> button (<img src="https://docs.qgis.org/3.34/en/_images/mActionToggleEditing.png" class="img-fluid">) on the main QGIS toolbar. Make sure you are editing the right layer (it should have a pencil symbol on top of the symbology colour on the layer list).</p></li>
 <li><p>Now right-click on the aerial photo layer and select <code>Zoom to Layer(s)</code> to centre the map canvas on it. Then manually set a scale of 1:1500 on the bottom QGIS bar. It is important to be aware of the scale you are digitizing at, and keep it constant so that the level of detail is also constant. Drag the castle to the middle of the canvas using the <code>Pan Map</code> tool (the hand).</p></li>
-<li><p>Now highlight the new shapefile layer (which is being edited) again. The <code>Digitizing tools</code> toolbar (<img src="images/lab_8/lab8_fig2_digi_tools.jpg" class="img-fluid">) should be available. Click on the <code>Add Polygn Feature</code> button (<img src="https://docs.qgis.org/3.34/en/_images/mActionCapturePolygon.png" class="img-fluid">) to enter a polygon drawing mode. Start clicking anywhere in the castle outer walls, and then keep clicking to trace the entire castle shape. Once you finish you polygon, right-click to end the drawing. A window will pop-up asking you to enter an <code>id</code> and <code>name</code>. Enter <code>1</code> and <code>Bamburgh Castle</code> respectively.</p></li>
+<li><p>Now highlight the new shapefile layer (which is being edited) again. The <code>Digitizing tools</code> toolbar (<img src="images/lab_8/lab8_fig2_digi_tools.jpg" class="img-fluid">) should be available. Click on the <code>Add Polygon Feature</code> button (<img src="https://docs.qgis.org/3.34/en/_images/mActionCapturePolygon.png" class="img-fluid">) to enter a polygon drawing mode. Start clicking anywhere in the castle outer walls, and then keep clicking to trace the entire castle shape. Once you finish you polygon, right-click to end the drawing. A window will pop-up asking you to enter an <code>id</code> and <code>name</code>. Enter <code>1</code> and <code>Bamburgh Castle</code> respectively.</p></li>
 <li><p>If you want to edit the polygon shape after the fact, use the <code>Vertex Tool</code> (<img src="https://docs.qgis.org/3.34/en/_images/mActionVertexToolActiveLayer.png" class="img-fluid">). Then click once on a vertex to select it, and then cick again to reposition it, or the Delete key on your keyboard to delete it. You can also add a new vertex by hovering the mouse in between vertices until you see a red <code>x</code>. You should end up with something like this:</p></li>
 </ol>
 <p><img src="images/lab_8/lab8_fig4_digitsed_castle.jpg" class="img-fluid"></p>
@@ -423,7 +423,7 @@ Click for answer
 </div>
 <div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>As a rule of thumb, legend names indicates <em>categories</em> or <em>groups</em> of things, as well as <em>continuous</em> variables. Labels identify <em>unique</em> things. For example, if there were multiple castles in the map, you could have a legend symbol indicating “castle” (a category of thing), and then labels showing the names of each castle. If you wanted to indicate a specific mountain peak in your elevation map, you would still have an “Elevation” item on the legend explaining the elevation symbology (a continuous variable), and then a point symbol and a label to identify the particular peak. If there were multiple peaks, then you would add a “Mountain Peak” item to the legend, associated with the point symbol you selected to indicate peaks. But this is not essential when there is only a single item in the category (like our single castle).</p>
+<p>As a rule of thumb, legend names indicate <em>categories</em> or <em>groups</em> of things, as well as <em>continuous</em> variables. Labels identify <em>unique</em> things. For example, if there were multiple castles in the map, you could have a legend symbol indicating “castle” (a category of thing), and then labels showing the names of each castle. If you wanted to indicate a specific mountain peak in your elevation map, you would still have an “Elevation” item on the legend explaining the elevation symbology (a continuous variable), and then a point symbol and a label to identify the particular peak. If there were multiple peaks, then you would add a “Mountain Peak” item to the legend, associated with the point symbol you selected to indicate peaks. But this is not essential when there is only a single item in the category (like our single castle).</p>
 </div>
 </div>
 </div>
@@ -507,11 +507,11 @@ Click for answer
 </div>
 </div>
 </div>
-<p>You should now have a lot less Named Places scattered through the map, and if you inspect the attribute table, you will see only the filtered results. It is as if the rest of the data doesn’t exist! You will always know if a layer is being filtered by the ‘funnel’ symbol to the right of the layer name (and you can click on the symbol to edit or clear the filter).</p>
+<p>You should now have a lot fewer Named Places scattered through the map, and if you inspect the attribute table, you will see only the filtered results. It is as if the rest of the data doesn’t exist! You will always know if a layer is being filtered by the ‘funnel’ symbol to the right of the layer name (and you can click on the symbol to edit or clear the filter).</p>
 <ol start="13" class="example" type="1">
 <li><p>Now follow the same procedure you used to label Bamburgh Castle to label the populated places, using the <code>DISTNAME</code> attribute - but use a font size of <code>10</code> to keep the <em>visual hierarchy</em> in relation to the castle, and keep the <code>Placement</code> option as the default <code>Cartographic</code> option.</p></li>
 <li><p>Change the <code>Symbology</code> of the <code>NU_NamedPlaces</code> layer to the preset symbol <code>topo pop capital</code> (a white circle with a black dot in the middle), with a <code>Size</code> of <code>2.4</code>.</p></li>
-<li><p>Add the <code>NU_RailwayStation.shp</code> file to your map, and label it using the <code>DISTNAME</code> attribute as well (you should see only one station, ‘Chathill’). Make the label size <code>10</code>, colour it <code>blue</code> and make its style <code>bold italic</code>, and do not use a <code>buffer</code> this time.</p></li>
+<li><p>Add the <code>NU_RailwayStation.shp</code> file to your map, and label it using the <code>DISTNAME</code> attribute as well (you should see only one station, ‘Chathill’). Make the label size <code>10</code>, colour it <code>blue</code> and make its style <code>bold italic</code>; do not use a <code>buffer</code> this time.</p></li>
 <li><p>Now go to the <code>Symbology</code> tab for the railway station layer, and pick <code>Single Symbol</code>. Select the <code>Simple Marker</code> sub-item, and then change the <code>Symbol layer type</code> from <code>Simple Marker</code> to <code>SVG Marker</code>. SVG stands for ‘Scalable Vector Graphics’ and is a commonly used format to store figures in desktop publishing.</p></li>
 <li><p>Once you change the <code>Symbol layer type</code>, a new <code>SVG Browser</code> section will appear below. In there, find the <code>transport</code> folder on the browser to the left, and pick the railway symbol (looks like a train). Then above it, change the <code>Fill Color</code> to the same blue you used for the label, and decrease the <code>Stroke Width</code> until it says <code>No stroke</code>. Increase the size of the symbol to <code>6</code> (width and height should be linked by default). Your options should look like this (<code>stroke colour</code> doesn’t matter):</p></li>
 </ol>
@@ -618,7 +618,7 @@ Tip
 <li><p>Our coordinates also have no axis indication, so change the <code>Format</code> option from <code>Decimal</code> to <code>Decimal with Suffix</code>. That will add the easting (E) and Northing(N) indicators.</p></li>
 <li><p>Below <code>Draw Coordinates</code>, you see sets of options labelled <code>Left</code>, <code>Right</code>, <code>Top</code> and <code>Bottom</code>. Change the third option for <code>Left</code> from <code>Horizontal</code> to <code>Vertical Ascending</code>, and for <code>Right</code> to <code>Vertical Descending</code>. Then at the bottom of the <code>Draw Coordinates</code> section, set <code>Coordinate Precision</code> to <code>0</code> to remove the decimal places.</p></li>
 <li><p>If we expected our map users to navigate using a compass, the actual grid lines would be useful. But since this is unlikely, the actual black grid lines are too obtrusive. Go back to the top of the <code>Map Grid Properties</code>, and change the <code>Grid Type</code> from <code>Solid</code> to <code>Frame and Annotations Only</code>.</p></li>
-<li><p>Finally, let us add a black border to our map for aesthetic purposes. Go back to the main <code>Item Properties</code> for <code>Map 1</code>, and find the <code>Framè</code> option. Enable the checkbox to add a frame. Save your layout.</p></li>
+<li><p>Finally, let us add a black border to our map for aesthetic purposes. Go back to the main <code>Item Properties</code> for <code>Map 1</code>, and find the <code>Frame</code> option. Enable the checkbox to add a frame. Save your layout.</p></li>
 </ol>
 <p>My map layout is now looking like this:</p>
 <p><img src="images/lab_8/lab8_fig16_layout_with_grid.jpg" class="img-fluid"></p>
@@ -712,7 +712,7 @@ Tip
 <ul>
 <li><p>Create a third theme on QGIS, where only the air photo is visible, and name it <code>Close Up</code>.</p></li>
 <li><p>Add a new map frame in the space left between the Overview map and the Legend, rename it from <code>Map 3</code> to <code>Close Up</code>, and set it to follow the <code>Close Up</code> theme.</p></li>
-<li><p>Adjust this inset map scale to show all of the castle as close up as possible. Aroubnd 15000 should work well.</p></li>
+<li><p>Adjust this inset map scale to show all of the castle as close up as possible. Around 15000 should work well.</p></li>
 <li><p>Do not add a coordinate grid to this map inset, but do add a Scale Bar. To make the scale relative to the <code>Close Up map</code>, create the scale bar then go to its <code>Item Properties</code>, and on the first option called <code>Map</code>, make sure it is set to <code>Close Up Map</code>. Make the scale only one segment long, and place it within the close up image.</p></li>
 <li><p>Add a small text below the Close Up Map, saying <code>Aerial View of Bamburgh Castle</code>.</p></li>
 </ul>

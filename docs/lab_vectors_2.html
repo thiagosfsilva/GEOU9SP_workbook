@@ -268,7 +268,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./lab_convex_interp.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Lab 14 - Convex Hulls and Interpolation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Lab 14 - Convex Hulls</span></span></a>
   </div>
 </li>
       </ul>
@@ -335,7 +335,7 @@ ul.task-list li input[type="checkbox"] {
 </ol>
 <p><img src="images/lab_4/lab4_fig1_select_loc.jpg" class="img-fluid"></p>
 <ol start="3" class="example" type="1">
-<li><p>Select the Earthquakes layer as <code>Select features from</code>. Then check <em>only</em> the <code>Are within</code> query option. Then pick your World Countries layer for <code>By comparing to the fetaures from</code>. Click <code>Run</code>, and after it is finished, click <code>Close</code>.</p></li>
+<li><p>Select the Earthquakes layer as <code>Select features from</code>. Then check <em>only</em> the <code>Are within</code> query option. Then pick your World Countries layer for <code>By comparing to the features from</code>. Click <code>Run</code>, and after it is finished, click <code>Close</code>.</p></li>
 <li><p>Visually inspect the results of your selection, and then open the Attribute Table for the Earthquakes layer.</p></li>
 </ol>
 <div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
@@ -372,7 +372,7 @@ Click for answer
 <li><p>Still on the Attribute Table of the Earthquakes layer, open the <code>Field Calculator</code>, and create a new <code>Text(string)</code> field called <code>Origin</code>. Make sure the option <code>Only update selected features</code> <strong>is</strong> enabled this time. Then on the Expression window, just write <code>'Land'</code>. That means the word <code>Land</code> will be added as the attribute value for every selected feature.</p></li>
 <li><p>Now back on the Attribute Table window, click on the <code>Invert Selection</code> button (<img src="https://docs.qgis.org/3.34/en/_images/mActionInvertSelection.png" class="img-fluid">).</p></li>
 <li><p>Return to the <code>Field Calculator</code> and this time use the <code>Update Existing Field</code> option to the right, instead of <code>Create a new field</code>. Make sure the option <code>Only update selected features</code> is still enabled. Pick <code>Origin</code> as the field to be updated, and now just write <code>'Ocean'</code> on the Expression window. Click <code>OK</code>.</p></li>
-<li><p>Now use the <code>Origin</code> attribute to style the colour or shape of your Earthquake points differently for land and ocean, using the <code>Symbology</code> options. Pick the <code>Categorized</code> symbology option at the top, and then the set the <code>Value</code> to the <code>Origin</code>attribute, and then <code>Classify</code>.</p></li>
+<li><p>Now use the <code>Origin</code> attribute to style the colour or shape of your Earthquake points differently for land and ocean, using the <code>Symbology</code> options. Pick the <code>Categorized</code> symbology option at the top, set the <code>Value</code> to the <code>Origin</code> attribute, and then <code>Classify</code>.</p></li>
 </ol>
 <div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
 <div class="callout-header d-flex align-content-center">
@@ -415,7 +415,7 @@ Click for answer
 <p>Another way to relate geometries to attributes is when we want to store some property of the geometry as an attribute itself, such as area, length or perimeter. QGIS also has tools for that.</p>
 <p>As an example, let us calculate the areas and border length (perimeter) of all the World’s countries.</p>
 <ol start="11" class="example" type="1">
-<li>Before using any of the geometry-based operators, we need to set up our desired units for the project. Go to the menu <code>File &gt; Properties...</code> to open your project properties. Then on the <code>General</code> tab, set the <code>Units for distance measurement</code> to <code>Kilometers</code> and the <code>Units for area measurement</code> to <code>Square Kilometers</code> (yes, we will use <a href="https://en.wikipedia.org/wiki/International_System_of_Units">SI</a> units because we scientists!).</li>
+<li>Before using any of the geometry-based operators, we need to set up our desired units for the project. Go to the menu <code>File &gt; Properties...</code> to open your project properties. Then on the <code>General</code> tab, set the <code>Units for distance measurement</code> to <code>Kilometers</code> and the <code>Units for area measurement</code> to <code>Square Kilometers</code> (yes, we will use <a href="https://en.wikipedia.org/wiki/International_System_of_Units">SI</a> units because we are scientists!).</li>
 </ol>
 <p>It is always important to think about your problem before choosing the units for length and area calculations. In this case, using the default of meters and squared meters would not make sense for things as large as countries.</p>
 <ol start="12" class="example" type="1">
@@ -541,7 +541,7 @@ Click for answer
 <li>The WPAs;</li>
 <li>The boundaries of the SSSIs, distinguishing between those that do and do not overlap with WPAs;</li>
 <li>All Scottish roads differentiated by class using line width;</li>
-<li>All the road segments that are Motorways, A or B roads within WPAs that are longer than 100m. These should use the same line widths as above to differentiate road class, but have a different colour from other roads.</li>
+<li>All the road segments that are Motorways, A or B roads within WPAs which are longer than 100m. These should use the same line widths as above to differentiate road class but have a different colour from other roads.</li>
 </ul>
 
 
