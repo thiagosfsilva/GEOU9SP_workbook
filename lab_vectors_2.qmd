@@ -101,12 +101,12 @@ To further solidify your knowledge, do the Independent Exercise below, which rev
 
 You want to investigate how priority areas for wildcat conservation (WPAs) overlap with protected areas, and the risk of wildcat roadkill.  
 
-For that, obtain the following layers from the [NatureScot Open Data Hub](https://opendata.nature.scot/). Get them in *shapefile* format.
+For that, obtain the following layers from the [NatureScot Open Data Hub](https://opendata.nature.scot/). Get them in either *shapefile* or *geopackage* format.
 
 - Wildcat Priority Areas (WPA)
 - Sites of Special Scientific Interest (SSSI)
 
-Then obtain the Open Roads layer for all of the UK from the [Ordnance Survey OS Open Data](https://osdatahub.os.uk/downloads/open) hub (it is a large file and it may take a while to download).
+Then obtain the Open Roads layer for all of the UK from the [Ordnance Survey OS Open Data](https://osdatahub.os.uk/downloads/open) hub, also as a *geopackage* (it is a large file and it may take a while to download).
 
 Finally, obtain the UK  country boundaries from the [Global Administrative Boundaries (GADM)](https://gadm.org/data.html) hub. Get the *GeoJSON*  file at *Level 1* (Level 0 is the UK border without countries, level 1 is countries, level 2 is counties/council areas, etc.)  
 
