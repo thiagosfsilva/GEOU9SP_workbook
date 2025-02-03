@@ -116,7 +116,7 @@ This is what is called a `multipart` polygon - a set of disjoint polygons all tr
 
 (@) Go to `Vector > Geometry Tools > Multipart to Singleparts`, and select the GADM layer. You can leave it as a temporary layer since we will only export one polygon for it in the next step. A new temp layer called `Single parts` will be created. Inspect its Attribute Table. 
 
-(@) Now use the feature selection tool (![](https://docs.qgis.org/3.34/en/_images/mActionSelectRectangle.png)) to select the one polygon for the mainland Great Britain only (no smaller islands!), and then right-click on the Single Part layer name and choose  `Export > Save selected features as...`. Pick a folder location and name the file `GB_Island.shp`. Before you click on OK, however, change the `CRS` drop-down menu to EPSG:27000. That is it, QGIS will now reproject the layer before saving it! Click `OK`to save, and then remove the original GADM and the temp layer from your project to keep things tidy. Save your project.
+(@) Now use the feature selection tool (![](https://docs.qgis.org/3.34/en/_images/mActionSelectRectangle.png)) to select the one polygon for the mainland Great Britain only (no smaller islands!), and then right-click on the Single Part layer name and choose  `Export > Save selected features as...`. Pick a folder location and name the file `GB_Island.shp`. Before you click on OK, however, change the `CRS` drop-down menu to EPSG:27700. That is it, QGIS will now reproject the layer before saving it! Click `OK`to save, and then remove the original GADM and the temp layer from your project to keep things tidy. Save your project.
 
 (@) Double check what is the CRS of the new `GB_island` layer you have created.
 
