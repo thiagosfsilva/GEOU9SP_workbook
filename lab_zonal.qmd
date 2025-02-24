@@ -138,11 +138,11 @@ CHELSA also provides data for future climate analysis, including multiple future
 
 You settle on using projections for the SSP 370 (middle-of-the-road scenario) for the years 2081-2100 prediction, and to restrict your analysis to the average prediction of three climate model outputs:
 
-IPSL-CM6A-LR ([https://cmc.ipsl.fr/ipsl-climate-models/ipsl-cm6/](https://cmc.ipsl.fr/ipsl-climate-models/ipsl-cm6/))
+IPSL-CM6A-LR ([https://cmc.ipsl.fr/ipsl-climate-models/ipsl-cm6/](info: https://cmc.ipsl.fr/ipsl-climate-models/ipsl-cm6/))
 
-MIROC-ES2L ([https://catalogue.ceda.ac.uk/uuid/a31ca90e3d524c99aef5d8223135f397](info: https://catalogue.ceda.ac.uk/uuid/a31ca90e3d524c99aef5d8223135f397))
+MPI-ESM1-2-HR ([https://gmd.copernicus.org/articles/12/3241/2019/](info: https://gmd.copernicus.org/articles/12/3241/2019/))
 
-GFDL-ESM4 ([ https://www.gfdl.noaa.gov/earth-system-esm4/]( https://www.gfdl.noaa.gov/earth-system-esm4/))
+MPI-ESM2-0 ([https://www.jstage.jst.go.jp/article/jmsj/97/5/97_2019-051/_article](info: https://www.jstage.jst.go.jp/article/jmsj/97/5/97_2019-051/_article))
 
 *Note: The CHELSA datasets come as global layers, but to reduce download sizes, I have already cropped them to cover Taiwan only. Don't say I never did anything for you :-).*
 
