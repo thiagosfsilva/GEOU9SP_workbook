@@ -57,6 +57,8 @@ The right way to accomplish this task is to use the `Zonal Statistics` tool. It 
 
 (@) Now style the new layer you obtained using a continuous colour scale to show NO$_2$ concentrations for each neighbourhood. 
 
+![](images/lab_12/lab12_fig_no2-per-neig.jpg)
+
 (@) Load the `OpenStreetMap` layer (on the `Browser Panel`, under the `XYZ Tiles` category). Does it look like NO$_2$ pollution is worse on densely urbanised areas?
 
 ## Guided Exercise 3 - Overlap Analysis
@@ -80,8 +82,6 @@ But again, there is a faster way. This will be a common theme for many of the to
 ![](images/lab_12/lab12_fig2_overlap.jpg)
 
 This new layer has all the same attributes and polygons as the original neighbourhoods layer, but two additional fields, named with the name of the overlap layer followed by a `_area` or `_pc` suffix: the first gives you the overlap area (in the same units as the CRS you are using, so m$^2$), and the second gives you the percentage of area overlap. It should look somewhat like this:
-
-![](images/lab_12/lab12_fig_no2-per-neig.jpg)
 
 
 (@) Style this new overlap layer to show the percentage of green spaces as a continuous colour. Does it seem to be inversely correlated to NO$_2$ pollution?
