@@ -6,9 +6,9 @@ Developing proper project and file management habits from the start is the *best
 
 ## Before you start!
 
-1. Go through the Week 1 preparatory session on Canvas, and watch the seminar recording if you have missed it. 
+(@) Go through the Week 1 preparatory session on Canvas, and watch the seminar recording if you have missed it. 
 
-2. Read [this document](https://www.ordnancesurvey.co.uk/documents/resources/guide-to-nationalgrid.pdf) to understand how the British National Grid indexing system works. 
+(@) Read [this document](https://www.ordnancesurvey.co.uk/documents/resources/guide-to-nationalgrid.pdf) to understand how the British National Grid indexing system works. 
 
 <!-- end of list -->
 
@@ -28,7 +28,7 @@ For this practical you will use the "OS open road" and "OS Terrain 50 Digital Te
   - OS Open Roads (under *Vector Data*) - choose the `SHP` format
   - "OS Terrain 50 Digital Terrain Model" (*NOT Terrain 5 and NOT Contours!*, under Land and Height Data) - choose the `ASC` format
 
-If you have correctly searched for tile NS89 and checked the required datasets, you will see a screen like this:
+If you have correctly searched for tile NS89 and checked the required datasets, you will see a screen like the one below (the basemap may look a bit different). To enable the NS89 label on the tile, click on `Reference Grid` under `Basemap` (top left of the map canvas) and enable the `10km grid`. 
 
 ![](images/lab_1/lab1_digimap.png)
 
@@ -84,7 +84,14 @@ I like to start folder names start with double digits so they are kept in order.
 
 - `04_notes`: here we will keep all our *non-GIS* files. For example, it may be a good idea to keep a text file documenting the project steps as you work on it. You could also save here screen grabs of specific steps. Again, use sub-folders as needed to keep your data tidy.
 
-(@) Now move the data you've downloaded into your organized project folders and extract (unzip) them if necessary. The terrain data folder (`terrain-50-dtm_xxxxxxx`) should go into the `raster` folder within `01_raw_data` and the roads folder (`open-roads_xxxxxxx`) into the `vector` folder. The `citations_orders.xxxx.txt` and `contents_order_xxx` text files should go into your `04_notes` folder. Your folder structure should look like this:
+(@) Now move the data you've downloaded into your organized project folders and extract (unzip) them if necessary. The terrain data folder (`terrain-50-dtm_xxxxxxx`) should go into the `raster` folder within `01_raw_data` and the roads folder (`open-roads_xxxxxxx`) into the `vector` folder. The `citations_orders.xxxx.txt` and `contents_order_xxx` text files should go into your `04_notes` folder. 
+
+::: {.callout-note}
+Each of the download datasets will contain several files once you unzip them. All of them are important, so make sure to keep them all together (except for the text files, these can go somewhere else).
+::: 
+
+
+Your folder structure should look like this:
 
 ```
 .
@@ -120,10 +127,15 @@ They are both plain text files. `citations_orders.xxxx.txt` is very handy as it 
 
 A QGIS project is a file, which will remember all the data layers you have loaded, their stacking order, the styling of each layer, and some other information such as the coordinate reference system. It will also keep any map layouts that you create. **But he project file will NOT store the data files themselves!!**. It will only link to the data. That is why we need good project folder organisation. If a data file is moved or renamed, the QGIS project file will lose track of it. 
 
-6. Create a new project in QGIS by clicking on `Project > New...` or pressing *Ctrl-N*:
+(@) Open QGIS. Then create a new project in QGIS by clicking on `Project > New...` or pressing *Ctrl-N*:
 
 ![](images/lab_1/lab1_fig1_newproject.png)
 
+::: {.callout-warning}
+If you start QGIS and you don't see the `Browser` and `Layers` panels to the left (like the figure below), then go to the menu `View > Panels ` and then enable the `Browser` panel. Then repeat, this time enabling the `Layers` panel. 
+
+![](images/lab_1/panels.png){width=70%}
+:::
 
 
 (@) Add to your project the layers `NS_RoadLink.shp` from the OS Roads dataset and the `NS89.asc` terrain data from your organized project folders. Don't worry if the extents don't match - it's just that the OS DEM and the OS Roads are distributed in different sized 'chunks'.
@@ -241,6 +253,8 @@ c) When we created the extent layer, we produced a *temporary layer*, which is d
 The main QGIS interface (or any other GIS software) is developed and optimised for interactive work. But very often as part of our GIS analysis we will want to generate nice maps and figures following proper design rules (and not just grabbing a screen capture of the QGIS window and dumping it on a page - hint for your assignment reports). For that, we use the QGIS **Map Layout Editor**. 
 
 (@) Click on `Project > New Print Layout` and name it `Lab 1 Layout`. A new window will open showing the QGIS Layout Editor. Notice that the main QGIS window remains open as well. These windows are 'linked', so that the map layout reflects any styling changes you make on the main window. 
+
+(@) The `Layout` window often opens at a small size. Maximize it so it takes the whole screen, and use your mouse wheel to zoom into the blank page until it occupies most of the canvas.
 
 (@) Add a new map to the layout by clicking on the ![](https://docs.qgis.org/testing/en/_images/mActionAddMap.png) icon. Drag it through the page so it covers about 2/3 of it horizontally, and the full height of the page (minus some borders).
 
