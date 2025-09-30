@@ -319,10 +319,10 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Vector data consists of discrete observations called features. For example, on a vector layer representing all protected areas in Scotland, each individual protected area would comprise a feature. With regular data, observations are just rows on a table, but with vector spatial data, features are composed of two elements: the geometry (the visual component + coordinates) and attributes (columns on a table holding data about each feature, also known as <em>fields</em>).</p>
-<p>On the figure below, each country is a feature - the shape of the country is represented by the geometry (left) and the corresponding <em>attributes</em> are shown in the right. Notice that both the geometry and the corresponding attributes of one specific feature (Brazil) are <em>selected</em>. Selections are a very important component of GIS analysis, as they can narrow down the targets for your calculations.</p>
+<p>Vector data consists of discrete observations (or records) that in GIS terminology are called <strong>features</strong>. For example, on a vector layer representing all protected areas in Scotland, each individual protected area would comprise a feature. Data records on non-spatial data are normally just rows on a table, but with vector spatial data features are composed of two elements: the <strong>geometry</strong> (the visual component - vertices, edges and their coordinates) and the <strong>attributes</strong> (columns on a table holding data about each feature, also known as <em>fields</em>).</p>
+<p>The figure below shows a portion of a vector layer of world countries. In this layer each country is a feature - the shape of the country is represented by both a geometry (seen on the <em>map canvas</em> on the left) and its corresponding attributes (shown in the *attribute table<strong> to the right). In the figure, the feature corresponding to Brazil is </strong>selected** - indicated by the bright yellow colour of the selected geometry and by the blue colour on the selected corresponding attribute row. <em>Selections are a very important component of GIS vector analysis</em>, as they will narrow down the targets of your calculations.</p>
 <p><img src="images/lab_3/lab3_fig1_geometries+attributes.jpg" class="img-fluid"></p>
-<p>For this lab, we will focus mainly on the following GIS operations: filtering attributes, summarising attributes, and creating and modifying attribute data. Remember to apply, from here on, all the steps you have already learned in previous labs: create a project folder, organize your data, save a named project with proper CRS info, etc. Each week’s labs will build upon the previous activities, so I will not be repeating instructions for things covered in previous sessions.</p>
+<p>For this lab, we will focus mainly on the following GIS vector operations: filtering attributes, summarising attributes, and creating and modifying attribute data. Remember to apply, from here on, all the steps you have already learned in previous labs: create a project folder, organize your data, save a named project with proper CRS info, and so on. Each week’s labs will build upon the previous activities, so I will not be repeating instructions for things covered in previous sessions.</p>
 <section id="before-you-start" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="before-you-start"><span class="header-section-number">3.1</span> Before you start!</h2>
 <ol type="1">
@@ -331,10 +331,30 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="guided-exercise-1---basic-work-with-vector-data" class="level2" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="guided-exercise-1---basic-work-with-vector-data"><span class="header-section-number">3.2</span> Guided Exercise 1 - Basic work with Vector Data</h2>
-<p>In this exercise, you will learn how to open and read vector data.</p>
+<p>In this exercise, you will learn how to open and read vector data. First, read the note below.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Common vector file formats">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Common vector file formats
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Vector data can come in different file formats, each with advantages and disadvantages:</p>
+<ul>
+<li><p><strong>Geopackage (.gpkg):</strong> Geopackages are a new and open file format that can hold single or multiple layers inside them, and they are completely self-contained (i.e.&nbsp;all required information is inside a single file). QGIS uses geopackage as its default file format.</p></li>
+<li><p><strong>Shapefile (.shp):</strong> Shapefiles are a very old file format, developed by ESRI (the makers of ArcGIS). It is still the most common format you will find vector data on. A single ‘shapefile’ is actually a set of multiple files with the same name and different extensions - the <code>.shp</code> file contains the geometries, the <code>.shx</code> file contains indexing information, the <code>.dbf</code> file stores the attribute table, and the <code>.prj</code> file will store the CRS information. There may also be other files, such as <code>.cpg</code> or <code>.sbn</code> - <a href="https://en.wikipedia.org/wiki/Shapefile#:~:text=The%20shapefile%20format%20is%20a,and%20other%20GIS%20software%20products">see the complete explanation here</a>. When opening a shapefile, always select the <code>.shp</code> file. And if you are moving a shapefile between folders or sending it to someone, remember to get all of the corresponding files of the same name, otherwise the data will not work properly.</p></li>
+<li><p><strong>GeoJSON (<code>'json</code>):</strong> GeoJSON is the spatial extension of the <a href="https://en.wikipedia.org/wiki/JSON">JSON file format</a>, the most common format for transferring information between websites. GeoJSON is normally used for web-based mapping and only supports the WGS84 coordinate reference system.</p></li>
+<li><p><strong>Keyhole Markup Language (.kml / .kmz):</strong> these formats were created by Google to store data in the Google Earth platform, and are also derived from a web-based file formal, XML.</p></li>
+</ul>
+<p><strong>Which format should I use?</strong> If you are downloading data and multiple formats are offered, my personal preference is geopackage, if not available then shapefile, and if neither is available then GeoJSON or KML/KMZ. When exporting/saving new layers I have created myself, I prefer to stick to geopackage, as it is self-contained and it will still be readable by any modern GIS software. I will only save data as shapefile, GeoJSON or KML/KMZ if specifically requested by someone.</p>
+</div>
+</div>
 <ol class="example" type="1">
-<li><p><a href="https://stir-my.sharepoint.com/:f:/g/personal/ala2_stir_ac_uk/EkD-gndA8ihElmcQFirYbPEBN6qvH2tzyLgJ8UujpCXi2Q?e=tsvmoG">Download the data for this exercise from here</a>, then extract the zip files (make sure all the data are unzipped! Sometimes you have zipfiles inside zipfiles…) and organise them to your preference (use a similar folder structure as from week 1).</p></li>
-<li><p>Load all three datasets in QGIS and inspect them. The file names are: <code>global_earthquakes_2011.gpkg</code>, <code>MajorRivers.shp</code>, and <code>ne_50m_admin_0_countries.shp</code>.</p></li>
+<li><p><a href="https://stir-my.sharepoint.com/:f:/g/personal/ala2_stir_ac_uk/EkD-gndA8ihElmcQFirYbPEBN6qvH2tzyLgJ8UujpCXi2Q?e=tsvmoG">Download the data for this exercise from here</a>, then <em>extract the data from the zip file</em> and organise it to your preference (you can use a similar folder structure as from Lab 1, or create your own). The important thing here is to know <em>exactly</em> where you data are stored before you bring it into QGIS.</p></li>
+<li><p>Load all three datasets in QGIS. Some datasets will contain multiple files, including <em>metadata</em> (information about the data itself) and yes, they are all important. The file names to be loaded on QGIS are: <code>global_earthquakes_2011.gpkg</code>, <code>MajorRivers.shp</code>, and <code>ne_50m_admin_0_countries.shp</code>.</p></li>
 </ol>
 <div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
 <div class="callout-header d-flex align-content-center">
@@ -347,16 +367,16 @@ Stop and Think
 </div>
 <div class="callout-body-container callout-body">
 <ol type="a">
-<li><p>What are the datasets you have?</p></li>
+<li><p>What information does each of the datasets seem to hold?</p></li>
 <li><p>What are the <em>data models</em> used by these datasets?</p></li>
 <li><p>What are the <em>file formats</em> you have to work with?</p></li>
-<li><p>Which of these files contain <em>metadata</em> about your datasets?</p></li>
+<li><p>Which of these files contain <em>metadata</em> about the dataset?</p></li>
 <li><p>What is the <em>CRS</em> of each data layer you have?</p></li>
 </ol>
 </div>
 </div>
 <div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -365,11 +385,11 @@ Click for answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ol type="a">
-<li><p>You can use the file names, the metadata, and the visual appearance of the layers to answer data. The <code>global_earthquakes_2011.gpkg</code> file seems to hold point data on recorded Earthquake locations in the year 2011. The <code>MajorRivers.shp</code> layer seems to hold line data on the world’s largest rivers. The <code>ne_50m_admin_0_countries.shp</code> seems to have boundaries for the world countries.</p></li>
-<li><p>All three files use the <em>vector</em> data model, being a point vector, line vector and polygon vector respectively.</p></li>
+<li><p>You can use the file names, the metadata, and the visual appearance of the layers to answer this question. The <code>global_earthquakes_2011.gpkg</code> file seems to hold point data on recorded Earthquake locations in the year 2011. The <code>MajorRivers.shp</code> layer seems to hold line data on the world’s largest rivers. The <code>ne_50m_admin_0_countries.shp</code> seems to have boundaries for the world countries.</p></li>
+<li><p>All three files use the <em>vector</em> data model - earthquakes being a <em>point</em> vector, rivers being <em>line</em> vectors and countries being <em>polygon</em> vectors.</p></li>
 <li><p>The earthquakes layer is given in the <a href="https://www.geopackage.org/">geopackage</a> file format, while the other two layers are given in the <a href="https://doc.arcgis.com/en/arcgis-online/reference/shapefiles.htm">shapefile</a> file format. Notice that data model and file format are two different things, and they don’t necessarily imply each other. Geopackages, for example, can hold both <em>vector</em> and <em>raster</em> data.</p></li>
 <li><p>The rivers layer has a plain text metadata file with a link that points to the source of the data, where more information can be found. The countries layer has an HTML file that holds metadata about the file. The earthquakes data has no metadata.</p></li>
 <li><p>All three layers are using EPSG 4236 (WGS84 ‘unprojected’) as CRS. You check it by right clicking on the layer name and selecting <code>Layer CRS</code>, or by selecting <code>Properties &gt; Information</code>.</p></li>
@@ -399,7 +419,7 @@ Stop and Think
 </div>
 </div>
 <div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -408,34 +428,38 @@ Click for answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ol type="a">
 <li><p>Earthquakes: 15272; Rivers: 98; Countries: 241.</p></li>
 <li><p>Earthquakes: 5 (fid, Event, latitude, longitude, Magnitude, Date); Rivers: 4 (NAME, SYSTEM, MILES, KILOMETERS); Countries: 94 (featurecla, scalerank, etc…).</p></li>
 </ol>
-<p>If you looked at <code>Properties &gt; Fields</code>, the last ID is 93, but the first one is 0, so 94 in total.</p>
+<p>If you looked at <code>Properties &gt; Fields</code>, the last ID is 93, but the first one is 0, thus 94 in total.</p>
 </div>
 </div>
 </div>
 <ol start="5" class="example" type="1">
-<li><p>Rename your layers on the layer list to human-readable, informative names, then save your project. Remember, these new names will appear within this project only, the name of the source files in your folders will not change.</p></li>
-<li><p>Organize the layer order and play with different layer superpositions to make the most readable visualisation for all datasets involved. Then experiment with the symbology of each layer to improve your visualization.</p></li>
+<li><p>Rename your layers on the layer list to human-readable informative names like <code>Earthquakes 2011</code>, <code>World Countries</code> and <code>Largest World Rivers</code>, then save your project. Remember, these new names will appear within this project only, the name of the source files in your folders will not change.</p></li>
+<li><p>Organize the layer order and play with different layer superpositions to make the most readable visualisation for all datasets involved. Then experiment with the <em>symbology</em> of each layer to improve your visualization (Right-click on the layer name then <code>Properties &gt; Symbology</code>).</p></li>
 </ol>
 </section>
 <section id="guided-exercise-2-visualising-layer-attributes" class="level2" data-number="3.3">
 <h2 data-number="3.3" class="anchored" data-anchor-id="guided-exercise-2-visualising-layer-attributes"><span class="header-section-number">3.3</span> Guided Exercise 2: Visualising layer attributes</h2>
-<p>One of the main applications of vector data is the ability to <em>select</em> and then <em>summarise</em> the different attributes of each layer to extract relevant information.</p>
+<p>One of the main applications of vector data is the ability to <em>select</em> and then <em>summarise</em> the existing records of a layer based on its different attributes, therefore extracting relevant information.</p>
 <ol start="7" class="example" type="1">
 <li><p>Turn off the “Rivers” and “Earthquakes” layers. (Tip: to turn multiple layers off or on at once, highlight all the layers you need to make hidden (or visible) by holding down the <code>Control</code> key of your keyboard while you click, then hit the spacebar on your keyboard).</p></li>
-<li><p>Go to <code>Layer Properties &gt; Symbology</code> for the World Countries layer, and change the top option from <code>Single Symbol</code> to <code>Categorized</code>. This lets you assign different colours based on attribute values. We will colour the countries based on the main region where they are. For <code>Value</code>, choose the <code>REGION_UN</code> attribute. Leave the <code>Symbol</code> option as is, and for <code>Color Ramp</code>, select <code>Random Colors</code> if it is not already. Then click on the <code>Classify</code> button on the bottom left of the large white space in the middle of the window. Then click on <code>OK</code>.</p></li>
-<li><p>Look at your layer and notice how it has been styled. Try to manually change the colours of each region to your liking.</p></li>
+<li><p>Go to <code>Layer Properties &gt; Symbology</code> for the World Countries layer, and change the top option from <code>Single Symbol</code> to <code>Categorized</code>. This lets you assign different colours to each feature based on attribute values. We will colour the countries based on the main region where they are. For <code>Value</code>, choose the <code>REGION_UN</code> attribute. Leave the <code>Symbol</code> option as is, and for <code>Color Ramp</code>, select <code>Random Colors</code> if it is not already. Then click on the <code>Classify</code> button on the bottom left of the large white space in the middle of the window. Your symbology window should look like the one below (but with different colours, since they are random). You can now click on <code>OK</code>.</p></li>
 </ol>
-<p>Now let’s use visualisation to understand the distribution of world population.</p>
+<p><img src="images/lab_3/lab3_symboloy_categorised.jpg" class="img-fluid"></p>
+<ol start="9" class="example" type="1">
+<li>Look at your layer and notice how it has been styled. Now go back and try to manually change the colours of each region to your liking (hint: double click on each colour square).</li>
+</ol>
+<p>Data visualisation, especially for spatial data, is more than just ‘looking pretty’ - we can use the Symbology to show real information. Let us use it to understand the distribution of world population.</p>
 <ol start="10" class="example" type="1">
-<li><p>Return to the <code>Symbology</code> window and select <code>Graduated</code> instead of <code>Categorized</code>. Change your <code>Value</code> to the <code>POP_EST</code> attribute. Choose <code>Magma</code> as your colour ramp (click on the little arrow to the right), and select the <code>Invert Color Ramp</code> option.</p></li>
-<li><p>Change the classification <code>Mode</code> (above the classify button) to <code>Equal interval</code>, leave the number of <code>Classes</code> as 5 (to the left of <code>Mode</code>), and then click on <code>Classify</code>, then <code>OK</code>.</p></li>
+<li><p>Return to the <code>Symbology</code> window and select <code>Graduated</code> instead of <code>Categorized</code>. Change your <code>Value</code> to the <code>POP_EST</code> attribute. Choose <code>Magma</code> as your colour ramp by clicking on the little arrow to the right, and then click on the small arrow again to select the <code>Invert Color Ramp</code> option.</p></li>
+<li><p>Change the classification <code>Mode</code> (above the classify button) to <code>Equal interval</code>, leave the number of <code>Classes</code> as 5 (to the left of <code>Mode</code>), and then click on <code>Classify</code>, then <code>OK</code>:</p></li>
 </ol>
+<p><img src="images/lab_3/lab3_symboloy_graduated.jpg" class="img-fluid"></p>
 <div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -453,7 +477,7 @@ Stop and Think
 </div>
 </div>
 <div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -462,35 +486,39 @@ Click for answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ol type="a">
 <li><p><code>Categorized</code> is for <em>categorical</em>, non-numeric variables (i.e.&nbsp;names, classes, etc.). <code>Graduated</code> is for <em>continuous</em> variables (i.e.&nbsp;quantities, measurements).</p></li>
-<li><p>No, because China, India and to a lesser extent the US have much larger population numbers than the rest, which biases the breakpoints. We will fix it in the next step.</p></li>
+<li><p>No, because China, India and to a lesser extent the US have much larger population numbers than the remaining countries, which biases the breakpoints. We will fix it in the next step.</p></li>
 </ol>
 </div>
 </div>
 </div>
 <ol start="12" class="example" type="1">
-<li>Return to the <code>Symbology</code> window, and change the <code>Mode</code> from <code>Equal Interval</code> to <code>Natural Breaks (Jenks)</code>, and increase the number of <code>Classes</code> to 10. Click on <code>OK</code>.</li>
+<li>Return to the <code>Symbology</code> window, and change the <code>Mode</code> from <code>Equal Interval</code> to <code>Natural Breaks (Jenks)</code>, and increase the number of <code>Classes</code> to 10. Click on <code>OK</code>. Now the map is more informative.</li>
 </ol>
-<p>When you are mapping your own data, make sure you explore the different methods for calculating breakpoints, and also play with the number of classes. You can see the full explanation of each <code>Mode</code> on the <a href="https://docs.qgis.org/3.34/en/docs/user_manual/working_with_vector/vector_properties.html#graduated-renderer">QGIS Documentation</a>.</p>
+<p>When you are mapping your own data, always explore the different methods for calculating breakpoints and the effect of picking different numbers of classes. You can see the full explanation of each <code>Mode</code> on the <a href="https://docs.qgis.org/3.40/en/docs/user_manual/working_with_vector/vector_properties.html#graduated-renderer">QGIS Documentation</a>.</p>
 </section>
 <section id="guided-exercise-3-selections-based-on-layer-attributes" class="level2" data-number="3.4">
 <h2 data-number="3.4" class="anchored" data-anchor-id="guided-exercise-3-selections-based-on-layer-attributes"><span class="header-section-number">3.4</span> Guided Exercise 3: Selections based on layer attributes</h2>
 <p>Now we will look into using <em>expressions</em> to search and select specific features according to their attributes. As GIS vector data emerged from the database world, these searches as sometimes refereed to as <em>queries</em>.</p>
 <ol start="13" class="example" type="1">
 <li><p>Change the symbology of the Countries layer to <code>Single Symbol</code>, and pick a dark grey. Then turn on the Rivers layer, change its symbology to a light blue, and make sure it is on top of the Countries layer.</p></li>
-<li><p>Open the Rivers layer attribute table (right click on its name then on <code>Open attribute table</code>). Then click on the <code>Select features using expression</code> button (<img src="https://docs.qgis.org/3.34/en/_images/mIconExpressionSelect.png" class="img-fluid">). You will see a new window with three panels, like the one below. If you only see two panels, then click on <code>Show help</code>:</p></li>
+<li><p>Open the attribute table of the Rivers layer (right click on its name then on <code>Open attribute table</code>). Then click on the <code>Select features using expression</code> button (<img src="https://docs.qgis.org/3.34/en/_images/mIconExpressionSelect.png" class="img-fluid">). You will see a new window with three panels, like the one below. If you only see two panels, click on the <code>Show help</code> button:</p></li>
 </ol>
 <p><img src="images/lab_3/lab3_fig2_select_feat_exp.jpg" class="img-fluid"></p>
 <p>You will encounter this expression window in other parts of QGIS as well. The way it works is that you type your expression on the left window, using the middle and right panels to browse and select operators to add to your expression. It will make more sense with an example:</p>
 <ol start="15" class="example" type="1">
-<li><p>In the middle panel, expand the <code>Fields and Values</code> item and then double click on <code>KILOMETERS</code>. It will add this attribute name to the left panel. Notice that it is enclosed by double quotes. In the expression window, <strong>any word between double quotes means it is an attribute’s name</strong>. You can also type names directly in the window if you prefer, and QGIS will offer autocomplete suggestions based on the existing attributes.</p></li>
-<li><p>Now complete the expression by typing the remainder, so that the final expression is <code>"KILOMETERS" &gt; 5000</code>. This expression means “Select all River features that have a length - represented by the KILOMETERS attribute - larger than 5000”. Then click on the <code>Select features</code> button.</p></li>
-<li><p>Check the results of your selection on the Attribute Table. The number of selected features should be shown on the top of the window (11), and selected features will be highlighted in blue. On the bottom left of the window, you can change from <code>Show all features</code> to <code>Show selected features</code> if you only want to see the selected features.</p></li>
-<li><p>Also check the results of your selection on the Map canvas. All selected features will be highlighted in yellow. Tip: if you ever set the symbology of a feature yellow, remember to not confuse it with selected objects. When in doubt, check the attribute table.</p></li>
+<li><p>In the middle panel, expand the <code>Fields and Values</code> item. This item lists all the attributes of the layer. Then double click on <code>KILOMETERS</code> to add this attribute to the left panel. Notice that it is enclosed by double quotes. In the expression window <strong>any word between double quotes means it is an attribute name</strong>, while a single quotes identify ‘normal’ text. You can also type names directly in the window if you prefer, and QGIS will offer autocomplete suggestions based on the existing attributes. Double-clicking on the suggestion or pressing <code>Enter</code> will add it to the expression window.</p></li>
+<li><p>Now we want to complete the expression so we can select only rivers longer than 5000km. The complete expression is <code>"KILOMETERS" &gt; 5000</code>. This expression means “Select all River features whose length - as represented by the KILOMETERS attribute - is larger than 5000”. Then click on the <code>Select features</code> button:</p></li>
 </ol>
+<p><img src="images/lab_3/lab3_select_rivers.jpg" class="img-fluid"></p>
+<ol start="17" class="example" type="1">
+<li><p>Check the results of your selection on the Attribute Table. The number of selected features should be shown on the top of the window (11 features), and the selected features will be highlighted in blue. On the bottom left of the window, you can change from <code>Show all features</code> to <code>Show selected features</code> if you only want to see the selected features.</p></li>
+<li><p>Also check the results of your selection on the Map canvas. All selected features will be highlighted in bright yellow. Tip: if you ever set the symbology of a feature to yellow, remember to not confuse it with selected objects. When in doubt, check the attribute table.</p></li>
+</ol>
+<p><img src="images/lab_3/lab3_selected_rivers.jpg" class="img-fluid"></p>
 <div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -502,11 +530,11 @@ Stop and Think
 </div>
 <div class="callout-body-container callout-body">
 <p>It seems the selection is missing a few of the longest rivers in the world, such as the Amazon River. Why would that be?</p>
-<p>Hint: try to use the manual selection tool (<img src="https://docs.qgis.org/3.34/en/_images/mActionSelectRectangle.png" class="img-fluid">) to click on the Amazon River and investigate.</p>
+<p>Hint: try to use the Manual Selection tool (<img src="https://docs.qgis.org/3.34/en/_images/mActionSelectRectangle.png" class="img-fluid">) or the Identify Features tool (<img src="https://docs.qgis.org/3.34/en/_images/mActionIdentify.png" class="img-fluid">) to click on the Amazon River and investigate.</p>
 </div>
 </div>
 <div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -515,16 +543,28 @@ Click for answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>The different segments of the Amazon River officially receive different names: Amazonas (lower Amazon), Solimões (central Amazon) and Ucayali (upper Amazon). In this dataset, it is broken down into two features: Amazon (with 3042 km) and Ucayali (with 2088 km). Since these are two separate features, neither is selected by our expression.</p>
 </div>
 </div>
 </div>
 <ol start="19" class="example" type="1">
-<li>Return to the attribute table and make sure that the rivers larger than 5000km are still selected. Then create a new expression: <code>SYSTEM" = 'Amazon'</code>. Notice that we enclose the word Amazon with single quotes. This identifies this as a <em>string</em>, i.e.&nbsp;a character value (like a word) within an attribute, and differentiates it from an attribute name. Then instead of clicking on <code>Select Features</code>, click on the small arrow to the right and click in <code>Add to Current Selection</code>. Now your selection should include all river features that are longer than 5000 km <em>or</em> belong to the Amazon system (26 features in total).</li>
+<li>Return to the attribute table and make sure that the rivers larger than 5000km are still selected. Then create a new expression: <code>SYSTEM" = 'Amazon'</code>. Notice that we enclose the word Amazon with single quotes. This identifies this as a <em>string</em>, i.e.&nbsp;a character value (like a word) within an attribute, and differentiates it from an attribute name. Then instead of clicking on <code>Select Features</code>, click on the small arrow to the right and click on <code>Add to Current Selection</code>. Now your selection should include all river features that are longer than 5000 km <em>or</em> belong to the Amazon system (26 features in total).</li>
 </ol>
-<p>Tip: If you can’t remember all the possible values of an attribute, select the attribute under <code>Fields and Values</code> and then on the right panel, double click on <code>All Unique</code>. QGIS will list all possible value options for that particular attribute.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>Tip:</em> If you can’t remember all the possible values of an attribute, select the attribute under <code>Fields and Values</code> and then on the right panel, double click on <code>All Unique</code>. QGIS will list all possible value options for that particular attribute.</p>
+</div>
+</div>
 <ol start="20" class="example" type="1">
 <li>Now deselect all features by clicking on the <code>Deselect</code> button in the Attribute Table (<img src="https://docs.qgis.org/3.34/en/_images/mActionDeselectActiveLayer.png" class="img-fluid">) or the <code>Deselect from all Layers</code> button in the main QGIS toolbar (<img src="https://docs.qgis.org/3.34/en/_images/mActionDeselectAll.png" class="img-fluid">). It is always good to clear selections when you are done with a certain analysis, to avoid unexpected consequences.</li>
 </ol>
@@ -535,10 +575,10 @@ Click for answer
 <li><p>Clear your selection and create a new one with the expression <code>"KILOMETERS" &gt; 1000 AND "SYSTEM" = 'Amazon'</code>. When you use the <code>AND</code> operator, each feature must fulfil <em>both</em> criteria (like an intersection in set theory, if you remember your maths). When you use the <code>OR</code> keyword, then each feature can fulfil <em>either</em> criteria (a mathematical <em>union</em>).</p></li>
 <li><p>Now change the expression to <code>"KILOMETERS" &gt; 1000 AND "SYSTEM" IS NOT 'Amazon'</code> and see what you get. Do you understand the effect of using the <code>NOT</code>operator?</p></li>
 </ol>
-<p>Finally, we have two useful operators for <em>partial matching</em> on strings. They are useful when you need to select based on a subset of string (word) values of an attribute:</p>
+<p>Finally, we have two useful operators for <em>partial matching</em> on strings. They are useful when you need to select based on a subset of a string (i.e.&nbsp;a word) attribute:</p>
 <ol start="24" class="example" type="1">
 <li><p>Clear your selection and create a new one with the expression <code>"NAME" LIKE 'Am%'</code>. This should select all three rivers whose name starts with ‘Am’ (Amazon, Amu Darya and Amur). The ‘%’ symbol in this case is what we call a ‘wildcard’, and it means ‘anything else’.</p></li>
-<li><p>Now use the expression <code>"NAME" LIKE 'C____'</code> (four underscores, ’_‘). This should select all rivers whose name starts with ’C’ followed by any four characters (So it picks Congo and Chire).</p></li>
+<li><p>Now use the expression <code>"NAME" LIKE 'C____'</code> (‘C’ followed by four underscores, ’_‘). This should select all rivers whose name starts with ’C’ followed by any four characters (So it picks Congo and Chire. It will not pick Colorado, for example, as it has 7 letters after the ‘C’).</p></li>
 </ol>
 <div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
 <div class="callout-header d-flex align-content-center">
@@ -554,7 +594,7 @@ Stop and Think
 </div>
 </div>
 <div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -563,9 +603,9 @@ Click for answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Four (Columbia, Colorado, Congo, Chire). When you use the ‘%’ wildcard it means ‘any amount of any character’.</p>
+<p>Four (Columbia, Colorado, Congo, Chire). When you use the ‘%’ wildcard it means ‘any characters in any number’, including zero characters - if there were a river called just ‘C’, it would select it too.</p>
 </div>
 </div>
 </div>
@@ -586,7 +626,7 @@ Stop and Think
 </div>
 </div>
 <div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -595,14 +635,14 @@ Click for answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>The <code>LIKE</code> operator is case sensitive, while <code>ILIKE</code> is case insensitive.</p>
+<p>The <code>LIKE</code> operator is case sensitive (i.e.&nbsp;differentiates between capital/uppercase and non-capital/lowercase letters), while <code>ILIKE</code> is case insensitive.</p>
 </div>
 </div>
 </div>
 <ol start="27" class="example" type="1">
-<li>Before you move on to the next exercise, make sure you clear your selection.</li>
+<li>Before you move on to the next exercise, make sure you clear your selections using the <code>Deselect from all Layers</code> button (<img src="https://docs.qgis.org/3.34/en/_images/mActionDeselectAll.png" class="img-fluid">).</li>
 </ol>
 </section>
 <section id="guided-exercise-3-summarising-layer-attributes" class="level2" data-number="3.5">
@@ -629,7 +669,7 @@ Stop and Think
 </div>
 </div>
 <div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -638,14 +678,14 @@ Click for answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div id="callout-16" class="callout-16-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Max: 9207.1 km; Min: 194.9 km; Mean: 2663.6 km</p>
 </div>
 </div>
 </div>
 <ol start="30" class="example" type="1">
-<li><p>Now repeat the attribute selection you did before using the expression <code>"KILOMETERS" &gt; 5000</code>, and then return to the <code>Statistical Summary</code> panel. Then check the <code>Selected Features Only</code> box at the bottom of the window. Now the stats will be re-calculated for the selected features only.</p></li>
+<li><p>Now repeat the attribute selection you did before using the expression <code>"KILOMETERS" &gt; 5000</code>, and then return to the <code>Statistical Summary</code> panel. Then check the <code>Selected Features Only</code> box at the bottom of the window. Now the stats will be re-calculated for the selected features only (new minimum of 5081.92, new mean of 6288.99).</p></li>
 <li><p>The <code>Statistical Summary</code> panel is smart enough to know how to summarise different <em>data types</em>. For example, select the <code>SYSTEM</code> attribute, and see how the stats change - now it gives you how many features in total (<code>Count</code>), how many unique values (<code>Count(Distinct)</code>), how many missing values (<code>Count(Missing)</code>), the <code>Minimum</code> and <code>Maximum</code> string values (they don’t have a clear meaning here), the least (<code>Minority</code>) and most (<code>Majority</code>) common unique values, and the <code>Minimum length</code> and <code>Maximum length</code> in number of characters.</p></li>
 </ol>
 <div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
@@ -662,7 +702,7 @@ Stop and Think
 </div>
 </div>
 <div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -671,7 +711,7 @@ Click for answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-16" class="callout-16-contents callout-collapse collapse">
+<div id="callout-18" class="callout-18-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>For the rivers dataset, <code>Majority</code> is blank and <code>Minimum length</code> is 0 because we have several <code>NULL</code> (missing) values. They have zero length, and they are in fact the most common unique value.</p>
 </div>
@@ -680,16 +720,19 @@ Click for answer
 </section>
 <section id="guided-exercise-4-calculating-new-attributes" class="level2" data-number="3.6">
 <h2 data-number="3.6" class="anchored" data-anchor-id="guided-exercise-4-calculating-new-attributes"><span class="header-section-number">3.6</span> Guided Exercise 4: Calculating new attributes</h2>
-<p>Another powerful way to derive information from vector attributes is to make calculations involving multiple attributes. For that, we can use the <code>Field Calculator</code> tool (<img src="https://docs.qgis.org/3.34/en/_images/mActionCalculateField.png" class="img-fluid">), accessible either from the <code>Attribute table</code> or the main QGIS toolbar.</p>
+<p>Another powerful way to derive information from vectors is to create new attributes from calculations involving the existing attributes. For that, we can use the <code>Field Calculator</code> tool (<img src="https://docs.qgis.org/3.34/en/_images/mActionCalculateField.png" class="img-fluid">), accessible either from the <code>Attribute table</code> or the main QGIS toolbar.</p>
 <ol start="32" class="example" type="1">
 <li><p>Before your start, make sure you clear your selections.</p></li>
-<li><p>Go back to the Attribute Table window for the Rivers layer and click on the Field Calculator button to open it. It should look like this:</p></li>
+<li><p>Go back to the Attribute Table window for the Rivers layer and click on the Field Calculator button to open it. It should look like the figure below. This is somewhat similar to the <code>Select by Expression</code> window, with the difference that it assumes the result of whatever expression you type is asisgned to the new attribute.</p></li>
 </ol>
 <p><img src="images/lab_3/lab3_fig3_field_calculator.jpg" class="img-fluid"></p>
 <ol start="34" class="example" type="1">
-<li><p>On the new window, make sure the <code>Only update selected features</code> option is <strong>not</strong> checked. Then name the new field <code>Mi_to_Km</code>, and change the output <em>data type</em> to <code>Decimal Number</code>. <code>Output field length</code> tells you the maximum number of digits that can be stored per attribute value, and the <code>Precision</code> field tells you how many of these digits should be decimal places.</p></li>
-<li><p>On the expression window, write <code>"MILES" / "KILOMETERS"</code>. Note the warning at the bottom. Now click on <code>OK</code>.</p></li>
-<li><p>Now <strong>turn off editing mode</strong> by clicking on the Toggle Editing (<img src="https://docs.qgis.org/3.34/en/_images/mActionToggleEditing.png" class="img-fluid">) button in the Attribute Table. When asked, confirm you want to save the layer changes.</p></li>
+<li><p>On the new window, make sure the <code>Only update selected features</code> option is <strong>not</strong> checked. Then name the new field <code>Mi_to_Km</code>, and change the output <em>data type</em> to <code>Decimal Number</code>. <code>Output field length</code> tells you the maximum number of digits that can be stored per attribute value, and the <code>Precision</code> field tells you how many of these digits should be decimal places. The defaults are fine for now.</p></li>
+<li><p>On the expression window, write <code>"MILES" / "KILOMETERS"</code>. Note the warning about edit mode at the bottom, and also notice that we <strong>don’t</strong> need to type <code>"Mi_to_Km" = "MILES" / "KILOEMETERS"</code> - the Field Calculator already knows we want the result of the division to be the value of the new attribute. Now click on <code>OK</code>.</p></li>
+</ol>
+<p><img src="images/lab_3/lab3_field_calculator_filled.jpg" class="img-fluid"></p>
+<ol start="36" class="example" type="1">
+<li>Now <strong>turn off editing mode</strong> by clicking on the Toggle Editing (<img src="https://docs.qgis.org/3.34/en/_images/mActionToggleEditing.png" class="img-fluid">) button in the Attribute Table. When asked, confirm you want to save the layer changes.</li>
 </ol>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -701,7 +744,7 @@ Warning
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Turning on editing mode is one of the <strong>most dangerous</strong> options in QGIS, as it lets you freely change both the geometry and the attribute values of a layer. Using the <code>Field calculator</code> automatically puts you on editing mode, so always make sure you turn it off immediately after you have finished a calculation. Once you make any changes and then save the changes, <em>there is no turning back</em>. I’ll often first export a copy of the layer if I need to do any edits, so I aways have the original as a backup if something goes wrong. We’ll revisit editing mode on week 4, when we learn how to digitise and edit geometries by hand.</p>
+<p>Turning on editing mode is one of the <strong>most dangerous</strong> options in QGIS, as it lets you freely change both the geometry and the attribute values of a layer. Using the <code>Field calculator</code> automatically puts you on editing mode, so always make sure you turn it off immediately after you have finished a calculation. Once you make any changes and then save the changes, <em>there is no turning back</em>. I’ll often first export a copy of the layer if I need to do any edits, so I always have the original as a backup if something goes wrong. We’ll revisit editing mode on week 4, when we learn how to digitise and edit geometries by hand.</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
@@ -718,7 +761,7 @@ Stop and Think
 </div>
 </div>
 <div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-21-contents" aria-controls="callout-21" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -727,29 +770,42 @@ Click for answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-19" class="callout-19-contents callout-collapse collapse">
+<div id="callout-21" class="callout-21-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Yes, 1 Mile = 1.609 kilometres.</p>
+<p>Yes, 1 km = 0.621 miles.</p>
 </div>
 </div>
 </div>
 <ol start="37" class="example" type="1">
-<li>This new attribute you calculated is not very useful. Let us get rid of it. Put the attribute table back into editing mode, then click on the <code>Delete Field</code> button (<img src="https://docs.qgis.org/3.34/en/_images/mActionDeleteAttribute.png" class="img-fluid">), and select your <code>Mi_to_Km</code> field. Click <code>OK</code>. It’s gone! Remember to save the changes and exit edit mode.</li>
+<li><p>Now imagine you actually wanted the opposite ratio, <code>"KILOMETERS" / "MILES"</code>, but you typed the wrong expression. You can <em>update</em> (replace) the values of a field by opening the <code>Field Calculator</code>, and instead of checking the box that says <code>Create a new field</code>, check the box that says <code>Update existing field</code>. Then pick the <code>Mi_to_Km</code> attribute, and enter the new expression (<code>"KILOMETERS" / "MILES"</code>). Once you run it, all values of the <code>Mi_to_Km</code> attribute should change to 1.609 (as 1 mi = 1.609 km).</p></li>
+<li><p>This new attribute you calculated is not very useful. Let us get rid of it. Put the attribute table back into editing mode, then click on the <code>Delete Field</code> button (<img src="https://docs.qgis.org/3.34/en/_images/mActionDeleteAttribute.png" class="img-fluid">), and select your <code>Mi_to_Km</code> field. Click <code>OK</code>. It’s gone! Remember to save the changes and exit edit mode.</p></li>
 </ol>
-<p>Tip: if you want to rename an attribute, create a new one with the new name and just use the name of the old one as the expression on the <code>Field Calculator</code>. It will copy all values to the new attribute. Then remove the old one.</p>
-<ol start="38" class="example" type="1">
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>Tip:</em> if you want to rename an attribute, create a new one with the new name and just enter the name of the old one as the expression on the <code>Field Calculator</code>. It will simply copy all values from the old to the new attribute. Then remove the old one.</p>
+</div>
+</div>
+<ol start="39" class="example" type="1">
 <li>We will continue working with this data in the next lab. If you want to keep your project, this is the best way to do it: on your computer’s file explorer, find the root folder for the project (<code>lab_3</code>, or whatever you have named it as). Then right click on it and select (on Windows) <code>Compress to Zip file</code>. That will create a new zipfile of the folder contents, with the same name as the folder. Then you can copy this zip file to your OneDrive folder or to an external drive.</li>
 </ol>
 <p>Good job, we have now finished our first guided tour of vector attributes. We will revisit it in the next lab, when we also learn about geometry-based selections.</p>
-<p>Make sure you have a go at the independent exercise below, to make sure you feel comfortable with attribute selections, calculations and summaries. You will keep using these skills for the rest of the module (and your GIS life).</p>
+<p>Make sure you have a go at the independent exercise below, to confirm you feel comfortable with attribute selections, calculations and summaries. You will keep using these skills for the rest of the module (and your GIS life).</p>
 </section>
 <section id="independent-exercise" class="level2" data-number="3.7">
 <h2 data-number="3.7" class="anchored" data-anchor-id="independent-exercise"><span class="header-section-number">3.7</span> Independent Exercise</h2>
 <p>Using the earthquakes layer you downloaded (<code>global_earthquakes_2011.gpkg</code>), do the following:</p>
 <ol type="1">
 <li><p>Find out how many earthquakes of magnitude equal or larger than 7 have occurred in the Northern Hemisphere in 2011.</p></li>
-<li><p>What was the average magnitude of all earthquakes that occurred in Japan in 2011? (Tip: make sure you enlarge the <code>event</code> column of the attribute table to the whole values).</p></li>
-<li><p>Create a new <code>Text (string)</code> attribute that indicates if an earthquake is located on the western (<code>W</code>) or eastern (<code>E</code>) hemisphere.</p></li>
+<li><p>What was the average magnitude of all earthquakes that occurred in Japan in 2011? (Hint: make sure you enlarge the <code>event</code> column of the attribute table to see the whole values).</p></li>
+<li><p>Create a new <code>Text (string)</code> attribute called <code>Hemisphere</code>, which indicates if an earthquake is located on the western (<code>W</code>) or eastern (<code>E</code>) hemisphere. (Hint: this involves multiple steps, including selection by expression, attribute creation, attribute <em>update</em>, and smart use of the <code>Only update selected features</code> option in the <code>Field Calculator</code>).</p></li>
 </ol>
 
 

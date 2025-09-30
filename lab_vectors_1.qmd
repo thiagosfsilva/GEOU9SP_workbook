@@ -1,12 +1,12 @@
 # Lab 3: Working with vector attributes {#sec-labvec1}
 
-Vector data consists of discrete observations called features. For example, on a vector layer representing all protected areas in Scotland, each individual protected area would comprise a feature. With regular data, observations are just rows on a table, but with vector spatial data, features are composed of two elements: the geometry (the visual component + coordinates) and attributes (columns on a table holding data about each feature, also known as *fields*). 
+Vector data consists of discrete observations (or records) that in GIS terminology are called **features**. For example, on a vector layer representing all protected areas in Scotland, each individual protected area would comprise a feature. Data records on non-spatial data are normally just rows on a table, but with vector spatial data features are composed of two elements: the **geometry** (the visual component - vertices, edges and their coordinates) and the **attributes** (columns on a table holding data about each feature, also known as *fields*). 
 
-On the figure below, each country is a feature - the shape of the country is represented by the geometry (left) and the corresponding *attributes* are shown in the right. Notice that both the geometry and the corresponding attributes of one specific feature (Brazil) are *selected*. Selections are a very important component of GIS analysis, as they can narrow down the targets for your calculations.
+The figure below shows a portion of a vector layer of world countries. In this layer each country is a feature - the shape of the country is represented by both a geometry (seen on the *map canvas* on the left) and its corresponding attributes (shown in the *attribute table** to the right). In the figure, the feature corresponding to Brazil is **selected** - indicated by the bright yellow colour of the selected geometry and by the blue colour on the selected corresponding attribute row. *Selections are a very important component of GIS vector analysis*, as they will narrow down the targets of your calculations.
 
 ![](images/lab_3/lab3_fig1_geometries+attributes.jpg)
 
-For this lab, we will focus mainly on the following GIS operations: filtering attributes, summarising attributes, and creating and modifying attribute data. Remember to apply, from here on, all the steps you have already learned in previous labs: create a project folder, organize your data, save a named project with proper CRS info, etc. Each week's labs will build upon the previous activities, so I will not be repeating instructions for things covered in previous sessions. 
+For this lab, we will focus mainly on the following GIS vector operations: filtering attributes, summarising attributes, and creating and modifying attribute data. Remember to apply, from here on, all the steps you have already learned in previous labs: create a project folder, organize your data, save a named project with proper CRS info, and so on. Each week's labs will build upon the previous activities, so I will not be repeating instructions for things covered in previous sessions. 
 
 ## Before you start!
 
@@ -15,30 +15,46 @@ For this lab, we will focus mainly on the following GIS operations: filtering at
 
 ## Guided Exercise 1 - Basic work with Vector Data
 
-In this exercise, you will learn how to open and read vector data.
+In this exercise, you will learn how to open and read vector data. First, read the note below.
 
-(@) [Download the data for this exercise from here](https://stir-my.sharepoint.com/:f:/g/personal/ala2_stir_ac_uk/EkD-gndA8ihElmcQFirYbPEBN6qvH2tzyLgJ8UujpCXi2Q?e=tsvmoG), then extract the zip files (make sure all the data are unzipped! Sometimes you have zipfiles inside zipfiles...) and organise them to your preference (use a similar folder structure as from week 1).
+::: {.callout-note title="Common vector file formats"}
 
-(@) Load all three datasets in QGIS and inspect them. The file names are: `global_earthquakes_2011.gpkg`, `MajorRivers.shp`, and `ne_50m_admin_0_countries.shp`. 
+Vector data can come in different file formats, each with advantages and disadvantages:
+
+- **Geopackage (.gpkg):** Geopackages are a new and open file format that can hold single or multiple layers inside them, and they are completely self-contained (i.e. all required information is inside a single file). QGIS uses geopackage as its default file format.
+
+- **Shapefile (.shp):** Shapefiles are a very old file format, developed by ESRI (the makers of ArcGIS). It is still the most common format you will find vector data on. A single 'shapefile' is actually a set of multiple files with the same name and different extensions - the `.shp` file contains the geometries, the `.shx` file contains indexing information, the `.dbf` file stores the attribute table, and the `.prj` file will store the CRS information. There may also be other files, such as `.cpg` or `.sbn` - [see the complete explanation here](https://en.wikipedia.org/wiki/Shapefile#:~:text=The%20shapefile%20format%20is%20a,and%20other%20GIS%20software%20products). When opening a shapefile, always select the `.shp` file. And if you are moving a shapefile between folders or sending it to someone, remember to get all of the corresponding files of the same name, otherwise the data will not work properly. 
+
+- **GeoJSON (`'json`):** GeoJSON is the spatial extension of the [JSON file format](https://en.wikipedia.org/wiki/JSON), the most common format for transferring information between websites. GeoJSON is normally used for web-based mapping and only supports the WGS84 coordinate reference system. 
+
+- **Keyhole Markup Language (.kml / .kmz):** these formats were created by Google to store data in the Google Earth platform, and are also derived from a web-based file formal, XML. 
+
+**Which format should I use?** If you are downloading data and multiple formats are offered, my personal preference is geopackage, if not available then shapefile, and if neither is available then GeoJSON or KML/KMZ. When exporting/saving new layers I have created myself, I prefer to stick to geopackage, as it is self-contained and it will still be readable by any modern GIS software. I will only save data as shapefile, GeoJSON or KML/KMZ if specifically requested by someone.
+
+:::
+
+(@) [Download the data for this exercise from here](https://stir-my.sharepoint.com/:f:/g/personal/ala2_stir_ac_uk/EkD-gndA8ihElmcQFirYbPEBN6qvH2tzyLgJ8UujpCXi2Q?e=tsvmoG), then *extract the data from the zip file* and organise it to your preference (you can use a similar folder structure as from Lab 1, or create your own). The important thing here is to know *exactly* where you data are stored before you bring it into QGIS.  
+
+(@) Load all three datasets in QGIS. Some datasets will contain multiple files, including *metadata* (information about the data itself) and yes, they are all important. The file names to be loaded on QGIS are: `global_earthquakes_2011.gpkg`, `MajorRivers.shp`, and `ne_50m_admin_0_countries.shp`. 
 
 ::: {.callout-important title="Stop and Think"}
-a) What are the datasets you have?
+a) What information does each of the datasets seem to hold?
 
 b) What are the *data models* used by these datasets?
 
 c) What are the *file formats* you have to work with?
 
-d) Which of these files contain *metadata* about your datasets?
+d) Which of these files contain *metadata* about the dataset?
 
 e) What is the *CRS* of each data layer you have? 
 :::
 
 ::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
-a) You can use the file names, the metadata, and the visual appearance of the layers to answer data. The `global_earthquakes_2011.gpkg` file seems to hold point data on recorded Earthquake locations in the year 2011. The `MajorRivers.shp` layer seems to hold line data on the world's largest rivers. The `ne_50m_admin_0_countries.shp` seems to have boundaries for the world countries. 
+a) You can use the file names, the metadata, and the visual appearance of the layers to answer this question. The `global_earthquakes_2011.gpkg` file seems to hold point data on recorded Earthquake locations in the year 2011. The `MajorRivers.shp` layer seems to hold line data on the world's largest rivers. The `ne_50m_admin_0_countries.shp` seems to have boundaries for the world countries. 
 
-b) All three files use the *vector* data model, being a point vector, line vector and polygon vector respectively.
+b) All three files use the *vector* data model - earthquakes being a *point* vector, rivers being *line* vectors and countries being *polygon* vectors.
 
-c) The earthquakes layer is given in the [geopackage](https://www.geopackage.org/) file format, while the other two layers are given in the [shapefile](https://doc.arcgis.com/en/arcgis-online/reference/shapefiles.htm) file format. Notice that data model and file format are two different things, and they don't necessarily imply each other. Geopackages, for example, can hold both *vector* and *raster* data.
+c) The earthquakes layer is given in the [geopackage](https://www.geopackage.org/) file format, while the other two layers are given in the [shapefile](https://doc.arcgis.com/en/arcgis-online/reference/shapefiles.htm) file format. Notice that data model and file format are two different things, and they don't necessarily imply each other. Geopackages, for example, can hold both *vector* and *raster* data. 
 
 d) The rivers layer has a plain text metadata file with a link that points to the source of the data, where more information can be found. The countries layer has an HTML file that holds metadata about the file. The earthquakes data has no metadata.
 
@@ -63,29 +79,34 @@ a) Earthquakes: 15272; Rivers: 98; Countries: 241.
 
 b) Earthquakes: 5 (fid, Event, latitude, longitude, Magnitude, Date); Rivers: 4 (NAME, SYSTEM, MILES, KILOMETERS); Countries: 94 (featurecla, scalerank, etc...).
 
-If you looked at `Properties > Fields`, the last ID is 93, but the first one is 0, so 94 in total. 
+If you looked at `Properties > Fields`, the last ID is 93, but the first one is 0, thus 94 in total. 
 :::
 
-(@) Rename your layers on the layer list to human-readable, informative names, then save your project. Remember, these new names will appear within this project only, the name of the source files in your folders will not change.
+(@) Rename your layers on the layer list to human-readable informative names like `Earthquakes 2011`, `World Countries` and `Largest World Rivers`, then save your project. Remember, these new names will appear within this project only, the name of the source files in your folders will not change.
 
-(@) Organize the layer order and play with different layer superpositions to make the most readable visualisation for all datasets involved. Then experiment with the symbology of each layer to improve your visualization.
+(@) Organize the layer order and play with different layer superpositions to make the most readable visualisation for all datasets involved. Then experiment with the *symbology* of each layer to improve your visualization (Right-click on the layer name then `Properties > Symbology`).
 
 
 ## Guided Exercise 2: Visualising layer attributes
 
-One of the main applications of vector data is the ability to *select*  and then *summarise* the different attributes of each layer to extract relevant information.
+One of the main applications of vector data is the ability to *select* and then *summarise* the existing records of a layer based on its different attributes, therefore extracting relevant information.
 
 (@) Turn off the "Rivers" and "Earthquakes" layers. (Tip: to turn multiple layers off or on at once, highlight all the layers you need to make hidden (or visible) by holding down the `Control` key of your keyboard while you click, then hit the spacebar on your keyboard).
 
-(@) Go to `Layer Properties > Symbology` for the World Countries layer, and change the top option from `Single Symbol` to `Categorized`. This lets you assign different colours based on attribute values. We will colour the countries based on the main region where they are. For `Value`, choose the `REGION_UN` attribute. Leave the `Symbol` option as is, and for `Color Ramp`, select `Random Colors` if it is not already. Then click on the `Classify` button on the bottom left of the large white space in the middle of the window. Then click on `OK`.
+(@) Go to `Layer Properties > Symbology` for the World Countries layer, and change the top option from `Single Symbol` to `Categorized`. This lets you assign different colours to each feature based on attribute values. We will colour the countries based on the main region where they are. For `Value`, choose the `REGION_UN` attribute. Leave the `Symbol` option as is, and for `Color Ramp`, select `Random Colors` if it is not already. Then click on the `Classify` button on the bottom left of the large white space in the middle of the window. Your symbology window should look like the one below (but with different colours, since they are random). You can now click on `OK`.
 
-(@) Look at your layer and notice how it has been styled. Try to manually change the colours of each region to your liking. 
+![](images/lab_3/lab3_symboloy_categorised.jpg)
 
-Now let's use visualisation to understand the distribution of world population.
 
-(@) Return to the `Symbology` window and select `Graduated` instead of `Categorized`. Change your `Value` to the `POP_EST` attribute. Choose `Magma` as your colour ramp (click on the little arrow to the right), and select the `Invert Color Ramp` option.
+(@) Look at your layer and notice how it has been styled. Now go back and try to manually change the colours of each region to your liking (hint: double click on each colour square). 
 
-(@) Change the classification `Mode` (above the classify button) to `Equal interval`, leave the number of `Classes` as 5 (to the left of `Mode`), and then click on `Classify`, then `OK`.
+Data visualisation, especially for spatial data, is more than just 'looking pretty' - we can use the Symbology to show real information. Let us use it to understand the distribution of world population.
+
+(@) Return to the `Symbology` window and select `Graduated` instead of `Categorized`. Change your `Value` to the `POP_EST` attribute. Choose `Magma` as your colour ramp by clicking on the little arrow to the right, and then click on the small arrow again to select the `Invert Color Ramp` option.
+
+(@) Change the classification `Mode` (above the classify button) to `Equal interval`, leave the number of `Classes` as 5 (to the left of `Mode`), and then click on `Classify`, then `OK`:
+
+![](images/lab_3/lab3_symboloy_graduated.jpg)
 
 ::: {.callout-important title="Stop and Think"}
 a) What is the difference between the `Categorized` and `Graduated` options? 
@@ -96,12 +117,12 @@ b) Does the `Equal Interval` classification give a good visualization of the dis
 ::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
 a) `Categorized` is for *categorical*, non-numeric variables (i.e. names, classes, etc.). `Graduated` is for *continuous* variables (i.e. quantities, measurements).
 
-b) No, because China, India and to a lesser extent the US have much larger population numbers than the rest, which biases the breakpoints. We will fix it in the next step. 
+b) No, because China, India and to a lesser extent the US have much larger population numbers than the remaining countries, which biases the breakpoints. We will fix it in the next step. 
 :::
 
-(@) Return to the `Symbology` window, and change the `Mode` from `Equal Interval` to `Natural Breaks (Jenks)`, and increase the number of `Classes` to 10. Click on `OK`.
+(@) Return to the `Symbology` window, and change the `Mode` from `Equal Interval` to `Natural Breaks (Jenks)`, and increase the number of `Classes` to 10. Click on `OK`. Now the map is more informative.
 
-When you are mapping your own data, make sure you explore the different methods for calculating breakpoints, and also play with the number of classes. You can see the full explanation of each `Mode` on the [QGIS Documentation](https://docs.qgis.org/3.34/en/docs/user_manual/working_with_vector/vector_properties.html#graduated-renderer).
+When you are mapping your own data, always explore the different methods for calculating breakpoints and the effect of picking different numbers of classes. You can see the full explanation of each `Mode` on the [QGIS Documentation](https://docs.qgis.org/3.40/en/docs/user_manual/working_with_vector/vector_properties.html#graduated-renderer).
 
 ## Guided Exercise 3: Selections based on layer attributes
 
@@ -109,33 +130,39 @@ Now we will look into using *expressions* to search and select specific features
 
 (@) Change the symbology of the Countries layer to `Single Symbol`, and pick a dark grey. Then turn on the Rivers layer, change its symbology to a light blue, and make sure it is on top of the Countries layer. 
 
-(@) Open the Rivers layer attribute table (right click on its name then on `Open attribute table`). Then click on the `Select features using expression` button (![](https://docs.qgis.org/3.34/en/_images/mIconExpressionSelect.png)). You will see a new window with three panels, like the one below. If you only see two panels, then click on ` Show help`:
+(@) Open the attribute table of the Rivers layer (right click on its name then on `Open attribute table`). Then click on the `Select features using expression` button (![](https://docs.qgis.org/3.34/en/_images/mIconExpressionSelect.png)). You will see a new window with three panels, like the one below. If you only see two panels, click on the ` Show help` button:
 
 ![](images/lab_3/lab3_fig2_select_feat_exp.jpg)
 
 You will encounter this expression window in other parts of QGIS as well. The way it works is that you type your expression on the left window, using the middle and right panels to browse and select operators to add to your expression. It will make more sense with an example:
 
-(@) In the middle panel, expand the `Fields and Values` item and then double click on `KILOMETERS`. It will add this attribute name to the left panel. Notice that it is enclosed by double quotes. In the expression window, **any word between double quotes means it is an attribute's name**. You can also type names directly in the window if you prefer, and QGIS will offer autocomplete suggestions based on the existing attributes. 
+(@) In the middle panel, expand the `Fields and Values` item. This item lists all the attributes of the layer. Then double click on `KILOMETERS` to add this attribute to the left panel. Notice that it is enclosed by double quotes. In the expression window **any word between double quotes means it is an attribute name**, while a single quotes identify 'normal' text. You can also type names directly in the window if you prefer, and QGIS will offer autocomplete suggestions based on the existing attributes. Double-clicking on the suggestion or pressing `Enter` will add it to the expression window.  
 
-(@) Now complete the expression by typing the remainder, so that the final expression is `"KILOMETERS" > 5000`. This expression means "Select all River features that have a length - represented by the KILOMETERS attribute - larger than 5000". Then click on the `Select features` button.
+(@) Now we want to complete the expression so we can select only rivers longer than 5000km. The complete expression is `"KILOMETERS" > 5000`. This expression means "Select all River features whose length - as represented by the KILOMETERS attribute - is larger than 5000". Then click on the `Select features` button:
 
-(@) Check the results of your selection on the Attribute Table. The number of selected features should be shown on the top of the window (11), and selected features will be highlighted in blue. On the bottom left of the window, you can change from `Show all features` to `Show selected features` if you only want to see the selected features. 
+![](images/lab_3/lab3_select_rivers.jpg)
 
-(@) Also check the results of your selection on the Map canvas. All selected features will be highlighted in yellow. Tip: if you ever set the symbology of a feature yellow, remember to not confuse it with selected objects. When in doubt, check the attribute table.  
+(@) Check the results of your selection on the Attribute Table. The number of selected features should be shown on the top of the window (11 features), and the selected features will be highlighted in blue. On the bottom left of the window, you can change from `Show all features` to `Show selected features` if you only want to see the selected features. 
+
+(@) Also check the results of your selection on the Map canvas. All selected features will be highlighted in bright yellow. Tip: if you ever set the symbology of a feature to yellow, remember to not confuse it with selected objects. When in doubt, check the attribute table.  
+
+![](images/lab_3/lab3_selected_rivers.jpg)
 
 ::: {.callout-important title="Stop and Think"}
 It seems the selection is missing a few of the longest rivers in the world, such as the Amazon River. Why would that be? 
 
-Hint: try to use the manual selection tool (![](https://docs.qgis.org/3.34/en/_images/mActionSelectRectangle.png)) to click on the Amazon River and investigate. 
+Hint: try to use the Manual Selection tool (![](https://docs.qgis.org/3.34/en/_images/mActionSelectRectangle.png)) or the Identify Features tool (![](https://docs.qgis.org/3.34/en/_images/mActionIdentify.png)) to click on the Amazon River and investigate. 
 :::
 
 ::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
 The different segments of the Amazon River officially receive different names: Amazonas (lower Amazon), Solimões (central Amazon) and Ucayali (upper Amazon). In this dataset, it is broken down into two features: Amazon (with 3042 km) and Ucayali (with 2088 km). Since these are two separate features, neither is selected by our expression.
 :::
 
-(@) Return to the attribute table and make sure that the rivers larger than 5000km are still selected. Then create a new expression: `SYSTEM" = 'Amazon'`. Notice that we enclose the word Amazon with single quotes. This identifies this as a *string*, i.e. a character value (like a word) within an attribute, and differentiates it from an attribute name. Then instead of clicking on `Select Features`, click on the small arrow to the right and click in `Add to Current Selection`. Now your selection should include all river features that are longer than 5000 km *or* belong to the Amazon system (26 features in total). 
+(@) Return to the attribute table and make sure that the rivers larger than 5000km are still selected. Then create a new expression: `SYSTEM" = 'Amazon'`. Notice that we enclose the word Amazon with single quotes. This identifies this as a *string*, i.e. a character value (like a word) within an attribute, and differentiates it from an attribute name. Then instead of clicking on `Select Features`, click on the small arrow to the right and click on `Add to Current Selection`. Now your selection should include all river features that are longer than 5000 km *or* belong to the Amazon system (26 features in total). 
 
-Tip: If you can't remember all the possible values of an attribute, select the attribute under `Fields and Values` and then on the right panel, double click on `All Unique`. QGIS will list all possible value options for that particular attribute. 
+::: {.callout-note}
+*Tip:* If you can't remember all the possible values of an attribute, select the attribute under `Fields and Values` and then on the right panel, double click on `All Unique`. QGIS will list all possible value options for that particular attribute.
+:::
 
 (@) Now deselect all features by clicking on the `Deselect` button in the Attribute Table (![](https://docs.qgis.org/3.34/en/_images/mActionDeselectActiveLayer.png)) or the `Deselect from all Layers` button in the main QGIS toolbar (![](https://docs.qgis.org/3.34/en/_images/mActionDeselectAll.png)). It is always good to clear selections when you are done with a certain analysis, to avoid unexpected consequences. 
 
@@ -149,18 +176,18 @@ Another class of useful operators are called *Boolean* operators: `AND`, `OR` an
 
 (@) Now change the expression to `"KILOMETERS" > 1000 AND "SYSTEM" IS NOT 'Amazon'` and see what you get. Do you understand the effect of using the `NOT`operator?
 
-Finally, we have two useful operators for *partial matching* on strings. They are useful when you need to select based on a subset of string (word) values of an attribute:
+Finally, we have two useful operators for *partial matching* on strings. They are useful when you need to select based on a subset of a string (i.e. a word) attribute:
 
 (@) Clear your selection and create a new one with the expression `"NAME" LIKE 'Am%'`. This should select all three rivers whose name starts with 'Am' (Amazon, Amu Darya and Amur). The '%' symbol in this case is what we call a 'wildcard', and it means 'anything else'. 
 
-(@) Now use the expression `"NAME" LIKE 'C____'` (four underscores, '_'). This should select all rivers whose name starts with 'C' followed by any four characters (So it picks Congo and Chire).
+(@) Now use the expression `"NAME" LIKE 'C____'` ('C' followed by four underscores, '_'). This should select all rivers whose name starts with 'C' followed by any four characters (So it picks Congo and Chire. It will not pick Colorado, for example, as it has 7 letters after the 'C').
 
 ::: {.callout-important title="Stop and Think"}
 How many rivers would you get if you changed the above expression to `"NAME" LIKE 'C%'`?
 :::
 
 ::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
-Four (Columbia, Colorado, Congo, Chire). When you use the '%' wildcard it means 'any amount of any character'. 
+Four (Columbia, Colorado, Congo, Chire). When you use the '%' wildcard it means 'any characters in any number', including zero characters - if there were a river called just 'C', it would select it too. 
 :::
 
 (@) Finally, create a selection with the expression `"NAME" LIKE 'AM%'` (notice the upper-case). You won't get any results. Then change the expression to `"NAME" ILIKE 'AM%'`. You should get the same three rivers starting with 'Am' again.  
@@ -170,10 +197,10 @@ What is the difference between `LIKE` and `ILIKE`?
 :::
 
 ::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
-The `LIKE` operator is case sensitive, while `ILIKE` is case insensitive. 
+The `LIKE` operator is case sensitive (i.e. differentiates between capital/uppercase and non-capital/lowercase letters), while `ILIKE` is case insensitive. 
 :::
 
-(@) Before you move on to the next exercise, make sure you clear your selection.
+(@) Before you move on to the next exercise, make sure you clear your selections using the `Deselect from all Layers` button (![](https://docs.qgis.org/3.34/en/_images/mActionDeselectAll.png)).
 
 ## Guided Exercise 3: Summarising layer attributes
 
@@ -193,7 +220,7 @@ What are the longest, shortest, and mean kilometre lengths in the dataset?
 Max: 9207.1 km; Min: 194.9 km; Mean: 2663.6 km 
 :::
 
-(@) Now repeat the attribute selection you did before using the expression `"KILOMETERS" > 5000`, and then return to the `Statistical Summary` panel. Then check the `Selected Features Only` box at the bottom of the window. Now the stats will be re-calculated for the selected features only. 
+(@) Now repeat the attribute selection you did before using the expression `"KILOMETERS" > 5000`, and then return to the `Statistical Summary` panel. Then check the `Selected Features Only` box at the bottom of the window. Now the stats will be re-calculated for the selected features only (new minimum of 5081.92, new mean of 6288.99). 
 
 (@) The `Statistical Summary` panel is smart enough to know how to summarise different *data types*. For example, select the `SYSTEM` attribute, and see how the stats change - now it gives you how many features in total (`Count`), how many unique values (`Count(Distinct)`), how many missing values (`Count(Missing)`), the `Minimum` and `Maximum` string values (they don't have a clear meaning here), the least (`Minority`) and most (`Majority`) common unique values, and the `Minimum length` and `Maximum length` in number of characters. 
 
@@ -207,23 +234,25 @@ For the rivers dataset, `Majority` is blank and `Minimum length` is 0 because we
 
 ## Guided Exercise 4: Calculating new attributes
 
-Another powerful way to derive information from vector attributes is to make calculations involving multiple attributes. For that, we can use the `Field Calculator` tool (![](https://docs.qgis.org/3.34/en/_images/mActionCalculateField.png)), accessible either from the `Attribute table` or the main QGIS toolbar.  
+Another powerful way to derive information from vectors is to create new attributes from calculations involving the existing attributes. For that, we can use the `Field Calculator` tool (![](https://docs.qgis.org/3.34/en/_images/mActionCalculateField.png)), accessible either from the `Attribute table` or the main QGIS toolbar.  
 
 
 (@) Before your start, make sure you clear your selections.
 
-(@) Go back to the Attribute Table window for the Rivers layer and click on the Field Calculator button to open it. It should look like this:
+(@) Go back to the Attribute Table window for the Rivers layer and click on the Field Calculator button to open it. It should look like the figure below. This is somewhat similar to the `Select by Expression` window, with the difference that it assumes the result of whatever expression you type is asisgned to the new attribute.
 
 ![](images/lab_3/lab3_fig3_field_calculator.jpg)
 
-(@) On the new window, make sure the `Only update selected features` option is **not** checked. Then name the new field  `Mi_to_Km`, and change the output *data type* to `Decimal Number`. `Output field length` tells you the maximum number of digits that can be stored per attribute value, and the `Precision` field tells you how many of these digits should be decimal places.
+(@) On the new window, make sure the `Only update selected features` option is **not** checked. Then name the new field  `Mi_to_Km`, and change the output *data type* to `Decimal Number`. `Output field length` tells you the maximum number of digits that can be stored per attribute value, and the `Precision` field tells you how many of these digits should be decimal places. The defaults are fine for now.
 
-(@) On the expression window, write `"MILES" / "KILOMETERS"`. Note the warning at the bottom. Now click on `OK`. 
+(@) On the expression window, write `"MILES" / "KILOMETERS"`. Note the warning about edit mode at the bottom, and also notice that we **don't** need to type `"Mi_to_Km" = "MILES" / "KILOEMETERS"` - the Field Calculator already knows we want the result of the division to be the value of the new attribute. Now click on `OK`. 
+
+![](images/lab_3/lab3_field_calculator_filled.jpg)
 
 (@) Now **turn off editing mode** by clicking on the Toggle Editing (![](https://docs.qgis.org/3.34/en/_images/mActionToggleEditing.png)) button in the Attribute Table. When asked, confirm you want to save the layer changes.
 
 :::{.callout-warning}
-Turning on editing mode is one of the **most dangerous** options in QGIS, as it lets you freely change both the geometry and the attribute values of a layer. Using the `Field calculator` automatically puts you on editing mode, so always make sure you turn it off immediately after you have finished a calculation. Once you make any changes and then save the changes, *there is no turning back*. I'll often first export a copy of the layer if I need to do any edits, so I aways have the original as a backup if something goes wrong. We'll revisit editing mode on week 4, when we learn how to digitise and edit geometries by hand.  
+Turning on editing mode is one of the **most dangerous** options in QGIS, as it lets you freely change both the geometry and the attribute values of a layer. Using the `Field calculator` automatically puts you on editing mode, so always make sure you turn it off immediately after you have finished a calculation. Once you make any changes and then save the changes, *there is no turning back*. I'll often first export a copy of the layer if I need to do any edits, so I always have the original as a backup if something goes wrong. We'll revisit editing mode on week 4, when we learn how to digitise and edit geometries by hand.  
 :::
 
 ::: {.callout-important title="Stop and Think"}
@@ -231,18 +260,22 @@ Does the Miles to Km proportion you calculated seem right?
 :::
 
 ::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
-Yes, 1 Mile = 1.609 kilometres.    
+Yes, 1 km = 0.621 miles.    
 :::
+
+(@) Now imagine you actually wanted the opposite ratio, `"KILOMETERS" / "MILES"`, but you typed the wrong expression. You can *update* (replace) the values of a field by opening the `Field Calculator`, and instead of checking the box that says `Create a new field`, check the box that says `Update existing field`. Then pick the `Mi_to_Km` attribute, and enter the new expression (`"KILOMETERS" / "MILES"`). Once you run it, all values of the `Mi_to_Km` attribute should change to 1.609 (as 1 mi = 1.609 km).
 
 (@) This new attribute you calculated is not very useful. Let us get rid of it. Put the attribute table back into editing mode, then click on the `Delete Field` button (![](https://docs.qgis.org/3.34/en/_images/mActionDeleteAttribute.png)), and select your `Mi_to_Km` field. Click `OK`. It's gone!  Remember to save the changes and exit edit mode.
 
-Tip: if you want to rename an attribute, create a new one with the new name and just use the name of the old one as the expression on the `Field Calculator`. It will copy all values to the new attribute. Then remove the old one.
+::: {.callout-note}
+*Tip:* if you want to rename an attribute, create a new one with the new name and just enter the name of the old one as the expression on the `Field Calculator`. It will simply copy all values from the old to the new attribute. Then remove the old one.
+:::
 
 (@) We will continue working with this data in the next lab. If you want to keep your project, this is the best way to do it: on your computer's file explorer, find the root folder for the project (`lab_3`, or whatever you have named it as). Then right click on it and select (on Windows) `Compress to Zip file`. That will create a new zipfile of the folder contents, with the same name as the folder. Then you can copy this zip file to your OneDrive folder or to an external drive. 
 
 Good job, we have now finished our first guided tour of vector attributes. We will revisit it in the next lab, when we also learn about geometry-based selections. 
 
-Make sure you  have a go at the independent exercise below, to make sure you feel comfortable with attribute selections, calculations and summaries. You will keep using these skills for the rest of the module (and your GIS life).
+Make sure you have a go at the independent exercise below, to confirm you feel comfortable with attribute selections, calculations and summaries. You will keep using these skills for the rest of the module (and your GIS life).
 
 ## Independent Exercise
 
@@ -250,6 +283,6 @@ Using the earthquakes layer you downloaded (`global_earthquakes_2011.gpkg`), do 
 
 1) Find out how many earthquakes of magnitude equal or larger than 7 have occurred in the Northern Hemisphere in 2011.
 
-2) What was the average magnitude of all earthquakes that occurred in Japan in 2011? (Tip: make sure you enlarge the `event` column of the attribute table to the whole values).
+2) What was the average magnitude of all earthquakes that occurred in Japan in 2011? (Hint: make sure you enlarge the `event` column of the attribute table to see the whole values).
 
-3) Create a new `Text (string)` attribute that indicates if an earthquake is located on the western (`W`) or eastern (`E`) hemisphere.  
+3) Create a new `Text (string)` attribute called `Hemisphere`, which indicates if an earthquake is located on the western (`W`) or eastern (`E`) hemisphere. (Hint: this involves multiple steps, including selection by expression, attribute creation, attribute *update*, and smart use of the `Only update selected features` option in the `Field Calculator`).

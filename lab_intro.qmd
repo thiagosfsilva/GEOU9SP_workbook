@@ -287,7 +287,7 @@ For reference, my map looked like this at this stage:
 
 At the end of each lab, you will have the opportunity to reinforce what you learned by going through 'independent' exercises. These will use the same operations you learned with the guided exercises, but it may require you to figure out small bits of new functionality and will not have step by step instructions.
 
-As the module progresses, the independent exercises will give you less and less directions, to reflect real-world GIS usage. **Make sure you do the independent exercises**  - it is easy to fall into a false sense of '*I got this*' when only following step-by-step directions. 
+As the module progresses, the independent exercises will give you less and less directions, to reflect real-world GIS usage. **Don't skipe the independent exercises**  - it is easy to fall into a false sense of '*I got this*' when only following step-by-step directions. 
 
 1. Create a new project folder structure for this project, under your main GEOU9SP work folder. 
 
@@ -313,9 +313,9 @@ As the module progresses, the independent exercises will give you less and less 
 
 10. Now answer the questions below:
 
- - How far is the Pathfoot Building from the Cottrell Building? Calculate it both "as the crow flies" (linear distance) and as if you were walking. (Hint: use the [Measuring](https://docs.qgis.org/3.34/en/docs/user_manual/map_views/map_view.html#sec-measure) tool).
+ - How far is the Pathfoot Building from the Cottrell Building? Calculate it both "as the crow flies" (linear distance) and as if you were walking. (Hint: use the [Measuring](https://docs.qgis.org/3.34/en/docs/user_manual/map_views/map_view.html#sec-measure) tool ![](https://docs.qgis.org/3.34/en/_images/mActionMeasure.png) ).
 
 - What is the total surface area of the water bodies in the University of Stirling Campus? (Hint: also the Measuring tool).
 
-- What is the classification of the UoS campus polygon within the "Functional Site" layer? (Hint: use the [Indentify Features](https://docs.qgis.org/3.34/en/docs/user_manual/introduction/general_tools.html#identify) tool).
+- What is the classification of the UoS campus polygon within the "Functional Site" layer? (Hint: use the [Identify Features](https://docs.qgis.org/3.34/en/docs/user_manual/introduction/general_tools.html#identify) tool  ![](https://docs.qgis.org/3.34/en/_images/mActionIdentify.png)).
 

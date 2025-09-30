@@ -504,7 +504,7 @@ Click for answer
 <ol start="8" class="example" type="1">
 <li>Open the <code>Raster Calculator</code> again, and this time use the expression <code>"UK_bioclim_BG_GBmask_BIO6_celsius@1" &gt; 0</code>. Notice we used here the layer that we just converted to degrees Celsius. Save the results in a proper folder with the name <code>GB_mintemp_gt_0.tif</code> (gt for ‘greater than’) and run the calculation. You should get something like this:</li>
 </ol>
-<p><img src="images/lab_6/lab_6_fig3_mintemp_gt_0.jpg" class="img-fluid"> By default, QGIS will paint pixels with a value of <code>1</code> white, and <code>2</code> black. So the white areas now show us all regions of Great Britain that <em>on average</em> don’t go below zero in the worst of winter (these are long term climatic averages). Use the <code>Identify Features</code> tool to check if the pixel values are really <code>0</code> and <code>1</code>.</p>
+<p><img src="images/lab_6/lab_6_fig3_mintemp_gt_0.jpg" class="img-fluid"> By default, QGIS will paint pixels with a value of <code>1</code> white, and <code>0</code> black. So the white areas now show us all regions of Great Britain that <em>on average</em> don’t go below zero in the worst of winter (these are long term climatic averages). Use the <code>Identify Features</code> tool to check if the pixel values are really <code>0</code> and <code>1</code>.</p>
 <ol start="9" class="example" type="1">
 <li>Now repeat the process for the precipitation layer. Our minimum annual precipitation value was just above 500, so let us limit our search to areas under 700mm of precipitation. Save the result as <code>GB_anprec_lt_700.tif</code>.</li>
 </ol>
