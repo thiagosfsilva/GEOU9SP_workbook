@@ -172,7 +172,7 @@ Another class of useful operators are called *Boolean* operators: `AND`, `OR` an
 
 (@) Return to the attribute table and this time use the following expression: `"KILOMETERS" > 5000 OR "SYSTEM" = 'Amazon'`. You should get the same results as when you used two separate selections with `Add to Current Selection`. But boolean operators can be more powerful. 
 
-(@) Clear your selection and create a new one with the expression `"KILOMETERS" > 1000 AND "SYSTEM" = 'Amazon'`. When you use the `AND` operator, each feature must fulfil *both* criteria (like an intersection in set theory, if you remember your maths). When you use the `OR` keyword, then each feature can fulfil *either* criteria (a mathematical *union*).
+(@) Clear your selection and delete the previous expression if still there. Then create a new selection with the expression `"KILOMETERS" > 1000 AND "SYSTEM" = 'Amazon'`. When you use the `AND` operator, each feature must fulfil *both* criteria (like an intersection in set theory, if you remember your maths). When you use the `OR` keyword, then each feature can fulfil *either* criteria (a mathematical *union*).
 
 (@) Now change the expression to `"KILOMETERS" > 1000 AND "SYSTEM" IS NOT 'Amazon'` and see what you get. Do you understand the effect of using the `NOT`operator?
 
@@ -245,7 +245,7 @@ Another powerful way to derive information from vectors is to create new attribu
 
 (@) On the new window, make sure the `Only update selected features` option is **not** checked. Then name the new field  `Mi_to_Km`, and change the output *data type* to `Decimal Number`. `Output field length` tells you the maximum number of digits that can be stored per attribute value, and the `Precision` field tells you how many of these digits should be decimal places. The defaults are fine for now.
 
-(@) On the expression window, write `"MILES" / "KILOMETERS"`. Note the warning about edit mode at the bottom, and also notice that we **don't** need to type `"Mi_to_Km" = "MILES" / "KILOEMETERS"` - the Field Calculator already knows we want the result of the division to be the value of the new attribute. Now click on `OK`. 
+(@) On the expression window, write `"MILES" / "KILOMETERS"`. Note the warning about edit mode at the bottom, and also notice that we **don't** need to type `"Mi_to_Km" = "MILES" / "KILOMETERS"` - the Field Calculator already knows we want the result of the division to be the value of the new attribute. Now click on `OK`. 
 
 ![](images/lab_3/lab3_field_calculator_filled.jpg)
 
@@ -283,6 +283,6 @@ Using the earthquakes layer you downloaded (`global_earthquakes_2011.gpkg`), do 
 
 1) Find out how many earthquakes of magnitude equal or larger than 7 have occurred in the Northern Hemisphere in 2011.
 
-2) What was the average magnitude of all earthquakes that occurred in Japan in 2011? (Hint: make sure you enlarge the `event` column of the attribute table to see the whole values).
+2) What was the average magnitude of all earthquakes that occurred in Japan in 2011? (Hint: make sure you enlarge the `event` column of the attribute table to see the whole values of that field).
 
 3) Create a new `Text (string)` attribute called `Hemisphere`, which indicates if an earthquake is located on the western (`W`) or eastern (`E`) hemisphere. (Hint: this involves multiple steps, including selection by expression, attribute creation, attribute *update*, and smart use of the `Only update selected features` option in the `Field Calculator`).
