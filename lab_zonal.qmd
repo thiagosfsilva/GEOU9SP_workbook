@@ -81,8 +81,7 @@ But again, there is a faster way. This will be a common theme for many of the to
 
 ![](images/lab_12/lab12_fig2_overlap.jpg)
 
-This new layer has all the same attributes and polygons as the original neighbourhoods layer, but two additional fields, named with the name of the overlap layer followed by a `_area` or `_pc` suffix: the first gives you the overlap area (in the same units as the CRS you are using, so m$^2$), and the second gives you the percentage of area overlap. It should look somewhat like this:
-
+This new layer has all the same attributes and polygons as the original neighbourhoods layer, but two additional fields, named with the name of the overlap layer followed by a `_area` or `_pc` suffix: the first gives you the overlap area (in the same units as the CRS you are using, so m$^2$), and the second gives you the percentage of area overlap. 
 
 (@) Style this new overlap layer to show the percentage of green spaces as a continuous colour. Does it seem to be inversely correlated to NO$_2$ pollution?
 
@@ -110,7 +109,7 @@ As the GIS specialist for an International NGO (Non-governmental organization), 
 
 ### Data Acquisition
 
-For this exercise, I am giving you a pre-downloaded dataset, because the source files are large and also require a registration to download. But I am describing below how to download the original data - *you will need it for the Final Project* and the information is relevant if working with species distribution data is of interest to you in the future. 
+For this exercise, I am giving you a pre-downloaded dataset, because the source files are large and also require a registration to download. But I am describing below how to download the original data - (if you are taking GEOU9SP you will need it for the Final Project) and the information is relevant if working with species distribution data is of interest to you in the future. 
 
 [Download the data package from here](https://stir-my.sharepoint.com/:u:/g/personal/ala2_stir_ac_uk/EdX5iTojX65Mv3Jf_DD-PvEBGKnlQIuu7Njo5XFdu4SQmA?e=krTy3W).
 
@@ -144,7 +143,7 @@ MPI-ESM1-2-HR ([https://gmd.copernicus.org/articles/12/3241/2019/](info: https:/
 
 MPI-ESM2-0 ([https://www.jstage.jst.go.jp/article/jmsj/97/5/97_2019-051/_article](info: https://www.jstage.jst.go.jp/article/jmsj/97/5/97_2019-051/_article))
 
-*Note: The CHELSA datasets come as global layers, but to reduce download sizes, I have already cropped them to cover Taiwan only. Don't say I never did anything for you :-).*
+*Note: The CHELSA datasets come as global layers, but to reduce download sizes, I have already cropped them to cover Taiwan only. You're welcome.*
 
 Finally, you decide to grab the Taiwan country borders from the [GADM website](https://gadm.org/download_country.html).
 
