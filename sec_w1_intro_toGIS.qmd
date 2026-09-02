@@ -1,6 +1,6 @@
 # Week 1 - Introduction 
 
-In our first week, we will get acquainted to with basic GIS data manipulation using the QGIS software.
+In our first week, we will get acquainted with basic GIS data manipulation using the QGIS software.
 
 ## ILOs covered
 

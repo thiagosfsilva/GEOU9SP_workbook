@@ -1,4 +1,4 @@
-# Lab 13 - Densities and distances {sec_spatan4}
+# Lab 13 - Densities and distances {#sec-spatan4}
 
 ## Guided Exercise 1 - Obtaining and organising the data
 
@@ -33,7 +33,7 @@ The first question you have been asked is where the crime *hotspots* in the city
 
 In GIS, density will be usually related to counts of 'things' over areas - the more things happening per unit area, the higher the density. This is often called *hotspot analysis* in GIS, where the hotspots are areas of remarkably high density. And the main tool used for that is known as *Kernel Density Estimation (KDE)*. I have made a video explanation on KDE that you can watch on Canvas. We will now learn about two ways of generating density maps. 
 
-(@) The first way to generate a density map is to change the layer `Symbology` (see image below). Select the crime layer and go to `Properties > Syymbology`, then change the symbology type from `Single Symbol` to `Heatmap`. Pick `Reds` as the `Color ramp`, and a `Radius` of 1000, changing the radius unit from `Millimiters` to `meters at scale` . Then `Apply` and `Close`. It will take a bit of time to change the appearance.
+(@) The first way to generate a density map is to change the layer `Symbology` (see image below). Select the crime layer and go to `Properties > Symbology`, then change the symbology type from `Single Symbol` to `Heatmap`. Pick `Reds` as the `Color ramp`, and a `Radius` of 1000, changing the radius unit from `Millimeters` to `meters at scale` . Then `Apply` and `Close`. It will take a bit of time to change the appearance.
 
 
 
@@ -99,7 +99,7 @@ Which precinct and neighbourhood seem to be the most problematic in terms of cri
 :::
 
 ::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
-We can look at the attribute table of the zonal statistics results to answer that. This confirms our visual analysis that Midtown / Midtown South Manhattan has the highest maximum and average densities of arrest incidents. Not surprisingly, the [14th Precinct](https://www.nyc.gov/site/nypd/bureaus/patrol/precincts/midtown-south-precinct.page), also known Midtown South Precinct, also has the highest average and maximum densities.
+We can look at the attribute table of the zonal statistics results to answer that. This confirms our visual analysis that Midtown / Midtown South Manhattan has the highest maximum and average densities of arrest incidents. Not surprisingly, the [14th Precinct](https://www.nyc.gov/site/nypd/bureaus/patrol/precincts/midtown-south-precinct.page), also known as Midtown South Precinct, also has the highest average and maximum densities.
 :::
 
 ## Guided Exercise 3 - Weighted Kernel Densities
@@ -201,7 +201,7 @@ There are times, however, when you want to create a *distance map* - a layer tha
 ![](images/lab_13/lab13_fig_rasterise.jpg)
 
 
-(@) Now open the `Proximity (raster distance)` tool in the `Processing` panel, under `Raster Analysis`. Pick the rasterised police stations as the `Input Layer`, and add the number `1` as the `List of pixel values....` option. Change the distance units to `Georeferenced coordinates`, leave the rest as default, and save the output as `dist_from_police_Stations.tif` and `Run` it. 
+(@) Now open the `Proximity (raster distance)` tool in the `Processing` panel, under `Raster Analysis`. Pick the rasterised police stations as the `Input Layer`, and add the number `1` as the `List of pixel values....` option. Change the distance units to `Georeferenced coordinates`, leave the rest as default, and save the output as `dist_from_police_stations.tif` and `Run` it. 
 
 ![](images/lab_13/lab_13_proximity.jpg)
 

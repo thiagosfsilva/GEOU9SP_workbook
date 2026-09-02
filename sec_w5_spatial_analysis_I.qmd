@@ -18,7 +18,7 @@ For every week, we will list the main theoretical and practical learning goals. 
 
 [@sec-catch1]
 
-No new knowledge for this section - it is reserved for you to catch up with previoous content
+No new knowledge for this section - it is reserved for you to catch up with previous content
 
 [@sec-spatan1]
 

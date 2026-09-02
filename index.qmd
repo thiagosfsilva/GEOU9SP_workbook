@@ -4,7 +4,7 @@ This e-book was created as a lab companion for the *GEOU9SP - Geographic Informa
 
 This book is **not a replacement to Canvas**, so make sure you are engaging with the material on Canvas on a weekly basis!
 
-The content of this book is organised into sections, which will correspond to the teaching weeks and practical lab sessions. You will always see the main content in the center window, with a detailed menu covering all entries in the book on the left, and a chapter-specific table of contents on the right. The Canvas pages for each lab session will always link to the corresponding chapter in this book.  
+The content of this book is organised into sections, which will correspond to the teaching weeks and practical lab sessions. You will always see the main content in the centre window, with a detailed menu covering all entries in the book on the left, and a chapter-specific table of contents on the right. The Canvas pages for each lab session will always link to the corresponding chapter in this book.  
 
 If you have any questions follow the instructions on Canvas on how to [contact the module coordinator](). 
 

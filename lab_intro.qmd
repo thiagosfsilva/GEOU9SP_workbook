@@ -20,7 +20,7 @@ In this exercise, you will download some data, prepare a *folder structure* to o
 
 For this practical you will use the "OS open road" and "OS Terrain 50 Digital Terrain Model" spatial datasets, specifically for the **NS89** tile of the Ordnance Survey British National Grid. (Read about what these datasets are here: [OS Open Roads](https://www.ordnancesurvey.co.uk/products/os-open-roads) , [OS Terrain 50](https://www.ordnancesurvey.co.uk/products/os-terrain-50)). 
 
-(@) Head to the [Digimap](https://digimap.edina.ac.uk/) website, and if you haven't already, make sure you accept the user licenses for all datasets, as show on the instructions video available on Canvas.
+(@) Head to the [Digimap](https://digimap.edina.ac.uk/) website, and if you haven't already, make sure you accept the user licences for all datasets, as show on the instructions video available on Canvas.
 
 (@) Go the `Ordnance Survey` section of the site, and then pick the `View maps and download data` option on the right.
 
@@ -34,10 +34,10 @@ If you have correctly searched for tile NS89 and checked the required datasets, 
 
 ### Creating a project structure
 
-GIS projects generate a lot of different files, and quickly, so project organization is **essential**. The folder structure below is my personal suggestion for organizing GIS projects files and associated data. As you get comfortable managing your own projects, feel free to change the organization structure to something that best suits your own workflow and the specific project you are working on! 
+GIS projects generate a lot of different files, and quickly, so project organisation is **essential**. The folder structure below is my personal suggestion for organizing GIS projects files and associated data. As you get comfortable managing your own projects, feel free to change the organisation structure to something that best suits your own workflow and the specific project you are working on! 
 
 
-(@) Create a folder on your computer with the module name (`GEOU9SP`), off of your main work folder. For **Windows** this will usually be `Documents`. For **Linux** and **Mac**, create it on you `home` folder. (If you prefer and are comfortable with saving at another location on your computer, go for it!)
+(@) Create a folder on your computer with the module name (`GEOU9SP`), off of your main work folder. For **Windows** this will usually be `Documents`. For **Linux** and **Mac**, create it on your `home` folder. (If you prefer and are comfortable with saving at another location on your computer, go for it!)
 
 **Windows:**
 
@@ -72,7 +72,7 @@ GIS projects generate a lot of different files, and quickly, so project organiza
         └── 04_notes
 ```
 
-I like to start folder names start with double digits so they are kept in order. These folders will be used as follows:
+I like to start folder names with double digits so they are kept in order. These folders will be used as follows:
 
 - `00_qgis`: we will use this folder to save our QGIS project files.
 
@@ -84,10 +84,10 @@ I like to start folder names start with double digits so they are kept in order.
 
 - `04_notes`: here we will keep all our *non-GIS* files. For example, it may be a good idea to keep a text file documenting the project steps as you work on it. You could also save here screen grabs of specific steps. Again, use sub-folders as needed to keep your data tidy.
 
-(@) Now move the data you've downloaded into your organized project folders and extract (unzip) them if necessary. The terrain data folder (`terrain-50-dtm_xxxxxxx`) should go into the `raster` folder within `01_raw_data` and the roads folder (`open-roads_xxxxxxx`) into the `vector` folder. The `citations_orders.xxxx.txt` and `contents_order_xxx` text files should go into your `04_notes` folder. 
+(@) Now move the data you've downloaded into your organised project folders and extract (unzip) them if necessary. The terrain data folder (`terrain-50-dtm_xxxxxxx`) should go into the `raster` folder within `01_raw_data` and the roads folder (`open-roads_xxxxxxx`) into the `vector` folder. The `citations_orders.xxxx.txt` and `contents_order_xxx` text files should go into your `04_notes` folder. 
 
 ::: {.callout-note}
-Each of the download datasets will contain several files once you unzip them. All of them are important, so make sure to keep them all together (except for the text files, these can go somewhere else).
+Each of the downloaded datasets will contain several files once you unzip them. All of them are important, so make sure to keep them all together (except for the text files, these can go somewhere else).
 ::: 
 
 
@@ -125,7 +125,7 @@ They are both plain text files. `citations_orders.xxxx.txt` is very handy as it 
 
 ### Creating a QGIS project and adding data to it
 
-A QGIS project is a file, which will remember all the data layers you have loaded, their stacking order, the styling of each layer, and some other information such as the coordinate reference system. It will also keep any map layouts that you create. **But he project file will NOT store the data files themselves!!**. It will only link to the data. That is why we need good project folder organisation. If a data file is moved or renamed, the QGIS project file will lose track of it. 
+A QGIS project is a file, which will remember all the data layers you have loaded, their stacking order, the styling of each layer, and some other information such as the coordinate reference system. It will also keep any map layouts that you create. **But the project file will NOT store the data files themselves!!**. It will only link to the data. That is why we need good project folder organisation. If a data file is moved or renamed, the QGIS project file will lose track of it. 
 
 (@) Open QGIS. Then create a new project in QGIS by clicking on `Project > New...` or pressing *Ctrl-N*:
 
@@ -138,7 +138,7 @@ If you start QGIS and you don't see the `Browser` and `Layers` panels to the lef
 :::
 
 
-(@) Add to your project the layers `NS_RoadLink.shp` from the OS Roads dataset and the `NS89.asc` terrain data from your organized project folders. Don't worry if the extents don't match - it's just that the OS DEM and the OS Roads are distributed in different sized 'chunks'.
+(@) Add to your project the layers `NS_RoadLink.shp` from the OS Roads dataset and the `NS89.asc` terrain data from your organised project folders. Don't worry if the extents don't match - it's just that the OS DEM and the OS Roads are distributed in different sized 'chunks'.
 
 (@) Save your project inside the `00_qgis` folder. You can save your project by clicking on the *Save* button, going to `Project > Save` menu, or by holding the keys `Ctrl+S (Command+S on Mac)`.
 
@@ -165,7 +165,7 @@ EPSG stands for "European Petroleum Survey Group", and designates a database wit
 
 
 
-## Guided Exercise 2 - Organizing and styling your layers 
+## Guided Exercise 2 - Organising and styling your layers 
 
 One of the most powerful aspects of GIS software is the ability to *style* spatial data in very specific ways, by specifying colours, line widths, line types, symbols, etc. As we progress in the module you will learn more and more ways to style your data.  
 
@@ -193,8 +193,8 @@ No, layer names within the project are independent of file names -  but as defau
 (@) On the `Min` and `Max` boxes, type `0` and `500` respectively. This determines the range of layer values to be visualised. 
 
 
-(@) Select `Rendering type` to be `Single Band Pseudocolor`, and change the `Color ramp` option by clicking on the down-arrow button to the right and picking the  `spectral` colour ramp. If you click on the colour ramp itself it will open a new window to customise it. This is now what we need for now, so just close it and use the down-arrow. 
-(@) Click on `Classify` (under the drop down menu that says * Mode: continuous*). The colours will be matched to the range of elevation values in the layer.
+(@) Select `Rendering type` to be `Single Band Pseudocolor`, and change the `Color ramp` option by clicking on the down-arrow button to the right and picking the  `spectral` colour ramp. If you click on the colour ramp itself it will open a new window to customise it. This is not what we need for now, so just close it and use the down-arrow. 
+(@) Click on `Classify` (under the drop down menu that says *Mode: continuous*). The colours will be matched to the range of elevation values in the layer.
 
 (@) Click again on the little down-arrow button beside the colour palette button and select `Invert Color Ramp` at the top of the options, so that the lowest heights are coloured blue. Then click on `OK`. 
 
@@ -210,7 +210,7 @@ We should always try to use colours that reinforce map interpretation. The colou
 
 (@) Rename the `NS_RoadLink` layer to `Road Network`. 
 
-(@) Go to its `Symbology` properties, like you did for the terrain layer, Notice that the symbology options are data-specific (vector vs. raster). Select `Simple Line` in the symbology window (under the main `Line` option). Then under the window, go to the `Color` option an click on the down-arrow menu to change the line colour to a dark grey. If you click on the actual colour, a more complex colour-picking window will appear. You can use either the quicker colour drop down or the main colour window, whatever you prefer.  
+(@) Go to its `Symbology` properties, like you did for the terrain layer, Notice that the symbology options are data-specific (vector vs. raster). Select `Simple Line` in the symbology window (under the main `Line` option). Then under the window, go to the `Color` option and click on the down-arrow menu to change the line colour to a dark grey. If you click on the actual colour, a more complex colour-picking window will appear. You can use either the quicker colour drop down or the main colour window, whatever you prefer.  
 
 (@) Change the `Stroke width` (line width) to 0.3. Click `OK`. Reactivate the layer if needed to visualise it.
 
@@ -226,7 +226,7 @@ The core of GIS work is to use the many built-in operations (also known as funct
 
 (@) Turn the original roads layer on and off to see the result of your operation. Then right-click on the original roads layer, and select `Styles > Copy Style > All Style Categories`. Then right click on the new (`Clipped`) roads layer and select `Styles > Paste Style > All Style Categories`. This is a great way to style several layers in the same way without effort. 
 
-(@) Remove the original roads layer from your project by right clicking on it and selecting `Remove Layer...`, and then rename you clipped layer to "Roads". Save your project. 
+(@) Remove the original roads layer from your project by right clicking on it and selecting `Remove Layer...`, and then rename your clipped layer to "Roads". Save your project. 
 
 (@) Close QGIS. **It will give you a warning** - read it carefully and then confirm it. 
 
@@ -270,7 +270,7 @@ The main QGIS interface (or any other GIS software) is developed and optimised f
 
 (@) Add a title to your map using the `Add Label...` tool (either on the `Add Item` menu or selecting the tool directly from the left sidebar). You can change the text by replacing the "Lorem ipsum" placeholder text with your own text on the left pane. Try to make it **bold** with a font size of 16 (hint: always use the down-arrow buttons for 'quick settings').
 
-(@) Rearrange the items on the page until you are pleased with the results. Then go to `Layout > Export as PDF...`, and export your map, naming it properly and saving it on `GEOU9SP/lab_1/final_products`. It is a good idea to export as PDF if you want your map to be a standalone document. If you are exporting to insert the map into a report, then use `Layout > Export as Image...` instead.
+(@) Rearrange the items on the page until you are pleased with the results. Then go to `Layout > Export as PDF...`, and export your map, naming it properly and saving it on `GEOU9SP/lab_1/03_final_products`. It is a good idea to export as PDF if you want your map to be a standalone document. If you are exporting to insert the map into a report, then use `Layout > Export as Image...` instead.
 
 For reference, my map looked like this at this stage:
 
@@ -279,7 +279,7 @@ For reference, my map looked like this at this stage:
 (@) Then close the Map Layout window, save your project on the main QGIS window, and close QGIS. Reopen QGIS, and go to `Project > Layout Manager`. The layout you created previously should appear on the list. Select it and click on `Show` to reopen the Map Layout window. 
 
 
-**Congratulations!** You have successfully finished your first GIS project, using proper file management practices! As a final suggestion, create a "workflow_notes" file on `GEOU9SP/lab1/notes` and write up a quick overview of what you did, along with any specific notes you would like to remember later.
+**Congratulations!** You have successfully finished your first GIS project, using proper file management practices! As a final suggestion, create a "workflow_notes" file on `GEOU9SP/lab_1/04_notes` and write up a quick overview of what you did, along with any specific notes you would like to remember later.
 
 
 
@@ -287,7 +287,7 @@ For reference, my map looked like this at this stage:
 
 At the end of each lab, you will have the opportunity to reinforce what you learned by going through 'independent' exercises. These will use the same operations you learned with the guided exercises, but it may require you to figure out small bits of new functionality and will not have step by step instructions.
 
-As the module progresses, the independent exercises will give you less and less directions, to reflect real-world GIS usage. **Don't skipe the independent exercises**  - it is easy to fall into a false sense of '*I got this*' when only following step-by-step directions. 
+As the module progresses, the independent exercises will give you less and less directions, to reflect real-world GIS usage. **Don't skip the independent exercises**  - it is easy to fall into a false sense of '*I got this*' when only following step-by-step directions. 
 
 1. Create a new project folder structure for this project, under your main GEOU9SP work folder. 
 

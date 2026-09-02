@@ -2,9 +2,9 @@
 
 So far, we have been working within the realm of vector data: beautiful topological combinations of vertices and lines to represent the complexity of the Earth’s surface. But there are plenty of situations where vectors are not the best choice; any information that varies gradually and continuously over the surface can be better represented by a raster.
 
-You know rasters well - any digital image is a raster. While vectors connect dots with lines, rasters are grid (i.e. a matrix) of numbers, called *pixels*. The numeric value of each pixel can be used the indicate a colour (like on digital photos), or can actually represent a physical quantity, such as temperature or elevation. 
+You know rasters well - any digital image is a raster. While vectors connect dots with lines, rasters are grid (i.e. a matrix) of numbers, called *pixels*. The numeric value of each pixel can be used to indicate a colour (like on digital photos), or can actually represent a physical quantity, such as temperature or elevation. 
 
-Raster files can contain multiple 'images' within them, which call *channels* or *bands*. Digital photos for example, actually contain three bands: one specifying the amount of red colour per pixel, one for the green colour, and one for the blue colour. When you look at a photo you are seeing a *colour composition* mixing the amounts of the three primary colours according to the information help by each pixel. 
+Raster files can contain multiple 'images' within them, which we call *channels* or *bands*. Digital photos for example, actually contain three bands: one specifying the amount of red colour per pixel, one for the green colour, and one for the blue colour. When you look at a photo you are seeing a *colour composition* mixing the amounts of the three primary colours according to the information held by each pixel. 
 
 
 ![Source: https://doi.org/10.5772/63028](https://d3i71xaburhd42.cloudfront.net/205876806bc8715da74adc23a0ad78090c73734f/4-Figure3-1.png)
@@ -34,7 +34,7 @@ We will cover most of the above this week, and then cover how to extract values 
 
 (@) For this exercise we will look at three different raster layers. The data has been pre-packaged and can be [downloaded here](https://stir-my.sharepoint.com/:u:/g/personal/ala2_stir_ac_uk/ESim8eCFo_ZCkZ4DQJ6eKpcBSJQSWHQErdPpkgcktwrXtg?e=5eG27g). It includes the following datasets:
 
-- UK SRTM: This is a single-band raster containing data from the [Shuttle Radar Topography Mission (SRTM)] (https://en.wikipedia.org/wiki/Shuttle_Radar_Topography_Mission), a global dataset of surface elevation. The data can be obtained from a variety of sources online. 
+- UK SRTM: This is a single-band raster containing data from the [Shuttle Radar Topography Mission (SRTM)](https://en.wikipedia.org/wiki/Shuttle_Radar_Topography_Mission), a global dataset of surface elevation. The data can be obtained from a variety of sources online. 
 
 - UK Bioclim: The BIOCLIM suite of climate data has been developed to support biodiversity studies and species distribution modelling. It is a single multiband raster file. [Read this page](https://www.worldclim.org/data/bioclim.html) for a description of which variable each band represents.
 
@@ -42,7 +42,7 @@ We will cover most of the above this week, and then cover how to extract values 
 
 - UK administrative boundaries from the [GADM website](https://gadm.org/), in geopackage vector file format. 
 
-(@) Download the required data and organise it as you have learned. Create a new QGIS project and add the `UK_SRTM.tif`, `UK_Bioclim.tif` and `CLC2018_CLC2018_V2018_20_UKclip.tif` raster files to your project. All files are in [*GeoTIFF*'](https://en.wikipedia.org/wiki/GeoTIFF) format, which is the most common and standard spatial raster file format. 
+(@) Download the required data and organise it as you have learned. Create a new QGIS project and add the `UK_SRTM.tif`, `UK_Bioclim.tif` and `CLC2018_CLC2018_V2018_20_UKclip.tif` raster files to your project. All files are in [*GeoTIFF*](https://en.wikipedia.org/wiki/GeoTIFF) format, which is the most common and standard spatial raster file format. 
 
 (@) For each of the raster layers, right-click on the layer name and go to `Properties > Information`, then:
 
@@ -67,9 +67,9 @@ a) raster (vector for the boundaries)
 
 b) GeoTIFF for the rasters, geopackage for the vector
 
-c) The data types can be found when looking at `Properties > Information` for a raster layer. The SRTM and CORINE datasets are 16-bit signed integer (INT16), the BIOCLIM dataset is a 32-but floating point raster. Raster data types are important as they determine the range and precision of the data that can be stored in the raster, and also impact the size of the raster file. For the same number of rows, columns and bands, a 32-bit raster is twice as large as a 16-bit raster. 
+c) The data types can be found when looking at `Properties > Information` for a raster layer. The SRTM and CORINE datasets are 16-bit signed integer (INT16), the BIOCLIM dataset is a 32-bit floating point raster. Raster data types are important as they determine the range and precision of the data that can be stored in the raster, and also impact the size of the raster file. For the same number of rows, columns and bands, a 32-bit raster is twice as large as a 16-bit raster. 
 
-d) GADM, SRTM, BIOCLIM: EPSG 4236 (WGS-84); CORINE: EPSG3035 (ETRS89 / Europe LAEA)
+d) GADM, SRTM, BIOCLIM: EPSG 4326 (WGS-84); CORINE: EPSG:3035 (ETRS89 / Europe LAEA)
 
 e) These are also found in `Properties > Information`, as `Width` (columns) and `Height`(rows) or in `Dimensions`. SRTM: 16355 cols x 12036 rows; CORINE: 10473 cols x 12261 rows; BIOCLIM: 1471 cols x 1084 rows.
 
@@ -80,7 +80,7 @@ g)  These are also found in `Properties > Information` in `Pixel Size`. SRTM: 0.
 
 ## Guided Exercise 2 - Reprojecting raster data
 
-As we learned in week 1, the UK looks “squished” because the data is projected using only the WGS-84 datum and geographic coordinates (EPSG:4236). Although data in geographic coordinates is often referred to as “unprojected,” this is not actually true (you are looking at it on a flat screen, right?). For these “unprojected” datasets, what most GIS software do is to simply use a linear function to convert latitudes and longitudes in degrees to x and y values on your screen. This projection can be referred to as Plate Carrée or Equirectangular projection, which has a heavy amount of distortion towards the poles:
+As we learned in week 1, the UK looks “squished” because the data is projected using only the WGS-84 datum and geographic coordinates (EPSG:4326). Although data in geographic coordinates is often referred to as “unprojected,” this is not actually true (you are looking at it on a flat screen, right?). For these “unprojected” datasets, what most GIS software do is to simply use a linear function to convert latitudes and longitudes in degrees to x and y values on your screen. This projection can be referred to as Plate Carrée or Equirectangular projection, which has a heavy amount of distortion towards the poles:
 
 ![](images/lab_5/lab5_fig1_Equirectangular_projection_SW.jpg)
 
@@ -178,7 +178,7 @@ Whoa, there are a lot of classes, and the random colours selection picked colour
 
 (@) Back on the `Properties > Symbology` window, click on the `...` button to the right of `Delete All` and choose `Load Color Map from File...`. Within the CORINE files you unzipped, find and select the metadata file named `CLC2018_CLC2018_V2018_20_QGIS.txt`. `Apply`and then click `OK`. Not only we get the colours selected by the CORINE mapping team, but also all the proper class names! That was nice!
 
-(@) Now let us have a look at the BIOCLIM dataset. First, read the metadata included with the data files (`Bioclim_metadata.txt`) to understand what each band of this dataset represents. Then turn on the BIOLCIM layer and turn the remaining layers off. 
+(@) Now let us have a look at the BIOCLIM dataset. First, read the metadata included with the data files (`Bioclim_metadata.txt`) to understand what each band of this dataset represents. Then turn on the BIOCLIM layer and turn the remaining layers off. 
 
 ::: {.callout-important title="Stop and Think"}
 Why does the BIOCLIM layer appears to be coloured?
@@ -221,7 +221,7 @@ Finally, let’s work on the symbology for the SRTM data. For that, we will take
 
 (@) Right-click on the SRTM layer name and select `Duplicate layer`. This option creates a 'virtual' copy of the layer - it will still point to the same file on disk, but you are able to select a different symbology for it. 
 
-(@)Now, on the `Properties > Symbology` of the copied layer, change the render type to `Hillshade`. Leave everything as default, then `Apply` and close the window. Make sure both the coloured and the hillshade SRTM layers are turned on in the Layer Panel, and that the hillshade layer is immediately under the coloured SRTM layer. Zoom in and turn each layer on and off in turn to understand how this neat '3-D' visual effect works. 
+(@) Now, on the `Properties > Symbology` of the copied layer, change the render type to `Hillshade`. Leave everything as default, then `Apply` and close the window. Make sure both the coloured and the hillshade SRTM layers are turned on in the Layer Panel, and that the hillshade layer is immediately under the coloured SRTM layer. Zoom in and turn each layer on and off in turn to understand how this neat '3-D' visual effect works. 
 
 
 ::: {.callout-important title="Stop and Think"}
@@ -276,7 +276,7 @@ We can now use our Central Scotland subset to demonstrate how to calculate slope
 
 ![](images/lab_5/lab5_fig6_slope.jpg)
 
-(@) Now go to `Raster > Analysis > Aspect...`, and again pick the Central Scotland DEM you created as `Input Layer`. Leave everything else as default and pick a folder to save the new file as `UK_SRTM_BG_centralscot_aspect.tif`. `Run` and `Close`. This layer will now tell you the cardinal direction, in degrees (North = 0/360),, that each slope is facing. 
+(@) Now go to `Raster > Analysis > Aspect...`, and again pick the Central Scotland DEM you created as `Input Layer`. Leave everything else as default and pick a folder to save the new file as `UK_SRTM_BG_centralscot_aspect.tif`. `Run` and `Close`. This layer will now tell you the cardinal direction, in degrees (North = 0/360), that each slope is facing. 
 
 (@) Use the `Identify Features...` tool to explore some of the aspect and slope values you have calculated. 
 
@@ -288,7 +288,7 @@ The `Visibility Analysis` plugin adds some option to the `Processing panel` of Q
 
 ![](images/lab_5/lab5_fig7_proc.jpg)
 
-(@) Download the `observation_point,shp` [file from this link](https://stir-my.sharepoint.com/:u:/g/personal/ala2_stir_ac_uk/EWG4zHZtEchMnkRo4Dyg-0ABn8kz7vnY4MABGkHJtBn8xg?e=zMQBZu).  
+(@) Download the `observation_point.shp` [file from this link](https://stir-my.sharepoint.com/:u:/g/personal/ala2_stir_ac_uk/EWG4zHZtEchMnkRo4Dyg-0ABn8kz7vnY4MABGkHJtBn8xg?e=zMQBZu).  
 
 
 (@) Open the `Visibility Analysis` heading on the `Processing Toolbox`, and then double click on `Create Viewpoints`. A new window will open. On this window, you need to pick the `Observer Location`, which will be the Observation point layer, and then the DEM, which will be the Central Scotland SRTM (make sure you *don't* pick the slope or aspect layers by mistake!). 
@@ -297,18 +297,18 @@ The `Visibility Analysis` plugin adds some option to the `Processing panel` of Q
 
 (@) Now go back to the `Processing Toolbox` and double click on `Viewshed`. Pick the `Viewpoint` layer as `Observer Location`, and the Central Scotland DEM as `Digital Elevation Model`. Leave everything else as default, and pick a folder to save your viewshed analysis as `viewshed.tif` (it will be a raster file).
 
-You should get an output similar to the figure below, where white pixels (value `1`) indicate 'visible' and black pixels (value `0`) indicate "not visible'. 
+You should get an output similar to the figure below, where white pixels (value `1`) indicate 'visible' and black pixels (value `0`) indicate "not visible". 
 
 ![](images/lab_5/lab5_fig8_viewshed.jpg)
 ## Guided Exercise 6 - Cleaning up and saving your project for the next lab
 
-We will use the data you produced on this lab to get started on the next, so let us 'package'it properly.
+We will use the data you produced on this lab to get started on the next, so let us 'package' it properly.
 
 (@) Remove all layers from the project except for the SRTM, CORINE, BIOCLIM and GADM layers that you have reprojected and masked for the GB island. Save your project
 
 (@) Delete all files from the folder except for the files for the four data layers above. If you saved the GB island vector as a shapefile, remember you need to keep all files with the same name but different extensions (`.shp`, `.shx`, `.dbf`, `.prj`)
 
-(@) On your systems file explorer, find the base folder for today's lab according to your organization, and right click on it. On Windows, choose `Compress to...` to create a zipfile containing your entire project. Name it as `lab_5_final_results.zip` or something similar.
+(@) On your systems file explorer, find the base folder for today's lab according to your organisation, and right click on it. On Windows, choose `Compress to...` to create a zipfile containing your entire project. Name it as `lab_5_final_results.zip` or something similar.
 
 (@) Now store this zipfile on your university's OneDrive or on some external drive, so that you can re-download it when you need it for the next session.
 

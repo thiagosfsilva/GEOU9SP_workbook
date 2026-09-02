@@ -2,7 +2,7 @@
 
 The 'geoprocessing' term is sometimes used as a catch all for all GIS operations, but within QGIS, it pertains to a specific set of tools. With the exception of the `Buffer` tool, the geoprocessing tools are aimed at creating new geometries based on the overlay of two separate vector layers. 
 
-You already learned and used one geoprocessing tool: the `Clip` tool. If finds the areas that are common between two layers, and 'cookie cuts' one of them based on the shape of the other. 
+You already learned and used one geoprocessing tool: the `Clip` tool. It finds the areas that are common between two layers, and 'cookie cuts' one of them based on the shape of the other. 
 
 Other geoprocessing tools will work similarly. For example, imagine that you have a polygon layer with all the woodlands in Scotland, and another with all the protected areas in Scotland. If you wanted to know all the woodland areas that are protected, you could `Clip` the woodland layer by the protected area layer. But what if you wanted the opposite - all the woodlands that are *not* protected. You will need some sort of `reverse clip` tool - turns out that is the `Difference` geoprocessing tool.
 
@@ -69,7 +69,7 @@ What are the options of GIS operations that you have to subset the datasets?
 :::
 
 ::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
-You could use `Clip` or `Intersection` if you wanted to change ('cut') the geometries of the target layer, or use `Select by Location` if you wanted to fidn the overlapping polygins without changing geometries. 
+You could use `Clip` or `Intersection` if you wanted to change ('cut') the geometries of the target layer, or use `Select by Location` if you wanted to find the overlapping polygons without changing geometries. 
 :::
 
 After consulting with your manager, you both decide that clipping or intersecting the data would not be a good option as it would change the geometry of the OAs, and there are official limits. So you decide to use `Select by Location`:   

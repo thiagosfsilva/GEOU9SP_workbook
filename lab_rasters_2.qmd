@@ -98,7 +98,7 @@ An alternative to the `Raster Calculator` that can be handier when you have mult
 
 ![](images/lab_6/lab_6_fig4_rec_by_table.jpg)
 
-Let us use this tool to extract the urban areas from the CORINE dataset. looking at the metadata, the two classes of interest are `Continuous Urban Fabric` (pixel value 111) and `Discontinuous Urban Fabric` (112) classes, which are the classes were we would expect existing housing to be located.
+Let us use this tool to extract the urban areas from the CORINE dataset. looking at the metadata, the two classes of interest are `Continuous Urban Fabric` (pixel value 111) and `Discontinuous Urban Fabric` (112) classes, which are the classes where we would expect existing housing to be located.
 
 (@) On the `Reclassify by table` window, pick the CORINE layer as your `Raster layer`, and `band 1` as your `Band Number`. Then click on the `...` button besides the box to open the `Reclassification  table`, and fill the table like the figure below. Click to add rows as necessary.
 
@@ -125,7 +125,7 @@ This is why binary rasters are also called raster *masks* - when you multiply an
 
 Doing it using the `Raster Calculator` is as simple as it sounds:
 
-(@) Open the `Raster Calculator` and enter the expression `"GB_anprec_lt_700@1" * "GB_mintemp_gt_0@1" * GB_urban_areas@1`. Then save you layer with name `UKs_winter_havens.tif`.  
+(@) Open the `Raster Calculator` and enter the expression `"GB_anprec_lt_700@1" * "GB_mintemp_gt_0@1" * "GB_urban_areas@1"`. Then save your layer with name `UKs_winter_havens.tif`.  
 
 ## Guided Exercise 6 - Vectorizing rasters
 
@@ -200,12 +200,12 @@ Why do we change `Output Data Type` to `Byte`?
 :::
 
 ::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
-The RGB colour system uses one byte (8-bits, 0-255 integer numbers) per colour channel to designate any colour. For example, the University of Stirling official green colour (![](images/lab_6/lab_6_fig9_StirColor.jpg)) is R=0 G=105 B=56. The `Byte` option ensures we only use 8-bits per band, and keep the file size smaller. If we left it as `Float32`, the same 0-225 integer numbers would be stored as 32-bit decimal numbers, quadrupling the size of the file for no reason. 
+The RGB colour system uses one byte (8-bits, 0-255 integer numbers) per colour channel to designate any colour. For example, the University of Stirling official green colour (![](images/lab_6/lab_6_fig9_StirColor.jpg)) is R=0 G=105 B=56. The `Byte` option ensures we only use 8-bits per band, and keep the file size smaller. If we left it as `Float32`, the same 0-255 integer numbers would be stored as 32-bit decimal numbers, quadrupling the size of the file for no reason. 
 :::
 
 (@) You should now have a properly coloured image for tile ns8196. Remove the three original single band layers from the project and then save it. 
 
-Everything looks good colour-wise now, bur our airphoto is still actually four separate adjacent photos. That means any processing we may want to do involving the entire area would have to be repeated four times. We can however merge these four tiles in a single airphoto *mosaic*.
+Everything looks good colour-wise now, but our airphoto is still actually four separate adjacent photos. That means any processing we may want to do involving the entire area would have to be repeated four times. We can however merge these four tiles in a single airphoto *mosaic*.
 
 (@) Go back to `Raster > Miscellaneous > Merge...`. Yes, it is a bit confusing, QGIS uses the same tool for both stacking and mosaicking.
 
@@ -262,7 +262,7 @@ NN is fast because it requires no additional computations, and also has the bene
 
 ![](images/lab_6/lab_6_fig8_StirSRTM.jpg)
 
-2. Now use `Warp(Reproject)` to reproject this dataset back to EPSG:4326, but twice. Do it the first time using `Nearest Neighbour` as the `Resampling method to use`, and then a second time using the `Cubic(4x4 kernel)` resampling method. Remember to pick the correct layer to reproject (it should be your Stirling-clipped SRTM layer). **Hint:** If you save it as a temporary file, it may not recognise the CRS after the warp - you will see a question mark to the right of the layer name. If that happens, just click on the question mark and pick ESPG:4326 as the CRS. 
+2. Now use `Warp(Reproject)` to reproject this dataset back to EPSG:4326, but twice. Do it the first time using `Nearest Neighbour` as the `Resampling method to use`, and then a second time using the `Cubic(4x4 kernel)` resampling method. Remember to pick the correct layer to reproject (it should be your Stirling-clipped SRTM layer). **Hint:** If you save it as a temporary file, it may not recognise the CRS after the warp - you will see a question mark to the right of the layer name. If that happens, just click on the question mark and pick EPSG:4326 as the CRS. 
 
 3. Apply a symbology to the original Stirling SRTM that makes it easier for you to see all terrain features. Then use `Copy Style` and `Paste Style` to make sure both of the new warped versions have the same symbology.
 
@@ -274,6 +274,6 @@ One instance where we should *always* use NN resampling is when we have categori
 
 6. Using `Raster > Extract > Clip Raster by Extent`, clip a portion of the CORINE dataset that matches the extent of the clipped Stirling SRTM layer. Hint: ask QGIS to use the extents of the SRTM clip for the CORINE clip. 
 
-7. Again, reproject this clipped CORINE dataset using both `Nearest Neighbor` and `Cubic(4x4 kernel)`, as you did for the terrain.
+7. Again, reproject this clipped CORINE dataset using both `Nearest Neighbour` and `Cubic(4x4 kernel)`, as you did for the terrain.
 
-8.Now use the `Raster Layer Unique Values Report` tool from the `Processing` panel to count the unique pixel values in the original CORINE clip and the two reprojections. What happened when you used the bicubic resampling?
+8. Now use the `Raster Layer Unique Values Report` tool from the `Processing` panel to count the unique pixel values in the original CORINE clip and the two reprojections. What happened when you used the bicubic resampling?

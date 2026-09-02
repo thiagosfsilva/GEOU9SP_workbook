@@ -52,7 +52,7 @@ To check it, you can use the `Statistical Summary` tool and the `timestamp` fiel
 - Chachalaca_3: 2841, 2022-01-14 to 2023-02-17
 - Chachalaca_4: 3641, 2022-01-14 to 2023-02-18
 - Chesnut_1: 385, 2022-03-05 to 2023-02-17
-- Chensut_2: 296, 2022-03-18 to 2022-03-19
+- Chesnut_2: 296, 2022-03-18 to 2022-03-19
 - Keel-billed_1: 311, 2022-01-15 to 2022-02-09
 - Keel-billed_2: 1568, 2022-02-22 to 2023-02-18
 - Parrot_1: 41933, 2020-03-17 to 2022-04-18
@@ -61,7 +61,7 @@ To check it, you can use the `Statistical Summary` tool and the `timestamp` fiel
 
 ## Guided Exercise 2 - Convex Hulls
 
-[Convex hulls](https://en.wikipedia.org/wiki/Convex_hul) are a type of Minimum Enclosing Polygon. The best way to think of it is as if the points were pegs on a board, and you wrapped a stretch band around them. The convex hull is the shape with the *smallest perimeter* enclosing all points. 
+[Convex hulls](https://en.wikipedia.org/wiki/Convex_hull) are a type of Minimum Enclosing Polygon. The best way to think of it is as if the points were pegs on a board, and you wrapped a stretch band around them. The convex hull is the shape with the *smallest perimeter* enclosing all points. 
 
 ![https://en.wikipedia.org/wiki/Convex_hull](https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/ConvexHull.svg/440px-ConvexHull.svg.png)
 
@@ -85,7 +85,7 @@ The first question we may want to ask as animal movement researchers is if there
 
 (@) Repeat for `Chachalaca_3` and `Chachalaca_4`. 
 
-(@) Now set the home range polygon symbologies to an outline that is the same colour as the original points with no fill (or a transparent fill), to evaluate the overlap in home ranges. Also add the ESRI Satellite Layer from the `QuickMap Plugin` for reference. Mine looks like this:
+(@) Now set the home range polygon symbologies to an outline that is the same colour as the original points with no fill (or a transparent fill), to evaluate the overlap in home ranges. Also add the ESRI Satellite Layer from the `QuickMapServices` plugin for reference. Mine looks like this:
 
 ![](images/lab_14/lab14_fig3_convex_hulls_on_map.jpg)
 
@@ -131,7 +131,7 @@ Chachalaca 4: Class 2 (Trees) = 151600m$^2$; Class 7 (Built Area) = 79900m$^2$
 So we can see that while Chachalaca 1 and 3 have decided to explore mainly urban habitats, Chachalaca 4 is mainly exploring the forest habitat, indicating possible behavioural adaptations and/or territoriality. 
 :::
 
-### Guided Exercise 4 -  Creating temporal animations with QGIS
+## Guided Exercise 4 -  Creating temporal animations with QGIS
 
 QGIS includes a feature called *Temporal Layers*, which allow us to animate the layers following time stamp information, to see how patterns change over time. We will use it now to look at the Chachalaca movement in time. 
 

@@ -10,7 +10,7 @@ The purpose of this lab is to continue developing your knowledge about vector sp
 
 We will continue with the Earthquakes, Rivers and Countries dataset from the previous lab.
 
-(@) If you have zipped your project from the last session, just unzip it and get to work. If not, then [download the data again](https://stir-my.sharepoint.com/:f:/g/personal/ala2_stir_ac_uk/EkD-gndA8ihElmcQFirYbPEBN6qvH2tzyLgJ8UujpCXi2Q?e=tsvmoG), and redo your project organization. As a reminder, the files to be loaded are: `global_earthquakes_2011.gpkg`, `MajorRivers.shp`, and `ne_50m_admin_0_countries.shp`. 
+(@) If you have zipped your project from the last session, just unzip it and get to work. If not, then [download the data again](https://stir-my.sharepoint.com/:f:/g/personal/ala2_stir_ac_uk/EkD-gndA8ihElmcQFirYbPEBN6qvH2tzyLgJ8UujpCXi2Q?e=tsvmoG), and redo your project organisation. As a reminder, the files to be loaded are: `global_earthquakes_2011.gpkg`, `MajorRivers.shp`, and `ne_50m_admin_0_countries.shp`. 
 
 For our next step in the analysis, we would like to focus only on earthquakes on *land* (i.e. not ocean). This information is not contained in the Earthquakes layer, but we do have a Countries layer that separates land from ocean. Could we use that to make a selection? 
 
@@ -79,7 +79,7 @@ b) Why should we use `$area` instead of `area` here?
 ::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
 a) The `$area` operator calculates `geodesic` area, meaning it takes into consideration the curved surface of the ellipsoid (defined by the projects CRS). It will also use the units specified in the project properties. The `area` operator will calculate *planimetric* area (i.e. a flat surface) and will derive the units from the CRS of the layer. 
 
-b) Since we are calculating very large areas, geodesic area will be more correct than planimetric area (unless the dataset uses an *equal-area* map projection). Moreover, the data is in EPSG24326 (WGS 84), which has degrees as units. If we used `area` we would get areas in squared degrees, which don't make a lot of sense. 
+b) Since we are calculating very large areas, geodesic area will be more correct than planimetric area (unless the dataset uses an *equal-area* map projection). Moreover, the data is in EPSG:4326 (WGS 84), which has degrees as units. If we used `area` we would get areas in squared degrees, which don't make a lot of sense. 
 :::
 
 (@) Now repeat the process above, and calculate `Per_km` as a new attribute, using the `$perimeter` operator (we use it instead of `perimeter` for the same reason above).
@@ -89,7 +89,7 @@ The perimeter/area (PA) ratio is often used as a measurement of polygon complexi
 :::
 
 ::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
-Use the `Field Calculator` to calculate areas and perimeters (you just did), then use it to create a new `PA_ratio` attribute (decimal number) using the expression `"Per_km" / "Area_km2"` (assuming these are the attribute names you used). Then use the `Summary Statistics tool` to find the maximum `PA_ratio` value in the dataset (4.592). The use `Select by expression` to select which feature has `"PA_ratio" = 4.592. That would be the Vatican! 
+Use the `Field Calculator` to calculate areas and perimeters (you just did), then use it to create a new `PA_ratio` attribute (decimal number) using the expression `"Per_km" / "Area_km2"` (assuming these are the attribute names you used). Then use the `Summary Statistics tool` to find the maximum `PA_ratio` value in the dataset (4.592). The use `Select by expression` to select which feature has `"PA_ratio" = 4.592`. That would be the Vatican! 
 A quicker way to answer this (that only works for min/max values) is to click on the `PA_ratio` attribute name on the Attribute Table twice, to sort it in ascending and then descending order, and then checking which country is the top row after sorting. 
 :::
 
@@ -110,7 +110,7 @@ Then obtain the Open Roads layer for all of the UK from the [Ordnance Survey OS 
 
 Finally, obtain the UK  country boundaries from the [Global Administrative Boundaries (GADM)](https://gadm.org/data.html) hub. Get the *GeoJSON*  file at *Level 1* (Level 0 is the UK border without countries, level 1 is countries, level 2 is counties/council areas, etc.)  
 
-Organize the data and create a new project where you load all four datasets. Order and style them as you prefer. Then: 
+Organise the data and create a new project where you load all four datasets. Order and style them as you prefer. Then: 
 
 1) Answer the questions:
     a) What is the data model of each layer?
@@ -125,7 +125,7 @@ Organize the data and create a new project where you load all four datasets. Ord
     
 4) The attribute `Shape_Area` of the WPA dataset does not indicate any units. It is always useful to have field names that hint at the unit for the values, making the data more self-explanatory. Recalculate the area of each WPA *in square km*, naming the new field 'Area_km2'. Then delete the 'Shape_Area' attribute from the dataset to avoid confusion for future users.
 
-5) The Sites of Specific Scientific Interest (SSSIs) are a category of protected area in Scotland. These may offer additional protection to wildcats. Find all the SSSIs that overlap with WPAs, and create a new layer containing only these sites. Then calculate the total area of these SSSIs.
+5) The Sites of Special Scientific Interest (SSSIs) are a category of protected area in Scotland. These may offer additional protection to wildcats. Find all the SSSIs that overlap with WPAs, and create a new layer containing only these sites. Then calculate the total area of these SSSIs.
 
 6) A major threat to wildlife is roadkill. Using the OS Open Data Open Roads dataset, answer the questions below:
 

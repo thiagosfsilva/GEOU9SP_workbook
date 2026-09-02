@@ -3,7 +3,7 @@
 
 ## Context
 
-One of my favourite TV shows of all time is the series ['The Last Kingdom](https://en.wikipedia.org/wiki/The_Last_Kingdom_(TV_series)). I was already a fan of the [books](https://en.wikipedia.org/wiki/The_Saxon_Stories), and I think they translated it to TV very well. 
+One of my favourite TV shows of all time is the series [The Last Kingdom](https://en.wikipedia.org/wiki/The_Last_Kingdom_(TV_series)). I was already a fan of the [books](https://en.wikipedia.org/wiki/The_Saxon_Stories), and I think they translated it to TV very well. 
 
 One of the key plots in the show is that the main character, Uthred, wants to reclaim his birthright - the castle of Bebbanburg. Turns out this is a real castle, and it still exists today as [Bamburgh Castle](https://en.wikipedia.org/wiki/Bamburgh_Castle) in Northumberland. It is a great place to visit, very scenic and right by the ocean!
 
@@ -35,15 +35,15 @@ We will use several datasets from the Ordnance Survey for this exercise, most of
 
 Finally, we will get a nice pre-made map of the UK to use as a base map for a broader location map inset. The map is also from Ordnance Survey, but is not on Digimap, so we will grab it from the OS Open Data Hub:
 
-(@) Go to the [OS Open Dat Hub](https://osdatahub.os.uk/downloads/open) and find the `GB Overview Maps` collection. Click on it and download the only available file. 
+(@) Go to the [OS Open Data Hub](https://osdatahub.os.uk/downloads/open) and find the `GB Overview Maps` collection. Click on it and download the only available file. 
 
 Okay, we should have enough data to make an informative map, so let us start laying it out.
 
-## Guided exercise 2 - Starting the project and organising data
+## Guided Exercise 2 - Starting the project and organising data
 
 Before we start mapping, we need to organise our downloads and set up a project to start bringing in the data. We will use the same data for this lab and the next.
 
-(@) Create a home folder for this project named `labs_7_8`), and then extract the zipped files and organise the data as you are used to.  
+(@) Create a home folder for this project named `labs_7_8`, and then extract the zipped files and organise the data as you are used to.  
 
 ::: {.callout-important title="Stop and Think"}
 What data models and file formats are your datasets on?
@@ -61,7 +61,7 @@ The vector district files are all vector files, some being polygons, some being 
 
 ![](images/lab_7/lab7_fig4_demsl.jpg)
 
-(@) We will want to style this data, but copying and pasting the style 15 times is too cumbersome. So use your skills from last week and make a *mosaic* of all the DTM tiles. Save it as a new file on the proper location in your folder organization, and then remove all the individual tiles from the project to keep it 'clean'.
+(@) We will want to style this data, but copying and pasting the style 15 times is too cumbersome. So use your skills from last week and make a *mosaic* of all the DTM tiles. Save it as a new file on the proper location in your folder organisation, and then remove all the individual tiles from the project to keep it 'clean'.
 
 (@) Now look at the data you downloaded from the OS Vector District dataset. It should contain several shapefiles named `NU_xxxxxx.shp`, where `xxxxx` will be a descriptive name for what the layer holds. You will want to bring in the layers below into your project. Don't worry yet about how each layer looks or their ordering, just make sure you got it all.
 
@@ -86,7 +86,7 @@ Thinking of the GIS tools you already learned, could you think of an explanation
 :::
 
 ::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
-On week 2 you learned about `Clip` and `Select by Location`. It seems that internally, when you draw a selection, Digimap is making a `Select by Location` operation, selecting all polygons that overlap with the NU square. For large polygons that cross OS grid tiles, you end bringing the whole polygon. So now let us do a proper `Clip`. 
+On week 2 you learned about `Clip` and `Select by Location`. It seems that internally, when you draw a selection, Digimap is making a `Select by Location` operation, selecting all polygons that overlap with the NU square. For large polygons that cross OS grid tiles, you end up bringing the whole polygon. So now let us do a proper `Clip`. 
 :::
 
 (@) Using your skills from previous labs, create a layer extent polygon (`Vector > Research Tools > Extract Layer Extent`) based on the DTM mosaic, and then use this polygon to `Clip` all layers. As you clip and save the clipped versions, remove the original ones to avoid confusion and keep the project tidy. Once they are all clipped and neat, save your project. **From now on, when I refer to any of these layers in the instructions, I will be meaning the clipped versions**. You may even want to delete the originals from your folder to prevent confusion. 
@@ -206,7 +206,7 @@ Before we finish for today, let us tweak the appearance of the shoreline a bit. 
 
 (@) Back on the main QGIS window, activate the `NU_TidalBoundary` and `NU_Foreshore` layers. Copy and paste the style of the Surface Water Line layer to the Tidal Boundary, and then open its `Properties > Symbology`, and make it a bit darker so it stands out from the background. Before you close the window, copy the `HTML notation` of the colour you picked. 
 
-(@) Now enable the Foreshore layer, and open its `Properties > Symbology`. Within the `Simpe Fill` sub-symbol, change both the `Fill color` and `Stroke color` to the colour you copied from the step above, and change the `Fill style` from `Solid` to `Dense 6`. Click `OK`. You should obtain an effect similar to the image below.
+(@) Now enable the Foreshore layer, and open its `Properties > Symbology`. Within the `Simple Fill` sub-symbol, change both the `Fill color` and `Stroke color` to the colour you copied from the step above, and change the `Fill style` from `Solid` to `Dense 6`. Click `OK`. You should obtain an effect similar to the image below.
 
 ![](images/lab_7/lab7_fig15_shoreline.jpg)
 

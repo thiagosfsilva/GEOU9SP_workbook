@@ -1,6 +1,6 @@
 # Lab 11 - Data Joins {#sec-spatan2}
 
-In this lab we will learn about *data joins* - operations that link data tables based on specific attributes, or based on locations. We will also learn how to read tabular data which has coordinates as columns but is not actual spatial dataset, and will learn about Web Feature Service (WCS) layers - a standardized way to *stream* geospatial data without having to download it. Don't skip the *Independent Exercise* either - you will learn two bonus GIS tools as part of it!
+In this lab we will learn about *data joins* - operations that link data tables based on specific attributes, or based on locations. We will also learn how to read tabular data which has coordinates as columns but is not an actual spatial dataset, and will learn about Web Feature Service (WFS) layers - a standardized way to *stream* geospatial data without having to download it. Don't skip the *Independent Exercise* either - you will learn two bonus GIS tools as part of it!
 
 ## Guided Exercise 1 - Working with WFS layers.
 
@@ -38,13 +38,13 @@ Another common issue is that people will see coordinates like -5.67543 degrees o
 
 In this exercise, we will import some data from Police Scotland about traffic incidents, which is provided in tabular format. 
 
-(@) To obtain the data, follow [this link to the Police Scotland website](https://www.scotland.police.uk/about-us/how-we-do-it/road-traffic-collision-data/). Then download the *Road Traffic Collisions - Circumstances Raw Data* dataset, which should be an Excel file (`.xsls`).
+(@) To obtain the data, follow [this link to the Police Scotland website](https://www.scotland.police.uk/about-us/how-we-do-it/road-traffic-collision-data/). Then download the *Road Traffic Collisions - Circumstances Raw Data* dataset, which should be an Excel file (`.xlsx`).
 
 QGIS is not able to understand Excel files, so we need to convert it to a *Comma Separated Value (CSV)* file. A CSV is just a plain text file where each line is a row on the table, and the data for each column is separated by...you guess it...a comma (actually sometimes it is a semicolon - especially in countries that use the comma instead of the period as a decimal separator).
 
 (@) Open the file you downloaded in Excel. The first thing you'll notice is that they have a VERY professional way of marking the data as official - a floating red text box saying 'official'. Delete this box, then go to `File > Save As` and then change the save format from `Excel workbook (.xlsx)` to `CSV UTF-8 (Comma Separated Value) (.csv)`. You can save it with the same name on the same folder you downloaded it.
 
-(@) Open the `Notepad` application (on Windows, on Mac use `TextEdit`) and then open the csv file you created, just to see how a CSV file is organized. Then close it. 
+(@) Open the `Notepad` application (on Windows, on Mac use `TextEdit`) and then open the csv file you created, just to see how a CSV file is organised. Then close it. 
 
 (@) Back on QGIS (in your `lab_11` project), open the `Data Source Manager` by clicking on the ![](https://docs.qgis.org/3.34/en/_images/mActionDataSourceManager.png) button on the main QGIS toolbar. Then pick the option `Delimited Text`. On the top box, find the `.csv` file you have created. Then make sure your options look the same as the figure below, including picking the correct data type for `date_of_collision` (`date`) and `time_of_collision` (`time`). Once you have everything set, click on `Add`, then `Close`.
 
@@ -62,10 +62,10 @@ We now have two separate layers with separate data tables -  the Local Authority
 
 ![](images/lab_11/lab_11_fig_4_newjoin.jpg)
 
-(@) Open the attribute table of the traffic collision layer again. Look at the last attribute columns of the table - there should now be two additional columns, showing the `code` and `hectares` fields of the Local Authority layer! Notice that while the Local Authority Layer only has one row per Authority area, the respective values of `code` and `hectare` are repeated for all traffic incidents occurring in the same Authority area.
+(@) Open the attribute table of the traffic collision layer again. Look at the last attribute columns of the table - there should now be two additional columns, showing the `code` and `hectares` fields of the Local Authority layer! Notice that while the Local Authority Layer only has one row per Authority area, the respective values of `code` and `hectares` are repeated for all traffic incidents occurring in the same Authority area.
 
 ::: {.callout-important title="Stop and Think"}
-On the joined attribute table of the Traffic Collisions layer, the local authorities of Dumfries & Galloway, Argyll & Bute, Perth & Kinross and Eilean Siar have all `code` and `hectare` fields as `NULL`, while they seem fine on the Local Authority attribute table. Can you identify what the problem is?
+On the joined attribute table of the Traffic Collisions layer, the local authorities of Dumfries & Galloway, Argyll & Bute, Perth & Kinross and Eilean Siar have all `code` and `hectares` fields as `NULL`, while they seem fine on the Local Authority attribute table. Can you identify what the problem is?
 :::
 
 ::: {.callout-important title="Click for answer" collapse="true" appearance="minimal"}
@@ -78,11 +78,11 @@ You may be tempted to fix the problem above by using the `Field Calculator` to r
 
 (@) First, remove the attribute join your created before. Go to the `Properties > Joins` of the Traffic Collision layer, select the existing join and remove it using the red minus symbol. Then click `OK`.
 
-(@) No go to the menu `Vector > Data Management Tools > Join Attributes by Location...`. You will see a new window similar to the `Select by Location` window. Then specify you want to `Join features in` the Traffic Collision layer that `Are Within` the Local Authority layer. Because there are many traffic incidents for each Authority area, you want to keep the `Join type` as `one-to-many`. For reference, check the figure below. This operation creates a new layer containing the joined table, so pick a folder and save your result as a vector file named  `traffic_collisions_authority_joined`, then click `Run` followed by `Close`.
+(@) Now go to the menu `Vector > Data Management Tools > Join Attributes by Location...`. You will see a new window similar to the `Select by Location` window. Then specify you want to `Join features in` the Traffic Collision layer that `Are Within` the Local Authority layer. Because there are many traffic incidents for each Authority area, you want to keep the `Join type` as `one-to-many`. For reference, check the figure below. This operation creates a new layer containing the joined table, so pick a folder and save your result as a vector file named  `traffic_collisions_authority_joined`, then click `Run` followed by `Close`.
 
 ![](images/lab_11/lab_11_fig_5_spatial_join.jpg)
 
-(@) Check the attribute table of the new joined layer you created. There should now be three new columns at the end - the three columns from the Local Area layer: `local_authority`, `code` and `hectares` (when we join by attribute QGIS knows not to repeat the matching field, so it only brings in `code ` and `hectare` -  but when we join by location then it brings all attributes). 
+(@) Check the attribute table of the new joined layer you created. There should now be three new columns at the end - the three columns from the Local Area layer: `local_authority`, `code` and `hectares` (when we join by attribute QGIS knows not to repeat the matching field, so it only brings in `code` and `hectares` -  but when we join by location then it brings all attributes). 
 
 ::: {.callout-important title="Stop and Think"}
 We can see that for most cases our Spatial Join fixed the name mismatch issues, and we see values of `GIS_Local_Authorities` like `Dumfries & Galloway` matched to `local_authority` values like `Dumfries and Galloway`. But if you sort your joined attributed table by `local_authority`, you will see there are now 11 rows with `NULL` values. Can you identify the problem this time?
@@ -104,13 +104,13 @@ You have been tasked with calculating a) the total amount of traffic incidents a
 
 3) Guess what? The Output Area shapefile has topology errors. Use the `Fix Geometries` tool (`Procesing` panel, under the `Vector Geometry` category) to create a new shapefile with fixed geometries. Once you create it, rebuild the spatial index of this new fixed layer by going to `Vector > Data Management Tools > Create Spatial Index`. Otherwise, your next step will be very slow. 
 
-3) Now do a *spatial join* between the fixed OA layer and the Traffic Collision layer. You want to join features from the traffic collision that `are within` the OAs. Save this new result as a new layer. 
+4) Now do a *spatial join* between the fixed OA layer and the Traffic Collision layer. You want to join features from the traffic collision that `are within` the OAs. Save this new result as a new layer. 
 
 5) Your resulting layer should now have all the traffic collisions joined to their respective OA codes. Now use the `Statistics by Categories` tool to count how many traffic collisions per Output Area code. The tool is in the `Processing` panel, under the `Vector Analysis` category. You want to calculate the counts, using the `code` attribute as the category for calculation. The window should look like this:
 
 ![](images/lab_11/lab_11_fig_6_stats_by_cats.jpg)
 
-6) The output of the above step will be another non-spatial table. Join this table to the OA polygons using `code` as the common attribute - the OA layer should be one receiving the join. Then do a second join to bring in the age data from the CSV file as well. For this join, bring only the `ALl_people` field from the csv file - enable the `Joined fields` box on the new join window, and then check only the box for `ALl_people`. Your attribute table now should look like this:
+6) The output of the above step will be another non-spatial table. Join this table to the OA polygons using `code` as the common attribute - the OA layer should be one receiving the join. Then do a second join to bring in the age data from the CSV file as well. For this join, bring only the `All_people` field from the csv file - enable the `Joined fields` box on the new join window, and then check only the box for `All_people`. Your attribute table now should look like this:
 
 ![](images/lab_11/lab_11_fig_7_double_join.jpg)
 
@@ -130,16 +130,16 @@ First, [download the data files from here](https://stir-my.sharepoint.com/:u:/g/
 
 3) Join the Census 2011 layer to the Local Authority layer using the fields 'Scottish Council Area' and 'local_authority'. Select only the columns 'All people', 'Males' and 'Females'. Also toggle the Custom field name prefix option and type '2011_'. 
 
-3) Now repeat the process to join the same three columns from the 2022 data. Don't forget to use the '2022_' prefix to distinguish them from the 2011 data. 
+4) Now repeat the process to join the same three columns from the 2022 data. Don't forget to use the '2022_' prefix to distinguish them from the 2011 data. 
 
-4) Export the joined data as a new Geopackage or Shapefile file.
+5) Export the joined data as a new Geopackage or Shapefile file.
 
-5) Make three thematic visualisations of the following information:
+6) Make three thematic visualisations of the following information:
     - The total change in population per Council Area between 2011 and 2022.
     - The total change in population density (people/km2) per Council Area between 2011 and 2022.
     - The change in sex ratios (male/female) per Council Area between 2011 and 2022.
     
-6) One of the measures for quality of life and healthy living is access to green spaces. Using the population census layer you created, and the [OS Open Greenspaces dataset](https://osdatahub.os.uk/downloads/open/OpenGreenspace), calculate how many m$^2$ of green space are available per capita for each Council Area in Scotland, and make a map showing this result. 
+7) One of the measures for quality of life and healthy living is access to green spaces. Using the population census layer you created, and the [OS Open Greenspaces dataset](https://osdatahub.os.uk/downloads/open/OpenGreenspace), calculate how many m$^2$ of green space are available per capita for each Council Area in Scotland, and make a map showing this result. 
 
 ::: {.callout-tip title="Hint" collapse="true" appearance="minimal"}
 Hint: You will need to do two separate joins: one to add the corresponding Council Area Name to each green space entry. Then you will need to calculate the total green space area per CA using the Statistics by Category tool. You can then join the Area attribute of this new layer to the original Local Authority attribute table containing the joined census data, and then calculate the proportions as a new field.

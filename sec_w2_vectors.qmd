@@ -63,5 +63,5 @@ Use this list as a 'check-list' to gauge your learning for each week. If you don
     - The different selection options
     - Importance of CRS matching
     - Select by location vs clipping
--How to combine spatial and attribute selection
+- How to combine spatial and attribute selection
     - Selecting within selections or saving intermediate results
