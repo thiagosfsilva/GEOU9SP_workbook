@@ -2,17 +2,23 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.554">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>GEOU9SP GIS Workbook - 8&nbsp; Lab 8: Making Maps - Part II</title>
+<title>8&nbsp; Lab 8: Making Maps - Part II – GEOU9SP GIS Workbook</title>
 <style>
-code{white-space: pre-wrap;}
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -32,15 +38,16 @@ ul.task-list li input[type="checkbox"] {
 <meta name="quarto:offset" content="./">
 <link href="./sec_w5_spatial_analysis_I.html" rel="next">
 <link href="./lab_carto_1.html" rel="prev">
-<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-6f73d8403cc376abaa041b598d8920a5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -72,19 +79,19 @@ ul.task-list li input[type="checkbox"] {
 
 </head>
 
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./sec_w4_cartography.html">Week 4 - Making maps</a></li><li class="breadcrumb-item"><a href="./lab_carto_2.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Lab 8: Making Maps - Part II</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -116,7 +123,7 @@ ul.task-list li input[type="checkbox"] {
       <div class="sidebar-item-container"> 
             <a href="./sec_w1_intro_toGIS.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 1 - Introduction</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -139,7 +146,7 @@ ul.task-list li input[type="checkbox"] {
       <div class="sidebar-item-container"> 
             <a href="./sec_w2_vectors.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 2 - Vector data</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -162,7 +169,7 @@ ul.task-list li input[type="checkbox"] {
       <div class="sidebar-item-container"> 
             <a href="./sec_w3_rasters.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 3 - Raster data</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -185,7 +192,7 @@ ul.task-list li input[type="checkbox"] {
       <div class="sidebar-item-container"> 
             <a href="./sec_w4_cartography.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 4 - Making maps</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -208,7 +215,7 @@ ul.task-list li input[type="checkbox"] {
       <div class="sidebar-item-container"> 
             <a href="./sec_w5_spatial_analysis_I.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 5 - Spatial analysis I</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -231,7 +238,7 @@ ul.task-list li input[type="checkbox"] {
       <div class="sidebar-item-container"> 
             <a href="./sec_w6_spatial_analysis_II.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 6 - Spatial analysis II</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -254,7 +261,7 @@ ul.task-list li input[type="checkbox"] {
       <div class="sidebar-item-container"> 
             <a href="./sec_w8_spatial_analysis_III.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Week 8 - Spatial analysis III</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -288,7 +295,7 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#getting-ready" id="toc-getting-ready" class="nav-link active" data-scroll-target="#getting-ready"><span class="header-section-number">8.1</span> Getting Ready</a></li>
-  <li><a href="#guided-exercise-1---digitizing-the-castle" id="toc-guided-exercise-1---digitizing-the-castle" class="nav-link" data-scroll-target="#guided-exercise-1---digitizing-the-castle"><span class="header-section-number">8.2</span> Guided Exercise 1 - Digitizing the castle</a></li>
+  <li><a href="#guided-exercise-1---digitising-the-castle" id="toc-guided-exercise-1---digitising-the-castle" class="nav-link" data-scroll-target="#guided-exercise-1---digitising-the-castle"><span class="header-section-number">8.2</span> Guided Exercise 1 - Digitising the castle</a></li>
   <li><a href="#guided-exercise-2---adding-places-and-labels" id="toc-guided-exercise-2---adding-places-and-labels" class="nav-link" data-scroll-target="#guided-exercise-2---adding-places-and-labels"><span class="header-section-number">8.3</span> Guided Exercise 2 - Adding places and labels</a></li>
   <li><a href="#guided-exercise-3---laying-out-the-final-map" id="toc-guided-exercise-3---laying-out-the-final-map" class="nav-link" data-scroll-target="#guided-exercise-3---laying-out-the-final-map"><span class="header-section-number">8.4</span> Guided Exercise 3 - Laying out the final map</a>
   <ul class="collapse">
@@ -326,7 +333,7 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>In this lab we will continue working on our map of the Bamburgh Castle region, this time focusing on manually digitizing polygons, labelling, and finishing our actual map page layout.</p>
+<p>In this lab we will continue working on our map of the Bamburgh Castle region, this time focusing on manually digitising polygons, labelling, and finishing our actual map page layout.</p>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -344,9 +351,9 @@ Warning
 <h2 data-number="8.1" class="anchored" data-anchor-id="getting-ready"><span class="header-section-number">8.1</span> Getting Ready</h2>
 <p>Make sure you restore the project folder and files you created in the previous lab, and then open your project.</p>
 </section>
-<section id="guided-exercise-1---digitizing-the-castle" class="level2" data-number="8.2">
-<h2 data-number="8.2" class="anchored" data-anchor-id="guided-exercise-1---digitizing-the-castle"><span class="header-section-number">8.2</span> Guided Exercise 1 - Digitizing the castle</h2>
-<p>One thing that seems to be missing from our map is more emphasis on the castle’s location. Let us use the aerial photo we acquired to digitize the castle area.</p>
+<section id="guided-exercise-1---digitising-the-castle" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="guided-exercise-1---digitising-the-castle"><span class="header-section-number">8.2</span> Guided Exercise 1 - Digitising the castle</h2>
+<p>One thing that seems to be missing from our map is more emphasis on the castle’s location. Let us use the aerial photo we acquired to digitise the castle area.</p>
 <ol class="example" type="1">
 <li>Add to your project the aerial orthophoto you downloaded at the start of the previous lab. If you had a wide selection and downloaded multiple tiles, the correct file is <code>nu1835_rgb_250_03.jpg</code>. It may be that the photo comes without a CRS defined (a question mark icon will appear to the right of the layer name). If that happens, just right click on the layer name, and select <code>Layer CRS &gt; Set Layer CRS</code> to pick EPSG:27700.</li>
 </ol>
@@ -356,7 +363,7 @@ Warning
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Stop and Think
+<span class="screen-reader-only">Important</span>Stop and Think
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -364,12 +371,12 @@ Stop and Think
 </div>
 </div>
 <div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click for answer
+<span class="screen-reader-only">Important</span>Click for answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -386,13 +393,13 @@ Click for answer
 <ol start="3" class="example" type="1">
 <li><p>First pick a folder to save your file and name it <code>bamburgh_castle</code>, on the <code>File Name</code> box. Then for <code>Geometry type</code>, pick <code>Polygon</code>, and pick EPSG:27700 for the CRS. Notice how QGIS automatically creates an integer attribute named <code>id</code>. We want a text attribute to hold the castle name, though, so enter <code>name</code> as the name of the field on the <code>New Field</code> options, then pick the <code>Text (string)</code> data type and a length of <code>80</code> (the default) and click on <code>Add to Fields List</code>. You should see the new <code>name</code> field added to the fields list. Then click <code>OK</code>.</p></li>
 <li><p>Find your new layer on the <code>Layer Panel</code>. It doesn’t have any geometries yet, so you won’t see anything on your map. Highlight your new layer, and then put it into editing mode by clicking on the <code>Toggle Editing</code> button (<img src="https://docs.qgis.org/3.34/en/_images/mActionToggleEditing.png" class="img-fluid">) on the main QGIS toolbar. Make sure you are editing the right layer (it should have a pencil symbol on top of the symbology colour on the layer list).</p></li>
-<li><p>Now right-click on the aerial photo layer and select <code>Zoom to Layer(s)</code> to centre the map canvas on it. Then manually set a scale of 1:1500 on the bottom QGIS bar. It is important to be aware of the scale you are digitizing at, and keep it constant so that the level of detail is also constant. Drag the castle to the middle of the canvas using the <code>Pan Map</code> tool (the hand).</p></li>
-<li><p>Now highlight the new shapefile layer (which is being edited) again. The <code>Digitizing tools</code> toolbar (<img src="images/lab_8/lab8_fig2_digi_tools.jpg" class="img-fluid">) should be available. Click on the <code>Add Polygon Feature</code> button (<img src="https://docs.qgis.org/3.34/en/_images/mActionCapturePolygon.png" class="img-fluid">) to enter a polygon drawing mode. Start clicking anywhere in the castle outer walls, and then keep clicking to trace the entire castle shape. Once you finish you polygon, right-click to end the drawing. A window will pop-up asking you to enter an <code>id</code> and <code>name</code>. Enter <code>1</code> and <code>Bamburgh Castle</code> respectively.</p></li>
-<li><p>If you want to edit the polygon shape after the fact, use the <code>Vertex Tool</code> (<img src="https://docs.qgis.org/3.34/en/_images/mActionVertexToolActiveLayer.png" class="img-fluid">). Then click once on a vertex to select it, and then cick again to reposition it, or the Delete key on your keyboard to delete it. You can also add a new vertex by hovering the mouse in between vertices until you see a red <code>x</code>. You should end up with something like this:</p></li>
+<li><p>Now right-click on the aerial photo layer and select <code>Zoom to Layer(s)</code> to centre the map canvas on it. Then manually set a scale of 1:1500 on the bottom QGIS bar. It is important to be aware of the scale you are digitising at, and keep it constant so that the level of detail is also constant. Drag the castle to the middle of the canvas using the <code>Pan Map</code> tool (the hand).</p></li>
+<li><p>Now highlight the new shapefile layer (which is being edited) again. The <code>Digitizing tools</code> toolbar (<img src="images/lab_8/lab8_fig2_digi_tools.jpg" class="img-fluid">) should be available. Click on the <code>Add Polygon Feature</code> button (<img src="https://docs.qgis.org/3.34/en/_images/mActionCapturePolygon.png" class="img-fluid">) to enter a polygon drawing mode. Start clicking anywhere in the castle outer walls, and then keep clicking to trace the entire castle shape. Once you finish your polygon, right-click to end the drawing. A window will pop-up asking you to enter an <code>id</code> and <code>name</code>. Enter <code>1</code> and <code>Bamburgh Castle</code> respectively.</p></li>
+<li><p>If you want to edit the polygon shape after the fact, use the <code>Vertex Tool</code> (<img src="https://docs.qgis.org/3.34/en/_images/mActionVertexToolActiveLayer.png" class="img-fluid">). Then click once on a vertex to select it, and then click again to reposition it, or the Delete key on your keyboard to delete it. You can also add a new vertex by hovering the mouse in between vertices until you see a red <code>x</code>. You should end up with something like this:</p></li>
 </ol>
 <p><img src="images/lab_8/lab8_fig4_digitsed_castle.jpg" class="img-fluid"></p>
 <ol start="8" class="example" type="1">
-<li>Once you’re happy with your polygon, remember to click the <code>Save Layer Edits</code> button (on the editing toolbar - <em>not</em> the <code>Save project</code> button) and then exit editing mode. Set you map back to the 1:80000 scale you decided on in the previous lab, and pick a strong and visible colour for the castle polygon. Turn off the aerial image again, and save your project.</li>
+<li>Once you’re happy with your polygon, remember to click the <code>Save Layer Edits</code> button (on the editing toolbar - <em>not</em> the <code>Save project</code> button) and then exit editing mode. Set your map back to the 1:80000 scale you decided on in the previous lab, and pick a strong and visible colour for the castle polygon. Turn off the aerial image again, and save your project.</li>
 </ol>
 </section>
 <section id="guided-exercise-2---adding-places-and-labels" class="level2" data-number="8.3">
@@ -404,7 +411,7 @@ Click for answer
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Stop and Think
+<span class="screen-reader-only">Important</span>Stop and Think
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -412,12 +419,12 @@ Stop and Think
 </div>
 </div>
 <div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click for answer
+<span class="screen-reader-only">Important</span>Click for answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -444,23 +451,23 @@ Click for answer
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Stop and Think
+<span class="screen-reader-only">Important</span>Stop and Think
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <ol type="a">
-<li><p>How would you reduce the number of points show based on the above attributes?</p></li>
+<li><p>How would you reduce the number of points shown based on the above attributes?</p></li>
 <li><p>Why do the attributes have truncated names such as <code>CLASSIFICA</code>?</p></li>
 </ol>
 </div>
 </div>
 <div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click for answer
+<span class="screen-reader-only">Important</span>Click for answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -473,9 +480,9 @@ Click for answer
 </div>
 </div>
 </div>
-<p>If we want to limit the number of features that are <em>available</em> to us in a layer, we can use the <code>Filter</code> method instead of<code>Select by Expression</code>. While selecting is useful to create a <em>selection</em> that you can then export or summarise, filtering will essentially <em>hide</em> the information from view and manipulation - as if it didn’t exist. Let us filter our named places to only medium and large populated places.</p>
+<p>If we want to limit the number of features that are <em>available</em> to us in a layer, we can use the <code>Filter</code> method instead of <code>Select by Expression</code>. While selecting is useful to create a <em>selection</em> that you can then export or summarise, filtering will essentially <em>hide</em> the information from view and manipulation - as if it didn’t exist. Let us filter our named places to only medium and large populated places.</p>
 <ol start="12" class="example" type="1">
-<li>Right click on the <code>NU_namedPlace layer</code> and select <code>Filter...</code>. You will see a new window similar to the <code>Select by Expression</code> window. On this window, you can pick attributes on the top left, and then list all unique values of each attribute in the top right (select the attribute then click on<code>All</code>). You can then double click on attribute names, values and operators, or simply type your expression in the bottom window. For this dataset, we want to filter using the following expression: <code>"CLASSIFICA" = 'Populated Place' AND ("FONTHEIGHT" = 'Medium' OR "FONTHEIGHT" = 'Large')</code>. Notice the parentheses! Then click on <code>OK</code>.</li>
+<li>Right click on the <code>NU_NamedPlace</code> layer and select <code>Filter...</code>. You will see a new window similar to the <code>Select by Expression</code> window. On this window, you can pick attributes on the top left, and then list all unique values of each attribute in the top right (select the attribute then click on<code>All</code>). You can then double click on attribute names, values and operators, or simply type your expression in the bottom window. For this dataset, we want to filter using the following expression: <code>"CLASSIFICA" = 'Populated Place' AND ("FONTHEIGHT" = 'Medium' OR "FONTHEIGHT" = 'Large')</code>. Notice the parentheses! Then click on <code>OK</code>.</li>
 </ol>
 <p><img src="images/lab_8/lab8_fig6_filtering.jpg" class="img-fluid"></p>
 <div class="callout callout-style-default callout-important callout-titled" title="Stop and Think">
@@ -484,7 +491,7 @@ Click for answer
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Stop and Think
+<span class="screen-reader-only">Important</span>Stop and Think
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -492,12 +499,12 @@ Stop and Think
 </div>
 </div>
 <div class="callout callout-style-simple callout-important no-icon callout-titled" title="Click for answer">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click for answer
+<span class="screen-reader-only">Important</span>Click for answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -550,7 +557,7 @@ Click for answer
 <ol start="26" class="example" type="1">
 <li>The spacing between items seems to be excessive now, so find the <code>Spacing</code> option for the Legend item and reduce all non-zero spacing by 1mm, <em>except</em> for the <code>Column Space</code> option - set that one to <code>3</code>. It will have an effect later.</li>
 </ol>
-<p>Our legend is looking much better, but there is a big problem: the item names reflect the file names, and your map readers won’t know what <code>NU_NamedPlace</code> means. So we should rename our layers to have intelligible names. You <em>can</em> rename your layers in the Map Layout by going back to the legend <code>Item Properties</code> and double clicking each item. But I think it is a better idea to rename the actual layers in the QGIS project. This way, if you decide to add/remove other layers to the legend, you won’t need to rename then again.</p>
+<p>Our legend is looking much better, but there is a big problem: the item names reflect the file names, and your map readers won’t know what <code>NU_NamedPlace</code> means. So we should rename our layers to have intelligible names. You <em>can</em> rename your layers in the Map Layout by going back to the legend <code>Item Properties</code> and double clicking each item. But I think it is a better idea to rename the actual layers in the QGIS project. This way, if you decide to add/remove other layers to the legend, you won’t need to rename them again.</p>
 <ol start="27" class="example" type="1">
 <li>Go back to the main QGIS window, and rename all the layers in the legend to proper, readable names. For example, <code>NU_RailwayStation</code> to Railway Station, <code>NU_NamedPlace</code> to <code>City/Town</code>, etc. Try to use short names:</li>
 </ol>
@@ -615,7 +622,7 @@ Tip
 <li><p>We will set several options here to have a nice grid. First, we need to decide our <code>Interval</code> in the <code>X</code> and <code>Y</code> directions. This is the spacing between coordinate lines. We are using the OSGB CRS (EPSG:27700) with metric coordinates, so this interval will be in meters. Let us add coordinates every 5km by changing both <code>X</code> and <code>Y</code> spacing to <code>5000</code>. You should now see a grid of lines in the map.</p></li>
 <li><p>The squares formed by the lines seem a bit ‘offset’ in relation to the map area. We can shift them so they are nicely centred in the vertical and horizontal direction by adding <code>X</code> and <code>Y</code> offsets. On my map, an <code>X</code> offset of <code>500</code> and a <code>Y</code> offset of <code>-1500</code> centres the grid nicely. You may need to use different values depending on your choice of framing.</p></li>
 <li><p>I now have coordinate lines, but they have no coordinate numbers, thus so far my grid is useless. Next set the <code>Frame Style</code> option to <code>Exterior Ticks</code>, then keep scrolling down until you reach the <code>Draw Coordinates</code> option. Check the box and coordinate numbers will appear at each line. But they do not align well with the frame, and also have useless decimal places.</p></li>
-<li><p>Our coordinates also have no axis indication, so change the <code>Format</code> option from <code>Decimal</code> to <code>Decimal with Suffix</code>. That will add the easting (E) and Northing(N) indicators.</p></li>
+<li><p>Our coordinates also have no axis indication, so change the <code>Format</code> option from <code>Decimal</code> to <code>Decimal with Suffix</code>. That will add the Easting (E) and Northing (N) indicators.</p></li>
 <li><p>Below <code>Draw Coordinates</code>, you see sets of options labelled <code>Left</code>, <code>Right</code>, <code>Top</code> and <code>Bottom</code>. Change the third option for <code>Left</code> from <code>Horizontal</code> to <code>Vertical Ascending</code>, and for <code>Right</code> to <code>Vertical Descending</code>. Then at the bottom of the <code>Draw Coordinates</code> section, set <code>Coordinate Precision</code> to <code>0</code> to remove the decimal places.</p></li>
 <li><p>If we expected our map users to navigate using a compass, the actual grid lines would be useful. But since this is unlikely, the actual black grid lines are too obtrusive. Go back to the top of the <code>Map Grid Properties</code>, and change the <code>Grid Type</code> from <code>Solid</code> to <code>Frame and Annotations Only</code>.</p></li>
 <li><p>Finally, let us add a black border to our map for aesthetic purposes. Go back to the main <code>Item Properties</code> for <code>Map 1</code>, and find the <code>Frame</code> option. Enable the checkbox to add a frame. Save your layout.</p></li>
@@ -683,7 +690,7 @@ Tip
 </div>
 </div>
 <ol start="55" class="example" type="1">
-<li><p>Now go back to the Layout Editor window, and select the <code>Main Map</code> item. On its <code>Item Properties</code>, find the <code>Layers</code> option and enable the <code>Follow Map Theme</code> option, picking the <code>Main Map</code>theme. Then do the same with the <code>Overview Map</code>, and set it to the <code>Overview</code> theme.</p></li>
+<li><p>Now go back to the Layout Editor window, and select the <code>Main Map</code> item. On its <code>Item Properties</code>, find the <code>Layers</code> option and enable the <code>Follow Map Theme</code> option, picking the <code>Main Map</code> theme. Then do the same with the <code>Overview Map</code>, and set it to the <code>Overview</code> theme.</p></li>
 <li><p>Set the scale of the overview map (on its <code>Item Properties</code>) to 5000000 (five million), and use the <code>Move item content</code> (<img src="https://docs.qgis.org/3.34/en/_images/mActionMoveItemContent.png" class="img-fluid">) tool so that Newcastle is about centred on the map. This map has ‘painted-on’ labels, so make sure you don’t cut off any labels when placing your map.</p></li>
 </ol>
 <p>Now we need to indicate ‘where’ in the overview map is the main map located. QGIS has a nice feature to do that for us automatically:</p>
@@ -696,7 +703,7 @@ Tip
 <section id="independent-exercise-1---adding-a-second-coordinate-grid-and-a-second-inset-map" class="level2" data-number="8.7">
 <h2 data-number="8.7" class="anchored" data-anchor-id="independent-exercise-1---adding-a-second-coordinate-grid-and-a-second-inset-map"><span class="header-section-number">8.7</span> Independent Exercise 1 - Adding a second coordinate grid and a second inset map</h2>
 <ol type="1">
-<li>Now add a coordinate grid to the Overview map. following the same steps as you did for the main map, but with the following changes:</li>
+<li>Now add a coordinate grid to the Overview map, following the same steps as you did for the main map, but with the following changes:</li>
 </ol>
 <ul>
 <li><p>Instead of the OSGB CRS, use WGS84 as the CRS, so that the coordinates are in degrees (to determine ‘where in the world’ somewhere is, degrees make more sense than meters). To do that, manually pick <code>EPSG:4326</code> as the <code>CRS</code> on the <code>Map Grid Properties</code> of the new grid.</p></li>
@@ -726,50 +733,65 @@ Tip
 <li><p>To export as an image, on the Layout Editor window go to <code>Layout &gt; Export as Image...</code>. Pick a folder and file name to save it, and then it will show you some options. You can normally use the default options, or check the <code>Crop to Content</code> box if you want your image edges to cover only the content of the map (i.e.&nbsp;no white margins).</p></li>
 <li><p>To export as a PDF, go to <code>Layout &gt; Export as PDF...</code>. Pick a folder and file name to save it, and then it will show you some options as well. The defaults are fine for most cases.</p></li>
 </ul>
-<p>Well done! You havemade a very complex and (arguably) nice looking map! You are now ready to take on the first module Assessment, and make a beautiful map showing the not-so-beautiful issue of deforestation in the Amazon.</p>
+<p>Well done! You have made a very complex and (arguably) nice looking map! You are now ready to take on the first module Assessment, and make a beautiful map showing the not-so-beautiful issue of deforestation in the Amazon.</p>
 
 
 </section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
-    }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
       }
+      return false;
     }
-    return false;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
       for (const childEl of codeEl.children) {
         if (isCodeAnnotation(childEl)) {
           childEl.remove();
@@ -777,184 +799,184 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
       return codeEl.innerText;
     }
-  });
-  clipboard.on('success', function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  });
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-    const config = {
-      allowHTML: true,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start',
-    };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
     });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
-        }
-      }
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
     }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
           }
         }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
         }
-        return container.innerHTML
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
       } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
         if (window.Quarto?.typesetMath) {
           window.Quarto.typesetMath(note);
         }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      // TODO in 1.5, we should make sure this works without a callout special case
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
       }
     }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
           }
         } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
           .then(res => res.text())
           .then(html => {
             const parser = new DOMParser();
             const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
+            const note = htmlDoc.querySelector('main.content');
             if (note !== null) {
-              const html = processXRef(id, note);
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
               instance.setContent(html);
             } 
           }).finally(() => {
@@ -962,185 +984,161 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            div.style.left = 0;
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+      }, function(instance) {
       });
     }
-  }
-});
-</script>
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./lab_carto_1.html" class="pagination-link" aria-label="Lab 7: Making Maps - Part I">

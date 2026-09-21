@@ -122,7 +122,45 @@ Organise the data and create a new project where you load all four datasets. Ord
 2) The UK boundaries file has a different CRS from the rest, and it also contains all countries. Reproject this layer to the same CRS as the other layers, and then create a new layer containing the Scotland boundary only. Remove the UK layer from the project after that.
 
 3) The roads layer covers all of the UK, making it very heavy and slow to use. But our analysis concerns Scotland only, so create a new layer containing only the road links (lines) inside the Scottish boundaries. Remove the full UK layer from the project after that.
-    
+
+::: {.callout-warning title="Careful: the boundaries layer has a topology error!"}
+   If you try to clip (or otherwise geoprocess) the roads using the Scotland boundary you created in step 2, the tool will refuse to run, returning an error message about an *invalid geometry*.
+
+   This is not a mistake on your part. The GADM layer contains a **topology error**: somewhere along the very detailed coastline, the outline (ring) of a polygon crosses itself, which is known as a *ring self-intersection*. A polygon that crosses itself has no unambiguous 'inside', so operations such as clip, intersect, buffer or dissolve cannot be computed reliably. By default QGIS stops rather than producing a wrong answer.
+
+   Messy geometry is very common in real-world data, so learning to diagnose and repair it is part of the job. Work through steps 3.1 to 3.3 below *before* clipping the roads.
+:::
+
+   a) *Find where the error is*. Go to `Vector > Geometry Tools > Check Validity...` and run it on your Scotland (or UK) boundaries layer. You can leave them as temporary layers. The tool produces three output layers, plus a summary in the `Log` tab of the results window:
+
+   - `Valid output` - a copy of the features that passed the check. If your layer has a single feature and it is invalid, this layer will be empty.
+   - `Invalid output` - a copy of the features that failed, telling you *which* feature(s) are broken.
+   - `Error output` - a *point* layer marking the exact location of each problem, with a `message` attribute describing it. Open its attribute table and read the message (you should see something like `Ring Self-intersection`), then select the point and use `Zoom to Selection` to see exactly where on the coastline the problem sits. A single feature can generate several error points.
+
+   The summary in the log also reports how many features were valid and how many were invalid. Record what you find: which feature is invalid, what type of error it has, and where it is located.
+
+::: {.callout-note collapse="false" title="Why are there two validity methods?"}
+   The `Check Validity` window has a `Method` option. `GEOS` uses the same geometry engine as most processing algorithms, so it reports the errors that will actually block your analysis. The `QGIS` method is a native implementation that is stricter, and flags some additional issues that GEOS tolerates. If a tool is failing, check with `GEOS`.
+:::
+
+   b) *Fix the geometries.* Open the Processing Toolbox (`Processing > Toolbox`, or `Ctrl+Alt+T`), and find `Vector geometry > Fix geometries`. Set your boundaries layer as the input, save the output as a new permanent file (do not overwrite the original - keep it as a record of the raw data), and run it. Then run `Check Validity` again on the fixed layer to confirm no errors remain, and use the fixed layer for the rest of the exercise.
+   
+   c) Remove all the temporary layers from the `Check Validty` operation to clean up your project.  
+
+   Be aware that 'fixing' means *changing* the geometry. Repairing a self-intersection normally splits the offending ring into separate parts, so the output is a multi-part layer and the shape may differ very slightly from the original. Always check afterwards that the feature count and the overall shape are still what you expect.
+
+::: {.callout-tip collapse="false" title="(Advanced) Changing QGIS behaviour"}
+You can choose how QGIS handles invalid features.Instead of repairing the layer, you can tell the tool you are using what to do when it meets an invalid geometry. In any tool window, click the `Advanced` button at the bottom (next to `Run`) and go to `Algorithm Settings > Invalid feature filtering`. There are three options:
+
+- *Stop algorithm execution when a geometry is invalid* - the default, and the behaviour you saw above. The tool stops and nothing is produced until the data is fixed.
+- *Skip (ignore) features with invalid geometries* - invalid features are dropped and the algorithm runs on the rest. You get a result, but *silently* with less data than you put in.
+- *Do not filter (better performance)* - invalid features are passed straight to the algorithm. It may work, but it may also fail, crash, or return a geometrically wrong result.
+
+The caveats matter. Neither of the permissive options repairs anything, so they are workarounds, not solutions. `Skip` is particularly risky here: the boundaries layer has very few features, so skipping the invalid one could drop Scotland from the analysis entirely, leaving you with an empty output that looks like a legitimate result. `Do not filter` can produce slivers, gaps or nonsense areas that you may only notice much later, if at all. Use them for a quick diagnostic on large datasets where a handful of dubious features do not matter, and always report what you did in your methods. *For this exercise (and most of the time) fixing the geometry is the correct approach.*
+
+These options can be set permanently for all tools under `Settings > Options... > Processing > General > Invalid features filtering`. Changing it there affects every algorithm you run, so if you do change it, remember that you have.
+:::
+
 4) The attribute `Shape_Area` of the WPA dataset does not indicate any units. It is always useful to have field names that hint at the unit for the values, making the data more self-explanatory. Recalculate the area of each WPA *in square km*, naming the new field 'Area_km2'. Then delete the 'Shape_Area' attribute from the dataset to avoid confusion for future users.
 
 5) The Sites of Special Scientific Interest (SSSIs) are a category of protected area in Scotland. These may offer additional protection to wildcats. Find all the SSSIs that overlap with WPAs, and create a new layer containing only these sites. Then calculate the total area of these SSSIs.
