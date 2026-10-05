@@ -7,7 +7,7 @@ One of my favourite TV shows of all time is the series [The Last Kingdom](https:
 
 One of the key plots in the show is that the main character, Uthred, wants to reclaim his birthright - the castle of Bebbanburg. Turns out this is a real castle, and it still exists today as [Bamburgh Castle](https://en.wikipedia.org/wiki/Bamburgh_Castle) in Northumberland. It is a great place to visit, very scenic and right by the ocean!
 
-![](https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Bamburgh_Castle%2C_beautiful_day.jpg/1023px-Bamburgh_Castle%2C_beautiful_day.jpg)
+![](https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5f/Bamburgh_Castle%2C_beautiful_day.jpg/960px-Bamburgh_Castle%2C_beautiful_day.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=thumbnail&_=20230314005302)
 
 So for this mapping exercise, we will create a map that could be used to guide someone wanting to visit the location, including road and train access, some context information, and a close-up aerial view of the castle. It will be fun!
 
