@@ -370,20 +370,26 @@ window.Quarto = {
 <p>You can then download the two other datasets needed:</p>
 <ol start="2" class="example" type="1">
 <li><p><strong>Scottish School Roll and Locations</strong>: this dataset is provided by the Scottish Government, and contains information on all Scottish schools. Download the ‘<em>Scottish School Roll and Locations ZIP</em>’ (NOT the one with ‘Table’ on the name) <a href="https://www.data.gov.uk/dataset/9a6f9d86-9698-4a5d-a2c8-89f3b212c52c/scottish-school-roll-and-locations">from here</a>.</p></li>
-<li><p><strong>Census data on population age</strong>: the Digimap platform offers access to the 2011 Census variables in spatial format. To obtain it, go to the <em>Society</em> tab, and then select the ‘Download’ option on the leftmost toolbar (a down arrow going into a ‘box’). That will bring up the familiar Digimap download interface. This time we will use our Stirling Council shapefile to set the search area. For that, click on the <code>Import Polygons</code> button, and then on <code>Choose File</code>. Then choose the <em>zipped</em> Stirling dataset you have downloaded and click on import. Finally, under the <code>2011 Census data layers</code> tab, select the <code>Age</code> dataset. Your window should look like this:</p></li>
+<li><p><strong>Census data on population age</strong>: the Digimap platform offers access to the 2011 Census variables in spatial format. To obtain it, go to the <em>Society</em> tab, and then select the ‘Download’ option on the leftmost toolbar (a down arrow going into a ‘box’). That will bring up the familiar Digimap download interface. This time we will use our Stirling Council shapefile to set the search area. For that, click on the <code>Import Polygons</code> button, and then on <code>Choose File</code>. Then choose the <em>zipped</em> Stirling dataset you have downloaded and click on import. Finally, under the <code>2011 Census data layers</code> tab, select the <code>Age</code> dataset. Your window should look like this (see warning below first):</p></li>
 </ol>
 <p><img src="images/lab_geoprocessing/Fig1_digimap_stirlinghsire.png" class="img-fluid"></p>
-<div class="callout callout-style-default callout-warning callout-titled">
-<div class="callout-header d-flex align-content-center">
+<div class="callout callout-style-default callout-warning callout-titled" title="Polygon upload to Digimap is temporarily disabled / data mismatch">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Warning
+<span class="screen-reader-only">Warning</span>Polygon upload to Digimap is temporarily disabled / data mismatch
 </div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
-<p>The data for the 2022 census have been officially published by National Records of Scotland, but are not available on Digimap yet. Since we are only practising our GIS knowledge, it is OK to use mismatched data (schools from 2024 vs.&nbsp;age data from 2011). In a real application scenario, it would be very important to make sure the temporal coverage of the datasets matches as well as possible.</p>
+<p>Digimap has <strong>temporarily disabled</strong> the <code>Import Polygons</code> option, so you cannot currently upload the zipped Stirling shapefile to define your download area. Instead, <strong>select a large rectangular box that comfortably covers the whole of the Stirling Council Area</strong> (see image below), using the rectangle drawing tool in the Digimap download interface. If your box includes Ben Lawers, Dalmally, Milngavie and Dollar, it will get all of Stirling council.</p>
+<p>Your download will therefore contain many more Output Areas, including a lot outside Stirling. This does not change the rest of the lab: the <code>Select by Location</code> steps in the next section will keep only the OAs that belong to Stirling Council, so your final results will be exactly the same.</p>
+<p><img src="images/lab_geoprocessing/Fig_1b_digimap_box_alternative.png" class="img-fluid"></p>
+<p>Also yes, the data for the 2022 census have already been officially published. Since we are only practising our GIS knowledge, it is OK to use mismatched data (schools from 2024 vs.&nbsp;age data from 2011). In a real application scenario, it would be very important to make sure the temporal coverage of the datasets matches as well as possible.</p>
+</div>
 </div>
 </div>
 <ol start="4" class="example" type="1">
@@ -615,23 +621,26 @@ Warning
 <thead>
 <tr class="header">
 <th></th>
-<th>1km</th>
-<th>2km</th>
-<th>&gt;2km</th>
+<th>&lt; 1km</th>
+<th>1km - 2km</th>
+<th>&gt; 2km</th>
+<th>Total</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td>Primary</td>
-<td>6451</td>
-<td>6656</td>
-<td>89</td>
+<td>5823</td>
+<td>428</td>
+<td>495</td>
+<td>6745</td>
 </tr>
 <tr class="even">
 <td>Secondary</td>
-<td>7572</td>
-<td>7880</td>
-<td>91</td>
+<td>6555</td>
+<td>757</td>
+<td>659</td>
+<td>7971</td>
 </tr>
 </tbody>
 </table>

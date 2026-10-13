@@ -24,12 +24,18 @@ You can then download the two other datasets needed:
 
 (@) **Scottish School Roll and Locations**: this dataset is provided by the Scottish Government, and contains information on all Scottish schools. Download the '*Scottish School Roll and Locations ZIP*' (NOT the one with 'Table' on the name) [from here](https://www.data.gov.uk/dataset/9a6f9d86-9698-4a5d-a2c8-89f3b212c52c/scottish-school-roll-and-locations).
 
-(@) **Census data on population age**: the Digimap platform offers access to the 2011 Census variables in spatial format. To obtain it, go to the *Society* tab, and then select the 'Download' option on the leftmost toolbar (a down arrow going into a 'box'). That will bring up the familiar Digimap download interface. This time we will use our Stirling Council shapefile to set the search area. For that, click on the `Import Polygons` button, and then on `Choose File`. Then choose the *zipped* Stirling dataset you have downloaded and click on import. Finally, under the `2011 Census data layers` tab, select the `Age` dataset. Your window should look like this:
+(@) **Census data on population age**: the Digimap platform offers access to the 2011 Census variables in spatial format. To obtain it, go to the *Society* tab, and then select the 'Download' option on the leftmost toolbar (a down arrow going into a 'box'). That will bring up the familiar Digimap download interface. This time we will use our Stirling Council shapefile to set the search area. For that, click on the `Import Polygons` button, and then on `Choose File`. Then choose the *zipped* Stirling dataset you have downloaded and click on import. Finally, under the `2011 Census data layers` tab, select the `Age` dataset. Your window should look like this (see warning below first):
 
 ![](images/lab_geoprocessing/Fig1_digimap_stirlinghsire.png)
 
-::: {.callout-warning}
-The data for the 2022 census have been officially published by National Records of Scotland, but are not available on Digimap yet. Since we are only practising our GIS knowledge, it is OK to use mismatched data (schools from 2024 vs. age data from 2011). In a real application scenario, it would be very important to make sure the temporal coverage of the datasets matches as well as possible. 
+::: {.callout-warning collapse="false" title="Polygon upload to Digimap is temporarily disabled / data mismatch"}
+Digimap has **temporarily disabled** the `Import Polygons` option, so you cannot currently upload the zipped Stirling shapefile to define your download area. Instead, **select a large rectangular box that comfortably covers the whole of the Stirling Council Area** (see image below), using the rectangle drawing tool in the Digimap download interface. If your box includes Ben Lawers, Dalmally, Milngavie and Dollar, it will get all of Stirling council. 
+
+Your download will therefore contain many more Output Areas, including a lot outside Stirling. This does not change the rest of the lab: the `Select by Location` steps in the next section will keep only the OAs that belong to Stirling Council, so your final results will be exactly the same.
+
+![](images/lab_geoprocessing/Fig_1b_digimap_box_alternative.png)
+
+Also yes, the data for the 2022 census have already been officially published.  Since we are only practising our GIS knowledge, it is OK to use mismatched data (schools from 2024 vs. age data from 2011). In a real application scenario, it would be very important to make sure the temporal coverage of the datasets matches as well as possible. 
 :::
 
 (@) Add your data to the basket and finish the order, then download the data as you have done in previous labs. 
@@ -156,9 +162,9 @@ Great, you are almost there! The last step is to aggregate all the data at the c
 
 Your final results should be:
 
-|           | 1km	| 2km  | >2km |
-|-----------|-------|------|------|
-| Primary	| 6451	| 6656 | 89   |
-| Secondary	| 7572	| 7880 | 91   |
+|           | < 1km | 1km - 2km | > 2km | Total |
+|-----------|-------|-----------|-------|-------|
+| Primary   | 5823  | 428       | 495   | 6745  |
+| Secondary | 6555  | 757       | 659   | 7971  |
 
 That is the end of this lab. From now on the exercises will be a bit more involved, like the one above. But at the same time you will notice that much of the work is always the same - loading data, organising it, doing queries - we will just be adding new tools that open up new (but quite specific) analysis possibilities and/or make some of the things you did before faster/simpler. Overall, the general workflow of GIS is always the same. 
